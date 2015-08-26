@@ -13,8 +13,6 @@ namespace Refaccionaria.Negocio
         public ComboMultiSel()
         {
             InitializeComponent();
-
-            this.MostrarLista(false);
         }
 
         #region [ Propiedades ]
@@ -91,6 +89,8 @@ namespace Refaccionaria.Negocio
         {
             // Truco para que respete el forecolor cuando el control es ReadOnly ;)
             this.txtSeleccion.BackColor = this.txtSeleccion.BackColor;
+
+            this.MostrarLista(false);
         }
 
         private void ComboMultiSel_Leave(object sender, EventArgs e)

@@ -47,7 +47,7 @@ namespace Refaccionaria.App
         public Cobro ctlCobro;
 
         // Para la búsqueda avanzada
-        const int BusquedaRetrasoTecla = 400;
+        const int BusquedaRetrasoTecla = 700;
         int BusquedaLlamada = 0;
         int BusquedaIntento = 0;
         // Para prevenir doble ejecución al dar click en ejecutar

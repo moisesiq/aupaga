@@ -79,7 +79,7 @@ namespace Refaccionaria.Negocio
 
         public static void Cerrar()
         {
-            if (!Cargando.oProceso.IsAlive || Cargando.oForma == null)
+            if (Cargando.oProceso == null || !Cargando.oProceso.IsAlive || Cargando.oForma == null)
                 return;
 
             Cargando.oForma.Cerrar();
@@ -97,7 +97,7 @@ namespace Refaccionaria.Negocio
         public CargandoForma()
         {
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Size = new Size(64, 64);
+            this.Size = new Size(128, 128);
             // this.Opacity = 85;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -123,7 +123,7 @@ namespace Refaccionaria.Negocio
 
         void CargandoForma_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(64, 64);
+            this.Size = new Size(128, 128);
         }
 
         void CargandoForma_Shown(object sender, EventArgs e)

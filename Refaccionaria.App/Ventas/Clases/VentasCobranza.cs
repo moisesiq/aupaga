@@ -72,7 +72,7 @@ namespace Refaccionaria.App
                 if (General.Exists<VentaPago>(c => c.VentaID == oReg.VentaID && c.Estatus && c.SucursalID != GlobalClass.SucursalID))
                     sVentasOt += (", " + oReg.Folio);
             }
-            if (sVentasOt != "")
+            if (sVentasOt != "" && oVentasACobrar[0].VentaID != 270157)  // Modificaciòn temporal para no evaluar esa venta - 2015-08-24
             {
                 UtilLocal.MensajeAdvertencia("Las siguientes ventas ya fueron abonadas en otra sucursal, por lo tanto aquí no se pueden cobrar.\n\n"
                     + sVentasOt.Substring(2));
