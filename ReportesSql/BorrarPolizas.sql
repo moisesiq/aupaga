@@ -1,0 +1,6 @@
+/*
+use ControlRefaccionariaTest
+GO
+delete from contapolizadetalle
+delete from contapoliza
+*/
