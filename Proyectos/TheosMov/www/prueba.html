@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+console.log("script prueba.");
+			$(function() {
+console.log("init prueba.");
+				window.contenido.Inicializar("divPrueba");
+			});
+		</script>
+		
+		<div id="divPrueba" class="Pagina" data-role="page">
+			<div class="Encabezado" data-role="header" data-id="enc"></div>
+
+			<div data-role="main">
+				Contenido ;)
+			</div>
+
+			<!-- <div data-role="footer" data-position="fixed"></div> -->
+			<div class="Panel" data-role="panel" data-position="right" data-display="overlay"></div>
+		</div>
+	</body>
+</html>
