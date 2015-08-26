@@ -1191,7 +1191,12 @@ namespace Refaccionaria.App
             switch (iAfectacionID)
             {
                 case Cat.ContaAfectaciones.VentaContadoPago:
-                    ContaProc.AfectarConPrecioVenta(ref oDetalle, iId);
+                    // ContaProc.AfectarConPrecioVenta(ref oDetalle, iId);
+                    // Se verifica si la venta es del día o de días anteriores
+                    if (General.Exists<Venta>(c => c.VentaID == iId && c.Fecha < DateTime.Today && c.Estatus))
+                        ContaProc.AfectarConPagoDeVenta(ref oDetalle, iId);
+                    else
+                        ContaProc.AfectarConPagoNoValeDeVenta(ref oDetalle, iId);
                     break;
                 case Cat.ContaAfectaciones.PagoVentaCredito:
                     ContaProc.AfectarConPagoNoVale(ref oDetalle, iId);
@@ -1361,6 +1366,13 @@ namespace Refaccionaria.App
                     break;
                 case Cat.ContaAfectaciones.VentaContadoPagoFacturaGlobal:
                     ContaProc.AfectarConFacturaGlobalValesDeFactura(ref oDetalle, iId);
+                    break;
+                case Cat.ContaAfectaciones.VentaContadoPago:
+                    // Se verifica si la venta es del día o de días anteriores
+                    if (General.Exists<Venta>(c => c.VentaID == iId && c.Fecha < DateTime.Today && c.Estatus))
+                        ContaProc.AfectarConPagoDeVenta(ref oDetalle, iId);
+                    else
+                        ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
                     break;
             }
             return oDetalle;
@@ -1842,6 +1854,18 @@ namespace Refaccionaria.App
         private static void AfectarConPagoValeDeVenta(ref ContaPolizaDetalle oDetalle, int iId)
         {
             var oPagos = General.GetListOf<VentasPagosDetalleView>(c => c.VentaID == iId && c.FormaDePagoID == Cat.FormasDePago.Vale);
+            oDetalle.Cargo = (oPagos.Count > 0 ? oPagos.Sum(c => c.Importe) : 0);
+        }
+
+        private static void AfectarConPagoNoValeDeVenta(ref ContaPolizaDetalle oDetalle, int iId)
+        {
+            var oPagos = General.GetListOf<VentasPagosDetalleView>(c => c.VentaID == iId && c.FormaDePagoID != Cat.FormasDePago.Vale);
+            oDetalle.Cargo = (oPagos.Count > 0 ? oPagos.Sum(c => c.Importe) : 0);
+        }
+
+        private static void AfectarConPagoDeVenta(ref ContaPolizaDetalle oDetalle, int iId)
+        {
+            var oPagos = General.GetListOf<VentasPagosView>(c => c.VentaID == iId);
             oDetalle.Cargo = (oPagos.Count > 0 ? oPagos.Sum(c => c.Importe) : 0);
         }
 

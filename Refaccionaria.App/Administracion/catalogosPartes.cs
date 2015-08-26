@@ -64,7 +64,7 @@ namespace Refaccionaria.App
         {
             this.CargaInicial();
         }
-        
+                
         public void btnAgregar_Click(object sender, EventArgs e)
         {
             this.txtBusqueda.Clear();
@@ -232,6 +232,8 @@ namespace Refaccionaria.App
 
         private void tabPartes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (this.tabPartes.SelectedTab == null) return;
+
             switch (this.tabPartes.SelectedTab.Name)
             {
                 case "tbpKardex":
@@ -1323,6 +1325,16 @@ namespace Refaccionaria.App
 
                 // Ya no se carga el listado al cargar el control, se va filtrando según la búsqueda
                 // this.IniciarActualizarListado();
+
+                // Más validaciones de permisos, después de haber cargado varios controles 
+                if (!UtilDatos.ValidarPermiso("Administracion.CatalogosPartes.Parte.Ver"))
+                    this.tabPartes.TabPages.Remove(this.tbpParte);
+                if (!UtilDatos.ValidarPermiso("Administracion.CatalogosPartes.Kardex.Ver"))
+                    this.tabPartes.TabPages.Remove(this.tbpKardex);
+                if (!UtilDatos.ValidarPermiso("Administracion.CatalogosPartes.Avance.Ver"))
+                    this.tabPartes.TabPages.Remove(this.tbpAvance);
+                if (!UtilDatos.ValidarPermiso("Administracion.CatalogosPartes.Errores.Ver"))
+                    this.tabPartes.TabPages.Remove(this.tbpErrores);
             }
             catch (Exception ex)
             {
@@ -1588,6 +1600,8 @@ namespace Refaccionaria.App
                 if (dgvExistencias.Rows.Count > 0)
                     dgvExistencias.Rows.Clear();
 
+                /* Creo que esto no es necesario - Moi 2015-08-25
+                
                 DataTable dt = new DataTable();
                 DataRow row;
 
@@ -1610,7 +1624,7 @@ namespace Refaccionaria.App
                 /* var colUnidadEmpaque = new DataColumn();
                 colUnidadEmpaque.DataType = System.Type.GetType("System.Int32");
                 colUnidadEmpaque.ColumnName = "UEmp";
-                */
+                * /
 
                 dt.Columns.AddRange(new DataColumn[] { colSucursalId, colSucursal, colMaximo, colMinimo });
                                 
@@ -1632,6 +1646,8 @@ namespace Refaccionaria.App
                 // Se agrega columna de MaxMinFijo
                 this.dgvExistencias.Columns.Add("MaxMinFijo", "MaxMinFijo");
                 this.dgvExistencias.Columns["MaxMinFijo"].Visible = false;
+                
+                */
             }
             catch (Exception ex)
             {
@@ -2022,29 +2038,30 @@ namespace Refaccionaria.App
         {
             var oLineaCarV = General.GetListOf<LineasCaracteristicasView>(c => c.LineaID == this.oParte.LineaID);
             var oParteCars = General.GetListOf<ParteCaracteristica>(c => c.ParteID == this.oParte.ParteID);
-            int iControl = -1;
             this.LimpiarCaracteristicas();
             foreach (var oReg in oLineaCarV)
             {
+                // Se agrega un contenedor para la etiqueta y el control
+                var oPanel = new Panel() { Width = 200, Height = 20, BackColor = Color.Black };
+                this.flpCaracteristicas.Controls.Add(oPanel);
                 // Se agrega la etiqueta
-                this.flpCaracteristicas.Controls.Add(new Label() { Font = new Font("Arial", 8)
-                    , Text = oReg.Caracteristica, TextAlign = ContentAlignment.BottomRight, Width = 38 });
+                oPanel.Controls.Add(new Label() { Text = oReg.Caracteristica, TextAlign = ContentAlignment.MiddleLeft, Width = 60 });
                 // Se agrega el control
                 if (oReg.Multiple.Valor())
                 {
-                    var oCombo = new ComboMultiSel() { Margin = new Padding() { Top = 3 }, Width = 78 };
+                    var oCombo = new ComboMultiSel() { Width = 140 };
                     oCombo.Items.AddRange(oReg.MultipleOpciones.Split(','));
-                    this.flpCaracteristicas.Controls.Add(oCombo);
+                    oPanel.Controls.Add(oCombo);
+                    oCombo.Width = 140;
                 }
                 else
                 {
-                    this.flpCaracteristicas.Controls.Add(new TextBox() { Width = 44 });
+                    oPanel.Controls.Add(new TextBox() { Width = 140 });
                 }
-                iControl += 2;
                 // Se llena el control
                 var oParteCar = oParteCars.FirstOrDefault(c => c.CaracteristicaID == oReg.CaracteristicaID);
-                this.flpCaracteristicas.Controls[iControl].Text = (oParteCar == null ? "" : oParteCar.Valor);
-                this.flpCaracteristicas.Controls[iControl].Tag = oReg.CaracteristicaID;
+                oPanel.Controls[1].Text = (oParteCar == null ? "" : oParteCar.Valor);
+                oPanel.Controls[1].Tag = oReg.CaracteristicaID;
             }
             
         }
@@ -2563,5 +2580,6 @@ namespace Refaccionaria.App
         #endregion
 
         #endregion
+
     }
 }
