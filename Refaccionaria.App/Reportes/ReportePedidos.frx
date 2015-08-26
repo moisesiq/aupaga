@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/21/2013 03:20:20" ReportInfo.Modified="11/21/2013 03:41:21" ReportInfo.CreatorVersion="2013.3.2.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="Pedido" ReferenceName="Pedido" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.PedidosView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="PedidoID" DataType="System.Int32"/>
+      <Column Name="ProveedorID" DataType="System.Int32"/>
+      <Column Name="NombreProveedor" DataType="System.String"/>
+      <Column Name="Beneficiario" DataType="System.String"/>
+      <Column Name="ImporteTotal" DataType="System.Decimal"/>
+      <Column Name="Fecha" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="FechaRegistro" DataType="System.DateTime"/>
+      <Column Name="PedidoEstatusID" DataType="System.Int32"/>
+      <Column Name="NombrePedidoEstatus" DataType="System.String"/>
+      <Column Name="Abreviacion" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="DetallePedido" ReferenceName="DetallePedido" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.PedidosDetalleView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="PedidoDetalleID" DataType="System.Int32"/>
+      <Column Name="PedidoID" DataType="System.Int32"/>
+      <Column Name="ParteID" DataType="System.Int32"/>
+      <Column Name="NumeroParte" DataType="System.String"/>
+      <Column Name="NombreParte" DataType="System.String"/>
+      <Column Name="PedidoEstatusID" DataType="System.Int32"/>
+      <Column Name="NombrePedidoEstatus" DataType="System.String"/>
+      <Column Name="Abreviacion" DataType="System.String"/>
+      <Column Name="CantidadPedido" DataType="System.Decimal"/>
+      <Column Name="CantidadSurtida" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="CostosUnitario" DataType="System.Decimal"/>
+      <Column Name="FechaRegistro" DataType="System.DateTime"/>
+      <Column Name="Fecha" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="18.9">
+      <TextObject Name="Text1" Left="614.25" Width="103.95" Height="18.9" Text="[Date]" Format="Date" Format.Format="d" HorzAlign="Right"/>
+      <TextObject Name="Text3" Width="56.7" Height="18.9" Text="Pedido:" HorzAlign="Right"/>
+      <TextObject Name="Text2" Left="56.7" Width="94.5" Height="18.9" Text="[Pedido.PedidoID]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="22.23" Width="718.2" Height="37.8">
+      <TextObject Name="Text4" Width="321.3" Height="18.9" Text="[Pedido.NombreProveedor]"/>
+      <TextObject Name="Text5" Left="614.25" Width="103.95" Height="18.9" Text="[Pedido.ImporteTotal]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text7" Top="18.9" Width="94.5" Height="18.9" Text="Numero Parte"/>
+      <TextObject Name="Text9" Left="94.5" Top="18.9" Width="94.5" Height="18.9" Text="Nombre Parte"/>
+      <TextObject Name="Text11" Left="491.4" Width="94.5" Height="18.9" Text="CantidadPedido"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="63.37" Width="718.2" Height="18.9" DataSource="Pedido">
+      <TextObject Name="Text6" Width="94.5" Height="18.9" Text="[DetallePedido.NumeroParte]"/>
+      <TextObject Name="Text8" Left="94.5" Width="359.1" Height="18.9" Text="[DetallePedido.NombreParte]"/>
+      <TextObject Name="Text10" Left="491.4" Width="94.5" Height="18.9" Text="[DetallePedido.CantidadPedido]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+    </DataBand>
+  </ReportPage>
+</Report>
