@@ -1854,6 +1854,7 @@
             this.flpCaracteristicas.Name = "flpCaracteristicas";
             this.flpCaracteristicas.Size = new System.Drawing.Size(660, 158);
             this.flpCaracteristicas.TabIndex = 198;
+            this.flpCaracteristicas.DoubleClick += new System.EventHandler(this.flpCaracteristicas_DoubleClick);
             // 
             // lblNoPedidos
             // 

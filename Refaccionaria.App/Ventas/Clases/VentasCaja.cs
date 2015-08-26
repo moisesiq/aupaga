@@ -1374,10 +1374,13 @@ namespace Refaccionaria.App
                 mFacturadoDiasAnt += mAbonosAnt;
 
                 // Para diferenciar vales
+                /* Ya no se consideran los vales de lo facturado de tickets de días anteriores porque ya fueron contemplados en la factura global del día de la venta
+                   - Moi 2015-08-26
                 var oAbonosAntVale = General.GetListOf<VentasPagosDetalleAvanzadoView>(c => c.VentaID == oReg.VentaID && c.Fecha < dHoy
                     && c.FormaDePagoID == Cat.FormasDePago.Vale);
                 decimal mAbonosAntVale = oAbonosAntVale.Sum(c => c.Importe);
                 mFacturarVales += mAbonosAntVale;
+                */
 
                 // Se resta el costo, proporcional a lo abonado en días anteriores
                 var oVentaDet = General.GetListOf<VentaDetalle>(c => c.VentaID == oReg.VentaID && c.Estatus);

@@ -1370,8 +1370,6 @@ namespace Refaccionaria.App
                 case Cat.ContaAfectaciones.VentaContadoPago:
                     // Se verifica si la venta es del día o de días anteriores
                     if (General.Exists<Venta>(c => c.VentaID == iId && c.Fecha < DateTime.Today && c.Estatus))
-                        ContaProc.AfectarConPagoDeVenta(ref oDetalle, iId);
-                    else
                         ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
                     break;
             }

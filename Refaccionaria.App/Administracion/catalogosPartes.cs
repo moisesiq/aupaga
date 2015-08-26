@@ -2049,14 +2049,14 @@ namespace Refaccionaria.App
                 // Se agrega el control
                 if (oReg.Multiple.Valor())
                 {
-                    var oCombo = new ComboMultiSel() { Width = 140 };
+                    var oCombo = new ComboMultiSel() { Width = 180 };
                     oCombo.Items.AddRange(oReg.MultipleOpciones.Split(','));
                     oPanel.Controls.Add(oCombo);
-                    oCombo.Width = 140;
+                    // oCombo.Width = 140;
                 }
                 else
                 {
-                    oPanel.Controls.Add(new TextBox() { Width = 140 });
+                    oPanel.Controls.Add(new TextBox() { Width = 180 });
                 }
                 // Se llena el control
                 var oParteCar = oParteCars.FirstOrDefault(c => c.CaracteristicaID == oReg.CaracteristicaID);
@@ -2578,6 +2578,12 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        private void flpCaracteristicas_DoubleClick(object sender, EventArgs e)
+        {
+            var x = "dos";
+            var y = "tres";
+        }
 
         #endregion
 
