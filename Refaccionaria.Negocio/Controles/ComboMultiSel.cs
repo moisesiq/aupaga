@@ -13,9 +13,16 @@ namespace Refaccionaria.Negocio
         public ComboMultiSel()
         {
             InitializeComponent();
+            
+            this.clbSeleccion = new CheckedListBox() { Visible = false };
+            this.AltoLista = 160;
         }
 
         #region [ Propiedades ]
+
+        public CheckedListBox clbSeleccion { get; set; }
+
+        public int AltoLista { get; set; }
 
         public CheckedListBox.ObjectCollection Items
         {
@@ -42,6 +49,7 @@ namespace Refaccionaria.Negocio
                         this.clbSeleccion.SetItemChecked(i, true);
                 }
                 this.txtSeleccion.Text = value;
+                this.MostrarLista(false);
             }
         }
 
@@ -90,7 +98,7 @@ namespace Refaccionaria.Negocio
             // Truco para que respete el forecolor cuando el control es ReadOnly ;)
             this.txtSeleccion.BackColor = this.txtSeleccion.BackColor;
 
-            this.MostrarLista(false);
+            // this.MostrarLista(false);
         }
 
         private void ComboMultiSel_Leave(object sender, EventArgs e)
@@ -192,14 +200,17 @@ namespace Refaccionaria.Negocio
         {
             if (bMostrar)
             {
-                this.Height = 203;
+                // this.Height = 203;
                 //this.BringToFront();
-                // this.clbSeleccion.Parent = this.ParentForm;
+                this.clbSeleccion.Parent = this.ParentForm;
+                var oPunto = this.PointToScreen(Point.Empty);
+                this.clbSeleccion.Location = new Point(oPunto.X, oPunto.Y - 2);
+                this.clbSeleccion.Size = new Size(this.Width, this.AltoLista);
                 this.clbSeleccion.BringToFront();
             }
             else
             {
-                this.Height = 20;
+                // this.Height = 20;
             }
             this.clbSeleccion.Visible = bMostrar;
             this.bListaVisible = bMostrar;

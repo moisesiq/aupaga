@@ -1364,12 +1364,16 @@ namespace Refaccionaria.App
             }
 
             // Se obtiene el total de los tickets de días anteriores facturados el día de hoy
-            var oDatos = General.GetListOf<VentasFacturasDetalleAvanzadoView>(c => c.SucursalID == GlobalClass.SucursalID && EntityFunctions.TruncateTime(c.Fecha) == dHoy
+            var oDatos = General.GetListOf<VentasFacturasDetalleAvanzadoView>(c => EntityFunctions.TruncateTime(c.Fecha) == dHoy
                 && c.FechaVenta < dHoy && c.EstatusGenericoID == Cat.EstatusGenericos.Completada)
                 .Select(c => new { c.VentaID }).Distinct();
             decimal mFacturadoDiasAnt = 0;
             foreach (var oReg in oDatos)
             {
+                // Se verifica si el pago es de la sucursal actual, si no, no se cuenta
+                if (General.Exists<VentasPagosView>(c => c.VentaID == oReg.VentaID && c.Importe > 0 && c.SucursalID != GlobalClass.SucursalID))
+                    continue;
+                
                 // Se obtiene el importe de lo abonado sólo los días anteriores a hoy
                 var oAbonosAnt = General.GetListOf<VentasPagosView>(c => c.VentaID == oReg.VentaID && c.Fecha < dHoy);
                 decimal mAbonosAnt = oAbonosAnt.Sum(c => c.Importe);

@@ -2042,21 +2042,21 @@ namespace Refaccionaria.App
             foreach (var oReg in oLineaCarV)
             {
                 // Se agrega un contenedor para la etiqueta y el control
-                var oPanel = new Panel() { Width = 200, Height = 20, BackColor = Color.Black };
+                var oPanel = new Panel() { Width = 211, Height = 20 };
                 this.flpCaracteristicas.Controls.Add(oPanel);
                 // Se agrega la etiqueta
                 oPanel.Controls.Add(new Label() { Text = oReg.Caracteristica, TextAlign = ContentAlignment.MiddleLeft, Width = 60 });
                 // Se agrega el control
                 if (oReg.Multiple.Valor())
                 {
-                    var oCombo = new ComboMultiSel() { Width = 180 };
+                    var oCombo = new ComboMultiSel() { Left = 61, Width = 150 };
                     oCombo.Items.AddRange(oReg.MultipleOpciones.Split(','));
                     oPanel.Controls.Add(oCombo);
                     // oCombo.Width = 140;
                 }
                 else
                 {
-                    oPanel.Controls.Add(new TextBox() { Width = 180 });
+                    oPanel.Controls.Add(new TextBox() { Left = 61, Width = 150 });
                 }
                 // Se llena el control
                 var oParteCar = oParteCars.FirstOrDefault(c => c.CaracteristicaID == oReg.CaracteristicaID);

@@ -2019,7 +2019,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AG.ico" />
-    <Content Include="G.ico" />
     <None Include="Resources\Hotmail.png" />
     <None Include="Resources\HotmailClic.png" />
     <None Include="Resources\HotmailSobre.png" />
