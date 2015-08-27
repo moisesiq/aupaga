@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Objects;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -1369,7 +1370,7 @@ namespace Refaccionaria.App
                     break;
                 case Cat.ContaAfectaciones.VentaContadoPago:
                     // Se verifica si la venta es del día o de días anteriores
-                    if (General.Exists<Venta>(c => c.VentaID == iId && c.Fecha < DateTime.Today && c.Estatus))
+                    if (General.Exists<Venta>(c => c.VentaID == iId && EntityFunctions.TruncateTime(c.Fecha) == DateTime.Today && c.Estatus))
                         ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
                     break;
             }

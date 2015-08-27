@@ -811,8 +811,10 @@ namespace Refaccionaria.App
             }
 
             // Se manda a afectar contabilidad (AfeConta), si es vale
-            if (oPagoDet.Any(c => c.FormaDePagoID == Cat.FormasDePago.Vale))
-                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaContadoVale, iVentaID, oVentaV.Folio, oCliente.Nombre);
+            // Ya no se manda hacer esta póliza porque este movimiento ya lo contempla la Factura global del Día o la Factura al 
+            // momento del Pago, sea crédito o contado. Si se quiciera reactivar esta póliza verificar la Función porque Moy la modificó 2015-08-26
+            // if (oPagoDet.Any(c => c.FormaDePagoID == Cat.FormasDePago.Vale))
+            //     ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaContadoVale, iVentaID, oVentaV.Folio, oCliente.Nombre);
 
             // Se agrega al Kardex
             var oVentaDet = General.GetListOf<VentaDetalle>(c => c.VentaID == iVentaID && c.Estatus);
@@ -1392,7 +1394,7 @@ namespace Refaccionaria.App
                 mCostoTotal -= mCosto;
 
                 // Para diferenciar vales
-                mCostoVales -= ((mAbonosAntVale / mPrecio) * mCosto);
+                // mCostoVales -= ((mAbonosAntVale / mPrecio) * mCosto);
             }
 
             // Se hace el cálculo final
