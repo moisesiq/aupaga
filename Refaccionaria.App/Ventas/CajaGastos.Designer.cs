@@ -178,7 +178,7 @@
             this.cmbGastos.SelectedItem = null;
             this.cmbGastos.SelectedText = "";
             this.cmbGastos.SelectedValue = null;
-            this.cmbGastos.Size = new System.Drawing.Size(240, 21);
+            this.cmbGastos.Size = new System.Drawing.Size(375, 21);
             this.cmbGastos.TabIndex = 0;
             this.cmbGastos.ValueMember = "";
             this.cmbGastos.SelectedIndexChanged += new System.EventHandler(this.cmbGastos_SelectedIndexChanged);
@@ -193,13 +193,13 @@
             this.cmbOtrosIngresos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             this.cmbOtrosIngresos.Etiqueta = "Otros Ingresos";
             this.cmbOtrosIngresos.EtiquetaColor = System.Drawing.Color.Gray;
-            this.cmbOtrosIngresos.Location = new System.Drawing.Point(249, 3);
+            this.cmbOtrosIngresos.Location = new System.Drawing.Point(384, 3);
             this.cmbOtrosIngresos.Name = "cmbOtrosIngresos";
             this.cmbOtrosIngresos.SelectedIndex = -1;
             this.cmbOtrosIngresos.SelectedItem = null;
             this.cmbOtrosIngresos.SelectedText = "";
             this.cmbOtrosIngresos.SelectedValue = null;
-            this.cmbOtrosIngresos.Size = new System.Drawing.Size(240, 21);
+            this.cmbOtrosIngresos.Size = new System.Drawing.Size(105, 21);
             this.cmbOtrosIngresos.TabIndex = 1;
             this.cmbOtrosIngresos.ValueMember = "";
             this.cmbOtrosIngresos.SelectedIndexChanged += new System.EventHandler(this.cmbOtrosIngresos_SelectedIndexChanged);

@@ -342,7 +342,7 @@
             this.lblEncontrados.BackColor = System.Drawing.Color.Transparent;
             this.lblEncontrados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEncontrados.ForeColor = System.Drawing.Color.White;
-            this.lblEncontrados.Location = new System.Drawing.Point(568, 10);
+            this.lblEncontrados.Location = new System.Drawing.Point(775, 10);
             this.lblEncontrados.Name = "lblEncontrados";
             this.lblEncontrados.Size = new System.Drawing.Size(70, 13);
             this.lblEncontrados.TabIndex = 2;
@@ -363,7 +363,7 @@
             // progreso
             // 
             this.progreso.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.progreso.Location = new System.Drawing.Point(990, 6);
+            this.progreso.Location = new System.Drawing.Point(1197, 6);
             this.progreso.Name = "progreso";
             this.progreso.Size = new System.Drawing.Size(214, 21);
             this.progreso.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -376,7 +376,7 @@
             this.lblNumeroRegistros.BackColor = System.Drawing.Color.Transparent;
             this.lblNumeroRegistros.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumeroRegistros.ForeColor = System.Drawing.Color.White;
-            this.lblNumeroRegistros.Location = new System.Drawing.Point(919, 14);
+            this.lblNumeroRegistros.Location = new System.Drawing.Point(1126, 14);
             this.lblNumeroRegistros.Name = "lblNumeroRegistros";
             this.lblNumeroRegistros.Size = new System.Drawing.Size(14, 13);
             this.lblNumeroRegistros.TabIndex = 42;
@@ -390,7 +390,7 @@
             this.cboFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboFiltro.ForeColor = System.Drawing.Color.White;
             this.cboFiltro.FormattingEnabled = true;
-            this.cboFiltro.Location = new System.Drawing.Point(919, 6);
+            this.cboFiltro.Location = new System.Drawing.Point(1126, 6);
             this.cboFiltro.Name = "cboFiltro";
             this.cboFiltro.Size = new System.Drawing.Size(92, 21);
             this.cboFiltro.TabIndex = 3;
@@ -448,7 +448,7 @@
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 25;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(1201, 181);
+            this.dgvDatos.Size = new System.Drawing.Size(1408, 181);
             this.dgvDatos.TabIndex = 4;
             this.dgvDatos.CurrentCellChanged += new System.EventHandler(this.dgvDatos_CurrentCellChanged);
             this.dgvDatos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDatos_KeyDown);
@@ -509,7 +509,7 @@
             this.txtBusqueda.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBusqueda.Location = new System.Drawing.Point(57, 8);
             this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new System.Drawing.Size(505, 20);
+            this.txtBusqueda.Size = new System.Drawing.Size(712, 20);
             this.txtBusqueda.TabIndex = 0;
             this.txtBusqueda.TabStop = false;
             this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
@@ -588,7 +588,7 @@
             this.chkSiEtiqueta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSiEtiqueta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSiEtiqueta.ForeColor = System.Drawing.Color.White;
-            this.chkSiEtiqueta.Location = new System.Drawing.Point(1044, 403);
+            this.chkSiEtiqueta.Location = new System.Drawing.Point(1217, 58);
             this.chkSiEtiqueta.Name = "chkSiEtiqueta";
             this.chkSiEtiqueta.Size = new System.Drawing.Size(34, 17);
             this.chkSiEtiqueta.TabIndex = 37;
@@ -631,7 +631,7 @@
             this.chkSoloUna.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSoloUna.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSoloUna.ForeColor = System.Drawing.Color.White;
-            this.chkSoloUna.Location = new System.Drawing.Point(1094, 403);
+            this.chkSoloUna.Location = new System.Drawing.Point(1267, 58);
             this.chkSoloUna.Name = "chkSoloUna";
             this.chkSoloUna.Size = new System.Drawing.Size(65, 17);
             this.chkSoloUna.TabIndex = 38;
@@ -658,7 +658,7 @@
             this.lblEtiqueta.BackColor = System.Drawing.Color.Transparent;
             this.lblEtiqueta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEtiqueta.ForeColor = System.Drawing.Color.White;
-            this.lblEtiqueta.Location = new System.Drawing.Point(998, 404);
+            this.lblEtiqueta.Location = new System.Drawing.Point(1171, 59);
             this.lblEtiqueta.Name = "lblEtiqueta";
             this.lblEtiqueta.Size = new System.Drawing.Size(46, 13);
             this.lblEtiqueta.TabIndex = 89;
@@ -1549,7 +1549,7 @@
             this.txtNombreParte.Location = new System.Drawing.Point(385, 3);
             this.txtNombreParte.MaxLength = 200;
             this.txtNombreParte.Name = "txtNombreParte";
-            this.txtNombreParte.Size = new System.Drawing.Size(467, 20);
+            this.txtNombreParte.Size = new System.Drawing.Size(674, 20);
             this.txtNombreParte.TabIndex = 4;
             this.txtNombreParte.Enter += new System.EventHandler(this.txtNombreParte_Enter);
             // 
@@ -1596,7 +1596,7 @@
             this.lblCodigoBarra.BackColor = System.Drawing.Color.Transparent;
             this.lblCodigoBarra.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCodigoBarra.ForeColor = System.Drawing.Color.White;
-            this.lblCodigoBarra.Location = new System.Drawing.Point(858, 8);
+            this.lblCodigoBarra.Location = new System.Drawing.Point(1065, 8);
             this.lblCodigoBarra.Name = "lblCodigoBarra";
             this.lblCodigoBarra.Size = new System.Drawing.Size(73, 13);
             this.lblCodigoBarra.TabIndex = 160;
@@ -1607,7 +1607,7 @@
             this.txtCodigoBarra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCodigoBarra.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCodigoBarra.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCodigoBarra.Location = new System.Drawing.Point(937, 4);
+            this.txtCodigoBarra.Location = new System.Drawing.Point(1144, 4);
             this.txtCodigoBarra.MaxLength = 50;
             this.txtCodigoBarra.Name = "txtCodigoBarra";
             this.txtCodigoBarra.Size = new System.Drawing.Size(140, 20);
@@ -1619,7 +1619,7 @@
             this.lblTiempoReposicion.BackColor = System.Drawing.Color.Transparent;
             this.lblTiempoReposicion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTiempoReposicion.ForeColor = System.Drawing.Color.White;
-            this.lblTiempoReposicion.Location = new System.Drawing.Point(998, 423);
+            this.lblTiempoReposicion.Location = new System.Drawing.Point(1171, 78);
             this.lblTiempoReposicion.Name = "lblTiempoReposicion";
             this.lblTiempoReposicion.Size = new System.Drawing.Size(98, 13);
             this.lblTiempoReposicion.TabIndex = 162;
@@ -1631,7 +1631,7 @@
             this.btnImprimirTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimirTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImprimirTicket.ForeColor = System.Drawing.Color.White;
-            this.btnImprimirTicket.Location = new System.Drawing.Point(999, 495);
+            this.btnImprimirTicket.Location = new System.Drawing.Point(1172, 150);
             this.btnImprimirTicket.Name = "btnImprimirTicket";
             this.btnImprimirTicket.Size = new System.Drawing.Size(94, 23);
             this.btnImprimirTicket.TabIndex = 170;
@@ -1646,7 +1646,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(998, 449);
+            this.label1.Location = new System.Drawing.Point(1171, 104);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 13);
             this.label1.TabIndex = 166;
@@ -1657,7 +1657,7 @@
             this.btnImportar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnImportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImportar.ForeColor = System.Drawing.Color.White;
-            this.btnImportar.Location = new System.Drawing.Point(1099, 495);
+            this.btnImportar.Location = new System.Drawing.Point(1272, 150);
             this.btnImportar.Name = "btnImportar";
             this.btnImportar.Size = new System.Drawing.Size(66, 23);
             this.btnImportar.TabIndex = 171;
@@ -1680,7 +1680,7 @@
             this.tabPartes.Multiline = true;
             this.tabPartes.Name = "tabPartes";
             this.tabPartes.SelectedIndex = 0;
-            this.tabPartes.Size = new System.Drawing.Size(1201, 569);
+            this.tabPartes.Size = new System.Drawing.Size(1408, 569);
             this.tabPartes.TabIndex = 5;
             this.tabPartes.SelectedIndexChanged += new System.EventHandler(this.tabPartes_SelectedIndexChanged);
             // 
@@ -1760,7 +1760,7 @@
             this.tbpParte.Location = new System.Drawing.Point(4, 4);
             this.tbpParte.Name = "tbpParte";
             this.tbpParte.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpParte.Size = new System.Drawing.Size(1174, 561);
+            this.tbpParte.Size = new System.Drawing.Size(1381, 561);
             this.tbpParte.TabIndex = 0;
             this.tbpParte.Text = "Parte";
             // 
@@ -1862,7 +1862,7 @@
             this.lblNoPedidos.BackColor = System.Drawing.Color.Transparent;
             this.lblNoPedidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoPedidos.ForeColor = System.Drawing.Color.Yellow;
-            this.lblNoPedidos.Location = new System.Drawing.Point(998, 521);
+            this.lblNoPedidos.Location = new System.Drawing.Point(1171, 176);
             this.lblNoPedidos.Name = "lblNoPedidos";
             this.lblNoPedidos.Size = new System.Drawing.Size(145, 13);
             this.lblNoPedidos.TabIndex = 172;
@@ -1885,7 +1885,7 @@
             this.chkEsPar.AutoSize = true;
             this.chkEsPar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkEsPar.ForeColor = System.Drawing.Color.White;
-            this.chkEsPar.Location = new System.Drawing.Point(1071, 472);
+            this.chkEsPar.Location = new System.Drawing.Point(1244, 127);
             this.chkEsPar.Name = "chkEsPar";
             this.chkEsPar.Size = new System.Drawing.Size(53, 17);
             this.chkEsPar.TabIndex = 164;
@@ -1895,7 +1895,7 @@
             // txtUnidadEmpaque
             // 
             this.txtUnidadEmpaque.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUnidadEmpaque.Location = new System.Drawing.Point(1114, 446);
+            this.txtUnidadEmpaque.Location = new System.Drawing.Point(1287, 101);
             this.txtUnidadEmpaque.MaxLength = 10;
             this.txtUnidadEmpaque.Name = "txtUnidadEmpaque";
             this.txtUnidadEmpaque.Size = new System.Drawing.Size(53, 20);
@@ -1919,7 +1919,7 @@
             this.chkAGranel.AutoSize = true;
             this.chkAGranel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkAGranel.ForeColor = System.Drawing.Color.White;
-            this.chkAGranel.Location = new System.Drawing.Point(999, 472);
+            this.chkAGranel.Location = new System.Drawing.Point(1172, 127);
             this.chkAGranel.Name = "chkAGranel";
             this.chkAGranel.Size = new System.Drawing.Size(62, 17);
             this.chkAGranel.TabIndex = 163;
@@ -1951,7 +1951,7 @@
             // txtTiempoReposicion
             // 
             this.txtTiempoReposicion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTiempoReposicion.Location = new System.Drawing.Point(1114, 420);
+            this.txtTiempoReposicion.Location = new System.Drawing.Point(1287, 75);
             this.txtTiempoReposicion.MaxLength = 10;
             this.txtTiempoReposicion.Name = "txtTiempoReposicion";
             this.txtTiempoReposicion.Size = new System.Drawing.Size(53, 20);
@@ -1989,7 +1989,7 @@
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(1083, 3);
+            this.btnGuardar.Location = new System.Drawing.Point(1290, 3);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(85, 23);
             this.btnGuardar.TabIndex = 11;
@@ -2084,7 +2084,7 @@
             this.tbpKardex.Location = new System.Drawing.Point(4, 4);
             this.tbpKardex.Name = "tbpKardex";
             this.tbpKardex.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpKardex.Size = new System.Drawing.Size(1174, 561);
+            this.tbpKardex.Size = new System.Drawing.Size(1381, 561);
             this.tbpKardex.TabIndex = 1;
             this.tbpKardex.Text = "Kardex";
             // 
@@ -2155,7 +2155,7 @@
             this.dgvKardex.RowHeadersVisible = false;
             this.dgvKardex.RowHeadersWidth = 25;
             this.dgvKardex.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKardex.Size = new System.Drawing.Size(904, 549);
+            this.dgvKardex.Size = new System.Drawing.Size(1111, 549);
             this.dgvKardex.TabIndex = 4;
             this.dgvKardex.RowHeadersBorderStyleChanged += new System.EventHandler(this.dgvKardex_RowHeadersBorderStyleChanged);
             // 
@@ -2401,7 +2401,7 @@
             this.tbpAvance.Controls.Add(this.dgvAvProveedores);
             this.tbpAvance.Location = new System.Drawing.Point(4, 4);
             this.tbpAvance.Name = "tbpAvance";
-            this.tbpAvance.Size = new System.Drawing.Size(1174, 561);
+            this.tbpAvance.Size = new System.Drawing.Size(1381, 561);
             this.tbpAvance.TabIndex = 2;
             this.tbpAvance.Text = "Completo";
             // 
@@ -2548,7 +2548,7 @@
             this.btnAvActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnAvActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAvActualizar.ForeColor = System.Drawing.Color.White;
-            this.btnAvActualizar.Location = new System.Drawing.Point(1086, 506);
+            this.btnAvActualizar.Location = new System.Drawing.Point(1293, 506);
             this.btnAvActualizar.Name = "btnAvActualizar";
             this.btnAvActualizar.Size = new System.Drawing.Size(85, 23);
             this.btnAvActualizar.TabIndex = 3;
@@ -2564,7 +2564,7 @@
             this.btnAvQuitarFiltro.Enabled = false;
             this.btnAvQuitarFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAvQuitarFiltro.ForeColor = System.Drawing.Color.White;
-            this.btnAvQuitarFiltro.Location = new System.Drawing.Point(1086, 535);
+            this.btnAvQuitarFiltro.Location = new System.Drawing.Point(1293, 535);
             this.btnAvQuitarFiltro.Name = "btnAvQuitarFiltro";
             this.btnAvQuitarFiltro.Size = new System.Drawing.Size(85, 23);
             this.btnAvQuitarFiltro.TabIndex = 4;
@@ -2974,7 +2974,7 @@
             this.tbpErrores.Controls.Add(this.chkErr_MostrarTodos);
             this.tbpErrores.Location = new System.Drawing.Point(4, 4);
             this.tbpErrores.Name = "tbpErrores";
-            this.tbpErrores.Size = new System.Drawing.Size(1174, 561);
+            this.tbpErrores.Size = new System.Drawing.Size(1381, 561);
             this.tbpErrores.TabIndex = 3;
             this.tbpErrores.Text = "Errores";
             // 
@@ -3036,7 +3036,7 @@
             this.dgvErrores.RowHeadersVisible = false;
             this.dgvErrores.RowHeadersWidth = 25;
             this.dgvErrores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvErrores.Size = new System.Drawing.Size(1168, 532);
+            this.dgvErrores.Size = new System.Drawing.Size(1375, 532);
             this.dgvErrores.TabIndex = 2;
             this.dgvErrores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvErrores_CellDoubleClick);
             // 
@@ -3179,7 +3179,7 @@
             this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.Color.White;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
-            this.btnModificar.Location = new System.Drawing.Point(818, 5);
+            this.btnModificar.Location = new System.Drawing.Point(1025, 5);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(91, 23);
             this.btnModificar.TabIndex = 2;
@@ -3196,7 +3196,7 @@
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.Location = new System.Drawing.Point(723, 5);
+            this.btnAgregar.Location = new System.Drawing.Point(930, 5);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(85, 23);
             this.btnAgregar.TabIndex = 1;
@@ -3228,7 +3228,7 @@
             this.Controls.Add(this.cboTipoGarantia);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "catalogosPartes";
-            this.Size = new System.Drawing.Size(1207, 794);
+            this.Size = new System.Drawing.Size(1414, 794);
             this.Load += new System.EventHandler(this.catalogosPartes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.tabExistencia.ResumeLayout(false);
