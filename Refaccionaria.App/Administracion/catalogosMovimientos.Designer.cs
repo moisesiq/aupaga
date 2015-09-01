@@ -230,8 +230,8 @@
             // 
             // lblProveedor
             // 
-            this.lblProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProveedor.AutoSize = true;
             this.lblProveedor.Location = new System.Drawing.Point(640, 38);
             this.lblProveedor.Name = "lblProveedor";
@@ -438,8 +438,8 @@
             // 
             // txtObservaciones
             // 
-            this.txtObservaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtObservaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtObservaciones.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtObservaciones.Location = new System.Drawing.Point(483, 596);
             this.txtObservaciones.MaxLength = 255;
@@ -472,9 +472,9 @@
             // 
             // tabDetalleOperacion
             // 
-            this.tabDetalleOperacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabDetalleOperacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabDetalleOperacion.Controls.Add(this.tabDetalleCaptura);
             this.tabDetalleOperacion.Controls.Add(this.tabDescuentos);
             this.tabDetalleOperacion.Controls.Add(this.tabDiferencia);
@@ -588,9 +588,9 @@
             // 
             this.dgvDetalleCaptura.AllowUserToAddRows = false;
             this.dgvDetalleCaptura.AllowUserToResizeRows = false;
-            this.dgvDetalleCaptura.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDetalleCaptura.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetalleCaptura.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvDetalleCaptura.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDetalleCaptura.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -749,9 +749,9 @@
             // 
             this.dgvDetalleDescuentos.AllowUserToAddRows = false;
             this.dgvDetalleDescuentos.AllowUserToResizeRows = false;
-            this.dgvDetalleDescuentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDetalleDescuentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetalleDescuentos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvDetalleDescuentos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDetalleDescuentos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -792,6 +792,7 @@
             this.dgvDetalleDescuentos.TabIndex = 53;
             this.dgvDetalleDescuentos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleDescuentos_CellClick);
             this.dgvDetalleDescuentos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleDescuentos_CellValueChanged);
+            this.dgvDetalleDescuentos.CurrentCellChanged += new System.EventHandler(this.dgvDetalleDescuentos_CurrentCellChanged);
             this.dgvDetalleDescuentos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDetalleDescuentos_KeyDown);
             this.dgvDetalleDescuentos.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvDetalleDescuentos_KeyUp);
             // 
@@ -1043,8 +1044,8 @@
             this.dgvHistorialDescuentos.AllowUserToAddRows = false;
             this.dgvHistorialDescuentos.AllowUserToResizeColumns = false;
             this.dgvHistorialDescuentos.AllowUserToResizeRows = false;
-            this.dgvHistorialDescuentos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvHistorialDescuentos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvHistorialDescuentos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvHistorialDescuentos.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -1359,9 +1360,9 @@
             // 
             this.dgvDiferencia.AllowUserToAddRows = false;
             this.dgvDiferencia.AllowUserToResizeRows = false;
-            this.dgvDiferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDiferencia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDiferencia.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvDiferencia.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDiferencia.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -1405,6 +1406,7 @@
             this.dgvDiferencia.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvDiferencia_CellValidating);
             this.dgvDiferencia.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDiferencia_CellValueChanged);
             this.dgvDiferencia.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvDiferencia_ColumnHeaderMouseClick);
+            this.dgvDiferencia.CurrentCellChanged += new System.EventHandler(this.dgvDiferencia_CurrentCellChanged);
             this.dgvDiferencia.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvDiferencia_RowsAdded);
             this.dgvDiferencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvDiferencia_KeyUp);
             // 
@@ -1632,9 +1634,9 @@
             // 
             // picBoxImagen
             // 
-            this.picBoxImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.picBoxImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.picBoxImagen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.picBoxImagen.Location = new System.Drawing.Point(493, 35);
             this.picBoxImagen.Name = "picBoxImagen";
@@ -1672,8 +1674,8 @@
             // 
             // picBoxCamaraOrigen
             // 
-            this.picBoxCamaraOrigen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.picBoxCamaraOrigen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.picBoxCamaraOrigen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.picBoxCamaraOrigen.Location = new System.Drawing.Point(6, 35);
             this.picBoxCamaraOrigen.Name = "picBoxCamaraOrigen";

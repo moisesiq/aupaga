@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblPrecio5 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
             this.lblPrecio4 = new System.Windows.Forms.Label();
@@ -88,6 +88,9 @@
             this.lisProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lisLineaMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpHistorico = new System.Windows.Forms.TabPage();
+            this.cmbHisUsuario = new Refaccionaria.Negocio.ComboEtiqueta();
+            this.cmbHisEstatus = new Refaccionaria.Negocio.ComboEtiqueta();
+            this.cmbHisSucursal = new Refaccionaria.Negocio.ComboEtiqueta();
             this.ctlExistencias = new Refaccionaria.App.GridExsitencias();
             this.btnHisMostrar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -107,9 +110,13 @@
             this.hisVendedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hisBajaMotivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hisBajaUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmbHisSucursal = new Refaccionaria.Negocio.ComboEtiqueta();
-            this.cmbHisEstatus = new Refaccionaria.Negocio.ComboEtiqueta();
-            this.cmbHisUsuario = new Refaccionaria.Negocio.ComboEtiqueta();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbBuscarSucursal = new System.Windows.Forms.ComboBox();
+            this.cmbBuscarVendedor = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtpBuscarDesde = new System.Windows.Forms.DateTimePicker();
+            this.dtpBuscarHasta = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).BeginInit();
             this.tab9500.SuspendLayout();
             this.tbpNuevo.SuspendLayout();
@@ -282,8 +289,8 @@
             // 
             this.dgvPartes.AllowUserToAddRows = false;
             this.dgvPartes.AllowUserToDeleteRows = false;
-            this.dgvPartes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvPartes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPartes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPartes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPartes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -296,14 +303,14 @@
             this.Cantidad,
             this.Descripcion,
             this.Precio});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPartes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPartes.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvPartes.GridColor = System.Drawing.Color.White;
             this.dgvPartes.Location = new System.Drawing.Point(6, 145);
             this.dgvPartes.MultiSelect = false;
@@ -346,10 +353,10 @@
             // 
             // Precio
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Precio.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Format = "C2";
+            dataGridViewCellStyle17.NullValue = null;
+            this.Precio.DefaultCellStyle = dataGridViewCellStyle17;
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
@@ -364,9 +371,9 @@
             // 
             // tab9500
             // 
-            this.tab9500.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tab9500.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tab9500.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tab9500.Controls.Add(this.tbpNuevo);
             this.tab9500.Controls.Add(this.tbpBuscar);
@@ -600,6 +607,13 @@
             // tbpBuscar
             // 
             this.tbpBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.tbpBuscar.Controls.Add(this.dtpBuscarHasta);
+            this.tbpBuscar.Controls.Add(this.dtpBuscarDesde);
+            this.tbpBuscar.Controls.Add(this.label5);
+            this.tbpBuscar.Controls.Add(this.cmbBuscarVendedor);
+            this.tbpBuscar.Controls.Add(this.label4);
+            this.tbpBuscar.Controls.Add(this.cmbBuscarSucursal);
+            this.tbpBuscar.Controls.Add(this.label1);
             this.tbpBuscar.Controls.Add(this.txtBusqueda);
             this.tbpBuscar.Controls.Add(this.dgvDatos);
             this.tbpBuscar.Location = new System.Drawing.Point(4, 25);
@@ -611,12 +625,12 @@
             // 
             // txtBusqueda
             // 
-            this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBusqueda.Location = new System.Drawing.Point(6, 6);
+            this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBusqueda.Location = new System.Drawing.Point(6, 33);
             this.txtBusqueda.Name = "txtBusqueda";
             this.txtBusqueda.Size = new System.Drawing.Size(572, 20);
-            this.txtBusqueda.TabIndex = 0;
+            this.txtBusqueda.TabIndex = 4;
             this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
             this.txtBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBusqueda_KeyDown);
             // 
@@ -625,9 +639,9 @@
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
-            this.dgvDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDatos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -646,23 +660,23 @@
             this.lisSucursal,
             this.lisProveedor,
             this.lisLineaMarca});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle22;
             this.dgvDatos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvDatos.Location = new System.Drawing.Point(6, 32);
+            this.dgvDatos.Location = new System.Drawing.Point(6, 59);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 25;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(572, 253);
-            this.dgvDatos.TabIndex = 1;
+            this.dgvDatos.Size = new System.Drawing.Size(572, 226);
+            this.dgvDatos.TabIndex = 5;
             this.dgvDatos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellDoubleClick);
             this.dgvDatos.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvDatos_RowStateChanged);
             this.dgvDatos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDatos_KeyDown);
@@ -704,9 +718,9 @@
             // 
             // lisCosto
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "C2";
-            this.lisCosto.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Format = "C2";
+            this.lisCosto.DefaultCellStyle = dataGridViewCellStyle19;
             this.lisCosto.HeaderText = "Costo";
             this.lisCosto.Name = "lisCosto";
             this.lisCosto.ReadOnly = true;
@@ -714,9 +728,9 @@
             // 
             // lisPrecioAlCliente
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "C2";
-            this.lisPrecioAlCliente.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "C2";
+            this.lisPrecioAlCliente.DefaultCellStyle = dataGridViewCellStyle20;
             this.lisPrecioAlCliente.HeaderText = "Precio";
             this.lisPrecioAlCliente.Name = "lisPrecioAlCliente";
             this.lisPrecioAlCliente.ReadOnly = true;
@@ -724,9 +738,9 @@
             // 
             // lisAnticipo
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "C2";
-            this.lisAnticipo.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Format = "C2";
+            this.lisAnticipo.DefaultCellStyle = dataGridViewCellStyle21;
             this.lisAnticipo.HeaderText = "Anticipo";
             this.lisAnticipo.Name = "lisAnticipo";
             this.lisAnticipo.ReadOnly = true;
@@ -779,6 +793,66 @@
             this.tbpHistorico.Size = new System.Drawing.Size(584, 291);
             this.tbpHistorico.TabIndex = 2;
             this.tbpHistorico.Text = "Histórico";
+            // 
+            // cmbHisUsuario
+            // 
+            this.cmbHisUsuario.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbHisUsuario.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbHisUsuario.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.cmbHisUsuario.DataSource = null;
+            this.cmbHisUsuario.DisplayMember = "";
+            this.cmbHisUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbHisUsuario.Etiqueta = "Vendedor";
+            this.cmbHisUsuario.EtiquetaColor = System.Drawing.Color.Gray;
+            this.cmbHisUsuario.Location = new System.Drawing.Point(262, 31);
+            this.cmbHisUsuario.Name = "cmbHisUsuario";
+            this.cmbHisUsuario.SelectedIndex = -1;
+            this.cmbHisUsuario.SelectedItem = null;
+            this.cmbHisUsuario.SelectedText = "";
+            this.cmbHisUsuario.SelectedValue = null;
+            this.cmbHisUsuario.Size = new System.Drawing.Size(121, 21);
+            this.cmbHisUsuario.TabIndex = 5;
+            this.cmbHisUsuario.ValueMember = "";
+            // 
+            // cmbHisEstatus
+            // 
+            this.cmbHisEstatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbHisEstatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbHisEstatus.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.cmbHisEstatus.DataSource = null;
+            this.cmbHisEstatus.DisplayMember = "";
+            this.cmbHisEstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbHisEstatus.Etiqueta = "Estatus";
+            this.cmbHisEstatus.EtiquetaColor = System.Drawing.Color.Gray;
+            this.cmbHisEstatus.Location = new System.Drawing.Point(135, 31);
+            this.cmbHisEstatus.Name = "cmbHisEstatus";
+            this.cmbHisEstatus.SelectedIndex = -1;
+            this.cmbHisEstatus.SelectedItem = null;
+            this.cmbHisEstatus.SelectedText = "";
+            this.cmbHisEstatus.SelectedValue = null;
+            this.cmbHisEstatus.Size = new System.Drawing.Size(121, 21);
+            this.cmbHisEstatus.TabIndex = 4;
+            this.cmbHisEstatus.ValueMember = "";
+            // 
+            // cmbHisSucursal
+            // 
+            this.cmbHisSucursal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbHisSucursal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbHisSucursal.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.cmbHisSucursal.DataSource = null;
+            this.cmbHisSucursal.DisplayMember = "";
+            this.cmbHisSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbHisSucursal.Etiqueta = "Sucursal";
+            this.cmbHisSucursal.EtiquetaColor = System.Drawing.Color.Gray;
+            this.cmbHisSucursal.Location = new System.Drawing.Point(8, 31);
+            this.cmbHisSucursal.Name = "cmbHisSucursal";
+            this.cmbHisSucursal.SelectedIndex = -1;
+            this.cmbHisSucursal.SelectedItem = null;
+            this.cmbHisSucursal.SelectedText = "";
+            this.cmbHisSucursal.SelectedValue = null;
+            this.cmbHisSucursal.Size = new System.Drawing.Size(121, 21);
+            this.cmbHisSucursal.TabIndex = 3;
+            this.cmbHisSucursal.ValueMember = "";
             // 
             // ctlExistencias
             // 
@@ -843,9 +917,9 @@
             this.dgvHistorico.AllowUserToAddRows = false;
             this.dgvHistorico.AllowUserToDeleteRows = false;
             this.dgvHistorico.AllowUserToResizeRows = false;
-            this.dgvHistorico.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvHistorico.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvHistorico.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvHistorico.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvHistorico.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -863,14 +937,14 @@
             this.hisVendedor,
             this.hisBajaMotivo,
             this.hisBajaUsuario});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvHistorico.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvHistorico.DefaultCellStyle = dataGridViewCellStyle24;
             this.dgvHistorico.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvHistorico.Location = new System.Drawing.Point(3, 58);
             this.dgvHistorico.Name = "dgvHistorico";
@@ -918,9 +992,9 @@
             // 
             // hisAnticipo
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "C2";
-            this.hisAnticipo.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.Format = "C2";
+            this.hisAnticipo.DefaultCellStyle = dataGridViewCellStyle23;
             this.hisAnticipo.HeaderText = "Anticipo";
             this.hisAnticipo.Name = "hisAnticipo";
             this.hisAnticipo.ReadOnly = true;
@@ -967,65 +1041,75 @@
             this.hisBajaUsuario.ReadOnly = true;
             this.hisBajaUsuario.Width = 80;
             // 
-            // cmbHisSucursal
+            // label1
             // 
-            this.cmbHisSucursal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbHisSucursal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbHisSucursal.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.cmbHisSucursal.DataSource = null;
-            this.cmbHisSucursal.DisplayMember = "";
-            this.cmbHisSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            this.cmbHisSucursal.Etiqueta = "Sucursal";
-            this.cmbHisSucursal.EtiquetaColor = System.Drawing.Color.Gray;
-            this.cmbHisSucursal.Location = new System.Drawing.Point(8, 31);
-            this.cmbHisSucursal.Name = "cmbHisSucursal";
-            this.cmbHisSucursal.SelectedIndex = -1;
-            this.cmbHisSucursal.SelectedItem = null;
-            this.cmbHisSucursal.SelectedText = "";
-            this.cmbHisSucursal.SelectedValue = null;
-            this.cmbHisSucursal.Size = new System.Drawing.Size(121, 21);
-            this.cmbHisSucursal.TabIndex = 3;
-            this.cmbHisSucursal.ValueMember = "";
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Sucursal";
             // 
-            // cmbHisEstatus
+            // cmbBuscarSucursal
             // 
-            this.cmbHisEstatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbHisEstatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbHisEstatus.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.cmbHisEstatus.DataSource = null;
-            this.cmbHisEstatus.DisplayMember = "";
-            this.cmbHisEstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            this.cmbHisEstatus.Etiqueta = "Estatus";
-            this.cmbHisEstatus.EtiquetaColor = System.Drawing.Color.Gray;
-            this.cmbHisEstatus.Location = new System.Drawing.Point(135, 31);
-            this.cmbHisEstatus.Name = "cmbHisEstatus";
-            this.cmbHisEstatus.SelectedIndex = -1;
-            this.cmbHisEstatus.SelectedItem = null;
-            this.cmbHisEstatus.SelectedText = "";
-            this.cmbHisEstatus.SelectedValue = null;
-            this.cmbHisEstatus.Size = new System.Drawing.Size(121, 21);
-            this.cmbHisEstatus.TabIndex = 4;
-            this.cmbHisEstatus.ValueMember = "";
+            this.cmbBuscarSucursal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbBuscarSucursal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbBuscarSucursal.FormattingEnabled = true;
+            this.cmbBuscarSucursal.Location = new System.Drawing.Point(60, 6);
+            this.cmbBuscarSucursal.Name = "cmbBuscarSucursal";
+            this.cmbBuscarSucursal.Size = new System.Drawing.Size(100, 21);
+            this.cmbBuscarSucursal.TabIndex = 0;
+            this.cmbBuscarSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbBuscarSucursal_SelectedIndexChanged);
             // 
-            // cmbHisUsuario
+            // cmbBuscarVendedor
             // 
-            this.cmbHisUsuario.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbHisUsuario.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbHisUsuario.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.cmbHisUsuario.DataSource = null;
-            this.cmbHisUsuario.DisplayMember = "";
-            this.cmbHisUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            this.cmbHisUsuario.Etiqueta = "Vendedor";
-            this.cmbHisUsuario.EtiquetaColor = System.Drawing.Color.Gray;
-            this.cmbHisUsuario.Location = new System.Drawing.Point(262, 31);
-            this.cmbHisUsuario.Name = "cmbHisUsuario";
-            this.cmbHisUsuario.SelectedIndex = -1;
-            this.cmbHisUsuario.SelectedItem = null;
-            this.cmbHisUsuario.SelectedText = "";
-            this.cmbHisUsuario.SelectedValue = null;
-            this.cmbHisUsuario.Size = new System.Drawing.Size(121, 21);
-            this.cmbHisUsuario.TabIndex = 5;
-            this.cmbHisUsuario.ValueMember = "";
+            this.cmbBuscarVendedor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbBuscarVendedor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbBuscarVendedor.FormattingEnabled = true;
+            this.cmbBuscarVendedor.Location = new System.Drawing.Point(225, 6);
+            this.cmbBuscarVendedor.Name = "cmbBuscarVendedor";
+            this.cmbBuscarVendedor.Size = new System.Drawing.Size(121, 21);
+            this.cmbBuscarVendedor.TabIndex = 1;
+            this.cmbBuscarVendedor.SelectedIndexChanged += new System.EventHandler(this.cmbBuscarVendedor_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(166, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Vendedor";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(352, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Fechas";
+            // 
+            // dtpBuscarDesde
+            // 
+            this.dtpBuscarDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpBuscarDesde.Location = new System.Drawing.Point(400, 6);
+            this.dtpBuscarDesde.Name = "dtpBuscarDesde";
+            this.dtpBuscarDesde.Size = new System.Drawing.Size(95, 20);
+            this.dtpBuscarDesde.TabIndex = 2;
+            this.dtpBuscarDesde.ValueChanged += new System.EventHandler(this.dtpBuscarDesde_ValueChanged);
+            // 
+            // dtpBuscarHasta
+            // 
+            this.dtpBuscarHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpBuscarHasta.Location = new System.Drawing.Point(501, 6);
+            this.dtpBuscarHasta.Name = "dtpBuscarHasta";
+            this.dtpBuscarHasta.Size = new System.Drawing.Size(95, 20);
+            this.dtpBuscarHasta.TabIndex = 3;
+            this.dtpBuscarHasta.ValueChanged += new System.EventHandler(this.dtpBuscarHasta_ValueChanged);
             // 
             // c9500Partes
             // 
@@ -1127,6 +1211,13 @@
         private Negocio.ComboEtiqueta cmbHisUsuario;
         private Negocio.ComboEtiqueta cmbHisEstatus;
         private Negocio.ComboEtiqueta cmbHisSucursal;
+        private System.Windows.Forms.DateTimePicker dtpBuscarHasta;
+        private System.Windows.Forms.DateTimePicker dtpBuscarDesde;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbBuscarVendedor;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbBuscarSucursal;
+        private System.Windows.Forms.Label label1;
 
     }
 }

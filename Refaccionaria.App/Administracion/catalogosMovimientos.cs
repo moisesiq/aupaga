@@ -59,6 +59,7 @@ namespace Refaccionaria.App
         private void catalogosMovimientos_Load(object sender, EventArgs e)
         {
             this.cargaInicial();
+            this.ActiveControl = this.txtFolioFactura;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -539,6 +540,10 @@ namespace Refaccionaria.App
                 oFila.DefaultCellStyle.ForeColor = Color.Black;
 
                 int iParteID = Helper.ConvertirEntero(oFila.Cells["ParteID"].Value);
+                // Si es un 9500, no se valida
+                if (General.Exists<Parte>(c => c.ParteID == iParteID && c.Es9500 == true && c.Estatus))
+                    continue;
+
                 // int iSucursalID = Helper.ConvertirEntero(this.cboUbicacionDestino.SelectedValue);
                 decimal mCantidad = Helper.ConvertirDecimal(oFila.Cells["UNS"].Value);
                 decimal mNecesidad = General.GetListOf<PartesExistenciasMaxMinView>(c => c.ParteID == iParteID).Sum(c => c.Maximo - c.Existencia).Valor();
@@ -2072,6 +2077,38 @@ namespace Refaccionaria.App
             }
         }
 
+        private void dgvDetalleDescuentos_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (this.dgvDetalleDescuentos.VerSeleccionNueva())
+            {
+                if (this.dgvDetalleDescuentos.CurrentRow == null)
+                {
+                    this.dgvExistencias.LimpiarDatos();
+                }
+                else
+                {
+                    int iParteID = Helper.ConvertirEntero(this.dgvDetalleDescuentos.CurrentRow.Cells["ParteID"].Value);
+                    this.dgvExistencias.CargarDatos(iParteID);
+                }
+            }
+        }
+
+        private void dgvDiferencia_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (this.dgvDiferencia.VerSeleccionNueva())
+            {
+                if (this.dgvDiferencia.CurrentRow == null)
+                {
+                    this.dgvExistencias.LimpiarDatos();
+                }
+                else
+                {
+                    int iParteID = Helper.ConvertirEntero(this.dgvDiferencia.CurrentRow.Cells["ParteID"].Value);
+                    this.dgvExistencias.CargarDatos(iParteID);
+                }
+            }
+        }
+
         #endregion
 
         #region[ Metodos ]
@@ -2157,6 +2194,7 @@ namespace Refaccionaria.App
                 this.cboProveedor.DataSource = listaProveedor;
                 this.cboProveedor.DisplayMember = "NombreProveedor";
                 this.cboProveedor.ValueMember = "ProveedorID";
+                this.cboProveedor.SelectedIndex = -1;
                 AutoCompleteStringCollection autProveedor = new AutoCompleteStringCollection();
                 foreach (var prov in listaProveedor) autProveedor.Add(prov.NombreProveedor);
                 this.cboProveedor.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -2173,6 +2211,8 @@ namespace Refaccionaria.App
 
                 this.habilitarControles();
                 this.establecerInfoCaptura(-1);
+
+                this.txtFolioFactura.Focus();
 
                 this.cboTipoOperacion_SelectionChangeCommitted(null, null);
             }
@@ -3523,6 +3563,28 @@ namespace Refaccionaria.App
                         row["%4"] = parte.PorcentajeUtilidadCuatro;
                         row["%5"] = parte.PorcentajeUtilidadCinco;
                     }
+                    // Si es 9500, se pone el precio ya establecido
+                    if (General.Exists<Parte>(c => c.ParteID == parte.ParteID && c.Es9500 == true && c.Estatus))
+                    {
+                        var oReg9500 = General.GetEntity<Cotizaciones9500DetalleAvanzadoView>(c => c.ParteID == parte.ParteID
+                            && c.Cotizacion9500EstatusID == Cat.EstatusGenericos.Pendiente);
+                        if (oReg9500 != null)
+                        {
+                            decimal mPorcentaje = Math.Round(oReg9500.PrecioAlCliente / parte.Costo.Valor(), 2);
+                            // Se verifica si el porcentaje del 9500 está dentro del rango preestablecido
+                            if (mPorcentaje < Helper.ConvertirDecimal(row["%5"]) || mPorcentaje > Helper.ConvertirDecimal(row["%1"]))
+                                row.SetColumnError("Precio 1", "El precio del 9500 no está dentro del rango de los precios pre-establecidos.");
+                            row["%1"] = mPorcentaje;
+                            row["%2"] = mPorcentaje;
+                            row["%3"] = mPorcentaje;
+                            row["%4"] = mPorcentaje;
+                            row["%5"] = mPorcentaje;
+                        }
+                    }
+                    else
+                    {
+                        
+                    }
 
                     //Columna Etiqueta
                     var rowIndex = Helper.findRowIndex(this.dgvDetalleCaptura, "ParteID", parte.ParteID.ToString());
@@ -4064,6 +4126,6 @@ namespace Refaccionaria.App
 
             return (oCeldaError == null);
         }
-                                
+                
     }
 }

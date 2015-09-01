@@ -59,6 +59,11 @@ namespace Refaccionaria.App
             // this.cntError.Icon = 
             this.cmbProveedor.CargarDatos("ProveedorID", "NombreProveedor", General.GetListOf<Proveedor>(q => q.Estatus));
 
+            // Buscar
+            this.cmbBuscarSucursal.CargarDatos("SucursalID", "NombreSucursal", General.GetListOf<Sucursal>(c => c.Estatus));
+            this.cmbBuscarVendedor.CargarDatos("UsuarioID", "NombreUsuario", General.GetListOf<Usuario>(c => c.Activo && c.Estatus).OrderBy(c => c.NombreUsuario).ToList());
+            this.dtpBuscarDesde.Value = new DateTime(DateTime.Now.Year, 1, 1);
+
             // Histórico
             this.dtpHisDesde.Value = DateTime.Now.DiaPrimero();
             this.dtpHisHasta.Value = DateTime.Now.DiaUltimo();
@@ -261,10 +266,33 @@ namespace Refaccionaria.App
             }
         }
 
+        private void cmbBuscarSucursal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbBuscarSucursal.Focused)
+                this.CargarLista9500();
+        }
+
+        private void cmbBuscarVendedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbBuscarVendedor.Focused)
+                this.CargarLista9500();
+        }
+
+        private void dtpBuscarDesde_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.dtpBuscarDesde.Focused)
+                this.CargarLista9500();
+        }
+
+        private void dtpBuscarHasta_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.dtpBuscarHasta.Focused)
+                this.CargarLista9500();
+        }
+
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
-            this.dgvDatos.FiltrarContiene(this.txtBusqueda.Text, "lisCotizacion9500ID", "lisProveedor", "lisLineaMarca", "lisNumeroDeParte", "lisDescripcion"
-                , "lisCliente", "lisSucursal", "lisVendedor");
+            this.dgvDatos.FiltrarContiene(this.txtBusqueda.Text, "lisNumeroDeParte", "lisDescripcion");
         }
 
         private void txtBusqueda_KeyDown(object sender, KeyEventArgs e)
@@ -337,8 +365,18 @@ namespace Refaccionaria.App
                 Lista.btnCerrar.Text = "&Ninguna";
                 if (Lista.ShowDialog(Principal.Instance) == DialogResult.OK)
                 {
+                    // Se verifica si la parte tiene su máximo mayor a cero, lo cual indica que no puede ser 9500
+                    int iParteID = Helper.ConvertirEntero(Lista.Sel["ParteID"]);
+                    if (General.Exists<ParteMaxMin>(c => c.ParteID == iParteID && c.Maximo > 0))
+                    {
+                        UtilLocal.MensajeAdvertencia("Este artículo no puede ser 9500. Si no hay existencia, favor de reportarlo al Departamento de Compras.");
+                        this.txtDescripcion.Text = "";
+                        this.txtDescripcion.ReadOnly = true;
+                        return;
+                    }
+
                     this.txtDescripcion.Text = Helper.ConvertirCadena(Lista.Sel["Descripcion"]);
-                    this.ParteIDSel = Helper.ConvertirEntero(Lista.Sel["ParteID"]);
+                    this.ParteIDSel = iParteID;
                     // this.chkPaqueteria.Focus();
                     bSel = true;
                 }
@@ -445,11 +483,25 @@ namespace Refaccionaria.App
         private void CargarLista9500()
         {
             Cargando.Mostrar();
-            var oDatos = General.GetListOf<Lista9500View>(c => c.EstatusGenericoID == Cat.EstatusGenericos.Pendiente).OrderBy(c => c.Cotizacion9500ID);
+
+            int iSucursalID = Helper.ConvertirEntero(this.cmbBuscarSucursal.SelectedValue);
+            int iVendedorID = Helper.ConvertirEntero(this.cmbBuscarVendedor.SelectedValue);
+            DateTime dDesde = this.dtpBuscarDesde.Value.Date;
+            DateTime dHasta = this.dtpBuscarHasta.Value.Date.AddDays(1);
+
+            var oDatos = General.GetListOf<Lista9500View>(c => c.EstatusGenericoID == Cat.EstatusGenericos.Pendiente
+                && (iSucursalID == 0 || c.SucursalID == iSucursalID)
+                && (iVendedorID == 0 || c.VendedorID == iVendedorID)
+                && (c.Fecha >= dDesde && c.Fecha < dHasta)
+            ).OrderBy(c => c.Cotizacion9500ID);
             this.dgvDatos.Rows.Clear();
             foreach (var oReg in oDatos)
                 this.dgvDatos.Rows.Add(oReg.Cotizacion9500ID, oReg.Fecha, oReg.Vendedor, oReg.NumeroDeParte, oReg.Descripcion
                     , oReg.Costo, oReg.PrecioAlCliente, oReg.Anticipo, oReg.Cliente, oReg.Sucursal, oReg.Proveedor, oReg.LineaMarca);
+
+            if (this.txtBusqueda.Text != "")
+                this.txtBusqueda_TextChanged(this, null);
+
             Cargando.Cerrar();
         }
 
@@ -508,7 +560,7 @@ namespace Refaccionaria.App
                 this.CargarLista9500();
             }
         }
-
+        
         private void CargarHistorico()
         {
             Cargando.Mostrar();
@@ -596,6 +648,6 @@ namespace Refaccionaria.App
         }
 
         #endregion
-                                        
+                                
     }
 }

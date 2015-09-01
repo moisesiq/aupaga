@@ -2474,6 +2474,7 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Estatus" Type="bit" Nullable="false" />
           <Property Name="Actualizar" Type="bit" Nullable="false" />
+          <Property Name="Primera" Type="bit" />
         </EntityType>
         <EntityType Name="VentaFacturaDevolucion">
           <Key>
@@ -3190,6 +3191,32 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaPolizasDetalleAvanza
           <Property Name="Cargo" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Abono" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Referencia" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ControlRefaccionaria.dbo.Cotizaciones9500DetalleAvanzadoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Cotizaciones9500DetalleAvanzadoView">
+          <Key>
+            <PropertyRef Name="Cotizacion9500DetalleID" />
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="LineaID" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="PrecioAlCliente" />
+          </Key>
+          <Property Name="Cotizacion9500DetalleID" Type="int" Nullable="false" />
+          <Property Name="Cotizacion9500ID" Type="int" />
+          <Property Name="Cotizacion9500EstatusID" Type="int" />
+          <Property Name="ProveedorID" Type="int" Nullable="false" />
+          <Property Name="LineaID" Type="int" Nullable="false" />
+          <Property Name="MarcaID" Type="int" Nullable="false" />
+          <Property Name="ParteID" Type="int" Nullable="false" />
+          <Property Name="NumeroDeParte" Type="nvarchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="512" />
+          <Property Name="Cantidad" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PrecioAlCliente" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.Cotizaciones9500DetalleView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -10989,6 +11016,22 @@ FROM [dbo].[ContaEgresosView] AS [ContaEgresosView]</DefiningQuery>
 [ContaPolizasDetalleAvanzadoView].[Referencia] AS [Referencia]
 FROM [dbo].[ContaPolizasDetalleAvanzadoView] AS [ContaPolizasDetalleAvanzadoView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Cotizaciones9500DetalleAvanzadoView" EntityType="Self.Cotizaciones9500DetalleAvanzadoView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Cotizaciones9500DetalleAvanzadoView].[Cotizacion9500DetalleID] AS [Cotizacion9500DetalleID], 
+[Cotizaciones9500DetalleAvanzadoView].[Cotizacion9500ID] AS [Cotizacion9500ID], 
+[Cotizaciones9500DetalleAvanzadoView].[Cotizacion9500EstatusID] AS [Cotizacion9500EstatusID], 
+[Cotizaciones9500DetalleAvanzadoView].[ProveedorID] AS [ProveedorID], 
+[Cotizaciones9500DetalleAvanzadoView].[LineaID] AS [LineaID], 
+[Cotizaciones9500DetalleAvanzadoView].[MarcaID] AS [MarcaID], 
+[Cotizaciones9500DetalleAvanzadoView].[ParteID] AS [ParteID], 
+[Cotizaciones9500DetalleAvanzadoView].[NumeroDeParte] AS [NumeroDeParte], 
+[Cotizaciones9500DetalleAvanzadoView].[Descripcion] AS [Descripcion], 
+[Cotizaciones9500DetalleAvanzadoView].[Cantidad] AS [Cantidad], 
+[Cotizaciones9500DetalleAvanzadoView].[Costo] AS [Costo], 
+[Cotizaciones9500DetalleAvanzadoView].[PrecioAlCliente] AS [PrecioAlCliente]
+FROM [dbo].[Cotizaciones9500DetalleAvanzadoView] AS [Cotizaciones9500DetalleAvanzadoView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Cotizaciones9500DetalleView" EntityType="Self.Cotizaciones9500DetalleView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [Cotizaciones9500DetalleView].[Cotizacion9500DetalleID] AS [Cotizacion9500DetalleID], 
@@ -16211,6 +16254,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Venta" EntitySet="Venta" />
             <End Role="VentaParteAplicacion" EntitySet="VentaParteAplicacion" />
           </AssociationSet>
+          <EntitySet Name="Cotizaciones9500DetalleAvanzadoView" EntityType="RefaccionariaModelo.Cotizaciones9500DetalleAvanzadoView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -17553,6 +17597,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__70D3A237" FromRole="VentaFacturaDetalle" ToRole="VentaFactura" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__72BBEAA9" FromRole="VentaFacturaDetalle" ToRole="Usuario" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__71C7C670" FromRole="VentaFacturaDetalle" ToRole="Venta" />
+          <Property Name="Primera" Type="Boolean" />
         </EntityType>
         <EntityType Name="ClientePersonal">
           <Key>
@@ -27280,6 +27325,30 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cotizaciones9500DetalleAvanzadoView">
+          <Key>
+            <PropertyRef Name="Cotizacion9500DetalleID" />
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="LineaID" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="PrecioAlCliente" />
+          </Key>
+          <Property Name="Cotizacion9500DetalleID" Type="Int32" Nullable="false" />
+          <Property Name="Cotizacion9500ID" Type="Int32" />
+          <Property Name="Cotizacion9500EstatusID" Type="Int32" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="MarcaID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="NumeroDeParte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Cantidad" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="PrecioAlCliente" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -28343,6 +28412,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySetMapping Name="VentaFacturaDetalle">
             <EntityTypeMapping TypeName="RefaccionariaModelo.VentaFacturaDetalle">
               <MappingFragment StoreEntitySet="VentaFacturaDetalle">
+                <ScalarProperty Name="Primera" ColumnName="Primera" />
                 <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
@@ -32836,6 +32906,24 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="ParteID" ColumnName="ParteID" />
                 <ScalarProperty Name="VentaID" ColumnName="VentaID" />
                 <ScalarProperty Name="VentaParteAplicacion1" ColumnName="VentaParteAplicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cotizaciones9500DetalleAvanzadoView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.Cotizaciones9500DetalleAvanzadoView">
+              <MappingFragment StoreEntitySet="Cotizaciones9500DetalleAvanzadoView">
+                <ScalarProperty Name="PrecioAlCliente" ColumnName="PrecioAlCliente" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="Cotizacion9500EstatusID" ColumnName="Cotizacion9500EstatusID" />
+                <ScalarProperty Name="Cotizacion9500ID" ColumnName="Cotizacion9500ID" />
+                <ScalarProperty Name="Cotizacion9500DetalleID" ColumnName="Cotizacion9500DetalleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -40850,6 +40938,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPart__Motor__4337C010" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPart__Parte__414F779E" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPart__Venta__405B5365" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.Cotizaciones9500DetalleAvanzadoView" Width="1.5" PointX="5.375" PointY="25.75" />
         </Diagram>
     </Diagrams>
   </Designer>

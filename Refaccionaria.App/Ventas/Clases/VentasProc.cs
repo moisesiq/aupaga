@@ -1186,7 +1186,15 @@ namespace Refaccionaria.App
             };
             var oVentaFacturaD = new List<VentaFacturaDetalle>();
             foreach (var oVentaFac in oVentas)
-                oVentaFacturaD.Add(new VentaFacturaDetalle() { VentaID = oVentaFac.VentaID });
+            {
+                var oFacturaDet = new VentaFacturaDetalle() { VentaID = oVentaFac.VentaID };
+
+                // Se revisa si es la primera factura para esta venta
+                if (!General.Exists<VentaFacturaDetalle>(c => c.VentaID == oVentaFac.VentaID && c.Estatus))
+                    oFacturaDet.Primera = true;
+
+                oVentaFacturaD.Add(oFacturaDet);
+            }
             Guardar.Factura(oVentaFactura, oVentaFacturaD);
 
             // Se escribe el folio de factura en cada venta

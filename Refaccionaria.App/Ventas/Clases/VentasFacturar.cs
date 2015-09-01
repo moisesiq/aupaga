@@ -101,7 +101,8 @@ namespace Refaccionaria.App
                 }
                 else
                 {
-                    ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaContadoPago, iVentaID, (oFactura.Serie + oFactura.Folio), oVentaV.Cliente, oVentaV.SucursalID);
+                    ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaContadoFacturaConvertida, iVentaID
+                        , (oFactura.Serie + oFactura.Folio), oVentaV.Cliente, oVentaV.SucursalID);
                 }
             }
 

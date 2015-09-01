@@ -364,7 +364,8 @@ namespace Refaccionaria.Modelo
 
         public class ContaAfectaciones
         {
-            public const int VentaContadoPago = 1;
+            public const int VentaContadoFacturaDirecta = 1;
+            public const int VentaContadoFacturaConvertida = 46;
             public const int VentaContadoPagoFacturaGlobal = 28;
             public const int VentaContadoVale = 2;
             public const int VentaCredito = 3;

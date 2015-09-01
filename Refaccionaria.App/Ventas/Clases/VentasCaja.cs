@@ -341,7 +341,7 @@ namespace Refaccionaria.App
                 if (General.Exists<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == oContaEgreso.ContaCuentaAuxiliarID 
                     && c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.DeudoresDiversos))
                 {
-                    var oPoliza = General.GetEntity<ContaPoliza>(c => c.RelacionTabla == Cat.Tablas.ContaEgreso && c.RelacionID == iEgresoID);
+                    var oPoliza = General.GetEntity<ContaPoliza>(c => c.RelacionTabla == Cat.Tablas.CajaEgreso && c.RelacionID == oMov.CajaEgresoID);
                     ContaProc.BorrarPoliza(oPoliza.ContaPolizaID);
                 }
 
@@ -764,7 +764,7 @@ namespace Refaccionaria.App
                     if (oVenta.ACredito)
                         ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaCredito, iVentaID, (oFactura.Serie + oFactura.Folio), oCliente.Nombre);
                     else
-                        ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaContadoPago, iVentaID, (oFactura.Serie + oFactura.Folio), oCliente.Nombre);
+                        ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaContadoFacturaDirecta, iVentaID, (oFactura.Serie + oFactura.Folio), oCliente.Nombre);
                 }
                 else
                 {

@@ -614,7 +614,7 @@ namespace Refaccionaria.App
         {
             switch (iAfectacionID)
             {
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
                 case Cat.ContaAfectaciones.VentaContadoVale:
                 case Cat.ContaAfectaciones.VentaCredito:
                     return Cat.Tablas.Venta;
@@ -678,7 +678,8 @@ namespace Refaccionaria.App
             var oDetalle = new ContaPolizaDetalle();
             switch (iAfectacionID)
             {
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                 case Cat.ContaAfectaciones.VentaCredito:
                     ContaProc.AfectarConPrecioVenta(ref oDetalle, iId);
                     break;
@@ -970,7 +971,8 @@ namespace Refaccionaria.App
             var oDetalle = new ContaPolizaDetalle();
             switch (iAfectacionID)
             {
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                 case Cat.ContaAfectaciones.VentaCredito:
                     ContaProc.AfectarConCostoVenta(ref oDetalle, iId);
                     break;
@@ -1034,7 +1036,8 @@ namespace Refaccionaria.App
             var oDetalle = new ContaPolizaDetalle();
             switch (iAfectacionID)
             {
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                 case Cat.ContaAfectaciones.VentaCredito:
                     ContaProc.AfectarConCostoVenta(ref oDetalle, iId);
                     break;
@@ -1067,7 +1070,8 @@ namespace Refaccionaria.App
             var oDetalle = new ContaPolizaDetalle();
             switch (iAfectacionID)
             {
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                 // case Cat.ContaAfectaciones.NotaDeCreditoDevolucionVenta:
                     ContaProc.AfectarConPrecioSinIvaVenta(ref oDetalle, iId);
                     break;
@@ -1120,7 +1124,8 @@ namespace Refaccionaria.App
             var oDetalle = new ContaPolizaDetalle();
             switch (iAfectacionID)
             {
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                     ContaProc.AfectarConIvaVenta(ref oDetalle, iId);
                     break;
                 case Cat.ContaAfectaciones.PagoVentaCredito:
@@ -1191,7 +1196,10 @@ namespace Refaccionaria.App
             var oDetalle = new ContaPolizaDetalle();
             switch (iAfectacionID)
             {
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                    ContaProc.AfectarConPagoNoValeDeVenta(ref oDetalle, iId);
+                    break;
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                     // ContaProc.AfectarConPrecioVenta(ref oDetalle, iId);
                     // Se verifica si la venta es del día o de días anteriores
                     if (General.Exists<Venta>(c => c.VentaID == iId && c.Fecha < DateTime.Today && c.Estatus))
@@ -1368,7 +1376,10 @@ namespace Refaccionaria.App
                 case Cat.ContaAfectaciones.VentaContadoPagoFacturaGlobal:
                     ContaProc.AfectarConFacturaGlobalValesDeFactura(ref oDetalle, iId);
                     break;
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                    ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
+                    break;
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                     // Se verifica si la venta es del día o de días anteriores
                     if (General.Exists<Venta>(c => c.VentaID == iId && EntityFunctions.TruncateTime(c.Fecha) == DateTime.Today && c.Estatus))
                         ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
@@ -1481,7 +1492,7 @@ namespace Refaccionaria.App
             int iClienteID = 0;
             switch (iAfectacionID)
             {
-                case Cat.ContaAfectaciones.VentaContadoPago:
+                case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
                 case Cat.ContaAfectaciones.VentaCredito:
                     var oVenta = General.GetEntity<Venta>(c => c.VentaID == iId && c.Estatus);
                     iClienteID = oVenta.ClienteID;
