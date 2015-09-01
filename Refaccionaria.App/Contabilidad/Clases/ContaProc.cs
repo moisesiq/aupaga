@@ -615,6 +615,7 @@ namespace Refaccionaria.App
             switch (iAfectacionID)
             {
                 case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                 case Cat.ContaAfectaciones.VentaContadoVale:
                 case Cat.ContaAfectaciones.VentaCredito:
                     return Cat.Tablas.Venta;
@@ -1493,6 +1494,7 @@ namespace Refaccionaria.App
             switch (iAfectacionID)
             {
                 case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
+                case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                 case Cat.ContaAfectaciones.VentaCredito:
                     var oVenta = General.GetEntity<Venta>(c => c.VentaID == iId && c.Estatus);
                     iClienteID = oVenta.ClienteID;

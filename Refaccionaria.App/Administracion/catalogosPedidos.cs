@@ -315,12 +315,22 @@ namespace Refaccionaria.App
 
         private void sacarImporteTotal()
         {
+            decimal mTotal = 0;
+            foreach (DataGridViewRow oFila in this.dgvSugeridos.Rows)
+            {
+                if (!oFila.Visible || !Helper.ConvertirBool(oFila.Cells["Sel"].Value)) continue;
+                mTotal += Helper.ConvertirDecimal(oFila.Cells["Costo Total"].Value);
+            }
+            this.txtImporteTotal.Text = mTotal.ToString(GlobalClass.FormatoMoneda);
+
+            /* Se modifica la forma de calcular el total, pues se encontraban diferencias al seleccionar y des-seleccionar todos - Moi 2015-09-01
             try
             {
                 decimal importeTotal = dgvSugeridos.Rows.OfType<DataGridViewRow>().Where(c => Helper.ConvertirCadena(c.Cells["Caracteristica"].Value) != "NP")
                     .Sum(row => Helper.ConvertirDecimal(row.Cells["Costo Total"].Value));
                 var importeNoSeleccionados = 0.0M;
 
+                /* No se xq se calculaba el importe de lo no seleccionado, se modifica para q sólo se considere el importe de lo seleccionado - Moi 2015-09-01
                 foreach (DataGridViewRow fila in this.dgvSugeridos.Rows)
                 {
                     if (!fila.Visible) continue;
@@ -334,12 +344,16 @@ namespace Refaccionaria.App
                         }
                     }
                 }
+                * /
+
                 this.txtImporteTotal.Text = Helper.DecimalToCadenaMoneda(importeTotal - importeNoSeleccionados);
             }
             catch (Exception ex)
             {
                 Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
             }
+
+            */
         }
 
         private void LlenarDatosExtra(int iParteID, int iSucursalID)
