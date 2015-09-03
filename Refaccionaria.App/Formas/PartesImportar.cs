@@ -170,6 +170,7 @@ namespace Refaccionaria.App
                     UnidadEmpaque = Helper.ConvertirEntero(oFila.Cells["UnidadDeEmpaque"].Value),
                     AplicaComision = (Helper.ConvertirCadena(oFila.Cells["AplicaComision"].Value).ToLower() == PartesImportar.CadenaVerdadero),
                     Etiqueta = (Helper.ConvertirCadena(oFila.Cells["Etiqueta"].Value).ToLower() == PartesImportar.CadenaVerdadero),
+                    Es9500 = true
                 };
                 // Se genera el registro del precio
                 var oPartePrecio = new PartePrecio()

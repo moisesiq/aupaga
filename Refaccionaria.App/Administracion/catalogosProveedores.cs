@@ -2168,7 +2168,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             var devs = Negocio.General.GetListOf<MovimientoInventario>(c => c.ProveedorID == Proveedor.ProveedorID
-                && c.TipoOperacionID == Cat.TiposDeMovimientosOp.DevolucionAProveedor && c.TipoConceptoOperacionID != Cat.MovimientosConceptosDeOperacion.DevolucionGarantia
+                && c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.DevolucionAProveedor && c.TipoConceptoOperacionID != Cat.MovimientosConceptosDeOperacion.DevolucionGarantia
                 && (this.chkDevMostrarTodas.Checked || (!c.AplicaEnMovimientoInventarioID.HasValue && !c.FueLiquidado)));
             this.dgvDevoluciones.Rows.Clear();
             foreach (var oReg in devs)

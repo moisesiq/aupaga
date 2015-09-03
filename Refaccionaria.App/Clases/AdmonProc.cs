@@ -161,6 +161,14 @@ namespace Refaccionaria.App
             return oCantImagenes;
         }
 
+        public static bool VerGuardar9500(int iParteID)
+        {
+            var oParte = General.GetEntity<Parte>(c => c.ParteID == iParteID && c.Estatus);
+            oParte.Es9500 = !General.Exists<ParteMaxMin>(c => c.ParteID == iParteID && c.Maximo > 0);
+            Guardar.Generico<Parte>(oParte);
+            return oParte.Es9500.Valor();
+        }
+
         #endregion
 
         #region [ Relacionado con Proveedores ]
@@ -218,7 +226,7 @@ namespace Refaccionaria.App
         {
             var oMov = new MovimientoInventario()
             {
-                TipoOperacionID = Cat.TiposDeMovimientosOp.DevolucionAProveedor,
+                TipoOperacionID = Cat.TiposDeOperacionMovimientos.DevolucionAProveedor,
                 ProveedorID = iProveedorID,
                 // DevolucionOrigenID = iOrigenID,
                 ImporteTotal = mImporte,

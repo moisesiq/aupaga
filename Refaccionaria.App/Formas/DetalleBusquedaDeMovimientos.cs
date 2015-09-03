@@ -142,7 +142,7 @@ namespace Refaccionaria.App
         {
             DateTime dDesde = this.dtpDesde.Value.Date;
             DateTime dHasta = this.dtpHasta.Value.Date.AddDays(1);
-            var oDatos = General.GetListOf<MovimientosInventarioDetalleAvanzadoView>(c => c.TipoOperacionID == Cat.TiposDeMovimientosOp.EntradaCompra 
+            var oDatos = General.GetListOf<MovimientosInventarioDetalleAvanzadoView>(c => c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.EntradaCompra 
                 && c.ParteID == iParteID && (c.Cantidad - c.CantidadDevuelta) > 0 && (c.FechaFactura >= dDesde && c.FechaFactura < dHasta));
             this.dgvFacturas.Rows.Clear();
             foreach (var oReg in oDatos)

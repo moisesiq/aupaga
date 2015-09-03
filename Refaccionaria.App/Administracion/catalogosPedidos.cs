@@ -355,104 +355,7 @@ namespace Refaccionaria.App
 
             */
         }
-
-        private void LlenarDatosExtra(int iParteID, int iSucursalID)
-        {
-            this.LimpiarDatosExtra();
-                        
-            // Se llenan los datos calculados
-            DateTime dHasta = DateTime.Now.Date.DiaPrimero().AddDays(-1);
-            var oParams = new Dictionary<string, object>();
-            oParams.Add("ParteID", iParteID);
-            oParams.Add("Desde", dHasta.AddYears(-1).AddDays(1));
-            oParams.Add("Hasta", dHasta);
-            oParams.Add("SucursalID", iSucursalID);
-
-            var oDatos = General.ExecuteProcedure<pauParteMaxMinDatosExtra_Result>("pauParteMaxMinDatosExtra", oParams);
-
-            // Se llenan las etiquetas de los meses
-            var oMesesEtiquetas = new Dictionary<int, int>();
-            for (int iCont = 0; iCont < 12; iCont++)
-            {
-                DateTime dMes = dHasta.AddMonths(iCont * -1);
-                string sEtiqueta = string.Format("lblEtMes{0:00}", (12 - iCont));
-                this.pnlDatosVentas.Controls[sEtiqueta].Text =
-                    System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(dMes.Month).ToUpper()
-                    + dMes.Year.ToString().Derecha(2);
-                oMesesEtiquetas[dMes.Month] = (12 - iCont);
-            }
-
-            // Se llenan los datos, según la sucursal, si hubo resultados
-            if (oDatos.Count > 1)
-            {
-                this.lblVentaMayorDia.Text = oDatos[0].Cantidad.Valor().ToString();
-                this.lblVentaMenorDia.Text = oDatos[1].Cantidad.Valor().ToString();
-                this.lblSemanasConVenta.Text = oDatos.Where(q => q.Grupo == 3).Count().ToString();
-                // Coloración
-                this.lblVentaMayorDia.ForeColor = this.DatosExtraColoracion(oDatos[0].Cantidad, oDatos[0].Negadas);
-                this.lblVentaMenorDia.ForeColor = this.DatosExtraColoracion(oDatos[1].Cantidad, oDatos[1].Negadas);
-                this.lblSemanasConVenta.ForeColor = this.DatosExtraColoracion(oDatos.Where(q => q.Grupo == 3).Count(), oDatos.Where(q => q.Grupo == 3 && q.Negadas > 0).Count());
-                // Fin - Coloración
-
-                // Se llenan los meses
-                foreach (var oDato in oDatos)
-                {
-                    if (oDato.Grupo == 4)
-                    {
-                        this.pnlDatosVentas.Controls[string.Format("lblMes{0:00}", oMesesEtiquetas[oDato.Periodo.Valor()])].Text = oDato.Cantidad.Valor().ToString();
-                        this.pnlDatosVentas.Controls[string.Format("lblMes{0:00}", oMesesEtiquetas[oDato.Periodo.Valor()])].ForeColor =
-                            this.DatosExtraColoracion(oDato.Cantidad, oDato.Negadas);
-                    }
-                }
-
-                // Se llenan las semanas
-                var oSemanas = oDatos.Where(q => q.Grupo == 3).OrderByDescending(q => q.Cantidad).ToList();
-                for (int iCont = 0; (iCont < 13 && iCont < oSemanas.Count); iCont++)
-                {
-                    this.pnlDatosVentas.Controls[string.Format("lblSem{0:00}", iCont + 1)].Text = oSemanas[iCont].Cantidad.Valor().ToString();
-                    this.pnlDatosVentas.Controls[string.Format("lblSem{0:00}", iCont + 1)].ForeColor = 
-                        this.DatosExtraColoracion(oSemanas[iCont].Cantidad, oSemanas[iCont].Negadas);
-                }
-            }
-        }
                 
-        private void LimpiarDatosExtra()
-        {
-            this.lblVentaMayorDia.Text = "";
-            this.lblVentaMenorDia.Text = "";
-            this.lblSemanasConVenta.Text = "";
-
-            foreach (Control oControl in this.pnlDatosVentas.Controls)
-            {
-                if (oControl.Name.Contains("lblInMes"))
-                    oControl.Text = "";
-                else if (oControl.Name.Contains("lblMes") || oControl.Name.Contains("lblSem"))
-                    oControl.Text = "0";
-            }
-
-            // Coloración
-            foreach (Control oControl in this.pnlDatosVentas.Controls)
-            {
-                if (oControl.Name.Contains("lblVentaM") || oControl.Name == "lblSemanasConVenta")
-                    oControl.ForeColor = Color.Black;
-                else if (oControl.Name.Contains("lblMes") || oControl.Name.Contains("lblSem"))
-                    oControl.ForeColor = Color.White;
-            }
-            // Fin - Coloración
-        }
-
-        private Color DatosExtraColoracion(decimal? mCantidad, decimal? mNegadas)
-        {
-            decimal? mDiferencia = (mCantidad - mNegadas);
-
-            if (mDiferencia == mCantidad)
-                return Color.White;
-            else if (mDiferencia == 0)
-                return Color.Tomato;
-            else
-                return Color.LightSkyBlue;
-        }
-
         private void ColorearSugeridos(bool bColorearGridProveedores)
         {
             /* Ya no se ocultan las partes NP (partes que no tienen existencia pero tienen equivalentes que sí), pues se notó que esa funcionalidad sí aplica
@@ -1000,15 +903,8 @@ namespace Refaccionaria.App
                 
                 this.txtSugerenciaObservacion.Text = Helper.ConvertirCadena(this.dgvSugeridos["Observacion", e.RowIndex].Value);
 
-                // Se cargan los datos de las ventas, si aplica
-                int iSucursalID = 0;
-                switch (this.dgvSugeridos.Columns[e.ColumnIndex].Name) {
-                    case "NecesidadMatriz": iSucursalID = 1; break;
-                    case "NecesidadSuc02": iSucursalID = 2; break;
-                    case "NecesidadSuc03": iSucursalID = 3; break;
-                }
-                if (iSucursalID > 0)
-                    this.LlenarDatosExtra(parteId, iSucursalID);
+                // Se cargan los datos de las ventas para la parte seleccionada
+                this.ctlVentasPorMes.LlenarDatos(parteId);
             }
         }
 

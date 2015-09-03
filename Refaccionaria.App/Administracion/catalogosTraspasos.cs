@@ -619,7 +619,7 @@ namespace Refaccionaria.App
                     }
                     // Se verifica si ya hay un traspaso para la parte indicada
                     int iSucDestID = Helper.ConvertirEntero(this.cboUbicacionDestino.SelectedValue);
-                    if (General.Exists<MovimientoInventarioDetalleView>(c => c.TipoOperacionID == Cat.TiposDeMovimientosOp.Traspaso && c.SucursalDestinoID == iSucDestID
+                    if (General.Exists<MovimientoInventarioDetalleView>(c => c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.Traspaso && c.SucursalDestinoID == iSucDestID
                         && !c.FechaRecepcion.HasValue && c.ParteID == iParteID))
                     {
                         if (UtilLocal.MensajePregunta("El artículo seleccionado ya tiene un traspaso pendiente. ¿Aún así deseas continuar?") != DialogResult.Yes)
@@ -730,7 +730,7 @@ namespace Refaccionaria.App
                             
                             // Se verifica si ya hay un traspaso para la parte indicada
                             int iSucDestID = Helper.ConvertirEntero(this.cboUbicacionDestino.SelectedValue);
-                            if (General.Exists<MovimientoInventarioDetalleView>(c => c.TipoOperacionID == Cat.TiposDeMovimientosOp.Traspaso && c.SucursalDestinoID == iSucDestID
+                            if (General.Exists<MovimientoInventarioDetalleView>(c => c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.Traspaso && c.SucursalDestinoID == iSucDestID
                                 && !c.FechaRecepcion.HasValue && c.ParteID == parteId))
                             {
                                 if (UtilLocal.MensajePregunta("El artículo seleccionado ya tiene un traspaso pendiente. ¿Aún así deseas continuar?") != DialogResult.Yes)
@@ -1118,7 +1118,7 @@ namespace Refaccionaria.App
                 if (parte != null)
                 {
                     // Se valida si ya existe un traspaso de la misma parte, para mostrar la advertencia
-                    if (General.Exists<MovimientoInventarioDetalleView>(c => c.TipoOperacionID == Cat.TiposDeMovimientosOp.Traspaso && c.ParteID == parte.ParteID
+                    if (General.Exists<MovimientoInventarioDetalleView>(c => c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.Traspaso && c.ParteID == parte.ParteID
                         && !c.FechaRecepcion.HasValue && c.SucursalDestinoID == GlobalClass.SucursalID))
                     {
                         if (UtilLocal.MensajePregunta("Ya existe un Traspaso en curso para esta Parte. ¿Aún así deseas continuar?") != DialogResult.Yes)
@@ -1328,7 +1328,7 @@ namespace Refaccionaria.App
             }
 
             var oCompra = General.GetEntity<MovimientoInventarioView>(c => c.MovimientoInventarioID == iEntradaCompraID);
-            if (oCompra.TipoOperacionID != Cat.TiposDeMovimientosOp.EntradaCompra)
+            if (oCompra.TipoOperacionID != Cat.TiposDeOperacionMovimientos.EntradaCompra)
             {
                 UtilLocal.MensajeAdvertencia("El folio especificado no pertenece a una Compra. No se puede continuar.");
                 return;

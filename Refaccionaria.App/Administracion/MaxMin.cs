@@ -680,6 +680,9 @@ namespace Refaccionaria.App
                 oParteMaxMin.Minimo = Helper.ConvertirDecimal(Fila.Cells["Minimo"].Value);
                 oParteMaxMin.FechaCalculo = dAhora;
                 Guardar.Generico<ParteMaxMin>(oParteMaxMin);
+
+                // Se verifica si aplica para 9500 y se guarda el dato Es9500
+                AdmonProc.VerGuardar9500(iParteID);
             }
 
             Cargando.Cerrar();
@@ -992,6 +995,9 @@ namespace Refaccionaria.App
                 {
                     oParteMaxMin.Maximo = 0;
                     oParteMaxMin.Minimo = 0;
+
+                    // Se verifica si aplica para 9500 y se guarda el dato Es9500
+                    AdmonProc.VerGuardar9500(iParteID);
                 }
                 Guardar.Generico<ParteMaxMin>(oParteMaxMin);
             }

@@ -1086,7 +1086,7 @@ namespace Refaccionaria.App
             }
 
             // Se valida que se hayan recibido todos los traspasos marcados
-            if (General.Exists<MovimientoInventario>(c => c.TipoOperacionID == Cat.TiposDeMovimientosOp.Traspaso && c.SucursalDestinoID == GlobalClass.SucursalID
+            if (General.Exists<MovimientoInventario>(c => c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.Traspaso && c.SucursalDestinoID == GlobalClass.SucursalID
                 && c.TraspasoEntregado.HasValue && c.TraspasoEntregado.Value && !c.FechaRecepcion.HasValue))
             {
                 UtilLocal.MensajeAdvertencia("No se han registrado todos los traspasos que ya se marcaron como entregados.");

@@ -94,6 +94,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\Gen\GridVentasMes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Administracion\Gen\GridVentasMes.Designer.cs">
+      <DependentUpon>GridVentasMes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Administracion\Inventario.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1365,6 +1371,9 @@
     <Compile Include="Ventas\vdContactos.Designer.cs">
       <DependentUpon>vdContactos.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Administracion\Gen\GridVentasMes.resx">
+      <DependentUpon>GridVentasMes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Administracion\Inventario.resx">
       <DependentUpon>Inventario.cs</DependentUpon>
     </EmbeddedResource>

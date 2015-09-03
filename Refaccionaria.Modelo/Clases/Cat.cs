@@ -331,7 +331,7 @@ namespace Refaccionaria.Modelo
             public const int Cancelado = 3;
         }
 
-        public class TiposDeMovimientosOp
+        public class TiposDeOperacionMovimientos
         {
             public const int EntradaCompra = 1;
             public const int EntradaInventario = 2;

@@ -1044,6 +1044,9 @@ namespace Refaccionaria.App
                     }
                 }
 
+                // Se verifica el máximo, para guardar como 9500 o no
+                this.oParte.Es9500 = AdmonProc.VerGuardar9500(this.oParte.ParteID);
+
                 // Si es nuevo, se carga la parte, para que ya no sea nuevo
                 if (this.EsNuevo)
                     this.CargarParte(this.oParte.ParteID);
@@ -1461,6 +1464,9 @@ namespace Refaccionaria.App
             // Para mostrar / ocultar etiqueta de no pedidos
             this.lblNoPedidos.Visible = General.Exists<ParteCaracteristicaTemporal>(c => c.ParteID == this.oParte.ParteID
                 && c.Caracteristica == Cat.CaracTempPartes.NoPedidosPorEquivalentes);
+
+            // Se llenan los datos de las ventas por mes
+            this.ctlVentasPorMes.LlenarDatos(iParteID);
         }
 
         public void LimpiarFormulario()
@@ -1521,6 +1527,8 @@ namespace Refaccionaria.App
             this.txtUnidadEmpaque.Text = "1";
             this.chkAGranel.Checked = false;
             this.chkEsPar.Checked = false;
+
+            this.ctlVentasPorMes.LimpiarDatos();
         }
 
         private void LimpiarCaracteristicas()

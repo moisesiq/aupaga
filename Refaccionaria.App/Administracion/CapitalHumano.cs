@@ -811,8 +811,9 @@ namespace Refaccionaria.App
                     }
                 }
             }
-
+            
             UtilLocal.MostrarNotificacion("Proceso completado.");
+            this.btnDomingo_Click(this, null);
 
             return true;
         }

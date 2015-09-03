@@ -434,7 +434,9 @@ namespace Refaccionaria.App
                 this.cntError.PonerError(this.txtFolioFactura, "El campo es necesario.", ErrorIconAlignment.MiddleRight);
                 this.txtFolioFactura.Focus();
             }
-            if (Helper.ConvertirEntero(this.cboProveedor.SelectedValue) < 1)
+            int iTipoOp = Helper.ConvertirEntero(this.cboTipoOperacion.SelectedValue);
+            if ((iTipoOp == Cat.TiposDeOperacionMovimientos.EntradaCompra || iTipoOp == Cat.TiposDeOperacionMovimientos.DevolucionAProveedor) 
+                && Helper.ConvertirEntero(this.cboProveedor.SelectedValue) < 1)
             {
                 this.txtNumeroParte.Clear();
                 this.cntError.PonerError(this.cboProveedor);
@@ -580,7 +582,7 @@ namespace Refaccionaria.App
         private bool ValidarFinal()
         {
             this.cntError.LimpiarErrores();
-            if (Helper.ConvertirEntero(this.cboTipoOperacion.SelectedValue) != Cat.TiposDeMovimientosOp.EntradaCompra && this.txtObservaciones.Text == "")
+            if (Helper.ConvertirEntero(this.cboTipoOperacion.SelectedValue) != Cat.TiposDeOperacionMovimientos.EntradaCompra && this.txtObservaciones.Text == "")
                 this.cntError.PonerError(this.txtObservaciones, "Es necesario poner una observación.", ErrorIconAlignment.MiddleLeft);
 
             return this.cntError.Valido;
@@ -1681,7 +1683,7 @@ namespace Refaccionaria.App
 
         private void cboConceptoOperacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Helper.ConvertirEntero(this.cboTipoOperacion.SelectedValue) == Cat.TiposDeMovimientosOp.EntradaInventario)
+            if (Helper.ConvertirEntero(this.cboTipoOperacion.SelectedValue) == Cat.TiposDeOperacionMovimientos.EntradaInventario)
             {
                 this.txtNumeroParte.Enabled = true;
                 this.txtNumeroPedido.Enabled = true;
@@ -2170,7 +2172,7 @@ namespace Refaccionaria.App
                 this.limpiarFormulario();
 
                 this.cboTipoOperacion.DataSource = Negocio.General.GetListOf<TipoOperacionesView>(p => p.TipoOperacionID > 0 && !p.NombreTipoOperacion.Equals("TRASPASO")
-                    && p.TipoOperacionID != Cat.TiposDeMovimientosOp.AjusteKardex);
+                    && p.TipoOperacionID != Cat.TiposDeOperacionMovimientos.AjusteKardex);
                 this.cboTipoOperacion.DisplayMember = "NombreTipoOperacion";
                 this.cboTipoOperacion.ValueMember = "TipoOperacionID";
 

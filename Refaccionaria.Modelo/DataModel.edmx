@@ -10387,6 +10387,11 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <Parameter Name="Descripcion8" Type="nvarchar" Mode="In" />
           <Parameter Name="Descripcion9" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pauParteVentasPorMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ParteID" Type="int" Mode="In" />
+          <Parameter Name="Desde" Type="date" Mode="In" />
+          <Parameter Name="Hasta" Type="date" Mode="In" />
+        </Function>
         <Function Name="pauVentasCancelaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SucursalID" Type="int" Mode="In" />
           <Parameter Name="FechaInicial" Type="date" Mode="In" />
@@ -16255,6 +16260,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="VentaParteAplicacion" EntitySet="VentaParteAplicacion" />
           </AssociationSet>
           <EntitySet Name="Cotizaciones9500DetalleAvanzadoView" EntityType="RefaccionariaModelo.Cotizaciones9500DetalleAvanzadoView" />
+          <FunctionImport Name="pauParteVentasPorMes" ReturnType="Collection(RefaccionariaModelo.pauParteVentasPorMes_Result)">
+            <Parameter Name="ParteID" Mode="In" Type="Int32" />
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -27349,6 +27359,14 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="PrecioAlCliente" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
         </EntityType>
+        <ComplexType Name="pauParteVentasPorMes_Result">
+          <Property Type="Int32" Name="SucursalID" Nullable="false" />
+          <Property Type="String" Name="Sucursal" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Anio" Nullable="true" />
+          <Property Type="Int32" Name="Mes" Nullable="true" />
+          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Negado" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -32927,6 +32945,18 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pauParteVentasPorMes" FunctionName="ControlRefaccionariaModel.Store.pauParteVentasPorMes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RefaccionariaModelo.pauParteVentasPorMes_Result">
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Negado" ColumnName="Negado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
