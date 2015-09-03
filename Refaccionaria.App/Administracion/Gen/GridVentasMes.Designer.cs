@@ -134,7 +134,7 @@
             this.Mes1.HeaderText = "Mes1";
             this.Mes1.Name = "Mes1";
             this.Mes1.ReadOnly = true;
-            this.Mes1.Width = 80;
+            this.Mes1.Width = 45;
             // 
             // Mes2
             // 
@@ -144,7 +144,7 @@
             this.Mes2.HeaderText = "Mes2";
             this.Mes2.Name = "Mes2";
             this.Mes2.ReadOnly = true;
-            this.Mes2.Width = 80;
+            this.Mes2.Width = 45;
             // 
             // Mes3
             // 
@@ -154,7 +154,7 @@
             this.Mes3.HeaderText = "Mes3";
             this.Mes3.Name = "Mes3";
             this.Mes3.ReadOnly = true;
-            this.Mes3.Width = 80;
+            this.Mes3.Width = 45;
             // 
             // Mes4
             // 
@@ -164,7 +164,7 @@
             this.Mes4.HeaderText = "Mes4";
             this.Mes4.Name = "Mes4";
             this.Mes4.ReadOnly = true;
-            this.Mes4.Width = 80;
+            this.Mes4.Width = 45;
             // 
             // Mes5
             // 
@@ -174,7 +174,7 @@
             this.Mes5.HeaderText = "Mes5";
             this.Mes5.Name = "Mes5";
             this.Mes5.ReadOnly = true;
-            this.Mes5.Width = 80;
+            this.Mes5.Width = 45;
             // 
             // Mes6
             // 
@@ -184,7 +184,7 @@
             this.Mes6.HeaderText = "Mes6";
             this.Mes6.Name = "Mes6";
             this.Mes6.ReadOnly = true;
-            this.Mes6.Width = 80;
+            this.Mes6.Width = 45;
             // 
             // Mes7
             // 
@@ -194,7 +194,7 @@
             this.Mes7.HeaderText = "Mes7";
             this.Mes7.Name = "Mes7";
             this.Mes7.ReadOnly = true;
-            this.Mes7.Width = 80;
+            this.Mes7.Width = 45;
             // 
             // Mes8
             // 
@@ -204,7 +204,7 @@
             this.Mes8.HeaderText = "Mes8";
             this.Mes8.Name = "Mes8";
             this.Mes8.ReadOnly = true;
-            this.Mes8.Width = 80;
+            this.Mes8.Width = 45;
             // 
             // Mes9
             // 
@@ -214,7 +214,7 @@
             this.Mes9.HeaderText = "Mes9";
             this.Mes9.Name = "Mes9";
             this.Mes9.ReadOnly = true;
-            this.Mes9.Width = 80;
+            this.Mes9.Width = 45;
             // 
             // Mes10
             // 
@@ -224,7 +224,7 @@
             this.Mes10.HeaderText = "Mes10";
             this.Mes10.Name = "Mes10";
             this.Mes10.ReadOnly = true;
-            this.Mes10.Width = 80;
+            this.Mes10.Width = 45;
             // 
             // Mes11
             // 
@@ -234,7 +234,7 @@
             this.Mes11.HeaderText = "Mes11";
             this.Mes11.Name = "Mes11";
             this.Mes11.ReadOnly = true;
-            this.Mes11.Width = 80;
+            this.Mes11.Width = 45;
             // 
             // Mes12
             // 
@@ -244,7 +244,7 @@
             this.Mes12.HeaderText = "Mes12";
             this.Mes12.Name = "Mes12";
             this.Mes12.ReadOnly = true;
-            this.Mes12.Width = 80;
+            this.Mes12.Width = 45;
             // 
             // Total
             // 
@@ -254,7 +254,7 @@
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
             this.Total.ReadOnly = true;
-            this.Total.Width = 80;
+            this.Total.Width = 50;
             // 
             // GridVentasMes
             // 

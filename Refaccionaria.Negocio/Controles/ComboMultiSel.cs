@@ -14,7 +14,7 @@ namespace Refaccionaria.Negocio
         {
             InitializeComponent();
             
-            this.clbSeleccion = new CheckedListBox() { Visible = false };
+            this.clbSeleccion = new CheckedListBox() { Visible = false, CheckOnClick = true };
             this.AltoLista = 160;
             this.clbSeleccion.Leave += new EventHandler(clbSeleccion_Leave);
         }

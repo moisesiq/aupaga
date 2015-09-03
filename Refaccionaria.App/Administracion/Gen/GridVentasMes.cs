@@ -25,8 +25,8 @@ namespace Refaccionaria.App
 
         public void LlenarDatos(int iParteID)
         {
-            DateTime dDesde = DateTime.Now.AddYears(-1).DiaPrimero();
-            DateTime dHasta = DateTime.Now.DiaUltimo();
+            DateTime dDesde = DateTime.Now.AddMonths(-12).DiaPrimero();
+            DateTime dHasta = DateTime.Now.AddMonths(-1).DiaUltimo();
 
             var oParams = new Dictionary<string, object>();
             oParams.Add("ParteID", iParteID);
@@ -38,7 +38,7 @@ namespace Refaccionaria.App
             DateTime dMes = dDesde;
             for (int iCol = 1; iCol <= 12; iCol++) {
                 this.dgvDatos.Columns[iCol].Name = (dMes.Year.ToString() + dMes.Month.ToString());
-                this.dgvDatos.Columns[iCol].HeaderText = DateTimeFormatInfo.CurrentInfo.AbbreviatedMonthNames[dMes.Month];
+                this.dgvDatos.Columns[iCol].HeaderText = DateTimeFormatInfo.CurrentInfo.AbbreviatedMonthNames[dMes.Month - 1];
                 dMes = dMes.AddMonths(1);
             }
 
@@ -57,10 +57,10 @@ namespace Refaccionaria.App
                 }
 
                 string sMes = (oReg.Anio.ToString() + oReg.Mes.ToString());
-                this.dgvDatos[sMes, iFila].Value = string.Format("{0} / {1}", oReg.Cantidad, oReg.Negado);
+                this.dgvDatos[sMes, iFila].Value = string.Format("{0:N0}/{1:N0}", oReg.Cantidad, oReg.Negado);
                 mTotal += oReg.Cantidad.Valor();
                 mTotalNegados = oReg.Negado.Valor();
-                this.dgvDatos["Total", iFila].Value = string.Format("{0} / {1}", mTotal, mTotalNegados);
+                this.dgvDatos["Total", iFila].Value = string.Format("{0:N0}/{1:N0}", mTotal, mTotalNegados);
             }
         }
 
