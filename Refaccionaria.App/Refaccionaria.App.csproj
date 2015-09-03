@@ -94,9 +94,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracion\Gen\GridVentasMes.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Administracion\Gen\GridVentasMes.cs" />
     <Compile Include="Administracion\Gen\GridVentasMes.Designer.cs">
       <DependentUpon>GridVentasMes.cs</DependentUpon>
     </Compile>

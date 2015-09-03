@@ -16,6 +16,7 @@ namespace Refaccionaria.Negocio
             
             this.clbSeleccion = new CheckedListBox() { Visible = false };
             this.AltoLista = 160;
+            this.clbSeleccion.Leave += new EventHandler(clbSeleccion_Leave);
         }
 
         #region [ Propiedades ]
@@ -103,7 +104,7 @@ namespace Refaccionaria.Negocio
 
         private void ComboMultiSel_Leave(object sender, EventArgs e)
         {
-            if (this.bListaVisible)
+            if (!this.clbSeleccion.Focused && this.bListaVisible)
                 this.MostrarLista(false);
         }
 
@@ -160,14 +161,10 @@ namespace Refaccionaria.Negocio
             this.MostrarLista(!this.bListaVisible);
         }
 
-        private void clbSeleccion_SelectedIndexChanged(object sender, EventArgs e)
+        void clbSeleccion_Leave(object sender, EventArgs e)
         {
-            // this.MostrarValor();   
-        }
-
-        private void clbSeleccion_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            
+            if (!this.Focused && this.bListaVisible)
+                this.MostrarLista(false);
         }
 
         #endregion
