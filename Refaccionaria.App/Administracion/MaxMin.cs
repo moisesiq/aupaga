@@ -92,6 +92,12 @@ namespace Refaccionaria.App
             }
         }
 
+        private void cmbCambios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbCambios.Focused)
+                this.FiltroDeCambios();
+        }
+
         private void btnMostrar_Click(object sender, EventArgs e)
         {
             switch (this.tabMaxMin.SelectedTab.Name)
@@ -530,15 +536,22 @@ namespace Refaccionaria.App
             }
 
             // Se hace el filtro de Cambios, si aplica
-            UtilLocal.MostrarNotificacion("Ejecuntando el filtro de cambios..");
-            Application.DoEvents();
+            this.FiltroDeCambios();
+
+            Cargando.Cerrar();
+        }
+
+        private void FiltroDeCambios()
+        {
+            Cargando.Mostrar();
+
             if (this.cmbCambios.SelectedIndex >= 0)
             {
                 for (int iFila = 0; iFila < this.dgvDetalle.Rows.Count; iFila++)
                 {
                     if (!this.VerFiltroDeCambios(this.dgvDetalle.Rows[iFila]))
                     {
-                        this.dgvDetalle["colProcesar", iFila].Value = false;
+                        // this.dgvDetalle["colProcesar", iFila].Value = false;
                         this.dgvDetalle.Rows[iFila].Visible = false;
                     }
                 }
@@ -670,7 +683,7 @@ namespace Refaccionaria.App
             foreach (DataGridViewRow Fila in this.dgvDetalle.Rows)
             {
                 // Si no está marcado, no se guarda
-                if (!Helper.ConvertirBool(Fila.Cells["colProcesar"].Value)) continue;
+                if (!Fila.Visible || !Helper.ConvertirBool(Fila.Cells["colProcesar"].Value)) continue;
 
                 int iParteID = Helper.ConvertirEntero(Fila.Cells["ParteID"].Value);
                 var oParteMaxMin = General.GetEntity<ParteMaxMin>(q => q.ParteID == iParteID && q.SucursalID == iSucursalID);
