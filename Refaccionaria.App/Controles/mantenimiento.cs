@@ -54,7 +54,8 @@ namespace Refaccionaria.App
             // Se quita el tab de MaxMin, pues ya no se usa
             this.tabControlMovimientos.TabPages.Remove(this.tabKardex);
 
-            tabControlMovimientos_SelectedIndexChanged(sender, e);
+            this.tabControlMovimientos.SelectedTab = this.tabPartes;
+            // tabControlMovimientos_SelectedIndexChanged(sender, e);
         }
 
         #region [ Eventos ]

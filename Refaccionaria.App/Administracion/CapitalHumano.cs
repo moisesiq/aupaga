@@ -36,6 +36,9 @@ namespace Refaccionaria.App
             // Se llenan los datos de las semanas
             this.LlenarSemanas();
             this.cmbSemana.SelectedValue = UtilLocal.InicioSemanaSabAVie(DateTime.Now).Date;
+            // Se selecciona por predeterminado la semana anterior
+            if (this.cmbSemana.SelectedIndex > 0 && DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
+                this.cmbSemana.SelectedIndex -= 1;
 
             // Se llenan las cuentas bancarias
             this.cmbCuentaBancaria.CargarDatos("BancoCuentaID", "NombreDeCuenta", General.GetListOf<BancoCuenta>().OrderBy(c => c.NombreDeCuenta).ToList());
@@ -209,7 +212,7 @@ namespace Refaccionaria.App
         {
             // Se verifica si ya se había guardado, para mostrar el histórico
             DateTime dSemana = Helper.ConvertirFechaHora(this.cmbSemana.SelectedValue);
-            bool bHistorico = General.Exists<Nomina>(c => c.Semana == dSemana);
+            bool bHistorico = General.Exists<Nomina>(c => c.Semana == dSemana && (!c.Domingo.HasValue || !c.Domingo.Value));
             this.dgvDatos.ReadOnly = bHistorico;
             this.cmbCuentaBancaria.Enabled = !bHistorico;
             this.btnGuardar.Enabled = !bHistorico;

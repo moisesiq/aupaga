@@ -1071,7 +1071,7 @@ namespace Refaccionaria.App
                             });
 
                             // Se suma el importe de cada parte, para crear la póliza
-                            mCostoTotal += oPartePrecio.Costo.Valor();
+                            mCostoTotal += (oPartePrecio.Costo.Valor() * cantidad);
                         }
                     }
 
@@ -1623,7 +1623,7 @@ namespace Refaccionaria.App
                     });
 
                     // Se suma el importe de cada parte, para crear la póliza
-                    mCostoTotal += oPartePrecio.Costo.Valor();
+                    mCostoTotal += (oPartePrecio.Costo.Valor() * recibido);
                 }
 
                 // Se genera la póliza especial correspondiente (AfeConta)

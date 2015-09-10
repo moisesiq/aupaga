@@ -1072,7 +1072,7 @@ namespace Refaccionaria.App
                 var pedido = new Pedido()
                 {
                     ProveedorID = proveedorId,
-                    ImporteTotal = Helper.ConvertirDecimal(this.txtImporteTotal.Text),
+                    ImporteTotal = Helper.ConvertirDecimal(this.txtImporteTotal.Text.SoloNumeric()),
                     PedidoEstatusID = 2
                 };
 

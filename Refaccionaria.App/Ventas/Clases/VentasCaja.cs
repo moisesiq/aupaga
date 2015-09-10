@@ -327,9 +327,14 @@ namespace Refaccionaria.App
                 // Se guarda el borrado del gasto de caja (CajaEgreso)
                 int iEgresoID = oMov.ContaEgresoID.Valor();
                 Guardar.Eliminar<CajaEgreso>(oMov);  // Ahora se borra definitivamente, pues el gasto contable no tiene campo de "Estatus"
-                // Se guarda el borrado del Gasto Contable
-                var oContaEgreso = General.GetEntity<ContaEgreso>(c => c.ContaEgresoID == iEgresoID);
-                ContaProc.GastoEliminar(iEgresoID);
+                // Se guarda el borrado del Gasto Contable, si hubiera
+                int iCuentaAuxiliarID = 0;
+                if (iEgresoID > 0)
+                {
+                    var oContaEgreso = General.GetEntity<ContaEgreso>(c => c.ContaEgresoID == iEgresoID);
+                    iCuentaAuxiliarID = oContaEgreso.ContaCuentaAuxiliarID;
+                    ContaProc.GastoEliminar(iEgresoID);
+                }
 
                 // Si es un resguardo, se elimina la póliza correspondiente
                 if (oMov.CajaTipoEgresoID == Cat.CajaTiposDeEgreso.Resguardo)
@@ -338,15 +343,13 @@ namespace Refaccionaria.App
                     ContaProc.BorrarPoliza(oPoliza.ContaPolizaID);
                 }
                 // Si es un gasto de la cuenta deudores diversos, se verifica y elimina la póliza (AfeConta)
-                if (General.Exists<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == oContaEgreso.ContaCuentaAuxiliarID 
-                    && c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.DeudoresDiversos))
+                if (General.Exists<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == iCuentaAuxiliarID && c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.DeudoresDiversos))
                 {
                     var oPoliza = General.GetEntity<ContaPoliza>(c => c.RelacionTabla == Cat.Tablas.CajaEgreso && c.RelacionID == oMov.CajaEgresoID);
                     ContaProc.BorrarPoliza(oPoliza.ContaPolizaID);
                 }
 
                 // Se verifica si es un gasto de casco, para afectar la existencia
-                int iCuentaAuxiliarID = oContaEgreso.ContaCuentaAuxiliarID;
                 if (iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoChico || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoMediano
                     || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoGrande || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoExtragrande)
                 {
