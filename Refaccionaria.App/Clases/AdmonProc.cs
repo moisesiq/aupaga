@@ -257,6 +257,43 @@ namespace Refaccionaria.App
             }
         }
 
+        public static ProveedorParteGanancia ObtenerParteDescuentoGanancia(int? iProveedorID, int? iMarcaID, int? iLineaID, int? iParteID, bool bCompletarConParte)
+        {
+            if (bCompletarConParte)
+            {
+                var oParte = General.GetEntity<Parte>(c => c.ParteID == iParteID && c.Estatus);
+                if (!iProveedorID.HasValue)
+                    iProveedorID = oParte.ProveedorID;
+                if (!iMarcaID.HasValue)
+                    iMarcaID = oParte.MarcaParteID;
+                if (!iLineaID.HasValue)
+                    iLineaID = oParte.LineaID;
+            }
+
+            var oParteGan = General.GetEntity<ProveedorParteGanancia>(c => c.ProveedorID == iProveedorID && c.MarcaParteID == iMarcaID
+                && c.LineaID == iLineaID && c.ParteID == iParteID);
+            if (oParteGan == null)
+            {
+                oParteGan = General.GetEntity<ProveedorParteGanancia>(c => c.ProveedorID == iProveedorID && c.MarcaParteID == iMarcaID
+                    && c.LineaID == iLineaID);
+                if (oParteGan == null)
+                {
+                    oParteGan = General.GetEntity<ProveedorParteGanancia>(c => c.ProveedorID == iProveedorID && c.MarcaParteID == iMarcaID);
+                    if (oParteGan == null)
+                    {
+                        oParteGan = General.GetEntity<ProveedorParteGanancia>(c => c.ProveedorID == iProveedorID);
+                    }
+                }
+            }
+
+            return oParteGan;
+        }
+
+        public static ProveedorParteGanancia ObtenerParteDescuentoGanancia(int? iProveedorID, int? iMarcaID, int? iLineaID, int? iParteID)
+        {
+            return AdmonProc.ObtenerParteDescuentoGanancia(iProveedorID, iMarcaID, iLineaID, iParteID, false);
+        }
+
         #endregion
     }
 }

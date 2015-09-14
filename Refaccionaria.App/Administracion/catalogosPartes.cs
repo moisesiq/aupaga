@@ -96,7 +96,7 @@ namespace Refaccionaria.App
             if (!EsNuevo && oParte != null)
             {
                 int copias = 0;
-                var frmCantidad = new MensajeObtenerValor("Número de etiquetas", "0", MensajeObtenerValor.Tipo.Entero);
+                var frmCantidad = new MensajeObtenerValor("Número de etiquetas", "1", MensajeObtenerValor.Tipo.Entero);
                 if (frmCantidad.ShowDialog(Principal.Instance) == DialogResult.OK)
                 {
                     copias = Helper.ConvertirEntero(frmCantidad.Valor);
@@ -126,7 +126,8 @@ namespace Refaccionaria.App
                         report.RegisterData(etiquetas, "etiquetas", 3);
                         report.GetDataSource("etiquetas").Enabled = true;
                         report.FindObject("Text1").Delete();
-                        report.Show(true);
+                        // report.Show(true);
+                        UtilLocal.EnviarReporteASalida("Reportes.Partes.Etiqueta", report);
                     }
                 }
             }

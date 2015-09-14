@@ -36,7 +36,7 @@ namespace Refaccionaria.App
 
         }
 
-        public void LlenarDatosExtra(int iParteID,int iSucursalID)
+        public void LlenarDatosExtra(int iParteID, int iSucursalID)
         {
             this.LimpiarDatosExtra();
             //int iSucursalID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue);
@@ -53,7 +53,8 @@ namespace Refaccionaria.App
             this.lblCosto.Text = oPartePrecio.Costo.Valor().ToString(GlobalClass.FormatoMoneda);
             // Se obtiene el dato de si es ventas globales o no
             var oParteMaxMin = General.GetEntity<ParteMaxMin>(q => q.SucursalID == iSucursalID && q.ParteID == iParteID);
-            this.lblVentasGlobales.Visible = oParteMaxMin.VentasGlobales.Valor();
+            bool bVentasGlobales = (oParteMaxMin != null && oParteMaxMin.VentasGlobales.Valor());
+            this.lblVentasGlobales.Visible = bVentasGlobales;
 
             // Se llenan los datos calculados
             var oParams = new Dictionary<string, object>();
@@ -107,7 +108,7 @@ namespace Refaccionaria.App
             }
 
             // Se llenan los datos globales, si aplica
-            if (oParteMaxMin.VentasGlobales.Valor())
+            if (bVentasGlobales)
             {
                 oParams.Remove("SucursalID");
                 oDatos = General.ExecuteProcedure<pauParteMaxMinDatosExtra_Result>("pauParteMaxMinDatosExtra", oParams);

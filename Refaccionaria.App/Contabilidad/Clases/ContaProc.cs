@@ -313,8 +313,10 @@ namespace Refaccionaria.App
                 Abono = mImporte,
                 Referencia = sReferencia
             };
-            Guardar.Generico<ContaPolizaDetalle>(oDetCargo);
-            Guardar.Generico<ContaPolizaDetalle>(oDetAbono);
+            if (iCuentaCargo > 0)
+                Guardar.Generico<ContaPolizaDetalle>(oDetCargo);
+            if (iCuentaAbono > 0)
+                Guardar.Generico<ContaPolizaDetalle>(oDetAbono);
 
             return oPoliza;
         }

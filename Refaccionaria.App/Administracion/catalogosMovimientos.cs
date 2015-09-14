@@ -2078,23 +2078,7 @@ namespace Refaccionaria.App
                 }
             }
         }
-
-        private void dgvDetalleDescuentos_CurrentCellChanged(object sender, EventArgs e)
-        {
-            if (this.dgvDetalleDescuentos.VerSeleccionNueva())
-            {
-                if (this.dgvDetalleDescuentos.CurrentRow == null)
-                {
-                    this.dgvExistencias.LimpiarDatos();
-                }
-                else
-                {
-                    int iParteID = Helper.ConvertirEntero(this.dgvDetalleDescuentos.CurrentRow.Cells["ParteID"].Value);
-                    this.dgvExistencias.CargarDatos(iParteID);
-                }
-            }
-        }
-
+        
         private void dgvDiferencia_CurrentCellChanged(object sender, EventArgs e)
         {
             if (this.dgvDiferencia.VerSeleccionNueva())
@@ -2807,6 +2791,7 @@ namespace Refaccionaria.App
             try
             {
                 this.txtMarcaSelId.Text = marcaParteId.ToString();
+                /* Método anterior, se modifica por el de la nueva talba ProveedorParteGanancia
                 var listaDescuentos = Negocio.General.GetListOf<ProveedorMarcaParte>(p => p.ProveedorID.Equals(proveedor.ProveedorID) && p.MarcaParteID.Equals(marcaParteId));
                 foreach (var desc in listaDescuentos)
                 {
@@ -2826,6 +2811,18 @@ namespace Refaccionaria.App
                         this.txtDescuentoMarcaFacturaCuatro.Text = desc.DescuentoCuatro.ToString();
                         this.txtDescuentoMarcaFacturaCinco.Text = desc.DescuentoCinco.ToString();
                     }
+                }
+                */
+
+                var oParteGan = AdmonProc.ObtenerParteDescuentoGanancia(this.proveedor.ProveedorID, marcaParteId, null, parteId, true);
+                if (oParteGan != null)
+                {                    
+                    this.txtDescuentoMarcaArticuloUno.Text = oParteGan.DescuentoArticulo1.ToString();
+                    this.txtDescuentoMarcaArticuloDos.Text = oParteGan.DescuentoArticulo1.ToString();
+                    this.txtDescuentoMarcaArticuloTres.Text = oParteGan.DescuentoArticulo1.ToString();
+                    this.txtDescuentoMarcaFacturaUno.Text = oParteGan.DescuentoFactura1.ToString();
+                    this.txtDescuentoMarcaFacturaDos.Text = oParteGan.DescuentoFactura1.ToString();
+                    this.txtDescuentoMarcaFacturaTres.Text = oParteGan.DescuentoFactura1.ToString();
                 }
 
             }
@@ -3381,6 +3378,22 @@ namespace Refaccionaria.App
             }
         }
 
+        private void dgvDetalleDescuentos_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (this.dgvDetalleDescuentos.VerSeleccionNueva())
+            {
+                if (this.dgvDetalleDescuentos.CurrentRow == null)
+                {
+                    this.dgvExistencias.LimpiarDatos();
+                }
+                else
+                {
+                    int iParteID = Helper.ConvertirEntero(this.dgvDetalleDescuentos.CurrentRow.Cells["ParteID"].Value);
+                    this.dgvExistencias.CargarDatos(iParteID);
+                }
+            }
+        }
+
         private void dgvDetalleDescuentos_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             foreach (DataGridViewColumn column in this.dgvDetalleDescuentos.Columns)
@@ -3547,6 +3560,7 @@ namespace Refaccionaria.App
                     row["Costo Actual"] = parte.Costo;
 
                     //Obtener los valores de % de la tabla 'proveedorGanancia', de lo contrario de la tabla 'PartePrecio'
+                    /* Método anterior
                     var ganancias = Negocio.General.GetEntity<ProveedorGanancia>(p => p.ProveedorID.Equals(proveedor.ProveedorID)
                         && p.MarcaParteID.Equals(parte.MarcaParteID) && p.LineaID.Equals(parte.LineaID));
                     if (ganancias != null)
@@ -3564,6 +3578,16 @@ namespace Refaccionaria.App
                         row["%3"] = parte.PorcentajeUtilidadTres;
                         row["%4"] = parte.PorcentajeUtilidadCuatro;
                         row["%5"] = parte.PorcentajeUtilidadCinco;
+                    }
+                    */
+                    var oParteGan = AdmonProc.ObtenerParteDescuentoGanancia(this.proveedor.ProveedorID, parte.MarcaParteID, parte.LineaID, parte.ParteID);
+                    if (oParteGan != null)
+                    {
+                        row["%1"] = oParteGan.PorcentajeDeGanancia1;
+                        row["%2"] = oParteGan.PorcentajeDeGanancia2;
+                        row["%3"] = oParteGan.PorcentajeDeGanancia3;
+                        row["%4"] = oParteGan.PorcentajeDeGanancia4;
+                        row["%5"] = oParteGan.PorcentajeDeGanancia5;
                     }
                     // Si es 9500, se pone el precio ya establecido
                     if (General.Exists<Parte>(c => c.ParteID == parte.ParteID && c.Es9500 == true && c.Estatus))

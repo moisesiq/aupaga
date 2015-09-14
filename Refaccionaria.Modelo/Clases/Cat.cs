@@ -165,6 +165,7 @@ namespace Refaccionaria.Modelo
             public const string Linea = "Línea";
             public const string UnidadDeMedida = "U. Medida";
             public const string UnidadDeEmpaque = "U. Empaque";
+            public const string TiempoDeReposicion = "T. Reposición";
             public const string AplicaComision = "Comisión";
             public const string EsServicio = "Servicio";
             public const string Etiqueta = "Etiqueta";

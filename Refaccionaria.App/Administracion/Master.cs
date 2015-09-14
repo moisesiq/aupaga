@@ -140,7 +140,9 @@ namespace Refaccionaria.App
                     this.AplicarCombo(sColumna, oCol.ValueMember, oCol.DisplayMember, oCol.DataSource);
                     break;
                 case "UnidadDeEmpaque":
-                    var oValor = UtilLocal.ObtenerValor("Indica la Unidad de Empaque:", "1", MensajeObtenerValor.Tipo.Decimal);
+                case "TiempoDeReposicion":
+                    string sMensaje = (sColumna == "UnidadDeEmpaque" ? "Indica la Unidad de Empaque:" : "Indica el tiempo de reposición:");
+                    var oValor = UtilLocal.ObtenerValor(sMensaje, "1", MensajeObtenerValor.Tipo.Decimal);
                     if (oValor != null)
                         this.AplicarCambio(sColumna, oValor);
                     break;
@@ -215,7 +217,7 @@ namespace Refaccionaria.App
             {
                 this.dgvDatos.Rows.Add(oParte.ParteID, iSC, iSC, true
                     , oParte.NumeroDeParte, oParte.Descripcion, oParte.ProveedorID, oParte.LineaID, oParte.MarcaParteID
-                    , oParte.MedidaID, oParte.UnidadDeEmpaque
+                    , oParte.MedidaID, oParte.UnidadDeEmpaque, oParte.TiempoDeReposicion
                     , oParte.AplicaComision, oParte.EsServicio, oParte.Etiqueta, oParte.SoloUnaEtiqueta, oParte.EsPar
                     , oParte.CodigoDeBara, oParte.Existencia, oParte.Ventas, oParte.Costo
                     , oParte.PorcentajeUtilidadUno, oParte.PrecioUno, oParte.PrecioUno
@@ -279,6 +281,7 @@ namespace Refaccionaria.App
                     string sDescripcion = Helper.ConvertirCadena(Fila.Cells["Descripcion"].Value);
                     int iUnidadDeMedidaID = Helper.ConvertirEntero(Fila.Cells["UnidadDeMedidaID"].Value);
                     decimal mUnidadDeEmpaque = Helper.ConvertirDecimal(Fila.Cells["UnidadDeEmpaque"].Value);
+                    decimal mTiempoDeReposicion = Helper.ConvertirDecimal(Fila.Cells["TiempoDeReposicion"].Value);
                     bool bComision = Helper.ConvertirBool(Fila.Cells["Comision"].Value);
                     bool bServicio = Helper.ConvertirBool(Fila.Cells["Servicio"].Value);
                     bool bEtiqueta = Helper.ConvertirBool(Fila.Cells["Etiqueta"].Value);
@@ -321,6 +324,11 @@ namespace Refaccionaria.App
                     {
                         this.AgregarCambio(oCambios, oParte.ParteID, Cat.PartesCambios.UnidadDeEmpaque, oParte.UnidadEmpaque.ToString(), mUnidadDeEmpaque.ToString());
                         oParte.UnidadEmpaque = mUnidadDeEmpaque;
+                    }
+                    if (oParte.TiempoReposicion != mTiempoDeReposicion)
+                    {
+                        this.AgregarCambio(oCambios, oParte.ParteID, Cat.PartesCambios.TiempoDeReposicion, oParte.TiempoReposicion.ToString(), mTiempoDeReposicion.ToString());
+                        oParte.TiempoReposicion = mTiempoDeReposicion;
                     }
                     if (oParte.AplicaComision.Valor() != bComision)
                     {

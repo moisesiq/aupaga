@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
+using AdvancedDataGridView;
+
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
 
@@ -21,6 +21,7 @@ namespace Refaccionaria.App
         public int Modo = 0;
         bool sel = true;
         bool unaVez = true;
+        bool bCargandoDescuentosGanancias = false;
 
         bool paiting = false;
         decimal sumaImporte = 0;
@@ -237,6 +238,12 @@ namespace Refaccionaria.App
                     if (this.dgvDevoluciones.Rows.Count <= 0)
                         this.CargarDevoluciones(Proveedor.ProveedorID);
                     break;
+                case "tbpDescGan":
+                    if (this.tgvDescGan.Rows.Count <= 0)
+                    {
+                        this.CargarDescuentosGanancias(this.Proveedor.ProveedorID);
+                    }
+                    break;
 
                 default:
                     break;
@@ -333,6 +340,10 @@ namespace Refaccionaria.App
                 // Para que al cambiar proveedor, se actualicen las pestañas de Garantías y Devolución
                 this.dgvGarantias.Rows.Clear();
                 this.dgvDevoluciones.Rows.Clear();
+
+                this.tgvDescGan.Rows.Clear();
+                this.tgvDescGan.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
+                this.tgvDescGan.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
 
                 /*
                 var modoList = new List<string>();
@@ -2190,6 +2201,187 @@ namespace Refaccionaria.App
             var oDetalle = General.GetListOf<MovimientosInventarioDetalleAvanzadoView>(c => c.MovimientoInventarioID == iDevID);
             foreach (var oReg in oDetalle)
                 this.dgvDevolucionesDetalle.Rows.Add(oReg.MovimientoInventarioDetalleID, oReg.Linea, oReg.Marca, oReg.NumeroDeParte, oReg.Descripcion);
+        }
+
+        #endregion
+
+        #region [ Tab Descuentos Ganancias ]
+
+        private void tgvDescGan_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.bCargandoDescuentosGanancias || this.tgvDescGan.CurrentNode == null) return;
+            this.VerMarcarCambio(this.tgvDescGan.CurrentNode.Cells[e.ColumnIndex]);
+        }
+
+        private void btnDescGanGuardar_Click(object sender, EventArgs e)
+        {
+            this.GuardarDescuentosGanancias();
+        }
+
+        private void VerMarcarCambio(DataGridViewCell oCelda)
+        {
+            // Se verifica si ya se marcó la fila como modificada, en base al tag
+            if (oCelda.Tag != null)
+                return;
+
+            // Se marca la fila como modificada y se manda afectar los nodos hijos
+            oCelda.Style.ForeColor = Color.Orange;
+            oCelda.Tag = true;
+            oCelda.OwningRow.Tag = true;
+            this.VerCambiosEnCascada(this.tgvDescGan.GetNodeForRow(oCelda.OwningRow), oCelda.ColumnIndex, oCelda.Value);
+        }
+
+        private void VerCambiosEnCascada(TreeGridNode oNodo, int iCol, object oValor)
+        {
+            if (oNodo.Nodes.Count > 0)
+            {
+                var oCelda = oNodo.Cells[iCol];
+                oCelda.Style.ForeColor = Color.Orange;
+                oCelda.Tag = true;
+                oCelda.OwningRow.Tag = true;
+                oCelda.Value = oValor;
+
+                foreach (var oNodoHijo in oNodo.Nodes)
+                    this.VerCambiosEnCascada(oNodoHijo, iCol, oValor);
+            }
+            else
+            {
+                var oCelda = oNodo.Cells[iCol];
+                oCelda.Style.ForeColor = Color.Orange;
+                oCelda.Tag = true;
+                oCelda.OwningRow.Tag = true;
+                oCelda.Value = oValor;
+            }
+        }
+
+        private void CargarDescuentosGanancias(int iProveedorID)
+        {
+            Cargando.Mostrar();
+            this.bCargandoDescuentosGanancias = true;
+
+            string sProveedor = "", sMarca = "", sLinea = "";
+            TreeGridNode oNodoProveedor = null, oNodoMarca = null, oNodoLinea = null;
+            var oDatos = General.GetListOf<ProveedoresPartesGananciasView>(c => c.ProveedorID == iProveedorID)
+                .OrderBy(c => c.Proveedor).ThenBy(c => c.Marca).ThenBy(c => c.Linea).ThenBy(c => c.Parte);
+            this.tgvDescGan.Rows.Clear();
+            foreach (var oReg in oDatos)
+            {
+                if (oReg.Proveedor != sProveedor)
+                {
+                    sProveedor = oReg.Proveedor;
+                    oNodoProveedor = this.tgvDescGan.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.ProveedorID, sProveedor
+                        , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
+                        , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
+                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                    continue;
+                }
+                if (oReg.Marca != sMarca)
+                {
+                    sMarca = oReg.Marca;
+                    oNodoMarca = oNodoProveedor.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.MarcaID, sMarca
+                        , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
+                        , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
+                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                    continue;
+                }
+                if (oReg.Linea != sLinea)
+                {
+                    sLinea = oReg.Linea;
+                    oNodoLinea = oNodoMarca.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.LineaID, sLinea
+                        , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
+                        , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
+                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                    continue;
+                }
+
+                oNodoLinea.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.ParteID, oReg.Parte
+                    , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
+                    , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
+                    , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+            }
+
+            this.bCargandoDescuentosGanancias = false;
+            Cargando.Cerrar();
+        }
+
+        private void GuardarDescuentosGanancias()
+        {
+            if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que deseas guardar los cambios realizados.?") != DialogResult.Yes)
+                return;
+
+            Cargando.Mostrar();
+
+            foreach (DataGridViewRow oFila in this.tgvDescGan.Rows)
+            {
+                if (oFila.Tag == null) continue;
+
+                var oNodo = this.tgvDescGan.GetNodeForRow(oFila);
+                int? iProveedorID = null, iMarcaID = null, iLineaID = null, iParteID = null;
+                switch (oNodo.Level)
+                {
+                    case 1:
+                        iProveedorID = (int)oNodo.Cells["dcgId"].Value;
+                        break;
+                    case 2:
+                        iProveedorID = (int)oNodo.Parent.Cells["dcgId"].Value;
+                        iMarcaID = (int)oNodo.Cells["dcgId"].Value;
+                        break;
+                    case 3:
+                        iProveedorID = (int)oNodo.Parent.Parent.Cells["dcgId"].Value;
+                        iMarcaID = (int)oNodo.Parent.Cells["dcgId"].Value;
+                        iLineaID = (int)oNodo.Cells["dcgId"].Value;
+                        break;
+                    case 4:
+                        iProveedorID = (int)oNodo.Parent.Parent.Parent.Cells["dcgId"].Value;
+                        iMarcaID = (int)oNodo.Parent.Parent.Cells["dcgId"].Value;
+                        iLineaID = (int)oNodo.Parent.Cells["dcgId"].Value;
+                        iParteID = (int)oNodo.Cells["dcgId"].Value;
+                        break;
+                }
+
+                int iParteGananciaID = Helper.ConvertirEntero(oNodo.Cells["dcgProveedorParteGananciaID"].Value);
+                ProveedorParteGanancia oParteGanancia;
+                if (iParteGananciaID > 0)
+                {
+                    oParteGanancia = General.GetEntity<ProveedorParteGanancia>(c => c.ProveedorParteGananciaID == iParteGananciaID);
+                }
+                else
+                {
+                    oParteGanancia = new ProveedorParteGanancia() { ProveedorID = iProveedorID.Value, MarcaParteID = iMarcaID, LineaID = iLineaID, ParteID = iParteID };
+                    oParteGanancia.DescuentoFactura1 = oParteGanancia.DescuentoFactura2 = oParteGanancia.DescuentoFactura3 =
+                        oParteGanancia.DescuentoArticulo1 = oParteGanancia.DescuentoArticulo2 = oParteGanancia.DescuentoArticulo3 =
+                        oParteGanancia.PorcentajeDeGanancia1 = oParteGanancia.PorcentajeDeGanancia2 = oParteGanancia.PorcentajeDeGanancia3 =
+                        oParteGanancia.PorcentajeDeGanancia4 = oParteGanancia.PorcentajeDeGanancia5 = 0;
+                }
+                
+                if (oNodo.Cells["dcgDescuentoFactura1"].Tag != null)
+                    oParteGanancia.DescuentoFactura1 = Helper.ConvertirDecimal(oNodo.Cells["dcgDescuentoFactura1"].Value);
+                if (oNodo.Cells["dcgDescuentoFactura2"].Tag != null)
+                    oParteGanancia.DescuentoFactura2 = Helper.ConvertirDecimal(oNodo.Cells["dcgDescuentoFactura2"].Value);
+                if (oNodo.Cells["dcgDescuentoFactura3"].Tag != null)
+                    oParteGanancia.DescuentoFactura3 = Helper.ConvertirDecimal(oNodo.Cells["dcgDescuentoFactura3"].Value);
+                if (oNodo.Cells["dcgDescuentoArticulo1"].Tag != null)
+                    oParteGanancia.DescuentoArticulo1 = Helper.ConvertirDecimal(oNodo.Cells["dcgDescuentoArticulo1"].Value);
+                if (oNodo.Cells["dcgDescuentoArticulo2"].Tag != null)
+                    oParteGanancia.DescuentoArticulo2 = Helper.ConvertirDecimal(oNodo.Cells["dcgDescuentoArticulo2"].Value);
+                if (oNodo.Cells["dcgDescuentoArticulo3"].Tag != null)
+                    oParteGanancia.DescuentoArticulo3 = Helper.ConvertirDecimal(oNodo.Cells["dcgDescuentoArticulo3"].Value);
+                if (oNodo.Cells["dcgPorcentajeDeGanancia1"].Tag != null)
+                    oParteGanancia.PorcentajeDeGanancia1 = Helper.ConvertirDecimal(oNodo.Cells["dcgPorcentajeDeGanancia1"].Value);
+                if (oNodo.Cells["dcgPorcentajeDeGanancia2"].Tag != null)
+                    oParteGanancia.PorcentajeDeGanancia2 = Helper.ConvertirDecimal(oNodo.Cells["dcgPorcentajeDeGanancia2"].Value);
+                if (oNodo.Cells["dcgPorcentajeDeGanancia3"].Tag != null)
+                    oParteGanancia.PorcentajeDeGanancia3 = Helper.ConvertirDecimal(oNodo.Cells["dcgPorcentajeDeGanancia3"].Value);
+                if (oNodo.Cells["dcgPorcentajeDeGanancia4"].Tag != null)
+                    oParteGanancia.PorcentajeDeGanancia4 = Helper.ConvertirDecimal(oNodo.Cells["dcgPorcentajeDeGanancia4"].Value);
+                if (oNodo.Cells["dcgPorcentajeDeGanancia5"].Tag != null)
+                    oParteGanancia.PorcentajeDeGanancia5 = Helper.ConvertirDecimal(oNodo.Cells["dcgPorcentajeDeGanancia5"].Value);
+                Guardar.Generico<ProveedorParteGanancia>(oParteGanancia);
+            }
+
+            Cargando.Cerrar();
+
+            this.CargarDescuentosGanancias(this.Proveedor.ProveedorID);
         }
 
         #endregion
