@@ -2386,5 +2386,10 @@ namespace Refaccionaria.App
 
         #endregion
 
+        private void tabDatosGen_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
