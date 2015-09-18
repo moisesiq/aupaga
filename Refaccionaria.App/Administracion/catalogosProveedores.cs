@@ -52,9 +52,13 @@ namespace Refaccionaria.App
         {
             InitializeComponent();
         }
-
+        
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            // Si es la pestaña de Descuentos/Ganancias, se ignora la configuración del Enter
+            if (this.tabDatosProveedores.SelectedTab == this.tbpDescGan)
+                return base.ProcessCmdKey(ref msg, keyData);
+
             if (keyData == Keys.Enter)
             {
                 this.SelectNextControl(this.ActiveControl, true, true, true, true);
@@ -239,7 +243,7 @@ namespace Refaccionaria.App
                         this.CargarDevoluciones(Proveedor.ProveedorID);
                     break;
                 case "tbpDescGan":
-                    if (this.tgvDescGan.Rows.Count <= 0)
+                    if (this.tgvDescGan.Nodes.Count <= 0)
                     {
                         this.CargarDescuentosGanancias(this.Proveedor.ProveedorID);
                     }
@@ -341,7 +345,7 @@ namespace Refaccionaria.App
                 this.dgvGarantias.Rows.Clear();
                 this.dgvDevoluciones.Rows.Clear();
 
-                this.tgvDescGan.Rows.Clear();
+                this.tgvDescGan.Nodes.Clear();
                 this.tgvDescGan.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
                 this.tgvDescGan.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
 
@@ -814,6 +818,9 @@ namespace Refaccionaria.App
                         MontoPaqueteria = Helper.ConvertirDecimal(this.txtMontoPaqueteria.Text)
                     };
                     General.SaveOrUpdate<Proveedor>(proveedor, proveedor);
+
+                    // Se agrega la cuenta auxiliar correspondiente
+                    ContaProc.CrearCuentaAuxiliar(proveedor.NombreProveedor, Cat.ContaCuentasDeMayor.Proveedores, proveedor.ProveedorID);
                 }
                 else
                 {
@@ -1003,9 +1010,7 @@ namespace Refaccionaria.App
                 Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
             }
         }
-
-
-
+        
         private void btnAgregarProntoPago_Click(object sender, EventArgs e)
         {
             DetalleProveedorProntoPago m = new DetalleProveedorProntoPago();
@@ -2207,6 +2212,35 @@ namespace Refaccionaria.App
 
         #region [ Tab Descuentos Ganancias ]
 
+        private void tgvDescGan_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (this.tgvDescGan.VerSeleccionNueva())
+            {
+                if (this.tgvDescGan.CurrentNode == null)
+                    this.txtDescGanObservacion.Clear();
+                else
+                    this.txtDescGanObservacion.Text = Helper.ConvertirCadena(this.tgvDescGan.CurrentNode.Cells["dcgObservacion"].Value);
+            }
+        }
+
+        private void tgvDescGan_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.tgvDescGan.Columns[e.ColumnIndex] == this.dcgNombre)
+                this.CargarPartesLinea(this.tgvDescGan.CurrentNode);
+        }
+
+        private void tgvDescGan_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (this.tgvDescGan.CurrentCell.ColumnIndex < (this.tgvDescGan.Columns.Count - 1))
+                {
+                    this.tgvDescGan.CurrentCell = this.tgvDescGan.CurrentCell.OwningRow.Cells[this.tgvDescGan.CurrentCell.ColumnIndex + 1];
+                    e.Handled = true;
+                }
+            }
+        }
+
         private void tgvDescGan_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (this.bCargandoDescuentosGanancias || this.tgvDescGan.CurrentNode == null) return;
@@ -2228,7 +2262,8 @@ namespace Refaccionaria.App
             oCelda.Style.ForeColor = Color.Orange;
             oCelda.Tag = true;
             oCelda.OwningRow.Tag = true;
-            this.VerCambiosEnCascada(this.tgvDescGan.GetNodeForRow(oCelda.OwningRow), oCelda.ColumnIndex, oCelda.Value);
+            if (oCelda.OwningColumn.Name != "dcgObservacion")
+                this.VerCambiosEnCascada(this.tgvDescGan.GetNodeForRow(oCelda.OwningRow), oCelda.ColumnIndex, oCelda.Value);
         }
 
         private void VerCambiosEnCascada(TreeGridNode oNodo, int iCol, object oValor)
@@ -2261,9 +2296,9 @@ namespace Refaccionaria.App
 
             string sProveedor = "", sMarca = "", sLinea = "";
             TreeGridNode oNodoProveedor = null, oNodoMarca = null, oNodoLinea = null;
-            var oDatos = General.GetListOf<ProveedoresPartesGananciasView>(c => c.ProveedorID == iProveedorID)
+            var oDatos = General.GetListOf<ProveedoresPartesGananciasLineasView>(c => c.ProveedorID == iProveedorID)
                 .OrderBy(c => c.Proveedor).ThenBy(c => c.Marca).ThenBy(c => c.Linea).ThenBy(c => c.Parte);
-            this.tgvDescGan.Rows.Clear();
+            this.tgvDescGan.Nodes.Clear();
             foreach (var oReg in oDatos)
             {
                 if (oReg.Proveedor != sProveedor)
@@ -2272,7 +2307,8 @@ namespace Refaccionaria.App
                     oNodoProveedor = this.tgvDescGan.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.ProveedorID, sProveedor
                         , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
                         , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
-                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5, oReg.Observacion);
+                    oNodoProveedor.Expand();
                     continue;
                 }
                 if (oReg.Marca != sMarca)
@@ -2281,7 +2317,7 @@ namespace Refaccionaria.App
                     oNodoMarca = oNodoProveedor.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.MarcaID, sMarca
                         , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
                         , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
-                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5, oReg.Observacion);
                     continue;
                 }
                 if (oReg.Linea != sLinea)
@@ -2290,23 +2326,46 @@ namespace Refaccionaria.App
                     oNodoLinea = oNodoMarca.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.LineaID, sLinea
                         , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
                         , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
-                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                        , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5, oReg.Observacion);
                     continue;
                 }
 
+                /* Se carga sólo hasta líneas, para que sea már rápido
                 oNodoLinea.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.ParteID, oReg.Parte
                     , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
                     , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
                     , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                */
             }
 
             this.bCargandoDescuentosGanancias = false;
             Cargando.Cerrar();
         }
 
+        private void CargarPartesLinea(TreeGridNode oNodo)
+        {
+            Cargando.Mostrar();
+
+            int iLineaID = Helper.ConvertirEntero(oNodo.Cells["dcgId"].Value);
+            int iMarcaID = Helper.ConvertirEntero(oNodo.Parent.Cells["dcgId"].Value);
+            int iProveedorID = Helper.ConvertirEntero(oNodo.Parent.Parent.Cells["dcgId"].Value);
+            var oDatos = General.GetListOf<ProveedoresPartesGananciasView>(c => c.ProveedorID == iProveedorID && c.MarcaID == iMarcaID && c.LineaID == iLineaID
+                && c.ParteID > 0).OrderBy(c => c.ParteID);
+            oNodo.Nodes.Clear();
+            foreach (var oReg in oDatos)
+            {
+                oNodo.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.ParteID, oReg.Parte
+                    , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
+                    , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
+                    , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5, oReg.Observacion);
+            }
+            
+            Cargando.Cerrar();
+        }
+
         private void GuardarDescuentosGanancias()
         {
-            if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que deseas guardar los cambios realizados.?") != DialogResult.Yes)
+            if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que deseas guardar los cambios realizados?") != DialogResult.Yes)
                 return;
 
             Cargando.Mostrar();
@@ -2376,6 +2435,16 @@ namespace Refaccionaria.App
                     oParteGanancia.PorcentajeDeGanancia4 = Helper.ConvertirDecimal(oNodo.Cells["dcgPorcentajeDeGanancia4"].Value);
                 if (oNodo.Cells["dcgPorcentajeDeGanancia5"].Tag != null)
                     oParteGanancia.PorcentajeDeGanancia5 = Helper.ConvertirDecimal(oNodo.Cells["dcgPorcentajeDeGanancia5"].Value);
+
+                // Se guarda la observación
+                if (oNodo.Cells["dcgObservacion"].Tag != null)
+                {
+                    if (!string.IsNullOrEmpty(oParteGanancia.Observacion))
+                        oParteGanancia.Observacion += "\r\n";
+                    oParteGanancia.Observacion += string.Format("{0} / {1} / {2}", DateTime.Now, GlobalClass.UsuarioGlobal.NombreUsuario
+                        , Helper.ConvertirCadena(oNodo.Cells["dcgObservacion"].Value));
+                }
+
                 Guardar.Generico<ProveedorParteGanancia>(oParteGanancia);
             }
 
@@ -2385,11 +2454,6 @@ namespace Refaccionaria.App
         }
 
         #endregion
-
-        private void tabDatosGen_Click(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }

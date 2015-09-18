@@ -2000,6 +2000,7 @@
           <Property Name="PorcentajeDeGanancia3" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="PorcentajeDeGanancia4" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="PorcentajeDeGanancia5" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Observacion" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="ProveedorPoliza">
           <Key>
@@ -2517,6 +2518,8 @@
           <Property Name="Ack" Type="nvarchar" MaxLength="36" />
           <Property Name="Procesada" Type="bit" Nullable="false" />
           <Property Name="FechaProcesada" Type="datetime" />
+          <Property Name="Subtotal" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Iva" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="VentaFacturaDevolucionDetalle">
           <Key>
@@ -4701,6 +4704,26 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresComprasView' d
           <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresMarcasLineasView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProveedoresMarcasLineasView">
+          <Key>
+            <PropertyRef Name="ProveedorMarcaParteID" />
+            <PropertyRef Name="LineaMarcaParteID" />
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="LineaID" />
+          </Key>
+          <Property Name="ProveedorMarcaParteID" Type="int" Nullable="false" />
+          <Property Name="LineaMarcaParteID" Type="int" Nullable="false" />
+          <Property Name="ProveedorID" Type="int" Nullable="false" />
+          <Property Name="Proveedor" Type="nvarchar" MaxLength="200" />
+          <Property Name="MarcaID" Type="int" Nullable="false" />
+          <Property Name="Marca" Type="nvarchar" MaxLength="200" />
+          <Property Name="LineaID" Type="int" Nullable="false" />
+          <Property Name="Linea" Type="nvarchar" MaxLength="100" />
+          <Property Name="LineaMarca" Type="nvarchar" MaxLength="301" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresNotasDeCreditoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProveedoresNotasDeCreditoView">
           <Key>
@@ -4727,6 +4750,38 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresNotasDeCredito
           <Property Name="Origen" Type="nvarchar" MaxLength="32" />
           <Property Name="Observacion" Type="nvarchar" MaxLength="128" />
           <Property Name="Disponible" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPartesGananciasLineasView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProveedoresPartesGananciasLineasView">
+          <Key>
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="LineaID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Proveedor" />
+          </Key>
+          <Property Name="ProveedorParteGananciaID" Type="int" />
+          <Property Name="ProveedorID" Type="int" Nullable="false" />
+          <Property Name="MarcaID" Type="int" Nullable="false" />
+          <Property Name="LineaID" Type="int" Nullable="false" />
+          <Property Name="ParteID" Type="int" Nullable="false" />
+          <Property Name="Proveedor" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Marca" Type="nvarchar" MaxLength="200" />
+          <Property Name="Linea" Type="nvarchar" MaxLength="100" />
+          <Property Name="Parte" Type="int" />
+          <Property Name="DescuentoFactura1" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoFactura2" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoFactura3" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo1" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo2" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo3" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia1" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia2" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia3" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia4" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia5" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Observacion" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPartesGananciasView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4758,6 +4813,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPartesGanancia
           <Property Name="PorcentajeDeGanancia3" Type="decimal" Precision="5" Scale="2" />
           <Property Name="PorcentajeDeGanancia4" Type="decimal" Precision="5" Scale="2" />
           <Property Name="PorcentajeDeGanancia5" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Observacion" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPolizasDetalleAvanzadoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -12117,6 +12173,19 @@ FROM [dbo].[ProveedorEquivalContactoPpalView] AS [ProveedorEquivalContactoPpalVi
 [ProveedoresComprasView].[Usuario] AS [Usuario]
 FROM [dbo].[ProveedoresComprasView] AS [ProveedoresComprasView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ProveedoresMarcasLineasView" EntityType="Self.ProveedoresMarcasLineasView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ProveedoresMarcasLineasView].[ProveedorMarcaParteID] AS [ProveedorMarcaParteID], 
+[ProveedoresMarcasLineasView].[LineaMarcaParteID] AS [LineaMarcaParteID], 
+[ProveedoresMarcasLineasView].[ProveedorID] AS [ProveedorID], 
+[ProveedoresMarcasLineasView].[Proveedor] AS [Proveedor], 
+[ProveedoresMarcasLineasView].[MarcaID] AS [MarcaID], 
+[ProveedoresMarcasLineasView].[Marca] AS [Marca], 
+[ProveedoresMarcasLineasView].[LineaID] AS [LineaID], 
+[ProveedoresMarcasLineasView].[Linea] AS [Linea], 
+[ProveedoresMarcasLineasView].[LineaMarca] AS [LineaMarca]
+FROM [dbo].[ProveedoresMarcasLineasView] AS [ProveedoresMarcasLineasView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ProveedoresNotasDeCreditoView" EntityType="Self.ProveedoresNotasDeCreditoView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [ProveedoresNotasDeCreditoView].[ProveedorNotaDeCreditoID] AS [ProveedorNotaDeCreditoID], 
@@ -12133,6 +12202,31 @@ FROM [dbo].[ProveedoresComprasView] AS [ProveedoresComprasView]</DefiningQuery>
 [ProveedoresNotasDeCreditoView].[Observacion] AS [Observacion], 
 [ProveedoresNotasDeCreditoView].[Disponible] AS [Disponible]
 FROM [dbo].[ProveedoresNotasDeCreditoView] AS [ProveedoresNotasDeCreditoView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProveedoresPartesGananciasLineasView" EntityType="Self.ProveedoresPartesGananciasLineasView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ProveedoresPartesGananciasLineasView].[ProveedorParteGananciaID] AS [ProveedorParteGananciaID], 
+[ProveedoresPartesGananciasLineasView].[ProveedorID] AS [ProveedorID], 
+[ProveedoresPartesGananciasLineasView].[MarcaID] AS [MarcaID], 
+[ProveedoresPartesGananciasLineasView].[LineaID] AS [LineaID], 
+[ProveedoresPartesGananciasLineasView].[ParteID] AS [ParteID], 
+[ProveedoresPartesGananciasLineasView].[Proveedor] AS [Proveedor], 
+[ProveedoresPartesGananciasLineasView].[Marca] AS [Marca], 
+[ProveedoresPartesGananciasLineasView].[Linea] AS [Linea], 
+[ProveedoresPartesGananciasLineasView].[Parte] AS [Parte], 
+[ProveedoresPartesGananciasLineasView].[DescuentoFactura1] AS [DescuentoFactura1], 
+[ProveedoresPartesGananciasLineasView].[DescuentoFactura2] AS [DescuentoFactura2], 
+[ProveedoresPartesGananciasLineasView].[DescuentoFactura3] AS [DescuentoFactura3], 
+[ProveedoresPartesGananciasLineasView].[DescuentoArticulo1] AS [DescuentoArticulo1], 
+[ProveedoresPartesGananciasLineasView].[DescuentoArticulo2] AS [DescuentoArticulo2], 
+[ProveedoresPartesGananciasLineasView].[DescuentoArticulo3] AS [DescuentoArticulo3], 
+[ProveedoresPartesGananciasLineasView].[PorcentajeDeGanancia1] AS [PorcentajeDeGanancia1], 
+[ProveedoresPartesGananciasLineasView].[PorcentajeDeGanancia2] AS [PorcentajeDeGanancia2], 
+[ProveedoresPartesGananciasLineasView].[PorcentajeDeGanancia3] AS [PorcentajeDeGanancia3], 
+[ProveedoresPartesGananciasLineasView].[PorcentajeDeGanancia4] AS [PorcentajeDeGanancia4], 
+[ProveedoresPartesGananciasLineasView].[PorcentajeDeGanancia5] AS [PorcentajeDeGanancia5], 
+[ProveedoresPartesGananciasLineasView].[Observacion] AS [Observacion]
+FROM [dbo].[ProveedoresPartesGananciasLineasView] AS [ProveedoresPartesGananciasLineasView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProveedoresPartesGananciasView" EntityType="Self.ProveedoresPartesGananciasView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -12155,7 +12249,8 @@ FROM [dbo].[ProveedoresNotasDeCreditoView] AS [ProveedoresNotasDeCreditoView]</D
 [ProveedoresPartesGananciasView].[PorcentajeDeGanancia2] AS [PorcentajeDeGanancia2], 
 [ProveedoresPartesGananciasView].[PorcentajeDeGanancia3] AS [PorcentajeDeGanancia3], 
 [ProveedoresPartesGananciasView].[PorcentajeDeGanancia4] AS [PorcentajeDeGanancia4], 
-[ProveedoresPartesGananciasView].[PorcentajeDeGanancia5] AS [PorcentajeDeGanancia5]
+[ProveedoresPartesGananciasView].[PorcentajeDeGanancia5] AS [PorcentajeDeGanancia5], 
+[ProveedoresPartesGananciasView].[Observacion] AS [Observacion]
 FROM [dbo].[ProveedoresPartesGananciasView] AS [ProveedoresPartesGananciasView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProveedoresPolizasDetalleAvanzadoView" EntityType="Self.ProveedoresPolizasDetalleAvanzadoView" store:Type="Views" store:Schema="dbo">
@@ -14485,7 +14580,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="VentaFacturaDevolucion" EntityType="RefaccionariaModelo.VentaFacturaDevolucion" />
           <EntitySet Name="VentasFacturasView" EntityType="RefaccionariaModelo.VentasFacturasView" />
           <EntitySet Name="Estado" EntityType="RefaccionariaModelo.Estado" />
           <EntitySet Name="Municipio" EntityType="RefaccionariaModelo.Municipio" />
@@ -14669,10 +14763,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="ClientesFlotillasView" EntityType="RefaccionariaModelo.ClientesFlotillasView" />
           <EntitySet Name="VentaFacturaDevolucionDetalle" EntityType="RefaccionariaModelo.VentaFacturaDevolucionDetalle" />
-          <AssociationSet Name="FK__VentaFact__Venta__6BD9E2F0" Association="RefaccionariaModelo.FK__VentaFact__Venta__6BD9E2F0">
-            <End Role="VentaFacturaDevolucion" EntitySet="VentaFacturaDevolucion" />
-            <End Role="VentaFacturaDevolucionDetalle" EntitySet="VentaFacturaDevolucionDetalle" />
-          </AssociationSet>
           <EntitySet Name="ContaCuentasAuxiliaresView" EntityType="RefaccionariaModelo.ContaCuentasAuxiliaresView" />
           <FunctionImport Name="pauCuadroDeControlCompras" ReturnType="Collection(RefaccionariaModelo.pauCuadroDeControlCompras_Result)">
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
@@ -15244,10 +15334,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__VentaFact__Estat__7874C3FF" Association="RefaccionariaModelo.FK__VentaFact__Estat__7874C3FF">
             <End Role="EstatusGenerico" EntitySet="EstatusGenerico" />
             <End Role="VentaFactura" EntitySet="VentaFactura" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaFact__Venta__625078B6" Association="RefaccionariaModelo.FK__VentaFact__Venta__625078B6">
-            <End Role="VentaFactura" EntitySet="VentaFactura" />
-            <End Role="VentaFacturaDevolucion" EntitySet="VentaFacturaDevolucion" />
           </AssociationSet>
           <AssociationSet Name="FK__VentaFact__Venta__70D3A237" Association="RefaccionariaModelo.FK__VentaFact__Venta__70D3A237">
             <End Role="VentaFactura" EntitySet="VentaFactura" />
@@ -15843,10 +15929,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="VentaFactura" EntitySet="VentaFactura" />
           </AssociationSet>
-          <AssociationSet Name="FK__VentaFact__Usuar__6438C128" Association="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="VentaFacturaDevolucion" EntitySet="VentaFacturaDevolucion" />
-          </AssociationSet>
           <AssociationSet Name="FK__VentaFact__Usuar__6DC22B62" Association="RefaccionariaModelo.FK__VentaFact__Usuar__6DC22B62">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="VentaFacturaDevolucionDetalle" EntitySet="VentaFacturaDevolucionDetalle" />
@@ -16229,10 +16311,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="VentaDevolucion" EntitySet="VentaDevolucion" />
           </AssociationSet>
-          <AssociationSet Name="FK__VentaFact__Sucur__63449CEF" Association="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF">
-            <End Role="Sucursal" EntitySet="Sucursal" />
-            <End Role="VentaFacturaDevolucion" EntitySet="VentaFacturaDevolucion" />
-          </AssociationSet>
           <AssociationSet Name="FK__VentaFact__Sucur__77809FC6" Association="RefaccionariaModelo.FK__VentaFact__Sucur__77809FC6">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="VentaFactura" EntitySet="VentaFactura" />
@@ -16404,8 +16482,14 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </FunctionImport>
           <EntitySet Name="PerfilPermisosView" EntityType="RefaccionariaModelo.PerfilPermisosView" />
           <EntitySet Name="UsuarioPerfilesView" EntityType="RefaccionariaModelo.UsuarioPerfilesView" />
-          <EntitySet Name="ProveedoresPartesGananciasView" EntityType="RefaccionariaModelo.ProveedoresPartesGananciasView" />
+          <EntitySet Name="PartesExistenciasView" EntityType="RefaccionariaModelo.PartesExistenciasView" />
+          <FunctionImport Name="pauPartesMaster" ReturnType="Collection(RefaccionariaModelo.pauPartesMaster_Result)">
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <EntitySet Name="ProveedorParteGanancia" EntityType="RefaccionariaModelo.ProveedorParteGanancia" />
+          <EntitySet Name="ProveedoresPartesGananciasLineasView" EntityType="RefaccionariaModelo.ProveedoresPartesGananciasLineasView" />
+          <EntitySet Name="ProveedoresPartesGananciasView" EntityType="RefaccionariaModelo.ProveedoresPartesGananciasView" />
           <AssociationSet Name="FK__Proveedor__Linea__5091BB2E" Association="RefaccionariaModelo.FK__Proveedor__Linea__5091BB2E">
             <End Role="Linea" EntitySet="Linea" />
             <End Role="ProveedorParteGanancia" EntitySet="ProveedorParteGanancia" />
@@ -16422,11 +16506,24 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ProveedorParteGanancia" EntitySet="ProveedorParteGanancia" />
           </AssociationSet>
-          <EntitySet Name="PartesExistenciasView" EntityType="RefaccionariaModelo.PartesExistenciasView" />
-          <FunctionImport Name="pauPartesMaster" ReturnType="Collection(RefaccionariaModelo.pauPartesMaster_Result)">
-            <Parameter Name="Desde" Mode="In" Type="DateTime" />
-            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
-          </FunctionImport>
+          <EntitySet Name="VentaFacturaDevolucion" EntityType="RefaccionariaModelo.VentaFacturaDevolucion" />
+          <AssociationSet Name="FK__VentaFact__Sucur__63449CEF" Association="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="VentaFacturaDevolucion" EntitySet="VentaFacturaDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaFact__Usuar__6438C128" Association="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaFacturaDevolucion" EntitySet="VentaFacturaDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaFact__Venta__625078B6" Association="RefaccionariaModelo.FK__VentaFact__Venta__625078B6">
+            <End Role="VentaFactura" EntitySet="VentaFactura" />
+            <End Role="VentaFacturaDevolucion" EntitySet="VentaFacturaDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaFact__Venta__6BD9E2F0" Association="RefaccionariaModelo.FK__VentaFact__Venta__6BD9E2F0">
+            <End Role="VentaFacturaDevolucion" EntitySet="VentaFacturaDevolucion" />
+            <End Role="VentaFacturaDevolucionDetalle" EntitySet="VentaFacturaDevolucionDetalle" />
+          </AssociationSet>
+          <EntitySet Name="ProveedoresMarcasLineasView" EntityType="RefaccionariaModelo.ProveedoresMarcasLineasView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -18172,31 +18269,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Cancelaciones" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="PorSurtir" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
-        <EntityType Name="VentaFacturaDevolucion">
-          <Key>
-            <PropertyRef Name="VentaFacturaDevolucionID" />
-          </Key>
-          <Property Type="Int32" Name="VentaFacturaDevolucionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="VentaFacturaID" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="SucursalID" Nullable="false" />
-          <Property Type="Boolean" Name="EsCancelacion" Nullable="false" />
-          <Property Type="String" Name="FolioFiscal" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Serie" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Folio" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="UsuarioID" Nullable="false" />
-          <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="FechaModificacion" Precision="3" />
-          <Property Type="Boolean" Name="Estatus" Nullable="false" />
-          <Property Type="Boolean" Name="Actualizar" Nullable="false" />
-          <Property Type="String" Name="Ack" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="Procesada" Nullable="false" />
-          <Property Type="DateTime" Name="FechaProcesada" Precision="3" />
-          <NavigationProperty Name="VentaFacturaDevolucionDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__6BD9E2F0" FromRole="VentaFacturaDevolucion" ToRole="VentaFacturaDevolucionDetalle" />
-          <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__625078B6" FromRole="VentaFacturaDevolucion" ToRole="VentaFactura" />
-          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128" FromRole="VentaFacturaDevolucion" ToRole="Usuario" />
-          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF" FromRole="VentaFacturaDevolucion" ToRole="Sucursal" />
-        </EntityType>
         <EntityType Name="VentasFacturasView">
           <Key>
             <PropertyRef Name="VentaFacturaID" />
@@ -19553,23 +19625,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Boolean" Name="Estatus" Nullable="false" />
           <Property Type="Boolean" Name="Actualizar" Nullable="false" />
           <Property Type="Int32" Name="VentaGarantiaID" />
-          <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__6BD9E2F0" FromRole="VentaFacturaDevolucionDetalle" ToRole="VentaFacturaDevolucion" />
           <NavigationProperty Name="VentaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__6CCE0729" FromRole="VentaFacturaDevolucionDetalle" ToRole="VentaDevolucion" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__6DC22B62" FromRole="VentaFacturaDevolucionDetalle" ToRole="Usuario" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__2BDF596C" FromRole="VentaFacturaDevolucionDetalle" ToRole="VentaGarantia" />
+          <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__6BD9E2F0" FromRole="VentaFacturaDevolucionDetalle" ToRole="VentaFacturaDevolucion" />
         </EntityType>
-        <Association Name="FK__VentaFact__Venta__6BD9E2F0">
-          <End Type="RefaccionariaModelo.VentaFacturaDevolucion" Role="VentaFacturaDevolucion" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaFacturaDevolucionDetalle" Role="VentaFacturaDevolucionDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaFacturaDevolucion">
-              <PropertyRef Name="VentaFacturaDevolucionID" />
-            </Principal>
-            <Dependent Role="VentaFacturaDevolucionDetalle">
-              <PropertyRef Name="VentaFacturaDevolucionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ContaCuentasAuxiliaresView">
           <Key>
             <PropertyRef Name="ContaCuentaAuxiliarID" />
@@ -22510,12 +22570,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Costo" Nullable="false" Precision="12" Scale="2" />
           <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B" FromRole="VentaFactura" ToRole="Cliente" />
           <NavigationProperty Name="EstatusGenerico" Relationship="RefaccionariaModelo.FK__VentaFact__Estat__7874C3FF" FromRole="VentaFactura" ToRole="EstatusGenerico" />
-          <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__625078B6" FromRole="VentaFactura" ToRole="VentaFacturaDevolucion" />
           <NavigationProperty Name="VentaFacturaDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__70D3A237" FromRole="VentaFactura" ToRole="VentaFacturaDetalle" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaFact__Reali__768C7B8D" FromRole="VentaFactura" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__3B4BBA2E" FromRole="VentaFactura" ToRole="Usuario" />
           <NavigationProperty Name="CajaFacturaGlobal" Relationship="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956" FromRole="VentaFactura" ToRole="CajaFacturaGlobal" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__77809FC6" FromRole="VentaFactura" ToRole="Sucursal" />
+          <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__625078B6" FromRole="VentaFactura" ToRole="VentaFacturaDevolucion" />
         </EntityType>
         <Association Name="FK__VentaFact__Clien__6561EF8B">
           <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
@@ -22538,18 +22598,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="VentaFactura">
               <PropertyRef Name="EstatusGenericoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaFact__Venta__625078B6">
-          <End Type="RefaccionariaModelo.VentaFactura" Role="VentaFactura" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaFacturaDevolucion" Role="VentaFacturaDevolucion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaFactura">
-              <PropertyRef Name="VentaFacturaID" />
-            </Principal>
-            <Dependent Role="VentaFacturaDevolucion">
-              <PropertyRef Name="VentaFacturaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -23389,7 +23437,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaDevolucionDetalle" Relationship="RefaccionariaModelo.FK__VentaDevo__Usuar__42B7D1CC" FromRole="Usuario" ToRole="VentaDevolucionDetalle" />
           <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__VentaFact__Reali__768C7B8D" FromRole="Usuario" ToRole="VentaFactura" />
           <NavigationProperty Name="VentaFactura1" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__3B4BBA2E" FromRole="Usuario" ToRole="VentaFactura" />
-          <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128" FromRole="Usuario" ToRole="VentaFacturaDevolucion" />
           <NavigationProperty Name="VentaFacturaDevolucionDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__6DC22B62" FromRole="Usuario" ToRole="VentaFacturaDevolucionDetalle" />
           <NavigationProperty Name="VentaFacturaDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__72BBEAA9" FromRole="Usuario" ToRole="VentaFacturaDetalle" />
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaPago__Usuar__644DCFC1" FromRole="Usuario" ToRole="VentaPago" />
@@ -23410,6 +23457,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="InventarioConteo1" Relationship="RefaccionariaModelo.FK__Inventari__Reali__23BF14B7" FromRole="Usuario" ToRole="InventarioConteo" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Venta__RealizoUs__7F01C5FD" FromRole="Usuario" ToRole="Venta" />
           <NavigationProperty Name="Venta1" Relationship="RefaccionariaModelo.FK__Venta__UsuarioID__32B6742D" FromRole="Usuario" ToRole="Venta" />
+          <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128" FromRole="Usuario" ToRole="VentaFacturaDevolucion" />
         </EntityType>
         <Association Name="FK__Autorizac__Autor__21E0EDE6">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -24871,18 +24919,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               <PropertyRef Name="UsuarioID" />
             </Principal>
             <Dependent Role="VentaFactura">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaFact__Usuar__6438C128">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaFacturaDevolucion" Role="VentaFacturaDevolucion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="VentaFacturaDevolucion">
               <PropertyRef Name="UsuarioID" />
             </Dependent>
           </ReferentialConstraint>
@@ -26377,7 +26413,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="UsuarioNomina" Relationship="RefaccionariaModelo.FK__UsuarioNo__Sucur__65F6EC68" FromRole="Sucursal" ToRole="UsuarioNomina" />
           <NavigationProperty Name="VentaCambio" Relationship="RefaccionariaModelo.FK__VentaCamb__Sucur__530E3526" FromRole="Sucursal" ToRole="VentaCambio" />
           <NavigationProperty Name="VentaDevolucion" Relationship="RefaccionariaModelo.FK__VentaDevo__Sucur__3651FAE7" FromRole="Sucursal" ToRole="VentaDevolucion" />
-          <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF" FromRole="Sucursal" ToRole="VentaFacturaDevolucion" />
           <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__77809FC6" FromRole="Sucursal" ToRole="VentaFactura" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" FromRole="Sucursal" ToRole="VentaGarantia" />
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaPago__Sucur__20A2B0EA" FromRole="Sucursal" ToRole="VentaPago" />
@@ -26385,6 +26420,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="SucursalCriterioABC" Relationship="RefaccionariaModelo.FK_SucursalCriterioABC_Sucursal" FromRole="Sucursal" ToRole="SucursalCriterioABC" />
           <NavigationProperty Name="MetaUtilidadSucursal" Relationship="RefaccionariaModelo.FK__MetaUtili__Sucur__6641052B" FromRole="Sucursal" ToRole="MetaUtilidadSucursal" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Venta__SucursalI__0F382DC6" FromRole="Sucursal" ToRole="Venta" />
+          <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF" FromRole="Sucursal" ToRole="VentaFacturaDevolucion" />
         </EntityType>
         <Association Name="FK__Autorizac__Sucur__2D9297B4">
           <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
@@ -26778,18 +26814,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               <PropertyRef Name="SucursalID" />
             </Principal>
             <Dependent Role="VentaDevolucion">
-              <PropertyRef Name="SucursalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaFact__Sucur__63449CEF">
-          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaFacturaDevolucion" Role="VentaFacturaDevolucion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sucursal">
-              <PropertyRef Name="SucursalID" />
-            </Principal>
-            <Dependent Role="VentaFacturaDevolucion">
               <PropertyRef Name="SucursalID" />
             </Dependent>
           </ReferentialConstraint>
@@ -27475,108 +27499,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Contrasenia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NombrePersona" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="ProveedoresPartesGananciasView">
-          <Key>
-            <PropertyRef Name="ProveedorID" />
-            <PropertyRef Name="MarcaID" />
-            <PropertyRef Name="LineaID" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="Proveedor" />
-          </Key>
-          <Property Name="ProveedorParteGananciaID" Type="Int32" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="MarcaID" Type="Int32" Nullable="false" />
-          <Property Name="LineaID" Type="Int32" Nullable="false" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="Proveedor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Parte" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="DescuentoFactura1" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="DescuentoFactura2" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="DescuentoFactura3" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="DescuentoArticulo1" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="DescuentoArticulo2" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="DescuentoArticulo3" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia1" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia2" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia3" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia4" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia5" Type="Decimal" Precision="5" Scale="2" />
-        </EntityType>
-        <EntityType Name="ProveedorParteGanancia">
-          <Key>
-            <PropertyRef Name="ProveedorParteGananciaID" />
-          </Key>
-          <Property Name="ProveedorParteGananciaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="MarcaParteID" Type="Int32" />
-          <Property Name="LineaID" Type="Int32" />
-          <Property Name="ParteID" Type="Int32" />
-          <Property Name="DescuentoFactura1" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="DescuentoFactura2" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="DescuentoFactura3" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="DescuentoArticulo1" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="DescuentoArticulo2" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="DescuentoArticulo3" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia1" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia2" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia3" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia4" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="PorcentajeDeGanancia5" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <NavigationProperty Name="Linea" Relationship="RefaccionariaModelo.FK__Proveedor__Linea__5091BB2E" FromRole="ProveedorParteGanancia" ToRole="Linea" />
-          <NavigationProperty Name="MarcaParte" Relationship="RefaccionariaModelo.FK__Proveedor__Marca__4F9D96F5" FromRole="ProveedorParteGanancia" ToRole="MarcaParte" />
-          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK__Proveedor__Parte__5185DF67" FromRole="ProveedorParteGanancia" ToRole="Parte" />
-          <NavigationProperty Name="Proveedor" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__4EA972BC" FromRole="ProveedorParteGanancia" ToRole="Proveedor" />
-        </EntityType>
-        <Association Name="FK__Proveedor__Linea__5091BB2E">
-          <End Type="RefaccionariaModelo.Linea" Role="Linea" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.ProveedorParteGanancia" Role="ProveedorParteGanancia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Linea">
-              <PropertyRef Name="LineaID" />
-            </Principal>
-            <Dependent Role="ProveedorParteGanancia">
-              <PropertyRef Name="LineaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__Marca__4F9D96F5">
-          <End Type="RefaccionariaModelo.MarcaParte" Role="MarcaParte" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.ProveedorParteGanancia" Role="ProveedorParteGanancia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MarcaParte">
-              <PropertyRef Name="MarcaParteID" />
-            </Principal>
-            <Dependent Role="ProveedorParteGanancia">
-              <PropertyRef Name="MarcaParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__Parte__5185DF67">
-          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.ProveedorParteGanancia" Role="ProveedorParteGanancia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ParteID" />
-            </Principal>
-            <Dependent Role="ProveedorParteGanancia">
-              <PropertyRef Name="ParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__Prove__4EA972BC">
-          <End Type="RefaccionariaModelo.Proveedor" Role="Proveedor" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorParteGanancia" Role="ProveedorParteGanancia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ProveedorID" />
-            </Principal>
-            <Dependent Role="ProveedorParteGanancia">
-              <PropertyRef Name="ProveedorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PartesExistenciasView">
           <Key>
             <PropertyRef Name="Registro" />
@@ -27638,6 +27560,233 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="PorcentajeUtilidadCinco" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="PrecioCinco" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
+        <EntityType Name="ProveedorParteGanancia">
+          <Key>
+            <PropertyRef Name="ProveedorParteGananciaID" />
+          </Key>
+          <Property Name="ProveedorParteGananciaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="MarcaParteID" Type="Int32" />
+          <Property Name="LineaID" Type="Int32" />
+          <Property Name="ParteID" Type="Int32" />
+          <Property Name="DescuentoFactura1" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="DescuentoFactura2" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="DescuentoFactura3" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo1" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo2" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo3" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia1" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia2" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia3" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia4" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia5" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Observacion" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Linea" Relationship="RefaccionariaModelo.FK__Proveedor__Linea__5091BB2E" FromRole="ProveedorParteGanancia" ToRole="Linea" />
+          <NavigationProperty Name="MarcaParte" Relationship="RefaccionariaModelo.FK__Proveedor__Marca__4F9D96F5" FromRole="ProveedorParteGanancia" ToRole="MarcaParte" />
+          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK__Proveedor__Parte__5185DF67" FromRole="ProveedorParteGanancia" ToRole="Parte" />
+          <NavigationProperty Name="Proveedor" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__4EA972BC" FromRole="ProveedorParteGanancia" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="ProveedoresPartesGananciasLineasView">
+          <Key>
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="LineaID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Proveedor" />
+          </Key>
+          <Property Name="ProveedorParteGananciaID" Type="Int32" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="MarcaID" Type="Int32" Nullable="false" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="Proveedor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Parte" Type="Int32" />
+          <Property Name="DescuentoFactura1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoFactura2" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoFactura3" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo2" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo3" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia2" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia3" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia4" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia5" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Observacion" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProveedoresPartesGananciasView">
+          <Key>
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="LineaID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Proveedor" />
+          </Key>
+          <Property Name="ProveedorParteGananciaID" Type="Int32" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="MarcaID" Type="Int32" Nullable="false" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="Proveedor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Parte" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DescuentoFactura1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoFactura2" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoFactura3" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo2" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DescuentoArticulo3" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia1" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia2" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia3" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia4" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeDeGanancia5" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Observacion" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Proveedor__Linea__5091BB2E">
+          <End Type="RefaccionariaModelo.Linea" Role="Linea" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ProveedorParteGanancia" Role="ProveedorParteGanancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="LineaID" />
+            </Principal>
+            <Dependent Role="ProveedorParteGanancia">
+              <PropertyRef Name="LineaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Marca__4F9D96F5">
+          <End Type="RefaccionariaModelo.MarcaParte" Role="MarcaParte" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ProveedorParteGanancia" Role="ProveedorParteGanancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarcaParte">
+              <PropertyRef Name="MarcaParteID" />
+            </Principal>
+            <Dependent Role="ProveedorParteGanancia">
+              <PropertyRef Name="MarcaParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Parte__5185DF67">
+          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ProveedorParteGanancia" Role="ProveedorParteGanancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ProveedorParteGanancia">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Prove__4EA972BC">
+          <End Type="RefaccionariaModelo.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorParteGanancia" Role="ProveedorParteGanancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ProveedorID" />
+            </Principal>
+            <Dependent Role="ProveedorParteGanancia">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VentaFacturaDevolucion">
+          <Key>
+            <PropertyRef Name="VentaFacturaDevolucionID" />
+          </Key>
+          <Property Name="VentaFacturaDevolucionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VentaFacturaID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="EsCancelacion" Type="Boolean" Nullable="false" />
+          <Property Name="FolioFiscal" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Serie" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Folio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
+          <Property Name="Ack" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Procesada" Type="Boolean" Nullable="false" />
+          <Property Name="FechaProcesada" Type="DateTime" Precision="3" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF" FromRole="VentaFacturaDevolucion" ToRole="Sucursal" />
+          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128" FromRole="VentaFacturaDevolucion" ToRole="Usuario" />
+          <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__625078B6" FromRole="VentaFacturaDevolucion" ToRole="VentaFactura" />
+          <NavigationProperty Name="VentaFacturaDevolucionDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__6BD9E2F0" FromRole="VentaFacturaDevolucion" ToRole="VentaFacturaDevolucionDetalle" />
+        </EntityType>
+        <Association Name="FK__VentaFact__Sucur__63449CEF">
+          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaFacturaDevolucion" Role="VentaFacturaDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="VentaFacturaDevolucion">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaFact__Usuar__6438C128">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaFacturaDevolucion" Role="VentaFacturaDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaFacturaDevolucion">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaFact__Venta__625078B6">
+          <End Type="RefaccionariaModelo.VentaFactura" Role="VentaFactura" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaFacturaDevolucion" Role="VentaFacturaDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaFactura">
+              <PropertyRef Name="VentaFacturaID" />
+            </Principal>
+            <Dependent Role="VentaFacturaDevolucion">
+              <PropertyRef Name="VentaFacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaFact__Venta__6BD9E2F0">
+          <End Type="RefaccionariaModelo.VentaFacturaDevolucion" Role="VentaFacturaDevolucion" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaFacturaDevolucionDetalle" Role="VentaFacturaDevolucionDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaFacturaDevolucion">
+              <PropertyRef Name="VentaFacturaDevolucionID" />
+            </Principal>
+            <Dependent Role="VentaFacturaDevolucionDetalle">
+              <PropertyRef Name="VentaFacturaDevolucionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProveedoresMarcasLineasView">
+          <Key>
+            <PropertyRef Name="ProveedorMarcaParteID" />
+            <PropertyRef Name="LineaMarcaParteID" />
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="LineaID" />
+          </Key>
+          <Property Name="ProveedorMarcaParteID" Type="Int32" Nullable="false" />
+          <Property Name="LineaMarcaParteID" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MarcaID" Type="Int32" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LineaMarca" Type="String" MaxLength="301" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -29015,28 +29164,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="VentaFacturaDevolucion">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.VentaFacturaDevolucion">
-              <MappingFragment StoreEntitySet="VentaFacturaDevolucion">
-                <ScalarProperty Name="FechaProcesada" ColumnName="FechaProcesada" />
-                <ScalarProperty Name="Procesada" ColumnName="Procesada" />
-                <ScalarProperty Name="Ack" ColumnName="Ack" />
-                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Serie" ColumnName="Serie" />
-                <ScalarProperty Name="FolioFiscal" ColumnName="FolioFiscal" />
-                <ScalarProperty Name="EsCancelacion" ColumnName="EsCancelacion" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="VentaFacturaID" ColumnName="VentaFacturaID" />
-                <ScalarProperty Name="VentaFacturaDevolucionID" ColumnName="VentaFacturaDevolucionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VentasFacturasView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.VentasFacturasView">
               <MappingFragment StoreEntitySet="VentasFacturasView">
@@ -33170,54 +33297,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProveedoresPartesGananciasView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPartesGananciasView">
-              <MappingFragment StoreEntitySet="ProveedoresPartesGananciasView">
-                <ScalarProperty Name="PorcentajeDeGanancia5" ColumnName="PorcentajeDeGanancia5" />
-                <ScalarProperty Name="PorcentajeDeGanancia4" ColumnName="PorcentajeDeGanancia4" />
-                <ScalarProperty Name="PorcentajeDeGanancia3" ColumnName="PorcentajeDeGanancia3" />
-                <ScalarProperty Name="PorcentajeDeGanancia2" ColumnName="PorcentajeDeGanancia2" />
-                <ScalarProperty Name="PorcentajeDeGanancia1" ColumnName="PorcentajeDeGanancia1" />
-                <ScalarProperty Name="DescuentoArticulo3" ColumnName="DescuentoArticulo3" />
-                <ScalarProperty Name="DescuentoArticulo2" ColumnName="DescuentoArticulo2" />
-                <ScalarProperty Name="DescuentoArticulo1" ColumnName="DescuentoArticulo1" />
-                <ScalarProperty Name="DescuentoFactura3" ColumnName="DescuentoFactura3" />
-                <ScalarProperty Name="DescuentoFactura2" ColumnName="DescuentoFactura2" />
-                <ScalarProperty Name="DescuentoFactura1" ColumnName="DescuentoFactura1" />
-                <ScalarProperty Name="Parte" ColumnName="Parte" />
-                <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="ProveedorParteGananciaID" ColumnName="ProveedorParteGananciaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedorParteGanancia">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorParteGanancia">
-              <MappingFragment StoreEntitySet="ProveedorParteGanancia">
-                <ScalarProperty Name="PorcentajeDeGanancia5" ColumnName="PorcentajeDeGanancia5" />
-                <ScalarProperty Name="PorcentajeDeGanancia4" ColumnName="PorcentajeDeGanancia4" />
-                <ScalarProperty Name="PorcentajeDeGanancia3" ColumnName="PorcentajeDeGanancia3" />
-                <ScalarProperty Name="PorcentajeDeGanancia2" ColumnName="PorcentajeDeGanancia2" />
-                <ScalarProperty Name="PorcentajeDeGanancia1" ColumnName="PorcentajeDeGanancia1" />
-                <ScalarProperty Name="DescuentoArticulo3" ColumnName="DescuentoArticulo3" />
-                <ScalarProperty Name="DescuentoArticulo2" ColumnName="DescuentoArticulo2" />
-                <ScalarProperty Name="DescuentoArticulo1" ColumnName="DescuentoArticulo1" />
-                <ScalarProperty Name="DescuentoFactura3" ColumnName="DescuentoFactura3" />
-                <ScalarProperty Name="DescuentoFactura2" ColumnName="DescuentoFactura2" />
-                <ScalarProperty Name="DescuentoFactura1" ColumnName="DescuentoFactura1" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="ProveedorParteGananciaID" ColumnName="ProveedorParteGananciaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PartesExistenciasView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.PartesExistenciasView">
               <MappingFragment StoreEntitySet="PartesExistenciasView">
@@ -33278,6 +33357,122 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ProveedorParteGanancia">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorParteGanancia">
+              <MappingFragment StoreEntitySet="ProveedorParteGanancia">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="PorcentajeDeGanancia5" ColumnName="PorcentajeDeGanancia5" />
+                <ScalarProperty Name="PorcentajeDeGanancia4" ColumnName="PorcentajeDeGanancia4" />
+                <ScalarProperty Name="PorcentajeDeGanancia3" ColumnName="PorcentajeDeGanancia3" />
+                <ScalarProperty Name="PorcentajeDeGanancia2" ColumnName="PorcentajeDeGanancia2" />
+                <ScalarProperty Name="PorcentajeDeGanancia1" ColumnName="PorcentajeDeGanancia1" />
+                <ScalarProperty Name="DescuentoArticulo3" ColumnName="DescuentoArticulo3" />
+                <ScalarProperty Name="DescuentoArticulo2" ColumnName="DescuentoArticulo2" />
+                <ScalarProperty Name="DescuentoArticulo1" ColumnName="DescuentoArticulo1" />
+                <ScalarProperty Name="DescuentoFactura3" ColumnName="DescuentoFactura3" />
+                <ScalarProperty Name="DescuentoFactura2" ColumnName="DescuentoFactura2" />
+                <ScalarProperty Name="DescuentoFactura1" ColumnName="DescuentoFactura1" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ProveedorParteGananciaID" ColumnName="ProveedorParteGananciaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresPartesGananciasLineasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPartesGananciasLineasView">
+              <MappingFragment StoreEntitySet="ProveedoresPartesGananciasLineasView">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="PorcentajeDeGanancia5" ColumnName="PorcentajeDeGanancia5" />
+                <ScalarProperty Name="PorcentajeDeGanancia4" ColumnName="PorcentajeDeGanancia4" />
+                <ScalarProperty Name="PorcentajeDeGanancia3" ColumnName="PorcentajeDeGanancia3" />
+                <ScalarProperty Name="PorcentajeDeGanancia2" ColumnName="PorcentajeDeGanancia2" />
+                <ScalarProperty Name="PorcentajeDeGanancia1" ColumnName="PorcentajeDeGanancia1" />
+                <ScalarProperty Name="DescuentoArticulo3" ColumnName="DescuentoArticulo3" />
+                <ScalarProperty Name="DescuentoArticulo2" ColumnName="DescuentoArticulo2" />
+                <ScalarProperty Name="DescuentoArticulo1" ColumnName="DescuentoArticulo1" />
+                <ScalarProperty Name="DescuentoFactura3" ColumnName="DescuentoFactura3" />
+                <ScalarProperty Name="DescuentoFactura2" ColumnName="DescuentoFactura2" />
+                <ScalarProperty Name="DescuentoFactura1" ColumnName="DescuentoFactura1" />
+                <ScalarProperty Name="Parte" ColumnName="Parte" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ProveedorParteGananciaID" ColumnName="ProveedorParteGananciaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresPartesGananciasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPartesGananciasView">
+              <MappingFragment StoreEntitySet="ProveedoresPartesGananciasView">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="PorcentajeDeGanancia5" ColumnName="PorcentajeDeGanancia5" />
+                <ScalarProperty Name="PorcentajeDeGanancia4" ColumnName="PorcentajeDeGanancia4" />
+                <ScalarProperty Name="PorcentajeDeGanancia3" ColumnName="PorcentajeDeGanancia3" />
+                <ScalarProperty Name="PorcentajeDeGanancia2" ColumnName="PorcentajeDeGanancia2" />
+                <ScalarProperty Name="PorcentajeDeGanancia1" ColumnName="PorcentajeDeGanancia1" />
+                <ScalarProperty Name="DescuentoArticulo3" ColumnName="DescuentoArticulo3" />
+                <ScalarProperty Name="DescuentoArticulo2" ColumnName="DescuentoArticulo2" />
+                <ScalarProperty Name="DescuentoArticulo1" ColumnName="DescuentoArticulo1" />
+                <ScalarProperty Name="DescuentoFactura3" ColumnName="DescuentoFactura3" />
+                <ScalarProperty Name="DescuentoFactura2" ColumnName="DescuentoFactura2" />
+                <ScalarProperty Name="DescuentoFactura1" ColumnName="DescuentoFactura1" />
+                <ScalarProperty Name="Parte" ColumnName="Parte" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ProveedorParteGananciaID" ColumnName="ProveedorParteGananciaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VentaFacturaDevolucion">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.VentaFacturaDevolucion">
+              <MappingFragment StoreEntitySet="VentaFacturaDevolucion">
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="FechaProcesada" ColumnName="FechaProcesada" />
+                <ScalarProperty Name="Procesada" ColumnName="Procesada" />
+                <ScalarProperty Name="Ack" ColumnName="Ack" />
+                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="FolioFiscal" ColumnName="FolioFiscal" />
+                <ScalarProperty Name="EsCancelacion" ColumnName="EsCancelacion" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="VentaFacturaID" ColumnName="VentaFacturaID" />
+                <ScalarProperty Name="VentaFacturaDevolucionID" ColumnName="VentaFacturaDevolucionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresMarcasLineasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresMarcasLineasView">
+              <MappingFragment StoreEntitySet="ProveedoresMarcasLineasView">
+                <ScalarProperty Name="LineaMarca" ColumnName="LineaMarca" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="LineaMarcaParteID" ColumnName="LineaMarcaParteID" />
+                <ScalarProperty Name="ProveedorMarcaParteID" ColumnName="ProveedorMarcaParteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -33677,7 +33872,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.Cotizaciones9500DetalleView" Width="1.5" PointX="14.75" PointY="12.75" Height="0.39999999999997726" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ClienteFacturacion" Width="1.5" PointX="5.25" PointY="61.375" Height="0.39999999999997726" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.LineasView" Width="1.5" PointX="16.75" PointY="0.75" Height="0.39999999999997726" IsExpanded="false" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.VentaFacturaDevolucion" Width="1.5" PointX="8.25" PointY="42.25" Height="0.39999999999997726" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasFacturasView" Width="1.5" PointX="0.75" PointY="16.75" Height="0.39999999999997726" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Estado" Width="1.5" PointX="3" PointY="31.375" Height="0.39999999999997726" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Municipio" Width="1.5" PointX="5.25" PointY="41.375" Height="0.39999999999997726" IsExpanded="false" />
@@ -33928,27 +34122,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.ClientesFlotillasView" Width="1.5" PointX="23.375" PointY="22.75" Height="4.287903645833353" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentaFacturaDevolucionDetalle" Width="1.5" PointX="18.75" PointY="47.5" Height="3.5186979166667243" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Venta__6BD9E2F0" >
-          <ConnectorPoint PointX="9.75" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="9.9166666666666661" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="10.083333333333334" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="10.213541666666666" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="10.380208333333334" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="11.166666666666666" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="11.333333333333334" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="12.135416666666666" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="12.302083333333334" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="12.875" PointY="42.55078400000005" />
-          <ConnectorPoint PointX="12.875" PointY="46.587500000000006" />
-          <ConnectorPoint PointX="15.041666666666666" PointY="46.587500000000006" />
-          <ConnectorPoint PointX="15.208333333333334" PointY="46.587500000000006" />
-          <ConnectorPoint PointX="16.166666666666668" PointY="46.587500000000006" />
-          <ConnectorPoint PointX="16.333333333333332" PointY="46.587500000000006" />
-          <ConnectorPoint PointX="18.197916666666668" PointY="46.587500000000006" />
-          <ConnectorPoint PointX="18.458333333333332" PointY="46.587500000000006" />
-          <ConnectorPoint PointX="19.5" PointY="46.587500000000006" />
-          <ConnectorPoint PointX="19.5" PointY="47.5" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentasAuxiliaresView" Width="1.5" PointX="15.375" PointY="24.75" Height="2.7494921874999818" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasDevolucionesDetalleView" Width="1.5" PointX="25.375" PointY="8.75" Height="3.3263964843749818" />
         <EntityTypeShape EntityType="RefaccionariaModelo.MetaVendedor" Width="1.5" PointX="13.25" PointY="41.75" Height="3.9033007812499818" />
@@ -35680,67 +35853,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="36.125" PointY="66.625" />
           <ConnectorPoint PointX="35.781252" PointY="66.625" />
           <ConnectorPoint PointX="35.781252" PointY="67.125" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Venta__625078B6" >
-          <ConnectorPoint PointX="35.375" PointY="67.125" />
-          <ConnectorPoint PointX="35.375" PointY="66.595683593749982" />
-          <ConnectorPoint PointX="34.125" PointY="66.595683593749982" />
-          <ConnectorPoint PointX="34.125" PointY="64.047587890624982" />
-          <ConnectorPoint PointX="34.604166666666664" PointY="64.047587890624982" />
-          <ConnectorPoint PointX="34.770833333333336" PointY="64.047587890624982" />
-          <ConnectorPoint PointX="35" PointY="64.047587890624982" />
-          <ConnectorPoint PointX="35" PointY="46.047425130208353" />
-          <ConnectorPoint PointX="33.333333333333336" PointY="46.047425130208353" />
-          <ConnectorPoint PointX="32.791666666666664" PointY="46.047425130208353" />
-          <ConnectorPoint PointX="32.75" PointY="46.047425130208353" />
-          <ConnectorPoint PointX="32.75" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="32.208333333333336" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="32.041666666666664" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="30.239583333333332" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="30.041666666666668" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="29.458333333333332" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="29.291666666666668" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="28.583333333333332" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="28.416666666666668" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="25.729166166666666" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="25.5624995" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="24.659885232489909" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="24.493218565823245" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="24.442708333333332" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="23.916666666666668" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="23.833333333333332" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="23.666666666666668" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="22.333333333333332" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="21.354166666666668" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="20.846137547810873" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="20.567275095621749" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="20.375" PointY="42.840800781249982" />
-          <ConnectorPoint PointX="20.375" PointY="41.0625" />
-          <ConnectorPoint PointX="18.364583333333332" PointY="41.0625" />
-          <ConnectorPoint PointX="18.197916666666668" PointY="41.0625" />
-          <ConnectorPoint PointX="18.083333333333332" PointY="41.0625" />
-          <ConnectorPoint PointX="17.916666666666668" PointY="41.0625" />
-          <ConnectorPoint PointX="17.552083333333332" PointY="41.0625" />
-          <ConnectorPoint PointX="17.385416666666668" PointY="41.0625" />
-          <ConnectorPoint PointX="17.208333333333332" PointY="41.0625" />
-          <ConnectorPoint PointX="17.041666666666668" PointY="41.0625" />
-          <ConnectorPoint PointX="15.208333333333334" PointY="41.0625" />
-          <ConnectorPoint PointX="15.041666666666666" PointY="41.0625" />
-          <ConnectorPoint PointX="13.020833333333334" PointY="41.0625" />
-          <ConnectorPoint PointX="12.854166666666666" PointY="41.0625" />
-          <ConnectorPoint PointX="12.708333333333334" PointY="41.0625" />
-          <ConnectorPoint PointX="12.541666666666666" PointY="41.0625" />
-          <ConnectorPoint PointX="12.302083333333334" PointY="41.0625" />
-          <ConnectorPoint PointX="12.302083333333334" PointY="42.429688" />
-          <ConnectorPoint PointX="12.302083333333334" PointY="42.429688" />
-          <ConnectorPoint PointX="12.135416666666666" PointY="42.429688" />
-          <ConnectorPoint PointX="11.333333333333334" PointY="42.429688" />
-          <ConnectorPoint PointX="11.166666666666666" PointY="42.429688" />
-          <ConnectorPoint PointX="10.380208333333334" PointY="42.429688" />
-          <ConnectorPoint PointX="10.213541666666666" PointY="42.429688" />
-          <ConnectorPoint PointX="10.083333333333334" PointY="42.429688" />
-          <ConnectorPoint PointX="9.9166666666666661" PointY="42.429688" />
-          <ConnectorPoint PointX="9.75" PointY="42.429688" />
         </AssociationConnector>
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Venta__70D3A237" >
           <ConnectorPoint PointX="34.625" PointY="71.886635960286441" />
@@ -39913,24 +40025,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="34.125" PointY="70.787065480143283" />
           <ConnectorPoint PointX="34.625" PointY="70.787065480143283" />
         </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128" >
-          <ConnectorPoint PointX="2.25" PointY="57.898075923076924" />
-          <ConnectorPoint PointX="2.4410744349011204" PointY="57.707001488175806" />
-          <ConnectorPoint PointX="2.6214255650988791" PointY="57.526650357978042" />
-          <ConnectorPoint PointX="2.625" PointY="57.523075923076924" />
-          <ConnectorPoint PointX="2.625" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="2.6393229166666665" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="2.9153645833333335" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="3.7057336666666667" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="3.8724003333333337" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="4.744791666666667" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="5.302083333333333" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="7.604166666666667" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="7.833333333333333" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="8.1494077682344557" PointY="42.468752500000051" />
-          <ConnectorPoint PointX="8.25" PointY="42.468752500000051" />
-        </AssociationConnector>
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Usuar__6DC22B62" >
           <ConnectorPoint PointX="1.7160753551773498" PointY="57.875" />
           <ConnectorPoint PointX="1.7160753551773498" PointY="57.189433593749982" />
@@ -41239,7 +41333,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__UsuarioNo__Sucur__65F6EC68" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaCamb__Sucur__530E3526" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaDevo__Sucur__3651FAE7" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Sucur__77809FC6" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__Sucur__20A2B0EA" />
@@ -41289,13 +41382,20 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.Cotizaciones9500DetalleAvanzadoView" Width="1.5" PointX="5.375" PointY="25.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.PerfilPermisosView" Width="1.5" PointX="36.375" PointY="0.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.UsuarioPerfilesView" Width="1.5" PointX="40.375" PointY="30.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPartesGananciasView" Width="1.5" PointX="40.375" PointY="24.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorParteGanancia" Width="1.5" PointX="27.75" PointY="49.5" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.PartesExistenciasView" Width="1.5" PointX="32.375" PointY="5.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorParteGanancia" Width="1.5" PointX="27.75" PointY="49.375" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPartesGananciasLineasView" Width="1.5" PointX="40.375" PointY="24.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPartesGananciasView" Width="1.5" PointX="41.375" PointY="0.75" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Linea__5091BB2E" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Marca__4F9D96F5" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Parte__5185DF67" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Prove__4EA972BC" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.PartesExistenciasView" Width="1.5" PointX="32.375" PointY="5.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.VentaFacturaDevolucion" Width="1.5" PointX="36.875" PointY="90.25" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Venta__625078B6" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Venta__6BD9E2F0" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresMarcasLineasView" Width="1.5" PointX="41.375" PointY="6.75" />
         </Diagram>
     </Diagrams>
   </Designer>

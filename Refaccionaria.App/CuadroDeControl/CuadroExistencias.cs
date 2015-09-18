@@ -23,6 +23,7 @@ namespace Refaccionaria.App
             this.cmbProveedor.CargarDatos("ProveedorID", "NombreProveedor", General.GetListOf<Proveedor>(c => c.Estatus));
             this.cmbMarca.CargarDatos("MarcaParteID", "NombreMarcaParte", General.GetListOf<MarcaParte>(c => c.Estatus));
             this.cmbLinea.CargarDatos("LineaID", "NombreLinea", General.GetListOf<Linea>(c => c.Estatus));
+            this.cmbAgrupar.Items.AddRange(new object[] { "Proveedor", "Marca", "Línea", "Marca-Línea" });
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -87,18 +88,79 @@ namespace Refaccionaria.App
                 }).ToList();
             }
 
+            // Se verifica si se deben agrupar los datos, y se agrupan
+            switch (this.cmbAgrupar.Text)
+            {
+                case "Proveedor":
+                    oDatos = oDatos.GroupBy(g => new { g.ProveedorID, g.Proveedor }).Select(c => new PartesExistenciasView
+                    {
+                        Proveedor = c.Key.Proveedor, 
+                        Marca = "",
+                        Linea = "",
+                        Costo = c.Sum(s => s.Costo * s.Existencia),
+                        CostoConDescuento = c.Sum(s => s.CostoConDescuento * s.Existencia),
+                        Existencia = c.Sum(s => s.Existencia)
+                    }).ToList();
+                    break;
+                case "Marca":
+                    oDatos = oDatos.GroupBy(g => new { g.MarcaID, g.Marca }).Select(c => new PartesExistenciasView
+                    {
+                        Proveedor = "",
+                        Marca = c.Key.Marca,
+                        Linea = "",
+                        Costo = c.Sum(s => s.Costo * s.Existencia),
+                        CostoConDescuento = c.Sum(s => s.CostoConDescuento * s.Existencia),
+                        Existencia = c.Sum(s => s.Existencia)
+                    }).ToList();
+                    break;
+                case "Línea":
+                    oDatos = oDatos.GroupBy(g => new { g.LineaID, g.Linea }).Select(c => new PartesExistenciasView 
+                    {
+                        Proveedor = "",
+                        Marca = "",
+                        Linea = c.Key.Linea,
+                        Costo = c.Sum(s => s.Costo * s.Existencia),
+                        CostoConDescuento = c.Sum(s => s.CostoConDescuento * s.Existencia),
+                        Existencia = c.Sum(s => s.Existencia)
+                    }).ToList();
+                    break;
+                case "Marca-Línea":
+                    oDatos = oDatos.GroupBy(g => new { g.MarcaID, g.Marca, g.LineaID, g.Linea }).Select(c => new PartesExistenciasView
+                    {
+                        Proveedor = "",
+                        Marca = c.Key.Marca,
+                        Linea = c.Key.Linea,
+                        Costo = c.Sum(s => s.Costo * s.Existencia),
+                        CostoConDescuento = c.Sum(s => s.CostoConDescuento * s.Existencia),
+                        Existencia = c.Sum(s => s.Existencia)
+                    }).ToList();
+                    break;
+            }
+
             // Se llena el grid
             decimal mExistenciaT = 0, mCostoT = 0;
             this.dgvDatos.Rows.Clear();
-            foreach (var oReg in oDatos)
+            if (this.cmbAgrupar.Text == "")
             {
-                this.dgvDatos.Rows.Add(oReg.ParteID, oReg.NumeroDeParte, oReg.Descripcion, oReg.Proveedor, oReg.Marca, oReg.Linea
-                    , (bCostoDesc ? oReg.CostoConDescuento : oReg.Costo), oReg.Existencia, ((bCostoDesc ? oReg.CostoConDescuento : oReg.Costo) * oReg.Existencia)
-                    , oReg.UltimaVenta);
-                mExistenciaT += oReg.Existencia.Valor();
-                mCostoT += ((bCostoDesc ? oReg.CostoConDescuento : oReg.Costo) * oReg.Existencia).Valor();
+                foreach (var oReg in oDatos)
+                {
+                    this.dgvDatos.Rows.Add(oReg.ParteID, oReg.NumeroDeParte, oReg.Descripcion, oReg.Proveedor, oReg.Marca, oReg.Linea
+                        , (bCostoDesc ? oReg.CostoConDescuento : oReg.Costo), oReg.Existencia, ((bCostoDesc ? oReg.CostoConDescuento : oReg.Costo) * oReg.Existencia)
+                        , oReg.UltimaVenta);
+                    mExistenciaT += oReg.Existencia.Valor();
+                    mCostoT += ((bCostoDesc ? oReg.CostoConDescuento : oReg.Costo) * oReg.Existencia).Valor();
+                }
             }
-
+            else
+            {
+                foreach (var oReg in oDatos)
+                {
+                    this.dgvDatos.Rows.Add(null, null, null, oReg.Proveedor, oReg.Marca, oReg.Linea, null, oReg.Existencia, (bCostoDesc ? oReg.CostoConDescuento : oReg.Costo));
+                    mExistenciaT += oReg.Existencia.Valor();
+                    mCostoT += (bCostoDesc ? oReg.CostoConDescuento : oReg.Costo).Valor();
+                }
+            }
+            
             // Se agregan los totales
             this.lblExistenciaTotal.Text = mExistenciaT.ToString(GlobalClass.FormatoDecimal);
             this.lblCostoTotal.Text = mCostoT.ToString(GlobalClass.FormatoMoneda);
@@ -108,7 +170,5 @@ namespace Refaccionaria.App
 
         #endregion
 
-        
-                                        
     }
 }

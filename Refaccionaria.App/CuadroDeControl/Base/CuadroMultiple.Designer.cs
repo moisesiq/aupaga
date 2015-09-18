@@ -48,6 +48,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -64,6 +68,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -76,14 +84,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.dtpDesde = new System.Windows.Forms.DateTimePicker();
             this.chkCobradas = new System.Windows.Forms.CheckBox();
@@ -114,6 +114,12 @@
             this.Meses_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Meses_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvSemanas = new System.Windows.Forms.DataGridView();
+            this.Semanas_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Semanas_Semana = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Semanas_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Semanas_Anterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Semanas_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Semanas_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chrMeses = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chrSemanas = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dgvVendedor = new System.Windows.Forms.DataGridView();
@@ -124,6 +130,12 @@
             this.Vendedor_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Vendedor_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvSucursal = new System.Windows.Forms.DataGridView();
+            this.Sucursal_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sucursal_Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sucursal_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sucursal_Anterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sucursal_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sucursal_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Partes_Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,18 +155,8 @@
             this.btnMostrar = new System.Windows.Forms.Button();
             this.cmbCalculo = new System.Windows.Forms.ComboBox();
             this.lblCalculo = new System.Windows.Forms.Label();
-            this.Semanas_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Semanas_Semana = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Semanas_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Semanas_Anterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Semanas_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Semanas_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sucursal_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sucursal_Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sucursal_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sucursal_Anterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sucursal_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sucursal_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nudDecimales = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMeses)).BeginInit();
@@ -165,6 +167,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipalTotales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpHasta
@@ -173,7 +176,7 @@
             this.dtpHasta.Location = new System.Drawing.Point(807, 28);
             this.dtpHasta.Name = "dtpHasta";
             this.dtpHasta.Size = new System.Drawing.Size(122, 20);
-            this.dtpHasta.TabIndex = 7;
+            this.dtpHasta.TabIndex = 8;
             this.dtpHasta.ValueChanged += new System.EventHandler(this.dtpHasta_ValueChanged);
             // 
             // dtpDesde
@@ -182,7 +185,7 @@
             this.dtpDesde.Location = new System.Drawing.Point(679, 27);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(122, 20);
-            this.dtpDesde.TabIndex = 6;
+            this.dtpDesde.TabIndex = 7;
             this.dtpDesde.ValueChanged += new System.EventHandler(this.dtpDesde_ValueChanged);
             // 
             // chkCobradas
@@ -192,7 +195,7 @@
             this.chkCobradas.Location = new System.Drawing.Point(281, 28);
             this.chkCobradas.Name = "chkCobradas";
             this.chkCobradas.Size = new System.Drawing.Size(71, 17);
-            this.chkCobradas.TabIndex = 2;
+            this.chkCobradas.TabIndex = 3;
             this.chkCobradas.Text = "Cobradas";
             this.chkCobradas.UseVisualStyleBackColor = true;
             this.chkCobradas.CheckedChanged += new System.EventHandler(this.chkCobradas_CheckedChanged);
@@ -204,7 +207,7 @@
             this.chkPagadas.Location = new System.Drawing.Point(207, 28);
             this.chkPagadas.Name = "chkPagadas";
             this.chkPagadas.Size = new System.Drawing.Size(68, 17);
-            this.chkPagadas.TabIndex = 1;
+            this.chkPagadas.TabIndex = 2;
             this.chkPagadas.Text = "Pagadas";
             this.chkPagadas.UseVisualStyleBackColor = true;
             this.chkPagadas.CheckedChanged += new System.EventHandler(this.chkPagadas_CheckedChanged);
@@ -216,7 +219,7 @@
             this.cmbSucursal.Location = new System.Drawing.Point(51, 26);
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(140, 21);
-            this.cmbSucursal.TabIndex = 0;
+            this.cmbSucursal.TabIndex = 1;
             this.cmbSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbSucursal_SelectedIndexChanged);
             // 
             // label1
@@ -236,7 +239,7 @@
             this.chk9500.Location = new System.Drawing.Point(358, 28);
             this.chk9500.Name = "chk9500";
             this.chk9500.Size = new System.Drawing.Size(74, 17);
-            this.chk9500.TabIndex = 3;
+            this.chk9500.TabIndex = 4;
             this.chk9500.Text = "Sólo 9500";
             this.chk9500.UseVisualStyleBackColor = true;
             this.chk9500.CheckedChanged += new System.EventHandler(this.chk9500_CheckedChanged);
@@ -282,7 +285,7 @@
             this.dgvPrincipal.RowHeadersVisible = false;
             this.dgvPrincipal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPrincipal.Size = new System.Drawing.Size(500, 367);
-            this.dgvPrincipal.TabIndex = 9;
+            this.dgvPrincipal.TabIndex = 12;
             this.dgvPrincipal.CurrentCellChanged += new System.EventHandler(this.dgvPrincipal_CurrentCellChanged);
             // 
             // Principal_Id
@@ -387,7 +390,7 @@
             this.dgvGrupos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGrupos.ShowEditingIcon = false;
             this.dgvGrupos.Size = new System.Drawing.Size(451, 544);
-            this.dgvGrupos.TabIndex = 11;
+            this.dgvGrupos.TabIndex = 14;
             this.dgvGrupos.CurrentCellChanged += new System.EventHandler(this.dgvGrupos_CurrentCellChanged);
             // 
             // Grupos_Id
@@ -484,7 +487,7 @@
             this.dgvMeses.RowHeadersVisible = false;
             this.dgvMeses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMeses.Size = new System.Drawing.Size(303, 299);
-            this.dgvMeses.TabIndex = 12;
+            this.dgvMeses.TabIndex = 15;
             this.dgvMeses.CurrentCellChanged += new System.EventHandler(this.dgvMeses_CurrentCellChanged);
             // 
             // Meses_Id
@@ -582,8 +585,62 @@
             this.dgvSemanas.RowHeadersVisible = false;
             this.dgvSemanas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSemanas.Size = new System.Drawing.Size(302, 413);
-            this.dgvSemanas.TabIndex = 14;
+            this.dgvSemanas.TabIndex = 17;
             this.dgvSemanas.CurrentCellChanged += new System.EventHandler(this.dgvSemanas_CurrentCellChanged);
+            // 
+            // Semanas_Id
+            // 
+            this.Semanas_Id.HeaderText = "Id";
+            this.Semanas_Id.Name = "Semanas_Id";
+            this.Semanas_Id.ReadOnly = true;
+            this.Semanas_Id.Visible = false;
+            // 
+            // Semanas_Semana
+            // 
+            this.Semanas_Semana.HeaderText = "Sem.";
+            this.Semanas_Semana.Name = "Semanas_Semana";
+            this.Semanas_Semana.ReadOnly = true;
+            this.Semanas_Semana.Width = 40;
+            // 
+            // Semanas_Actual
+            // 
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Format = "C2";
+            this.Semanas_Actual.DefaultCellStyle = dataGridViewCellStyle19;
+            this.Semanas_Actual.HeaderText = "Actual";
+            this.Semanas_Actual.Name = "Semanas_Actual";
+            this.Semanas_Actual.ReadOnly = true;
+            this.Semanas_Actual.Width = 80;
+            // 
+            // Semanas_Anterior
+            // 
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "C2";
+            this.Semanas_Anterior.DefaultCellStyle = dataGridViewCellStyle20;
+            this.Semanas_Anterior.HeaderText = "Anterior";
+            this.Semanas_Anterior.Name = "Semanas_Anterior";
+            this.Semanas_Anterior.ReadOnly = true;
+            this.Semanas_Anterior.Width = 80;
+            // 
+            // Semanas_Resultado
+            // 
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Format = "N2";
+            this.Semanas_Resultado.DefaultCellStyle = dataGridViewCellStyle21;
+            this.Semanas_Resultado.HeaderText = "R°";
+            this.Semanas_Resultado.Name = "Semanas_Resultado";
+            this.Semanas_Resultado.ReadOnly = true;
+            this.Semanas_Resultado.Width = 40;
+            // 
+            // Semanas_Porcentaje
+            // 
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle22.Format = "N2";
+            this.Semanas_Porcentaje.DefaultCellStyle = dataGridViewCellStyle22;
+            this.Semanas_Porcentaje.HeaderText = "%";
+            this.Semanas_Porcentaje.Name = "Semanas_Porcentaje";
+            this.Semanas_Porcentaje.ReadOnly = true;
+            this.Semanas_Porcentaje.Width = 40;
             // 
             // chrMeses
             // 
@@ -636,7 +693,7 @@
             this.chrMeses.Series.Add(series1);
             this.chrMeses.Series.Add(series2);
             this.chrMeses.Size = new System.Drawing.Size(400, 120);
-            this.chrMeses.TabIndex = 17;
+            this.chrMeses.TabIndex = 20;
             this.chrMeses.Text = "chart1";
             title1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
@@ -714,7 +771,7 @@
             this.chrSemanas.Series.Add(series3);
             this.chrSemanas.Series.Add(series4);
             this.chrSemanas.Size = new System.Drawing.Size(520, 120);
-            this.chrSemanas.TabIndex = 16;
+            this.chrSemanas.TabIndex = 19;
             this.chrSemanas.Text = "chart1";
             title2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
@@ -766,7 +823,7 @@
             this.dgvVendedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVendedor.ShowEditingIcon = false;
             this.dgvVendedor.Size = new System.Drawing.Size(500, 125);
-            this.dgvVendedor.TabIndex = 15;
+            this.dgvVendedor.TabIndex = 18;
             this.dgvVendedor.CurrentCellChanged += new System.EventHandler(this.dgvVendedor_CurrentCellChanged);
             // 
             // Vendedor_Id
@@ -864,8 +921,62 @@
             this.dgvSucursal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSucursal.ShowEditingIcon = false;
             this.dgvSucursal.Size = new System.Drawing.Size(303, 108);
-            this.dgvSucursal.TabIndex = 13;
+            this.dgvSucursal.TabIndex = 16;
             this.dgvSucursal.CurrentCellChanged += new System.EventHandler(this.dgvSucursal_CurrentCellChanged);
+            // 
+            // Sucursal_Id
+            // 
+            this.Sucursal_Id.HeaderText = "Id";
+            this.Sucursal_Id.Name = "Sucursal_Id";
+            this.Sucursal_Id.ReadOnly = true;
+            this.Sucursal_Id.Visible = false;
+            // 
+            // Sucursal_Sucursal
+            // 
+            this.Sucursal_Sucursal.HeaderText = "Suc.";
+            this.Sucursal_Sucursal.Name = "Sucursal_Sucursal";
+            this.Sucursal_Sucursal.ReadOnly = true;
+            this.Sucursal_Sucursal.Width = 50;
+            // 
+            // Sucursal_Actual
+            // 
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle31.Format = "C2";
+            this.Sucursal_Actual.DefaultCellStyle = dataGridViewCellStyle31;
+            this.Sucursal_Actual.HeaderText = "Actual";
+            this.Sucursal_Actual.Name = "Sucursal_Actual";
+            this.Sucursal_Actual.ReadOnly = true;
+            this.Sucursal_Actual.Width = 80;
+            // 
+            // Sucursal_Anterior
+            // 
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle32.Format = "C2";
+            this.Sucursal_Anterior.DefaultCellStyle = dataGridViewCellStyle32;
+            this.Sucursal_Anterior.HeaderText = "Anterior";
+            this.Sucursal_Anterior.Name = "Sucursal_Anterior";
+            this.Sucursal_Anterior.ReadOnly = true;
+            this.Sucursal_Anterior.Width = 80;
+            // 
+            // Sucursal_Resultado
+            // 
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle33.Format = "N2";
+            this.Sucursal_Resultado.DefaultCellStyle = dataGridViewCellStyle33;
+            this.Sucursal_Resultado.HeaderText = "R°";
+            this.Sucursal_Resultado.Name = "Sucursal_Resultado";
+            this.Sucursal_Resultado.ReadOnly = true;
+            this.Sucursal_Resultado.Width = 40;
+            // 
+            // Sucursal_Porcentaje
+            // 
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle34.Format = "N2";
+            this.Sucursal_Porcentaje.DefaultCellStyle = dataGridViewCellStyle34;
+            this.Sucursal_Porcentaje.HeaderText = "%";
+            this.Sucursal_Porcentaje.Name = "Sucursal_Porcentaje";
+            this.Sucursal_Porcentaje.ReadOnly = true;
+            this.Sucursal_Porcentaje.Width = 40;
             // 
             // dgvPartes
             // 
@@ -907,7 +1018,7 @@
             this.dgvPartes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPartes.ShowEditingIcon = false;
             this.dgvPartes.Size = new System.Drawing.Size(611, 286);
-            this.dgvPartes.TabIndex = 18;
+            this.dgvPartes.TabIndex = 21;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -997,7 +1108,7 @@
             this.dgvPrincipalTotales.RowHeadersVisible = false;
             this.dgvPrincipalTotales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPrincipalTotales.Size = new System.Drawing.Size(500, 24);
-            this.dgvPrincipalTotales.TabIndex = 10;
+            this.dgvPrincipalTotales.TabIndex = 13;
             // 
             // PrincipalT_Nombre
             // 
@@ -1055,7 +1166,7 @@
             this.chkCostoConDescuento.Location = new System.Drawing.Point(546, 28);
             this.chkCostoConDescuento.Name = "chkCostoConDescuento";
             this.chkCostoConDescuento.Size = new System.Drawing.Size(127, 17);
-            this.chkCostoConDescuento.TabIndex = 5;
+            this.chkCostoConDescuento.TabIndex = 6;
             this.chkCostoConDescuento.Text = "Costo con descuento";
             this.chkCostoConDescuento.UseVisualStyleBackColor = true;
             this.chkCostoConDescuento.Visible = false;
@@ -1068,7 +1179,7 @@
             this.chkOmitirDomingos.Location = new System.Drawing.Point(438, 28);
             this.chkOmitirDomingos.Name = "chkOmitirDomingos";
             this.chkOmitirDomingos.Size = new System.Drawing.Size(102, 17);
-            this.chkOmitirDomingos.TabIndex = 4;
+            this.chkOmitirDomingos.TabIndex = 5;
             this.chkOmitirDomingos.Text = "Omitir Domingos";
             this.chkOmitirDomingos.UseVisualStyleBackColor = true;
             this.chkOmitirDomingos.CheckedChanged += new System.EventHandler(this.chkOmitirDomingos_CheckedChanged);
@@ -1093,7 +1204,7 @@
             this.txtBusqueda.PasarEnfoqueConEnter = true;
             this.txtBusqueda.SeleccionarTextoAlEnfoque = false;
             this.txtBusqueda.Size = new System.Drawing.Size(500, 20);
-            this.txtBusqueda.TabIndex = 8;
+            this.txtBusqueda.TabIndex = 11;
             this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
             // 
             // btnMostrar
@@ -1101,7 +1212,7 @@
             this.btnMostrar.Location = new System.Drawing.Point(854, 3);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(75, 23);
-            this.btnMostrar.TabIndex = 0;
+            this.btnMostrar.TabIndex = 9;
             this.btnMostrar.Text = "Mostrar";
             this.btnMostrar.UseVisualStyleBackColor = true;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
@@ -1125,119 +1236,41 @@
             this.lblCalculo.TabIndex = 183;
             this.lblCalculo.Text = "Cálculo";
             // 
-            // Semanas_Id
+            // nudDecimales
             // 
-            this.Semanas_Id.HeaderText = "Id";
-            this.Semanas_Id.Name = "Semanas_Id";
-            this.Semanas_Id.ReadOnly = true;
-            this.Semanas_Id.Visible = false;
+            this.nudDecimales.Location = new System.Drawing.Point(738, 4);
+            this.nudDecimales.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudDecimales.Name = "nudDecimales";
+            this.nudDecimales.Size = new System.Drawing.Size(40, 20);
+            this.nudDecimales.TabIndex = 10;
+            this.nudDecimales.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudDecimales.ValueChanged += new System.EventHandler(this.nudDecimales_ValueChanged);
             // 
-            // Semanas_Semana
+            // label9
             // 
-            this.Semanas_Semana.HeaderText = "Sem.";
-            this.Semanas_Semana.Name = "Semanas_Semana";
-            this.Semanas_Semana.ReadOnly = true;
-            this.Semanas_Semana.Width = 40;
-            // 
-            // Semanas_Actual
-            // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "C2";
-            this.Semanas_Actual.DefaultCellStyle = dataGridViewCellStyle19;
-            this.Semanas_Actual.HeaderText = "Actual";
-            this.Semanas_Actual.Name = "Semanas_Actual";
-            this.Semanas_Actual.ReadOnly = true;
-            this.Semanas_Actual.Width = 80;
-            // 
-            // Semanas_Anterior
-            // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.Format = "C2";
-            this.Semanas_Anterior.DefaultCellStyle = dataGridViewCellStyle20;
-            this.Semanas_Anterior.HeaderText = "Anterior";
-            this.Semanas_Anterior.Name = "Semanas_Anterior";
-            this.Semanas_Anterior.ReadOnly = true;
-            this.Semanas_Anterior.Width = 80;
-            // 
-            // Semanas_Resultado
-            // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle21.Format = "N2";
-            this.Semanas_Resultado.DefaultCellStyle = dataGridViewCellStyle21;
-            this.Semanas_Resultado.HeaderText = "R°";
-            this.Semanas_Resultado.Name = "Semanas_Resultado";
-            this.Semanas_Resultado.ReadOnly = true;
-            this.Semanas_Resultado.Width = 40;
-            // 
-            // Semanas_Porcentaje
-            // 
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle22.Format = "N2";
-            this.Semanas_Porcentaje.DefaultCellStyle = dataGridViewCellStyle22;
-            this.Semanas_Porcentaje.HeaderText = "%";
-            this.Semanas_Porcentaje.Name = "Semanas_Porcentaje";
-            this.Semanas_Porcentaje.ReadOnly = true;
-            this.Semanas_Porcentaje.Width = 40;
-            // 
-            // Sucursal_Id
-            // 
-            this.Sucursal_Id.HeaderText = "Id";
-            this.Sucursal_Id.Name = "Sucursal_Id";
-            this.Sucursal_Id.ReadOnly = true;
-            this.Sucursal_Id.Visible = false;
-            // 
-            // Sucursal_Sucursal
-            // 
-            this.Sucursal_Sucursal.HeaderText = "Suc.";
-            this.Sucursal_Sucursal.Name = "Sucursal_Sucursal";
-            this.Sucursal_Sucursal.ReadOnly = true;
-            this.Sucursal_Sucursal.Width = 50;
-            // 
-            // Sucursal_Actual
-            // 
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle31.Format = "C2";
-            this.Sucursal_Actual.DefaultCellStyle = dataGridViewCellStyle31;
-            this.Sucursal_Actual.HeaderText = "Actual";
-            this.Sucursal_Actual.Name = "Sucursal_Actual";
-            this.Sucursal_Actual.ReadOnly = true;
-            this.Sucursal_Actual.Width = 80;
-            // 
-            // Sucursal_Anterior
-            // 
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle32.Format = "C2";
-            this.Sucursal_Anterior.DefaultCellStyle = dataGridViewCellStyle32;
-            this.Sucursal_Anterior.HeaderText = "Anterior";
-            this.Sucursal_Anterior.Name = "Sucursal_Anterior";
-            this.Sucursal_Anterior.ReadOnly = true;
-            this.Sucursal_Anterior.Width = 80;
-            // 
-            // Sucursal_Resultado
-            // 
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle33.Format = "N2";
-            this.Sucursal_Resultado.DefaultCellStyle = dataGridViewCellStyle33;
-            this.Sucursal_Resultado.HeaderText = "R°";
-            this.Sucursal_Resultado.Name = "Sucursal_Resultado";
-            this.Sucursal_Resultado.ReadOnly = true;
-            this.Sucursal_Resultado.Width = 40;
-            // 
-            // Sucursal_Porcentaje
-            // 
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle34.Format = "N2";
-            this.Sucursal_Porcentaje.DefaultCellStyle = dataGridViewCellStyle34;
-            this.Sucursal_Porcentaje.HeaderText = "%";
-            this.Sucursal_Porcentaje.Name = "Sucursal_Porcentaje";
-            this.Sucursal_Porcentaje.ReadOnly = true;
-            this.Sucursal_Porcentaje.Width = 40;
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(676, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 13);
+            this.label9.TabIndex = 184;
+            this.label9.Text = "Decimales";
             // 
             // CuadroMultiple
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.nudDecimales);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.cmbCalculo);
             this.Controls.Add(this.lblCalculo);
             this.Controls.Add(this.btnMostrar);
@@ -1275,6 +1308,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipalTotales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1353,6 +1387,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal_Anterior;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal_Resultado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal_Porcentaje;
+        private System.Windows.Forms.NumericUpDown nudDecimales;
+        private System.Windows.Forms.Label label9;
 
     }
 }

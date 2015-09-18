@@ -174,6 +174,7 @@ namespace Refaccionaria.App
             if (this.ctlCobro.ComisionistaID > 0)
                 o9500.ComisionistaClienteID = this.ctlCobro.ComisionistaID;
             // Se genera el detalle del 9500
+            var oParteGanancia = this.ctlPartes.ObtenerParteGanancia(null);
             var o9500Detalle = new List<Cotizacion9500Detalle>();
             foreach (var Parte9500 in this.ctlPartes.Detalle)
             {
@@ -197,22 +198,21 @@ namespace Refaccionaria.App
                     
                     // Se agregan los precios
                     PartePrecio oPartePrecio = null;
-                    if (this.ctlPartes.oProveedorGanancia != null)
+                    if (oParteGanancia != null)
                     {
-                        var oProvGan = this.ctlPartes.oProveedorGanancia;
                         oPartePrecio = new PartePrecio()
                         {
                             Costo = Parte9500.Value.Costo,
-                            PorcentajeUtilidadUno = oProvGan.PCT1,
-                            PorcentajeUtilidadDos = oProvGan.PCT2,
-                            PorcentajeUtilidadTres = oProvGan.PCT3,
-                            PorcentajeUtilidadCuatro = oProvGan.PCT4,
-                            PorcentajeUtilidadCinco = oProvGan.PCT5,
-                            PrecioUno = Helper.AplicarRedondeo(Parte9500.Value.Costo * oProvGan.PCT1.Valor()),
-                            PrecioDos = Helper.AplicarRedondeo(Parte9500.Value.Costo * oProvGan.PCT2.Valor()),
-                            PrecioTres = Helper.AplicarRedondeo(Parte9500.Value.Costo * oProvGan.PCT3.Valor()),
-                            PrecioCuatro = Helper.AplicarRedondeo(Parte9500.Value.Costo * oProvGan.PCT4.Valor()),
-                            PrecioCinco = Helper.AplicarRedondeo(Parte9500.Value.Costo * oProvGan.PCT5.Valor())
+                            PorcentajeUtilidadUno = oParteGanancia.PorcentajeDeGanancia1,
+                            PorcentajeUtilidadDos = oParteGanancia.PorcentajeDeGanancia2,
+                            PorcentajeUtilidadTres = oParteGanancia.PorcentajeDeGanancia3,
+                            PorcentajeUtilidadCuatro = oParteGanancia.PorcentajeDeGanancia4,
+                            PorcentajeUtilidadCinco = oParteGanancia.PorcentajeDeGanancia5,
+                            PrecioUno = Helper.AplicarRedondeo(Parte9500.Value.Costo * oParteGanancia.PorcentajeDeGanancia1),
+                            PrecioDos = Helper.AplicarRedondeo(Parte9500.Value.Costo * oParteGanancia.PorcentajeDeGanancia2),
+                            PrecioTres = Helper.AplicarRedondeo(Parte9500.Value.Costo * oParteGanancia.PorcentajeDeGanancia3),
+                            PrecioCuatro = Helper.AplicarRedondeo(Parte9500.Value.Costo * oParteGanancia.PorcentajeDeGanancia4),
+                            PrecioCinco = Helper.AplicarRedondeo(Parte9500.Value.Costo * oParteGanancia.PorcentajeDeGanancia5)
                         };
                     }
 

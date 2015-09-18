@@ -40,6 +40,8 @@ namespace Refaccionaria.App
         {
             this.LimpiarDatosExtra();
             //int iSucursalID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue);
+            
+            if (iParteID <= 0) return;
 
             // Se obtiene los datos de Abc
             var oParteAbc = General.GetEntity<ParteAbc>(q => q.ParteID == iParteID);

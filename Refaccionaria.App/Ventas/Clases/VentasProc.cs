@@ -1126,6 +1126,7 @@ namespace Refaccionaria.App
                 return new ResAcc<int>(false, ResRec.Mensaje);
 
             // Se llenan los conceptos de la factura
+            decimal mUnitarioTotal = 0, mIvaTotal = 0;
             oFacturaE.Conceptos = new List<Concepto>();
             if (oListaVenta == null)
             {
@@ -1144,6 +1145,9 @@ namespace Refaccionaria.App
                             ValorUnitario = oConcepto.PrecioUnitario,
                             Iva = oConcepto.Iva
                         });
+
+                        mUnitarioTotal += oConcepto.PrecioUnitario;
+                        mIvaTotal += oConcepto.Iva;
                     }
                 }
             }
@@ -1160,6 +1164,9 @@ namespace Refaccionaria.App
                         ValorUnitario = oConcepto.PrecioUnitario,
                         Iva = oConcepto.Iva
                     });
+
+                    mUnitarioTotal += oConcepto.PrecioUnitario;
+                    mIvaTotal += oConcepto.Iva;
                 }
             }
 
@@ -1182,7 +1189,9 @@ namespace Refaccionaria.App
                 Serie = oFacturaE.Serie,
                 Folio = oFacturaE.Folio,
                 ClienteID = iClienteID,
-                Observacion = sObservacion
+                Observacion = sObservacion,
+                Subtotal = mUnitarioTotal,
+                Iva = mIvaTotal
             };
             var oVentaFacturaD = new List<VentaFacturaDetalle>();
             foreach (var oVentaFac in oVentas)
@@ -1592,6 +1601,7 @@ namespace Refaccionaria.App
                 return new ResAcc<int>(false, ResRec.Mensaje);
 
             // Se llenan los conceptos de la factura
+            decimal mUnitarioTotal = 0, mIvaTotal = 0;
             oFacturaE.Conceptos = new List<Concepto>();
             foreach (var oDet in oDetalle)
             {
@@ -1604,6 +1614,9 @@ namespace Refaccionaria.App
                     ValorUnitario = oDet.PrecioUnitario,
                     Iva = oDet.Iva
                 });
+
+                mUnitarioTotal += oDet.PrecioUnitario;
+                mIvaTotal += oDet.Iva;
             }
 
             // Se comienza a procesar la facturación electrónica
@@ -1630,7 +1643,9 @@ namespace Refaccionaria.App
                 Folio = oFacturaE.Folio,
                 EsCancelacion = false,
                 Procesada = bFacturada,
-                FechaProcesada = (bFacturada ? ((DateTime?)dAhora) : null)
+                FechaProcesada = (bFacturada ? ((DateTime?)dAhora) : null),
+                Subtotal = mUnitarioTotal,
+                Iva = mIvaTotal
             };
             var oFacturaDevDet = new List<VentaFacturaDevolucionDetalle>();
             var oRegFacDevDet = new VentaFacturaDevolucionDetalle();

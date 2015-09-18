@@ -234,7 +234,7 @@ namespace Refaccionaria.App
                         mTickets += oMov.Tickets.Valor();
                         mFacturas += oMov.Facturas.Valor();
 
-                        if (oMov.Orden == 12)
+                        if (oMov.Orden == 12 || oMov.Orden == 14)
                         {
                             this.dgvDetalle["Contenido", iFila].Value += " [-]";
                             this.dgvDetalle["Totales", iFila].Value = ("$" + oMov.Total.Valor().ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(12));
@@ -267,6 +267,7 @@ namespace Refaccionaria.App
                         this.Total -= oMov.Total.Valor();
                         break;
                     case 17:
+                    case 18:
                         this.AgregarLineaDetalle(
                             oMov.Pendientes.Valor()
                             , oMov.Concepto.RellenarCortarDerecha(20)

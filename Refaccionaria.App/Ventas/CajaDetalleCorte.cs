@@ -126,7 +126,7 @@ namespace Refaccionaria.App
                 + "Nombre del Cliente".PadRight(22 + 1)
                 + "Forma Pago".PadRight(19 + 1)
                 + "Usuario".PadRight(10 + 1)
-                + "Caract.".PadRight(7 + 1)
+                + "Caract.".PadRight(10 + 1)
                 + "Importe".PadRight(10)
             );
             int iUltOrden = 0;
@@ -149,7 +149,7 @@ namespace Refaccionaria.App
                         + " " + oPago.Cliente.RellenarCortarDerecha(22)
                         + " " + oPago.FormaDePago.RellenarCortarDerecha(19)
                         + " " + oPago.Usuario.RellenarCortarDerecha(10)
-                        + " " + oPago.Caracteristica.RellenarCortarDerecha(7)
+                        + " " + oPago.Caracteristica.RellenarCortarDerecha(10)
                         + " $" + oPago.Importe.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
                     , true
                     , (oPago.FechaVistoBueno == null ? "" : oPago.FechaVistoBueno.Valor().ToString(CajaDetalleCorte.FormatoHora))
@@ -164,7 +164,7 @@ namespace Refaccionaria.App
                     this.dgvDetalle["Caracteristica", iFila].Value = "D";
                 }
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
             #endregion
 
             #region [ Devoluciones ]
@@ -177,7 +177,7 @@ namespace Refaccionaria.App
             this.AgregarLineaEncabezado(
                 "Folio".PadRight(8 + 1)
                 + "Tipo".PadRight(8 + 1)
-                + "Cliente".PadRight(20 + 1)
+                + "Cliente".PadRight(23 + 1)
                 + "Salida".PadRight(15 + 1)
                 + "Autorización".PadRight(15 + 1)
                 + "Importe".PadRight(10)
@@ -187,7 +187,7 @@ namespace Refaccionaria.App
                 iFila = this.AgregarLineaDetalle(
                     Helper.ConvertirCadena(oMov.Folio).RellenarCortarDerecha(8)
                         + " " + oMov.Tipo.RellenarCortarDerecha(8)
-                        + " " + oMov.Cliente.RellenarCortarDerecha(20)
+                        + " " + oMov.Cliente.RellenarCortarDerecha(23)
                         + " " + oMov.Salida.RellenarCortarDerecha(15)
                         + " " + oMov.Autorizacion.RellenarCortarDerecha(15)
                         + " $" + oMov.Importe.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
@@ -201,7 +201,7 @@ namespace Refaccionaria.App
                 if (oMov.Autorizacion.EndsWith("> "))
                     this.dgvDetalle.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
 
             // Se llenan las devoluciones - días anteriores
             mTotal = 0;
@@ -213,7 +213,7 @@ namespace Refaccionaria.App
             this.AgregarLineaEncabezado(
                 "Folio".PadRight(8 + 1)
                 + "Tipo".PadRight(8 + 1)
-                + "Cliente".PadRight(20 + 1)
+                + "Cliente".PadRight(23 + 1)
                 + "Salida".PadRight(15 + 1)
                 + "Autorización".PadRight(15 + 1)
                 + "Importe".PadRight(10)
@@ -223,7 +223,7 @@ namespace Refaccionaria.App
                 iFila = this.AgregarLineaDetalle(
                     Helper.ConvertirCadena(oMov.Folio).RellenarCortarDerecha(8)
                         + " " + oMov.Tipo.RellenarCortarDerecha(8)
-                        + " " + oMov.Cliente.RellenarCortarDerecha(20)
+                        + " " + oMov.Cliente.RellenarCortarDerecha(23)
                         + " " + oMov.Salida.RellenarCortarDerecha(15)
                         + " " + oMov.Autorizacion.RellenarCortarDerecha(15)
                         + " $" + oMov.Importe.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
@@ -237,7 +237,7 @@ namespace Refaccionaria.App
                 if (oMov.Autorizacion.EndsWith("> "))
                     this.dgvDetalle.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
             #endregion
 
             #region [ Garantías ]
@@ -250,7 +250,7 @@ namespace Refaccionaria.App
             this.AgregarLineaTitulo("Garantías del día");
             this.AgregarLineaEncabezado(
                 "Folio".PadRight(8 + 1)
-                + "Cliente".PadRight(20 + 1)
+                + "Cliente".PadRight(23 + 1)
                 + "Salida".PadRight(15 + 1)
                 + "Autorización".PadRight(15 + 9 + 1)
                 + "Importe".PadRight(10)
@@ -259,7 +259,7 @@ namespace Refaccionaria.App
             {
                 iFila = this.AgregarLineaDetalle(
                     Helper.ConvertirCadena(oMov.Folio).RellenarCortarDerecha(8)
-                        + " " + oMov.Cliente.RellenarCortarDerecha(20)
+                        + " " + oMov.Cliente.RellenarCortarDerecha(23)
                         + " " + oMov.Salida.RellenarCortarDerecha(15)
                         + " " + oMov.Autorizacion.RellenarCortarDerecha(15 + 9)
                         + " $" + oMov.Importe.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
@@ -273,7 +273,7 @@ namespace Refaccionaria.App
                 if (oMov.Autorizacion.EndsWith("> "))
                     this.dgvDetalle.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
 
             // Se llenan las Garantías - días anteriores
             mTotal = 0;
@@ -284,7 +284,7 @@ namespace Refaccionaria.App
             this.AgregarLineaTitulo("Garantías de días anteriores");
             this.AgregarLineaEncabezado(
                 "Folio".PadRight(8 + 1)
-                + "Cliente".PadRight(20 + 1)
+                + "Cliente".PadRight(23 + 1)
                 + "Salida".PadRight(15 + 1)
                 + "Autorización".PadRight(15 + 9 + 1)
                 + "Importe".PadRight(10)
@@ -293,7 +293,7 @@ namespace Refaccionaria.App
             {
                 iFila = this.AgregarLineaDetalle(
                     Helper.ConvertirCadena(oMov.Folio).RellenarCortarDerecha(8)
-                        + " " + oMov.Cliente.RellenarCortarDerecha(20)
+                        + " " + oMov.Cliente.RellenarCortarDerecha(23)
                         + " " + oMov.Salida.RellenarCortarDerecha(15)
                         + " " + oMov.Autorizacion.RellenarCortarDerecha(15 + 9)
                         + " $" + oMov.Importe.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
@@ -307,7 +307,7 @@ namespace Refaccionaria.App
                 if (oMov.Autorizacion.EndsWith("> "))
                     this.dgvDetalle.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
             #endregion
 
             #region [ 9500 ]
@@ -319,14 +319,14 @@ namespace Refaccionaria.App
             this.AgregarLineaTitulo("9500");
             this.AgregarLineaEncabezado(
                 "Folio".PadRight(8 + 1)
-                + "Cliente".PadRight(61 + 1)
+                + "Cliente".PadRight(64 + 1)
                 + "Importe".PadRight(10)
             );
             foreach (var oMov in Ventas9500)
             {
                 this.AgregarLineaDetalle(
                     Helper.ConvertirCadena(oMov.Folio).RellenarCortarDerecha(8)
-                        + " " + oMov.Cliente.RellenarCortarDerecha(61)
+                        + " " + oMov.Cliente.RellenarCortarDerecha(64)
                         + " $" + oMov.Anticipo.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
                     , true
                     , (oMov.FechaVistoBueno == null ? "" : oMov.FechaVistoBueno.Valor().ToString(CajaDetalleCorte.FormatoHora))
@@ -335,7 +335,7 @@ namespace Refaccionaria.App
                 );
                 mTotal += oMov.Anticipo;
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
             #endregion
 
             #region [ Cobranza ]
@@ -347,7 +347,7 @@ namespace Refaccionaria.App
             this.AgregarLineaTitulo("Cobranza");
             this.AgregarLineaEncabezado(
                 "Folio".PadRight(8 + 1)
-                + "Nombre del Cliente".PadRight(41 + 1)
+                + "Nombre del Cliente".PadRight(44 + 1)
                 + "Forma Pago".PadRight(19 + 1)
                 + "Importe".PadRight(10)
             );
@@ -355,7 +355,7 @@ namespace Refaccionaria.App
             {
                 this.AgregarLineaDetalle(
                     Helper.ConvertirCadena(oMov.Folio).RellenarCortarDerecha(8)
-                        + " " + oMov.Cliente.RellenarCortarDerecha(41)
+                        + " " + oMov.Cliente.RellenarCortarDerecha(44)
                         + " " + oMov.FormaDePago.RellenarCortarDerecha(19)
                         + " $" + oMov.Importe.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
                     , true
@@ -365,7 +365,7 @@ namespace Refaccionaria.App
                 );
                 mTotal += oMov.Importe;
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
             #endregion
 
             #region [ Gastos ]
@@ -376,14 +376,14 @@ namespace Refaccionaria.App
             var Egresos = General.ExecuteProcedure<cdcIngresosEgresos>("pauCajaDetalleCorte", oParams);
             this.AgregarLineaTitulo("Gastos");
             this.AgregarLineaEncabezado(
-                "Concepto".PadRight(45 + 1)
+                "Concepto".PadRight(48 + 1)
                 + "Autorización".PadRight(24 + 1)
                 + "Importe".PadRight(10)
             );
             foreach (var oMov in Egresos)
             {
                 iFila = this.AgregarLineaDetalle(
-                    oMov.Concepto.RellenarCortarDerecha(45)
+                    oMov.Concepto.RellenarCortarDerecha(48)
                         + " " + oMov.Autorizacion.RellenarCortarDerecha(23)
                         + " $" + oMov.Importe.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
                     , true
@@ -396,7 +396,7 @@ namespace Refaccionaria.App
                 if (oMov.Autorizacion.EndsWith("> "))
                     this.dgvDetalle.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
             #endregion
 
             #region [ Ingresos ]
@@ -407,14 +407,14 @@ namespace Refaccionaria.App
             var Ingresos = General.ExecuteProcedure<cdcIngresosEgresos>("pauCajaDetalleCorte", oParams);
             this.AgregarLineaTitulo("Otros Ingresos");
             this.AgregarLineaEncabezado(
-                "Concepto".PadRight(45 + 1)
+                "Concepto".PadRight(48 + 1)
                 + "Autorización".PadRight(24 + 1)
                 + "Importe".PadRight(10)
             );
             foreach (var oMov in Ingresos)
             {
                 iFila = this.AgregarLineaDetalle(
-                    oMov.Concepto.RellenarCortarDerecha(45)
+                    oMov.Concepto.RellenarCortarDerecha(48)
                         + " " + oMov.Autorizacion.RellenarCortarDerecha(23)
                         + " $" + oMov.Importe.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9)
                     , true
@@ -427,7 +427,7 @@ namespace Refaccionaria.App
                 if (oMov.Autorizacion.EndsWith("> "))
                     this.dgvDetalle.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
             }
-            this.AgregarLineaEncabezado("Total".PadLeft(70) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
+            this.AgregarLineaEncabezado("Total".PadLeft(73) + " $" + mTotal.ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(9));
             #endregion
 
             this.Actualizando = false;

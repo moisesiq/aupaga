@@ -88,6 +88,20 @@ namespace Refaccionaria.App
             //     this.CargarDatos();
         }
 
+        private void nudDecimales_ValueChanged(object sender, EventArgs e)
+        {
+            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
+            sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
+            this.dgvSemana.Columns["Semana_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvSemana.Columns["Semana_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvSemanaT.Columns["SemanaT_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvSemanaT.Columns["SemanaT_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedor.Columns["Vendedor_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedor.Columns["Vendedor_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedorT.Columns["VendedorT_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedorT.Columns["VendedorT_Anterior"].DefaultCellStyle.Format = sFormato;
+        }
+
         private void btnMostrar_Click(object sender, EventArgs e)
         {
             this.CargarDatos();
@@ -526,6 +540,6 @@ namespace Refaccionaria.App
         }
 
         #endregion
-                                                               
+                                                       
     }
 }

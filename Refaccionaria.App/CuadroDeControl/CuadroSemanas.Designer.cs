@@ -108,12 +108,15 @@
             this.btnMostrar = new System.Windows.Forms.Button();
             this.cmbCalculo = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.nudDecimales = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendedor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chrSemana)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSemana)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSemanaT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendedorT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendedorSem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).BeginInit();
             this.SuspendLayout();
             // 
             // chkCostoConDescuento
@@ -123,7 +126,7 @@
             this.chkCostoConDescuento.Location = new System.Drawing.Point(699, 10);
             this.chkCostoConDescuento.Name = "chkCostoConDescuento";
             this.chkCostoConDescuento.Size = new System.Drawing.Size(127, 17);
-            this.chkCostoConDescuento.TabIndex = 179;
+            this.chkCostoConDescuento.TabIndex = 6;
             this.chkCostoConDescuento.Text = "Costo con descuento";
             this.chkCostoConDescuento.UseVisualStyleBackColor = true;
             this.chkCostoConDescuento.Visible = false;
@@ -136,7 +139,7 @@
             this.chkOmitirDomingos.Location = new System.Drawing.Point(591, 10);
             this.chkOmitirDomingos.Name = "chkOmitirDomingos";
             this.chkOmitirDomingos.Size = new System.Drawing.Size(102, 17);
-            this.chkOmitirDomingos.TabIndex = 178;
+            this.chkOmitirDomingos.TabIndex = 5;
             this.chkOmitirDomingos.Text = "Omitir Domingos";
             this.chkOmitirDomingos.UseVisualStyleBackColor = true;
             this.chkOmitirDomingos.CheckedChanged += new System.EventHandler(this.chkOmitirDomingos_CheckedChanged);
@@ -148,7 +151,7 @@
             this.chk9500.Location = new System.Drawing.Point(511, 10);
             this.chk9500.Name = "chk9500";
             this.chk9500.Size = new System.Drawing.Size(74, 17);
-            this.chk9500.TabIndex = 177;
+            this.chk9500.TabIndex = 4;
             this.chk9500.Text = "Sólo 9500";
             this.chk9500.UseVisualStyleBackColor = true;
             this.chk9500.CheckedChanged += new System.EventHandler(this.chk9500_CheckedChanged);
@@ -156,19 +159,19 @@
             // dtpHasta
             // 
             this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHasta.Location = new System.Drawing.Point(961, 10);
+            this.dtpHasta.Location = new System.Drawing.Point(1069, 10);
             this.dtpHasta.Name = "dtpHasta";
             this.dtpHasta.Size = new System.Drawing.Size(123, 20);
-            this.dtpHasta.TabIndex = 181;
+            this.dtpHasta.TabIndex = 9;
             this.dtpHasta.ValueChanged += new System.EventHandler(this.dtpHasta_ValueChanged);
             // 
             // dtpDesde
             // 
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDesde.Location = new System.Drawing.Point(832, 9);
+            this.dtpDesde.Location = new System.Drawing.Point(940, 9);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(123, 20);
-            this.dtpDesde.TabIndex = 180;
+            this.dtpDesde.TabIndex = 8;
             this.dtpDesde.ValueChanged += new System.EventHandler(this.dtpDesde_ValueChanged);
             // 
             // chkCobradas
@@ -178,7 +181,7 @@
             this.chkCobradas.Location = new System.Drawing.Point(434, 10);
             this.chkCobradas.Name = "chkCobradas";
             this.chkCobradas.Size = new System.Drawing.Size(71, 17);
-            this.chkCobradas.TabIndex = 176;
+            this.chkCobradas.TabIndex = 3;
             this.chkCobradas.Text = "Cobradas";
             this.chkCobradas.UseVisualStyleBackColor = true;
             this.chkCobradas.CheckedChanged += new System.EventHandler(this.chkCobradas_CheckedChanged);
@@ -190,7 +193,7 @@
             this.chkPagadas.Location = new System.Drawing.Point(360, 10);
             this.chkPagadas.Name = "chkPagadas";
             this.chkPagadas.Size = new System.Drawing.Size(68, 17);
-            this.chkPagadas.TabIndex = 175;
+            this.chkPagadas.TabIndex = 2;
             this.chkPagadas.Text = "Pagadas";
             this.chkPagadas.UseVisualStyleBackColor = true;
             this.chkPagadas.CheckedChanged += new System.EventHandler(this.chkPagadas_CheckedChanged);
@@ -202,7 +205,7 @@
             this.cmbSucursal.Location = new System.Drawing.Point(204, 8);
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(140, 21);
-            this.cmbSucursal.TabIndex = 174;
+            this.cmbSucursal.TabIndex = 1;
             this.cmbSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbSucursal_SelectedIndexChanged);
             // 
             // label1
@@ -256,7 +259,7 @@
             this.dgvVendedor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVendedor.ShowEditingIcon = false;
             this.dgvVendedor.Size = new System.Drawing.Size(500, 379);
-            this.dgvVendedor.TabIndex = 185;
+            this.dgvVendedor.TabIndex = 13;
             // 
             // Vendedor_Id
             // 
@@ -380,7 +383,7 @@
             this.chrSemana.Series.Add(series1);
             this.chrSemana.Series.Add(series2);
             this.chrSemana.Size = new System.Drawing.Size(723, 379);
-            this.chrSemana.TabIndex = 186;
+            this.chrSemana.TabIndex = 15;
             this.chrSemana.Text = "chart1";
             title1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
@@ -431,7 +434,7 @@
             this.dgvSemana.RowHeadersVisible = false;
             this.dgvSemana.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSemana.Size = new System.Drawing.Size(340, 380);
-            this.dgvSemana.TabIndex = 184;
+            this.dgvSemana.TabIndex = 11;
             this.dgvSemana.CurrentCellChanged += new System.EventHandler(this.dgvSemana_CurrentCellChanged);
             // 
             // Semana_Id
@@ -536,7 +539,7 @@
             this.dgvSemanaT.RowHeadersVisible = false;
             this.dgvSemanaT.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSemanaT.Size = new System.Drawing.Size(340, 24);
-            this.dgvSemanaT.TabIndex = 187;
+            this.dgvSemanaT.TabIndex = 12;
             // 
             // SemanaT_Nombre
             // 
@@ -635,7 +638,7 @@
             this.dgvVendedorT.RowHeadersVisible = false;
             this.dgvVendedorT.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVendedorT.Size = new System.Drawing.Size(500, 24);
-            this.dgvVendedorT.TabIndex = 188;
+            this.dgvVendedorT.TabIndex = 14;
             // 
             // VendedorT_Nombre
             // 
@@ -724,7 +727,7 @@
             this.dgvVendedorSem.RowHeadersVisible = false;
             this.dgvVendedorSem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVendedorSem.Size = new System.Drawing.Size(1560, 312);
-            this.dgvVendedorSem.TabIndex = 189;
+            this.dgvVendedorSem.TabIndex = 16;
             this.dgvVendedorSem.CurrentCellChanged += new System.EventHandler(this.dgvVendedorSem_CurrentCellChanged);
             // 
             // VendedorSem_Id
@@ -767,10 +770,10 @@
             // 
             // btnMostrar
             // 
-            this.btnMostrar.Location = new System.Drawing.Point(1100, 7);
+            this.btnMostrar.Location = new System.Drawing.Point(1208, 8);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(75, 23);
-            this.btnMostrar.TabIndex = 184;
+            this.btnMostrar.TabIndex = 10;
             this.btnMostrar.Text = "Mostrar";
             this.btnMostrar.UseVisualStyleBackColor = true;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
@@ -794,12 +797,42 @@
             this.label8.TabIndex = 191;
             this.label8.Text = "Cálculo";
             // 
+            // nudDecimales
+            // 
+            this.nudDecimales.Location = new System.Drawing.Point(894, 10);
+            this.nudDecimales.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudDecimales.Name = "nudDecimales";
+            this.nudDecimales.Size = new System.Drawing.Size(40, 20);
+            this.nudDecimales.TabIndex = 7;
+            this.nudDecimales.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudDecimales.ValueChanged += new System.EventHandler(this.nudDecimales_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(832, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 13);
+            this.label9.TabIndex = 193;
+            this.label9.Text = "Decimales";
+            // 
             // CuadroSemanas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.nudDecimales);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.cmbCalculo);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnMostrar);
@@ -827,6 +860,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSemanaT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendedorT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVendedorSem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -878,5 +912,7 @@
         private System.Windows.Forms.Button btnMostrar;
         protected System.Windows.Forms.ComboBox cmbCalculo;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown nudDecimales;
+        private System.Windows.Forms.Label label9;
     }
 }

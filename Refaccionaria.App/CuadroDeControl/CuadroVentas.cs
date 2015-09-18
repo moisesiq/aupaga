@@ -105,6 +105,26 @@ namespace Refaccionaria.App
             //     this.CargarDatos();
         }
 
+        private void nudDecimales_ValueChanged(object sender, EventArgs e)
+        {
+            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
+            sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
+            this.dgvPorDia.Columns["Dia_AnioActual"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorDia.Columns["Dia_AnioAnterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorDiaT.Columns["DiaT_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorDiaT.Columns["DiaT_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorSemana.Columns["Semana_AnioActual"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorSemana.Columns["Semana_AnioAnterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorSemanaT.Columns["SemanaT_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorSemanaT.Columns["SemanaT_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorMes.Columns["Mes_AnioActual"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorMes.Columns["Mes_AnioAnterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvDias.Columns["Dias_AnioActual"].DefaultCellStyle.Format = sFormato;
+            this.dgvDias.Columns["Dias_AnioAnterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvHoras.Columns["Horas_AnioActual"].DefaultCellStyle.Format = sFormato;
+            this.dgvHoras.Columns["Horas_AnioAnterior"].DefaultCellStyle.Format = sFormato;
+        }
+
         private void btnMostrar_Click(object sender, EventArgs e)
         {
             this.CargarDatos();

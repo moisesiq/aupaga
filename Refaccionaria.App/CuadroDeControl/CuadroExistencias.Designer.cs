@@ -56,6 +56,7 @@
             this.chkSoloConExistencia = new System.Windows.Forms.CheckBox();
             this.btnExcel = new System.Windows.Forms.Button();
             this.vmsExistencia = new Refaccionaria.App.VentasMesSemana();
+            this.cmbAgrupar = new Refaccionaria.Negocio.ComboEtiqueta();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,8 +106,8 @@
             this.dgvDatos.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(1090, 363);
-            this.dgvDatos.TabIndex = 6;
+            this.dgvDatos.Size = new System.Drawing.Size(1194, 363);
+            this.dgvDatos.TabIndex = 9;
             this.dgvDatos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellClick);
             // 
             // ParteID
@@ -190,10 +191,10 @@
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(943, 3);
+            this.btnActualizar.Location = new System.Drawing.Point(1041, 5);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
-            this.btnActualizar.TabIndex = 5;
+            this.btnActualizar.TabIndex = 7;
             this.btnActualizar.Text = "&Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
@@ -203,7 +204,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(780, 398);
+            this.label1.Location = new System.Drawing.Point(884, 398);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 2;
@@ -213,7 +214,7 @@
             // 
             this.lblExistenciaTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblExistenciaTotal.ForeColor = System.Drawing.Color.White;
-            this.lblExistenciaTotal.Location = new System.Drawing.Point(841, 398);
+            this.lblExistenciaTotal.Location = new System.Drawing.Point(945, 398);
             this.lblExistenciaTotal.Name = "lblExistenciaTotal";
             this.lblExistenciaTotal.Size = new System.Drawing.Size(80, 13);
             this.lblExistenciaTotal.TabIndex = 3;
@@ -224,7 +225,7 @@
             // 
             this.lblCostoTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCostoTotal.ForeColor = System.Drawing.Color.White;
-            this.lblCostoTotal.Location = new System.Drawing.Point(990, 398);
+            this.lblCostoTotal.Location = new System.Drawing.Point(1094, 398);
             this.lblCostoTotal.Name = "lblCostoTotal";
             this.lblCostoTotal.Size = new System.Drawing.Size(100, 13);
             this.lblCostoTotal.TabIndex = 5;
@@ -236,7 +237,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(927, 398);
+            this.label4.Location = new System.Drawing.Point(1031, 398);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 4;
@@ -306,10 +307,10 @@
             // 
             this.chkCostoConDescuento.AutoSize = true;
             this.chkCostoConDescuento.ForeColor = System.Drawing.Color.White;
-            this.chkCostoConDescuento.Location = new System.Drawing.Point(730, 7);
+            this.chkCostoConDescuento.Location = new System.Drawing.Point(828, 9);
             this.chkCostoConDescuento.Name = "chkCostoConDescuento";
             this.chkCostoConDescuento.Size = new System.Drawing.Size(105, 17);
-            this.chkCostoConDescuento.TabIndex = 4;
+            this.chkCostoConDescuento.TabIndex = 5;
             this.chkCostoConDescuento.Text = "Costo con Desc.";
             this.chkCostoConDescuento.UseVisualStyleBackColor = true;
             // 
@@ -337,16 +338,16 @@
             // 
             this.chkSoloConExistencia.AutoSize = true;
             this.chkSoloConExistencia.ForeColor = System.Drawing.Color.White;
-            this.chkSoloConExistencia.Location = new System.Drawing.Point(841, 7);
+            this.chkSoloConExistencia.Location = new System.Drawing.Point(939, 9);
             this.chkSoloConExistencia.Name = "chkSoloConExistencia";
             this.chkSoloConExistencia.Size = new System.Drawing.Size(96, 17);
-            this.chkSoloConExistencia.TabIndex = 7;
+            this.chkSoloConExistencia.TabIndex = 6;
             this.chkSoloConExistencia.Text = "Sólo con Exist.";
             this.chkSoloConExistencia.UseVisualStyleBackColor = true;
             // 
             // btnExcel
             // 
-            this.btnExcel.Location = new System.Drawing.Point(1024, 3);
+            this.btnExcel.Location = new System.Drawing.Point(1122, 5);
             this.btnExcel.Name = "btnExcel";
             this.btnExcel.Size = new System.Drawing.Size(75, 23);
             this.btnExcel.TabIndex = 8;
@@ -361,13 +362,34 @@
             this.vmsExistencia.Location = new System.Drawing.Point(0, 414);
             this.vmsExistencia.Name = "vmsExistencia";
             this.vmsExistencia.Size = new System.Drawing.Size(1280, 100);
-            this.vmsExistencia.TabIndex = 9;
+            this.vmsExistencia.TabIndex = 10;
+            // 
+            // cmbAgrupar
+            // 
+            this.cmbAgrupar.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbAgrupar.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbAgrupar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.cmbAgrupar.DataSource = null;
+            this.cmbAgrupar.DisplayMember = "";
+            this.cmbAgrupar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbAgrupar.Etiqueta = "Agrupar";
+            this.cmbAgrupar.EtiquetaColor = System.Drawing.Color.Gray;
+            this.cmbAgrupar.Location = new System.Drawing.Point(730, 5);
+            this.cmbAgrupar.Name = "cmbAgrupar";
+            this.cmbAgrupar.SelectedIndex = -1;
+            this.cmbAgrupar.SelectedItem = null;
+            this.cmbAgrupar.SelectedText = "";
+            this.cmbAgrupar.SelectedValue = null;
+            this.cmbAgrupar.Size = new System.Drawing.Size(92, 21);
+            this.cmbAgrupar.TabIndex = 4;
+            this.cmbAgrupar.ValueMember = "";
             // 
             // CuadroExistencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.cmbAgrupar);
             this.Controls.Add(this.vmsExistencia);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.chkSoloConExistencia);
@@ -383,7 +405,7 @@
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.dgvDatos);
             this.Name = "CuadroExistencias";
-            this.Size = new System.Drawing.Size(1096, 517);
+            this.Size = new System.Drawing.Size(1200, 517);
             this.Load += new System.EventHandler(this.CuadroExistencias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             this.ResumeLayout(false);
@@ -417,5 +439,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn UltimaVenta;
         private VentasMesSemana vmsExistencia;
+        private Negocio.ComboEtiqueta cmbAgrupar;
     }
 }

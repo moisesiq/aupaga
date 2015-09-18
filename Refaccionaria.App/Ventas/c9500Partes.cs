@@ -31,8 +31,6 @@ namespace Refaccionaria.App
 
         #region [ Propiedades ]
 
-        public ProveedorGananciasView oProveedorGanancia { get { return (this.cmbLineaMarca.SelectedItem as ProveedorGananciasView); } }
-
         public bool AutorizacionRequeridaPrecio
         {
             get
@@ -83,7 +81,7 @@ namespace Refaccionaria.App
 
             // Se cargan las línes - marcas, en base al proveedor seleccionado
             int iProveedorID = Helper.ConvertirEntero(this.cmbProveedor.SelectedValue);
-            this.cmbLineaMarca.CargarDatos("ProveedorGananciaID", "LineaMarca", General.GetListOf<ProveedorGananciasView>(q => q.ProveedorID == iProveedorID));
+            this.cmbLineaMarca.CargarDatos("LineaMarcaParteID", "LineaMarca", General.GetListOf<ProveedoresMarcasLineasView>(q => q.ProveedorID == iProveedorID));
 
             // Se muestra la paquetería
             var Proveedor = (this.cmbProveedor.SelectedItem as Proveedor);
@@ -101,9 +99,6 @@ namespace Refaccionaria.App
 
             // Se calculan los precios
             this.CalcularPrecios();
-
-            
-
 
         }
 
@@ -175,12 +170,12 @@ namespace Refaccionaria.App
             }
             else
             {
-                var LineaMarca = (this.cmbLineaMarca.SelectedItem as ProveedorGananciasView);
+                var LineaMarca = (this.cmbLineaMarca.SelectedItem as ProveedoresMarcasLineasView);
                 this.Detalle.Add(sLlave, new Cotizacion9500Detalle()
                 {
                     ProveedorID = Helper.ConvertirEntero(this.cmbProveedor.SelectedValue),
                     LineaID = LineaMarca.LineaID,
-                    MarcaParteID = LineaMarca.MarcaParteID,
+                    MarcaParteID = LineaMarca.MarcaID,
                     ParteID = this.ParteIDSel,
                     Cantidad = Helper.ConvertirDecimal(this.txtCantidad.Text),
                     Costo = Helper.ConvertirDecimal(this.txtCosto.Text),
@@ -384,9 +379,9 @@ namespace Refaccionaria.App
             else
             {
                 // Se sugiere el nombre
-                var oProvGanV = (this.cmbLineaMarca.SelectedItem as ProveedorGananciasView);
+                var oProvGanV = (this.cmbLineaMarca.SelectedItem as ProveedoresMarcasLineasView);
                 if (oProvGanV != null)
-                    this.txtDescripcion.Text = UtilDatos.GenerarSugerenciaNombreParte(oProvGanV.LineaID, oProvGanV.MarcaParteID, sNumeroDeParte);
+                    this.txtDescripcion.Text = UtilDatos.GenerarSugerenciaNombreParte(oProvGanV.LineaID, oProvGanV.MarcaID, sNumeroDeParte);
             }
 
             this.txtDescripcion.ReadOnly = bSel;
@@ -409,11 +404,12 @@ namespace Refaccionaria.App
 
         private void CalcularPrecios()
         {
-            int iProveedorID = Helper.ConvertirEntero(this.cmbProveedor.SelectedValue);
-            var ProveedorGan = this.oProveedorGanancia;
+            // Se obtiene el registro correspondiente para los porcentajes
+            var oParteGan = this.ObtenerParteGanancia(this.ParteIDSel);
+
             decimal mCosto = Helper.ConvertirDecimal(this.txtCosto.Text);
 
-            if (ProveedorGan == null)
+            if (oParteGan == null)
             {
                 if (this.chkPrecioAutomatico.Checked)
                     this.txtPrecio.Text = "";
@@ -426,11 +422,11 @@ namespace Refaccionaria.App
             else
             {
                 decimal[] Precios = new decimal[] {
-                    Helper.AplicarRedondeo(mCosto * ProveedorGan.PCT1.Valor())
-                    , Helper.AplicarRedondeo(mCosto * ProveedorGan.PCT2.Valor())
-                    , Helper.AplicarRedondeo(mCosto * ProveedorGan.PCT3.Valor())
-                    , Helper.AplicarRedondeo(mCosto * ProveedorGan.PCT4.Valor())
-                    , Helper.AplicarRedondeo(mCosto * ProveedorGan.PCT5.Valor())
+                    Helper.AplicarRedondeo(mCosto * oParteGan.PorcentajeDeGanancia1)
+                    , Helper.AplicarRedondeo(mCosto * oParteGan.PorcentajeDeGanancia2)
+                    , Helper.AplicarRedondeo(mCosto * oParteGan.PorcentajeDeGanancia3)
+                    , Helper.AplicarRedondeo(mCosto * oParteGan.PorcentajeDeGanancia4)
+                    , Helper.AplicarRedondeo(mCosto * oParteGan.PorcentajeDeGanancia5)
                 };
 
                 // Se contempla el costo de la paquetería
@@ -645,6 +641,20 @@ namespace Refaccionaria.App
             }
 
             return o9500Detalle;
+        }
+
+        public ProveedorParteGanancia ObtenerParteGanancia(int? iParteID)
+        {
+            if (iParteID <= 0)
+                iParteID = null;
+            int iProveedorID = Helper.ConvertirEntero(this.cmbProveedor.SelectedValue);
+            var oMarcaLinea = (this.cmbLineaMarca.SelectedItem as ProveedoresMarcasLineasView);
+            if (this.ParteIDSel > 0)
+                iParteID = this.ParteIDSel;
+            if (oMarcaLinea == null)
+                return AdmonProc.ObtenerParteDescuentoGanancia(iProveedorID, null, null, iParteID);
+            else
+                return AdmonProc.ObtenerParteDescuentoGanancia(iProveedorID, oMarcaLinea.MarcaID, oMarcaLinea.LineaID, iParteID);
         }
 
         #endregion
