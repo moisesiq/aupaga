@@ -575,7 +575,7 @@ namespace Refaccionaria.App
             try
             {
                 //SucursalID
-                var sucursal = string.Empty;
+                /* var sucursal = string.Empty;
                 var ids = new StringBuilder();
                 foreach (DataGridViewRow fila in this.dgvSucursales.Rows)
                 {
@@ -585,10 +585,19 @@ namespace Refaccionaria.App
                     }
                 }
                 if (ids.ToString().Length > 0)
+                */
+                var oSucursales = new DataTable();
+                oSucursales.Columns.Add("SucursalID", typeof(int));
+                foreach (DataGridViewRow oFila in this.dgvSucursales.Rows)
                 {
-                    sucursal = ids.ToString().Substring(0, ids.ToString().Length - 1);
+                    if (Helper.ConvertirBool(oFila.Cells["X"].Value))
+                        oSucursales.Rows.Add(Helper.ConvertirEntero(oFila.Cells["SucursalID"].Value));
+                }
+                if (oSucursales.Rows.Count > 0)
+                {
+                    // sucursal = ids.ToString().Substring(0, ids.ToString().Length - 1);
                     var dic = new Dictionary<string, object>();
-                    dic.Add("SucursalID", sucursal);
+                    dic.Add("Sucursales/tpuTablaEnteros", oSucursales);
 
                     // Se agregan los parámetros de línea y marca
                     if (this.ctlMarcas.ValoresSeleccionados.Count > 0)
