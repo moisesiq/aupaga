@@ -53,7 +53,7 @@ namespace Refaccionaria.App
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid principal
-            var oVendedores = this.AgruparPorEnteroCadena(oDatos.GroupBy(g => new EnteroCadena() { Entero = g.VendedorID, Cadena = g.Vendedor }))
+            var oVendedores = this.AgruparPorEnteroCadena(oDatos.GroupBy(g => new EnteroCadenaComp() { Entero = g.VendedorID, Cadena = g.Vendedor }))
                 .OrderByDescending(c => c.Actual);
             decimal mTotal = (oVendedores.Count() > 0 ? oVendedores.Sum(c => c.Actual) : 0);
             this.dgvPrincipal.Rows.Clear();
@@ -85,7 +85,7 @@ namespace Refaccionaria.App
 
             // Se llena el grid de líneas
             var oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.VendedorID == iId).GroupBy(
-                g => new EnteroCadena() { Entero = g.LineaID.Valor(), Cadena = g.Linea })).OrderByDescending(c => c.Actual);
+                g => new EnteroCadenaComp() { Entero = g.LineaID.Valor(), Cadena = g.Linea })).OrderByDescending(c => c.Actual);
             decimal mTotal = (oConsulta.Count() > 0 ? oConsulta.Sum(c => c.Actual) : 0);
             foreach (var oReg in oConsulta)
             {
@@ -199,7 +199,7 @@ namespace Refaccionaria.App
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid de Sucursales
-            var oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.VendedorID == iId).GroupBy(g => new EnteroCadena() { Entero = g.SucursalID, Cadena = g.Sucursal }));
+            var oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.VendedorID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.SucursalID, Cadena = g.Sucursal }));
             decimal mTotal = (oConsulta.Count() > 0 ? oConsulta.Sum(c => c.Actual) : 0);
             foreach (var oReg in oConsulta)
             {

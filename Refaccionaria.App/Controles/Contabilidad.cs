@@ -76,6 +76,14 @@ namespace Refaccionaria.App
                     if (this.tbpReserva.Controls.Count <= 0)
                         this.tbpReserva.Controls.Add(new ContaReserva() { Dock = DockStyle.Fill });
                     break;
+                case "tbpBalance":
+                    if (this.tbpBalance.Controls.Count <= 0)
+                        this.tbpBalance.Controls.Add(new ContaBalance() { Dock = DockStyle.Fill });
+                    break;
+                case "tbpEstadoDeResultados":
+                    if (this.tbpEstadoDeResultados.Controls.Count <= 0)
+                        this.tbpEstadoDeResultados.Controls.Add(new ContaEstadoDeResultados() { Dock = DockStyle.Fill });
+                    break;
             }
         }
 

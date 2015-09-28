@@ -29,7 +29,7 @@ namespace Refaccionaria.App
 
         #region [ Clases auxiliares ]
 
-        protected class EnteroCadena : IEnumerable, IEquatable<EnteroCadena>
+        protected class EnteroCadenaComp : IEnumerable, IEquatable<EnteroCadenaComp>
         {
 
             public int Entero { get; set; }
@@ -40,7 +40,7 @@ namespace Refaccionaria.App
                 return this.GetEnumerator();
             }
 
-            public bool Equals(EnteroCadena other)
+            public bool Equals(EnteroCadenaComp other)
             {
                 if (Object.ReferenceEquals(other, null)) return false;
                 if (Object.ReferenceEquals(this, other)) return true;
@@ -408,7 +408,7 @@ namespace Refaccionaria.App
             return null;
         }
 
-        protected virtual IEnumerable<TotalesPorEnteroCadena> AgruparPorEnteroCadena(IEnumerable<IGrouping<EnteroCadena, pauCuadroDeControlGeneral_Result>> oDatos)
+        protected virtual IEnumerable<TotalesPorEnteroCadena> AgruparPorEnteroCadena(IEnumerable<IGrouping<EnteroCadenaComp, pauCuadroDeControlGeneral_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)

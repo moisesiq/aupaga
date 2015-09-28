@@ -191,7 +191,7 @@ namespace Refaccionaria.App
         {
             //this.addControlInPanel(Autorizaciones.Instance);
             //this.CargarControl("Autorizaciones");
-            this.CargarControl(Autorizaciones.Instance);
+            this.CargarControl(Validaciones.Instance);
         }
 
         private void btnCambiosSistema_Click(object sender, EventArgs e)

@@ -215,6 +215,13 @@ namespace Refaccionaria.Modelo
             public const int NoProcedio = 3;
         }
 
+        public class ContaCuentas
+        {
+            public const int Activo = 1;
+            public const int Pasivo = 2;
+            public const int CapitalContable = 3;
+        }
+
         public class ContaCuentasDeMayor
         {
             public const int Salarios = 4;
@@ -461,6 +468,20 @@ namespace Refaccionaria.Modelo
         {
             public const int Vendedor = 1;
             public const int Gerente = 2;
+        }
+
+        public class CategoriasCorte
+        {
+            public const int Ventas = 1;
+            public const int CancelacionesDia = 2;
+            public const int CancelacionesDiasAnteriores = 3;
+            public const int GarantiasDia = 4;
+            public const int GarantiasDiasAnteriores = 5;
+            public const int Cobranza = 6;
+            public const int ValesCreados = 7;
+            public const int Gastos = 8;
+            public const int Resguardos = 9;
+            public const int Refuerzos = 10;
         }
     }
 }

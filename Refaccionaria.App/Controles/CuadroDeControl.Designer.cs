@@ -33,20 +33,21 @@
             this.tbpClientes = new System.Windows.Forms.TabPage();
             this.tbpVendedores = new System.Windows.Forms.TabPage();
             this.tbpProveedores = new System.Windows.Forms.TabPage();
+            this.tbpMarcas = new System.Windows.Forms.TabPage();
             this.tbpLineas = new System.Windows.Forms.TabPage();
             this.tbpCancelaciones = new System.Windows.Forms.TabPage();
             this.tbpSemanas = new System.Windows.Forms.TabPage();
             this.tbpMetas = new System.Windows.Forms.TabPage();
             this.tbpExistencias = new System.Windows.Forms.TabPage();
-            this.tbpMarcas = new System.Windows.Forms.TabPage();
+            this.tbpSucursales = new System.Windows.Forms.TabPage();
             this.tabCuadroDeControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabCuadroDeControl
             // 
-            this.tabCuadroDeControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabCuadroDeControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabCuadroDeControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabCuadroDeControl.Controls.Add(this.tbpVentas);
             this.tabCuadroDeControl.Controls.Add(this.tbpClientes);
@@ -58,6 +59,7 @@
             this.tabCuadroDeControl.Controls.Add(this.tbpSemanas);
             this.tabCuadroDeControl.Controls.Add(this.tbpMetas);
             this.tabCuadroDeControl.Controls.Add(this.tbpExistencias);
+            this.tabCuadroDeControl.Controls.Add(this.tbpSucursales);
             this.tabCuadroDeControl.Location = new System.Drawing.Point(3, 3);
             this.tabCuadroDeControl.Name = "tabCuadroDeControl";
             this.tabCuadroDeControl.SelectedIndex = 0;
@@ -104,6 +106,15 @@
             this.tbpProveedores.TabIndex = 2;
             this.tbpProveedores.Text = "Proveedores";
             this.tbpProveedores.UseVisualStyleBackColor = true;
+            // 
+            // tbpMarcas
+            // 
+            this.tbpMarcas.Location = new System.Drawing.Point(4, 25);
+            this.tbpMarcas.Name = "tbpMarcas";
+            this.tbpMarcas.Size = new System.Drawing.Size(757, 483);
+            this.tbpMarcas.TabIndex = 9;
+            this.tbpMarcas.Text = "Marcas";
+            this.tbpMarcas.UseVisualStyleBackColor = true;
             // 
             // tbpLineas
             // 
@@ -153,14 +164,14 @@
             this.tbpExistencias.Text = "Existencia";
             this.tbpExistencias.UseVisualStyleBackColor = true;
             // 
-            // tbpMarcas
+            // tbpSucursales
             // 
-            this.tbpMarcas.Location = new System.Drawing.Point(4, 25);
-            this.tbpMarcas.Name = "tbpMarcas";
-            this.tbpMarcas.Size = new System.Drawing.Size(757, 483);
-            this.tbpMarcas.TabIndex = 9;
-            this.tbpMarcas.Text = "Marcas";
-            this.tbpMarcas.UseVisualStyleBackColor = true;
+            this.tbpSucursales.Location = new System.Drawing.Point(4, 25);
+            this.tbpSucursales.Name = "tbpSucursales";
+            this.tbpSucursales.Size = new System.Drawing.Size(757, 483);
+            this.tbpSucursales.TabIndex = 10;
+            this.tbpSucursales.Text = "Sucursales";
+            this.tbpSucursales.UseVisualStyleBackColor = true;
             // 
             // CuadroDeControl
             // 
@@ -189,5 +200,6 @@
         private System.Windows.Forms.TabPage tbpMetas;
         private System.Windows.Forms.TabPage tbpExistencias;
         private System.Windows.Forms.TabPage tbpMarcas;
+        private System.Windows.Forms.TabPage tbpSucursales;
     }
 }

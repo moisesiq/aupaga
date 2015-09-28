@@ -1147,6 +1147,9 @@ namespace Refaccionaria.App
             if (!bFacturaGlobal)
                 return false;
 
+            // Se manda guardar el histórico del corte
+            this.GuardarHistoricoCorte();
+
             // Se registra el cierre de caja
             oDia.CierreDebeHaber = oCorte.Total;
             oDia.Cierre = oCorte.Conteo;
@@ -1198,7 +1201,7 @@ namespace Refaccionaria.App
 
             return true;
         }
-        
+
         #endregion
 
         #region [ Uso interno ]
@@ -1521,6 +1524,285 @@ namespace Refaccionaria.App
             }
 
             return true;
+        }
+
+        private void GuardarHistoricoCorte()
+        {
+            int iSucursalID = GlobalClass.SucursalID;
+            DateTime dHoy = DateTime.Today;
+            DateTime dManiana = dHoy.AddDays(1);
+
+            // Se guardan las ventas
+            var oPagos = General.GetListOf<VentasPagosFormasDePagoView>(c => c.SucursalID == iSucursalID && c.Fecha >= dHoy && c.Fecha < dManiana
+                && c.Importe > 0 && c.ACredito == false);
+            var oRegCorteTickets = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.Ventas);
+            foreach (var oReg in oPagos)
+            {
+                if (oReg.Facturada.Valor())
+                {
+                    var oRegCorte = new CorteDetalleHistorico()
+                    {
+                        Dia = dHoy,
+                        SucursalID = iSucursalID,
+                        CorteCategoriaID = Cat.CategoriasCorte.Ventas,
+                        RelacionTabla = Cat.Tablas.Venta,
+                        RelacionID = oReg.VentaID,
+                        Concepto = oReg.FolioDeVenta,
+                        Importe = oReg.Importe.Valor(),
+                        Efectivo = oReg.Efectivo,
+                        Cheque = oReg.Cheque,
+                        Tarjeta = oReg.Tarjeta,
+                        Transferencia = oReg.Transferencia,
+                        Vale = oReg.Vale
+                    };
+                    Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
+                }
+                else
+                {
+                    oRegCorteTickets.Efectivo += oReg.Efectivo;
+                    oRegCorteTickets.Cheque += oReg.Cheque;
+                    oRegCorteTickets.Tarjeta += oReg.Tarjeta;
+                    oRegCorteTickets.Transferencia += oReg.Transferencia;
+                    oRegCorteTickets.Vale += oReg.Vale;
+                    oRegCorteTickets.Importe += oReg.Importe.Valor();
+                }
+            }
+            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTickets);
+
+            // Se registran las cancelaciones
+            var oCancelaciones = General.GetListOf<VentasDevolucionesView>(c => c.SucursalID == iSucursalID && c.Fecha >= dHoy && c.Fecha < dManiana);
+            oRegCorteTickets = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.CancelacionesDia);
+            var oRegCorteTicketsAnt = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.CancelacionesDiasAnteriores);
+            decimal? mEfectivo, mCheque, mTarjeta, mTransferencia, mVale;
+            foreach (var oReg in oCancelaciones)
+            {
+                mEfectivo = (oReg.FormaDePagoID == Cat.FormasDePago.Efectivo ? oReg.Total : 0);
+                mCheque = (oReg.FormaDePagoID == Cat.FormasDePago.Cheque ? oReg.Total : 0);
+                mTarjeta = (oReg.FormaDePagoID == Cat.FormasDePago.Tarjeta ? oReg.Total : 0);
+                mTransferencia = (oReg.FormaDePagoID == Cat.FormasDePago.Transferencia ? oReg.Total : 0);
+                mVale = (oReg.FormaDePagoID == Cat.FormasDePago.Vale ? oReg.Total : 0);
+                                
+                if (oReg.Facturada)
+                {
+                    var oRegCorte = new CorteDetalleHistorico()
+                    {
+                        Dia = dHoy,
+                        SucursalID = iSucursalID,
+                        CorteCategoriaID = (oReg.FechaDeVenta < dHoy ? Cat.CategoriasCorte.CancelacionesDiasAnteriores : Cat.CategoriasCorte.CancelacionesDia),
+                        RelacionTabla = Cat.Tablas.VentaDevolucion,
+                        RelacionID = oReg.VentaDevolucionID,
+                        Concepto = oReg.FolioDeVenta,
+                        Importe = oReg.Total.Valor(),
+                        Efectivo = mEfectivo,
+                        Cheque = mCheque,
+                        Tarjeta = mTarjeta,
+                        Transferencia = mTransferencia,
+                        Vale = mVale
+                    };
+                    Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
+                }
+                else
+                {
+                    if (oReg.FechaDeVenta < dHoy)
+                    {
+                        oRegCorteTicketsAnt.Efectivo += mEfectivo;
+                        oRegCorteTicketsAnt.Cheque += mCheque;
+                        oRegCorteTicketsAnt.Tarjeta += mTarjeta;
+                        oRegCorteTicketsAnt.Transferencia += mTransferencia;
+                        oRegCorteTicketsAnt.Vale += mVale;
+                        oRegCorteTicketsAnt.Importe += oReg.Total.Valor();
+                    }
+                    else
+                    {
+                        oRegCorteTickets.Efectivo += mEfectivo;
+                        oRegCorteTickets.Cheque += mCheque;
+                        oRegCorteTickets.Tarjeta += mTarjeta;
+                        oRegCorteTickets.Transferencia += mTransferencia;
+                        oRegCorteTickets.Vale += mVale;
+                        oRegCorteTickets.Importe += oReg.Total.Valor();
+                    }
+                }
+            }
+            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTickets);
+            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTicketsAnt);
+
+            // Se registran las garantías
+            var oGarantias = General.GetListOf<VentasGarantiasView>(c => c.SucursalID == iSucursalID && c.Fecha >= dHoy && c.Fecha < dManiana);
+            oRegCorteTickets = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.GarantiasDia);
+            oRegCorteTicketsAnt = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.GarantiasDiasAnteriores);
+            foreach (var oReg in oGarantias)
+            {
+                mEfectivo = (oReg.AccionID == Cat.VentasGarantiasAcciones.Efectivo ? oReg.Total : 0);
+                mCheque = (oReg.AccionID == Cat.VentasGarantiasAcciones.Cheque ? oReg.Total : 0);
+                mTarjeta = (oReg.AccionID == Cat.VentasGarantiasAcciones.Tarjeta ? oReg.Total : 0);
+                mTransferencia = (oReg.AccionID == Cat.VentasGarantiasAcciones.Transferencia ? oReg.Total : 0);
+                mVale = (oReg.AccionID == Cat.VentasGarantiasAcciones.NotaDeCredito ? oReg.Total : 0);
+
+                if (oReg.Facturada)
+                {
+                    var oRegCorte = new CorteDetalleHistorico()
+                    {
+                        Dia = dHoy,
+                        SucursalID = iSucursalID,
+                        CorteCategoriaID = (oReg.FechaDeVenta < dHoy ? Cat.CategoriasCorte.GarantiasDiasAnteriores : Cat.CategoriasCorte.GarantiasDia),
+                        RelacionTabla = Cat.Tablas.VentaGarantia,
+                        RelacionID = oReg.VentaGarantiaID,
+                        Concepto = oReg.FolioDeVenta,
+                        Importe = oReg.Total.Valor(),
+                        Efectivo = mEfectivo,
+                        Cheque = mCheque,
+                        Tarjeta = mTarjeta,
+                        Transferencia = mTransferencia,
+                        Vale = mVale
+                    };
+                    Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
+                }
+                else
+                {
+                    if (oReg.FechaDeVenta < dHoy)
+                    {
+                        oRegCorteTicketsAnt.Efectivo += mEfectivo;
+                        oRegCorteTicketsAnt.Cheque += mCheque;
+                        oRegCorteTicketsAnt.Tarjeta += mTarjeta;
+                        oRegCorteTicketsAnt.Transferencia += mTransferencia;
+                        oRegCorteTicketsAnt.Vale += mVale;
+                        oRegCorteTicketsAnt.Importe += oReg.Total.Valor();
+                    }
+                    else
+                    {
+                        oRegCorteTickets.Efectivo += mEfectivo;
+                        oRegCorteTickets.Cheque += mCheque;
+                        oRegCorteTickets.Tarjeta += mTarjeta;
+                        oRegCorteTickets.Transferencia += mTransferencia;
+                        oRegCorteTickets.Vale += mVale;
+                        oRegCorteTickets.Importe += oReg.Total.Valor();
+                    }
+                }
+            }
+            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTickets);
+            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTicketsAnt);
+
+            // Se guarda la cobranza
+            var oCobranza = General.GetListOf<VentasPagosFormasDePagoView>(c => c.SucursalID == iSucursalID && c.Fecha >= dHoy && c.Fecha < dManiana
+                && c.Importe > 0 && c.ACredito == true);
+            oRegCorteTickets = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.Cobranza);
+            foreach (var oReg in oCobranza)
+            {
+                if (oReg.Facturada.Valor())
+                {
+                    var oRegCorte = new CorteDetalleHistorico()
+                    {
+                        Dia = dHoy,
+                        SucursalID = iSucursalID,
+                        CorteCategoriaID = Cat.CategoriasCorte.Cobranza,
+                        RelacionTabla = Cat.Tablas.VentaPago,
+                        RelacionID = oReg.VentaPagoID,
+                        Concepto = oReg.FolioDeVenta,
+                        Importe = oReg.Importe.Valor(),
+                        Efectivo = oReg.Efectivo,
+                        Cheque = oReg.Cheque,
+                        Tarjeta = oReg.Tarjeta,
+                        Transferencia = oReg.Transferencia,
+                        Vale = oReg.Vale
+                    };
+                    Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
+                }
+                else
+                {
+                    oRegCorteTickets.Efectivo += oReg.Efectivo;
+                    oRegCorteTickets.Cheque += oReg.Cheque;
+                    oRegCorteTickets.Tarjeta += oReg.Tarjeta;
+                    oRegCorteTickets.Transferencia += oReg.Transferencia;
+                    oRegCorteTickets.Vale += oReg.Vale;
+                    oRegCorteTickets.Importe += oReg.Importe.Valor();
+                }
+            }
+            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTickets);
+
+            // Se guardan los Vales creados
+            var oVales = General.GetListOf<NotaDeCredito>(c => c.FechaDeEmision >= dHoy && c.FechaDeEmision < dManiana && c.Estatus);
+            foreach (var oReg in oVales)
+            {
+                var oRegCorte = new CorteDetalleHistorico()
+                {
+                    Dia = dHoy,
+                    SucursalID = iSucursalID,
+                    CorteCategoriaID = Cat.CategoriasCorte.ValesCreados,
+                    RelacionTabla = Cat.Tablas.NotaDeCredito,
+                    RelacionID = oReg.NotaDeCreditoID,
+                    Concepto = oReg.Observacion,
+                    Importe = oReg.Importe
+                };
+                Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
+            }
+
+            // Se guardan los gastos
+            var oGastos = General.GetListOf<CajaEgreso>(c => c.CajaTipoEgresoID != Cat.CajaTiposDeEgreso.Resguardo && c.Fecha >= dHoy && c.Fecha < dManiana && c.Estatus);
+            foreach (var oReg in oGastos)
+            {
+                var oRegCorte = new CorteDetalleHistorico()
+                {
+                    Dia = dHoy,
+                    SucursalID = iSucursalID,
+                    CorteCategoriaID = Cat.CategoriasCorte.Gastos,
+                    RelacionTabla = Cat.Tablas.CajaEgreso,
+                    RelacionID = oReg.CajaEgresoID,
+                    Concepto = oReg.Concepto,
+                    Importe = oReg.Importe
+                };
+                Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
+            }
+
+            // Se guardan los resguardos
+            var oResguardos = General.GetListOf<CajaEgreso>(c => c.CajaTipoEgresoID == Cat.CajaTiposDeEgreso.Resguardo && c.Fecha >= dHoy && c.Fecha < dManiana && c.Estatus);
+            foreach (var oReg in oResguardos)
+            {
+                var oRegCorte = new CorteDetalleHistorico()
+                {
+                    Dia = dHoy,
+                    SucursalID = iSucursalID,
+                    CorteCategoriaID = Cat.CategoriasCorte.Resguardos,
+                    RelacionTabla = Cat.Tablas.CajaEgreso,
+                    RelacionID = oReg.CajaEgresoID,
+                    Concepto = oReg.Concepto,
+                    Importe = oReg.Importe
+                };
+                Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
+            }
+
+            // Se guardan los refuerzos
+            var oRefuerzos = General.GetListOf<CajaIngreso>(c => c.CajaTipoIngresoID == Cat.CajaTiposDeIngreso.Refuerzo && c.Fecha >= dHoy && c.Fecha < dManiana && c.Estatus);
+            foreach (var oReg in oRefuerzos)
+            {
+                var oRegCorte = new CorteDetalleHistorico()
+                {
+                    Dia = dHoy,
+                    SucursalID = iSucursalID,
+                    CorteCategoriaID = Cat.CategoriasCorte.Refuerzos,
+                    RelacionTabla = Cat.Tablas.CajaIngreso,
+                    RelacionID = oReg.CajaIngresoID,
+                    Concepto = oReg.Concepto,
+                    Importe = oReg.Importe
+                };
+                Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
+            }
+
+        }
+
+        private CorteDetalleHistorico ObtenerRegistroCorteTickets(DateTime dDia, int iSucursalID, int iCategoria)
+        {
+            return new CorteDetalleHistorico()
+            {
+                Dia = dDia,
+                SucursalID = iSucursalID,
+                CorteCategoriaID = iCategoria,
+                Concepto = "Tickets",
+                Efectivo = 0,
+                Cheque = 0,
+                Tarjeta = 0,
+                Transferencia = 0,
+                Vale = 0
+            };
         }
 
         private ListaEstatus<VentaPagoDetalle> CambiosPagoDetalle(List<VentaPagoDetalle> oPagoDetActual, List<VentaPagoDetalle> oPagoDetNuevo)

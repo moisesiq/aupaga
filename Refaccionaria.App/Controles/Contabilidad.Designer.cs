@@ -40,6 +40,8 @@
             this.tbpBancos = new System.Windows.Forms.TabPage();
             this.tbpGastosParaPolizas = new System.Windows.Forms.TabPage();
             this.tbpReserva = new System.Windows.Forms.TabPage();
+            this.tbpBalance = new System.Windows.Forms.TabPage();
+            this.tbpEstadoDeResultados = new System.Windows.Forms.TabPage();
             this.tabContabilidad.SuspendLayout();
             this.tbpConfiguracion.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +56,8 @@
             this.tabContabilidad.Controls.Add(this.tbpBancos);
             this.tabContabilidad.Controls.Add(this.tbpGastosParaPolizas);
             this.tabContabilidad.Controls.Add(this.tbpReserva);
+            this.tabContabilidad.Controls.Add(this.tbpBalance);
+            this.tabContabilidad.Controls.Add(this.tbpEstadoDeResultados);
             this.tabContabilidad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabContabilidad.Location = new System.Drawing.Point(0, 0);
             this.tabContabilidad.Name = "tabContabilidad";
@@ -163,6 +167,24 @@
             this.tbpReserva.Text = "Reserva";
             this.tbpReserva.UseVisualStyleBackColor = true;
             // 
+            // tbpBalance
+            // 
+            this.tbpBalance.Location = new System.Drawing.Point(4, 22);
+            this.tbpBalance.Name = "tbpBalance";
+            this.tbpBalance.Size = new System.Drawing.Size(744, 412);
+            this.tbpBalance.TabIndex = 8;
+            this.tbpBalance.Text = "Balance";
+            this.tbpBalance.UseVisualStyleBackColor = true;
+            // 
+            // tbpEstadoDeResultados
+            // 
+            this.tbpEstadoDeResultados.Location = new System.Drawing.Point(4, 22);
+            this.tbpEstadoDeResultados.Name = "tbpEstadoDeResultados";
+            this.tbpEstadoDeResultados.Size = new System.Drawing.Size(744, 412);
+            this.tbpEstadoDeResultados.TabIndex = 9;
+            this.tbpEstadoDeResultados.Text = "Estado de Resultados";
+            this.tbpEstadoDeResultados.UseVisualStyleBackColor = true;
+            // 
             // Contabilidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,5 +213,7 @@
         private System.Windows.Forms.TabPage tbpGastosParaPolizas;
         private System.Windows.Forms.TabPage tbpCuentasPolizas;
         private System.Windows.Forms.TabPage tbpReserva;
+        private System.Windows.Forms.TabPage tbpBalance;
+        private System.Windows.Forms.TabPage tbpEstadoDeResultados;
     }
 }

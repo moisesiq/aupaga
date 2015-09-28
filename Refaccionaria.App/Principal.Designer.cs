@@ -132,7 +132,7 @@
             // 
             this.sslRestante.BackColor = System.Drawing.SystemColors.Control;
             this.sslRestante.Name = "sslRestante";
-            this.sslRestante.Size = new System.Drawing.Size(460, 25);
+            this.sslRestante.Size = new System.Drawing.Size(429, 25);
             this.sslRestante.Spring = true;
             // 
             // lblToolTip
@@ -214,7 +214,7 @@
             this.btnAutorizaciones.Margin = new System.Windows.Forms.Padding(0, 3, 4, 2);
             this.btnAutorizaciones.Name = "btnAutorizaciones";
             this.btnAutorizaciones.Size = new System.Drawing.Size(30, 25);
-            this.btnAutorizaciones.ToolTipText = "Autorizaciones";
+            this.btnAutorizaciones.ToolTipText = "Validaciones";
             this.btnAutorizaciones.Click += new System.EventHandler(this.btnAutorizaciones_Click);
             // 
             // btnCambiosSistema

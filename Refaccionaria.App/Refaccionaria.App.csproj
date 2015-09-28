@@ -132,11 +132,23 @@
     <Compile Include="Contabilidad\Consumibles.Designer.cs">
       <DependentUpon>Consumibles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\ContaBalance.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\ContaBalance.Designer.cs">
+      <DependentUpon>ContaBalance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\ContaBancos.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Contabilidad\ContaBancos.Designer.cs">
       <DependentUpon>ContaBancos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contabilidad\ContaEstadoDeResultados.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\ContaEstadoDeResultados.Designer.cs">
+      <DependentUpon>ContaEstadoDeResultados.cs</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\ContaReserva.cs">
       <SubType>UserControl</SubType>
@@ -473,11 +485,23 @@
     <Compile Include="Controles\CuadroDeControl.Designer.cs">
       <DependentUpon>CuadroDeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controles\Validaciones.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\Validaciones.Designer.cs">
+      <DependentUpon>Validaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuadroDeControl\Base\CuadroMultiple.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CuadroDeControl\Base\CuadroMultiple.Designer.cs">
       <DependentUpon>CuadroMultiple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuadroDeControl\Base\CuadroMultipleSucursales.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CuadroDeControl\Base\CuadroMultipleSucursales.Designer.cs">
+      <DependentUpon>CuadroMultipleSucursales.cs</DependentUpon>
     </Compile>
     <Compile Include="CuadroDeControl\CuadroCancelaciones.cs">
       <SubType>UserControl</SubType>
@@ -526,6 +550,12 @@
     </Compile>
     <Compile Include="CuadroDeControl\CuadroSemanas.Designer.cs">
       <DependentUpon>CuadroSemanas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuadroDeControl\CuadroSucursales.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CuadroDeControl\CuadroSucursales.Designer.cs">
+      <DependentUpon>CuadroSucursales.cs</DependentUpon>
     </Compile>
     <Compile Include="CuadroDeControl\CuadroVendedores.cs">
       <SubType>UserControl</SubType>
@@ -593,10 +623,10 @@
     <Compile Include="Formas\DetalleBusquedaDeClientes.Designer.cs">
       <DependentUpon>DetalleBusquedaDeClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controles\Autorizaciones.cs">
+    <Compile Include="Validaciones\Autorizaciones.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controles\Autorizaciones.Designer.cs">
+    <Compile Include="Validaciones\Autorizaciones.Designer.cs">
       <DependentUpon>Autorizaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Formas\DetalleBusquedaDeCriterios.cs">
@@ -671,6 +701,12 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Validaciones\ValCortes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Validaciones\ValCortes.Designer.cs">
+      <DependentUpon>ValCortes.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventas\Formas\Duck.cs">
       <SubType>Form</SubType>
@@ -1386,8 +1422,14 @@
     <EmbeddedResource Include="Contabilidad\Consumibles.resx">
       <DependentUpon>Consumibles.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\ContaBalance.resx">
+      <DependentUpon>ContaBalance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\ContaBancos.resx">
       <DependentUpon>ContaBancos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\ContaEstadoDeResultados.resx">
+      <DependentUpon>ContaEstadoDeResultados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\ContaReserva.resx">
       <DependentUpon>ContaReserva.cs</DependentUpon>
@@ -1630,8 +1672,14 @@
     <EmbeddedResource Include="Controles\CuadroDeControl.resx">
       <DependentUpon>CuadroDeControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controles\Validaciones.resx">
+      <DependentUpon>Validaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CuadroDeControl\Base\CuadroMultiple.resx">
       <DependentUpon>CuadroMultiple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuadroDeControl\Base\CuadroMultipleSucursales.resx">
+      <DependentUpon>CuadroMultipleSucursales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuadroDeControl\CuadroCancelaciones.resx">
       <DependentUpon>CuadroCancelaciones.cs</DependentUpon>
@@ -1656,6 +1704,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CuadroDeControl\CuadroSemanas.resx">
       <DependentUpon>CuadroSemanas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuadroDeControl\CuadroSucursales.resx">
+      <DependentUpon>CuadroSucursales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuadroDeControl\CuadroVendedores.resx">
       <DependentUpon>CuadroVendedores.cs</DependentUpon>
@@ -1690,7 +1741,7 @@
     <EmbeddedResource Include="Formas\DetalleBusquedaDeClientes.resx">
       <DependentUpon>DetalleBusquedaDeClientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controles\Autorizaciones.resx">
+    <EmbeddedResource Include="Validaciones\Autorizaciones.resx">
       <DependentUpon>Autorizaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formas\DetalleBusquedaDeCriterios.resx">
@@ -1725,6 +1776,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formas\Gen\EdicionListadoTheos.resx">
       <DependentUpon>EdicionListadoTheos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Validaciones\ValCortes.resx">
+      <DependentUpon>ValCortes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\Formas\Duck.resx">
       <DependentUpon>Duck.cs</DependentUpon>
