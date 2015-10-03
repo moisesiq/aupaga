@@ -587,7 +587,13 @@ namespace Refaccionaria.App
                     UtilLocal.MensajeAdvertencia(string.Format("La cuenta bancaria seleccionada no tiene una cuenta auxiliar en contabilidad. No se agregará la póliza."));
                 }
                 // Se hace la afectación contable (AfeConta)
-                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.DepositoBancario, oMov.BancoCuentaMovimientoID, oMov.Referencia, oMov.Concepto);
+                DateTime dFechaPoliza = oMov.FechaAsignado.Valor();
+                if (oMov.MovimientoAgrupadorID.HasValue)
+                {
+                    var oMovAgr = General.GetEntity<BancoCuentaMovimiento>(c => c.BancoCuentaMovimientoID == oMov.MovimientoAgrupadorID);
+                    dFechaPoliza = oMovAgr.FechaAsignado.Valor();
+                }
+                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.DepositoBancario, oMov.BancoCuentaMovimientoID, oMov.Referencia, oMov.Concepto, dFechaPoliza);
             }
         }
 
