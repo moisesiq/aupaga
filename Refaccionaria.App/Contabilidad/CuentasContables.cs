@@ -100,7 +100,7 @@ namespace Refaccionaria.App
             frmCont.Dispose();
         }
 
-        private void tgvCuentas_CurrentCellChanged(object sender, EventArgs e)
+        private void tgvCuentas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.tgvCuentas.VerSeleccionNueva())
             {
@@ -121,6 +121,11 @@ namespace Refaccionaria.App
             this.btnCuentaAgregar.Enabled = (iNivel < 4);
             this.btnCuentaEliminar.Enabled = (iNivel > 2);
             this.btnCuentaMover.Enabled = (iNivel == 4);
+        }
+
+        private void tgvCuentas_CurrentCellChanged(object sender, EventArgs e)
+        {
+            // Se cambió al evento CellClick porque se ejecutaba muchas veces al expandir o contraer el árbol.
         }
 
         private void tgvCuentas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -204,6 +209,16 @@ namespace Refaccionaria.App
                     this.LlenarGastoDev(iEgresoID);
                 }
             }
+        }
+
+        private void dgvGastos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.btnEgresoDevengar_Click(sender, e);
+        }
+
+        private void dgvGastos_DoubleClick(object sender, EventArgs e)
+        {
+            
         }
 
         private void btnEgresoDevengar_Click(object sender, EventArgs e)
@@ -315,7 +330,8 @@ namespace Refaccionaria.App
         {
             DateTime dDesde = this.dtpDesde.Value.Date;
             DateTime dHasta = this.dtpHasta.Value.Date.AddDays(1);
-            var oMovs = General.GetListOf<ContaEgresosView>(c => c.ContaCuentaAuxiliarID == iCuentaID && (c.Fecha >= dDesde && c.Fecha < dHasta));
+            var oMovs = General.GetListOf<ContaEgresosView>(c => c.ContaCuentaAuxiliarID == iCuentaID && (c.Fecha >= dDesde && c.Fecha < dHasta))
+                .OrderBy(c => c.Fecha);
             
             this.dgvGastos.Rows.Clear();
             foreach (var oMov in oMovs)
@@ -354,7 +370,7 @@ namespace Refaccionaria.App
                 else
                     oFila.ForeColor = Color.Green;
             }
-            dmod */
+            */
         }
 
         private void LlenarGastoDev(int iEgresoID)
@@ -434,6 +450,15 @@ namespace Refaccionaria.App
         public void LlenarCuentasTotales()
         {
             Cargando.Mostrar();
+
+            // Se guarda la selección actual
+            var oRutaNodoAct = new List<int>();
+            var oNodo = this.tgvCuentas.CurrentNode;
+            while (oNodo != null && oNodo.Level > 0)
+            {
+                oRutaNodoAct.Insert(0, oNodo.Index);
+                oNodo = oNodo.Parent;
+            }
 
             var oParams = new Dictionary<string, object>();
             oParams.Add("Desde", this.dtpDesde.Value);
@@ -563,7 +588,13 @@ namespace Refaccionaria.App
             }
 
             // Se selecciona el nodo previamente seleccionado
-            // this.tlvDatos.FocusedNode = oNodoSel;
+            oNodo = (oRutaNodoAct.Count > 0 ? this.tgvCuentas.Nodes[oRutaNodoAct[0]] : null);
+            for (int iNodo = 1; iNodo < oRutaNodoAct.Count; iNodo++)
+            {
+                oNodo.Expand();
+                oNodo = oNodo.Nodes[oRutaNodoAct[iNodo]];
+                this.tgvCuentas.CurrentCell = oNodo.Cells["Cuentas_Cuenta"];
+            }
 
             Cargando.Cerrar();
         }
