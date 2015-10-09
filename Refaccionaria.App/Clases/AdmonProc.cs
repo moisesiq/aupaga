@@ -14,15 +14,13 @@ namespace Refaccionaria.App
         #region [ Relacionado con Partes ]
 
         public static void AfectarExistenciaYKardex(int iParteID, int iSucursalID, int iOperacionID, string sFolio, int iUsuarioID, string sEntidad
-            , string sOrigen, string sDestino, decimal mCantidad, decimal mImporte)
+            , string sOrigen, string sDestino, decimal mCantidad, decimal mImporte, string sTabla, int iId)
         {
             var oParteEx = General.GetEntity<ParteExistencia>(c => c.ParteID == iParteID && c.SucursalID == iSucursalID && c.Estatus);
             if (iOperacionID == Cat.OperacionesKardex.Venta || iOperacionID == Cat.OperacionesKardex.DevolucionAProveedor
                 || iOperacionID == Cat.OperacionesKardex.SalidaInventario || iOperacionID == Cat.OperacionesKardex.SalidaTraspaso)
-                oParteEx.Existencia -= mCantidad;
-            else
-                oParteEx.Existencia += mCantidad;
-            Guardar.Generico<ParteExistencia>(oParteEx);
+                mCantidad *= -1;
+            AdmonProc.AgregarExistencia(iParteID, iSucursalID, mCantidad, sTabla, iId);
 
             var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == iSucursalID && c.Estatus);
             var oKardex = new ParteKardex()
@@ -37,9 +35,34 @@ namespace Refaccionaria.App
                 Origen = sOrigen,
                 Destino = sDestino,
                 Cantidad = mCantidad,
-                Importe = mImporte
+                Importe = mImporte,
+                RelacionTabla = sTabla,
+                RelacionID = iId
             };
             AdmonProc.RegistrarKardex(oKardex);
+        }
+
+        public static void AgregarExistencia(int iParteID, int iSucursalID, decimal mAgregar, string sTabla, int iId)
+        {
+            // var oParte = General.GetEntity<Parte>(q => q.ParteID == iParteID && q.Estatus);
+            // if (!oParte.EsServicio.Valor())
+            if (General.Exists<Parte>(c => c.ParteID == iParteID && (!c.EsServicio.HasValue || !c.EsServicio.Value) && c.Estatus))
+            {
+                var oParteEx = General.GetEntity<ParteExistencia>(q => q.SucursalID == iSucursalID && q.ParteID == iParteID && q.Estatus);
+                oParteEx.Existencia += mAgregar;
+                Guardar.Generico<ParteExistencia>(oParteEx);
+
+                // Se registra el histórico de la existencia
+                var oExHis = new ParteExistenciaHistorico()
+                {
+                    ParteID = iParteID,
+                    Cantidad = mAgregar,
+                    ExistenciaNueva = oParteEx.Existencia.Valor(),
+                    RelacionTabla = sTabla,
+                    RelacionID = iId
+                };
+                Guardar.Generico<ParteExistenciaHistorico>(oExHis);
+            }
         }
 
         public static void RegistrarKardex(ParteKardex oParteKardex)

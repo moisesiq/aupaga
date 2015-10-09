@@ -269,7 +269,9 @@ namespace Refaccionaria.App
                         Origen = oVentaV.ClienteID.ToString(),
                         Destino = oDevV.Sucursal,
                         Cantidad = oReg.Cantidad,
-                        Importe = (oReg.PrecioUnitario + oReg.Iva)
+                        Importe = (oReg.PrecioUnitario + oReg.Iva),
+                        RelacionTabla = Cat.Tablas.VentaDevolucion,
+                        RelacionID = oDevV.VentaDevolucionID
                     });
                 }
             }
@@ -418,7 +420,8 @@ namespace Refaccionaria.App
                     // Se registra la salida del inventario
                     var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oDev.VentaID);
                     AdmonProc.AfectarExistenciaYKardex(oCascoReg.RecibidoCascoID.Valor(), GlobalClass.SucursalID, Cat.OperacionesKardex.SalidaInventario
-                        , oCascoReg.CascoRegistroID.ToString(), iUsuarioID, oVentaV.Cliente, "CONTROL DE CASCOS", oVentaV.Sucursal, 1, oDevDet.Costo);
+                        , oCascoReg.CascoRegistroID.ToString(), iUsuarioID, oVentaV.Cliente, "CONTROL DE CASCOS", oVentaV.Sucursal, 1, oDevDet.Costo
+                        , Cat.Tablas.CascoRegistro, oCascoReg.CascoRegistroID);
 
                     // Acciones si no se recibió el caso adecuado
                     if (oCascoReg.RecibidoCascoID != oParte.RequiereCascoDe)

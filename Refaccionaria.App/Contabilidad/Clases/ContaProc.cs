@@ -651,11 +651,11 @@ namespace Refaccionaria.App
                 case Cat.ContaAfectaciones.PagoCompraCreditoGastoCaja:
                 case Cat.ContaAfectaciones.PagoCompraCreditoGastoCajaFacturado:
                 case Cat.ContaAfectaciones.PagoCompraCreditoDescuentoFactura:
-                case Cat.ContaAfectaciones.GastoCajaFacturado:
                 case Cat.ContaAfectaciones.PagoProveedorDirectoCpcp:
                     return Cat.Tablas.ProveedorPolizaDetalle;
                 case Cat.ContaAfectaciones.Resguardo:
                 case Cat.ContaAfectaciones.GastoReparteUtilidades:
+                case Cat.ContaAfectaciones.GastoCajaFacturado:
                     return Cat.Tablas.CajaEgreso;
                 case Cat.ContaAfectaciones.Refuerzo:
                     return Cat.Tablas.CajaIngreso;
@@ -722,14 +722,11 @@ namespace Refaccionaria.App
             var oDetalle = new ContaPolizaDetalle();
             switch (iAfectacionID)
             {
-                // case Cat.ContaAfectaciones.CompraContado:
                 case Cat.ContaAfectaciones.CompraCreditoFactura:
-                // case Cat.ContaAfectaciones.DevolucionCompraPago:
-                // case Cat.ContaAfectaciones.DevolucionCompraNotaDeCredito:
-                    ContaProc.AfectarConPrecioInventario(ref oDetalle, iId);
+                    ContaProc.AfectarConTotalImporteFacturaInventario(ref oDetalle, iId);
                     break;
                 case Cat.ContaAfectaciones.CompraCreditoNota:
-                    ContaProc.AfectarConImporteFacturaCompra(ref oDetalle, iId);
+                    ContaProc.AfectarConTotalImporteFacturaInventario(ref oDetalle, iId);
                     break;
                 case Cat.ContaAfectaciones.PagoCompraCredito:
                 case Cat.ContaAfectaciones.PagoCompraCreditoNotaDeCreditoGarantia:
@@ -987,13 +984,15 @@ namespace Refaccionaria.App
                 case Cat.ContaAfectaciones.SalidaInventario:
                     ContaProc.AfectarConCostoParteDeMovimientoInventario(ref oDetalle, iId);
                     break;
-                case Cat.ContaAfectaciones.CompraCreditoFactura:
                 case Cat.ContaAfectaciones.DevolucionCompraPago:
                 case Cat.ContaAfectaciones.DevolucionCompraNotaDeCredito:
                     ContaProc.AfectarConCostoInventario(ref oDetalle, iId);
                     break;
+                case Cat.ContaAfectaciones.CompraCreditoFactura:
+                    ContaProc.AfectarConSubtotalImporteFacturaInventario(ref oDetalle, iId);
+                    break;
                 case Cat.ContaAfectaciones.CompraCreditoNota:
-                    ContaProc.AfectarConImporteFacturaCompra(ref oDetalle, iId);
+                    ContaProc.AfectarConTotalImporteFacturaInventario(ref oDetalle, iId);
                     break;
                 case Cat.ContaAfectaciones.DevolucionVentaPago:
                 case Cat.ContaAfectaciones.DevolucionVentaValeFactura:
@@ -1259,6 +1258,8 @@ namespace Refaccionaria.App
             switch (iAfectacionID)
             {
                 case Cat.ContaAfectaciones.CompraCreditoFactura:
+                    ContaProc.AfectarConIvaImporteFacturaInventario(ref oDetalle, iId);
+                    break;
                 case Cat.ContaAfectaciones.DevolucionCompraNotaDeCredito:
                     ContaProc.AfectarConIvaInventario(ref oDetalle, iId);
                     break;
@@ -1882,15 +1883,7 @@ namespace Refaccionaria.App
             var oPagos = General.GetListOf<VentasPagosView>(c => c.VentaID == iId);
             oDetalle.Cargo = (oPagos.Count > 0 ? oPagos.Sum(c => c.Importe) : 0);
         }
-
-        private static void AfectarConCostoInventario(ref ContaPolizaDetalle oDetalle, int iId)
-        {
-            var oCompra = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iId && c.Estatus);
-            var oCompraDet = General.GetListOf<MovimientoInventarioDetalle>(c => c.MovimientoInventarioID == iId && c.Estatus);
-            oDetalle.Cargo = (oCompraDet.Count > 0 ? oCompraDet.Sum(c => c.PrecioUnitario * c.Cantidad) : 0);
-            oDetalle.Referencia = oCompra.FolioFactura;
-        }
-
+        
         private static void AfectarConCostoParteDeMovimientoInventario(ref ContaPolizaDetalle oDetalle, int iId)
         {
             decimal mCosto = 0;
@@ -1915,13 +1908,21 @@ namespace Refaccionaria.App
             oDetalle.Cargo = UtilLocal.ObtenerImporteMasIva(oDetalle.Cargo);
         }
 
+        private static void AfectarConCostoInventario(ref ContaPolizaDetalle oDetalle, int iId)
+        {
+            var oCompra = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iId && c.Estatus);
+            var oCompraDet = General.GetListOf<MovimientoInventarioDetalle>(c => c.MovimientoInventarioID == iId && c.Estatus);
+            oDetalle.Cargo = (oCompraDet.Count > 0 ? oCompraDet.Sum(c => c.PrecioUnitario * c.Cantidad) : 0);
+            // oDetalle.Referencia = oCompra.FolioFactura;
+        }
+
         private static void AfectarConIvaInventario(ref ContaPolizaDetalle oDetalle, int iId)
         {
             var oCompra = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iId && c.Estatus);
             var oCompraDet = General.GetListOf<MovimientoInventarioDetalle>(c => c.MovimientoInventarioID == iId && c.Estatus);
             decimal mMultIva = (GlobalClass.ConfiguracionGlobal.IVA / 100);
             oDetalle.Cargo = (oCompraDet.Count > 0 ? oCompraDet.Sum(c => (c.PrecioUnitario * mMultIva) * c.Cantidad) : 0);
-            oDetalle.Referencia = oCompra.FolioFactura;
+            // oDetalle.Referencia = oCompra.FolioFactura;
         }
 
         private static void AfectarConPrecioInventario(ref ContaPolizaDetalle oDetalle, int iId)
@@ -1930,7 +1931,25 @@ namespace Refaccionaria.App
             var oCompraDet = General.GetListOf<MovimientoInventarioDetalle>(c => c.MovimientoInventarioID == iId && c.Estatus);
             decimal mMultIva = (1 + (GlobalClass.ConfiguracionGlobal.IVA / 100));
             oDetalle.Cargo = (oCompraDet.Count > 0 ? oCompraDet.Sum(c => (c.PrecioUnitario * mMultIva) * c.Cantidad) : 0);
-            oDetalle.Referencia = oCompra.FolioFactura;
+            // oDetalle.Referencia = oCompra.FolioFactura;
+        }
+
+        private static void AfectarConSubtotalImporteFacturaInventario(ref ContaPolizaDetalle oDetalle, int iId)
+        {
+            var oCompra = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iId && c.Estatus);
+            oDetalle.Cargo = UtilLocal.ObtenerPrecioSinIva(oCompra.ImporteFactura);
+        }
+
+        private static void AfectarConIvaImporteFacturaInventario(ref ContaPolizaDetalle oDetalle, int iId)
+        {
+            var oCompra = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iId && c.Estatus);
+            oDetalle.Cargo = UtilLocal.ObtenerIvaDePrecio(oCompra.ImporteFactura);
+        }
+
+        private static void AfectarConTotalImporteFacturaInventario(ref ContaPolizaDetalle oDetalle, int iId)
+        {
+            var oCompra = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iId && c.Estatus);
+            oDetalle.Cargo = oCompra.ImporteFactura;
         }
 
         private static void AfectarConCostoDevolucion(ref ContaPolizaDetalle oDetalle, int iId)
@@ -2186,13 +2205,7 @@ namespace Refaccionaria.App
             var oReg = General.GetEntity<BancoCuentaMovimiento>(c => c.BancoCuentaMovimientoID == iId);
             oDetalle.Cargo = oReg.Importe;
         }
-
-        private static void AfectarConImporteFacturaCompra(ref ContaPolizaDetalle oDetalle, int iId)
-        {
-            var oReg = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iId && c.Estatus);
-            oDetalle.Cargo = oReg.ImporteFactura;
-        }
-
+        
         private static void AfectarConCuentaNominaOficial(ref ContaPolizaDetalle oDetalle, int iId, int iCuentaDeMayorID)
         {
             var oNominaUs = General.GetEntity<NominaUsuario>(c => c.NominaUsuarioID == iId);

@@ -13,10 +13,12 @@ namespace Refaccionaria.App
     {
         ContaEgreso oEgreso;
         bool bTieneDetalle;
-        decimal mImporteDev;
+        // decimal mImporteDev;
         ControlError ctlError = new ControlError();
         List<Sucursal> oSucursales;
         List<int> EgresosDevBorrados = new List<int>();
+        List<int> DevEspecialBorrados = new List<int>();
+        enum TipoDev { Sucursal, Duenio }
 
         public GastoDevengar(int iContaEgresoID)
         {
@@ -33,6 +35,8 @@ namespace Refaccionaria.App
             this.ActiveControl = this.cmbSucursal;
             this.oSucursales = General.GetListOf<Sucursal>(c => c.Estatus);
             this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", this.oSucursales);
+            this.cmbDuenio.CargarDatos("DuenioID", "Duenio1", General.GetListOf<Duenio>().OrderBy(c => c.Duenio1).ToList());
+            this.dgvTotales.Rows.Add();
 
             // Se llenan los datos
             this.LlenarDatos();
@@ -46,7 +50,19 @@ namespace Refaccionaria.App
                 this.Height -= iDif;
             }
         }
-                
+
+        private void cmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbSucursal.Focused)
+                this.cmbDuenio.SelectedIndex = -1;
+        }
+
+        private void cmbDuenio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbDuenio.Focused)
+                this.cmbSucursal.SelectedIndex = -1;
+        }
+
         private void dgvEgresoDetalle_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvEgresoDetalle.Columns[e.ColumnIndex].Name == "CantidadDev")
@@ -65,6 +81,66 @@ namespace Refaccionaria.App
             }
         }
 
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (Helper.ConvertirDecimal(this.txtImporte.Text) != 0)
+                return;
+
+            TipoDev eTipoDev = TipoDev.Sucursal;
+            int iSelID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue);
+            string sRelacion = this.cmbSucursal.Text;
+            if (iSelID == 0)
+            {
+                if (this.bTieneDetalle)
+                {
+                    UtilLocal.MensajeAdvertencia("No se puede agregar un devengado especial si la cuenta tiene detalle.");
+                    return;
+                }
+                eTipoDev = TipoDev.Duenio;
+                iSelID = Helper.ConvertirEntero(this.cmbDuenio.SelectedValue);
+                sRelacion = this.cmbDuenio.Text;
+            }
+            
+            int iFila = this.dgvDetalle.Rows.Add(eTipoDev, null, iSelID, this.dtpFecha.Value, sRelacion, Helper.ConvertirDecimal(this.txtImporteDev.Text));
+            bool bError = false;
+            if (this.bTieneDetalle)
+            {
+                var oDetalleDev = new List<ContaEgresoDetalleDevengado>();
+                foreach (DataGridViewRow oFila in this.dgvEgresoDetalle.Rows)
+                {
+                    // Se valida que no haya errores
+                    if (oFila.ErrorText != "")
+                    {
+                        bError = true;
+                        break;
+                    }
+
+                    int iCantidadDev = Helper.ConvertirEntero(oFila.Cells["CantidadDev"].Value);
+                    if (iCantidadDev > 0)
+                    {
+                        oDetalleDev.Add(new ContaEgresoDetalleDevengado()
+                        {
+                            ContaEgresoDetalleID = Helper.ConvertirEntero(oFila.Cells["ContaEgresoDetalleID"].Value),
+                            Cantidad = iCantidadDev
+                        });
+                    }
+                }
+                this.dgvDetalle.Rows[iFila].Tag = oDetalleDev;
+
+                this.dgvEgresoDetalle.Rows.Clear();
+            }
+
+            if (bError)
+            {
+                this.dgvDetalle.Rows.RemoveAt(iFila);
+            }
+            else
+            {
+                this.txtImporteDev.Clear();
+                this.CalcularTotal();
+            }
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (this.AccionGuardar())
@@ -73,7 +149,7 @@ namespace Refaccionaria.App
                 this.Close();
             }
         }
-                
+        
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -111,17 +187,24 @@ namespace Refaccionaria.App
         private void LlenarDev()
         {
             var oDevs = General.GetListOf<ContaEgresoDevengado>(c => c.ContaEgresoID == this.oEgreso.ContaEgresoID);
-            this.mImporteDev = 0;
             this.dgvDetalle.Rows.Clear();
             foreach (var oDev in oDevs)
             {
                 string sSucursal = this.oSucursales.FirstOrDefault(c => c.SucursalID == oDev.SucursalID).NombreSucursal;
-                this.dgvDetalle.Rows.Add(oDev.ContaEgresoDevengadoID, oDev.Fecha, sSucursal, oDev.Importe);
-                this.mImporteDev += oDev.Importe;
+                this.dgvDetalle.Rows.Add(TipoDev.Sucursal, oDev.ContaEgresoDevengadoID, oDev.SucursalID, oDev.Fecha, sSucursal, oDev.Importe);
             }
-            // Se agrega el total
-            this.dgvTotales.Rows.Clear();
-            this.dgvTotales.Rows.Add("", this.mImporteDev);
+
+            // Se agregan los devengados especiales
+            var oDuenios = General.GetListOf<Duenio>();
+            var oDevEsp = General.GetListOf<ContaEgresoDevengadoEspecial>(c => c.ContaEgresoID == this.oEgreso.ContaEgresoID);
+            foreach (var oReg in oDevEsp)
+            {
+                string sDuenio = oDuenios.FirstOrDefault(c => c.DuenioID == oReg.DuenioID).Duenio1;
+                this.dgvDetalle.Rows.Add(TipoDev.Duenio, oReg.ContaEgresoDevengadoEspecialID, oReg.DuenioID, oReg.Fecha, sDuenio, oReg.Importe);
+            }
+
+            // Se calcula el total
+            this.CalcularTotal();
         }
 
         private void AplicarCambioCantidad(DataGridViewRow Fila)
@@ -155,10 +238,10 @@ namespace Refaccionaria.App
             }
 
             // Se calcula el importe total
-            this.CalcularImporteTotal();
+            this.CalcularTotalDetalle();
         }
 
-        private void CalcularImporteTotal()
+        private void CalcularTotalDetalle()
         {
             decimal mTotal = 0;
             foreach (DataGridViewRow Fila in this.dgvEgresoDetalle.Rows)
@@ -166,29 +249,40 @@ namespace Refaccionaria.App
             this.txtImporteDev.Text = mTotal.ToString();
         }
 
+        private void CalcularTotal()
+        {
+            decimal mTotal = 0;
+            foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
+                mTotal += Helper.ConvertirDecimal(oFila.Cells["Importe"].Value);
+            this.dgvTotales["TotalImporte", 0].Value = mTotal;
+        }
+
         private void BorrarEgresoDevGrid(DataGridViewRow Fila)
         {
-            // Se resta el importe de lo devengado
-            decimal mImporte = Helper.ConvertirDecimal(Fila.Cells["Importe"].Value);
-            this.mImporteDev -= mImporte;
             // Se modifican los importes restantes, si hay detalle
-            int iEgresoDevID = Helper.ConvertirEntero(Fila.Cells["ContaEgresoDevengadoID"].Value);
-            if (this.bTieneDetalle)
+            int iRegistroID = Helper.ConvertirEntero(Fila.Cells["RegistroID"].Value);
+            if (iRegistroID > 0)
             {
-                var oDevDetalle = General.GetListOf<ContaEgresoDetalleDevengado>(c => c.ContaEgresoDevengadoID == iEgresoDevID);
-                foreach (var oDevDet in oDevDetalle)
+                if (this.bTieneDetalle)
                 {
-                    int iFila = this.dgvEgresoDetalle.EncontrarIndiceDeValor("ContaEgresoDetalleID", oDevDet.ContaEgresoDetalleID);
-                    this.dgvEgresoDetalle["Restante", iFila].Value = (Helper.ConvertirDecimal(this.dgvEgresoDetalle["Restante", iFila].Value) + oDevDet.Cantidad);
-                    this.AplicarCambioCantidad(this.dgvEgresoDetalle.Rows[iFila]);
+                    var oDevDetalle = General.GetListOf<ContaEgresoDetalleDevengado>(c => c.ContaEgresoDevengadoID == iRegistroID);
+                    foreach (var oDevDet in oDevDetalle)
+                    {
+                        int iFila = this.dgvEgresoDetalle.EncontrarIndiceDeValor("ContaEgresoDetalleID", oDevDet.ContaEgresoDetalleID);
+                        this.dgvEgresoDetalle["Restante", iFila].Value = (Helper.ConvertirDecimal(this.dgvEgresoDetalle["Restante", iFila].Value) + oDevDet.Cantidad);
+                        this.AplicarCambioCantidad(this.dgvEgresoDetalle.Rows[iFila]);
+                    }
                 }
+                // Se mete el EgresoDev a la lista para borrar correspondiente
+                if (((TipoDev)Fila.Cells["colTipoDev"].Value) == TipoDev.Sucursal)
+                    this.EgresosDevBorrados.Add(iRegistroID);
+                else
+                    this.DevEspecialBorrados.Add(iRegistroID);
             }
-            // Se mete el EgresoDev a la lista para borrar
-            this.EgresosDevBorrados.Add(iEgresoDevID);
             // Se quita la fila del grid
             this.dgvDetalle.Rows.Remove(Fila);
             // Se actualizan los totales
-            this.dgvTotales["TotalImporte", 0].Value = this.mImporteDev;
+            this.CalcularTotal();
         }
 
         private bool AccionGuardar()
@@ -199,36 +293,46 @@ namespace Refaccionaria.App
             // Se borran los "devengados", si hay
             foreach (int iDevBorrarID in this.EgresosDevBorrados)
                 ContaProc.DevengadoEliminar(iDevBorrarID);
-
-            if (Helper.ConvertirDecimal(this.txtImporteDev.Text) > 0)
+            // Se borran los especials, si hay
+            foreach (int iDevID in this.DevEspecialBorrados)
             {
-                // Se genera el "devengado"
-                var oEgresoDev = new ContaEgresoDevengado()
+                var oDevEsp = General.GetEntity<ContaEgresoDevengadoEspecial>(c => c.ContaEgresoDevengadoEspecialID == iDevID);
+                Guardar.Eliminar<ContaEgresoDevengadoEspecial>(oDevEsp);
+            }
+            
+            // Se procesan los nuevos
+            foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
+            {
+                if (oFila.Cells["RegistroID"].Value != null)
+                    continue;
+
+                // Se genera el "devengado", según corresponda
+                if (((TipoDev)oFila.Cells["colTipoDev"].Value) == TipoDev.Sucursal)
                 {
-                    ContaEgresoID = this.oEgreso.ContaEgresoID,
-                    Fecha = this.dtpFecha.Value,
-                    Importe = Helper.ConvertirDecimal(this.txtImporteDev.Text),
-                    SucursalID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue),
-                };
-                // Se genera el detalle, si aplica
-                var oDetalleDev = new List<ContaEgresoDetalleDevengado>();
-                if (this.bTieneDetalle)
-                {
-                    foreach (DataGridViewRow Fila in this.dgvEgresoDetalle.Rows)
+                    var oEgresoDev = new ContaEgresoDevengado()
                     {
-                        int iCantidadDev = Helper.ConvertirEntero(Fila.Cells["CantidadDev"].Value);
-                        if (iCantidadDev > 0)
-                        {
-                            oDetalleDev.Add(new ContaEgresoDetalleDevengado()
-                            {
-                                ContaEgresoDetalleID = Helper.ConvertirEntero(Fila.Cells["ContaEgresoDetalleID"].Value),
-                                Cantidad = iCantidadDev
-                            });
-                        }
-                    }
+                        ContaEgresoID = this.oEgreso.ContaEgresoID,
+                        Fecha = Helper.ConvertirFechaHora(oFila.Cells["Fecha"].Value),
+                        Importe = Helper.ConvertirDecimal(oFila.Cells["Importe"].Value),
+                        SucursalID = Helper.ConvertirEntero(oFila.Cells["SelID"].Value),
+                    };
+                    // Se obtiene el detalle, si aplica
+                    var oDetalleDev = (oFila.Tag as List<ContaEgresoDetalleDevengado>);
+
+                    // Se manda guardar los datos
+                    ContaProc.GastoDevengar(oEgresoDev, oDetalleDev);
                 }
-                // Se manda guardar los datos
-                ContaProc.GastoDevengar(oEgresoDev, oDetalleDev);
+                else
+                {
+                    var oDevEsp = new ContaEgresoDevengadoEspecial()
+                    {
+                        ContaEgresoID = this.oEgreso.ContaEgresoID,
+                        Fecha = Helper.ConvertirFechaHora(oFila.Cells["Fecha"].Value),
+                        DuenioID = Helper.ConvertirEntero(oFila.Cells["SelID"].Value),
+                        Importe = Helper.ConvertirDecimal(oFila.Cells["Importe"].Value)
+                    };
+                    Guardar.Generico<ContaEgresoDevengadoEspecial>(oDevEsp);
+                }
             }
 
             // Se muestra una notificación
@@ -240,7 +344,8 @@ namespace Refaccionaria.App
         private bool Validar()
         {
             this.ctlError.LimpiarErrores();
-            if (Helper.ConvertirDecimal(this.txtImporteDev.Text) <= 0 && this.EgresosDevBorrados.Count <= 0)
+
+            /* if (Helper.ConvertirDecimal(this.txtImporteDev.Text) <= 0 && this.EgresosDevBorrados.Count <= 0)
             {
                 this.ctlError.PonerError(this.txtImporteDev, "Importe inválido.", ErrorIconAlignment.MiddleLeft);
             }
@@ -263,11 +368,15 @@ namespace Refaccionaria.App
                     }
                 }
             }
-            return (this.ctlError.NumeroDeErrores == 0 && bDetalleVal);
+            */
+
+            if (Helper.ConvertirDecimal(this.dgvTotales["TotalImporte", 0].Value) > this.oEgreso.Importe)
+                this.ctlError.PonerError(this.dgvTotales, "El Importe total es mayor a lo restante por devengar.");
+
+            return this.ctlError.Valido;
         }
 
         #endregion
-                
-                                                
+                                
     }
 }

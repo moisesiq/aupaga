@@ -196,11 +196,10 @@
             // 
             this.chkActualizarPrecios.AutoSize = true;
             this.chkActualizarPrecios.BackColor = System.Drawing.Color.Transparent;
-            this.chkActualizarPrecios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkActualizarPrecios.Location = new System.Drawing.Point(95, 113);
             this.chkActualizarPrecios.Margin = new System.Windows.Forms.Padding(0);
             this.chkActualizarPrecios.Name = "chkActualizarPrecios";
-            this.chkActualizarPrecios.Size = new System.Drawing.Size(142, 17);
+            this.chkActualizarPrecios.Size = new System.Drawing.Size(145, 17);
             this.chkActualizarPrecios.TabIndex = 2;
             this.chkActualizarPrecios.Text = "Actualizar lista de precios";
             this.chkActualizarPrecios.UseVisualStyleBackColor = false;

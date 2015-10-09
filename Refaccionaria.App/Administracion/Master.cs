@@ -246,6 +246,7 @@ namespace Refaccionaria.App
             ModelHelper.StartPersistentContext();
             int iErroresVal = 0;
             var oCambios = new List<ParteCambio>();
+            var oVarCostos = new Dictionary<int, decimal>();
             foreach (DataGridViewRow Fila in this.dgvDatos.Rows)
             {
                 this.pgrGuardar.EjecutarPaso(true);
@@ -381,6 +382,7 @@ namespace Refaccionaria.App
                 {
                     var oParte = General.GetEntity<PartePrecio>(q => q.ParteID == iParteID && q.Estatus);
                     decimal mCosto = Helper.ConvertirDecimal(Fila.Cells["Costo"].Value);
+                    decimal mCostoConDescuento = Helper.ConvertirDecimal(Fila.Cells["CostoConDescuento"].Value);
                     decimal mPorUtil1 = Helper.ConvertirDecimal(Fila.Cells["Por1"].Value);
                     decimal mPorUtil2 = Helper.ConvertirDecimal(Fila.Cells["Por2"].Value);
                     decimal mPorUtil3 = Helper.ConvertirDecimal(Fila.Cells["Por3"].Value);
@@ -395,8 +397,25 @@ namespace Refaccionaria.App
                     // Para agregar registro de cambios
                     if (oParte.Costo.Valor() != mCosto)
                     {
+                        // Para calcular la diferencia total en costo, por sucursal
+                        decimal mVarCosto = (oParte.Costo.Valor() - mCosto);
+                        var oExistencias = General.GetListOf<ParteExistencia>(c => c.ParteID == iParteID && c.Estatus);
+                        foreach (var oReg in oExistencias)
+                        {
+                            if (!oVarCostos.ContainsKey(oReg.SucursalID))
+                                oVarCostos.Add(oReg.SucursalID, 0);
+                            oVarCostos[oReg.SucursalID] += mVarCosto;
+                        }
+                        
+                        //
                         this.AgregarCambio(oCambios, oParte.ParteID, Cat.PartesCambios.Costo, this.CadenaDeDecimal(oParte.Costo), mCosto.ToString());
                         oParte.Costo = mCosto;
+                    }
+                    if (oParte.CostoConDescuento.Valor() != mCostoConDescuento)
+                    {
+                        this.AgregarCambio(oCambios, oParte.ParteID, Cat.PartesCambios.CostoConDescuento
+                            , this.CadenaDeDecimal(oParte.CostoConDescuento), mCostoConDescuento.ToString());
+                        oParte.CostoConDescuento = mCostoConDescuento;
                     }
                     if (oParte.PorcentajeUtilidadUno.Valor() != mPorUtil1)
                     {
@@ -472,6 +491,17 @@ namespace Refaccionaria.App
                     Fila.Cells["CambioPrecio"].Value = Cat.TiposDeAfectacion.SinCambios;
                     Fila.ErrorText = "";
                     // Fila.DefaultCellStyle.ForeColor = Color.Black;
+                }
+            }
+
+            // Se generan los pólizas correspondientes por diferencias de costos
+            string sObsPoliza = Helper.ConvertirCadena(this.dgvDatos.Columns["Costo"].Tag);
+            foreach (var oDif in oVarCostos)
+            {
+                if (oDif.Value != 0)
+                {
+                    ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Diario, sObsPoliza, Cat.ContaCuentasAuxiliares.Inventario, Cat.ContaCuentasAuxiliares.CapitalFijo
+                        , oDif.Value, "", null, null, oDif.Key);
                 }
             }
 
@@ -646,8 +676,9 @@ namespace Refaccionaria.App
         private void AplicarPrecio(string sColumna)
         {
             var frmCalculo = new MasterCostos();
-            frmCalculo.MostrarActualizarPrecios = (sColumna == "Costo");
-            frmCalculo.Text = (sColumna == "Costo" ? "Costo" : ("Precio " + sColumna.Derecha(1)));
+            bool bCosto = (sColumna == "Costo");
+            frmCalculo.MostrarActualizarPrecios = bCosto;
+            frmCalculo.Text = (bCosto ? "Costo" : ("Precio " + sColumna.Derecha(1)));
             if (frmCalculo.ShowDialog(Principal.Instance) == DialogResult.OK)
             {
                 foreach (DataGridViewRow Fila in this.dgvDatos.Rows)
@@ -656,14 +687,36 @@ namespace Refaccionaria.App
 
                     // Se aplica el nuevo costo / precio, según aplique
                     if (frmCalculo.TipoDePrecio == 1)
+                    {
                         Fila.Cells[sColumna].Value = frmCalculo.Importe;
+                        if (bCosto)
+                        {
+                            Fila.Cells["CostoConDescuento"].Value = frmCalculo.Importe;
+                            this.dgvDatos.Columns[sColumna].Tag = ("Importe fijo: " + frmCalculo.Importe.ToString(GlobalClass.FormatoMoneda));
+                        }
+                    }
                     else if (frmCalculo.TipoDePrecio == 2)
+                    {
                         Fila.Cells[sColumna].Value = Math.Round(Helper.ConvertirDecimal(Fila.Cells[sColumna].Value) * (1 + (frmCalculo.Porcentaje / 100)), 2);
+                        if (bCosto)
+                        {
+                            Fila.Cells["CostoConDescuento"].Value = 
+                                Math.Round(Helper.ConvertirDecimal(Fila.Cells["CostoConDescuento"].Value) * (1 + (frmCalculo.Porcentaje / 100)), 2);
+                            this.dgvDatos.Columns[sColumna].Tag = ("Incremento o descuento: " + frmCalculo.Porcentaje.ToString() + "%");
+                        }
+                    }
                     else
+                    {
                         Fila.Cells[sColumna].Value = (Helper.ConvertirDecimal(Fila.Cells[sColumna].Value) + frmCalculo.Importe);
+                        if (bCosto)
+                        {
+                            Fila.Cells["CostoConDescuento"].Value = (Helper.ConvertirDecimal(Fila.Cells["CostoConDescuento"].Value) + frmCalculo.Importe);
+                            this.dgvDatos.Columns[sColumna].Tag = ("Incremento o descuento: " + frmCalculo.Importe.ToString(GlobalClass.FormatoMoneda));
+                        }
+                    }
 
                     // Si es un precio, se aplica el redondeo
-                    if (sColumna != "Costo")
+                    if (!bCosto)
                         Fila.Cells[sColumna].Value = Helper.AplicarRedondeo(Helper.ConvertirDecimal(Fila.Cells[sColumna].Value));
 
                     // Se actualizan los precios, si aplica

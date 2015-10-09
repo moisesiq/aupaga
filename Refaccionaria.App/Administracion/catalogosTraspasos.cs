@@ -1034,8 +1034,9 @@ namespace Refaccionaria.App
                                     var inicial = existencia.Existencia;
                                     existencia.Existencia -= cantidad;
                                     existencia.UsuarioID = iAutorizoID;
-                                    existencia.FechaModificacion = DateTime.Now;
-                                    General.SaveOrUpdate<ParteExistencia>(existencia, existencia);
+                                    // existencia.FechaModificacion = DateTime.Now;
+                                    // General.SaveOrUpdate<ParteExistencia>(existencia, existencia);
+                                    AdmonProc.AgregarExistencia(parteId, sucursalId, (cantidad * -1), Cat.Tablas.MovimientoInventario, traspaso.MovimientoInventarioID);
 
                                     var historial = new MovimientoInventarioHistorial()
                                     {
@@ -1067,7 +1068,9 @@ namespace Refaccionaria.App
                                 Origen = this.cboUbicacionOrigen.Text,
                                 Destino = this.cboUbicacionDestino.Text,
                                 Cantidad = cantidad,
-                                Importe = oPartePrecio.Costo.Valor()
+                                Importe = oPartePrecio.Costo.Valor(),
+                                RelacionTabla = Cat.Tablas.MovimientoInventario,
+                                RelacionID = traspaso.MovimientoInventarioID
                             });
 
                             // Se suma el importe de cada parte, para crear la póliza
@@ -1470,7 +1473,7 @@ namespace Refaccionaria.App
 
         private void btnProcesarRecibir_Click(object sender, EventArgs e)
         {
-            var log = new Log();
+            // var log = new Log();
             try
             {
                 int iAutorizoID = 0;
@@ -1508,9 +1511,8 @@ namespace Refaccionaria.App
                 }
 
                 //SplashScreen.Show(new Splash());
-                log.Text = "Ingresando Traspaso, espere un momento...";
-                log.Show();
-                this.btnProcesarRecibir.Enabled = false;
+                // log.Text = "Ingresando Traspaso, espere un momento...";
+                // log.Show();
 
                 foreach (DataGridViewRow row in this.dgvRecibirDetalle.Rows)
                 {
@@ -1538,7 +1540,9 @@ namespace Refaccionaria.App
                     Helper.MensajeError("Ocurrio un error al intentar recibir el traspaso.", GlobalClass.NombreApp);
                     return;
                 }
+                Cargando.Mostrar();
                 this.Cursor = Cursors.WaitCursor;
+                this.btnProcesarRecibir.Enabled = false;
 
                 // Se obtienen la Sucursal Origen y Destino para el traspaso seleccionado
                 string sOrigen = Helper.ConvertirCadena(this.dgvRecibir.CurrentRow.Cells["Origen"].Value);
@@ -1570,7 +1574,7 @@ namespace Refaccionaria.App
                             Estatus = true,
                             Actualizar = true
                         };
-                        log.AppendTextBox("Almacenando Contingencia...");
+                        // log.AppendTextBox("Almacenando Contingencia...");
                         General.SaveOrUpdate<MovimientoInventarioTraspasoContingencia>(contingencia, contingencia);
                     }
 
@@ -1584,9 +1588,10 @@ namespace Refaccionaria.App
                             var inicial = existencia.Existencia;
                             existencia.Existencia += recibido;
                             existencia.UsuarioID = iAutorizoID;
-                            existencia.FechaModificacion = DateTime.Now;
-                            log.AppendTextBox(string.Format("{0} {1}", "Actualizando existencia de:", numeroParte));
-                            General.SaveOrUpdate<ParteExistencia>(existencia, existencia);
+                            // existencia.FechaModificacion = DateTime.Now;
+                            // log.AppendTextBox(string.Format("{0} {1}", "Actualizando existencia de:", numeroParte));
+                            // General.SaveOrUpdate<ParteExistencia>(existencia, existencia);
+                            AdmonProc.AgregarExistencia(parteId, GlobalClass.SucursalID, recibido, Cat.Tablas.MovimientoInventario, movimientoId);
 
                             var historial = new MovimientoInventarioHistorial()
                             {
@@ -1600,7 +1605,7 @@ namespace Refaccionaria.App
                                 Estatus = true,
                                 Actualizar = true
                             };
-                            log.AppendTextBox("Almacenando en Historial...");
+                            // log.AppendTextBox("Almacenando en Historial...");
                             General.SaveOrUpdate<MovimientoInventarioHistorial>(historial, historial);
                         }
                     }
@@ -1619,7 +1624,9 @@ namespace Refaccionaria.App
                         Origen = sOrigen,
                         Destino = sDestino,
                         Cantidad = recibido,
-                        Importe = oPartePrecio.Costo.Valor()
+                        Importe = oPartePrecio.Costo.Valor(),
+                        RelacionTabla = Cat.Tablas.MovimientoInventario,
+                        RelacionID = movimientoId
                     });
 
                     // Se suma el importe de cada parte, para crear la póliza
@@ -1633,8 +1640,11 @@ namespace Refaccionaria.App
                     , Cat.ContaCuentasAuxiliares.Inventario, Cat.ContaCuentasAuxiliares.Inventario, mCostoTotal, ResU.Respuesta.NombreUsuario
                     , Cat.Tablas.MovimientoInventario, movimientoId, iSucursalDestinoID);
                 var oCuentaQuitar = General.GetEntity<ContaPolizaDetalle>(c => c.ContaPolizaID == oPoliza.ContaPolizaID && c.Abono > 0);
-                oCuentaQuitar.Abono = 0;
-                Guardar.Generico<ContaPolizaDetalle>(oCuentaQuitar);
+                if (oCuentaQuitar != null)
+                {
+                    oCuentaQuitar.Abono = 0;
+                    Guardar.Generico<ContaPolizaDetalle>(oCuentaQuitar);
+                }
 
                 //Actualizar el movimiento con los datos (fecha y usuario que recibio)
                 var movimiento = General.GetEntity<MovimientoInventario>(m => m.MovimientoInventarioID == movimientoId);
@@ -1644,15 +1654,15 @@ namespace Refaccionaria.App
                     movimiento.UsuarioRecibioTraspasoID = iAutorizoID;
                     movimiento.FechaRecepcion = DateTime.Now;
                     movimiento.FechaModificacion = DateTime.Now;
-                    log.AppendTextBox("Finalizando...");
+                    // log.AppendTextBox("Finalizando...");
                     General.SaveOrUpdate<MovimientoInventario>(movimiento, movimiento);
                 }
 
                 this.LimpiarFormulario();
                 this.Cursor = Cursors.Default;
                 //SplashScreen.Close();
-                log.finalizo = true;
-                log.Close();
+                // log.finalizo = true;
+                // log.Close();
                 this.btnProcesarRecibir.Enabled = true;
                 new Notificacion("Traspaso Recibido exitosamente", 2 * 1000).Mostrar(Principal.Instance);
             }
@@ -1660,11 +1670,13 @@ namespace Refaccionaria.App
             {
                 this.Cursor = Cursors.Default;
                 //SplashScreen.Close();
-                log.finalizo = true;
-                log.Close();
+                // log.finalizo = true;
+                // log.Close();
                 this.btnProcesarRecibir.Enabled = true;
                 Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
             }
+
+            Cargando.Cerrar();
         }
 
         private void dtpFechaDesde_ValueChanged(object sender, EventArgs e)

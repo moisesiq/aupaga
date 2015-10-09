@@ -9,6 +9,8 @@ namespace Refaccionaria.App
         {
             InitializeComponent();
 
+            this.Icon = Properties.Resources.Ico_ControlRefaccionaria;
+
             // this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             // this.BackColor = System.Drawing.Color.Transparent;
 

@@ -300,7 +300,8 @@ namespace Refaccionaria.App
                 var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == iSucursalID && c.Estatus);
                 var oPrecioRec = General.GetEntity<PartePrecio>(c => c.ParteID == iCascoRecibido && c.Estatus);
                 AdmonProc.AfectarExistenciaYKardex(iCascoRecibido, GlobalClass.SucursalID, Cat.OperacionesKardex.EntradaInventario, iCascoRegistroID.ToString()
-                    , oResU.Respuesta.UsuarioID, oCliente.Nombre, "CONTROL DE CASCOS", oSucursal.NombreSucursal, 1, oPrecioRec.Costo.Valor());
+                    , oResU.Respuesta.UsuarioID, oCliente.Nombre, "CONTROL DE CASCOS", oSucursal.NombreSucursal, 1, oPrecioRec.Costo.Valor()
+                    , Cat.Tablas.CascoRegistro, iCascoRegistroID);
             }
             
             // Se guardan los datos del registro de casco

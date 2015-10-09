@@ -247,17 +247,6 @@ namespace Refaccionaria.App
             return new ResAcc<int>(true);
         }
 
-        public static void AgregarExistencia(int iParteID, int iSucursalID, decimal mAgregar)
-        {
-            var oParte = General.GetEntity<Parte>(q => q.ParteID == iParteID);
-            if (!oParte.EsServicio.Valor())
-            {
-                var oParteEx = General.GetEntity<ParteExistencia>(q => q.SucursalID == iSucursalID && q.ParteID == iParteID && q.Estatus);
-                oParteEx.Existencia += mAgregar;
-                Guardar.Generico<ParteExistencia>(oParteEx);
-            }
-        }
-
         public static void EliminarVenta(int iVentaID)
         {
             var oVenta = General.GetEntity<Venta>(q => q.VentaID == iVentaID && q.Estatus);
@@ -270,7 +259,7 @@ namespace Refaccionaria.App
             // Se regresa la existencia y se borra el detalle de la venta
             foreach (var oParteDet in oVentaDet)
             {
-                VentasProc.AgregarExistencia(oParteDet.ParteID, oVenta.SucursalID, oParteDet.Cantidad);
+                AdmonProc.AgregarExistencia(oParteDet.ParteID, oVenta.SucursalID, oParteDet.Cantidad, Cat.Tablas.Venta, iVentaID);
                 Guardar.Eliminar<VentaDetalle>(oParteDet, true);
             }
             // Se borra la venta en sí

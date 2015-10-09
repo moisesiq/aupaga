@@ -228,7 +228,7 @@ namespace Refaccionaria.App
                 Guardar.Generico<VentaDetalle>(ParteDetalle);
 
                 // Se afecta la existencia
-                VentasProc.AgregarExistencia(ParteDetalle.ParteID, oVenta.SucursalID, (ParteDetalle.Cantidad * -1));
+                AdmonProc.AgregarExistencia(ParteDetalle.ParteID, oVenta.SucursalID, (ParteDetalle.Cantidad * -1), Cat.Tablas.Venta, oVenta.VentaID);
             }
 
             // Se generar datos relevantes al cliente comisionista, si hubiera
@@ -354,7 +354,7 @@ namespace Refaccionaria.App
                 Guardar.Generico<VentaDetalle>(oParteVenta, false);
 
                 // Se afecta la existencia
-                VentasProc.AgregarExistencia(ParteDetalle.ParteID, GlobalClass.SucursalID, ParteDetalle.Cantidad);
+                AdmonProc.AgregarExistencia(ParteDetalle.ParteID, GlobalClass.SucursalID, ParteDetalle.Cantidad, Cat.Tablas.VentaDevolucion, oDevolucion.VentaDevolucionID);
             }
 
             // Si es cancelación, se cambia el estatus de la venta

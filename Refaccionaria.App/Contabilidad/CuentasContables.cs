@@ -16,12 +16,13 @@ namespace Refaccionaria.App
         {
             public const int Id = 0;
             public const int Cuenta = 1;
-            public const int Fiscal = 2;
-            public const int Total = 3;
-            public const int Matriz = 4;
-            public const int Sucursal2 = 5;
-            public const int Sucursal3 = 6;
-            public const int ImporteDev = 7;
+            public const int Porcentaje = 2;
+            public const int Fiscal = 3;
+            public const int Total = 4;
+            public const int Matriz = 5;
+            public const int Sucursal2 = 6;
+            public const int Sucursal3 = 7;
+            public const int ImporteDev = 8;
         }
 
         List<Sucursal> oSucursales;
@@ -524,6 +525,7 @@ namespace Refaccionaria.App
                 var oNodoCuentaAux = oNodoCuentaDeMayor.Nodes.Add(
                     oCuenta.ContaCuentaAuxiliarID,
                     oCuenta.CuentaAuxiliar,
+                    0,
                     oCuenta.Fiscal,
                     oCuenta.Total,
                     oCuenta.Matriz,
@@ -534,12 +536,10 @@ namespace Refaccionaria.App
                 this.oIndiceCuentas.Add(new ContaModelos.IndiceCuentasContables()
                 {
                     Cuenta = oCuenta.CuentaAuxiliar.ToLower(),
-                    Nivel = 4
-                    ,
+                    Nivel = 4,
                     IndiceCuenta = oNodoCuenta.Index,
                     IndiceSubcuenta = oNodoSubcuenta.Index,
-                    IndiceCuentaDeMayor = oNodoCuentaDeMayor.Index
-                    ,
+                    IndiceCuentaDeMayor = oNodoCuentaDeMayor.Index,
                     IndiceCuentaAuxiliar = oNodoCuentaAux.Index
                 });
 
@@ -549,32 +549,45 @@ namespace Refaccionaria.App
                 {
                     switch (iCol)
                     {
-                        case 2: mImporte = oCuenta.Fiscal.Valor(); break;
-                        case 3: mImporte = oCuenta.Total.Valor(); break;
-                        case 4: mImporte = oCuenta.Matriz.Valor(); break;
-                        case 5: mImporte = oCuenta.Suc02.Valor(); break;
-                        case 6: mImporte = oCuenta.Suc03.Valor(); break;
-                        case 7: mImporte = oCuenta.ImporteDev.Valor(); break;
+                        case ColsCuentas.Fiscal: mImporte = oCuenta.Fiscal.Valor(); break;
+                        case ColsCuentas.Total: mImporte = oCuenta.Total.Valor(); break;
+                        case ColsCuentas.Matriz: mImporte = oCuenta.Matriz.Valor(); break;
+                        case ColsCuentas.Sucursal2: mImporte = oCuenta.Suc02.Valor(); break;
+                        case ColsCuentas.Sucursal3: mImporte = oCuenta.Suc03.Valor(); break;
+                        case ColsCuentas.ImporteDev: mImporte = oCuenta.ImporteDev.Valor(); break;
                     }
                     oNodoCuentaDeMayor.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaDeMayor.Cells[iCol].Value) + mImporte);
                     oNodoSubcuenta.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoSubcuenta.Cells[iCol].Value) + mImporte);
                     oNodoCuenta.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuenta.Cells[iCol].Value) + mImporte);
                 }
             }
-
-            // Se aplica el formato y el color
+            
+            // Se aplica el formato y el color, y se llena el porcentaje
+            decimal mCuenta = 0, mSubcuenta = 0, mCuentaDeMayor = 0, mCuentaAux= 0;
             foreach (var oNodCuenta in this.tgvCuentas.Nodes)
             {
                 oNodCuenta.Expand();
+                mCuenta = Helper.ConvertirDecimal(oNodCuenta.Cells["Cuentas_Total"].Value);
+                oNodCuenta.Cells["Cuentas_Porcentaje"].Value = "-";
                 foreach (var oNodSubcuenta in oNodCuenta.Nodes)
                 {
                     oNodSubcuenta.Expand();
+                    mSubcuenta = Helper.ConvertirDecimal(oNodSubcuenta.Cells["Cuentas_Total"].Value);
+                    if (mCuenta != 0)
+                        oNodSubcuenta.Cells["Cuentas_Porcentaje"].Value = ((mSubcuenta / mCuenta) * 100);
                     foreach (var oNodCuentaDeMayor in oNodSubcuenta.Nodes)
                     {
+                        mCuentaDeMayor = Helper.ConvertirDecimal(oNodCuentaDeMayor.Cells["Cuentas_Total"].Value);
+                        if (mSubcuenta != 0)
+                            oNodCuentaDeMayor.Cells["Cuentas_Porcentaje"].Value = ((mCuentaDeMayor / mSubcuenta) * 100);
                         foreach (var oNodCuentaAuxiliar in oNodCuentaDeMayor.Nodes)
                         {
                             this.AplicarColor(oNodCuentaAuxiliar);
                             this.FormatoColumnasImporte(oNodCuentaAuxiliar);
+
+                            mCuentaAux = Helper.ConvertirDecimal(oNodCuentaAuxiliar.Cells[ColsCuentas.Total].Value);
+                            if (mCuentaDeMayor != 0)
+                                oNodCuentaAuxiliar.Cells[ColsCuentas.Porcentaje].Value = ((mCuentaAux / mCuentaDeMayor) * 100);
                         }
                         this.AplicarColor(oNodCuentaDeMayor);
                         this.FormatoColumnasImporte(oNodCuentaDeMayor);

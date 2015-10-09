@@ -670,7 +670,7 @@ namespace Refaccionaria.App
                 this.cboClienteComisionista.AutoCompleteCustomSource = autComisionista;
                 this.cboClienteComisionista.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
 
-                //dMod this.LimpiarFormulario();
+                this.LimpiarFormulario();
             }
             catch (Exception ex)
             {

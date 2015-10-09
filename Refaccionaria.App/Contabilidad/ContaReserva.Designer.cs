@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContaReserva));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -43,26 +44,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContaReserva));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.dtpDesde = new System.Windows.Forms.DateTimePicker();
             this.dgvReserva = new System.Windows.Forms.DataGridView();
-            this.CajaFacturaGlobalID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tickets = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FacturadoDeDiasAnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Negativos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Devoluciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cancelaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Oficial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Restar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Supuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostoMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Restante = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaldoRestante = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Facturar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -87,6 +74,25 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
+            this.CajaFacturaGlobalID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tickets = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FacturadoDeDiasAnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Negativos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DevolucionesDia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DevolucionesDiasAnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GarantiasDia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GarantiasDiasAnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cobranza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Oficial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Restar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Supuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostoMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Restante = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaldoRestante = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Facturar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReserva)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,8 +132,11 @@
             this.Tickets,
             this.FacturadoDeDiasAnt,
             this.Negativos,
-            this.Devoluciones,
-            this.Cancelaciones,
+            this.DevolucionesDia,
+            this.DevolucionesDiasAnt,
+            this.GarantiasDia,
+            this.GarantiasDiasAnt,
+            this.Cobranza,
             this.Oficial,
             this.Restar,
             this.Supuesto,
@@ -136,14 +145,14 @@
             this.SaldoRestante,
             this.Facturar,
             this.Reserva});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReserva.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReserva.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvReserva.Location = new System.Drawing.Point(3, 29);
             this.dgvReserva.Name = "dgvReserva";
             this.dgvReserva.ReadOnly = true;
@@ -151,163 +160,6 @@
             this.dgvReserva.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvReserva.Size = new System.Drawing.Size(1117, 332);
             this.dgvReserva.TabIndex = 3;
-            // 
-            // CajaFacturaGlobalID
-            // 
-            this.CajaFacturaGlobalID.HeaderText = "CajaFacturaGlobalID";
-            this.CajaFacturaGlobalID.Name = "CajaFacturaGlobalID";
-            this.CajaFacturaGlobalID.ReadOnly = true;
-            this.CajaFacturaGlobalID.Visible = false;
-            // 
-            // Dia
-            // 
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Dia.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Dia.HeaderText = "Dia";
-            this.Dia.Name = "Dia";
-            this.Dia.ReadOnly = true;
-            this.Dia.Width = 80;
-            // 
-            // Sucursal
-            // 
-            this.Sucursal.HeaderText = "Sucursal";
-            this.Sucursal.Name = "Sucursal";
-            this.Sucursal.ReadOnly = true;
-            // 
-            // Tickets
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "C2";
-            this.Tickets.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Tickets.HeaderText = "Tickets";
-            this.Tickets.Name = "Tickets";
-            this.Tickets.ReadOnly = true;
-            this.Tickets.Width = 80;
-            // 
-            // FacturadoDeDiasAnt
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "C2";
-            this.FacturadoDeDiasAnt.DefaultCellStyle = dataGridViewCellStyle3;
-            this.FacturadoDeDiasAnt.HeaderText = "FacturadoDiasAnt";
-            this.FacturadoDeDiasAnt.Name = "FacturadoDeDiasAnt";
-            this.FacturadoDeDiasAnt.ReadOnly = true;
-            this.FacturadoDeDiasAnt.Width = 80;
-            // 
-            // Negativos
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "C2";
-            this.Negativos.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Negativos.HeaderText = "Negativos";
-            this.Negativos.Name = "Negativos";
-            this.Negativos.ReadOnly = true;
-            this.Negativos.Width = 80;
-            // 
-            // Devoluciones
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "C2";
-            this.Devoluciones.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Devoluciones.HeaderText = "Devoluciones";
-            this.Devoluciones.Name = "Devoluciones";
-            this.Devoluciones.ReadOnly = true;
-            this.Devoluciones.Width = 80;
-            // 
-            // Cancelaciones
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "C2";
-            this.Cancelaciones.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Cancelaciones.HeaderText = "Cancelaciones";
-            this.Cancelaciones.Name = "Cancelaciones";
-            this.Cancelaciones.ReadOnly = true;
-            this.Cancelaciones.Width = 80;
-            // 
-            // Oficial
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle7.Format = "C2";
-            this.Oficial.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Oficial.HeaderText = "Oficial";
-            this.Oficial.Name = "Oficial";
-            this.Oficial.ReadOnly = true;
-            this.Oficial.Width = 80;
-            // 
-            // Restar
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red;
-            dataGridViewCellStyle8.Format = "C2";
-            this.Restar.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Restar.HeaderText = "Restar";
-            this.Restar.Name = "Restar";
-            this.Restar.ReadOnly = true;
-            this.Restar.Width = 80;
-            // 
-            // Supuesto
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.Format = "C2";
-            this.Supuesto.DefaultCellStyle = dataGridViewCellStyle9;
-            this.Supuesto.HeaderText = "Supuesto";
-            this.Supuesto.Name = "Supuesto";
-            this.Supuesto.ReadOnly = true;
-            this.Supuesto.Width = 80;
-            // 
-            // CostoMinimo
-            // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "C2";
-            this.CostoMinimo.DefaultCellStyle = dataGridViewCellStyle10;
-            this.CostoMinimo.HeaderText = "CostoMinimo";
-            this.CostoMinimo.Name = "CostoMinimo";
-            this.CostoMinimo.ReadOnly = true;
-            this.CostoMinimo.Width = 80;
-            // 
-            // Restante
-            // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "C2";
-            this.Restante.DefaultCellStyle = dataGridViewCellStyle11;
-            this.Restante.HeaderText = "Restante";
-            this.Restante.Name = "Restante";
-            this.Restante.ReadOnly = true;
-            this.Restante.Width = 80;
-            // 
-            // SaldoRestante
-            // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "C2";
-            this.SaldoRestante.DefaultCellStyle = dataGridViewCellStyle12;
-            this.SaldoRestante.HeaderText = "SaldoRestante";
-            this.SaldoRestante.Name = "SaldoRestante";
-            this.SaldoRestante.ReadOnly = true;
-            this.SaldoRestante.Width = 80;
-            // 
-            // Facturar
-            // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.Format = "C2";
-            this.Facturar.DefaultCellStyle = dataGridViewCellStyle13;
-            this.Facturar.HeaderText = "Final";
-            this.Facturar.Name = "Facturar";
-            this.Facturar.ReadOnly = true;
-            this.Facturar.Width = 80;
-            // 
-            // Reserva
-            // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.Format = "C2";
-            this.Reserva.DefaultCellStyle = dataGridViewCellStyle14;
-            this.Reserva.HeaderText = "Reserva";
-            this.Reserva.Name = "Reserva";
-            this.Reserva.ReadOnly = true;
-            this.Reserva.Width = 80;
             // 
             // label1
             // 
@@ -596,6 +448,193 @@
             this.label23.TabIndex = 16;
             this.label23.Text = resources.GetString("label23.Text");
             // 
+            // CajaFacturaGlobalID
+            // 
+            this.CajaFacturaGlobalID.HeaderText = "CajaFacturaGlobalID";
+            this.CajaFacturaGlobalID.Name = "CajaFacturaGlobalID";
+            this.CajaFacturaGlobalID.ReadOnly = true;
+            this.CajaFacturaGlobalID.Visible = false;
+            // 
+            // Dia
+            // 
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Dia.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Dia.HeaderText = "Dia";
+            this.Dia.Name = "Dia";
+            this.Dia.ReadOnly = true;
+            this.Dia.Width = 80;
+            // 
+            // Sucursal
+            // 
+            this.Sucursal.HeaderText = "Sucursal";
+            this.Sucursal.Name = "Sucursal";
+            this.Sucursal.ReadOnly = true;
+            // 
+            // Tickets
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            this.Tickets.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Tickets.HeaderText = "Tickets";
+            this.Tickets.Name = "Tickets";
+            this.Tickets.ReadOnly = true;
+            this.Tickets.Width = 80;
+            // 
+            // FacturadoDeDiasAnt
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "C2";
+            this.FacturadoDeDiasAnt.DefaultCellStyle = dataGridViewCellStyle3;
+            this.FacturadoDeDiasAnt.HeaderText = "FacturadoDiasAnt";
+            this.FacturadoDeDiasAnt.Name = "FacturadoDeDiasAnt";
+            this.FacturadoDeDiasAnt.ReadOnly = true;
+            this.FacturadoDeDiasAnt.Width = 80;
+            // 
+            // Negativos
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "C2";
+            this.Negativos.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Negativos.HeaderText = "Negativos";
+            this.Negativos.Name = "Negativos";
+            this.Negativos.ReadOnly = true;
+            this.Negativos.Width = 80;
+            // 
+            // DevolucionesDia
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "C2";
+            this.DevolucionesDia.DefaultCellStyle = dataGridViewCellStyle5;
+            this.DevolucionesDia.HeaderText = "Dev. día";
+            this.DevolucionesDia.Name = "DevolucionesDia";
+            this.DevolucionesDia.ReadOnly = true;
+            this.DevolucionesDia.Width = 80;
+            // 
+            // DevolucionesDiasAnt
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "C2";
+            this.DevolucionesDiasAnt.DefaultCellStyle = dataGridViewCellStyle6;
+            this.DevolucionesDiasAnt.HeaderText = "Dev. ant.";
+            this.DevolucionesDiasAnt.Name = "DevolucionesDiasAnt";
+            this.DevolucionesDiasAnt.ReadOnly = true;
+            this.DevolucionesDiasAnt.Width = 80;
+            // 
+            // GarantiasDia
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "C2";
+            this.GarantiasDia.DefaultCellStyle = dataGridViewCellStyle7;
+            this.GarantiasDia.HeaderText = "Gar. día";
+            this.GarantiasDia.Name = "GarantiasDia";
+            this.GarantiasDia.ReadOnly = true;
+            this.GarantiasDia.Width = 80;
+            // 
+            // GarantiasDiasAnt
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "C2";
+            this.GarantiasDiasAnt.DefaultCellStyle = dataGridViewCellStyle8;
+            this.GarantiasDiasAnt.HeaderText = "Gar. Ant.";
+            this.GarantiasDiasAnt.Name = "GarantiasDiasAnt";
+            this.GarantiasDiasAnt.ReadOnly = true;
+            this.GarantiasDiasAnt.Width = 80;
+            // 
+            // Cobranza
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "C2";
+            this.Cobranza.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Cobranza.HeaderText = "Cobranza";
+            this.Cobranza.Name = "Cobranza";
+            this.Cobranza.ReadOnly = true;
+            this.Cobranza.Width = 80;
+            // 
+            // Oficial
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle10.Format = "C2";
+            this.Oficial.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Oficial.HeaderText = "Oficial";
+            this.Oficial.Name = "Oficial";
+            this.Oficial.ReadOnly = true;
+            this.Oficial.Width = 80;
+            // 
+            // Restar
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle11.Format = "C2";
+            this.Restar.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Restar.HeaderText = "Restar";
+            this.Restar.Name = "Restar";
+            this.Restar.ReadOnly = true;
+            this.Restar.Width = 80;
+            // 
+            // Supuesto
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.Format = "C2";
+            this.Supuesto.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Supuesto.HeaderText = "Supuesto";
+            this.Supuesto.Name = "Supuesto";
+            this.Supuesto.ReadOnly = true;
+            this.Supuesto.Width = 80;
+            // 
+            // CostoMinimo
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "C2";
+            this.CostoMinimo.DefaultCellStyle = dataGridViewCellStyle13;
+            this.CostoMinimo.HeaderText = "CostoMinimo";
+            this.CostoMinimo.Name = "CostoMinimo";
+            this.CostoMinimo.ReadOnly = true;
+            this.CostoMinimo.Width = 80;
+            // 
+            // Restante
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "C2";
+            this.Restante.DefaultCellStyle = dataGridViewCellStyle14;
+            this.Restante.HeaderText = "Restante";
+            this.Restante.Name = "Restante";
+            this.Restante.ReadOnly = true;
+            this.Restante.Width = 80;
+            // 
+            // SaldoRestante
+            // 
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "C2";
+            this.SaldoRestante.DefaultCellStyle = dataGridViewCellStyle15;
+            this.SaldoRestante.HeaderText = "SaldoRestante";
+            this.SaldoRestante.Name = "SaldoRestante";
+            this.SaldoRestante.ReadOnly = true;
+            this.SaldoRestante.Width = 80;
+            // 
+            // Facturar
+            // 
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.Format = "C2";
+            this.Facturar.DefaultCellStyle = dataGridViewCellStyle16;
+            this.Facturar.HeaderText = "Final";
+            this.Facturar.Name = "Facturar";
+            this.Facturar.ReadOnly = true;
+            this.Facturar.Width = 80;
+            // 
+            // Reserva
+            // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Format = "C2";
+            this.Reserva.DefaultCellStyle = dataGridViewCellStyle17;
+            this.Reserva.HeaderText = "Reserva";
+            this.Reserva.Name = "Reserva";
+            this.Reserva.ReadOnly = true;
+            this.Reserva.Width = 80;
+            // 
             // ContaReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -672,8 +711,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Tickets;
         private System.Windows.Forms.DataGridViewTextBoxColumn FacturadoDeDiasAnt;
         private System.Windows.Forms.DataGridViewTextBoxColumn Negativos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Devoluciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cancelaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DevolucionesDia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DevolucionesDiasAnt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GarantiasDia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GarantiasDiasAnt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cobranza;
         private System.Windows.Forms.DataGridViewTextBoxColumn Oficial;
         private System.Windows.Forms.DataGridViewTextBoxColumn Restar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Supuesto;

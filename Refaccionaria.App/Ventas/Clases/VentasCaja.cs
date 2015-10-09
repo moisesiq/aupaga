@@ -311,7 +311,7 @@ namespace Refaccionaria.App
                     }
                     var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == GlobalClass.SucursalID && c.Estatus);
                     AdmonProc.AfectarExistenciaYKardex(iCascoParteID, GlobalClass.SucursalID, Cat.OperacionesKardex.EntradaInventario, oEgreso.CajaEgresoID.ToString()
-                        , iRealizoUsuarioID, "----", "Gasto por Casco", oSucursal.NombreSucursal, 1, oGastoConta.Importe);
+                        , iRealizoUsuarioID, "----", "Gasto por Casco", oSucursal.NombreSucursal, 1, oGastoConta.Importe, Cat.Tablas.CajaEgreso, oEgreso.CajaEgresoID);
                 }
 
                 // Se genera la autorización
@@ -363,7 +363,7 @@ namespace Refaccionaria.App
                     }
                     var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == GlobalClass.SucursalID && c.Estatus);
                     AdmonProc.AfectarExistenciaYKardex(iCascoParteID, GlobalClass.SucursalID, Cat.OperacionesKardex.SalidaInventario, oMov.CajaEgresoID.ToString()
-                        , iRealizoUsuarioID, "----", "Gasto por Casco", oSucursal.NombreSucursal, 1, oMov.Importe);
+                        , iRealizoUsuarioID, "----", "Gasto por Casco", oSucursal.NombreSucursal, 1, oMov.Importe, Cat.Tablas.CajaEgreso, oMov.CajaEgresoID);
                 }
                 // Se genera la autorización
                 VentasProc.GenerarAutorizacion(Cat.AutorizacionesProcesos.GastosBorrar, Cat.Tablas.CajaEgreso, oMov.CajaEgresoID, iAutorizoID);
@@ -835,7 +835,9 @@ namespace Refaccionaria.App
                     Origen = oVentaV.Sucursal,
                     Destino = oVentaV.Cliente,
                     Cantidad = oReg.Cantidad,
-                    Importe = (oReg.PrecioUnitario + oReg.Iva)
+                    Importe = (oReg.PrecioUnitario + oReg.Iva),
+                    RelacionTabla = Cat.Tablas.Venta,
+                    RelacionID = iVentaID
                 });
             }
 
@@ -1148,7 +1150,9 @@ namespace Refaccionaria.App
                 return false;
 
             // Se manda guardar el histórico del corte
-            this.GuardarHistoricoCorte();
+            bool bSeguir = this.GuardarHistoricoCorte();
+            if (!bSeguir)
+                return false;
 
             // Se registra el cierre de caja
             oDia.CierreDebeHaber = oCorte.Total;
@@ -1219,6 +1223,7 @@ namespace Refaccionaria.App
                 && !c.Facturada);
             var oDevsV = General.GetListOf<VentasDevolucionesView>(c => c.SucursalID == GlobalClass.SucursalID && EntityFunctions.TruncateTime(c.Fecha) == dHoy);
             decimal mTickets = 0, mNegativos = 0, mCancelaciones = 0, mDevoluciones = 0;
+            decimal mDevolucionesDia = 0, mDevolucionesDiasAnt = 0, mGarantiasDia = 0, mGarantiasDiasAnt = 0, mCobranza = 0;
             decimal mFacturarVales = 0, mCostoVales = 0;
             string sCancelaciones = "", sDevoluciones = "";
             decimal mCostoTotal = 0;
@@ -1233,65 +1238,6 @@ namespace Refaccionaria.App
                 // if (oReg.FormaDePagoID == Cat.FormasDePago.Vale && oReg.Importe < 0)
                 //     continue;
 
-                // Se suman los importes negativos de anticipos y cancelaciones del día, para restar (porque estas devoluciones no generan pago negativo, creo)
-                if (oReg.Importe < 0 && (oDevsV.Any(c => c.VentaID == oReg.VentaID && c.FechaDeVenta.Valor().Date == dHoy) || !oDevsV.Any(c => c.VentaID == oReg.VentaID)))
-                {
-                    mNegativos += (oReg.Importe * -1);
-
-                    // Se va calculando el importe correspondiente a vales (se suma xq como es negativo, eso hará q reste)
-                    // Siempre no, si es un pago negativo no se debe considerar para la suma del importe de vales (Haid{e e Isidro detectamos que los vales
-                    // creados son negativos y estaban apareciendo en la FGD en negativo y esto no es correcto. Cuando se crea un vale ya existe una póliza
-                    // que hace la operación de afectar Caja y Anticipo Clientes. La FGD sólo debe afectarse cuando los vales se usan)- Moi 08/08/2015
-                    // if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
-                    //     mFacturarVales += oReg.Importe;
-
-                    // Se resta el costo, (cada pago negativo corresponde sólo a una devolución)
-                    var oDev = General.GetEntity<VentaDevolucion>(c => c.VentaPagoDetalleID == oReg.VentaPagoDetalleID && c.Estatus);
-                    if (oDev == null)
-                    {
-                        // Se verifica si es de un 9500
-                        var o9500 = General.GetEntity<Cotizacion9500>(c => c.AnticipoVentaID == oReg.VentaID && c.Estatus);
-                        if (o9500 == null)
-                        {
-                            // Se verifica si es de una garantía
-                            var oGar = General.GetEntity<VentaGarantia>(c => c.VentaPagoDetalleID == oReg.VentaPagoDetalleID && c.Estatus);
-                            if (oGar == null)
-                            {
-                                // Si se llega aquí quiere decir que hay un pago negativo que no es ni de devolución/cancelación ni de 9500 ni de garantía. Es importante
-                                // revisar de qué es para hacer los ajustes necesarios - Moi 16/06/2015
-                                UtilLocal.MensajeAdvertencia("Se encontró un pago negativo sin origen aparente. Número: " + oReg.VentaPagoDetalleID.ToString()
-                                    + ". Por favor toma nota de este número y avísale al administrador del sistema.");
-                            }
-                            else
-                            {
-                                // No se resta el costo, por lo mismo que los pagos negativos de devoluciones (abajo mencionado).
-                            }
-                        }
-                        else
-                        {
-                            // Si es un anticipo de 9500 se toma el importe proporcional según el pago
-                            var o9500Det = General.GetListOf<Cotizacion9500Detalle>(c => c.Cotizacion9500ID == o9500.Cotizacion9500ID && c.Estatus);
-                            decimal mCosto = o9500Det.Sum(c => c.Costo * c.Cantidad);
-                            decimal mPrecio = o9500Det.Sum(c => c.PrecioAlCliente * c.Cantidad);
-                            mCosto = ((oReg.Importe / mPrecio) * mCosto);
-                            mCostoTotal += mCosto;
-
-                            // Para diferenciar vales
-                            if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
-                                mCostoVales += mCosto;
-                        }
-                    }
-                    else
-                    {
-                        // No se resta el costo en pagos negativos del día, pues tampoco se suma el costo de su pago positivo equivalente ya que si la venta está devuelta
-                        // ya no tiene detalle - Moi 16/06/2015
-                        // var oDevDet = General.GetListOf<VentaDevolucionDetalle>(c => c.VentaDevolucionID == oDev.VentaDevolucionID && c.Estatus);
-                        // mCostoTotal -= (oDevDet.Count > 0 ? oDevDet.Sum(c => c.Costo * c.Cantidad) : 0);
-                    }
-
-                    continue;
-                }
-
                 // Se suma el importe a la variable correspondiente
                 if (oReg.Importe >= 0)
                 {
@@ -1300,6 +1246,10 @@ namespace Refaccionaria.App
                     // Para diferenciar vales
                     if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
                         mFacturarVales += oReg.Importe;
+
+                    // Para diferencia la cobranza
+                    if (oReg.ACredito.Valor())
+                        mCobranza += oReg.Importe;
 
                     // Se suma el costo, si es venta a crédito, se calcula un proporcional
                     if (!oPagosProc.Contains(oReg.VentaPagoID.Valor()))
@@ -1322,49 +1272,107 @@ namespace Refaccionaria.App
                 }
                 else
                 {
-                    string sFolioVenta = ("|" + oReg.FolioVenta + "|");
-                    if (oReg.VentaEstatusID == Cat.VentasEstatus.Cancelada)
-                    {
-                        mCancelaciones += (oReg.Importe * -1);
-                        sCancelaciones += (sCancelaciones.Contains(sFolioVenta) ? "" : (", " + sFolioVenta));
-                    }
-                    else
-                    {
-                        mDevoluciones += (oReg.Importe * -1);
-                        sDevoluciones += (sCancelaciones.Contains(sFolioVenta) ? "" : (", " + sFolioVenta));
-                    }
+                    // Se verifica a qué tipo de movimiento corresponde el pago negativo, Devolución / Garantía / 9500
+                    decimal mImporteNeg = (oReg.Importe * -1);
 
-                    // Para diferenciar vales (como es negativo, se resta)
-                    // Siempre no, si es un pago negativo no se debe considerar para la suma del importe de vales (Haid{e e Isidro detectamos que los vales
-                    // creados son negativos y estaban apareciendo en la FGD en negativo y esto no es correcto. Cuando se crea un vale ya existe una póliza
-                    // que hace la operación de afectar Caja y Anticipo Clientes. La FGD sólo debe afectarse cuando los vales se usan)- Moi 08/08/2015
-                    // if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
-                    //     mFacturarVales += oReg.Importe;
-
-                    // Se resta el costo, (cada pago negativo corresponde sólo a una devolución)
-                    // Se verifica si el pago negativo es de una devolución
+                    // Se verifica si es una Devolución/Cancelación
                     var oDev = General.GetEntity<VentaDevolucion>(c => c.VentaPagoDetalleID == oReg.VentaPagoDetalleID && c.Estatus);
                     if (oDev == null)
                     {
-                        // Se verifica si es de una garantía
-                        var oGar = General.GetEntity<VentaGarantia>(c => c.VentaPagoDetalleID == oReg.VentaPagoDetalleID && c.Estatus);
-                        if (oGar != null)
+                        // Se verifica si es de un 9500
+                        var o9500 = General.GetEntity<Cotizacion9500>(c => c.AnticipoVentaID == oReg.VentaID && c.Estatus);
+                        if (o9500 == null)
                         {
-                            mCostoTotal -= oGar.Costo;
+                            // Se verifica si es de una garantía
+                            var oGar = General.GetEntity<VentaGarantia>(c => c.VentaPagoDetalleID == oReg.VentaPagoDetalleID && c.Estatus);
+                            if (oGar == null)
+                            {
+                                // Si se llega aquí quiere decir que hay un pago negativo que no es ni de devolución/cancelación ni de 9500 ni de garantía. Es importante
+                                // revisar de qué es para hacer los ajustes necesarios - Moi 16/06/2015
+                                UtilLocal.MensajeAdvertencia("Se encontró un pago negativo sin origen aparente. Número: " + oReg.VentaPagoDetalleID.ToString()
+                                    + ". Por favor toma nota de este número y avísale al administrador del sistema.");
+                            }
+                            else
+                            {
+                                // Se suma el importe correspondiente de venta y de costo
+                                if (oReg.FechaVenta < dHoy)
+                                {
+                                    mGarantiasDiasAnt += mImporteNeg;
+
+                                    mCostoTotal -= oGar.Costo;
+                                    // Para diferenciar vales
+                                    if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
+                                        mCostoVales -= oGar.Costo;
+                                }
+                                else
+                                {
+                                    mGarantiasDia += mImporteNeg;
+                                    
+                                    // No se resta el costo, por lo mismo que los pagos negativos de devoluciones (abajo mencionado).
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Se suma el importe correspondiente
+                            mNegativos += mImporteNeg;
+
+                            // Se suma el costo, se toma el importe proporcional según el pago
+                            var o9500Det = General.GetListOf<Cotizacion9500Detalle>(c => c.Cotizacion9500ID == o9500.Cotizacion9500ID && c.Estatus);
+                            decimal mCosto = o9500Det.Sum(c => c.Costo * c.Cantidad);
+                            decimal mPrecio = o9500Det.Sum(c => c.PrecioAlCliente * c.Cantidad);
+                            mCosto = ((oReg.Importe / mPrecio) * mCosto);
+                            mCostoTotal += mCosto;
 
                             // Para diferenciar vales
                             if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
-                                mCostoVales -= oGar.Costo;
+                                mCostoVales += mCosto;
                         }
                     }
                     else
                     {
-                        var oDevDet = General.GetListOf<VentaDevolucionDetalle>(c => c.VentaDevolucionID == oDev.VentaDevolucionID && c.Estatus);
-                        mCostoTotal -= (oDevDet.Count > 0 ? oDevDet.Sum(c => c.Costo * c.Cantidad) : 0);
+                        // Se suma el importe correspondiente de venta y de costo
+                        if (oReg.FechaVenta < dHoy)
+                        {
+                            mDevolucionesDiasAnt += mImporteNeg;
 
-                        // Para diferenciar vales
-                        if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
-                            mCostoVales -= oDevDet.Sum(c => c.Costo * c.Cantidad);
+                            // Para la factura impresa
+                            string sFolioVenta = ("|" + oReg.FolioVenta + "|");
+                            if (oDev.EsCancelacion)
+                            {
+                                mCancelaciones += (oReg.Importe * -1);
+                                sCancelaciones += (sCancelaciones.Contains(sFolioVenta) ? "" : (", " + sFolioVenta));
+                            }
+                            else
+                            {
+                                mDevoluciones += (oReg.Importe * -1);
+                                sDevoluciones += (sCancelaciones.Contains(sFolioVenta) ? "" : (", " + sFolioVenta));
+                            }
+
+                            // Para diferenciar vales (como es negativo, se resta)
+                            // Siempre no, si es un pago negativo no se debe considerar para la suma del importe de vales (Haid{e e Isidro detectamos que los vales
+                            // creados son negativos y estaban apareciendo en la FGD en negativo y esto no es correcto. Cuando se crea un vale ya existe una póliza
+                            // que hace la operación de afectar Caja y Anticipo Clientes. La FGD sólo debe afectarse cuando los vales se usan)- Moi 08/08/2015
+                            // if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
+                            //     mFacturarVales += oReg.Importe;
+
+                            // Se resta el costo, (cada pago negativo corresponde sólo a una devolución)
+                            var oDevDet = General.GetListOf<VentaDevolucionDetalle>(c => c.VentaDevolucionID == oDev.VentaDevolucionID && c.Estatus);
+                            mCostoTotal -= (oDevDet.Count > 0 ? oDevDet.Sum(c => c.Costo * c.Cantidad) : 0);
+
+                            // Para diferenciar vales
+                            if (oReg.FormaDePagoID == Cat.FormasDePago.Vale)
+                                mCostoVales -= oDevDet.Sum(c => c.Costo * c.Cantidad);
+                        }
+                        else
+                        {
+                            mDevolucionesDia += mImporteNeg;
+
+                            // No se resta el costo en pagos negativos del día, pues tampoco se suma el costo de su pago positivo equivalente ya que si la venta está devuelta
+                            // ya no tiene detalle - Moi 16/06/2015
+                            // var oDevDet = General.GetListOf<VentaDevolucionDetalle>(c => c.VentaDevolucionID == oDev.VentaDevolucionID && c.Estatus);
+                            // mCostoTotal -= (oDevDet.Count > 0 ? oDevDet.Sum(c => c.Costo * c.Cantidad) : 0);
+                        }
                     }
                 }
             }
@@ -1409,7 +1417,8 @@ namespace Refaccionaria.App
 
             // Se hace el cálculo final
             decimal mCostoMinimo = (UtilLocal.ObtenerImporteMasIva(mCostoTotal) * 1.1M);
-            decimal mOficial = (mTickets - mNegativos - mDevoluciones - mCancelaciones - mFacturadoDiasAnt);
+            // decimal mOficial = (mTickets - mNegativos - mDevoluciones - mCancelaciones - mFacturadoDiasAnt);
+            decimal mOficial = (mTickets - mNegativos - mDevolucionesDia - mDevolucionesDiasAnt - mGarantiasDia - mGarantiasDiasAnt - mFacturadoDiasAnt);
             decimal mFacturar = (mOficial - mRestar);
             decimal mRestante = 0;
             var oFacturaGlobalAnt = General.GetListOf<CajaFacturaGlobal>(c => c.SucursalID == GlobalClass.SucursalID).OrderBy(c => c.Dia).LastOrDefault();
@@ -1478,8 +1487,11 @@ namespace Refaccionaria.App
                 Tickets = mTickets,
                 FacturadoDeDiasAnt = mFacturadoDiasAnt,
                 Negativos = mNegativos,
-                Devoluciones = mDevoluciones,
-                Cancelaciones = mCancelaciones,
+                DevolucionesDia = mDevolucionesDia,
+                DevolucionesDiasAnt = mDevolucionesDiasAnt,
+                GarantiasDia = mGarantiasDia,
+                GarantiasDiasAnt = mGarantiasDiasAnt,
+                Cobranza = mCobranza,
                 Restar = mRestar,
                 CostoMinimo = mCostoMinimo,
                 Restante = mRestante,
@@ -1516,17 +1528,10 @@ namespace Refaccionaria.App
                 }
             }
             
-            //
-            if (!GlobalClass.Produccion)
-            {
-                if (System.Configuration.ConfigurationManager.AppSettings["CorteDePrueba"] != null)
-                    return !Helper.ConvertirBool(System.Configuration.ConfigurationManager.AppSettings["CorteDePrueba"]);
-            }
-
             return true;
         }
 
-        private void GuardarHistoricoCorte()
+        private bool GuardarHistoricoCorte()
         {
             int iSucursalID = GlobalClass.SucursalID;
             DateTime dHoy = DateTime.Today;
@@ -1535,189 +1540,96 @@ namespace Refaccionaria.App
             // Se guardan las ventas
             var oPagos = General.GetListOf<VentasPagosFormasDePagoView>(c => c.SucursalID == iSucursalID && c.Fecha >= dHoy && c.Fecha < dManiana
                 && c.Importe > 0 && c.ACredito == false);
-            var oRegCorteTickets = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.Ventas);
             foreach (var oReg in oPagos)
             {
-                if (oReg.Facturada.Valor())
+                var oRegCorte = new CorteDetalleHistorico()
                 {
-                    var oRegCorte = new CorteDetalleHistorico()
-                    {
-                        Dia = dHoy,
-                        SucursalID = iSucursalID,
-                        CorteCategoriaID = Cat.CategoriasCorte.Ventas,
-                        RelacionTabla = Cat.Tablas.Venta,
-                        RelacionID = oReg.VentaID,
-                        Concepto = oReg.FolioDeVenta,
-                        Importe = oReg.Importe.Valor(),
-                        Efectivo = oReg.Efectivo,
-                        Cheque = oReg.Cheque,
-                        Tarjeta = oReg.Tarjeta,
-                        Transferencia = oReg.Transferencia,
-                        Vale = oReg.Vale
-                    };
-                    Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
-                }
-                else
-                {
-                    oRegCorteTickets.Efectivo += oReg.Efectivo;
-                    oRegCorteTickets.Cheque += oReg.Cheque;
-                    oRegCorteTickets.Tarjeta += oReg.Tarjeta;
-                    oRegCorteTickets.Transferencia += oReg.Transferencia;
-                    oRegCorteTickets.Vale += oReg.Vale;
-                    oRegCorteTickets.Importe += oReg.Importe.Valor();
-                }
+                    Dia = dHoy,
+                    SucursalID = iSucursalID,
+                    CorteCategoriaID = Cat.CategoriasCorte.Ventas,
+                    RelacionTabla = Cat.Tablas.Venta,
+                    RelacionID = oReg.VentaID,
+                    Concepto = oReg.FolioDeVenta,
+                    Importe = oReg.Importe.Valor(),
+                    Efectivo = oReg.Efectivo,
+                    Cheque = oReg.Cheque,
+                    Tarjeta = oReg.Tarjeta,
+                    Transferencia = oReg.Transferencia,
+                    Vale = oReg.Vale,
+                    Factura = oReg.Facturada
+                };
+                Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
             }
-            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTickets);
 
             // Se registran las cancelaciones
             var oCancelaciones = General.GetListOf<VentasDevolucionesView>(c => c.SucursalID == iSucursalID && c.Fecha >= dHoy && c.Fecha < dManiana);
-            oRegCorteTickets = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.CancelacionesDia);
-            var oRegCorteTicketsAnt = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.CancelacionesDiasAnteriores);
-            decimal? mEfectivo, mCheque, mTarjeta, mTransferencia, mVale;
             foreach (var oReg in oCancelaciones)
             {
-                mEfectivo = (oReg.FormaDePagoID == Cat.FormasDePago.Efectivo ? oReg.Total : 0);
-                mCheque = (oReg.FormaDePagoID == Cat.FormasDePago.Cheque ? oReg.Total : 0);
-                mTarjeta = (oReg.FormaDePagoID == Cat.FormasDePago.Tarjeta ? oReg.Total : 0);
-                mTransferencia = (oReg.FormaDePagoID == Cat.FormasDePago.Transferencia ? oReg.Total : 0);
-                mVale = (oReg.FormaDePagoID == Cat.FormasDePago.Vale ? oReg.Total : 0);
-                                
-                if (oReg.Facturada)
+                var oRegCorte = new CorteDetalleHistorico()
                 {
-                    var oRegCorte = new CorteDetalleHistorico()
-                    {
-                        Dia = dHoy,
-                        SucursalID = iSucursalID,
-                        CorteCategoriaID = (oReg.FechaDeVenta < dHoy ? Cat.CategoriasCorte.CancelacionesDiasAnteriores : Cat.CategoriasCorte.CancelacionesDia),
-                        RelacionTabla = Cat.Tablas.VentaDevolucion,
-                        RelacionID = oReg.VentaDevolucionID,
-                        Concepto = oReg.FolioDeVenta,
-                        Importe = oReg.Total.Valor(),
-                        Efectivo = mEfectivo,
-                        Cheque = mCheque,
-                        Tarjeta = mTarjeta,
-                        Transferencia = mTransferencia,
-                        Vale = mVale
-                    };
-                    Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
-                }
-                else
-                {
-                    if (oReg.FechaDeVenta < dHoy)
-                    {
-                        oRegCorteTicketsAnt.Efectivo += mEfectivo;
-                        oRegCorteTicketsAnt.Cheque += mCheque;
-                        oRegCorteTicketsAnt.Tarjeta += mTarjeta;
-                        oRegCorteTicketsAnt.Transferencia += mTransferencia;
-                        oRegCorteTicketsAnt.Vale += mVale;
-                        oRegCorteTicketsAnt.Importe += oReg.Total.Valor();
-                    }
-                    else
-                    {
-                        oRegCorteTickets.Efectivo += mEfectivo;
-                        oRegCorteTickets.Cheque += mCheque;
-                        oRegCorteTickets.Tarjeta += mTarjeta;
-                        oRegCorteTickets.Transferencia += mTransferencia;
-                        oRegCorteTickets.Vale += mVale;
-                        oRegCorteTickets.Importe += oReg.Total.Valor();
-                    }
-                }
+                    Dia = dHoy,
+                    SucursalID = iSucursalID,
+                    CorteCategoriaID = (oReg.FechaDeVenta < dHoy ? Cat.CategoriasCorte.CancelacionesDiasAnteriores : Cat.CategoriasCorte.CancelacionesDia),
+                    RelacionTabla = Cat.Tablas.VentaDevolucion,
+                    RelacionID = oReg.VentaDevolucionID,
+                    Concepto = oReg.FolioDeVenta,
+                    Importe = oReg.Total.Valor(),
+                    Efectivo = (oReg.FormaDePagoID == Cat.FormasDePago.Efectivo ? oReg.Total : 0),
+                    Cheque = (oReg.FormaDePagoID == Cat.FormasDePago.Cheque ? oReg.Total : 0),
+                    Tarjeta = (oReg.FormaDePagoID == Cat.FormasDePago.Tarjeta ? oReg.Total : 0),
+                    Transferencia = (oReg.FormaDePagoID == Cat.FormasDePago.Transferencia ? oReg.Total : 0),
+                    Vale = (oReg.FormaDePagoID == Cat.FormasDePago.Vale ? oReg.Total : 0),
+                    Factura = oReg.Facturada
+                };
+                Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
             }
-            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTickets);
-            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTicketsAnt);
 
             // Se registran las garantías
             var oGarantias = General.GetListOf<VentasGarantiasView>(c => c.SucursalID == iSucursalID && c.Fecha >= dHoy && c.Fecha < dManiana);
-            oRegCorteTickets = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.GarantiasDia);
-            oRegCorteTicketsAnt = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.GarantiasDiasAnteriores);
             foreach (var oReg in oGarantias)
             {
-                mEfectivo = (oReg.AccionID == Cat.VentasGarantiasAcciones.Efectivo ? oReg.Total : 0);
-                mCheque = (oReg.AccionID == Cat.VentasGarantiasAcciones.Cheque ? oReg.Total : 0);
-                mTarjeta = (oReg.AccionID == Cat.VentasGarantiasAcciones.Tarjeta ? oReg.Total : 0);
-                mTransferencia = (oReg.AccionID == Cat.VentasGarantiasAcciones.Transferencia ? oReg.Total : 0);
-                mVale = (oReg.AccionID == Cat.VentasGarantiasAcciones.NotaDeCredito ? oReg.Total : 0);
-
-                if (oReg.Facturada)
+                var oRegCorte = new CorteDetalleHistorico()
                 {
-                    var oRegCorte = new CorteDetalleHistorico()
-                    {
-                        Dia = dHoy,
-                        SucursalID = iSucursalID,
-                        CorteCategoriaID = (oReg.FechaDeVenta < dHoy ? Cat.CategoriasCorte.GarantiasDiasAnteriores : Cat.CategoriasCorte.GarantiasDia),
-                        RelacionTabla = Cat.Tablas.VentaGarantia,
-                        RelacionID = oReg.VentaGarantiaID,
-                        Concepto = oReg.FolioDeVenta,
-                        Importe = oReg.Total.Valor(),
-                        Efectivo = mEfectivo,
-                        Cheque = mCheque,
-                        Tarjeta = mTarjeta,
-                        Transferencia = mTransferencia,
-                        Vale = mVale
-                    };
-                    Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
-                }
-                else
-                {
-                    if (oReg.FechaDeVenta < dHoy)
-                    {
-                        oRegCorteTicketsAnt.Efectivo += mEfectivo;
-                        oRegCorteTicketsAnt.Cheque += mCheque;
-                        oRegCorteTicketsAnt.Tarjeta += mTarjeta;
-                        oRegCorteTicketsAnt.Transferencia += mTransferencia;
-                        oRegCorteTicketsAnt.Vale += mVale;
-                        oRegCorteTicketsAnt.Importe += oReg.Total.Valor();
-                    }
-                    else
-                    {
-                        oRegCorteTickets.Efectivo += mEfectivo;
-                        oRegCorteTickets.Cheque += mCheque;
-                        oRegCorteTickets.Tarjeta += mTarjeta;
-                        oRegCorteTickets.Transferencia += mTransferencia;
-                        oRegCorteTickets.Vale += mVale;
-                        oRegCorteTickets.Importe += oReg.Total.Valor();
-                    }
-                }
+                    Dia = dHoy,
+                    SucursalID = iSucursalID,
+                    CorteCategoriaID = (oReg.FechaDeVenta < dHoy ? Cat.CategoriasCorte.GarantiasDiasAnteriores : Cat.CategoriasCorte.GarantiasDia),
+                    RelacionTabla = Cat.Tablas.VentaGarantia,
+                    RelacionID = oReg.VentaGarantiaID,
+                    Concepto = oReg.FolioDeVenta,
+                    Importe = oReg.Total.Valor(),
+                    Efectivo = (oReg.AccionID == Cat.VentasGarantiasAcciones.Efectivo ? oReg.Total : 0),
+                    Cheque = (oReg.AccionID == Cat.VentasGarantiasAcciones.Cheque ? oReg.Total : 0),
+                    Tarjeta = (oReg.AccionID == Cat.VentasGarantiasAcciones.Tarjeta ? oReg.Total : 0),
+                    Transferencia = (oReg.AccionID == Cat.VentasGarantiasAcciones.Transferencia ? oReg.Total : 0),
+                    Vale = ((oReg.AccionID == Cat.VentasGarantiasAcciones.NotaDeCredito || oReg.AccionID == Cat.VentasGarantiasAcciones.ArticuloNuevo) ? oReg.Total : 0),
+                    Factura = oReg.Facturada
+                };
+                Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
             }
-            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTickets);
-            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTicketsAnt);
 
             // Se guarda la cobranza
             var oCobranza = General.GetListOf<VentasPagosFormasDePagoView>(c => c.SucursalID == iSucursalID && c.Fecha >= dHoy && c.Fecha < dManiana
                 && c.Importe > 0 && c.ACredito == true);
-            oRegCorteTickets = this.ObtenerRegistroCorteTickets(dHoy, iSucursalID, Cat.CategoriasCorte.Cobranza);
             foreach (var oReg in oCobranza)
             {
-                if (oReg.Facturada.Valor())
+                var oRegCorte = new CorteDetalleHistorico()
                 {
-                    var oRegCorte = new CorteDetalleHistorico()
-                    {
-                        Dia = dHoy,
-                        SucursalID = iSucursalID,
-                        CorteCategoriaID = Cat.CategoriasCorte.Cobranza,
-                        RelacionTabla = Cat.Tablas.VentaPago,
-                        RelacionID = oReg.VentaPagoID,
-                        Concepto = oReg.FolioDeVenta,
-                        Importe = oReg.Importe.Valor(),
-                        Efectivo = oReg.Efectivo,
-                        Cheque = oReg.Cheque,
-                        Tarjeta = oReg.Tarjeta,
-                        Transferencia = oReg.Transferencia,
-                        Vale = oReg.Vale
-                    };
-                    Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
-                }
-                else
-                {
-                    oRegCorteTickets.Efectivo += oReg.Efectivo;
-                    oRegCorteTickets.Cheque += oReg.Cheque;
-                    oRegCorteTickets.Tarjeta += oReg.Tarjeta;
-                    oRegCorteTickets.Transferencia += oReg.Transferencia;
-                    oRegCorteTickets.Vale += oReg.Vale;
-                    oRegCorteTickets.Importe += oReg.Importe.Valor();
-                }
+                    Dia = dHoy,
+                    SucursalID = iSucursalID,
+                    CorteCategoriaID = Cat.CategoriasCorte.Cobranza,
+                    RelacionTabla = Cat.Tablas.VentaPago,
+                    RelacionID = oReg.VentaPagoID,
+                    Concepto = oReg.FolioDeVenta,
+                    Importe = oReg.Importe.Valor(),
+                    Efectivo = oReg.Efectivo,
+                    Cheque = oReg.Cheque,
+                    Tarjeta = oReg.Tarjeta,
+                    Transferencia = oReg.Transferencia,
+                    Vale = oReg.Vale,
+                    Factura = oReg.Facturada
+                };
+                Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
             }
-            Guardar.Generico<CorteDetalleHistorico>(oRegCorteTickets);
 
             // Se guardan los Vales creados
             var oVales = General.GetListOf<NotaDeCredito>(c => c.FechaDeEmision >= dHoy && c.FechaDeEmision < dManiana && c.Estatus);
@@ -1787,22 +1699,15 @@ namespace Refaccionaria.App
                 Guardar.Generico<CorteDetalleHistorico>(oRegCorte);
             }
 
-        }
 
-        private CorteDetalleHistorico ObtenerRegistroCorteTickets(DateTime dDia, int iSucursalID, int iCategoria)
-        {
-            return new CorteDetalleHistorico()
+            // Si aplica, se retorna falso, para no hacer el corte, útil en caso de pruebas
+            if (!GlobalClass.Produccion)
             {
-                Dia = dDia,
-                SucursalID = iSucursalID,
-                CorteCategoriaID = iCategoria,
-                Concepto = "Tickets",
-                Efectivo = 0,
-                Cheque = 0,
-                Tarjeta = 0,
-                Transferencia = 0,
-                Vale = 0
-            };
+                if (System.Configuration.ConfigurationManager.AppSettings["CorteDePrueba"] != null)
+                    return !Helper.ConvertirBool(System.Configuration.ConfigurationManager.AppSettings["CorteDePrueba"]);
+            }
+
+            return true;
         }
 
         private ListaEstatus<VentaPagoDetalle> CambiosPagoDetalle(List<VentaPagoDetalle> oPagoDetActual, List<VentaPagoDetalle> oPagoDetNuevo)
@@ -1868,7 +1773,7 @@ namespace Refaccionaria.App
 
             return oCambios;
         }
-    
+
         #endregion
 
         #region [ Públicos ]

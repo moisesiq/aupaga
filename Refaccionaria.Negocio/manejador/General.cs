@@ -25,10 +25,15 @@ namespace Refaccionaria.Negocio
         /// <returns></returns>
         public static List<T> GetListOf<T>(Expression<Func<T, bool>> expression) where T : class
         {
-            using (var context = ModelHelper.CreateDataContext())
+            var context = ModelHelper.CreateDataContext();
+            var oList = context.CreateObjectSet<T>().Where(expression).ToList();
+            ModelHelper.ReleaseDataContext(ref context);
+            return oList;
+            /* using (var context = ModelHelper.CreateDataContext())
             {
                 return context.CreateObjectSet<T>().Where(expression).ToList();
             }
+            */
         }
 
 		public static List<T> GetListOf<T>() where T : class

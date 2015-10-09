@@ -150,8 +150,6 @@
           <Property Name="Tickets" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="FacturadoDeDiasAnt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Negativos" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-          <Property Name="Devoluciones" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-          <Property Name="Cancelaciones" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Restar" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="CostoMinimo" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Restante" Type="decimal" Precision="12" Scale="2" Nullable="false" />
@@ -159,6 +157,11 @@
           <Property Name="SaldoRestante" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="FacturadoVales" Type="decimal" Precision="12" Scale="2" />
           <Property Name="VentaFacturaID" Type="int" />
+          <Property Name="DevolucionesDia" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DevolucionesDiasAnt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="GarantiasDia" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="GarantiasDiasAnt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Cobranza" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="CajaIngreso">
           <Key>
@@ -572,6 +575,16 @@
           <Property Name="SucursalID" Type="int" Nullable="false" />
           <Property Name="RealizoUsuarioID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ContaEgresoDevengadoEspecial">
+          <Key>
+            <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
+          </Key>
+          <Property Name="ContaEgresoDevengadoEspecialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContaEgresoID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="DuenioID" Type="int" Nullable="false" />
+          <Property Name="Importe" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="ContaPoliza">
           <Key>
             <PropertyRef Name="ContaPolizaID" />
@@ -661,6 +674,7 @@
           <Property Name="Tarjeta" Type="decimal" Precision="12" Scale="2" />
           <Property Name="Transferencia" Type="decimal" Precision="12" Scale="2" />
           <Property Name="Vale" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Factura" Type="bit" />
         </EntityType>
         <EntityType Name="Cotizacion9500">
           <Key>
@@ -716,6 +730,13 @@
           <Property Name="FechaModificacion" Type="date" />
           <Property Name="Estatus" Type="bit" Nullable="false" />
           <Property Name="Actualizar" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Duenio">
+          <Key>
+            <PropertyRef Name="DuenioID" />
+          </Key>
+          <Property Name="DuenioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Duenio" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -1510,6 +1531,18 @@
           <Property Name="Estatus" Type="bit" Nullable="false" />
           <Property Name="Actualizar" Type="bit" Nullable="false" />
           <Property Name="ExistenciaInicial" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ParteExistenciaHistorico">
+          <Key>
+            <PropertyRef Name="ParteExistenciaHistoricoID" />
+          </Key>
+          <Property Name="ParteExistenciaHistoricoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParteID" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="ExistenciaNueva" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="RelacionTabla" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="RelacionID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ParteGiro">
           <Key>
@@ -2814,8 +2847,11 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.CajaFacturasGlobalesView'
             <PropertyRef Name="Tickets" />
             <PropertyRef Name="FacturadoDeDiasAnt" />
             <PropertyRef Name="Negativos" />
-            <PropertyRef Name="Devoluciones" />
-            <PropertyRef Name="Cancelaciones" />
+            <PropertyRef Name="DevolucionesDia" />
+            <PropertyRef Name="DevolucionesDiasAnt" />
+            <PropertyRef Name="GarantiasDia" />
+            <PropertyRef Name="GarantiasDiasAnt" />
+            <PropertyRef Name="Cobranza" />
             <PropertyRef Name="Restar" />
             <PropertyRef Name="CostoMinimo" />
             <PropertyRef Name="Restante" />
@@ -2829,11 +2865,14 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.CajaFacturasGlobalesView'
           <Property Name="Tickets" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="FacturadoDeDiasAnt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Negativos" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-          <Property Name="Devoluciones" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-          <Property Name="Cancelaciones" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-          <Property Name="Oficial" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="DevolucionesDia" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DevolucionesDiasAnt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="GarantiasDia" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="GarantiasDiasAnt" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Cobranza" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Oficial" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Restar" Type="decimal" Precision="12" Scale="2" Nullable="false" />
-          <Property Name="Supuesto" Type="decimal" Precision="17" Scale="2" />
+          <Property Name="Supuesto" Type="decimal" Precision="19" Scale="2" />
           <Property Name="CostoMinimo" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Restante" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="SaldoRestante" Type="decimal" Precision="12" Scale="2" Nullable="false" />
@@ -3197,6 +3236,33 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaEgresosDetalleView' 
           <Property Name="CantidadDev" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaEgresosDevengadoEspecialCuentasView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ContaEgresosDevengadoEspecialCuentasView">
+          <Key>
+            <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
+            <PropertyRef Name="ContaEgresoID" />
+            <PropertyRef Name="DuenioID" />
+            <PropertyRef Name="ContaCuentaAuxiliarID" />
+            <PropertyRef Name="CuentaAuxiliar" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="ImporteDev" />
+          </Key>
+          <Property Name="ContaEgresoDevengadoEspecialID" Type="int" Nullable="false" />
+          <Property Name="ContaEgresoID" Type="int" Nullable="false" />
+          <Property Name="DuenioID" Type="int" Nullable="false" />
+          <Property Name="Duenio" Type="nvarchar" MaxLength="128" />
+          <Property Name="ContaCuentaID" Type="int" />
+          <Property Name="Cuenta" Type="nvarchar" MaxLength="64" />
+          <Property Name="ContaSubcuentaID" Type="int" />
+          <Property Name="Subcuenta" Type="nvarchar" MaxLength="64" />
+          <Property Name="ContaCuentaDeMayorID" Type="int" />
+          <Property Name="CuentaDeMayor" Type="nvarchar" MaxLength="64" />
+          <Property Name="ContaCuentaAuxiliarID" Type="int" Nullable="false" />
+          <Property Name="CuentaAuxiliar" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="ImporteDev" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaEgresosView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ContaEgresosView">
           <Key>
@@ -3235,6 +3301,8 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaPolizasDetalleAvanza
           <Property Name="ConceptoPoliza" Type="nvarchar" MaxLength="256" />
           <Property Name="Error" Type="bit" />
           <Property Name="FueManual" Type="bit" />
+          <Property Name="RelacionTabla" Type="nvarchar" MaxLength="64" />
+          <Property Name="RelacionID" Type="int" />
           <Property Name="ContaCuentaAuxiliarID" Type="int" Nullable="false" />
           <Property Name="CuentaAuxiliar" Type="nvarchar" MaxLength="64" />
           <Property Name="CuentaContpaq" Type="nvarchar" MaxLength="16" />
@@ -3242,6 +3310,38 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaPolizasDetalleAvanza
           <Property Name="Cargo" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Abono" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Referencia" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ControlRefaccionaria.dbo.CorteValidacionView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CorteValidacionView">
+          <Key>
+            <PropertyRef Name="CorteDetalleHistoricoID" />
+            <PropertyRef Name="Dia" />
+            <PropertyRef Name="SucursalID" />
+            <PropertyRef Name="CorteCategoriaID" />
+            <PropertyRef Name="Concepto" />
+            <PropertyRef Name="Importe" />
+          </Key>
+          <Property Name="CorteDetalleHistoricoID" Type="int" Nullable="false" />
+          <Property Name="Dia" Type="date" Nullable="false" />
+          <Property Name="SucursalID" Type="int" Nullable="false" />
+          <Property Name="CorteCategoriaID" Type="int" Nullable="false" />
+          <Property Name="RelacionID" Type="int" />
+          <Property Name="Concepto" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Factura" Type="bit" />
+          <Property Name="Importe" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Efectivo" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Cheque" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Tarjeta" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Transferencia" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Vale" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="ContaPolizaID" Type="int" />
+          <Property Name="CuentaCaja" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="CuentaAnticipoClientes" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="CuentaInventario" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="KardexCantidad" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="KardexImporte" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="ExistenciaCantidad" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.Cotizaciones9500DetalleAvanzadoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -6513,6 +6613,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ContaEgre__Conta__190C7C1A">
+          <End Role="ContaEgreso" Type="Self.ContaEgreso" Multiplicity="1" />
+          <End Role="ContaEgresoDevengadoEspecial" Type="Self.ContaEgresoDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaEgreso">
+              <PropertyRef Name="ContaEgresoID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="ContaEgresoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ContaEgre__Conta__70F39DC8">
           <End Role="ContaCuentaAuxiliar" Type="Self.ContaCuentaAuxiliar" Multiplicity="1" />
           <End Role="ContaEgreso" Type="Self.ContaEgreso" Multiplicity="*" />
@@ -6534,6 +6646,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Principal>
             <Dependent Role="ContaEgresoDevengado">
               <PropertyRef Name="ContaEgresoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaEgre__Dueni__1A00A053">
+          <End Role="Duenio" Type="Self.Duenio" Multiplicity="1" />
+          <End Role="ContaEgresoDevengadoEspecial" Type="Self.ContaEgresoDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duenio">
+              <PropertyRef Name="DuenioID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="DuenioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7758,6 +7882,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Principal>
             <Dependent Role="ParteError">
               <PropertyRef Name="SolucionUsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteExis__Parte__0E8EEDA7">
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="ParteExistenciaHistorico" Type="Self.ParteExistenciaHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteExistenciaHistorico">
+              <PropertyRef Name="ParteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10720,6 +10856,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <EntitySet Name="ContaEgresoDetalle" EntityType="Self.ContaEgresoDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContaEgresoDetalleDevengado" EntityType="Self.ContaEgresoDetalleDevengado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContaEgresoDevengado" EntityType="Self.ContaEgresoDevengado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContaEgresoDevengadoEspecial" EntityType="Self.ContaEgresoDevengadoEspecial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContaPoliza" EntityType="Self.ContaPoliza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContaPolizaDetalle" EntityType="Self.ContaPolizaDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContaPolizaError" EntityType="Self.ContaPolizaError" Schema="dbo" store:Type="Tables" />
@@ -10731,6 +10868,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <EntitySet Name="Cotizacion9500" EntityType="Self.Cotizacion9500" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cotizacion9500Detalle" EntityType="Self.Cotizacion9500Detalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CriterioABC" EntityType="Self.CriterioABC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Duenio" EntityType="Self.Duenio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstatusGenerico" EntityType="Self.EstatusGenerico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventarioConteo" EntityType="Self.InventarioConteo" Schema="dbo" store:Type="Tables" />
@@ -10786,6 +10924,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <EntitySet Name="ParteError" EntityType="Self.ParteError" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteEstatus" EntityType="Self.ParteEstatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteExistencia" EntityType="Self.ParteExistencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParteExistenciaHistorico" EntityType="Self.ParteExistenciaHistorico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteGiro" EntityType="Self.ParteGiro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteImagen" EntityType="Self.ParteImagen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteKardex" EntityType="Self.ParteKardex" Schema="dbo" store:Type="Tables" />
@@ -10968,8 +11107,11 @@ FROM [dbo].[CajaEgresosView] AS [CajaEgresosView]</DefiningQuery>
 [CajaFacturasGlobalesView].[Tickets] AS [Tickets], 
 [CajaFacturasGlobalesView].[FacturadoDeDiasAnt] AS [FacturadoDeDiasAnt], 
 [CajaFacturasGlobalesView].[Negativos] AS [Negativos], 
-[CajaFacturasGlobalesView].[Devoluciones] AS [Devoluciones], 
-[CajaFacturasGlobalesView].[Cancelaciones] AS [Cancelaciones], 
+[CajaFacturasGlobalesView].[DevolucionesDia] AS [DevolucionesDia], 
+[CajaFacturasGlobalesView].[DevolucionesDiasAnt] AS [DevolucionesDiasAnt], 
+[CajaFacturasGlobalesView].[GarantiasDia] AS [GarantiasDia], 
+[CajaFacturasGlobalesView].[GarantiasDiasAnt] AS [GarantiasDiasAnt], 
+[CajaFacturasGlobalesView].[Cobranza] AS [Cobranza], 
 [CajaFacturasGlobalesView].[Oficial] AS [Oficial], 
 [CajaFacturasGlobalesView].[Restar] AS [Restar], 
 [CajaFacturasGlobalesView].[Supuesto] AS [Supuesto], 
@@ -11229,6 +11371,24 @@ FROM [dbo].[ContaCuentasAuxiliaresView] AS [ContaCuentasAuxiliaresView]</Definin
 [ContaEgresosDetalleView].[CantidadDev] AS [CantidadDev]
 FROM [dbo].[ContaEgresosDetalleView] AS [ContaEgresosDetalleView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ContaEgresosDevengadoEspecialCuentasView" EntityType="Self.ContaEgresosDevengadoEspecialCuentasView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ContaEgresosDevengadoEspecialCuentasView].[ContaEgresoDevengadoEspecialID] AS [ContaEgresoDevengadoEspecialID], 
+[ContaEgresosDevengadoEspecialCuentasView].[ContaEgresoID] AS [ContaEgresoID], 
+[ContaEgresosDevengadoEspecialCuentasView].[DuenioID] AS [DuenioID], 
+[ContaEgresosDevengadoEspecialCuentasView].[Duenio] AS [Duenio], 
+[ContaEgresosDevengadoEspecialCuentasView].[ContaCuentaID] AS [ContaCuentaID], 
+[ContaEgresosDevengadoEspecialCuentasView].[Cuenta] AS [Cuenta], 
+[ContaEgresosDevengadoEspecialCuentasView].[ContaSubcuentaID] AS [ContaSubcuentaID], 
+[ContaEgresosDevengadoEspecialCuentasView].[Subcuenta] AS [Subcuenta], 
+[ContaEgresosDevengadoEspecialCuentasView].[ContaCuentaDeMayorID] AS [ContaCuentaDeMayorID], 
+[ContaEgresosDevengadoEspecialCuentasView].[CuentaDeMayor] AS [CuentaDeMayor], 
+[ContaEgresosDevengadoEspecialCuentasView].[ContaCuentaAuxiliarID] AS [ContaCuentaAuxiliarID], 
+[ContaEgresosDevengadoEspecialCuentasView].[CuentaAuxiliar] AS [CuentaAuxiliar], 
+[ContaEgresosDevengadoEspecialCuentasView].[Fecha] AS [Fecha], 
+[ContaEgresosDevengadoEspecialCuentasView].[ImporteDev] AS [ImporteDev]
+FROM [dbo].[ContaEgresosDevengadoEspecialCuentasView] AS [ContaEgresosDevengadoEspecialCuentasView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ContaEgresosView" EntityType="Self.ContaEgresosView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [ContaEgresosView].[ContaEgresoID] AS [ContaEgresoID], 
@@ -11254,6 +11414,8 @@ FROM [dbo].[ContaEgresosView] AS [ContaEgresosView]</DefiningQuery>
 [ContaPolizasDetalleAvanzadoView].[ConceptoPoliza] AS [ConceptoPoliza], 
 [ContaPolizasDetalleAvanzadoView].[Error] AS [Error], 
 [ContaPolizasDetalleAvanzadoView].[FueManual] AS [FueManual], 
+[ContaPolizasDetalleAvanzadoView].[RelacionTabla] AS [RelacionTabla], 
+[ContaPolizasDetalleAvanzadoView].[RelacionID] AS [RelacionID], 
 [ContaPolizasDetalleAvanzadoView].[ContaCuentaAuxiliarID] AS [ContaCuentaAuxiliarID], 
 [ContaPolizasDetalleAvanzadoView].[CuentaAuxiliar] AS [CuentaAuxiliar], 
 [ContaPolizasDetalleAvanzadoView].[CuentaContpaq] AS [CuentaContpaq], 
@@ -11262,6 +11424,30 @@ FROM [dbo].[ContaEgresosView] AS [ContaEgresosView]</DefiningQuery>
 [ContaPolizasDetalleAvanzadoView].[Abono] AS [Abono], 
 [ContaPolizasDetalleAvanzadoView].[Referencia] AS [Referencia]
 FROM [dbo].[ContaPolizasDetalleAvanzadoView] AS [ContaPolizasDetalleAvanzadoView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CorteValidacionView" EntityType="Self.CorteValidacionView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[CorteValidacionView].[CorteDetalleHistoricoID] AS [CorteDetalleHistoricoID], 
+[CorteValidacionView].[Dia] AS [Dia], 
+[CorteValidacionView].[SucursalID] AS [SucursalID], 
+[CorteValidacionView].[CorteCategoriaID] AS [CorteCategoriaID], 
+[CorteValidacionView].[RelacionID] AS [RelacionID], 
+[CorteValidacionView].[Concepto] AS [Concepto], 
+[CorteValidacionView].[Factura] AS [Factura], 
+[CorteValidacionView].[Importe] AS [Importe], 
+[CorteValidacionView].[Efectivo] AS [Efectivo], 
+[CorteValidacionView].[Cheque] AS [Cheque], 
+[CorteValidacionView].[Tarjeta] AS [Tarjeta], 
+[CorteValidacionView].[Transferencia] AS [Transferencia], 
+[CorteValidacionView].[Vale] AS [Vale], 
+[CorteValidacionView].[ContaPolizaID] AS [ContaPolizaID], 
+[CorteValidacionView].[CuentaCaja] AS [CuentaCaja], 
+[CorteValidacionView].[CuentaAnticipoClientes] AS [CuentaAnticipoClientes], 
+[CorteValidacionView].[CuentaInventario] AS [CuentaInventario], 
+[CorteValidacionView].[KardexCantidad] AS [KardexCantidad], 
+[CorteValidacionView].[KardexImporte] AS [KardexImporte], 
+[CorteValidacionView].[ExistenciaCantidad] AS [ExistenciaCantidad]
+FROM [dbo].[CorteValidacionView] AS [CorteValidacionView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Cotizaciones9500DetalleAvanzadoView" EntityType="Self.Cotizaciones9500DetalleAvanzadoView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -13192,6 +13378,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ContaEgresoDevengado" EntitySet="ContaEgresoDevengado" />
             <End Role="ContaEgresoDetalleDevengado" EntitySet="ContaEgresoDetalleDevengado" />
           </AssociationSet>
+          <AssociationSet Name="FK__ContaEgre__Conta__190C7C1A" Association="Self.FK__ContaEgre__Conta__190C7C1A">
+            <End Role="ContaEgreso" EntitySet="ContaEgreso" />
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
+          </AssociationSet>
           <AssociationSet Name="FK__ContaEgre__Conta__70F39DC8" Association="Self.FK__ContaEgre__Conta__70F39DC8">
             <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
             <End Role="ContaEgreso" EntitySet="ContaEgreso" />
@@ -13199,6 +13389,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__ContaEgre__Conta__7C655074" Association="Self.FK__ContaEgre__Conta__7C655074">
             <End Role="ContaEgreso" EntitySet="ContaEgreso" />
             <End Role="ContaEgresoDevengado" EntitySet="ContaEgresoDevengado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContaEgre__Dueni__1A00A053" Association="Self.FK__ContaEgre__Dueni__1A00A053">
+            <End Role="Duenio" EntitySet="Duenio" />
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
           </AssociationSet>
           <AssociationSet Name="FK__ContaEgre__Reali__74C42EAC" Association="Self.FK__ContaEgre__Reali__74C42EAC">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -13607,6 +13801,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__ParteErro__Soluc__1F6473EE" Association="Self.FK__ParteErro__Soluc__1F6473EE">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ParteError" EntitySet="ParteError" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteExis__Parte__0E8EEDA7" Association="Self.FK__ParteExis__Parte__0E8EEDA7">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteExistenciaHistorico" EntitySet="ParteExistenciaHistorico" />
           </AssociationSet>
           <AssociationSet Name="FK__ParteExis__Usuar__534E2C48" Association="Self.FK__ParteExis__Usuar__534E2C48">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -16095,7 +16293,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="CajaEfectivoPorDia" EntitySet="CajaEfectivoPorDia" />
           </AssociationSet>
-          <EntitySet Name="CajaFacturasGlobalesView" EntityType="RefaccionariaModelo.CajaFacturasGlobalesView" />
           <EntitySet Name="BancoCuenta" EntityType="RefaccionariaModelo.BancoCuenta" />
           <AssociationSet Name="FK__BancoCuen__Banco__1EA559DF" Association="RefaccionariaModelo.FK__BancoCuen__Banco__1EA559DF">
             <End Role="Banco" EntitySet="Banco" />
@@ -16240,7 +16437,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ContaPoliza" EntitySet="ContaPoliza" />
           </AssociationSet>
-          <EntitySet Name="ContaPolizasDetalleAvanzadoView" EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" />
           <EntitySet Name="Nomina" EntityType="RefaccionariaModelo.Nomina" />
           <AssociationSet Name="FK__Nomina__BancoCue__725CC34D" Association="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D">
             <End Role="BancoCuenta" EntitySet="BancoCuenta" />
@@ -16255,11 +16451,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="NominaUsuarioOficial" EntitySet="NominaUsuarioOficial" />
           </AssociationSet>
           <EntitySet Name="VentasPagosDetalleAvanzadoView" EntityType="RefaccionariaModelo.VentasPagosDetalleAvanzadoView" />
-          <EntitySet Name="CajaFacturaGlobal" EntityType="RefaccionariaModelo.CajaFacturaGlobal" />
-          <AssociationSet Name="FK__CajaFactu__Venta__3F9C3956" Association="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956">
-            <End Role="VentaFactura" EntitySet="VentaFactura" />
-            <End Role="CajaFacturaGlobal" EntitySet="CajaFacturaGlobal" />
-          </AssociationSet>
           <EntitySet Name="InventarioLineasAgrupadoView" EntityType="RefaccionariaModelo.InventarioLineasAgrupadoView" />
           <EntitySet Name="InventarioLineasPartesView" EntityType="RefaccionariaModelo.InventarioLineasPartesView" />
           <EntitySet Name="InventarioResultadosView" EntityType="RefaccionariaModelo.InventarioResultadosView" />
@@ -16308,10 +16499,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__CajaEgres__Sucur__3BA0BFE9" Association="RefaccionariaModelo.FK__CajaEgres__Sucur__3BA0BFE9">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="CajaEgreso" EntitySet="CajaEgreso" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CajaFactu__Sucur__0C1C9550" Association="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550">
-            <End Role="Sucursal" EntitySet="Sucursal" />
-            <End Role="CajaFacturaGlobal" EntitySet="CajaFacturaGlobal" />
           </AssociationSet>
           <AssociationSet Name="FK__CajaIngre__Sucur__321755AF" Association="RefaccionariaModelo.FK__CajaIngre__Sucur__321755AF">
             <End Role="Sucursal" EntitySet="Sucursal" />
@@ -16636,6 +16823,26 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="ProveedoresMarcasLineasView" EntityType="RefaccionariaModelo.ProveedoresMarcasLineasView" />
           <EntitySet Name="CorteCategoria" EntityType="RefaccionariaModelo.CorteCategoria" />
           <EntitySet Name="VentasPagosFormasDePagoView" EntityType="RefaccionariaModelo.VentasPagosFormasDePagoView" />
+          <FunctionImport Name="pauContaCuentasPolizasImportes" ReturnType="Collection(RefaccionariaModelo.pauContaCuentasPolizasImportes_Result)">
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CajaFacturaGlobal" EntityType="RefaccionariaModelo.CajaFacturaGlobal" />
+          <EntitySet Name="CajaFacturasGlobalesView" EntityType="RefaccionariaModelo.CajaFacturasGlobalesView" />
+          <AssociationSet Name="FK__CajaFactu__Sucur__0C1C9550" Association="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="CajaFacturaGlobal" EntitySet="CajaFacturaGlobal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CajaFactu__Venta__3F9C3956" Association="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956">
+            <End Role="VentaFactura" EntitySet="VentaFactura" />
+            <End Role="CajaFacturaGlobal" EntitySet="CajaFacturaGlobal" />
+          </AssociationSet>
+          <EntitySet Name="ParteExistenciaHistorico" EntityType="RefaccionariaModelo.ParteExistenciaHistorico" />
+          <AssociationSet Name="FK__ParteExis__Parte__0E8EEDA7" Association="RefaccionariaModelo.FK__ParteExis__Parte__0E8EEDA7">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteExistenciaHistorico" EntitySet="ParteExistenciaHistorico" />
+          </AssociationSet>
           <EntitySet Name="CorteDetalleHistorico" EntityType="RefaccionariaModelo.CorteDetalleHistorico" />
           <AssociationSet Name="FK__CorteDeta__Corte__73DAF76B" Association="RefaccionariaModelo.FK__CorteDeta__Corte__73DAF76B">
             <End Role="CorteCategoria" EntitySet="CorteCategoria" />
@@ -16645,11 +16852,19 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="CorteDetalleHistorico" EntitySet="CorteDetalleHistorico" />
           </AssociationSet>
-          <FunctionImport Name="pauContaCuentasPolizasImportes" ReturnType="Collection(RefaccionariaModelo.pauContaCuentasPolizasImportes_Result)">
-            <Parameter Name="Desde" Mode="In" Type="DateTime" />
-            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
-            <Parameter Name="SucursalID" Mode="In" Type="Int32" />
-          </FunctionImport>
+          <EntitySet Name="CorteValidacionView" EntityType="RefaccionariaModelo.CorteValidacionView" />
+          <EntitySet Name="ContaPolizasDetalleAvanzadoView" EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" />
+          <EntitySet Name="ContaEgresoDevengadoEspecial" EntityType="RefaccionariaModelo.ContaEgresoDevengadoEspecial" />
+          <AssociationSet Name="FK__ContaEgre__Conta__190C7C1A" Association="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A">
+            <End Role="ContaEgreso" EntitySet="ContaEgreso" />
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
+          </AssociationSet>
+          <EntitySet Name="Duenio" EntityType="RefaccionariaModelo.Duenio" />
+          <AssociationSet Name="FK__ContaEgre__Dueni__1A00A053" Association="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053">
+            <End Role="Duenio" EntitySet="Duenio" />
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
+          </AssociationSet>
+          <EntitySet Name="ContaEgresosDevengadoEspecialCuentasView" EntityType="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -21199,6 +21414,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="InventarioConteo" Relationship="RefaccionariaModelo.FK__Inventari__Parte__22CAF07E" FromRole="Parte" ToRole="InventarioConteo" />
           <NavigationProperty Name="VentaParteAplicacion" Relationship="RefaccionariaModelo.FK__VentaPart__Parte__414F779E" FromRole="Parte" ToRole="VentaParteAplicacion" />
           <NavigationProperty Name="ProveedorParteGanancia" Relationship="RefaccionariaModelo.FK__Proveedor__Parte__5185DF67" FromRole="Parte" ToRole="ProveedorParteGanancia" />
+          <NavigationProperty Name="ParteExistenciaHistorico" Relationship="RefaccionariaModelo.FK__ParteExis__Parte__0E8EEDA7" FromRole="Parte" ToRole="ParteExistenciaHistorico" />
         </EntityType>
         <Association Name="FK__CascoRegi__Parte__023E255B">
           <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
@@ -22701,9 +22917,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaFacturaDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__70D3A237" FromRole="VentaFactura" ToRole="VentaFacturaDetalle" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaFact__Reali__768C7B8D" FromRole="VentaFactura" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__3B4BBA2E" FromRole="VentaFactura" ToRole="Usuario" />
-          <NavigationProperty Name="CajaFacturaGlobal" Relationship="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956" FromRole="VentaFactura" ToRole="CajaFacturaGlobal" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__77809FC6" FromRole="VentaFactura" ToRole="Sucursal" />
           <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__625078B6" FromRole="VentaFactura" ToRole="VentaFacturaDevolucion" />
+          <NavigationProperty Name="CajaFacturaGlobal" Relationship="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956" FromRole="VentaFactura" ToRole="CajaFacturaGlobal" />
         </EntityType>
         <Association Name="FK__VentaFact__Clien__6561EF8B">
           <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
@@ -22886,6 +23102,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__ContaEgre__Usuar__75B852E5" FromRole="ContaEgreso" ToRole="Usuario" />
           <NavigationProperty Name="BancoCuenta" Relationship="RefaccionariaModelo.FK__ContaEgre__Banco__214CBC60" FromRole="ContaEgreso" ToRole="BancoCuenta" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__ContaEgre__Sucur__73D00A73" FromRole="ContaEgreso" ToRole="Sucursal" />
+          <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" FromRole="ContaEgreso" ToRole="ContaEgresoDevengadoEspecial" />
           </EntityType>
         <Association Name="FK__CajaEgres__Conta__106C4921">
           <End Type="RefaccionariaModelo.ContaEgreso" Role="ContaEgreso" Multiplicity="0..1" />
@@ -25327,39 +25544,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CajaFacturasGlobalesView">
-          <Key>
-            <PropertyRef Name="CajaFacturaGlobalID" />
-            <PropertyRef Name="Dia" />
-            <PropertyRef Name="SucursalID" />
-            <PropertyRef Name="Tickets" />
-            <PropertyRef Name="FacturadoDeDiasAnt" />
-            <PropertyRef Name="Negativos" />
-            <PropertyRef Name="Devoluciones" />
-            <PropertyRef Name="Cancelaciones" />
-            <PropertyRef Name="Restar" />
-            <PropertyRef Name="CostoMinimo" />
-            <PropertyRef Name="Restante" />
-            <PropertyRef Name="SaldoRestante" />
-            <PropertyRef Name="Facturado" />
-          </Key>
-          <Property Type="Int32" Name="CajaFacturaGlobalID" Nullable="false" />
-          <Property Type="DateTime" Name="Dia" Nullable="false" Precision="0" />
-          <Property Type="Int32" Name="SucursalID" Nullable="false" />
-          <Property Type="String" Name="Sucursal" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Tickets" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="FacturadoDeDiasAnt" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="Negativos" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="Devoluciones" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="Cancelaciones" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="Oficial" Precision="16" Scale="2" />
-          <Property Type="Decimal" Name="Restar" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="Supuesto" Precision="17" Scale="2" />
-          <Property Type="Decimal" Name="CostoMinimo" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="Restante" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="SaldoRestante" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="Facturado" Nullable="false" Precision="12" Scale="2" />
-        </EntityType>
         <EntityType Name="BancoCuenta">
           <Key>
             <PropertyRef Name="BancoCuentaID" />
@@ -26198,31 +26382,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ContaPolizasDetalleAvanzadoView">
-          <Key>
-            <PropertyRef Name="ContaPolizaDetalleID" />
-            <PropertyRef Name="ContaPolizaID" />
-            <PropertyRef Name="ContaCuentaAuxiliarID" />
-            <PropertyRef Name="Cargo" />
-            <PropertyRef Name="Abono" />
-          </Key>
-          <Property Name="ContaPolizaDetalleID" Type="Int32" Nullable="false" />
-          <Property Name="ContaPolizaID" Type="Int32" Nullable="false" />
-          <Property Name="FechaPoliza" Type="DateTime" Precision="3" />
-          <Property Name="OrigenPoliza" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="SucursalID" Type="Int32" />
-          <Property Name="Sucursal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ConceptoPoliza" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Error" Type="Boolean" />
-          <Property Name="FueManual" Type="Boolean" />
-          <Property Name="ContaCuentaAuxiliarID" Type="Int32" Nullable="false" />
-          <Property Name="CuentaAuxiliar" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="CuentaContpaq" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="CuentaSat" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="Cargo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Abono" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Referencia" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Nomina">
           <Key>
             <PropertyRef Name="NominaID" />
@@ -26304,40 +26463,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="ACredito" Type="Boolean" />
           <Property Name="Vendedor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="CajaFacturaGlobal">
-          <Key>
-            <PropertyRef Name="CajaFacturaGlobalID" />
-          </Key>
-          <Property Name="CajaFacturaGlobalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Dia" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SucursalID" Type="Int32" Nullable="false" />
-          <Property Name="Tickets" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="FacturadoDeDiasAnt" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Negativos" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Devoluciones" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Cancelaciones" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Restar" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="CostoMinimo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Restante" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Facturado" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="SaldoRestante" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="FacturadoVales" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="VentaFacturaID" Type="Int32" />
-          <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956" FromRole="CajaFacturaGlobal" ToRole="VentaFactura" />
-          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550" FromRole="CajaFacturaGlobal" ToRole="Sucursal" />
-        </EntityType>
-        <Association Name="FK__CajaFactu__Venta__3F9C3956">
-          <End Type="RefaccionariaModelo.VentaFactura" Role="VentaFactura" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.CajaFacturaGlobal" Role="CajaFacturaGlobal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaFactura">
-              <PropertyRef Name="VentaFacturaID" />
-            </Principal>
-            <Dependent Role="CajaFacturaGlobal">
-              <PropertyRef Name="VentaFacturaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="InventarioLineasAgrupadoView">
           <Key>
             <PropertyRef Name="Id" />
@@ -26513,7 +26638,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="CajaCambioDeTurno" Relationship="RefaccionariaModelo.FK__CajaCambi__Sucur__49C4C20E" FromRole="Sucursal" ToRole="CajaCambioDeTurno" />
           <NavigationProperty Name="CajaEfectivoPorDia" Relationship="RefaccionariaModelo.FK__CajaEfect__Sucur__521A10ED" FromRole="Sucursal" ToRole="CajaEfectivoPorDia" />
           <NavigationProperty Name="CajaEgreso" Relationship="RefaccionariaModelo.FK__CajaEgres__Sucur__3BA0BFE9" FromRole="Sucursal" ToRole="CajaEgreso" />
-          <NavigationProperty Name="CajaFacturaGlobal" Relationship="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550" FromRole="Sucursal" ToRole="CajaFacturaGlobal" />
           <NavigationProperty Name="CajaIngreso" Relationship="RefaccionariaModelo.FK__CajaIngre__Sucur__321755AF" FromRole="Sucursal" ToRole="CajaIngreso" />
           <NavigationProperty Name="ContaCuentaAuxiliarDevengadoAutomatico" Relationship="RefaccionariaModelo.FK__ContaCuen__Sucur__2AD6269A" FromRole="Sucursal" ToRole="ContaCuentaAuxiliarDevengadoAutomatico" />
           <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__ContaEgre__Sucur__73D00A73" FromRole="Sucursal" ToRole="ContaEgreso" />
@@ -26549,6 +26673,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="MetaUtilidadSucursal" Relationship="RefaccionariaModelo.FK__MetaUtili__Sucur__6641052B" FromRole="Sucursal" ToRole="MetaUtilidadSucursal" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Venta__SucursalI__0F382DC6" FromRole="Sucursal" ToRole="Venta" />
           <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__63449CEF" FromRole="Sucursal" ToRole="VentaFacturaDevolucion" />
+          <NavigationProperty Name="CajaFacturaGlobal" Relationship="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550" FromRole="Sucursal" ToRole="CajaFacturaGlobal" />
           <NavigationProperty Name="CorteDetalleHistorico" Relationship="RefaccionariaModelo.FK__CorteDeta__Sucur__72E6D332" FromRole="Sucursal" ToRole="CorteDetalleHistorico" />
         </EntityType>
         <Association Name="FK__Autorizac__Sucur__2D9297B4">
@@ -26607,18 +26732,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               <PropertyRef Name="SucursalID" />
             </Principal>
             <Dependent Role="CajaEgreso">
-              <PropertyRef Name="SucursalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CajaFactu__Sucur__0C1C9550">
-          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.CajaFacturaGlobal" Role="CajaFacturaGlobal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sucursal">
-              <PropertyRef Name="SucursalID" />
-            </Principal>
-            <Dependent Role="CajaFacturaGlobal">
               <PropertyRef Name="SucursalID" />
             </Dependent>
           </ReferentialConstraint>
@@ -27947,6 +28060,131 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Vale" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="Importe" Type="Decimal" Precision="38" Scale="2" />
         </EntityType>
+        <ComplexType Name="pauContaCuentasPolizasImportes_Result">
+          <Property Type="Int32" Name="ContaCuentaID" Nullable="true" />
+          <Property Type="String" Name="Cuenta" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="ContaSubcuentaID" Nullable="true" />
+          <Property Type="String" Name="Subcuenta" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="ContaCuentaDeMayorID" Nullable="false" />
+          <Property Type="String" Name="CuentaDeMayor" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="ContaCuentaAuxiliarID" Nullable="false" />
+          <Property Type="String" Name="CuentaAuxiliar" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="SucursalID" Nullable="true" />
+          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <EntityType Name="CajaFacturaGlobal">
+          <Key>
+            <PropertyRef Name="CajaFacturaGlobalID" />
+          </Key>
+          <Property Name="CajaFacturaGlobalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="Tickets" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="FacturadoDeDiasAnt" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Negativos" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Restar" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CostoMinimo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Restante" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Facturado" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SaldoRestante" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="FacturadoVales" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="VentaFacturaID" Type="Int32" />
+          <Property Name="DevolucionesDia" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="DevolucionesDiasAnt" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="GarantiasDia" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="GarantiasDiasAnt" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Cobranza" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550" FromRole="CajaFacturaGlobal" ToRole="Sucursal" />
+          <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956" FromRole="CajaFacturaGlobal" ToRole="VentaFactura" />
+        </EntityType>
+        <EntityType Name="CajaFacturasGlobalesView">
+          <Key>
+            <PropertyRef Name="CajaFacturaGlobalID" />
+            <PropertyRef Name="Dia" />
+            <PropertyRef Name="SucursalID" />
+            <PropertyRef Name="Tickets" />
+            <PropertyRef Name="FacturadoDeDiasAnt" />
+            <PropertyRef Name="Negativos" />
+            <PropertyRef Name="DevolucionesDia" />
+            <PropertyRef Name="DevolucionesDiasAnt" />
+            <PropertyRef Name="GarantiasDia" />
+            <PropertyRef Name="GarantiasDiasAnt" />
+            <PropertyRef Name="Cobranza" />
+            <PropertyRef Name="Restar" />
+            <PropertyRef Name="CostoMinimo" />
+            <PropertyRef Name="Restante" />
+            <PropertyRef Name="SaldoRestante" />
+            <PropertyRef Name="Facturado" />
+          </Key>
+          <Property Name="CajaFacturaGlobalID" Type="Int32" Nullable="false" />
+          <Property Name="Dia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="Sucursal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tickets" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="FacturadoDeDiasAnt" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Negativos" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="DevolucionesDia" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="DevolucionesDiasAnt" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="GarantiasDia" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="GarantiasDiasAnt" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Cobranza" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Oficial" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Restar" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Supuesto" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="CostoMinimo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Restante" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SaldoRestante" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Facturado" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+        </EntityType>
+        <Association Name="FK__CajaFactu__Sucur__0C1C9550">
+          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.CajaFacturaGlobal" Role="CajaFacturaGlobal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="CajaFacturaGlobal">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CajaFactu__Venta__3F9C3956">
+          <End Type="RefaccionariaModelo.VentaFactura" Role="VentaFactura" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.CajaFacturaGlobal" Role="CajaFacturaGlobal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaFactura">
+              <PropertyRef Name="VentaFacturaID" />
+            </Principal>
+            <Dependent Role="CajaFacturaGlobal">
+              <PropertyRef Name="VentaFacturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ParteExistenciaHistorico">
+          <Key>
+            <PropertyRef Name="ParteExistenciaHistoricoID" />
+          </Key>
+          <Property Name="ParteExistenciaHistoricoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="ExistenciaNueva" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RelacionTabla" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RelacionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK__ParteExis__Parte__0E8EEDA7" FromRole="ParteExistenciaHistorico" ToRole="Parte" />
+        </EntityType>
+        <Association Name="FK__ParteExis__Parte__0E8EEDA7">
+          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ParteExistenciaHistorico" Role="ParteExistenciaHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteExistenciaHistorico">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="CorteDetalleHistorico">
           <Key>
             <PropertyRef Name="CorteDetalleHistoricoID" />
@@ -27964,6 +28202,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Tarjeta" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Transferencia" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Vale" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Factura" Type="Boolean" />
           <NavigationProperty Name="CorteCategoria" Relationship="RefaccionariaModelo.FK__CorteDeta__Corte__73DAF76B" FromRole="CorteDetalleHistorico" ToRole="CorteCategoria" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__CorteDeta__Sucur__72E6D332" FromRole="CorteDetalleHistorico" ToRole="Sucursal" />
         </EntityType>
@@ -27991,18 +28230,132 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="pauContaCuentasPolizasImportes_Result">
-          <Property Type="Int32" Name="ContaCuentaID" Nullable="true" />
-          <Property Type="String" Name="Cuenta" Nullable="true" MaxLength="64" />
-          <Property Type="Int32" Name="ContaSubcuentaID" Nullable="true" />
-          <Property Type="String" Name="Subcuenta" Nullable="true" MaxLength="64" />
-          <Property Type="Int32" Name="ContaCuentaDeMayorID" Nullable="false" />
-          <Property Type="String" Name="CuentaDeMayor" Nullable="true" MaxLength="64" />
-          <Property Type="Int32" Name="ContaCuentaAuxiliarID" Nullable="false" />
-          <Property Type="String" Name="CuentaAuxiliar" Nullable="false" MaxLength="64" />
-          <Property Type="Int32" Name="SucursalID" Nullable="true" />
-          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="2" />
-        </ComplexType>
+        <EntityType Name="CorteValidacionView">
+          <Key>
+            <PropertyRef Name="CorteDetalleHistoricoID" />
+            <PropertyRef Name="Dia" />
+            <PropertyRef Name="SucursalID" />
+            <PropertyRef Name="CorteCategoriaID" />
+            <PropertyRef Name="Concepto" />
+            <PropertyRef Name="Importe" />
+          </Key>
+          <Property Name="CorteDetalleHistoricoID" Type="Int32" Nullable="false" />
+          <Property Name="Dia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="CorteCategoriaID" Type="Int32" Nullable="false" />
+          <Property Name="RelacionID" Type="Int32" />
+          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Factura" Type="Boolean" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Efectivo" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Cheque" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Tarjeta" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Transferencia" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Vale" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ContaPolizaID" Type="Int32" />
+          <Property Name="CuentaCaja" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="CuentaAnticipoClientes" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="CuentaInventario" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="KardexCantidad" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="KardexImporte" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="ExistenciaCantidad" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="ContaPolizasDetalleAvanzadoView">
+          <Key>
+            <PropertyRef Name="ContaPolizaDetalleID" />
+            <PropertyRef Name="ContaPolizaID" />
+            <PropertyRef Name="ContaCuentaAuxiliarID" />
+            <PropertyRef Name="Cargo" />
+            <PropertyRef Name="Abono" />
+          </Key>
+          <Property Name="ContaPolizaDetalleID" Type="Int32" Nullable="false" />
+          <Property Name="ContaPolizaID" Type="Int32" Nullable="false" />
+          <Property Name="FechaPoliza" Type="DateTime" Precision="3" />
+          <Property Name="OrigenPoliza" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="SucursalID" Type="Int32" />
+          <Property Name="Sucursal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ConceptoPoliza" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Error" Type="Boolean" />
+          <Property Name="FueManual" Type="Boolean" />
+          <Property Name="RelacionTabla" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RelacionID" Type="Int32" />
+          <Property Name="ContaCuentaAuxiliarID" Type="Int32" Nullable="false" />
+          <Property Name="CuentaAuxiliar" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CuentaContpaq" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="CuentaSat" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Cargo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Abono" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Referencia" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ContaEgresoDevengadoEspecial">
+          <Key>
+            <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
+          </Key>
+          <Property Name="ContaEgresoDevengadoEspecialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContaEgresoID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DuenioID" Type="Int32" Nullable="false" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" FromRole="ContaEgresoDevengadoEspecial" ToRole="ContaEgreso" />
+          <NavigationProperty Name="Duenio" Relationship="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" FromRole="ContaEgresoDevengadoEspecial" ToRole="Duenio" />
+        </EntityType>
+        <Association Name="FK__ContaEgre__Conta__190C7C1A">
+          <End Type="RefaccionariaModelo.ContaEgreso" Role="ContaEgreso" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaEgreso">
+              <PropertyRef Name="ContaEgresoID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="ContaEgresoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Duenio">
+          <Key>
+            <PropertyRef Name="DuenioID" />
+          </Key>
+          <Property Name="DuenioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Duenio1" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" FromRole="Duenio" ToRole="ContaEgresoDevengadoEspecial" />
+        </EntityType>
+        <Association Name="FK__ContaEgre__Dueni__1A00A053">
+          <End Type="RefaccionariaModelo.Duenio" Role="Duenio" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duenio">
+              <PropertyRef Name="DuenioID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="DuenioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ContaEgresosDevengadoEspecialCuentasView">
+          <Key>
+            <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
+            <PropertyRef Name="ContaEgresoID" />
+            <PropertyRef Name="DuenioID" />
+            <PropertyRef Name="ContaCuentaAuxiliarID" />
+            <PropertyRef Name="CuentaAuxiliar" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="ImporteDev" />
+          </Key>
+          <Property Name="ContaEgresoDevengadoEspecialID" Type="Int32" Nullable="false" />
+          <Property Name="ContaEgresoID" Type="Int32" Nullable="false" />
+          <Property Name="DuenioID" Type="Int32" Nullable="false" />
+          <Property Name="Duenio" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ContaCuentaID" Type="Int32" />
+          <Property Name="Cuenta" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ContaSubcuentaID" Type="Int32" />
+          <Property Name="Subcuenta" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ContaCuentaDeMayorID" Type="Int32" />
+          <Property Name="CuentaDeMayor" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ContaCuentaAuxiliarID" Type="Int32" Nullable="false" />
+          <Property Name="CuentaAuxiliar" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ImporteDev" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -32741,28 +33094,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CajaFacturasGlobalesView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.CajaFacturasGlobalesView">
-              <MappingFragment StoreEntitySet="CajaFacturasGlobalesView">
-                <ScalarProperty Name="Facturado" ColumnName="Facturado" />
-                <ScalarProperty Name="SaldoRestante" ColumnName="SaldoRestante" />
-                <ScalarProperty Name="Restante" ColumnName="Restante" />
-                <ScalarProperty Name="CostoMinimo" ColumnName="CostoMinimo" />
-                <ScalarProperty Name="Supuesto" ColumnName="Supuesto" />
-                <ScalarProperty Name="Restar" ColumnName="Restar" />
-                <ScalarProperty Name="Oficial" ColumnName="Oficial" />
-                <ScalarProperty Name="Cancelaciones" ColumnName="Cancelaciones" />
-                <ScalarProperty Name="Devoluciones" ColumnName="Devoluciones" />
-                <ScalarProperty Name="Negativos" ColumnName="Negativos" />
-                <ScalarProperty Name="FacturadoDeDiasAnt" ColumnName="FacturadoDeDiasAnt" />
-                <ScalarProperty Name="Tickets" ColumnName="Tickets" />
-                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="Dia" ColumnName="Dia" />
-                <ScalarProperty Name="CajaFacturaGlobalID" ColumnName="CajaFacturaGlobalID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BancoCuenta">
             <EntityTypeMapping TypeName="RefaccionariaModelo.BancoCuenta">
               <MappingFragment StoreEntitySet="BancoCuenta">
@@ -33139,28 +33470,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContaPolizasDetalleAvanzadoView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView">
-              <MappingFragment StoreEntitySet="ContaPolizasDetalleAvanzadoView">
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Abono" ColumnName="Abono" />
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
-                <ScalarProperty Name="CuentaSat" ColumnName="CuentaSat" />
-                <ScalarProperty Name="CuentaContpaq" ColumnName="CuentaContpaq" />
-                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
-                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
-                <ScalarProperty Name="FueManual" ColumnName="FueManual" />
-                <ScalarProperty Name="Error" ColumnName="Error" />
-                <ScalarProperty Name="ConceptoPoliza" ColumnName="ConceptoPoliza" />
-                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="OrigenPoliza" ColumnName="OrigenPoliza" />
-                <ScalarProperty Name="FechaPoliza" ColumnName="FechaPoliza" />
-                <ScalarProperty Name="ContaPolizaID" ColumnName="ContaPolizaID" />
-                <ScalarProperty Name="ContaPolizaDetalleID" ColumnName="ContaPolizaDetalleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Nomina">
             <EntityTypeMapping TypeName="RefaccionariaModelo.Nomina">
               <MappingFragment StoreEntitySet="Nomina">
@@ -33198,27 +33507,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="FormaDePago" ColumnName="FormaDePago" />
                 <ScalarProperty Name="FormaDePagoID" ColumnName="FormaDePagoID" />
                 <ScalarProperty Name="VentaPagoDetalleID" ColumnName="VentaPagoDetalleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CajaFacturaGlobal">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.CajaFacturaGlobal">
-              <MappingFragment StoreEntitySet="CajaFacturaGlobal">
-                <ScalarProperty Name="VentaFacturaID" ColumnName="VentaFacturaID" />
-                <ScalarProperty Name="FacturadoVales" ColumnName="FacturadoVales" />
-                <ScalarProperty Name="SaldoRestante" ColumnName="SaldoRestante" />
-                <ScalarProperty Name="Facturado" ColumnName="Facturado" />
-                <ScalarProperty Name="Restante" ColumnName="Restante" />
-                <ScalarProperty Name="CostoMinimo" ColumnName="CostoMinimo" />
-                <ScalarProperty Name="Restar" ColumnName="Restar" />
-                <ScalarProperty Name="Cancelaciones" ColumnName="Cancelaciones" />
-                <ScalarProperty Name="Devoluciones" ColumnName="Devoluciones" />
-                <ScalarProperty Name="Negativos" ColumnName="Negativos" />
-                <ScalarProperty Name="FacturadoDeDiasAnt" ColumnName="FacturadoDeDiasAnt" />
-                <ScalarProperty Name="Tickets" ColumnName="Tickets" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="Dia" ColumnName="Dia" />
-                <ScalarProperty Name="CajaFacturaGlobalID" ColumnName="CajaFacturaGlobalID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -33720,25 +34008,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CorteDetalleHistorico">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.CorteDetalleHistorico">
-              <MappingFragment StoreEntitySet="CorteDetalleHistorico">
-                <ScalarProperty Name="Vale" ColumnName="Vale" />
-                <ScalarProperty Name="Transferencia" ColumnName="Transferencia" />
-                <ScalarProperty Name="Tarjeta" ColumnName="Tarjeta" />
-                <ScalarProperty Name="Cheque" ColumnName="Cheque" />
-                <ScalarProperty Name="Efectivo" ColumnName="Efectivo" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
-                <ScalarProperty Name="RelacionTabla" ColumnName="RelacionTabla" />
-                <ScalarProperty Name="CorteCategoriaID" ColumnName="CorteCategoriaID" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="Dia" ColumnName="Dia" />
-                <ScalarProperty Name="CorteDetalleHistoricoID" ColumnName="CorteDetalleHistoricoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pauContaCuentasPolizasImportes" FunctionName="ControlRefaccionariaModel.Store.pauContaCuentasPolizasImportes">
             <ResultMapping>
               <ComplexTypeMapping TypeName="RefaccionariaModelo.pauContaCuentasPolizasImportes_Result">
@@ -33755,6 +34024,177 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CajaFacturaGlobal">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.CajaFacturaGlobal">
+              <MappingFragment StoreEntitySet="CajaFacturaGlobal">
+                <ScalarProperty Name="Cobranza" ColumnName="Cobranza" />
+                <ScalarProperty Name="GarantiasDiasAnt" ColumnName="GarantiasDiasAnt" />
+                <ScalarProperty Name="GarantiasDia" ColumnName="GarantiasDia" />
+                <ScalarProperty Name="DevolucionesDiasAnt" ColumnName="DevolucionesDiasAnt" />
+                <ScalarProperty Name="DevolucionesDia" ColumnName="DevolucionesDia" />
+                <ScalarProperty Name="VentaFacturaID" ColumnName="VentaFacturaID" />
+                <ScalarProperty Name="FacturadoVales" ColumnName="FacturadoVales" />
+                <ScalarProperty Name="SaldoRestante" ColumnName="SaldoRestante" />
+                <ScalarProperty Name="Facturado" ColumnName="Facturado" />
+                <ScalarProperty Name="Restante" ColumnName="Restante" />
+                <ScalarProperty Name="CostoMinimo" ColumnName="CostoMinimo" />
+                <ScalarProperty Name="Restar" ColumnName="Restar" />
+                <ScalarProperty Name="Negativos" ColumnName="Negativos" />
+                <ScalarProperty Name="FacturadoDeDiasAnt" ColumnName="FacturadoDeDiasAnt" />
+                <ScalarProperty Name="Tickets" ColumnName="Tickets" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="CajaFacturaGlobalID" ColumnName="CajaFacturaGlobalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaFacturasGlobalesView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.CajaFacturasGlobalesView">
+              <MappingFragment StoreEntitySet="CajaFacturasGlobalesView">
+                <ScalarProperty Name="Facturado" ColumnName="Facturado" />
+                <ScalarProperty Name="SaldoRestante" ColumnName="SaldoRestante" />
+                <ScalarProperty Name="Restante" ColumnName="Restante" />
+                <ScalarProperty Name="CostoMinimo" ColumnName="CostoMinimo" />
+                <ScalarProperty Name="Supuesto" ColumnName="Supuesto" />
+                <ScalarProperty Name="Restar" ColumnName="Restar" />
+                <ScalarProperty Name="Oficial" ColumnName="Oficial" />
+                <ScalarProperty Name="Cobranza" ColumnName="Cobranza" />
+                <ScalarProperty Name="GarantiasDiasAnt" ColumnName="GarantiasDiasAnt" />
+                <ScalarProperty Name="GarantiasDia" ColumnName="GarantiasDia" />
+                <ScalarProperty Name="DevolucionesDiasAnt" ColumnName="DevolucionesDiasAnt" />
+                <ScalarProperty Name="DevolucionesDia" ColumnName="DevolucionesDia" />
+                <ScalarProperty Name="Negativos" ColumnName="Negativos" />
+                <ScalarProperty Name="FacturadoDeDiasAnt" ColumnName="FacturadoDeDiasAnt" />
+                <ScalarProperty Name="Tickets" ColumnName="Tickets" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="CajaFacturaGlobalID" ColumnName="CajaFacturaGlobalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParteExistenciaHistorico">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ParteExistenciaHistorico">
+              <MappingFragment StoreEntitySet="ParteExistenciaHistorico">
+                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
+                <ScalarProperty Name="RelacionTabla" ColumnName="RelacionTabla" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="ExistenciaNueva" ColumnName="ExistenciaNueva" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="ParteExistenciaHistoricoID" ColumnName="ParteExistenciaHistoricoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CorteDetalleHistorico">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.CorteDetalleHistorico">
+              <MappingFragment StoreEntitySet="CorteDetalleHistorico">
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="Vale" ColumnName="Vale" />
+                <ScalarProperty Name="Transferencia" ColumnName="Transferencia" />
+                <ScalarProperty Name="Tarjeta" ColumnName="Tarjeta" />
+                <ScalarProperty Name="Cheque" ColumnName="Cheque" />
+                <ScalarProperty Name="Efectivo" ColumnName="Efectivo" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
+                <ScalarProperty Name="RelacionTabla" ColumnName="RelacionTabla" />
+                <ScalarProperty Name="CorteCategoriaID" ColumnName="CorteCategoriaID" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="CorteDetalleHistoricoID" ColumnName="CorteDetalleHistoricoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CorteValidacionView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.CorteValidacionView">
+              <MappingFragment StoreEntitySet="CorteValidacionView">
+                <ScalarProperty Name="ExistenciaCantidad" ColumnName="ExistenciaCantidad" />
+                <ScalarProperty Name="KardexImporte" ColumnName="KardexImporte" />
+                <ScalarProperty Name="KardexCantidad" ColumnName="KardexCantidad" />
+                <ScalarProperty Name="CuentaInventario" ColumnName="CuentaInventario" />
+                <ScalarProperty Name="CuentaAnticipoClientes" ColumnName="CuentaAnticipoClientes" />
+                <ScalarProperty Name="CuentaCaja" ColumnName="CuentaCaja" />
+                <ScalarProperty Name="ContaPolizaID" ColumnName="ContaPolizaID" />
+                <ScalarProperty Name="Vale" ColumnName="Vale" />
+                <ScalarProperty Name="Transferencia" ColumnName="Transferencia" />
+                <ScalarProperty Name="Tarjeta" ColumnName="Tarjeta" />
+                <ScalarProperty Name="Cheque" ColumnName="Cheque" />
+                <ScalarProperty Name="Efectivo" ColumnName="Efectivo" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
+                <ScalarProperty Name="CorteCategoriaID" ColumnName="CorteCategoriaID" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="CorteDetalleHistoricoID" ColumnName="CorteDetalleHistoricoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContaPolizasDetalleAvanzadoView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView">
+              <MappingFragment StoreEntitySet="ContaPolizasDetalleAvanzadoView">
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Abono" ColumnName="Abono" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="CuentaSat" ColumnName="CuentaSat" />
+                <ScalarProperty Name="CuentaContpaq" ColumnName="CuentaContpaq" />
+                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
+                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
+                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
+                <ScalarProperty Name="RelacionTabla" ColumnName="RelacionTabla" />
+                <ScalarProperty Name="FueManual" ColumnName="FueManual" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="ConceptoPoliza" ColumnName="ConceptoPoliza" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="OrigenPoliza" ColumnName="OrigenPoliza" />
+                <ScalarProperty Name="FechaPoliza" ColumnName="FechaPoliza" />
+                <ScalarProperty Name="ContaPolizaID" ColumnName="ContaPolizaID" />
+                <ScalarProperty Name="ContaPolizaDetalleID" ColumnName="ContaPolizaDetalleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContaEgresoDevengadoEspecial">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresoDevengadoEspecial">
+              <MappingFragment StoreEntitySet="ContaEgresoDevengadoEspecial">
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="DuenioID" ColumnName="DuenioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
+                <ScalarProperty Name="ContaEgresoDevengadoEspecialID" ColumnName="ContaEgresoDevengadoEspecialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Duenio">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.Duenio">
+              <MappingFragment StoreEntitySet="Duenio">
+                <ScalarProperty Name="Duenio1" ColumnName="Duenio" />
+                <ScalarProperty Name="DuenioID" ColumnName="DuenioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContaEgresosDevengadoEspecialCuentasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView">
+              <MappingFragment StoreEntitySet="ContaEgresosDevengadoEspecialCuentasView">
+                <ScalarProperty Name="ImporteDev" ColumnName="ImporteDev" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
+                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
+                <ScalarProperty Name="CuentaDeMayor" ColumnName="CuentaDeMayor" />
+                <ScalarProperty Name="ContaCuentaDeMayorID" ColumnName="ContaCuentaDeMayorID" />
+                <ScalarProperty Name="Subcuenta" ColumnName="Subcuenta" />
+                <ScalarProperty Name="ContaSubcuentaID" ColumnName="ContaSubcuentaID" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="ContaCuentaID" ColumnName="ContaCuentaID" />
+                <ScalarProperty Name="Duenio" ColumnName="Duenio" />
+                <ScalarProperty Name="DuenioID" ColumnName="DuenioID" />
+                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
+                <ScalarProperty Name="ContaEgresoDevengadoEspecialID" ColumnName="ContaEgresoDevengadoEspecialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -40572,7 +41012,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="15.388023412806195" PointY="85.421012994904089" />
           <ConnectorPoint PointX="15.388023412806195" PointY="65.537903645833353" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="RefaccionariaModelo.CajaFacturasGlobalesView" Width="1.5" PointX="37.375" PointY="11.75" Height="4.0956022135417243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.BancoCuenta" Width="1.5" PointX="5.25" PointY="57" Height="3.134095052083353" />
         <AssociationConnector Association="RefaccionariaModelo.FK__BancoCuen__Banco__1EA559DF" >
           <ConnectorPoint PointX="4.5" PointY="54.754999000000005" />
@@ -41562,14 +42001,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__5CD79682" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__7B5C1DA2" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Reali__5DCBBABB" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" Width="1.5" PointX="12.375" PointY="26.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Nomina" Width="1.5" PointX="7.5" PointY="77.25" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasPagosDetalleAvanzadoView" Width="1.5" PointX="30.375" PointY="38.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.CajaFacturaGlobal" Width="1.5" PointX="36.875" PointY="56.125" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956" />
         <EntityTypeShape EntityType="RefaccionariaModelo.InventarioLineasAgrupadoView" Width="1.5" PointX="19.375" PointY="37.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.InventarioLineasPartesView" Width="1.5" PointX="26.375" PointY="33.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.InventarioResultadosView" Width="1.5" PointX="40.375" PointY="16.75" />
@@ -41587,7 +42023,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__CajaCambi__Sucur__49C4C20E" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CajaEfect__Sucur__521A10ED" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CajaEgres__Sucur__3BA0BFE9" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CajaIngre__Sucur__321755AF" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Sucur__2AD6269A" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Sucur__73D00A73" />
@@ -41680,9 +42115,22 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresMarcasLineasView" Width="1.5" PointX="41.375" PointY="6.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.CorteCategoria" Width="1.5" PointX="6" PointY="118.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasPagosFormasDePagoView" Width="1.5" PointX="41.375" PointY="10.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.CorteDetalleHistorico" Width="1.5" PointX="8.25" PointY="120.625" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.CajaFacturaGlobal" Width="1.5" PointX="36.875" PointY="97.125" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.CajaFacturasGlobalesView" Width="1.5" PointX="41.375" PointY="34.75" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__CajaFactu__Venta__3F9C3956" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ParteExistenciaHistorico" Width="1.5" PointX="26.75" PointY="95.875" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ParteExis__Parte__0E8EEDA7" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.CorteDetalleHistorico" Width="1.5" PointX="8.25" PointY="120.5" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Corte__73DAF76B" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Sucur__72E6D332" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.CorteValidacionView" Width="1.5" PointX="38.375" PointY="41.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" Width="1.5" PointX="41.375" PointY="40.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Width="1.5" PointX="35.625" PointY="43.125" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.Duenio" Width="1.5" PointX="12.375" PointY="26.875" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView" Width="1.5" PointX="35.375" PointY="11.75" />
         </Diagram>
     </Diagrams>
   </Designer>

@@ -126,6 +126,7 @@ namespace Refaccionaria.Modelo
             public const string Nomina = "Nomina";
             public const string CajaFacturaGlobal = "CajaFacturaGlobal";
             public const string NominaImpuesto = "NominaImpuesto";
+            public const string CascoRegistro = "CascoRegistro";
         }
 
         public class CajaTiposDeIngreso
@@ -172,6 +173,7 @@ namespace Refaccionaria.Modelo
             public const string SoloUnaEtiqueta = "Sólo 1 Et.";
             public const string EsPar = "Par";
             public const string Costo = "Costo";
+            public const string CostoConDescuento = "CostoConDescuento";
             public const string PorUtil1 = "% Util 1";
             public const string PorUtil2 = "% Util 2";
             public const string PorUtil3 = "% Util 3";

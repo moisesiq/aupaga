@@ -81,6 +81,7 @@
             this.Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ventas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostoConDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Por1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio1Ant = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -208,6 +209,7 @@
             this.Existencia,
             this.Ventas,
             this.Costo,
+            this.CostoConDescuento,
             this.Por1,
             this.Precio1,
             this.Precio1Ant,
@@ -506,6 +508,12 @@
             this.Costo.Name = "Costo";
             this.Costo.Width = 60;
             // 
+            // CostoConDescuento
+            // 
+            this.CostoConDescuento.HeaderText = "Costo desc.";
+            this.CostoConDescuento.Name = "CostoConDescuento";
+            this.CostoConDescuento.Visible = false;
+            // 
             // Por1
             // 
             this.Por1.HeaderText = "%1";
@@ -699,6 +707,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Existencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ventas;
         private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CostoConDescuento;
         private System.Windows.Forms.DataGridViewTextBoxColumn Por1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio1Ant;

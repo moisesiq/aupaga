@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Linq;
 
 using AdvancedDataGridView;
 
@@ -33,27 +34,11 @@ namespace Refaccionaria.App
 
         private void CuentasPorSemana_Load(object sender, EventArgs e)
         {
+            this.cmbAnio.Items.AddRange(new object[] { 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 });
+            this.cmbAnio.Text = DateTime.Now.Year.ToString();
+
             // Se agregan las columnas variables
-            DateTime dAhora = DateTime.Now;
-            int iAnio = dAhora.Year;
-            var oFechas = UtilDatos.FechasDeComisiones(new DateTime(iAnio, 1, 1));
-            DateTime dIni = oFechas.Valor1;
-            int iColSem = 0;
-            while (dIni.Year <= iAnio)
-            {
-                string sEnc = string.Format("{0}\n{1}", dIni.ToString("dd/MMM"), dIni.AddDays(6).ToString("dd/MMM"));
-                var oCol = new DataGridViewTextBoxColumn() { Name = ("Sem" + dIni.ToString("d")), HeaderText = sEnc, Width = 80 };
-                oCol.FormatoMoneda();
-                this.tgvDatos.Columns.Add(oCol);
-
-                if (dAhora >= dIni && dAhora < dIni.AddDays(7))
-                    iColSem = this.tgvDatos.Columns.Count;
-
-                dIni = dIni.AddDays(7);
-            }
-
-            // this.tgvDatos.HorizontalScrollingOffset = this.tgvDatos.Columns[10].HeaderCell.ContentBounds.Left;
-            this.tgvDatos.FirstDisplayedScrollingColumnIndex = (iColSem - 1);
+            this.LlenarColumnasAnio(DateTime.Now.Year);
             
             // Se cargan los datos
             this.CargarDatos();
@@ -70,9 +55,46 @@ namespace Refaccionaria.App
                 this.CargarDatos();
         }
 
+        private void cmbAnio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbAnio.Focused)
+            {
+                this.LlenarColumnasAnio(Helper.ConvertirEntero(this.cmbAnio.Text));
+                this.CargarDatos();
+            }
+        }
+
         #endregion
 
         #region [ Métodos ]
+
+        private void LlenarColumnasAnio(int iAnio)
+        {
+            // Se borran las columnas de semanas
+            for (int iCol = (this.tgvDatos.Columns.Count - 1); iCol > 1; iCol--)
+                this.tgvDatos.Columns.RemoveAt(iCol);
+
+            // Se agregan las nuevas columnas
+            DateTime dDia = new DateTime(iAnio, DateTime.Now.Month, DateTime.Now.Day);
+            var oFechas = UtilDatos.FechasDeComisiones(new DateTime(iAnio, 1, 1));
+            DateTime dIni = oFechas.Valor1;
+            int iColSem = 0;
+            while (dIni.Year <= iAnio)
+            {
+                string sEnc = string.Format("{0}\n{1}", dIni.ToString("dd/MMM"), dIni.AddDays(6).ToString("dd/MMM"));
+                var oCol = new DataGridViewTextBoxColumn() { Name = ("Sem" + dIni.ToString("d")), HeaderText = sEnc, Width = 80 };
+                oCol.FormatoMoneda();
+                this.tgvDatos.Columns.Add(oCol);
+
+                if (dDia >= dIni && dDia < dIni.AddDays(7))
+                    iColSem = this.tgvDatos.Columns.Count;
+
+                dIni = dIni.AddDays(7);
+            }
+
+            // this.tgvDatos.HorizontalScrollingOffset = this.tgvDatos.Columns[10].HeaderCell.ContentBounds.Left;
+            this.tgvDatos.FirstDisplayedScrollingColumnIndex = (iColSem - 1);
+        }
 
         private void LlenarDetalleSemana(DataGridViewCell oCelda)
         {
@@ -114,8 +136,11 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             var oParams = new Dictionary<string, object>();
-            oParams.Add("Desde", new DateTime(DateTime.Today.Year, 1, 1));
-            oParams.Add("Hasta", new DateTime(DateTime.Today.Year, 12, 31));
+            int iAnio = Helper.ConvertirEntero(this.cmbAnio.Text);
+            DateTime dDesde = new DateTime(iAnio, 1, 1);
+            DateTime dHasta = new DateTime(iAnio, 12, 31);
+            oParams.Add("Desde", dDesde);
+            oParams.Add("Hasta", dHasta);
             oParams.Add("AfectaMetas", this.chkAfectaMetas.Checked);
 
             // Se llenan los datos
@@ -242,6 +267,60 @@ namespace Refaccionaria.App
                 }
             }
 
+            // Se llenan los datos de devengados especiales
+            DateTime dHastaMas1 = dHasta.AddDays(1);
+            var oDevEsp = General.GetListOf<ContaEgresosDevengadoEspecialCuentasView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1)
+                .OrderBy(c => c.Duenio).ThenBy(c => c.Cuenta).ThenBy(c => c.Subcuenta).ThenBy(c => c.CuentaDeMayor).ThenBy(c => c.CuentaAuxiliar)
+                .ThenByDescending(c => c.Fecha);
+            TreeGridNode oNodoDuenio = oNodoCuenta = oNodoSubcuenta = oNodoCuentaDeMayor = oNodoCuentaAuxiliar = null;
+            string sDuenio = sCuenta = sSubcuenta = sCuentaDeMayor = sCuentaAuxiliar = "";
+            foreach (var oReg in oDevEsp)
+            {
+                // Nodo de Sucursal
+                if (oReg.Duenio != sSucursal)
+                {
+                    sDuenio = oReg.Duenio;
+                    oNodoDuenio = this.tgvDatos.Nodes.Add(sDuenio);
+                    sCuenta = "";
+                }
+                // Nodo de Cuenta
+                if (oReg.Cuenta != sCuenta)
+                {
+                    sCuenta = oReg.Cuenta;
+                    oNodoCuenta = oNodoDuenio.Nodes.Add(sCuenta);
+                    sSubcuenta = "";
+                }
+                // Nodo de Subcuenta
+                if (oReg.Subcuenta != sSubcuenta)
+                {
+                    sSubcuenta = oReg.Subcuenta;
+                    oNodoSubcuenta = oNodoCuenta.Nodes.Add(sSubcuenta);
+                    sCuentaDeMayor = "";
+                }
+                // Nodo de Cuenta de mayor
+                if (oReg.CuentaDeMayor != sCuentaDeMayor)
+                {
+                    sCuentaDeMayor = oReg.CuentaDeMayor;
+                    oNodoCuentaDeMayor = oNodoSubcuenta.Nodes.Add(sCuentaDeMayor);
+                    sCuentaAuxiliar = "";
+                }
+                // Se agrega la cuenta auxiliar
+                if (oReg.CuentaAuxiliar != sCuentaAuxiliar)
+                {
+                    sCuentaAuxiliar = oReg.CuentaAuxiliar;
+                    oNodoCuentaAuxiliar = oNodoCuentaDeMayor.Nodes.Add(oReg.CuentaAuxiliar);
+                }
+                // Se meten los valores de las semanas, y los totales
+                DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(oReg.Fecha).Date;
+                int iCol = this.tgvDatos.Columns["Sem" + dIniSem.ToString("d")].Index;
+                // Para guardar los datos relacionados
+                // if (oNodoCuentaAuxiliar.Cells[iCol].Tag == null)
+                //     oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
+                // (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoID);
+                // Para llenar el importe
+                oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + oReg.ImporteDev);
+            }
+
             // Se llenan los totales
             foreach (var oNodSucursal in this.tgvDatos.Nodes)
             {
@@ -328,6 +407,6 @@ namespace Refaccionaria.App
         }
         
         #endregion
-                                
+                        
     }
 }

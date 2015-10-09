@@ -84,7 +84,8 @@ namespace Refaccionaria.App
 
         public static DateTime InicioSemanaSabAVie(DateTime dBase)
         {
-            return (dBase.DayOfWeek == DayOfWeek.Saturday ? dBase : dBase.AddDays((int)dBase.DayOfWeek * -1).AddDays(-1));
+            DateTime d = (dBase.DayOfWeek == DayOfWeek.Saturday ? dBase : dBase.AddDays((int)dBase.DayOfWeek * -1).AddDays(-1));
+            return d;
         }
 
         public static decimal GastoCalcularImporteDiario(DateTime dFecha, decimal mImporte, int iPeriodicidadMes)

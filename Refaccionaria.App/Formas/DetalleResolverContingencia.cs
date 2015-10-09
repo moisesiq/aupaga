@@ -179,12 +179,15 @@ namespace Refaccionaria.App
 
                             //Actualizar ParteExistencia
                             var sucursalId = ContingenciaCompleta.SucursalOrigenID;
-                            var existencia = General.GetEntity<ParteExistencia>(p => p.ParteID == ContingenciaCompleta.ParteID && p.SucursalID == sucursalId);
+                            /* var existencia = General.GetEntity<ParteExistencia>(p => p.ParteID == ContingenciaCompleta.ParteID && p.SucursalID == sucursalId);
                             if (existencia != null)
                             {
                                 existencia.Existencia += Helper.ConvertirDecimal(ContingenciaCompleta.Diferencia);
-                                Guardar.Generico<ParteExistencia>(existencia);
+                                Guardar.Generico<ParteExistencia>(existencia);//dmod
                             }
+                            */
+                            AdmonProc.AgregarExistencia(ContingenciaCompleta.ParteID, sucursalId.Valor(), ContingenciaCompleta.Diferencia.Valor()
+                                , Cat.Tablas.MovimientoInventario, movimientoEntradaI.MovimientoInventarioID);
 
                             #endregion
 

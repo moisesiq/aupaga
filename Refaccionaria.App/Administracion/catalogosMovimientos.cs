@@ -700,7 +700,8 @@ namespace Refaccionaria.App
                                 {
                                     var inicial = existencia.Existencia;
                                     existencia.Existencia += cantidad;
-                                    Guardar.Generico<ParteExistencia>(existencia);
+                                    // Guardar.Generico<ParteExistencia>(existencia);
+                                    AdmonProc.AgregarExistencia(parteId, sucursalId, cantidad, Cat.Tablas.MovimientoInventario, movimientoEntrada.MovimientoInventarioID);
 
                                     var historial = new MovimientoInventarioHistorial()
                                     {
@@ -751,7 +752,9 @@ namespace Refaccionaria.App
                                 Origen = proveedorId.ToString(),
                                 Destino = this.cboUbicacionDestino.Text,
                                 Cantidad = cantidad,
-                                Importe = Helper.ConvertirDecimal(this.dgvDiferencia["Costo Nuevo", iFilaDif].Value)
+                                Importe = Helper.ConvertirDecimal(this.dgvDiferencia["Costo Nuevo", iFilaDif].Value),
+                                RelacionTabla = Cat.Tablas.MovimientoInventario,
+                                RelacionID = movimientoEntrada.MovimientoInventarioID
                             });
                             
                         }
@@ -1018,7 +1021,8 @@ namespace Refaccionaria.App
                                 {
                                     var inicial = existencia.Existencia;
                                     existencia.Existencia += cantidad;
-                                    Guardar.Generico<ParteExistencia>(existencia);
+                                    // Guardar.Generico<ParteExistencia>(existencia);
+                                    AdmonProc.AgregarExistencia(parteId, sucursalId, cantidad, Cat.Tablas.MovimientoInventario, movimientoEntradaI.MovimientoInventarioID);
 
                                     var historial = new MovimientoInventarioHistorial()
                                     {
@@ -1068,7 +1072,9 @@ namespace Refaccionaria.App
                                 Origen = (bEntradaGarantia ? "GARANTÍA" : "----"),
                                 Destino = this.cboUbicacionDestino.Text,
                                 Cantidad = cantidad,
-                                Importe = oPartePrecio.Costo.Valor()
+                                Importe = oPartePrecio.Costo.Valor(),
+                                RelacionTabla = Cat.Tablas.MovimientoInventario,
+                                RelacionID = movimientoEntradaI.MovimientoInventarioID
                             });
                         }
 
@@ -1180,7 +1186,8 @@ namespace Refaccionaria.App
                                 {
                                     var inicial = existencia.Existencia;
                                     existencia.Existencia -= cantidad;
-                                    Guardar.Generico<ParteExistencia>(existencia);
+                                    // Guardar.Generico<ParteExistencia>(existencia);
+                                    AdmonProc.AgregarExistencia(parteId, sucursalId, (cantidad * -1), Cat.Tablas.MovimientoInventario, movimientoSalida.MovimientoInventarioID);
 
                                     var historial = new MovimientoInventarioHistorial()
                                     {
@@ -1208,7 +1215,9 @@ namespace Refaccionaria.App
                                 Origen = "----",
                                 Destino = this.cboUbicacionDestino.Text,
                                 Cantidad = cantidad,
-                                Importe = oPartePrecio.Costo.Valor()
+                                Importe = oPartePrecio.Costo.Valor(),
+                                RelacionTabla = Cat.Tablas.MovimientoInventario,
+                                RelacionID = movimientoSalida.MovimientoInventarioID
                             });
                         }
 
@@ -1392,7 +1401,9 @@ namespace Refaccionaria.App
                                 {
                                     var inicial = existencia.Existencia;
                                     existencia.Existencia -= cantidad;
-                                    Guardar.Generico<ParteExistencia>(existencia);
+                                    // Guardar.Generico<ParteExistencia>(existencia);
+                                    AdmonProc.AgregarExistencia(parteId, sucursalId, (cantidad * -1), Cat.Tablas.MovimientoInventario
+                                        , movimientoDevolucion.MovimientoInventarioID);
 
                                     var historial = new MovimientoInventarioHistorial()
                                     {
@@ -1441,7 +1452,9 @@ namespace Refaccionaria.App
                                 Origen = this.cboUbicacionDestino.Text,
                                 Destino = (bDevGarantia ? "GARANTÍA" : proveedorId.ToString()),
                                 Cantidad = (bDevGarantia ? 0 : cantidad),
-                                Importe = Helper.ConvertirDecimal(row.Cells["Costo Inicial"].Value)
+                                Importe = Helper.ConvertirDecimal(row.Cells["Costo Inicial"].Value),
+                                RelacionTabla = Cat.Tablas.MovimientoInventario,
+                                RelacionID = movimientoDevolucion.MovimientoInventarioID
                             });
                         }
 

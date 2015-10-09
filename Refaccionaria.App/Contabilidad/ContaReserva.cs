@@ -63,7 +63,8 @@ namespace Refaccionaria.App
             this.dgvReserva.Rows.Clear();
             foreach (var oReg in oDatos)
                 this.dgvReserva.Rows.Add(oReg.CajaFacturaGlobalID, oReg.Dia, oReg.Sucursal, oReg.Tickets, oReg.FacturadoDeDiasAnt, oReg.Negativos
-                    , oReg.Devoluciones, oReg.Cancelaciones, oReg.Oficial, oReg.Restar, oReg.Supuesto, oReg.CostoMinimo, oReg.Restante
+                    , oReg.DevolucionesDia, oReg.DevolucionesDiasAnt, oReg.GarantiasDia, oReg.GarantiasDiasAnt, oReg.Cobranza
+                    , oReg.Oficial, oReg.Restar, oReg.Supuesto, oReg.CostoMinimo, oReg.Restante
                     , oReg.SaldoRestante, oReg.Facturado, ((oReg.Oficial - oReg.Facturado) > 0 ? (oReg.Oficial - oReg.Facturado) : 0));
 
             Cargando.Cerrar();

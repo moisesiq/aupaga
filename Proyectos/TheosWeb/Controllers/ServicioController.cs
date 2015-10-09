@@ -11,6 +11,11 @@ namespace TheosWeb.Controllers
 {
     public class ServicioController : BaseController
     {
+        public void Probar()
+        {
+            this.Response.Write("Servicio funcionando correctamente.<br />" + DateTime.Now.ToString() + "<br />:)");
+        }
+
         public JsonResult ValidarUsuario(string eParam1, string eParam2)
         {
             var oUsuario = Consultas.ObtenerUsuarioDeContrasenia(eParam1);
@@ -28,6 +33,7 @@ namespace TheosWeb.Controllers
             
             return this.Json(new ResAcc(new { oUsuario.UsuarioID, Usuario = oUsuario.NombreUsuario }));
         }
+
         public JsonResult Acceso(string eParam1, int eParam2)
         {
             var oUsuario = Consultas.ObtenerUsuarioDeContrasenia(eParam1);

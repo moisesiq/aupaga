@@ -30,10 +30,12 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbSucursal = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnMostrar = new System.Windows.Forms.Button();
-            this.Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbAnio = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,23 +66,31 @@
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(824, 439);
-            this.dgvDatos.TabIndex = 2;
+            this.dgvDatos.TabIndex = 3;
+            // 
+            // Concepto
+            // 
+            this.Concepto.Frozen = true;
+            this.Concepto.HeaderText = "Cuenta";
+            this.Concepto.Name = "Concepto";
+            this.Concepto.ReadOnly = true;
+            this.Concepto.Width = 320;
             // 
             // cmbSucursal
             // 
             this.cmbSucursal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbSucursal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSucursal.FormattingEnabled = true;
-            this.cmbSucursal.Location = new System.Drawing.Point(57, 3);
+            this.cmbSucursal.Location = new System.Drawing.Point(155, 3);
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(121, 21);
-            this.cmbSucursal.TabIndex = 0;
+            this.cmbSucursal.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(3, 8);
+            this.label3.Location = new System.Drawing.Point(101, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 27;
@@ -91,27 +101,41 @@
             this.btnMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMostrar.ForeColor = System.Drawing.Color.White;
-            this.btnMostrar.Location = new System.Drawing.Point(184, 3);
+            this.btnMostrar.Location = new System.Drawing.Point(282, 3);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(67, 22);
-            this.btnMostrar.TabIndex = 1;
+            this.btnMostrar.TabIndex = 2;
             this.btnMostrar.Text = "&Mostrar";
             this.btnMostrar.UseVisualStyleBackColor = false;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
-            // Concepto
+            // cmbAnio
             // 
-            this.Concepto.Frozen = true;
-            this.Concepto.HeaderText = "Cuenta";
-            this.Concepto.Name = "Concepto";
-            this.Concepto.ReadOnly = true;
-            this.Concepto.Width = 320;
+            this.cmbAnio.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbAnio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbAnio.FormattingEnabled = true;
+            this.cmbAnio.Location = new System.Drawing.Point(35, 3);
+            this.cmbAnio.Name = "cmbAnio";
+            this.cmbAnio.Size = new System.Drawing.Size(60, 21);
+            this.cmbAnio.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(26, 13);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Año";
             // 
             // ContaEstadoDeResultados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.cmbAnio);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMostrar);
             this.Controls.Add(this.cmbSucursal);
             this.Controls.Add(this.label3);
@@ -132,5 +156,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnMostrar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Concepto;
+        private System.Windows.Forms.ComboBox cmbAnio;
+        private System.Windows.Forms.Label label1;
     }
 }
