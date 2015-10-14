@@ -1696,6 +1696,7 @@ namespace Refaccionaria.App
                 case Cat.ContaAfectaciones.GastoFacturadoEfectivo:
                 case Cat.ContaAfectaciones.GastoNotaEfectivo:
                 case Cat.ContaAfectaciones.InteresesBancarios:
+                case Cat.ContaAfectaciones.GastoContableFacturadoBancoCpcp:
                     var oGastoCont = General.GetEntity<ContaEgreso>(c => c.ContaEgresoID == iId);
                     if (oGastoCont != null)
                         iCuentaAuxID = oGastoCont.ContaCuentaAuxiliarID;

@@ -124,7 +124,6 @@
             this.tgvCuentas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.tgvCuentas.ImageList = null;
             this.tgvCuentas.Location = new System.Drawing.Point(3, 30);
-            this.tgvCuentas.MultiSelect = false;
             this.tgvCuentas.Name = "tgvCuentas";
             this.tgvCuentas.ReadOnly = true;
             this.tgvCuentas.RowHeadersVisible = false;
