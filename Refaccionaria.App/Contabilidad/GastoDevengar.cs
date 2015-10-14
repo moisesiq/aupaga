@@ -91,11 +91,6 @@ namespace Refaccionaria.App
             string sRelacion = this.cmbSucursal.Text;
             if (iSelID == 0)
             {
-                if (this.bTieneDetalle)
-                {
-                    UtilLocal.MensajeAdvertencia("No se puede agregar un devengado especial si la cuenta tiene detalle.");
-                    return;
-                }
                 eTipoDev = TipoDev.Duenio;
                 iSelID = Helper.ConvertirEntero(this.cmbDuenio.SelectedValue);
                 sRelacion = this.cmbDuenio.Text;
@@ -106,6 +101,7 @@ namespace Refaccionaria.App
             if (this.bTieneDetalle)
             {
                 var oDetalleDev = new List<ContaEgresoDetalleDevengado>();
+                var oDetalleDevEsp = new List<ContaEgresoDetalleDevengadoEspecial>();
                 foreach (DataGridViewRow oFila in this.dgvEgresoDetalle.Rows)
                 {
                     // Se valida que no haya errores
@@ -118,16 +114,34 @@ namespace Refaccionaria.App
                     int iCantidadDev = Helper.ConvertirEntero(oFila.Cells["CantidadDev"].Value);
                     if (iCantidadDev > 0)
                     {
-                        oDetalleDev.Add(new ContaEgresoDetalleDevengado()
+                        if (eTipoDev == TipoDev.Sucursal)
                         {
-                            ContaEgresoDetalleID = Helper.ConvertirEntero(oFila.Cells["ContaEgresoDetalleID"].Value),
-                            Cantidad = iCantidadDev
-                        });
+                            oDetalleDev.Add(new ContaEgresoDetalleDevengado()
+                            {
+                                ContaEgresoDetalleID = Helper.ConvertirEntero(oFila.Cells["ContaEgresoDetalleID"].Value),
+                                Cantidad = iCantidadDev
+                            });
+                        }
+                        else
+                        {
+                            oDetalleDevEsp.Add(new ContaEgresoDetalleDevengadoEspecial()
+                            {
+                                ContaEgresoDetalleID = Helper.ConvertirEntero(oFila.Cells["ContaEgresoDetalleID"].Value),
+                                Cantidad = iCantidadDev
+                            });
+                        }
+
+                        // Se ajusta el restante y se deja en cero la cantidad devengada, por si se hace otro devengado
+                        oFila.Cells["Restante"].Value = (Helper.ConvertirDecimal(oFila.Cells["Restante"].Value) - iCantidadDev);
+                        oFila.Cells["CantidadDev"].Value = null;
                     }
                 }
-                this.dgvDetalle.Rows[iFila].Tag = oDetalleDev;
+                if (eTipoDev == TipoDev.Sucursal)
+                    this.dgvDetalle.Rows[iFila].Tag = oDetalleDev;
+                else
+                    this.dgvDetalle.Rows[iFila].Tag = oDetalleDevEsp;
 
-                this.dgvEgresoDetalle.Rows.Clear();
+                // this.dgvEgresoDetalle.Rows.Clear();
             }
 
             if (bError)
@@ -174,7 +188,8 @@ namespace Refaccionaria.App
                 this.dgvEgresoDetalle.Rows.Clear();
                 foreach (var oConDev in oDet)
                 {
-                    int iFila = this.dgvEgresoDetalle.Rows.Add(oConDev.ContaEgresoDetalleID, oConDev.Consumible, (oConDev.Cantidad - oConDev.CantidadDev.Valor()));
+                    int iFila = this.dgvEgresoDetalle.Rows.Add(oConDev.ContaEgresoDetalleID, oConDev.Consumible
+                        , (oConDev.Cantidad - oConDev.CantidadDev.Valor() - oConDev.CantidadDevEspecial.Valor()));
                     this.dgvEgresoDetalle.Rows[iFila].Tag = oConDev;
                 }
                 this.txtImporteDev.Enabled = false;
@@ -295,10 +310,7 @@ namespace Refaccionaria.App
                 ContaProc.DevengadoEliminar(iDevBorrarID);
             // Se borran los especials, si hay
             foreach (int iDevID in this.DevEspecialBorrados)
-            {
-                var oDevEsp = General.GetEntity<ContaEgresoDevengadoEspecial>(c => c.ContaEgresoDevengadoEspecialID == iDevID);
-                Guardar.Eliminar<ContaEgresoDevengadoEspecial>(oDevEsp);
-            }
+                ContaProc.DevengadoEspecialEliminar(iDevID);
             
             // Se procesan los nuevos
             foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
@@ -331,7 +343,13 @@ namespace Refaccionaria.App
                         DuenioID = Helper.ConvertirEntero(oFila.Cells["SelID"].Value),
                         Importe = Helper.ConvertirDecimal(oFila.Cells["Importe"].Value)
                     };
-                    Guardar.Generico<ContaEgresoDevengadoEspecial>(oDevEsp);
+                    // Guardar.Generico<ContaEgresoDevengadoEspecial>(oDevEsp);
+
+                    // Se obtiene el detalle, si aplica
+                    var oDetalleDev = (oFila.Tag as List<ContaEgresoDetalleDevengadoEspecial>);
+
+                    // Se manda guardar los datos
+                    ContaProc.GastoDevengarEspecial(oDevEsp, oDetalleDev);
                 }
             }
 

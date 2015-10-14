@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCuenta = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,6 +57,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pnlAdicionalCuentaDeMayor = new System.Windows.Forms.Panel();
             this.chkRestaInversa = new System.Windows.Forms.CheckBox();
+            this.chkDevengarEspecial = new System.Windows.Forms.CheckBox();
+            this.cmbDevengarEspecial = new System.Windows.Forms.ComboBox();
             this.pnlAdicional.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDevSuc)).BeginInit();
             this.pnlAdicionalCuentaDeMayor.SuspendLayout();
@@ -127,7 +129,7 @@
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
-            this.btnCancelar.Location = new System.Drawing.Point(225, 318);
+            this.btnCancelar.Location = new System.Drawing.Point(225, 366);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(81, 23);
             this.btnCancelar.TabIndex = 4;
@@ -141,7 +143,7 @@
             this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Location = new System.Drawing.Point(138, 318);
+            this.btnGuardar.Location = new System.Drawing.Point(138, 366);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(81, 23);
             this.btnGuardar.TabIndex = 3;
@@ -151,6 +153,8 @@
             // 
             // pnlAdicional
             // 
+            this.pnlAdicional.Controls.Add(this.cmbDevengarEspecial);
+            this.pnlAdicional.Controls.Add(this.chkDevengarEspecial);
             this.pnlAdicional.Controls.Add(this.chkSumaGastosFijos);
             this.pnlAdicional.Controls.Add(this.chkAfectaMetas);
             this.pnlAdicional.Controls.Add(this.dtpDejarDeSemanalizar);
@@ -166,7 +170,7 @@
             this.pnlAdicional.Controls.Add(this.chkVisibleEnCaja);
             this.pnlAdicional.Location = new System.Drawing.Point(15, 87);
             this.pnlAdicional.Name = "pnlAdicional";
-            this.pnlAdicional.Size = new System.Drawing.Size(287, 225);
+            this.pnlAdicional.Size = new System.Drawing.Size(287, 273);
             this.pnlAdicional.TabIndex = 2;
             this.pnlAdicional.Visible = false;
             // 
@@ -197,7 +201,7 @@
             // dtpDejarDeSemanalizar
             // 
             this.dtpDejarDeSemanalizar.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDejarDeSemanalizar.Location = new System.Drawing.Point(153, 200);
+            this.dtpDejarDeSemanalizar.Location = new System.Drawing.Point(153, 250);
             this.dtpDejarDeSemanalizar.Name = "dtpDejarDeSemanalizar";
             this.dtpDejarDeSemanalizar.Size = new System.Drawing.Size(124, 20);
             this.dtpDejarDeSemanalizar.TabIndex = 10;
@@ -207,7 +211,7 @@
             this.chkDejarDeSemanalizar.AutoSize = true;
             this.chkDejarDeSemanalizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkDejarDeSemanalizar.ForeColor = System.Drawing.Color.White;
-            this.chkDejarDeSemanalizar.Location = new System.Drawing.Point(23, 200);
+            this.chkDejarDeSemanalizar.Location = new System.Drawing.Point(23, 250);
             this.chkDejarDeSemanalizar.Name = "chkDejarDeSemanalizar";
             this.chkDejarDeSemanalizar.Size = new System.Drawing.Size(121, 17);
             this.chkDejarDeSemanalizar.TabIndex = 9;
@@ -218,7 +222,7 @@
             // txtMeses
             // 
             this.txtMeses.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMeses.Location = new System.Drawing.Point(185, 174);
+            this.txtMeses.Location = new System.Drawing.Point(185, 224);
             this.txtMeses.Name = "txtMeses";
             this.txtMeses.Size = new System.Drawing.Size(92, 20);
             this.txtMeses.TabIndex = 8;
@@ -227,7 +231,7 @@
             // 
             this.lblDiasMovimiento.AutoSize = true;
             this.lblDiasMovimiento.ForeColor = System.Drawing.Color.White;
-            this.lblDiasMovimiento.Location = new System.Drawing.Point(20, 177);
+            this.lblDiasMovimiento.Location = new System.Drawing.Point(20, 227);
             this.lblDiasMovimiento.Name = "lblDiasMovimiento";
             this.lblDiasMovimiento.Size = new System.Drawing.Size(159, 13);
             this.lblDiasMovimiento.TabIndex = 7;
@@ -240,7 +244,7 @@
             this.chkCalculoSemanal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCalculoSemanal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkCalculoSemanal.ForeColor = System.Drawing.Color.White;
-            this.chkCalculoSemanal.Location = new System.Drawing.Point(3, 152);
+            this.chkCalculoSemanal.Location = new System.Drawing.Point(3, 202);
             this.chkCalculoSemanal.Name = "chkCalculoSemanal";
             this.chkCalculoSemanal.Size = new System.Drawing.Size(134, 17);
             this.chkCalculoSemanal.TabIndex = 6;
@@ -268,8 +272,8 @@
             this.dgvDevSuc.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dgvDevSuc.RowHeadersVisible = false;
             this.dgvDevSuc.RowHeadersWidth = 40;
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            this.dgvDevSuc.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            this.dgvDevSuc.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvDevSuc.Size = new System.Drawing.Size(254, 82);
             this.dgvDevSuc.TabIndex = 5;
             // 
@@ -288,10 +292,10 @@
             // 
             // Porcentaje
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.Porcentaje.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.Porcentaje.DefaultCellStyle = dataGridViewCellStyle5;
             this.Porcentaje.HeaderText = "Porcentaje %";
             this.Porcentaje.Name = "Porcentaje";
             // 
@@ -351,7 +355,7 @@
             // pnlAdicionalCuentaDeMayor
             // 
             this.pnlAdicionalCuentaDeMayor.Controls.Add(this.chkRestaInversa);
-            this.pnlAdicionalCuentaDeMayor.Location = new System.Drawing.Point(5, 318);
+            this.pnlAdicionalCuentaDeMayor.Location = new System.Drawing.Point(15, 365);
             this.pnlAdicionalCuentaDeMayor.Name = "pnlAdicionalCuentaDeMayor";
             this.pnlAdicionalCuentaDeMayor.Size = new System.Drawing.Size(116, 24);
             this.pnlAdicionalCuentaDeMayor.TabIndex = 7;
@@ -370,13 +374,34 @@
             this.chkRestaInversa.Text = "Resta inversar    ";
             this.chkRestaInversa.UseVisualStyleBackColor = true;
             // 
+            // chkDevengarEspecial
+            // 
+            this.chkDevengarEspecial.AutoSize = true;
+            this.chkDevengarEspecial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDevengarEspecial.ForeColor = System.Drawing.Color.White;
+            this.chkDevengarEspecial.Location = new System.Drawing.Point(3, 152);
+            this.chkDevengarEspecial.Name = "chkDevengarEspecial";
+            this.chkDevengarEspecial.Size = new System.Drawing.Size(112, 17);
+            this.chkDevengarEspecial.TabIndex = 13;
+            this.chkDevengarEspecial.Text = "Devengar especial";
+            this.chkDevengarEspecial.UseVisualStyleBackColor = true;
+            this.chkDevengarEspecial.CheckedChanged += new System.EventHandler(this.chkDevengarEspecial_CheckedChanged);
+            // 
+            // cmbDevengarEspecial
+            // 
+            this.cmbDevengarEspecial.FormattingEnabled = true;
+            this.cmbDevengarEspecial.Location = new System.Drawing.Point(23, 175);
+            this.cmbDevengarEspecial.Name = "cmbDevengarEspecial";
+            this.cmbDevengarEspecial.Size = new System.Drawing.Size(121, 21);
+            this.cmbDevengarEspecial.TabIndex = 14;
+            // 
             // CuentaContable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(318, 346);
+            this.ClientSize = new System.Drawing.Size(318, 394);
             this.Controls.Add(this.pnlAdicionalCuentaDeMayor);
             this.Controls.Add(this.txtCuentaSat);
             this.Controls.Add(this.label5);
@@ -435,5 +460,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel pnlAdicionalCuentaDeMayor;
         private System.Windows.Forms.CheckBox chkRestaInversa;
+        private System.Windows.Forms.ComboBox cmbDevengarEspecial;
+        private System.Windows.Forms.CheckBox chkDevengarEspecial;
     }
 }

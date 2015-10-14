@@ -219,7 +219,7 @@ namespace Refaccionaria.App
                     , oParte.NumeroDeParte, oParte.Descripcion, oParte.ProveedorID, oParte.LineaID, oParte.MarcaParteID
                     , oParte.MedidaID, oParte.UnidadDeEmpaque, oParte.TiempoDeReposicion
                     , oParte.AplicaComision, oParte.EsServicio, oParte.Etiqueta, oParte.SoloUnaEtiqueta, oParte.EsPar
-                    , oParte.CodigoDeBara, oParte.Existencia, oParte.Ventas, oParte.Costo
+                    , oParte.CodigoDeBara, oParte.Existencia, oParte.Ventas, oParte.Costo, null
                     , oParte.PorcentajeUtilidadUno, oParte.PrecioUno, oParte.PrecioUno
                     , oParte.PorcentajeUtilidadDos, oParte.PrecioDos, oParte.PrecioDos
                     , oParte.PorcentajeUtilidadTres, oParte.PrecioTres, oParte.PrecioTres
@@ -398,7 +398,7 @@ namespace Refaccionaria.App
                     if (oParte.Costo.Valor() != mCosto)
                     {
                         // Para calcular la diferencia total en costo, por sucursal
-                        decimal mVarCosto = (oParte.Costo.Valor() - mCosto);
+                        decimal mVarCosto = (mCosto - oParte.Costo.Valor());
                         var oExistencias = General.GetListOf<ParteExistencia>(c => c.ParteID == iParteID && c.Estatus);
                         foreach (var oReg in oExistencias)
                         {

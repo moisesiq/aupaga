@@ -55,6 +55,9 @@ namespace Refaccionaria.App
             foreach (var oSucursal in oSucursales)
                 this.dgvDevSuc.Rows.Add(oSucursal.SucursalID, oSucursal.NombreSucursal);
 
+            // Se llena el combo de devengado especial
+            this.cmbDevengarEspecial.CargarDatos("DuenioID", "Duenio1", General.GetListOf<Duenio>());
+
             //
             string sTipoCuenta = "";
             switch (this.TipoCuenta)
@@ -79,6 +82,10 @@ namespace Refaccionaria.App
 
         private void chkDevengarAutomaticamente_CheckedChanged(object sender, EventArgs e)
         {
+            if (!this.chkDevengarAutomaticamente.Focused)
+                return;
+
+            /*
             // Se valida si ya está visible o no el grid
             if ((this.chkDevengarAutomaticamente.Checked && this.dgvDevSuc.Visible) || (!this.chkDevengarAutomaticamente.Checked && !this.dgvDevSuc.Visible))
                 return;
@@ -99,6 +106,19 @@ namespace Refaccionaria.App
                 this.txtMeses.Top -= iDif;
             }
             this.dgvDevSuc.Visible = this.chkDevengarAutomaticamente.Checked;
+            */
+
+            if (this.chkDevengarAutomaticamente.Checked)
+                this.chkDevengarEspecial.Checked = false;
+        }
+
+        private void chkDevengarEspecial_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkDevengarEspecial.Focused)
+            {
+                if (this.chkDevengarEspecial.Checked)
+                    this.chkDevengarAutomaticamente.Checked = false;
+            }
         }
 
         private void chkCalculoSemanal_CheckedChanged(object sender, EventArgs e)
@@ -196,7 +216,19 @@ namespace Refaccionaria.App
             this.txtCuentaSat.Text = oCuentaAux.CuentaSat;
             this.chkTieneDetalle.Checked = oCuentaAux.Detallable;
             this.chkVisibleEnCaja.Checked = oCuentaAux.VisibleEnCaja;
-            this.chkDevengarAutomaticamente.Checked = oCuentaAux.DevengarAut.Valor();
+            // this.chkDevengarAutomaticamente.Checked = oCuentaAux.DevengarAut.Valor();
+            if (oCuentaAux.DevengarAut.Valor())
+            {
+                // Se verifica si es devengado especial o normal
+                var oDevEsp = General.GetEntity<ContaCuentaAuxiliarDevengadoEspecial>(c => c.ContaCuentaAuxiliarID == oCuentaAux.ContaCuentaAuxiliarID);
+                if (oDevEsp != null)
+                {
+                    this.chkDevengarEspecial.Checked = true;
+                    this.cmbDevengarEspecial.SelectedValue = oDevEsp.DuenioID;
+                }
+                this.chkDevengarAutomaticamente.Checked = !this.chkDevengarEspecial.Checked;
+            }
+
             var oDevAut = General.GetListOf<ContaCuentaAuxiliarDevengadoAutomatico>(c => c.ContaCuentaAuxiliarID == iCuentaID);
             foreach (var oReg in oDevAut)
             {
@@ -269,7 +301,7 @@ namespace Refaccionaria.App
             oCuentaAux.CuentaSat = this.txtCuentaSat.Text;
             oCuentaAux.Detallable = this.chkTieneDetalle.Checked;
             oCuentaAux.VisibleEnCaja = this.chkVisibleEnCaja.Checked;
-            oCuentaAux.DevengarAut = this.chkDevengarAutomaticamente.Checked;
+            oCuentaAux.DevengarAut = (this.chkDevengarAutomaticamente.Checked || this.chkDevengarEspecial.Checked);
             oCuentaAux.CalculoSemanal = this.chkCalculoSemanal.Checked;
             if (this.chkCalculoSemanal.Checked)
             {
@@ -290,8 +322,17 @@ namespace Refaccionaria.App
                     Guardar.Eliminar<SucursalGastoFijo>(oReg);
             }
 
-            // Se llenan los datos de devengar automáticamente, si aplica
-            if (this.chkDevengarAutomaticamente.Checked)
+            // Se llenan los datos de devengar automáticamente, si aplica.
+            // Primero se revisa si es especial
+            if (this.chkDevengarEspecial.Checked)
+            {
+                var oDevEsp = General.GetEntity<ContaCuentaAuxiliarDevengadoEspecial>(c => c.ContaCuentaAuxiliarID == oCuentaAux.ContaCuentaAuxiliarID);
+                if (oDevEsp == null)
+                    oDevEsp = new ContaCuentaAuxiliarDevengadoEspecial() { ContaCuentaAuxiliarID = oCuentaAux.ContaCuentaAuxiliarID };
+                oDevEsp.DuenioID = Helper.ConvertirEntero(this.cmbDevengarEspecial.SelectedValue);
+                Guardar.Generico<ContaCuentaAuxiliarDevengadoEspecial>(oDevEsp);
+            }
+            else if (this.chkDevengarAutomaticamente.Checked)
             {
                 foreach (DataGridViewRow oFila in this.dgvDevSuc.Rows)
                 {
@@ -330,6 +371,11 @@ namespace Refaccionaria.App
                 if (mPorTotal > 100)
                     this.ctlError.PonerError(this.chkDevengarAutomaticamente, "El Porcentaje total no puede ser mayor a cien.");
             }
+            if (this.chkDevengarEspecial.Checked)
+            {
+                if (Helper.ConvertirEntero(this.cmbDevengarEspecial.SelectedValue) == 0)
+                    this.ctlError.PonerError(this.cmbDevengarEspecial, "Debes seleccionar un devengado especial.");
+            }
             if (this.chkCalculoSemanal.Checked)
             {
                 if (Helper.ConvertirDecimal(this.txtMeses.Text) <= 0)
@@ -340,6 +386,6 @@ namespace Refaccionaria.App
         }
 
         #endregion
-                                               
+                                       
     }
 }

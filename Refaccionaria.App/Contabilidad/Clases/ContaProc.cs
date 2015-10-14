@@ -17,17 +17,27 @@ namespace Refaccionaria.App
             var oCuentaAux = General.GetEntity<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == oEgreso.ContaCuentaAuxiliarID);
             if (oCuentaAux.DevengarAut.Valor())
             {
-                decimal mPorTotal = 0, mImporteDev = 0;
-                var oDevAut = General.GetListOf<ContaCuentaAuxiliarDevengadoAutomatico>(c => c.ContaCuentaAuxiliarID == oEgreso.ContaCuentaAuxiliarID);
-                foreach (var oReg in oDevAut)
+                // Se verifica si se debe hacer un devengado especial, si no, se hace normal
+                var oDevEsp = General.GetEntity<ContaCuentaAuxiliarDevengadoEspecial>(c => c.ContaCuentaAuxiliarID == oEgreso.ContaCuentaAuxiliarID);
+                if (oDevEsp != null)
                 {
-                    mPorTotal += oReg.Porcentaje;
-                    decimal mImporte = Math.Round(oEgreso.Importe * (oReg.Porcentaje / 100), 2);
-                    if (mPorTotal == 100)
-                        mImporte = (oEgreso.Importe - mImporteDev);
+                    ContaProc.GastoDevengarEspecial(oEgreso.ContaEgresoID, oDevEsp.DuenioID, oEgreso.Importe, oEgreso.Fecha);
+                }
 
-                    ContaProc.GastoDevengar(oEgreso.ContaEgresoID, oReg.SucursalID, mImporte, oEgreso.Fecha);
-                    mImporteDev += mImporte;
+                else
+                {
+                    decimal mPorTotal = 0, mImporteDev = 0;
+                    var oDevAut = General.GetListOf<ContaCuentaAuxiliarDevengadoAutomatico>(c => c.ContaCuentaAuxiliarID == oEgreso.ContaCuentaAuxiliarID);
+                    foreach (var oReg in oDevAut)
+                    {
+                        mPorTotal += oReg.Porcentaje;
+                        decimal mImporte = Math.Round(oEgreso.Importe * (oReg.Porcentaje / 100), 2);
+                        if (mPorTotal == 100)
+                            mImporte = (oEgreso.Importe - mImporteDev);
+
+                        ContaProc.GastoDevengar(oEgreso.ContaEgresoID, oReg.SucursalID, mImporte, oEgreso.Fecha);
+                        mImporteDev += mImporte;
+                    }
                 }
             }
         }
@@ -120,6 +130,36 @@ namespace Refaccionaria.App
             oDev.Importe = mImporte;
 
             return ContaProc.GastoDevengar(oDev, null);
+        }
+
+        public static ResAcc<int> GastoDevengarEspecial(ContaEgresoDevengadoEspecial oDev, List<ContaEgresoDetalleDevengadoEspecial> oDetalleDev)
+        {
+            Guardar.Generico<ContaEgresoDevengadoEspecial>(oDev);
+
+            // Se llena el detalle, si hay
+            if (oDetalleDev != null && oDetalleDev.Count > 0)
+            {
+                foreach (var oReg in oDetalleDev)
+                {
+                    oReg.ContaEgresoDevengadoEspecialID = oDev.ContaEgresoDevengadoEspecialID;
+                    Guardar.Generico<ContaEgresoDetalleDevengadoEspecial>(oReg);
+                }
+            }
+                    
+            return new ResAcc<int>(true, oDev.ContaEgresoDevengadoEspecialID);
+        }
+
+        public static ResAcc<int> GastoDevengarEspecial(int iEgresoID, int iDuenioID, decimal mImporte, DateTime dFecha)
+        {
+            var oDev = new ContaEgresoDevengadoEspecial()
+            {
+                ContaEgresoID = iEgresoID,
+                DuenioID = iDuenioID,
+                Fecha = dFecha,
+                Importe = mImporte
+            };
+
+            return ContaProc.GastoDevengarEspecial(oDev, null);
         }
 
         public static ResAcc<int> CrearCuentaAuxiliar(string sCuenta, int iCuentaDeMayorID, int? iRelacionID)
@@ -215,6 +255,19 @@ namespace Refaccionaria.App
             // Se borra el "devengado"
             var oDev = General.GetEntity<ContaEgresoDevengado>(c => c.ContaEgresoDevengadoID == iDevID);
             Guardar.Eliminar<ContaEgresoDevengado>(oDev);
+
+            return new ResAcc<bool>(true);
+        }
+
+        public static ResAcc<bool> DevengadoEspecialEliminar(int iDevID)
+        {
+            // Se borra el detalle, si tiene
+            var oDetalleDev = General.GetListOf<ContaEgresoDetalleDevengadoEspecial>(c => c.ContaEgresoDevengadoEspecialID == iDevID);
+            foreach (var oReg in oDetalleDev)
+                Guardar.Eliminar<ContaEgresoDetalleDevengadoEspecial>(oReg);
+            // Se borra el "devengado"
+            var oDev = General.GetEntity<ContaEgresoDevengadoEspecial>(c => c.ContaEgresoDevengadoEspecialID == iDevID);
+            Guardar.Eliminar<ContaEgresoDevengadoEspecial>(oDev);
 
             return new ResAcc<bool>(true);
         }

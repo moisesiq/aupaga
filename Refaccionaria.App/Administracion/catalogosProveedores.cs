@@ -2212,6 +2212,44 @@ namespace Refaccionaria.App
 
         #region [ Tab Descuentos Ganancias ]
 
+        private void tgvDescGan_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            var oText = (e.Control as TextBox);
+            if (oText != null)
+                oText.KeyDown += tgvDescGan_TextBox_KeyDown;
+        }
+        Keys oUlt;
+        void tgvDescGan_TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.oUlt = e.KeyCode;
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.tgvDescGan_KeyDown(sender, e);
+            }
+        }
+
+        private void tgvDescGan_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (this.tgvDescGan.CurrentCell.ColumnIndex < (this.tgvDescGan.Columns.Count - 1))
+                {
+                    this.tgvDescGan.CurrentCell = this.tgvDescGan.CurrentCell.OwningRow.Cells[this.tgvDescGan.CurrentCell.ColumnIndex + 1];
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void tgvDescGan_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.oUlt == Keys.Enter)
+            {
+                if (this.tgvDescGan.CurrentCell.ColumnIndex < (this.tgvDescGan.Columns.Count - 1))
+                    this.tgvDescGan.CurrentCell = this.tgvDescGan.CurrentCell.OwningRow.Cells[this.tgvDescGan.CurrentCell.ColumnIndex + 1];
+            }
+
+        }
+
         private void tgvDescGan_CurrentCellChanged(object sender, EventArgs e)
         {
             if (this.tgvDescGan.VerSeleccionNueva())
@@ -2227,18 +2265,6 @@ namespace Refaccionaria.App
         {
             if (this.tgvDescGan.Columns[e.ColumnIndex] == this.dcgNombre)
                 this.CargarPartesLinea(this.tgvDescGan.CurrentNode);
-        }
-
-        private void tgvDescGan_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (this.tgvDescGan.CurrentCell.ColumnIndex < (this.tgvDescGan.Columns.Count - 1))
-                {
-                    this.tgvDescGan.CurrentCell = this.tgvDescGan.CurrentCell.OwningRow.Cells[this.tgvDescGan.CurrentCell.ColumnIndex + 1];
-                    e.Handled = true;
-                }
-            }
         }
 
         private void tgvDescGan_CellValueChanged(object sender, DataGridViewCellEventArgs e)

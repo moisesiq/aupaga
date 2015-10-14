@@ -310,15 +310,72 @@ namespace Refaccionaria.App
                     sCuentaAuxiliar = oReg.CuentaAuxiliar;
                     oNodoCuentaAuxiliar = oNodoCuentaDeMayor.Nodes.Add(oReg.CuentaAuxiliar);
                 }
+
                 // Se meten los valores de las semanas, y los totales
-                DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(oReg.Fecha).Date;
+                /* DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(oReg.Fecha).Date;
                 int iCol = this.tgvDatos.Columns["Sem" + dIniSem.ToString("d")].Index;
-                // Para guardar los datos relacionados
-                // if (oNodoCuentaAuxiliar.Cells[iCol].Tag == null)
-                //     oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
-                // (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoID);
                 // Para llenar el importe
                 oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + oReg.ImporteDev);
+                */
+                if (oReg.PeriodicidadMes.HasValue)
+                {
+                    DateTime dInicioPer = oReg.Fecha.DiaPrimero().Date;
+                    DateTime dFinPer = dInicioPer.AddMonths(oReg.PeriodicidadMes.Valor()).AddDays(-1);
+                    decimal mImporteDiario = (oReg.ImporteDev / ((dFinPer - dInicioPer).Days + 1));
+                    decimal mImporte; int iDias;
+                    DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(dInicioPer).Date;
+                    for (int iCol = (this.tgvDatos.Columns["Sem" + dIniSem.ToString("d")].Index); iCol < this.tgvDatos.Columns.Count; iCol++)
+                    {
+                        // Se verifica si se debe de seguir semanalizando
+                        if (oReg.FinSemanalizar.HasValue && oReg.FinSemanalizar <= dIniSem)
+                            break;
+                        // Se verifica la fecha final, 
+                        if (oNodoCuentaAuxiliar.Tag != null && dIniSem > dFinPer)
+                            break;
+
+                        // Se calcula el importe correspondiente
+                        DateTime dFinSem = dIniSem.AddDays(6);
+                        if (dIniSem < dInicioPer)
+                            iDias = dFinSem.Day;
+                        else if (dIniSem <= dFinPer && dFinSem > dFinPer)
+                            iDias = ((dIniSem.DiaUltimo().Day - dIniSem.Day) + 1);
+                        else if (dIniSem > dFinPer && (dIniSem - dFinPer).Days < 7)
+                        {
+                            iDias = (dIniSem.Day - 1);
+                            iCol--;
+                        }
+                        else
+                        {
+                            iDias = 7;
+                        }
+                        // int iDias = (dIniSem < dInicioPer ? dFinSem.Day : (dFinSem > dFinPer ? ((dIniSem.DiaUltimo().Day - dIniSem.Day) + 1) : 7));
+                        mImporte = (mImporteDiario * iDias);
+                        dIniSem = dIniSem.AddDays(7);
+
+                        // Para guardar los datos relacionados, para el grid de detalle devengado
+                        // if (oNodoCuentaAuxiliar.Cells[iCol].Tag == null)
+                        //     oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
+                        // (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoID);
+
+                        // Para llenar las celdas
+                        oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + mImporte); // mImporte;
+                    }
+
+                    // Se marca la cuenta, para que ya no se semanalice hasta el final
+                    if (oNodoCuentaAuxiliar.Tag == null)
+                        oNodoCuentaAuxiliar.Tag = true;
+                }
+                else
+                {
+                    DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(oReg.Fecha).Date;
+                    int iCol = this.tgvDatos.Columns["Sem" + dIniSem.ToString("d")].Index;
+                    // Para guardar los datos relacionados, para el grid de detalle devengado
+                    // if (oNodoCuentaAuxiliar.Cells[iCol].Tag == null)
+                    //     oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
+                    // (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoID);
+                    // Para llenar el importe
+                    oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + oReg.ImporteDev);
+                }
             }
 
             // Se llenan los totales

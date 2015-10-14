@@ -3034,7 +3034,7 @@
             dataGridViewCellStyle71.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle71.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.tgvDescGan.DefaultCellStyle = dataGridViewCellStyle71;
-            this.tgvDescGan.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.tgvDescGan.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.tgvDescGan.ImageList = null;
             this.tgvDescGan.Location = new System.Drawing.Point(3, 4);
             this.tgvDescGan.MultiSelect = false;
@@ -3043,8 +3043,10 @@
             this.tgvDescGan.Size = new System.Drawing.Size(1168, 600);
             this.tgvDescGan.TabIndex = 0;
             this.tgvDescGan.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvDescGan_CellDoubleClick);
+            this.tgvDescGan.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvDescGan_CellEndEdit);
             this.tgvDescGan.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvDescGan_CellValueChanged);
             this.tgvDescGan.CurrentCellChanged += new System.EventHandler(this.tgvDescGan_CurrentCellChanged);
+            this.tgvDescGan.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.tgvDescGan_EditingControlShowing);
             this.tgvDescGan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tgvDescGan_KeyDown);
             // 
             // dcgProveedorParteGananciaID

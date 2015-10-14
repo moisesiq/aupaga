@@ -74,13 +74,20 @@ namespace Refaccionaria.App
 
         #region [ Métodos de uso interno ]
 
-        protected virtual int AgregarLineaTitulo(string sTexto)
+        protected virtual int AgregarLineaTitulo(string sTexto, string sTotal)
         {
             sTexto = sTexto.ToUpper();
-            int iFila = this.dgvDetalle.Rows.Add("Titulo", null, sTexto, null);
+            if (sTotal != null)
+                sTotal = sTotal.ToUpper();
+            int iFila = this.dgvDetalle.Rows.Add("Titulo", null, sTexto, sTotal);
             this.dgvDetalle.Rows[iFila].DefaultCellStyle.Font = new Font(this.dgvDetalle.DefaultCellStyle.Font.FontFamily, (float)10, FontStyle.Bold);
             this.dgvDetalle.Rows[iFila].DefaultCellStyle.ForeColor = Color.CadetBlue;
             return iFila;
+        }
+
+        protected virtual int AgregarLineaTitulo(string sTexto)
+        {
+            return this.AgregarLineaTitulo(sTexto, null);
         }
 
         protected virtual int AgregarLineaEncabezado(string sContenido, string sTotal)
@@ -141,9 +148,9 @@ namespace Refaccionaria.App
                         iFila = this.AgregarLineaTitulo(oMov.Concepto);
                         this.dgvDetalle["Totales", iFila].Value = ("$" + oMov.Total.Valor().ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(10));
 
-                        this.AgregarLineaTitulo("Ingresos");
-                        this.AgregarLineaEncabezado(
-                            "Forma de pago".PadRight(20 + 1)
+                        // this.AgregarLineaTitulo("Ingresos");
+                        this.AgregarLineaTitulo(
+                            "Ingresos".PadRight(20 + 1)
                             + "Tickets".PadRight(12 + 1)
                             + "Facturas".PadRight(12 + 1)
                             + "Suma".PadRight(12 + 1)
@@ -208,9 +215,9 @@ namespace Refaccionaria.App
 
                         if (oMov.Orden == 10)
                         {
-                            this.AgregarLineaTitulo("Egresos");
-                            this.AgregarLineaEncabezado(
-                                "Tipo".PadRight(20 + 1)
+                            // this.AgregarLineaTitulo("Egresos");
+                            this.AgregarLineaTitulo(
+                                "Egresos".PadRight(20 + 1)
                                 + "Tickets".PadRight(12 + 1)
                                 + "Facturas".PadRight(12 + 1)
                                 + "Suma".PadRight(12 + 1)
