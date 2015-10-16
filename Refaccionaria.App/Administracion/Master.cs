@@ -219,7 +219,7 @@ namespace Refaccionaria.App
                     , oParte.NumeroDeParte, oParte.Descripcion, oParte.ProveedorID, oParte.LineaID, oParte.MarcaParteID
                     , oParte.MedidaID, oParte.UnidadDeEmpaque, oParte.TiempoDeReposicion
                     , oParte.AplicaComision, oParte.EsServicio, oParte.Etiqueta, oParte.SoloUnaEtiqueta, oParte.EsPar
-                    , oParte.CodigoDeBara, oParte.Existencia, oParte.Ventas, oParte.Costo, null
+                    , oParte.CodigoDeBara, oParte.Existencia, oParte.Ventas, oParte.Costo, oParte.CostoConDescuento
                     , oParte.PorcentajeUtilidadUno, oParte.PrecioUno, oParte.PrecioUno
                     , oParte.PorcentajeUtilidadDos, oParte.PrecioDos, oParte.PrecioDos
                     , oParte.PorcentajeUtilidadTres, oParte.PrecioTres, oParte.PrecioTres
