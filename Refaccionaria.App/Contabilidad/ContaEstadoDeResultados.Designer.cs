@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbSucursal = new System.Windows.Forms.ComboBox();
@@ -36,7 +36,10 @@
             this.btnMostrar = new System.Windows.Forms.Button();
             this.cmbAnio = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.nudDecimales = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvDatos
@@ -52,21 +55,21 @@
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Concepto});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDatos.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDatos.Location = new System.Drawing.Point(3, 30);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(824, 439);
-            this.dgvDatos.TabIndex = 3;
+            this.dgvDatos.TabIndex = 4;
             // 
             // Concepto
             // 
@@ -101,10 +104,10 @@
             this.btnMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMostrar.ForeColor = System.Drawing.Color.White;
-            this.btnMostrar.Location = new System.Drawing.Point(282, 3);
+            this.btnMostrar.Location = new System.Drawing.Point(400, 3);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(67, 22);
-            this.btnMostrar.TabIndex = 2;
+            this.btnMostrar.TabIndex = 3;
             this.btnMostrar.Text = "&Mostrar";
             this.btnMostrar.UseVisualStyleBackColor = false;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
@@ -129,11 +132,36 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "Año";
             // 
+            // nudDecimales
+            // 
+            this.nudDecimales.Location = new System.Drawing.Point(344, 4);
+            this.nudDecimales.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudDecimales.Name = "nudDecimales";
+            this.nudDecimales.Size = new System.Drawing.Size(40, 20);
+            this.nudDecimales.TabIndex = 2;
+            this.nudDecimales.ValueChanged += new System.EventHandler(this.nudDecimales_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(282, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 13);
+            this.label9.TabIndex = 184;
+            this.label9.Text = "Decimales";
+            // 
             // ContaEstadoDeResultados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.nudDecimales);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.cmbAnio);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMostrar);
@@ -144,6 +172,7 @@
             this.Size = new System.Drawing.Size(830, 472);
             this.Load += new System.EventHandler(this.ContaEstadoDeResultados_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +187,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Concepto;
         private System.Windows.Forms.ComboBox cmbAnio;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nudDecimales;
+        private System.Windows.Forms.Label label9;
     }
 }

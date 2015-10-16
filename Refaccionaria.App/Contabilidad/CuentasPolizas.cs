@@ -35,6 +35,8 @@ namespace Refaccionaria.App
             this.dtpDesde.Value = new DateTime(DateTime.Now.Year, 1, 1);
             this.dtpHasta.Value = new DateTime(DateTime.Now.Year, 12, 31);
 
+            this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", General.GetListOf<Sucursal>(c => c.Estatus));
+
             // Se cargan los datos
             this.LlenarArbol();
         }
@@ -181,6 +183,21 @@ namespace Refaccionaria.App
             this.MovimientosCuentaFormatoAdicional();
         }
 
+        private void cmbSucursal_TextChanged(object sender, EventArgs e)
+        {
+            if (this.cmbSucursal.Focused && this.cmbSucursal.Text == "")
+                this.cmbSucursal_SelectedIndexChanged(sender, e);
+        }
+
+        private void cmbSucursal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbSucursal.Focused)
+            {
+                int iCuentaID = Helper.ConvertirEntero(this.tgvCuentas.CurrentNode.Cells["Cuentas_Id"].Value);
+                this.LlenarMovimientosCuenta(iCuentaID);
+            }
+        }
+
         private void dgvDetalle_KeyDown(object sender, KeyEventArgs e)
         {
             if (this.dgvDetalle.CurrentRow == null) return;
@@ -304,9 +321,13 @@ namespace Refaccionaria.App
 
         private void LlenarMovimientosCuenta(int iCuentaID)
         {
+            Cargando.Mostrar();
+
             DateTime dDesde = this.dtpDesde.Value.Date;
             DateTime dHasta = this.dtpHasta.Value.Date.AddDays(1);
-            var oMovs = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.ContaCuentaAuxiliarID == iCuentaID && (c.FechaPoliza >= dDesde && c.FechaPoliza < dHasta))
+            int iSucursalID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue);
+            var oMovs = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => 
+                c.ContaCuentaAuxiliarID == iCuentaID && (c.FechaPoliza >= dDesde && c.FechaPoliza < dHasta) && (iSucursalID == 0 || c.SucursalID == iSucursalID))
                 .OrderBy(c => c.FechaPoliza).ToList();
 
             // Se llena a partir de un DataTable
@@ -347,6 +368,12 @@ namespace Refaccionaria.App
                     this.dgvDetalle.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
             }
             */
+
+            // Si existían un filtro previamente, se ejecuta nuevamente
+            if (this.txtBusquedaPolizaDet.Text != "")
+                this.txtBusquedaPolizaDet_TextChanged(this, null);
+
+            Cargando.Cerrar();
         }
 
         private void MovimientosCuentaFormatoAdicional()

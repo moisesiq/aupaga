@@ -77,6 +77,7 @@
             this.btnPolizaCambiarSucursal = new System.Windows.Forms.Button();
             this.txtBusquedaPolizaDet = new Refaccionaria.Negocio.TextoMod();
             this.txtBusqueda = new Refaccionaria.Negocio.TextoMod();
+            this.cmbSucursal = new Refaccionaria.Negocio.ComboEtiqueta();
             ((System.ComponentModel.ISupportInitialize)(this.tgvCuentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPoliza)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -238,7 +239,7 @@
             this.dgvPoliza.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPoliza.Size = new System.Drawing.Size(628, 177);
             this.dgvPoliza.StandardTab = true;
-            this.dgvPoliza.TabIndex = 13;
+            this.dgvPoliza.TabIndex = 15;
             // 
             // pol_PolizaDetalleID
             // 
@@ -368,7 +369,7 @@
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetalle.Size = new System.Drawing.Size(628, 166);
             this.dgvDetalle.StandardTab = true;
-            this.dgvDetalle.TabIndex = 12;
+            this.dgvDetalle.TabIndex = 13;
             this.dgvDetalle.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellDoubleClick);
             this.dgvDetalle.CurrentCellChanged += new System.EventHandler(this.dgvDetalle_CurrentCellChanged);
             this.dgvDetalle.Sorted += new System.EventHandler(this.dgvDetalle_Sorted);
@@ -493,7 +494,7 @@
             this.txtConceptoPoliza.Name = "txtConceptoPoliza";
             this.txtConceptoPoliza.ReadOnly = true;
             this.txtConceptoPoliza.Size = new System.Drawing.Size(628, 29);
-            this.txtConceptoPoliza.TabIndex = 14;
+            this.txtConceptoPoliza.TabIndex = 16;
             // 
             // lblOrigenPoliza
             // 
@@ -504,7 +505,7 @@
             this.lblOrigenPoliza.Location = new System.Drawing.Point(732, 228);
             this.lblOrigenPoliza.Name = "lblOrigenPoliza";
             this.lblOrigenPoliza.Size = new System.Drawing.Size(544, 17);
-            this.lblOrigenPoliza.TabIndex = 29;
+            this.lblOrigenPoliza.TabIndex = 14;
             this.lblOrigenPoliza.Text = "d";
             this.lblOrigenPoliza.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
@@ -538,14 +539,14 @@
             // 
             this.txtBusquedaPolizaDet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBusquedaPolizaDet.Etiqueta = "";
+            this.txtBusquedaPolizaDet.Etiqueta = "Filtro";
             this.txtBusquedaPolizaDet.EtiquetaColor = System.Drawing.Color.Gray;
-            this.txtBusquedaPolizaDet.Location = new System.Drawing.Point(729, 33);
+            this.txtBusquedaPolizaDet.Location = new System.Drawing.Point(835, 33);
             this.txtBusquedaPolizaDet.Name = "txtBusquedaPolizaDet";
             this.txtBusquedaPolizaDet.PasarEnfoqueConEnter = false;
             this.txtBusquedaPolizaDet.SeleccionarTextoAlEnfoque = true;
-            this.txtBusquedaPolizaDet.Size = new System.Drawing.Size(628, 20);
-            this.txtBusquedaPolizaDet.TabIndex = 11;
+            this.txtBusquedaPolizaDet.Size = new System.Drawing.Size(522, 20);
+            this.txtBusquedaPolizaDet.TabIndex = 12;
             this.txtBusquedaPolizaDet.TextChanged += new System.EventHandler(this.txtBusquedaPolizaDet_TextChanged);
             // 
             // txtBusqueda
@@ -561,11 +562,34 @@
             this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
             this.txtBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBusqueda_KeyDown);
             // 
+            // cmbSucursal
+            // 
+            this.cmbSucursal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbSucursal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbSucursal.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.cmbSucursal.DataSource = null;
+            this.cmbSucursal.DisplayMember = "";
+            this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbSucursal.Etiqueta = "Sucursal";
+            this.cmbSucursal.EtiquetaColor = System.Drawing.Color.Gray;
+            this.cmbSucursal.Location = new System.Drawing.Point(729, 33);
+            this.cmbSucursal.Name = "cmbSucursal";
+            this.cmbSucursal.SelectedIndex = -1;
+            this.cmbSucursal.SelectedItem = null;
+            this.cmbSucursal.SelectedText = "";
+            this.cmbSucursal.SelectedValue = null;
+            this.cmbSucursal.Size = new System.Drawing.Size(100, 21);
+            this.cmbSucursal.TabIndex = 11;
+            this.cmbSucursal.ValueMember = "";
+            this.cmbSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbSucursal_SelectedIndexChanged);
+            this.cmbSucursal.TextChanged += new System.EventHandler(this.cmbSucursal_TextChanged);
+            // 
             // CuentasPolizas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.cmbSucursal);
             this.Controls.Add(this.txtBusquedaPolizaDet);
             this.Controls.Add(this.btnPolizaCambiarSucursal);
             this.Controls.Add(this.btnRecibirResguardo);
@@ -593,7 +617,7 @@
             this.PerformLayout();
 
         }
-
+        
         #endregion
 
         private System.Windows.Forms.Button btnPolizaAgregar;
@@ -632,5 +656,6 @@
         private System.Windows.Forms.Button btnRecibirResguardo;
         private System.Windows.Forms.Button btnPolizaCambiarSucursal;
         private Negocio.TextoMod txtBusquedaPolizaDet;
+        private Negocio.ComboEtiqueta cmbSucursal;
     }
 }

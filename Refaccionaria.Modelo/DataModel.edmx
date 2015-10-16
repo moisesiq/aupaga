@@ -10837,6 +10837,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <Parameter Name="Desde" Type="date" Mode="In" />
           <Parameter Name="Hasta" Type="date" Mode="In" />
         </Function>
+        <Function Name="pauPedidosSugeridos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pauVentasCancelaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SucursalID" Type="int" Mode="In" />
           <Parameter Name="FechaInicial" Type="date" Mode="In" />
@@ -15522,15 +15523,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="PartesBusquedaEnMovimientosView" EntityType="RefaccionariaModelo.PartesBusquedaEnMovimientosView" />
           <EntitySet Name="PartesMaxMinView" EntityType="RefaccionariaModelo.PartesMaxMinView" />
           <EntitySet Name="CajaCambioDeTurno" EntityType="RefaccionariaModelo.CajaCambioDeTurno" />
-          <FunctionImport Name="pauCuadroDeControlGeneral" ReturnType="Collection(RefaccionariaModelo.pauCuadroDeControlGeneral_Result)">
-            <Parameter Name="SucursalID" Mode="In" Type="Int32" />
-            <Parameter Name="Pagadas" Mode="In" Type="Boolean" />
-            <Parameter Name="Cobradas" Mode="In" Type="Boolean" />
-            <Parameter Name="Solo9500" Mode="In" Type="Boolean" />
-            <Parameter Name="OmitirDomingo" Mode="In" Type="Boolean" />
-            <Parameter Name="Desde" Mode="In" Type="DateTime" />
-            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="MovimientoInventarioDetalleView" EntityType="RefaccionariaModelo.MovimientoInventarioDetalleView" />
           <FunctionImport Name="pauContaCuentasMovimientosTotales" ReturnType="Collection(RefaccionariaModelo.pauContaCuentasMovimientosTotales_Result)">
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
@@ -16870,10 +16862,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="PerfilPermisosView" EntityType="RefaccionariaModelo.PerfilPermisosView" />
           <EntitySet Name="UsuarioPerfilesView" EntityType="RefaccionariaModelo.UsuarioPerfilesView" />
           <EntitySet Name="PartesExistenciasView" EntityType="RefaccionariaModelo.PartesExistenciasView" />
-          <FunctionImport Name="pauPartesMaster" ReturnType="Collection(RefaccionariaModelo.pauPartesMaster_Result)">
-            <Parameter Name="Desde" Mode="In" Type="DateTime" />
-            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="ProveedorParteGanancia" EntityType="RefaccionariaModelo.ProveedorParteGanancia" />
           <EntitySet Name="ProveedoresPartesGananciasLineasView" EntityType="RefaccionariaModelo.ProveedoresPartesGananciasLineasView" />
           <EntitySet Name="ProveedoresPartesGananciasView" EntityType="RefaccionariaModelo.ProveedoresPartesGananciasView" />
@@ -16975,6 +16963,19 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ContaEgresoDetalleDevengadoEspecial" EntitySet="ContaEgresoDetalleDevengadoEspecial" />
           </AssociationSet>
           <EntitySet Name="ContaEgresosDevengadoEspecialCuentasView" EntityType="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView" />
+          <FunctionImport Name="pauPartesMaster" ReturnType="Collection(RefaccionariaModelo.pauPartesMaster_Result)">
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pauCuadroDeControlGeneral" ReturnType="Collection(RefaccionariaModelo.pauCuadroDeControlGeneral_Result)">
+            <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+            <Parameter Name="Pagadas" Mode="In" Type="Boolean" />
+            <Parameter Name="Cobradas" Mode="In" Type="Boolean" />
+            <Parameter Name="Solo9500" Mode="In" Type="Boolean" />
+            <Parameter Name="OmitirDomingo" Mode="In" Type="Boolean" />
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -22008,35 +22009,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__CajaCambi__Recib__4BAD0A80" FromRole="CajaCambioDeTurno" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__CajaCambi__Sucur__49C4C20E" FromRole="CajaCambioDeTurno" ToRole="Sucursal" />
         </EntityType>
-        <ComplexType Name="pauCuadroDeControlGeneral_Result">
-          <Property Type="Int32" Name="VentaID" Nullable="false" />
-          <Property Type="String" Name="Folio" Nullable="true" MaxLength="16" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="SucursalID" Nullable="false" />
-          <Property Type="String" Name="Sucursal" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="ClienteID" Nullable="false" />
-          <Property Type="String" Name="Cliente" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="VendedorID" Nullable="false" />
-          <Property Type="String" Name="Vendedor" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="LineaID" Nullable="true" />
-          <Property Type="String" Name="Linea" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="MarcaID" Nullable="true" />
-          <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="ProveedorID" Nullable="true" />
-          <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
-          <Property Type="Decimal" Name="Actual" Nullable="true" Precision="38" Scale="6" />
-          <Property Type="Decimal" Name="Anterior" Nullable="true" Precision="38" Scale="6" />
-          <Property Type="Decimal" Name="UtilDescActual" Nullable="true" Precision="38" Scale="6" />
-          <Property Type="Decimal" Name="UtilDescAnterior" Nullable="true" Precision="38" Scale="6" />
-          <Property Type="Decimal" Name="PrecioActual" Nullable="true" Precision="38" Scale="4" />
-          <Property Type="Decimal" Name="PrecioAnterior" Nullable="true" Precision="38" Scale="4" />
-          <Property Type="Decimal" Name="CostoActual" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="CostoAnterior" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="CostoDescActual" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="CostoDescAnterior" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Int32" Name="VentasActual" Nullable="true" />
-          <Property Type="Int32" Name="VentasAnterior" Nullable="true" />
-        </ComplexType>
         <EntityType Name="MovimientoInventarioDetalleView">
           <Key>
             <PropertyRef Name="MovimientoInventarioDetalleID" />
@@ -27819,40 +27791,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Existencia" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="UltimaVenta" Type="DateTime" Precision="3" />
         </EntityType>
-        <ComplexType Name="pauPartesMaster_Result">
-          <Property Type="Int32" Name="ParteID" Nullable="false" />
-          <Property Type="String" Name="CodigoDeBara" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NumeroDeParte" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="512" />
-          <Property Type="Int32" Name="ProveedorID" Nullable="false" />
-          <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="MarcaParteID" Nullable="false" />
-          <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="LineaID" Nullable="false" />
-          <Property Type="String" Name="Linea" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="MedidaID" Nullable="true" />
-          <Property Type="String" Name="UnidadDeMedida" Nullable="true" MaxLength="100" />
-          <Property Type="Decimal" Name="UnidadDeEmpaque" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="TiempoDeReposicion" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Boolean" Name="AplicaComision" Nullable="true" />
-          <Property Type="Boolean" Name="EsServicio" Nullable="true" />
-          <Property Type="Boolean" Name="Etiqueta" Nullable="true" />
-          <Property Type="Boolean" Name="SoloUnaEtiqueta" Nullable="true" />
-          <Property Type="Boolean" Name="EsPar" Nullable="true" />
-          <Property Type="Decimal" Name="Existencia" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Int32" Name="Ventas" Nullable="false" />
-          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PorcentajeUtilidadUno" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PrecioUno" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PorcentajeUtilidadDos" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PrecioDos" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PorcentajeUtilidadTres" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PrecioTres" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PorcentajeUtilidadCuatro" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PrecioCuatro" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PorcentajeUtilidadCinco" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PrecioCinco" Nullable="true" Precision="18" Scale="2" />
-        </ComplexType>
         <EntityType Name="ProveedorParteGanancia">
           <Key>
             <PropertyRef Name="ProveedorParteGananciaID" />
@@ -28544,6 +28482,71 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ImporteDev" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
         </EntityType>
+        <ComplexType Name="pauPartesMaster_Result">
+          <Property Type="Int32" Name="ParteID" Nullable="false" />
+          <Property Type="String" Name="CodigoDeBara" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NumeroDeParte" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="512" />
+          <Property Type="Int32" Name="ProveedorID" Nullable="false" />
+          <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="MarcaParteID" Nullable="false" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="LineaID" Nullable="false" />
+          <Property Type="String" Name="Linea" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="MedidaID" Nullable="true" />
+          <Property Type="String" Name="UnidadDeMedida" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="UnidadDeEmpaque" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TiempoDeReposicion" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Boolean" Name="AplicaComision" Nullable="true" />
+          <Property Type="Boolean" Name="EsServicio" Nullable="true" />
+          <Property Type="Boolean" Name="Etiqueta" Nullable="true" />
+          <Property Type="Boolean" Name="SoloUnaEtiqueta" Nullable="true" />
+          <Property Type="Boolean" Name="EsPar" Nullable="true" />
+          <Property Type="Decimal" Name="Existencia" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="Ventas" Nullable="false" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CostoConDescuento" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PorcentajeUtilidadUno" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrecioUno" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PorcentajeUtilidadDos" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrecioDos" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PorcentajeUtilidadTres" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrecioTres" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PorcentajeUtilidadCuatro" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrecioCuatro" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PorcentajeUtilidadCinco" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrecioCinco" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="pauCuadroDeControlGeneral_Result">
+          <Property Type="Int32" Name="VentaID" Nullable="false" />
+          <Property Type="String" Name="Folio" Nullable="true" MaxLength="16" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="SucursalID" Nullable="false" />
+          <Property Type="String" Name="Sucursal" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ClienteID" Nullable="false" />
+          <Property Type="String" Name="Cliente" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="VendedorID" Nullable="false" />
+          <Property Type="String" Name="Vendedor" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="LineaID" Nullable="true" />
+          <Property Type="String" Name="Linea" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="MarcaID" Nullable="true" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ProveedorID" Nullable="true" />
+          <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="Actual" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Anterior" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="UtilDescActual" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="UtilDescAnterior" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PrecioSinIvaActual" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PrecioActual" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="PrecioAnterior" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="CostoActual" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="CostoAnterior" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="CostoDescActual" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="CostoDescAnterior" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Int32" Name="VentasActual" Nullable="true" />
+          <Property Type="Int32" Name="VentasAnterior" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -32182,39 +32185,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pauCuadroDeControlGeneral" FunctionName="ControlRefaccionariaModel.Store.pauCuadroDeControlGeneral">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RefaccionariaModelo.pauCuadroDeControlGeneral_Result">
-                <ScalarProperty Name="VentaID" ColumnName="VentaID" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
-                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
-                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
-                <ScalarProperty Name="VendedorID" ColumnName="VendedorID" />
-                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
-                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-                <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="Actual" ColumnName="Actual" />
-                <ScalarProperty Name="Anterior" ColumnName="Anterior" />
-                <ScalarProperty Name="UtilDescActual" ColumnName="UtilDescActual" />
-                <ScalarProperty Name="UtilDescAnterior" ColumnName="UtilDescAnterior" />
-                <ScalarProperty Name="PrecioActual" ColumnName="PrecioActual" />
-                <ScalarProperty Name="PrecioAnterior" ColumnName="PrecioAnterior" />
-                <ScalarProperty Name="CostoActual" ColumnName="CostoActual" />
-                <ScalarProperty Name="CostoAnterior" ColumnName="CostoAnterior" />
-                <ScalarProperty Name="CostoDescActual" ColumnName="CostoDescActual" />
-                <ScalarProperty Name="CostoDescAnterior" ColumnName="CostoDescAnterior" />
-                <ScalarProperty Name="VentasActual" ColumnName="VentasActual" />
-                <ScalarProperty Name="VentasAnterior" ColumnName="VentasAnterior" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="MovimientoInventarioDetalleView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.MovimientoInventarioDetalleView">
               <MappingFragment StoreEntitySet="MovimientoInventarioDetalleView">
@@ -33962,44 +33932,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pauPartesMaster" FunctionName="ControlRefaccionariaModel.Store.pauPartesMaster">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RefaccionariaModelo.pauPartesMaster_Result">
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="CodigoDeBara" ColumnName="CodigoDeBara" />
-                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-                <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="MedidaID" ColumnName="MedidaID" />
-                <ScalarProperty Name="UnidadDeMedida" ColumnName="UnidadDeMedida" />
-                <ScalarProperty Name="UnidadDeEmpaque" ColumnName="UnidadDeEmpaque" />
-                <ScalarProperty Name="TiempoDeReposicion" ColumnName="TiempoDeReposicion" />
-                <ScalarProperty Name="AplicaComision" ColumnName="AplicaComision" />
-                <ScalarProperty Name="EsServicio" ColumnName="EsServicio" />
-                <ScalarProperty Name="Etiqueta" ColumnName="Etiqueta" />
-                <ScalarProperty Name="SoloUnaEtiqueta" ColumnName="SoloUnaEtiqueta" />
-                <ScalarProperty Name="EsPar" ColumnName="EsPar" />
-                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
-                <ScalarProperty Name="Ventas" ColumnName="Ventas" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="PorcentajeUtilidadUno" ColumnName="PorcentajeUtilidadUno" />
-                <ScalarProperty Name="PrecioUno" ColumnName="PrecioUno" />
-                <ScalarProperty Name="PorcentajeUtilidadDos" ColumnName="PorcentajeUtilidadDos" />
-                <ScalarProperty Name="PrecioDos" ColumnName="PrecioDos" />
-                <ScalarProperty Name="PorcentajeUtilidadTres" ColumnName="PorcentajeUtilidadTres" />
-                <ScalarProperty Name="PrecioTres" ColumnName="PrecioTres" />
-                <ScalarProperty Name="PorcentajeUtilidadCuatro" ColumnName="PorcentajeUtilidadCuatro" />
-                <ScalarProperty Name="PrecioCuatro" ColumnName="PrecioCuatro" />
-                <ScalarProperty Name="PorcentajeUtilidadCinco" ColumnName="PorcentajeUtilidadCinco" />
-                <ScalarProperty Name="PrecioCinco" ColumnName="PrecioCinco" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="ProveedorParteGanancia">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorParteGanancia">
               <MappingFragment StoreEntitySet="ProveedorParteGanancia">
@@ -34406,6 +34338,79 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pauPartesMaster" FunctionName="ControlRefaccionariaModel.Store.pauPartesMaster">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RefaccionariaModelo.pauPartesMaster_Result">
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="CodigoDeBara" ColumnName="CodigoDeBara" />
+                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="MedidaID" ColumnName="MedidaID" />
+                <ScalarProperty Name="UnidadDeMedida" ColumnName="UnidadDeMedida" />
+                <ScalarProperty Name="UnidadDeEmpaque" ColumnName="UnidadDeEmpaque" />
+                <ScalarProperty Name="TiempoDeReposicion" ColumnName="TiempoDeReposicion" />
+                <ScalarProperty Name="AplicaComision" ColumnName="AplicaComision" />
+                <ScalarProperty Name="EsServicio" ColumnName="EsServicio" />
+                <ScalarProperty Name="Etiqueta" ColumnName="Etiqueta" />
+                <ScalarProperty Name="SoloUnaEtiqueta" ColumnName="SoloUnaEtiqueta" />
+                <ScalarProperty Name="EsPar" ColumnName="EsPar" />
+                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
+                <ScalarProperty Name="Ventas" ColumnName="Ventas" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="CostoConDescuento" ColumnName="CostoConDescuento" />
+                <ScalarProperty Name="PorcentajeUtilidadUno" ColumnName="PorcentajeUtilidadUno" />
+                <ScalarProperty Name="PrecioUno" ColumnName="PrecioUno" />
+                <ScalarProperty Name="PorcentajeUtilidadDos" ColumnName="PorcentajeUtilidadDos" />
+                <ScalarProperty Name="PrecioDos" ColumnName="PrecioDos" />
+                <ScalarProperty Name="PorcentajeUtilidadTres" ColumnName="PorcentajeUtilidadTres" />
+                <ScalarProperty Name="PrecioTres" ColumnName="PrecioTres" />
+                <ScalarProperty Name="PorcentajeUtilidadCuatro" ColumnName="PorcentajeUtilidadCuatro" />
+                <ScalarProperty Name="PrecioCuatro" ColumnName="PrecioCuatro" />
+                <ScalarProperty Name="PorcentajeUtilidadCinco" ColumnName="PorcentajeUtilidadCinco" />
+                <ScalarProperty Name="PrecioCinco" ColumnName="PrecioCinco" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pauCuadroDeControlGeneral" FunctionName="ControlRefaccionariaModel.Store.pauCuadroDeControlGeneral">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RefaccionariaModelo.pauCuadroDeControlGeneral_Result">
+                <ScalarProperty Name="VentaID" ColumnName="VentaID" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="VendedorID" ColumnName="VendedorID" />
+                <ScalarProperty Name="Vendedor" ColumnName="Vendedor" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Actual" ColumnName="Actual" />
+                <ScalarProperty Name="Anterior" ColumnName="Anterior" />
+                <ScalarProperty Name="UtilDescActual" ColumnName="UtilDescActual" />
+                <ScalarProperty Name="UtilDescAnterior" ColumnName="UtilDescAnterior" />
+                <ScalarProperty Name="PrecioSinIvaActual" ColumnName="PrecioSinIvaActual" />
+                <ScalarProperty Name="PrecioActual" ColumnName="PrecioActual" />
+                <ScalarProperty Name="PrecioAnterior" ColumnName="PrecioAnterior" />
+                <ScalarProperty Name="CostoActual" ColumnName="CostoActual" />
+                <ScalarProperty Name="CostoAnterior" ColumnName="CostoAnterior" />
+                <ScalarProperty Name="CostoDescActual" ColumnName="CostoDescActual" />
+                <ScalarProperty Name="CostoDescAnterior" ColumnName="CostoDescAnterior" />
+                <ScalarProperty Name="VentasActual" ColumnName="VentasActual" />
+                <ScalarProperty Name="VentasAnterior" ColumnName="VentasAnterior" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

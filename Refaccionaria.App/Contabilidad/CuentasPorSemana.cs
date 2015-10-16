@@ -277,7 +277,7 @@ namespace Refaccionaria.App
             foreach (var oReg in oDevEsp)
             {
                 // Nodo de Sucursal
-                if (oReg.Duenio != sSucursal)
+                if (oReg.Duenio != sDuenio)
                 {
                     sDuenio = oReg.Duenio;
                     oNodoDuenio = this.tgvDatos.Nodes.Add(sDuenio);

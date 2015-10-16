@@ -114,7 +114,7 @@ namespace Refaccionaria.Negocio
         #region [ Manejadores de Eventos ]
 
         public event EventHandler SelectedIndexChanged;
-        public event EventHandler TextChanged;
+        public new event EventHandler TextChanged;
 
         #endregion
 

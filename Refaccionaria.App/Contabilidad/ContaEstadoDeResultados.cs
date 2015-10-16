@@ -26,6 +26,12 @@ namespace Refaccionaria.App
             this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", General.GetListOf<Sucursal>(c => c.Estatus));
         }
 
+        private void nudDecimales_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.nudDecimales.Focused)
+                this.FormatoColumnas();
+        }
+
         private void btnMostrar_Click(object sender, EventArgs e)
         {
             this.CargarDatos();
@@ -59,6 +65,15 @@ namespace Refaccionaria.App
             }
 
             // this.dgvDatos.FirstDisplayedScrollingColumnIndex = (iColSem - 1);
+
+            this.FormatoColumnas();
+        }
+
+        private void FormatoColumnas()
+        {
+            string sFormato = ("C" + this.nudDecimales.Value.ToString());
+            for (int iCol = 1; iCol < this.dgvDatos.Columns.Count; iCol++)
+                this.dgvDatos.Columns[iCol].DefaultCellStyle.Format = sFormato;
         }
 
         private void CargarDatos()
@@ -87,7 +102,7 @@ namespace Refaccionaria.App
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
             var oSemanas = oDatos.Where(c => c.Fecha >= dDesde)
                 .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
-                .Select(c => new { c.Key.Semana, c.Key.Sucursal, Precio = c.Sum(s => s.PrecioActual), Costo = c.Sum(s => s.CostoDescActual) })
+                .Select(c => new { c.Key.Semana, c.Key.Sucursal, PrecioSinIva = c.Sum(s => s.PrecioSinIvaActual), Costo = c.Sum(s => s.CostoDescActual) })
                 .OrderBy(c => c.Sucursal).ThenBy(c => c.Semana);
             this.dgvDatos.Rows.Clear();
 
@@ -106,8 +121,8 @@ namespace Refaccionaria.App
                 }
 
                 string sSemana = oReg.Semana.ToShortDateString();
-                this.dgvDatos[sSemana, iFila].Value = (Helper.ConvertirDecimal(this.dgvDatos[sSemana, iFila].Value) + oReg.Precio);
-                this.dgvDatos[sSemana, iFilaIngresos].Value = (Helper.ConvertirDecimal(this.dgvDatos[sSemana, iFilaIngresos].Value) + oReg.Precio);
+                this.dgvDatos[sSemana, iFila].Value = (Helper.ConvertirDecimal(this.dgvDatos[sSemana, iFila].Value) + oReg.PrecioSinIva);
+                this.dgvDatos[sSemana, iFilaIngresos].Value = (Helper.ConvertirDecimal(this.dgvDatos[sSemana, iFilaIngresos].Value) + oReg.PrecioSinIva);
             }
 
             // Se agrega la fila de Costos
@@ -129,7 +144,7 @@ namespace Refaccionaria.App
             }
 
             // Se agrega la fila de margen bruto
-            int iFilaMargen = this.dgvDatos.Rows.Add("Margen Bruto");
+            int iFilaMargen = this.dgvDatos.Rows.Add("= Margen Bruto");
             this.dgvDatos.Rows[iFilaMargen].DefaultCellStyle.Font = oFuenteT;
             foreach (DataGridViewColumn oCol in this.dgvDatos.Columns)
             {
@@ -167,6 +182,31 @@ namespace Refaccionaria.App
                 this.dgvDatos[sSemana, iFilaGastos].Value = (Helper.ConvertirDecimal(this.dgvDatos[sSemana, iFilaGastos].Value) + oReg.Importe);
             }
 
+            // Se agrega la fila de utilidad, con cada una de las sucursales
+            int iFilaUtilidad = this.dgvDatos.Rows.Add("= Utilidad");
+            this.dgvDatos.Rows[iFilaUtilidad].DefaultCellStyle.Font = oFuenteT;
+            // Sucursales
+            var oSucursales = General.GetListOf<Sucursal>(c => c.Estatus).OrderBy(c => c.NombreSucursal).ToList();
+            foreach (var oReg in oSucursales)
+                this.dgvDatos.Rows.Add(oReg.NombreSucursal);
+            // Se llenan los datos                        
+            foreach (DataGridViewColumn oCol in this.dgvDatos.Columns)
+            {
+                if (oCol.Index == 0) continue;
+                // Utilidad total
+                this.dgvDatos[oCol.Index, iFilaUtilidad].Value = (
+                    Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaMargen].Value)
+                    - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaGastos].Value)
+                );
+                // Sucursales
+                for (int i = 1; i < oSucursales.Count; i++)
+                    this.dgvDatos[oCol.Index, iFilaUtilidad + i].Value = (
+                        Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaIngresos + i].Value)
+                        - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaCostos + i].Value)
+                        - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaGastos + i].Value)
+                    );
+            }
+
             // Se obtienen los datos de gastos especiales
             DateTime dHastaMas1 = dHasta.AddDays(1);
             var oDevEsp = General.GetListOf<ContaEgresosDevengadoEspecialCuentasView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1)
@@ -193,12 +233,12 @@ namespace Refaccionaria.App
             }
 
             // Se agrega la fila de utilidad neta
-            int iFilaUtilidad = this.dgvDatos.Rows.Add("Utilidad neta");
-            this.dgvDatos.Rows[iFilaUtilidad].DefaultCellStyle.Font = oFuenteT;
+            int iFilaDividendos = this.dgvDatos.Rows.Add("= Dividendos");
+            this.dgvDatos.Rows[iFilaDividendos].DefaultCellStyle.Font = oFuenteT;
             foreach (DataGridViewColumn oCol in this.dgvDatos.Columns)
             {
                 if (oCol.Index == 0) continue;
-                this.dgvDatos[oCol.Index, iFilaUtilidad].Value = (
+                this.dgvDatos[oCol.Index, iFilaDividendos].Value = (
                     Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaMargen].Value)
                     - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaGastos].Value)
                     - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaEsp].Value)
