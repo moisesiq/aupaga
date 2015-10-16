@@ -670,7 +670,9 @@ namespace Refaccionaria.App
                 this.cboClienteComisionista.AutoCompleteCustomSource = autComisionista;
                 this.cboClienteComisionista.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
 
-                this.LimpiarFormulario();
+                // Se quita esta línea porque si se queda, como es una llamada asíncrona, al cargar datos de un cliente y mostrar se alcanza a ejecutar este
+                // código y eso ocasionaba que se mostrará el formulario sin datos, cuando se abre para editar desde ventas. - Moi 2015/10/16
+                // this.LimpiarFormulario();
             }
             catch (Exception ex)
             {
