@@ -217,24 +217,27 @@ namespace Refaccionaria.App
             this.chkTieneDetalle.Checked = oCuentaAux.Detallable;
             this.chkVisibleEnCaja.Checked = oCuentaAux.VisibleEnCaja;
             // this.chkDevengarAutomaticamente.Checked = oCuentaAux.DevengarAut.Valor();
+
+            // Se verifica si es devengado autómatico y de qué tipo es
+            this.chkDevengarAutomaticamente.Checked = false;
+            this.chkDevengarEspecial.Checked = false;
             if (oCuentaAux.DevengarAut.Valor())
             {
-                // Se verifica si es devengado especial o normal
-                var oDevEsp = General.GetEntity<ContaCuentaAuxiliarDevengadoEspecial>(c => c.ContaCuentaAuxiliarID == oCuentaAux.ContaCuentaAuxiliarID);
-                if (oDevEsp != null)
+                this.chkDevengarAutomaticamente.Checked = true;
+                var oDevAut = General.GetListOf<ContaCuentaAuxiliarDevengadoAutomatico>(c => c.ContaCuentaAuxiliarID == iCuentaID);
+                foreach (var oReg in oDevAut)
                 {
-                    this.chkDevengarEspecial.Checked = true;
-                    this.cmbDevengarEspecial.SelectedValue = oDevEsp.DuenioID;
+                    int iFila = this.dgvDevSuc.EncontrarIndiceDeValor("SucursalID", oReg.SucursalID);
+                    this.dgvDevSuc["Porcentaje", iFila].Value = oReg.Porcentaje;
                 }
-                this.chkDevengarAutomaticamente.Checked = !this.chkDevengarEspecial.Checked;
+            }
+            else if (oCuentaAux.DevengarAutEsp.Valor())
+            {
+                this.chkDevengarEspecial.Checked = true;
+                var oDevEsp = General.GetEntity<ContaCuentaAuxiliarDevengadoEspecial>(c => c.ContaCuentaAuxiliarID == oCuentaAux.ContaCuentaAuxiliarID);
+                this.cmbDevengarEspecial.SelectedValue = oDevEsp.DuenioID;
             }
 
-            var oDevAut = General.GetListOf<ContaCuentaAuxiliarDevengadoAutomatico>(c => c.ContaCuentaAuxiliarID == iCuentaID);
-            foreach (var oReg in oDevAut)
-            {
-                int iFila = this.dgvDevSuc.EncontrarIndiceDeValor("SucursalID", oReg.SucursalID);
-                this.dgvDevSuc["Porcentaje", iFila].Value = oReg.Porcentaje;
-            }
             this.chkCalculoSemanal.Checked = oCuentaAux.CalculoSemanal.Valor();
             this.txtMeses.Text = oCuentaAux.PeriodicidadMes.Valor().ToString();
             this.chkDejarDeSemanalizar.Checked = oCuentaAux.FinSemanalizar.HasValue;
@@ -301,7 +304,8 @@ namespace Refaccionaria.App
             oCuentaAux.CuentaSat = this.txtCuentaSat.Text;
             oCuentaAux.Detallable = this.chkTieneDetalle.Checked;
             oCuentaAux.VisibleEnCaja = this.chkVisibleEnCaja.Checked;
-            oCuentaAux.DevengarAut = (this.chkDevengarAutomaticamente.Checked || this.chkDevengarEspecial.Checked);
+            oCuentaAux.DevengarAut = this.chkDevengarAutomaticamente.Checked;
+            oCuentaAux.DevengarAutEsp = this.chkDevengarEspecial.Checked;
             oCuentaAux.CalculoSemanal = this.chkCalculoSemanal.Checked;
             if (this.chkCalculoSemanal.Checked)
             {
@@ -322,17 +326,8 @@ namespace Refaccionaria.App
                     Guardar.Eliminar<SucursalGastoFijo>(oReg);
             }
 
-            // Se llenan los datos de devengar automáticamente, si aplica.
-            // Primero se revisa si es especial
-            if (this.chkDevengarEspecial.Checked)
-            {
-                var oDevEsp = General.GetEntity<ContaCuentaAuxiliarDevengadoEspecial>(c => c.ContaCuentaAuxiliarID == oCuentaAux.ContaCuentaAuxiliarID);
-                if (oDevEsp == null)
-                    oDevEsp = new ContaCuentaAuxiliarDevengadoEspecial() { ContaCuentaAuxiliarID = oCuentaAux.ContaCuentaAuxiliarID };
-                oDevEsp.DuenioID = Helper.ConvertirEntero(this.cmbDevengarEspecial.SelectedValue);
-                Guardar.Generico<ContaCuentaAuxiliarDevengadoEspecial>(oDevEsp);
-            }
-            else if (this.chkDevengarAutomaticamente.Checked)
+            // Se llenan los datos de devengar automáticamente, si aplica y con el tipo que aplique
+            if (this.chkDevengarAutomaticamente.Checked)
             {
                 foreach (DataGridViewRow oFila in this.dgvDevSuc.Rows)
                 {
@@ -348,6 +343,14 @@ namespace Refaccionaria.App
                     oDevAut.Porcentaje = Helper.ConvertirDecimal(oFila.Cells["Porcentaje"].Value);
                     Guardar.Generico<ContaCuentaAuxiliarDevengadoAutomatico>(oDevAut);
                 }
+            }
+            else if (this.chkDevengarEspecial.Checked)
+            {
+                var oDevEsp = General.GetEntity<ContaCuentaAuxiliarDevengadoEspecial>(c => c.ContaCuentaAuxiliarID == oCuentaAux.ContaCuentaAuxiliarID);
+                if (oDevEsp == null)
+                    oDevEsp = new ContaCuentaAuxiliarDevengadoEspecial() { ContaCuentaAuxiliarID = oCuentaAux.ContaCuentaAuxiliarID };
+                oDevEsp.DuenioID = Helper.ConvertirEntero(this.cmbDevengarEspecial.SelectedValue);
+                Guardar.Generico<ContaCuentaAuxiliarDevengadoEspecial>(oDevEsp);
             }
             //
 

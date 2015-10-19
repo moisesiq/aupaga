@@ -17,28 +17,25 @@ namespace Refaccionaria.App
             var oCuentaAux = General.GetEntity<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == oEgreso.ContaCuentaAuxiliarID);
             if (oCuentaAux.DevengarAut.Valor())
             {
-                // Se verifica si se debe hacer un devengado especial, si no, se hace normal
+                decimal mPorTotal = 0, mImporteDev = 0;
+                var oDevAut = General.GetListOf<ContaCuentaAuxiliarDevengadoAutomatico>(c => c.ContaCuentaAuxiliarID == oEgreso.ContaCuentaAuxiliarID);
+                foreach (var oReg in oDevAut)
+                {
+                    mPorTotal += oReg.Porcentaje;
+                    decimal mImporte = Math.Round(oEgreso.Importe * (oReg.Porcentaje / 100), 2);
+                    if (mPorTotal == 100)
+                        mImporte = (oEgreso.Importe - mImporteDev);
+
+                    ContaProc.GastoDevengar(oEgreso.ContaEgresoID, oReg.SucursalID, mImporte, oEgreso.Fecha);
+                    mImporteDev += mImporte;
+                }
+            }
+            // Se verifica si se debe hacer un devengado especial
+            else if (oCuentaAux.DevengarAutEsp.Valor())
+            {
                 var oDevEsp = General.GetEntity<ContaCuentaAuxiliarDevengadoEspecial>(c => c.ContaCuentaAuxiliarID == oEgreso.ContaCuentaAuxiliarID);
                 if (oDevEsp != null)
-                {
                     ContaProc.GastoDevengarEspecial(oEgreso.ContaEgresoID, oDevEsp.DuenioID, oEgreso.Importe, oEgreso.Fecha);
-                }
-
-                else
-                {
-                    decimal mPorTotal = 0, mImporteDev = 0;
-                    var oDevAut = General.GetListOf<ContaCuentaAuxiliarDevengadoAutomatico>(c => c.ContaCuentaAuxiliarID == oEgreso.ContaCuentaAuxiliarID);
-                    foreach (var oReg in oDevAut)
-                    {
-                        mPorTotal += oReg.Porcentaje;
-                        decimal mImporte = Math.Round(oEgreso.Importe * (oReg.Porcentaje / 100), 2);
-                        if (mPorTotal == 100)
-                            mImporte = (oEgreso.Importe - mImporteDev);
-
-                        ContaProc.GastoDevengar(oEgreso.ContaEgresoID, oReg.SucursalID, mImporte, oEgreso.Fecha);
-                        mImporteDev += mImporte;
-                    }
-                }
             }
         }
 
@@ -134,6 +131,9 @@ namespace Refaccionaria.App
 
         public static ResAcc<int> GastoDevengarEspecial(ContaEgresoDevengadoEspecial oDev, List<ContaEgresoDetalleDevengadoEspecial> oDetalleDev)
         {
+            // Se llenan datos calculables
+            oDev.RealizoUsuarioID = (oDev.RealizoUsuarioID > 0 ? oDev.RealizoUsuarioID : GlobalClass.UsuarioGlobal.UsuarioID);
+            //
             Guardar.Generico<ContaEgresoDevengadoEspecial>(oDev);
 
             // Se llena el detalle, si hay

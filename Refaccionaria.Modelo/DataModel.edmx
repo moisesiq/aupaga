@@ -499,6 +499,7 @@
           <Property Name="SumaGastosFijos" Type="bit" />
           <Property Name="CuentaSat" Type="nvarchar" MaxLength="16" />
           <Property Name="RelacionID" Type="int" />
+          <Property Name="DevengarAutEsp" Type="bit" />
         </EntityType>
         <EntityType Name="ContaCuentaAuxiliarDevengadoAutomatico">
           <Key>
@@ -15645,11 +15646,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="VentasFacturasDetalleAvanzadoView" EntityType="RefaccionariaModelo.VentasFacturasDetalleAvanzadoView" />
           <EntitySet Name="VentasPagosView" EntityType="RefaccionariaModelo.VentasPagosView" />
           <EntitySet Name="VentasView" EntityType="RefaccionariaModelo.VentasView" />
-          <EntitySet Name="ContaCuentaAuxiliar" EntityType="RefaccionariaModelo.ContaCuentaAuxiliar" />
-          <AssociationSet Name="FK__SucursalG__Conta__31CD3CEC" Association="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC">
-            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
-            <End Role="SucursalGastoFijo" EntitySet="SucursalGastoFijo" />
-          </AssociationSet>
           <EntitySet Name="ContaPolizaError" EntityType="RefaccionariaModelo.ContaPolizaError" />
           <AssociationSet Name="FK__ContaPoli__Conta__5224FDE5" Association="RefaccionariaModelo.FK__ContaPoli__Conta__5224FDE5">
             <End Role="ContaTipoPoliza" EntitySet="ContaTipoPoliza" />
@@ -15751,10 +15747,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ContaEgreso" EntitySet="ContaEgreso" />
             <End Role="CajaEgreso" EntitySet="CajaEgreso" />
           </AssociationSet>
-          <AssociationSet Name="FK__ContaEgre__Conta__70F39DC8" Association="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8">
-            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
-            <End Role="ContaEgreso" EntitySet="ContaEgreso" />
-          </AssociationSet>
           <AssociationSet Name="FK__ContaEgre__Conta__06E2DEE7" Association="RefaccionariaModelo.FK__ContaEgre__Conta__06E2DEE7">
             <End Role="ContaEgreso" EntitySet="ContaEgreso" />
             <End Role="ContaEgresoDetalle" EntitySet="ContaEgresoDetalle" />
@@ -15795,10 +15787,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="ProveedoresNotasDeCreditoView" EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" />
           <EntitySet Name="ContaCuentaAuxiliarDevengadoAutomatico" EntityType="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoAutomatico" />
-          <AssociationSet Name="FK__ContaCuen__Conta__29E20261" Association="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261">
-            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
-            <End Role="ContaCuentaAuxiliarDevengadoAutomatico" EntitySet="ContaCuentaAuxiliarDevengadoAutomatico" />
-          </AssociationSet>
           <EntitySet Name="CajaEgresosView" EntityType="RefaccionariaModelo.CajaEgresosView" />
           <EntitySet Name="UsuariosView" EntityType="RefaccionariaModelo.UsuariosView" />
           <EntitySet Name="UsuariosPermisosView" EntityType="RefaccionariaModelo.UsuariosPermisosView" />
@@ -15813,10 +15801,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="NominaUsuario" EntityType="RefaccionariaModelo.NominaUsuario" />
           <EntitySet Name="NominaUsuariosView" EntityType="RefaccionariaModelo.NominaUsuariosView" />
           <EntitySet Name="ContaCuentaDeMayor" EntityType="RefaccionariaModelo.ContaCuentaDeMayor" />
-          <AssociationSet Name="FK__ContaCuen__Conta__685E57C7" Association="RefaccionariaModelo.FK__ContaCuen__Conta__685E57C7">
-            <End Role="ContaCuentaDeMayor" EntitySet="ContaCuentaDeMayor" />
-            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
-          </AssociationSet>
           <AssociationSet Name="FK__ContaCuen__Conta__6399A2AA" Association="RefaccionariaModelo.FK__ContaCuen__Conta__6399A2AA">
             <End Role="ContaSubcuenta" EntitySet="ContaSubcuenta" />
             <End Role="ContaCuentaDeMayor" EntitySet="ContaCuentaDeMayor" />
@@ -16337,10 +16321,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
           </AssociationSet>
           <EntitySet Name="ContaPolizaDetalle" EntityType="RefaccionariaModelo.ContaPolizaDetalle" />
-          <AssociationSet Name="FK__ContaPoli__Conta__7C5041DB" Association="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB">
-            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
-            <End Role="ContaPolizaDetalle" EntitySet="ContaPolizaDetalle" />
-          </AssociationSet>
           <EntitySet Name="NominaOficialCuenta" EntityType="RefaccionariaModelo.NominaOficialCuenta" />
           <EntitySet Name="NominaOficialCuentasView" EntityType="RefaccionariaModelo.NominaOficialCuentasView" />
           <AssociationSet Name="FK__NominaOfi__Conta__640EA3F6" Association="RefaccionariaModelo.FK__NominaOfi__Conta__640EA3F6">
@@ -16946,10 +16926,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="ContaCuentaAuxiliarDevengadoEspecial" EntityType="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" />
           <EntitySet Name="ContaEgresoDetalleDevengadoEspecial" EntityType="RefaccionariaModelo.ContaEgresoDetalleDevengadoEspecial" />
           <EntitySet Name="ContaEgresosDetalleView" EntityType="RefaccionariaModelo.ContaEgresosDetalleView" />
-          <AssociationSet Name="FK__ContaCuen__Conta__1FB979A9" Association="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9">
-            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
-            <End Role="ContaCuentaAuxiliarDevengadoEspecial" EntitySet="ContaCuentaAuxiliarDevengadoEspecial" />
-          </AssociationSet>
           <AssociationSet Name="FK__ContaCuen__Dueni__20AD9DE2" Association="RefaccionariaModelo.FK__ContaCuen__Dueni__20AD9DE2">
             <End Role="Duenio" EntitySet="Duenio" />
             <End Role="ContaCuentaAuxiliarDevengadoEspecial" EntitySet="ContaCuentaAuxiliarDevengadoEspecial" />
@@ -16976,6 +16952,31 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="ContaCuentaAuxiliar" EntityType="RefaccionariaModelo.ContaCuentaAuxiliar" />
+          <AssociationSet Name="FK__ContaCuen__Conta__1FB979A9" Association="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9">
+            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
+            <End Role="ContaCuentaAuxiliarDevengadoEspecial" EntitySet="ContaCuentaAuxiliarDevengadoEspecial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContaCuen__Conta__29E20261" Association="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261">
+            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
+            <End Role="ContaCuentaAuxiliarDevengadoAutomatico" EntitySet="ContaCuentaAuxiliarDevengadoAutomatico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContaCuen__Conta__685E57C7" Association="RefaccionariaModelo.FK__ContaCuen__Conta__685E57C7">
+            <End Role="ContaCuentaDeMayor" EntitySet="ContaCuentaDeMayor" />
+            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContaEgre__Conta__70F39DC8" Association="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8">
+            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
+            <End Role="ContaEgreso" EntitySet="ContaEgreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContaPoli__Conta__7C5041DB" Association="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB">
+            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
+            <End Role="ContaPolizaDetalle" EntitySet="ContaPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SucursalG__Conta__31CD3CEC" Association="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC">
+            <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
+            <End Role="SucursalGastoFijo" EntitySet="SucursalGastoFijo" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -19727,8 +19728,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="SucursalID" Nullable="false" />
           <Property Type="Int32" Name="ContaCuentaAuxiliarID" Nullable="false" />
           <Property Type="Decimal" Name="Importe" Precision="12" Scale="2" />
-          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC" FromRole="SucursalGastoFijo" ToRole="ContaCuentaAuxiliar" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__SucursalG__Sucur__30D918B3" FromRole="SucursalGastoFijo" ToRole="Sucursal" />
+          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC" FromRole="SucursalGastoFijo" ToRole="ContaCuentaAuxiliar" />
         </EntityType>
         <ComplexType Name="pauPartesMaxMinEquivalentes_Result">
           <Property Type="Int32" Name="ParteEquivalenteID" Nullable="false" />
@@ -22588,44 +22589,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="ClienteVehiculoID" />
           <Property Type="Int32" Name="Kilometraje" />
         </EntityType>
-        <EntityType Name="ContaCuentaAuxiliar">
-          <Key>
-            <PropertyRef Name="ContaCuentaAuxiliarID" />
-          </Key>
-          <Property Type="Int32" Name="ContaCuentaAuxiliarID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="ContaCuentaDeMayorID" Nullable="false" />
-          <Property Type="String" Name="CuentaAuxiliar" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="CuentaContpaq" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="Devengable" Nullable="false" />
-          <Property Type="Boolean" Name="Detallable" Nullable="false" />
-          <Property Type="Boolean" Name="VisibleEnCaja" Nullable="false" />
-          <Property Type="Boolean" Name="CalculoSemanal" />
-          <Property Type="Boolean" Name="DevengarAut" />
-          <Property Type="Int32" Name="PeriodicidadMes" />
-          <Property Type="DateTime" Name="FinSemanalizar" Precision="0" />
-          <Property Type="Boolean" Name="AfectaMetas" />
-          <Property Type="Boolean" Name="SumaGastosFijos" />
-          <Property Type="String" Name="CuentaSat" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="RelacionID" />
-          <NavigationProperty Name="SucursalGastoFijo" Relationship="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC" FromRole="ContaCuentaAuxiliar" ToRole="SucursalGastoFijo" />
-          <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8" FromRole="ContaCuentaAuxiliar" ToRole="ContaEgreso" />
-          <NavigationProperty Name="ContaCuentaAuxiliarDevengadoAutomatico" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261" FromRole="ContaCuentaAuxiliar" ToRole="ContaCuentaAuxiliarDevengadoAutomatico" />
-          <NavigationProperty Name="ContaCuentaDeMayor" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__685E57C7" FromRole="ContaCuentaAuxiliar" ToRole="ContaCuentaDeMayor" />
-          <NavigationProperty Name="ContaPolizaDetalle" Relationship="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB" FromRole="ContaCuentaAuxiliar" ToRole="ContaPolizaDetalle" />
-          <NavigationProperty Name="ContaCuentaAuxiliarDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9" FromRole="ContaCuentaAuxiliar" ToRole="ContaCuentaAuxiliarDevengadoEspecial" />
-        </EntityType>
-        <Association Name="FK__SucursalG__Conta__31CD3CEC">
-          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.SucursalGastoFijo" Role="SucursalGastoFijo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContaCuentaAuxiliar">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Principal>
-            <Dependent Role="SucursalGastoFijo">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ContaPolizaError">
           <Key>
             <PropertyRef Name="ContaPolizaErrorID" />
@@ -23161,7 +23124,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="String" Name="FolioFactura" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="BancoCuentaID" />
           <NavigationProperty Name="CajaEgreso" Relationship="RefaccionariaModelo.FK__CajaEgres__Conta__106C4921" FromRole="ContaEgreso" ToRole="CajaEgreso" />
-          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8" FromRole="ContaEgreso" ToRole="ContaCuentaAuxiliar" />
           <NavigationProperty Name="ContaEgresoDetalle" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__06E2DEE7" FromRole="ContaEgreso" ToRole="ContaEgresoDetalle" />
           <NavigationProperty Name="ContaEgresoDevengado" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__7C655074" FromRole="ContaEgreso" ToRole="ContaEgresoDevengado" />
           <NavigationProperty Name="TipoDocumento" Relationship="RefaccionariaModelo.FK__ContaEgre__TipoD__72DBE63A" FromRole="ContaEgreso" ToRole="TipoDocumento" />
@@ -23171,6 +23133,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="BancoCuenta" Relationship="RefaccionariaModelo.FK__ContaEgre__Banco__214CBC60" FromRole="ContaEgreso" ToRole="BancoCuenta" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__ContaEgre__Sucur__73D00A73" FromRole="ContaEgreso" ToRole="Sucursal" />
           <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" FromRole="ContaEgreso" ToRole="ContaEgresoDevengadoEspecial" />
+          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8" FromRole="ContaEgreso" ToRole="ContaCuentaAuxiliar" />
           </EntityType>
         <Association Name="FK__CajaEgres__Conta__106C4921">
           <End Type="RefaccionariaModelo.ContaEgreso" Role="ContaEgreso" Multiplicity="0..1" />
@@ -23181,18 +23144,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="CajaEgreso">
               <PropertyRef Name="ContaEgresoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ContaEgre__Conta__70F39DC8">
-          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ContaEgreso" Role="ContaEgreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContaCuentaAuxiliar">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Principal>
-            <Dependent Role="ContaEgreso">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -23410,21 +23361,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="ContaCuentaAuxiliarID" Nullable="false" />
           <Property Type="Int32" Name="SucursalID" Nullable="false" />
           <Property Type="Decimal" Name="Porcentaje" Nullable="false" Precision="5" Scale="2" />
-          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261" FromRole="ContaCuentaAuxiliarDevengadoAutomatico" ToRole="ContaCuentaAuxiliar" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__ContaCuen__Sucur__2AD6269A" FromRole="ContaCuentaAuxiliarDevengadoAutomatico" ToRole="Sucursal" />
+          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261" FromRole="ContaCuentaAuxiliarDevengadoAutomatico" ToRole="ContaCuentaAuxiliar" />
         </EntityType>
-        <Association Name="FK__ContaCuen__Conta__29E20261">
-          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoAutomatico" Role="ContaCuentaAuxiliarDevengadoAutomatico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContaCuentaAuxiliar">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Principal>
-            <Dependent Role="ContaCuentaAuxiliarDevengadoAutomatico">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CajaEgresosView">
           <Key>
             <PropertyRef Name="CajaEgresoID" />
@@ -23622,25 +23561,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="String" Name="CuentaContpaq" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="CuentaSat" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="RestaInversa" />
-          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__685E57C7" FromRole="ContaCuentaDeMayor" ToRole="ContaCuentaAuxiliar" />
           <NavigationProperty Name="ContaSubcuenta" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__6399A2AA" FromRole="ContaCuentaDeMayor" ToRole="ContaSubcuenta" />
           <NavigationProperty Name="NominaUsuarioOficial" Relationship="RefaccionariaModelo.FK__NominaUsu__Conta__7FB6BE6B" FromRole="ContaCuentaDeMayor" ToRole="NominaUsuarioOficial" />
           <NavigationProperty Name="UsuarioNominaOficial" Relationship="RefaccionariaModelo.FK__UsuarioNo__Conta__6502C82F" FromRole="ContaCuentaDeMayor" ToRole="UsuarioNominaOficial" />
           <NavigationProperty Name="NominaOficialCuenta" Relationship="RefaccionariaModelo.FK__NominaOfi__Conta__640EA3F6" FromRole="ContaCuentaDeMayor" ToRole="NominaOficialCuenta" />
           <NavigationProperty Name="NominaImpuesto" Relationship="RefaccionariaModelo.FK__NominaImp__Conta__29ACF837" FromRole="ContaCuentaDeMayor" ToRole="NominaImpuesto" />
+          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__685E57C7" FromRole="ContaCuentaDeMayor" ToRole="ContaCuentaAuxiliar" />
         </EntityType>
-        <Association Name="FK__ContaCuen__Conta__685E57C7">
-          <End Type="RefaccionariaModelo.ContaCuentaDeMayor" Role="ContaCuentaDeMayor" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContaCuentaDeMayor">
-              <PropertyRef Name="ContaCuentaDeMayorID" />
-            </Principal>
-            <Dependent Role="ContaCuentaAuxiliar">
-              <PropertyRef Name="ContaCuentaDeMayorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ContaCuen__Conta__6399A2AA">
           <End Type="RefaccionariaModelo.ContaSubcuenta" Role="ContaSubcuenta" Multiplicity="1" />
           <End Type="RefaccionariaModelo.ContaCuentaDeMayor" Role="ContaCuentaDeMayor" Multiplicity="*" />
@@ -25394,22 +25321,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="String" Name="Referencia" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Type="Decimal" Name="Cargo" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Decimal" Name="Abono" Nullable="false" Precision="12" Scale="2" />
-          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB" FromRole="ContaPolizaDetalle" ToRole="ContaCuentaAuxiliar" />
           <NavigationProperty Name="ContaPolizaResguardoOcultar" Relationship="RefaccionariaModelo.FK__ContaPoli__Conta__38EF3BC7" FromRole="ContaPolizaDetalle" ToRole="ContaPolizaResguardoOcultar" />
           <NavigationProperty Name="ContaPoliza" Relationship="RefaccionariaModelo.FK__ContaPoli__Conta__7B5C1DA2" FromRole="ContaPolizaDetalle" ToRole="ContaPoliza" />
+          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB" FromRole="ContaPolizaDetalle" ToRole="ContaCuentaAuxiliar" />
         </EntityType>
-        <Association Name="FK__ContaPoli__Conta__7C5041DB">
-          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ContaPolizaDetalle" Role="ContaPolizaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContaCuentaAuxiliar">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Principal>
-            <Dependent Role="ContaPolizaDetalle">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="NominaOficialCuenta">
           <Key>
             <PropertyRef Name="NominaOficialCuentaID" />
@@ -28376,8 +28291,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="ContaCuentaAuxiliarDevengadoEspecialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContaCuentaAuxiliarID" Type="Int32" Nullable="false" />
           <Property Name="DuenioID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9" FromRole="ContaCuentaAuxiliarDevengadoEspecial" ToRole="ContaCuentaAuxiliar" />
           <NavigationProperty Name="Duenio" Relationship="RefaccionariaModelo.FK__ContaCuen__Dueni__20AD9DE2" FromRole="ContaCuentaAuxiliarDevengadoEspecial" ToRole="Duenio" />
+          <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9" FromRole="ContaCuentaAuxiliarDevengadoEspecial" ToRole="ContaCuentaAuxiliar" />
         </EntityType>
         <EntityType Name="ContaEgresoDetalleDevengadoEspecial">
           <Key>
@@ -28407,18 +28322,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="CantidadDev" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="CantidadDevEspecial" Type="Decimal" Precision="38" Scale="2" />
         </EntityType>
-        <Association Name="FK__ContaCuen__Conta__1FB979A9">
-          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" Role="ContaCuentaAuxiliarDevengadoEspecial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContaCuentaAuxiliar">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Principal>
-            <Dependent Role="ContaCuentaAuxiliarDevengadoEspecial">
-              <PropertyRef Name="ContaCuentaAuxiliarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ContaCuen__Dueni__20AD9DE2">
           <End Type="RefaccionariaModelo.Duenio" Role="Duenio" Multiplicity="1" />
           <End Type="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" Role="ContaCuentaAuxiliarDevengadoEspecial" Multiplicity="*" />
@@ -28547,6 +28450,105 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="VentasActual" Nullable="true" />
           <Property Type="Int32" Name="VentasAnterior" Nullable="true" />
         </ComplexType>
+        <EntityType Name="ContaCuentaAuxiliar">
+          <Key>
+            <PropertyRef Name="ContaCuentaAuxiliarID" />
+          </Key>
+          <Property Name="ContaCuentaAuxiliarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContaCuentaDeMayorID" Type="Int32" Nullable="false" />
+          <Property Name="CuentaAuxiliar" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CuentaContpaq" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Devengable" Type="Boolean" Nullable="false" />
+          <Property Name="Detallable" Type="Boolean" Nullable="false" />
+          <Property Name="VisibleEnCaja" Type="Boolean" Nullable="false" />
+          <Property Name="CalculoSemanal" Type="Boolean" />
+          <Property Name="DevengarAut" Type="Boolean" />
+          <Property Name="PeriodicidadMes" Type="Int32" />
+          <Property Name="FinSemanalizar" Type="DateTime" Precision="0" />
+          <Property Name="AfectaMetas" Type="Boolean" />
+          <Property Name="SumaGastosFijos" Type="Boolean" />
+          <Property Name="CuentaSat" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="RelacionID" Type="Int32" />
+          <Property Name="DevengarAutEsp" Type="Boolean" />
+          <NavigationProperty Name="ContaCuentaAuxiliarDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9" FromRole="ContaCuentaAuxiliar" ToRole="ContaCuentaAuxiliarDevengadoEspecial" />
+          <NavigationProperty Name="ContaCuentaAuxiliarDevengadoAutomatico" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261" FromRole="ContaCuentaAuxiliar" ToRole="ContaCuentaAuxiliarDevengadoAutomatico" />
+          <NavigationProperty Name="ContaCuentaDeMayor" Relationship="RefaccionariaModelo.FK__ContaCuen__Conta__685E57C7" FromRole="ContaCuentaAuxiliar" ToRole="ContaCuentaDeMayor" />
+          <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8" FromRole="ContaCuentaAuxiliar" ToRole="ContaEgreso" />
+          <NavigationProperty Name="ContaPolizaDetalle" Relationship="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB" FromRole="ContaCuentaAuxiliar" ToRole="ContaPolizaDetalle" />
+          <NavigationProperty Name="SucursalGastoFijo" Relationship="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC" FromRole="ContaCuentaAuxiliar" ToRole="SucursalGastoFijo" />
+        </EntityType>
+        <Association Name="FK__ContaCuen__Conta__1FB979A9">
+          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" Role="ContaCuentaAuxiliarDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaCuentaAuxiliar">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Principal>
+            <Dependent Role="ContaCuentaAuxiliarDevengadoEspecial">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaCuen__Conta__29E20261">
+          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoAutomatico" Role="ContaCuentaAuxiliarDevengadoAutomatico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaCuentaAuxiliar">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Principal>
+            <Dependent Role="ContaCuentaAuxiliarDevengadoAutomatico">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaCuen__Conta__685E57C7">
+          <End Type="RefaccionariaModelo.ContaCuentaDeMayor" Role="ContaCuentaDeMayor" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaCuentaDeMayor">
+              <PropertyRef Name="ContaCuentaDeMayorID" />
+            </Principal>
+            <Dependent Role="ContaCuentaAuxiliar">
+              <PropertyRef Name="ContaCuentaDeMayorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaEgre__Conta__70F39DC8">
+          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaEgreso" Role="ContaEgreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaCuentaAuxiliar">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Principal>
+            <Dependent Role="ContaEgreso">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaPoli__Conta__7C5041DB">
+          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaPolizaDetalle" Role="ContaPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaCuentaAuxiliar">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Principal>
+            <Dependent Role="ContaPolizaDetalle">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SucursalG__Conta__31CD3CEC">
+          <End Type="RefaccionariaModelo.ContaCuentaAuxiliar" Role="ContaCuentaAuxiliar" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.SucursalGastoFijo" Role="SucursalGastoFijo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaCuentaAuxiliar">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Principal>
+            <Dependent Role="SucursalGastoFijo">
+              <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -32555,27 +32557,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContaCuentaAuxiliar">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaCuentaAuxiliar">
-              <MappingFragment StoreEntitySet="ContaCuentaAuxiliar">
-                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
-                <ScalarProperty Name="CuentaSat" ColumnName="CuentaSat" />
-                <ScalarProperty Name="SumaGastosFijos" ColumnName="SumaGastosFijos" />
-                <ScalarProperty Name="AfectaMetas" ColumnName="AfectaMetas" />
-                <ScalarProperty Name="FinSemanalizar" ColumnName="FinSemanalizar" />
-                <ScalarProperty Name="PeriodicidadMes" ColumnName="PeriodicidadMes" />
-                <ScalarProperty Name="DevengarAut" ColumnName="DevengarAut" />
-                <ScalarProperty Name="CalculoSemanal" ColumnName="CalculoSemanal" />
-                <ScalarProperty Name="VisibleEnCaja" ColumnName="VisibleEnCaja" />
-                <ScalarProperty Name="Detallable" ColumnName="Detallable" />
-                <ScalarProperty Name="Devengable" ColumnName="Devengable" />
-                <ScalarProperty Name="CuentaContpaq" ColumnName="CuentaContpaq" />
-                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
-                <ScalarProperty Name="ContaCuentaDeMayorID" ColumnName="ContaCuentaDeMayorID" />
-                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ContaPolizaError">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ContaPolizaError">
               <MappingFragment StoreEntitySet="ContaPolizaError">
@@ -34411,6 +34392,28 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ContaCuentaAuxiliar">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaCuentaAuxiliar">
+              <MappingFragment StoreEntitySet="ContaCuentaAuxiliar">
+                <ScalarProperty Name="DevengarAutEsp" ColumnName="DevengarAutEsp" />
+                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
+                <ScalarProperty Name="CuentaSat" ColumnName="CuentaSat" />
+                <ScalarProperty Name="SumaGastosFijos" ColumnName="SumaGastosFijos" />
+                <ScalarProperty Name="AfectaMetas" ColumnName="AfectaMetas" />
+                <ScalarProperty Name="FinSemanalizar" ColumnName="FinSemanalizar" />
+                <ScalarProperty Name="PeriodicidadMes" ColumnName="PeriodicidadMes" />
+                <ScalarProperty Name="DevengarAut" ColumnName="DevengarAut" />
+                <ScalarProperty Name="CalculoSemanal" ColumnName="CalculoSemanal" />
+                <ScalarProperty Name="VisibleEnCaja" ColumnName="VisibleEnCaja" />
+                <ScalarProperty Name="Detallable" ColumnName="Detallable" />
+                <ScalarProperty Name="Devengable" ColumnName="Devengable" />
+                <ScalarProperty Name="CuentaContpaq" ColumnName="CuentaContpaq" />
+                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
+                <ScalarProperty Name="ContaCuentaDeMayorID" ColumnName="ContaCuentaDeMayorID" />
+                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -36387,26 +36390,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasFacturasDetalleAvanzadoView" Width="1.5" PointX="12.375" PointY="31.75" Height="3.5186979166667243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasPagosView" Width="1.5" PointX="21.375" PointY="8.75" Height="3.5186979166667243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasView" Width="1.5" PointX="36.375" PointY="24.75" Height="5.2494108072917243" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentaAuxiliar" Width="1.5" PointX="27.125" PointY="83.375" Height="4.864807942708353" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC" >
-          <ConnectorPoint PointX="27.671874000000003" PointY="83.375" />
-          <ConnectorPoint PointX="27.671874000000003" PointY="82.066712239583325" />
-          <ConnectorPoint PointX="28.624998728434246" PointY="82.066712239583325" />
-          <ConnectorPoint PointX="28.812497456868488" PointY="82.066712239583325" />
-          <ConnectorPoint PointX="29" PointY="82.066712239583325" />
-          <ConnectorPoint PointX="29" PointY="75.720602213541724" />
-          <ConnectorPoint PointX="28.708333333333332" PointY="75.720602213541724" />
-          <ConnectorPoint PointX="28.541666666666668" PointY="75.720602213541724" />
-          <ConnectorPoint PointX="28.5" PointY="75.720602213541724" />
-          <ConnectorPoint PointX="28.5" PointY="64.826396484374982" />
-          <ConnectorPoint PointX="29.375" PointY="64.826396484374982" />
-          <ConnectorPoint PointX="29.375" PointY="37.518697916666724" />
-          <ConnectorPoint PointX="29.125" PointY="37.518697916666724" />
-          <ConnectorPoint PointX="29.125" PointY="31.480205078124982" />
-          <ConnectorPoint PointX="30.0625" PointY="31.480205078124982" />
-          <ConnectorPoint PointX="30.0625" PointY="24.211293945312491" />
-          <ConnectorPoint PointX="30.375" PointY="24.211293945312491" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaPolizaError" Width="1.5" PointX="8.25" PointY="73.125" Height="2.9417936197917243" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__5224FDE5" >
           <ConnectorPoint PointX="4.5" PointY="86.1873066923077" />
@@ -36916,23 +36899,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="32.458333333333336" PointY="57.509308268229162" />
           <ConnectorPoint PointX="32.625" PointY="57.509308268229162" />
         </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8" >
-          <ConnectorPoint PointX="28.281252000000002" PointY="83.375" />
-          <ConnectorPoint PointX="28.281252000000002" PointY="82.082337239583325" />
-          <ConnectorPoint PointX="28.624998728434246" PointY="82.082337239583325" />
-          <ConnectorPoint PointX="28.812497456868488" PointY="82.082337239583325" />
-          <ConnectorPoint PointX="29.0625" PointY="82.082337239583325" />
-          <ConnectorPoint PointX="29.0625" PointY="75.470602213541724" />
-          <ConnectorPoint PointX="28.5625" PointY="75.470602213541724" />
-          <ConnectorPoint PointX="28.5625" PointY="64.951396484374982" />
-          <ConnectorPoint PointX="29.5" PointY="64.951396484374982" />
-          <ConnectorPoint PointX="29.5" PointY="56.034843569269725" />
-          <ConnectorPoint PointX="29.604166666666668" PointY="56.034843569269725" />
-          <ConnectorPoint PointX="29.770833333333332" PointY="56.034843569269725" />
-          <ConnectorPoint PointX="30.072916666666668" PointY="56.034843569269725" />
-          <ConnectorPoint PointX="30.364583833333331" PointY="56.034843569269725" />
-          <ConnectorPoint PointX="30.375" PointY="56.034843569269725" />
-        </AssociationConnector>
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__06E2DEE7" >
           <ConnectorPoint PointX="31.875" PointY="53.914082937546475" />
           <ConnectorPoint PointX="32.041666666666664" PointY="53.914082937546475" />
@@ -37268,25 +37234,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" Width="1.5" PointX="31.375" PointY="17.75" Height="3.5186979166667243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoAutomatico" Width="1.5" PointX="35.375" PointY="61.625" Height="2.1725878906249818" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261" >
-          <ConnectorPoint PointX="28.625" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="28.645830790201824" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="28.812497456868488" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="29.479166666666668" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="29.645833333333332" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="31.291666666666668" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="31.583333333333332" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="35.291666666666664" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="35.458333333333336" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="35.666666666666664" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="35.833333333333336" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="35.875" PointY="84.949779668701211" />
-          <ConnectorPoint PointX="35.875" PointY="73.393616536458353" />
-          <ConnectorPoint PointX="36.375" PointY="73.393616536458353" />
-          <ConnectorPoint PointX="36.375" PointY="64.172587890624982" />
-          <ConnectorPoint PointX="36.125" PointY="64.172587890624982" />
-          <ConnectorPoint PointX="36.125" PointY="63.797587890624982" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.CajaEgresosView" Width="1.5" PointX="24.375" PointY="33.75" Height="4.0956022135417243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.UsuariosView" Width="1.5" PointX="26.375" PointY="36.75" Height="2.3648893229167243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.UsuariosPermisosView" Width="1.5" PointX="14.375" PointY="33.75" Height="1.980286458333353" />
@@ -37297,14 +37244,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.NominaUsuario" Width="1.5" PointX="15.75" PointY="55.25" Height="4.4802050781249818" />
         <EntityTypeShape EntityType="RefaccionariaModelo.NominaUsuariosView" Width="1.5" PointX="38.375" PointY="27.75" Height="5.6340136718749818" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentaDeMayor" Width="1.5" PointX="24.875" PointY="84.25" Height="3.134095052083353" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__685E57C7" >
-          <ConnectorPoint PointX="26.375" PointY="85.622367714925133" />
-          <ConnectorPoint PointX="26.385416666666668" PointY="85.622367714925133" />
-          <ConnectorPoint PointX="26.552083333333332" PointY="85.622367714925133" />
-          <ConnectorPoint PointX="26.729166666666668" PointY="85.622367714925133" />
-          <ConnectorPoint PointX="26.958333333333332" PointY="85.622367714925133" />
-          <ConnectorPoint PointX="27.125" PointY="85.622367714925133" />
-        </AssociationConnector>
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__6399A2AA" >
           <ConnectorPoint PointX="24.125" PointY="85.807444661458362" />
           <ConnectorPoint PointX="24.875" PointY="85.807444661458362" />
@@ -41109,13 +41048,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="7.5" PointY="56.056250000000006" />
         </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaPolizaDetalle" Width="1.5" PointX="29.375" PointY="72.625" Height="2.557190755208353" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB" >
-          <ConnectorPoint PointX="28.625" PointY="86.626046305704719" />
-          <ConnectorPoint PointX="28.645830790201824" PointY="86.626046305704719" />
-          <ConnectorPoint PointX="28.812497456868488" PointY="86.626046305704719" />
-          <ConnectorPoint PointX="29.5625" PointY="86.626046305704719" />
-          <ConnectorPoint PointX="29.5625" PointY="75.3744921875" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.NominaOficialCuenta" Width="1.5" PointX="27.125" PointY="92.875" Height="1.980286458333353" />
         <EntityTypeShape EntityType="RefaccionariaModelo.NominaOficialCuentasView" Width="1.5" PointX="15.375" PointY="38.75" Height="1.980286458333353" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NominaOfi__Conta__640EA3F6" >
@@ -42348,11 +42280,17 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" Width="1.5" PointX="35.375" PointY="56.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDetalleDevengadoEspecial" Width="1.5" PointX="40.875" PointY="48.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosDetalleView" Width="1.5" PointX="17.375" PointY="20.75" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Dueni__20AD9DE2" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__257252FF" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__26667738" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView" Width="1.5" PointX="35.375" PointY="11.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentaAuxiliar" Width="1.5" PointX="27.125" PointY="83.25" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__685E57C7" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC" />
         </Diagram>
     </Diagrams>
   </Designer>
