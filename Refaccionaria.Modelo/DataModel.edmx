@@ -602,6 +602,7 @@
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="DuenioID" Type="int" Nullable="false" />
           <Property Name="Importe" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="RealizoUsuarioID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ContaPoliza">
           <Key>
@@ -6729,6 +6730,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Principal>
             <Dependent Role="ContaEgresoDevengadoEspecial">
               <PropertyRef Name="DuenioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaEgre__Reali__284EBFAA">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ContaEgresoDevengadoEspecial" Type="Self.ContaEgresoDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="RealizoUsuarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -13488,6 +13501,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Duenio" EntitySet="Duenio" />
             <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
           </AssociationSet>
+          <AssociationSet Name="FK__ContaEgre__Reali__284EBFAA" Association="Self.FK__ContaEgre__Reali__284EBFAA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
+          </AssociationSet>
           <AssociationSet Name="FK__ContaEgre__Reali__74C42EAC" Association="Self.FK__ContaEgre__Reali__74C42EAC">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ContaEgreso" EntitySet="ContaEgreso" />
@@ -16912,16 +16929,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="CorteValidacionView" EntityType="RefaccionariaModelo.CorteValidacionView" />
           <EntitySet Name="ContaPolizasDetalleAvanzadoView" EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" />
-          <EntitySet Name="ContaEgresoDevengadoEspecial" EntityType="RefaccionariaModelo.ContaEgresoDevengadoEspecial" />
-          <AssociationSet Name="FK__ContaEgre__Conta__190C7C1A" Association="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A">
-            <End Role="ContaEgreso" EntitySet="ContaEgreso" />
-            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
-          </AssociationSet>
           <EntitySet Name="Duenio" EntityType="RefaccionariaModelo.Duenio" />
-          <AssociationSet Name="FK__ContaEgre__Dueni__1A00A053" Association="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053">
-            <End Role="Duenio" EntitySet="Duenio" />
-            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
-          </AssociationSet>
           <EntitySet Name="MovimientoInventarioView" EntityType="RefaccionariaModelo.MovimientoInventarioView" />
           <EntitySet Name="ContaCuentaAuxiliarDevengadoEspecial" EntityType="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" />
           <EntitySet Name="ContaEgresoDetalleDevengadoEspecial" EntityType="RefaccionariaModelo.ContaEgresoDetalleDevengadoEspecial" />
@@ -16934,11 +16942,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ContaEgresoDetalle" EntitySet="ContaEgresoDetalle" />
             <End Role="ContaEgresoDetalleDevengadoEspecial" EntitySet="ContaEgresoDetalleDevengadoEspecial" />
           </AssociationSet>
-          <AssociationSet Name="FK__ContaEgre__Conta__26667738" Association="RefaccionariaModelo.FK__ContaEgre__Conta__26667738">
-            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
-            <End Role="ContaEgresoDetalleDevengadoEspecial" EntitySet="ContaEgresoDetalleDevengadoEspecial" />
-          </AssociationSet>
-          <EntitySet Name="ContaEgresosDevengadoEspecialCuentasView" EntityType="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView" />
           <FunctionImport Name="pauPartesMaster" ReturnType="Collection(RefaccionariaModelo.pauPartesMaster_Result)">
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
@@ -16976,6 +16979,24 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__SucursalG__Conta__31CD3CEC" Association="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC">
             <End Role="ContaCuentaAuxiliar" EntitySet="ContaCuentaAuxiliar" />
             <End Role="SucursalGastoFijo" EntitySet="SucursalGastoFijo" />
+          </AssociationSet>
+          <EntitySet Name="ContaEgresoDevengadoEspecial" EntityType="RefaccionariaModelo.ContaEgresoDevengadoEspecial" />
+          <EntitySet Name="ContaEgresosDevengadoEspecialCuentasView" EntityType="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView" />
+          <AssociationSet Name="FK__ContaEgre__Conta__190C7C1A" Association="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A">
+            <End Role="ContaEgreso" EntitySet="ContaEgreso" />
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContaEgre__Conta__26667738" Association="RefaccionariaModelo.FK__ContaEgre__Conta__26667738">
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
+            <End Role="ContaEgresoDetalleDevengadoEspecial" EntitySet="ContaEgresoDetalleDevengadoEspecial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContaEgre__Dueni__1A00A053" Association="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053">
+            <End Role="Duenio" EntitySet="Duenio" />
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ContaEgre__Reali__284EBFAA" Association="RefaccionariaModelo.FK__ContaEgre__Reali__284EBFAA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Configuracion">
@@ -23132,8 +23153,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__ContaEgre__Usuar__75B852E5" FromRole="ContaEgreso" ToRole="Usuario" />
           <NavigationProperty Name="BancoCuenta" Relationship="RefaccionariaModelo.FK__ContaEgre__Banco__214CBC60" FromRole="ContaEgreso" ToRole="BancoCuenta" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__ContaEgre__Sucur__73D00A73" FromRole="ContaEgreso" ToRole="Sucursal" />
-          <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" FromRole="ContaEgreso" ToRole="ContaEgresoDevengadoEspecial" />
           <NavigationProperty Name="ContaCuentaAuxiliar" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8" FromRole="ContaEgreso" ToRole="ContaCuentaAuxiliar" />
+          <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" FromRole="ContaEgreso" ToRole="ContaEgresoDevengadoEspecial" />
           </EntityType>
         <Association Name="FK__CajaEgres__Conta__106C4921">
           <End Type="RefaccionariaModelo.ContaEgreso" Role="ContaEgreso" Multiplicity="0..1" />
@@ -23798,6 +23819,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Venta__RealizoUs__7F01C5FD" FromRole="Usuario" ToRole="Venta" />
           <NavigationProperty Name="Venta1" Relationship="RefaccionariaModelo.FK__Venta__UsuarioID__32B6742D" FromRole="Usuario" ToRole="Venta" />
           <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__6438C128" FromRole="Usuario" ToRole="VentaFacturaDevolucion" />
+          <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Reali__284EBFAA" FromRole="Usuario" ToRole="ContaEgresoDevengadoEspecial" />
         </EntityType>
         <Association Name="FK__Autorizac__Autor__21E0EDE6">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -28191,52 +28213,15 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Abono" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="Referencia" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="ContaEgresoDevengadoEspecial">
-          <Key>
-            <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
-          </Key>
-          <Property Name="ContaEgresoDevengadoEspecialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContaEgresoID" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DuenioID" Type="Int32" Nullable="false" />
-          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" FromRole="ContaEgresoDevengadoEspecial" ToRole="ContaEgreso" />
-          <NavigationProperty Name="Duenio" Relationship="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" FromRole="ContaEgresoDevengadoEspecial" ToRole="Duenio" />
-          <NavigationProperty Name="ContaEgresoDetalleDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__26667738" FromRole="ContaEgresoDevengadoEspecial" ToRole="ContaEgresoDetalleDevengadoEspecial" />
-        </EntityType>
-        <Association Name="FK__ContaEgre__Conta__190C7C1A">
-          <End Type="RefaccionariaModelo.ContaEgreso" Role="ContaEgreso" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContaEgreso">
-              <PropertyRef Name="ContaEgresoID" />
-            </Principal>
-            <Dependent Role="ContaEgresoDevengadoEspecial">
-              <PropertyRef Name="ContaEgresoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Duenio">
           <Key>
             <PropertyRef Name="DuenioID" />
           </Key>
           <Property Name="DuenioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Duenio1" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" FromRole="Duenio" ToRole="ContaEgresoDevengadoEspecial" />
           <NavigationProperty Name="ContaCuentaAuxiliarDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaCuen__Dueni__20AD9DE2" FromRole="Duenio" ToRole="ContaCuentaAuxiliarDevengadoEspecial" />
+          <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" FromRole="Duenio" ToRole="ContaEgresoDevengadoEspecial" />
         </EntityType>
-        <Association Name="FK__ContaEgre__Dueni__1A00A053">
-          <End Type="RefaccionariaModelo.Duenio" Role="Duenio" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Duenio">
-              <PropertyRef Name="DuenioID" />
-            </Principal>
-            <Dependent Role="ContaEgresoDevengadoEspecial">
-              <PropertyRef Name="DuenioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="MovimientoInventarioView">
           <Key>
             <PropertyRef Name="MovimientoInventarioID" />
@@ -28346,45 +28331,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ContaEgre__Conta__26667738">
-          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ContaEgresoDetalleDevengadoEspecial" Role="ContaEgresoDetalleDevengadoEspecial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContaEgresoDevengadoEspecial">
-              <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
-            </Principal>
-            <Dependent Role="ContaEgresoDetalleDevengadoEspecial">
-              <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ContaEgresosDevengadoEspecialCuentasView">
-          <Key>
-            <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
-            <PropertyRef Name="ContaEgresoID" />
-            <PropertyRef Name="DuenioID" />
-            <PropertyRef Name="ContaCuentaAuxiliarID" />
-            <PropertyRef Name="CuentaAuxiliar" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="ImporteDev" />
-          </Key>
-          <Property Name="ContaEgresoDevengadoEspecialID" Type="Int32" Nullable="false" />
-          <Property Name="ContaEgresoID" Type="Int32" Nullable="false" />
-          <Property Name="DuenioID" Type="Int32" Nullable="false" />
-          <Property Name="Duenio" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ContaCuentaID" Type="Int32" />
-          <Property Name="Cuenta" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="ContaSubcuentaID" Type="Int32" />
-          <Property Name="Subcuenta" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="ContaCuentaDeMayorID" Type="Int32" />
-          <Property Name="CuentaDeMayor" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="ContaCuentaAuxiliarID" Type="Int32" Nullable="false" />
-          <Property Name="CuentaAuxiliar" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="PeriodicidadMes" Type="Int32" />
-          <Property Name="FinSemanalizar" Type="DateTime" Precision="0" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ImporteDev" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-        </EntityType>
         <ComplexType Name="pauPartesMaster_Result">
           <Property Type="Int32" Name="ParteID" Nullable="false" />
           <Property Type="String" Name="CodigoDeBara" Nullable="true" MaxLength="50" />
@@ -28546,6 +28492,96 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="SucursalGastoFijo">
               <PropertyRef Name="ContaCuentaAuxiliarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ContaEgresoDevengadoEspecial">
+          <Key>
+            <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
+          </Key>
+          <Property Name="ContaEgresoDevengadoEspecialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContaEgresoID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DuenioID" Type="Int32" Nullable="false" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" FromRole="ContaEgresoDevengadoEspecial" ToRole="ContaEgreso" />
+          <NavigationProperty Name="ContaEgresoDetalleDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Conta__26667738" FromRole="ContaEgresoDevengadoEspecial" ToRole="ContaEgresoDetalleDevengadoEspecial" />
+          <NavigationProperty Name="Duenio" Relationship="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" FromRole="ContaEgresoDevengadoEspecial" ToRole="Duenio" />
+          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ContaEgre__Reali__284EBFAA" FromRole="ContaEgresoDevengadoEspecial" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="ContaEgresosDevengadoEspecialCuentasView">
+          <Key>
+            <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
+            <PropertyRef Name="ContaEgresoID" />
+            <PropertyRef Name="DuenioID" />
+            <PropertyRef Name="ContaCuentaAuxiliarID" />
+            <PropertyRef Name="CuentaAuxiliar" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="ImporteDev" />
+          </Key>
+          <Property Name="ContaEgresoDevengadoEspecialID" Type="Int32" Nullable="false" />
+          <Property Name="ContaEgresoID" Type="Int32" Nullable="false" />
+          <Property Name="DuenioID" Type="Int32" Nullable="false" />
+          <Property Name="Duenio" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ContaCuentaID" Type="Int32" />
+          <Property Name="Cuenta" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ContaSubcuentaID" Type="Int32" />
+          <Property Name="Subcuenta" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ContaCuentaDeMayorID" Type="Int32" />
+          <Property Name="CuentaDeMayor" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ContaCuentaAuxiliarID" Type="Int32" Nullable="false" />
+          <Property Name="CuentaAuxiliar" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PeriodicidadMes" Type="Int32" />
+          <Property Name="FinSemanalizar" Type="DateTime" Precision="0" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ImporteDev" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+        </EntityType>
+        <Association Name="FK__ContaEgre__Conta__190C7C1A">
+          <End Type="RefaccionariaModelo.ContaEgreso" Role="ContaEgreso" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaEgreso">
+              <PropertyRef Name="ContaEgresoID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="ContaEgresoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaEgre__Conta__26667738">
+          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaEgresoDetalleDevengadoEspecial" Role="ContaEgresoDetalleDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDetalleDevengadoEspecial">
+              <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaEgre__Dueni__1A00A053">
+          <End Type="RefaccionariaModelo.Duenio" Role="Duenio" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Duenio">
+              <PropertyRef Name="DuenioID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="DuenioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ContaEgre__Reali__284EBFAA">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Role="ContaEgresoDevengadoEspecial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ContaEgresoDevengadoEspecial">
+              <PropertyRef Name="RealizoUsuarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -34206,17 +34242,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContaEgresoDevengadoEspecial">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresoDevengadoEspecial">
-              <MappingFragment StoreEntitySet="ContaEgresoDevengadoEspecial">
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="DuenioID" ColumnName="DuenioID" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
-                <ScalarProperty Name="ContaEgresoDevengadoEspecialID" ColumnName="ContaEgresoDevengadoEspecialID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Duenio">
             <EntityTypeMapping TypeName="RefaccionariaModelo.Duenio">
               <MappingFragment StoreEntitySet="Duenio">
@@ -34294,28 +34319,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="ContaConsumibleID" ColumnName="ContaConsumibleID" />
                 <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
                 <ScalarProperty Name="ContaEgresoDetalleID" ColumnName="ContaEgresoDetalleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ContaEgresosDevengadoEspecialCuentasView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView">
-              <MappingFragment StoreEntitySet="ContaEgresosDevengadoEspecialCuentasView">
-                <ScalarProperty Name="ImporteDev" ColumnName="ImporteDev" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="FinSemanalizar" ColumnName="FinSemanalizar" />
-                <ScalarProperty Name="PeriodicidadMes" ColumnName="PeriodicidadMes" />
-                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
-                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
-                <ScalarProperty Name="CuentaDeMayor" ColumnName="CuentaDeMayor" />
-                <ScalarProperty Name="ContaCuentaDeMayorID" ColumnName="ContaCuentaDeMayorID" />
-                <ScalarProperty Name="Subcuenta" ColumnName="Subcuenta" />
-                <ScalarProperty Name="ContaSubcuentaID" ColumnName="ContaSubcuentaID" />
-                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
-                <ScalarProperty Name="ContaCuentaID" ColumnName="ContaCuentaID" />
-                <ScalarProperty Name="Duenio" ColumnName="Duenio" />
-                <ScalarProperty Name="DuenioID" ColumnName="DuenioID" />
-                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
-                <ScalarProperty Name="ContaEgresoDevengadoEspecialID" ColumnName="ContaEgresoDevengadoEspecialID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -34411,6 +34414,40 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
                 <ScalarProperty Name="ContaCuentaDeMayorID" ColumnName="ContaCuentaDeMayorID" />
                 <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContaEgresoDevengadoEspecial">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresoDevengadoEspecial">
+              <MappingFragment StoreEntitySet="ContaEgresoDevengadoEspecial">
+                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="DuenioID" ColumnName="DuenioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
+                <ScalarProperty Name="ContaEgresoDevengadoEspecialID" ColumnName="ContaEgresoDevengadoEspecialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContaEgresosDevengadoEspecialCuentasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView">
+              <MappingFragment StoreEntitySet="ContaEgresosDevengadoEspecialCuentasView">
+                <ScalarProperty Name="ImporteDev" ColumnName="ImporteDev" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="FinSemanalizar" ColumnName="FinSemanalizar" />
+                <ScalarProperty Name="PeriodicidadMes" ColumnName="PeriodicidadMes" />
+                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
+                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
+                <ScalarProperty Name="CuentaDeMayor" ColumnName="CuentaDeMayor" />
+                <ScalarProperty Name="ContaCuentaDeMayorID" ColumnName="ContaCuentaDeMayorID" />
+                <ScalarProperty Name="Subcuenta" ColumnName="Subcuenta" />
+                <ScalarProperty Name="ContaSubcuentaID" ColumnName="ContaSubcuentaID" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="ContaCuentaID" ColumnName="ContaCuentaID" />
+                <ScalarProperty Name="Duenio" ColumnName="Duenio" />
+                <ScalarProperty Name="DuenioID" ColumnName="DuenioID" />
+                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
+                <ScalarProperty Name="ContaEgresoDevengadoEspecialID" ColumnName="ContaEgresoDevengadoEspecialID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -42272,18 +42309,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Sucur__72E6D332" />
         <EntityTypeShape EntityType="RefaccionariaModelo.CorteValidacionView" Width="1.5" PointX="38.375" PointY="41.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" Width="1.5" PointX="41.375" PointY="40.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Width="1.5" PointX="35.625" PointY="43.125" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Duenio" Width="1.5" PointX="12.375" PointY="26.875" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" />
         <EntityTypeShape EntityType="RefaccionariaModelo.MovimientoInventarioView" Width="1.5" PointX="32.375" PointY="38.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" Width="1.5" PointX="35.375" PointY="56.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDetalleDevengadoEspecial" Width="1.5" PointX="40.875" PointY="48.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosDetalleView" Width="1.5" PointX="17.375" PointY="20.75" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Dueni__20AD9DE2" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__257252FF" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__26667738" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView" Width="1.5" PointX="35.375" PointY="11.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentaAuxiliar" Width="1.5" PointX="27.125" PointY="83.25" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__1FB979A9" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Conta__29E20261" />
@@ -42291,6 +42323,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__70F39DC8" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB" />
         <AssociationConnector Association="RefaccionariaModelo.FK__SucursalG__Conta__31CD3CEC" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDevengadoEspecial" Width="1.5" PointX="35.625" PointY="52.375" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosDevengadoEspecialCuentasView" Width="1.5" PointX="35.375" PointY="11.75" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__190C7C1A" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__26667738" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Reali__284EBFAA" />
         </Diagram>
     </Diagrams>
   </Designer>
