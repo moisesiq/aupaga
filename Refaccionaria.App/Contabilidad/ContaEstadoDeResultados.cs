@@ -11,6 +11,8 @@ namespace Refaccionaria.App
 {
     public partial class ContaEstadoDeResultados : UserControl
     {
+        int iFilasFijas;
+
         public ContaEstadoDeResultados()
         {
             InitializeComponent();
@@ -24,6 +26,8 @@ namespace Refaccionaria.App
             this.cmbAnio.Items.AddRange(new object[] { 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 });
             this.cmbAnio.Text = DateTime.Now.Year.ToString();
             this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", General.GetListOf<Sucursal>(c => c.Estatus));
+
+            this.iFilasFijas = this.dgvDatos.Columns.Count;
         }
 
         private void nudDecimales_ValueChanged(object sender, EventArgs e)
@@ -44,7 +48,7 @@ namespace Refaccionaria.App
         private void LlenarColumnasAnio(int iAnio)
         {
             // Se borran las columnas de semanas
-            for (int iCol = (this.dgvDatos.Columns.Count - 1); iCol > 0; iCol--)
+            for (int iCol = (this.dgvDatos.Columns.Count - 1); iCol >= this.iFilasFijas; iCol--)
                 this.dgvDatos.Columns.RemoveAt(iCol);
 
             // Se agregan las nuevas columnas
@@ -76,6 +80,12 @@ namespace Refaccionaria.App
                 this.dgvDatos.Columns[iCol].DefaultCellStyle.Format = sFormato;
         }
 
+        class GastoSem
+        {
+            public DateTime Semana { get; set; }
+            public string Grupo { get; set; }
+            public decimal Importe { get; set; }
+        }
         private void CargarDatos()
         {
             Cargando.Mostrar();
@@ -107,7 +117,7 @@ namespace Refaccionaria.App
             this.dgvDatos.Rows.Clear();
 
             // Se agrega la fila de ingresos
-            int iFilaIngresos = this.dgvDatos.Rows.Add("+ Ingresos");
+            int iFilaIngresos = this.dgvDatos.Rows.Add("+ Ingresos", oSemanas.Sum(c => c.PrecioSinIva), oSemanas.Average(c => c.PrecioSinIva));
             this.dgvDatos.Rows[iFilaIngresos].DefaultCellStyle.Font = oFuenteT;
             // Se llenan los ingresos
             string sSucursal = "";
@@ -117,7 +127,8 @@ namespace Refaccionaria.App
                 if (sSucursal != oReg.Sucursal)
                 {
                     sSucursal = oReg.Sucursal;
-                    iFila = this.dgvDatos.Rows.Add(sSucursal);
+                    iFila = this.dgvDatos.Rows.Add(sSucursal, oSemanas.Where(c=> c.Sucursal == sSucursal).Sum(c => c.PrecioSinIva)
+                        , oSemanas.Where(c => c.Sucursal == sSucursal).Average(c => c.PrecioSinIva));
                 }
 
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -126,7 +137,7 @@ namespace Refaccionaria.App
             }
 
             // Se agrega la fila de Costos
-            int iFilaCostos = this.dgvDatos.Rows.Add("- Costos");
+            int iFilaCostos = this.dgvDatos.Rows.Add("- Costos", oSemanas.Sum(c => c.Costo), oSemanas.Average(c => c.Costo));
             this.dgvDatos.Rows[iFilaCostos].DefaultCellStyle.Font = oFuenteT;
             // Se llenan los costos
             sSucursal = "";
@@ -135,7 +146,8 @@ namespace Refaccionaria.App
                 if (sSucursal != oReg.Sucursal)
                 {
                     sSucursal = oReg.Sucursal;
-                    iFila = this.dgvDatos.Rows.Add(sSucursal);
+                    iFila = this.dgvDatos.Rows.Add(sSucursal, oSemanas.Where(c => c.Sucursal == sSucursal).Sum(c => c.Costo)
+                        , oSemanas.Where(c => c.Sucursal == sSucursal).Average(c => c.Costo));
                 }
 
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -160,21 +172,31 @@ namespace Refaccionaria.App
             oParams.Add("Desde", dDesde);
             oParams.Add("Hasta", dHasta);
             var oGastos = General.ExecuteProcedure<pauContaCuentasPorSemana_Result>("pauContaCuentasPorSemana", oParams);
-            var oGastosSem = oGastos.GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
-                .Select(c => new { c.Key.Semana, c.Key.Sucursal, Importe = c.Sum(s => s.ImporteDev) })
-                .OrderBy(c => c.Sucursal).ThenBy(c => c.Semana);
+            var oGastosSemFijo = oGastos.GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
+                .Select(c => new GastoSem() { Semana = c.Key.Semana, Grupo = c.Key.Sucursal, Importe = c.Sum(s => s.ImporteDev).Valor() });
+            // Se obtiene los datos según el tipo de semanalización
+            List<GastoSem> oGastosSem;
+            if (this.rdbSemanalizar.Checked)
+            {
+                oGastosSem = this.GastosSemanalizados(oGastos);
+            }
+            else
+            {
+                oGastosSem = oGastosSemFijo.OrderBy(c => c.Grupo).ThenBy(c => c.Semana).ToList();
+            }
 
             // Se agrega la fila de los Gastos
-            int iFilaGastos = this.dgvDatos.Rows.Add("- Gastos");
+            int iFilaGastos = this.dgvDatos.Rows.Add("- Gastos", oGastosSemFijo.Sum(c => c.Importe), oGastosSemFijo.Average(c => c.Importe));
             this.dgvDatos.Rows[iFilaGastos].DefaultCellStyle.Font = oFuenteT;
             // Se llenan los gastos
             sSucursal = "";
             foreach (var oReg in oGastosSem)
             {
-                if (sSucursal != oReg.Sucursal)
+                if (sSucursal != oReg.Grupo)
                 {
-                    sSucursal = oReg.Sucursal;
-                    iFila = this.dgvDatos.Rows.Add(sSucursal);
+                    sSucursal = oReg.Grupo;
+                    iFila = this.dgvDatos.Rows.Add(sSucursal, oGastosSemFijo.Where(c => c.Grupo == sSucursal).Sum(c => c.Importe)
+                        , oGastosSemFijo.Where(c => c.Grupo == sSucursal).Average(c => c.Importe));
                 }
 
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -199,7 +221,7 @@ namespace Refaccionaria.App
                     - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaGastos].Value)
                 );
                 // Sucursales
-                for (int i = 1; i < oSucursales.Count; i++)
+                for (int i = 1; i <= oSucursales.Count; i++)
                     this.dgvDatos[oCol.Index, iFilaUtilidad + i].Value = (
                         Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaIngresos + i].Value)
                         - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaCostos + i].Value)
@@ -209,22 +231,32 @@ namespace Refaccionaria.App
 
             // Se obtienen los datos de gastos especiales
             DateTime dHastaMas1 = dHasta.AddDays(1);
-            var oDevEsp = General.GetListOf<ContaEgresosDevengadoEspecialCuentasView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1)
+            // Se obtiene los datos según el tipo de semanalización
+            List<GastoSem> oGastosSemEsp;
+            var oGastosSemEspFijo = General.GetListOf<ContaEgresosDevengadoEspecialCuentasView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1)
                 .GroupBy(c => new { c.Duenio, Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha) })
-                .Select(c => new { c.Key.Duenio, c.Key.Semana, Importe = c.Sum(s => s.ImporteDev) })
-                .OrderBy(c => c.Duenio).ThenBy(c => c.Semana);
+                .Select(c => new GastoSem() { Semana = c.Key.Semana, Grupo = c.Key.Duenio, Importe = c.Sum(s => s.ImporteDev) });
+            if (this.rdbSemanalizar.Checked)
+            {
+                oGastosSemEsp = this.GastosSemanalizados(General.GetListOf<ContaEgresosDevengadoEspecialCuentasView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1));
+            }
+            else
+            {
+                oGastosSemEsp = oGastosSemEspFijo.OrderBy(c => c.Grupo).ThenBy(c => c.Semana).ToList();
+            }
 
             // Se agrega la fila de Especiales
-            int iFilaEsp = this.dgvDatos.Rows.Add("- Especiales");
+            int iFilaEsp = this.dgvDatos.Rows.Add("- Especiales", oGastosSemEspFijo.Sum(c => c.Importe), oGastosSemEspFijo.Average(c => c.Importe));
             this.dgvDatos.Rows[iFilaEsp].DefaultCellStyle.Font = oFuenteT;
             // Se llenan los gastos
             string sDuenio = "";
-            foreach (var oReg in oDevEsp)
+            foreach (var oReg in oGastosSemEsp)
             {
-                if (sDuenio != oReg.Duenio)
+                if (sDuenio != oReg.Grupo)
                 {
-                    sDuenio = oReg.Duenio;
-                    iFila = this.dgvDatos.Rows.Add(sDuenio);
+                    sDuenio = oReg.Grupo;
+                    iFila = this.dgvDatos.Rows.Add(sDuenio, oGastosSemEspFijo.Where(c => c.Grupo == sDuenio).Sum(c => c.Importe)
+                        , oGastosSemEspFijo.Where(c => c.Grupo == sDuenio).Average(c => c.Importe));
                 }
 
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -246,6 +278,89 @@ namespace Refaccionaria.App
             }
 
             Cargando.Cerrar();
+        }
+
+        private List<GastoSem> GastosSemanalizados(List<pauContaCuentasPorSemana_Result> oDatos)
+        {
+            var oGastosSem = new List<GastoSem>();
+            DateTime dUltSem = Helper.ConvertirFechaHora(this.dgvDatos.Columns[this.dgvDatos.Columns.Count - 1].Name);
+
+            foreach (var oReg in oDatos)
+            {
+                if (oReg.PeriodicidadMes.HasValue)
+                {
+                    DateTime dInicioPer = oReg.Fecha.DiaPrimero().Date;
+                    DateTime dFinPer = dInicioPer.AddMonths(oReg.PeriodicidadMes.Valor()).AddDays(-1);
+                    decimal mImporteDiario = (oReg.ImporteDev.Valor() / ((dFinPer - dInicioPer).Days + 1));
+                    decimal mImporte; int iDias;
+                    DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(dInicioPer).Date;
+
+                    while (dIniSem <= dUltSem)
+                    {
+                        // Se verifica si ya existe la semana actual
+                        var oSem = oGastosSem.Find(c => c.Semana == dIniSem && c.Grupo == oReg.Sucursal);
+                        if (oSem == null)
+                            oGastosSem.Add(oSem = new GastoSem() { Semana = dIniSem, Grupo = oReg.Sucursal });
+
+                        // Se verifica si se debe de seguir semanalizando
+                        if (oReg.FinSemanalizar.HasValue && oReg.FinSemanalizar <= dIniSem)
+                            break;
+                        // Se verifica la fecha final, 
+                        if (dIniSem > dFinPer)
+                            break;
+
+                        // Se calcula el importe correspondiente
+                        DateTime dFinSem = dIniSem.AddDays(6);
+                        if (dIniSem < dInicioPer)
+                            iDias = dFinSem.Day;
+                        else if (dIniSem <= dFinPer && dFinSem > dFinPer)
+                            iDias = ((dIniSem.DiaUltimo().Day - dIniSem.Day) + 1);
+                        else if (dIniSem > dFinPer && (dIniSem - dFinPer).Days < 7)
+                        {
+                            iDias = (dIniSem.Day - 1);
+                        }
+                        else
+                        {
+                            iDias = 7;
+                        }
+                        mImporte = (mImporteDiario * iDias);
+                        dIniSem = dIniSem.AddDays(7);
+
+                        // Se va sumando el importe en la semana correspondiente
+                        oSem.Importe += mImporte;
+                    }
+                }
+                else
+                {
+                    // Se verifica si ya existe la semana actual
+                    DateTime dSem = UtilLocal.InicioSemanaSabAVie(oReg.Fecha).Date;
+                    var oSem = oGastosSem.Find(c => c.Semana == dSem && c.Grupo == oReg.Sucursal);
+                    if (oSem == null)
+                        oGastosSem.Add(oSem = new GastoSem() { Semana = dSem, Grupo = oReg.Sucursal });
+                    // Se va sumando el importe en la semana correspondiente
+                    oSem.Importe += oReg.ImporteDev.Valor();
+                }
+            }
+
+            return oGastosSem.OrderBy(c => c.Grupo).ThenBy(c => c.Semana).ToList();
+        }
+
+        private List<GastoSem> GastosSemanalizados(List<ContaEgresosDevengadoEspecialCuentasView> oDatos)
+        {
+            var oListaSem = new List<pauContaCuentasPorSemana_Result>();
+            foreach (var oReg in oDatos)
+            {
+                oListaSem.Add(new pauContaCuentasPorSemana_Result()
+                {
+                    Fecha = oReg.Fecha,
+                    Sucursal = oReg.Duenio,
+                    ImporteDev = oReg.ImporteDev,
+                    PeriodicidadMes = oReg.PeriodicidadMes,
+                    FinSemanalizar = oReg.FinSemanalizar
+                });
+            }
+
+            return this.GastosSemanalizados(oListaSem);
         }
 
         #endregion
