@@ -340,10 +340,11 @@ namespace Refaccionaria.App
                 int iFila = this.dgvGastos.Rows.Add(oMov.ContaEgresoID, oMov.Fecha, oMov.FolioDePago, oMov.Importe, oMov.Sucursal
                     , oMov.FormaDePago, oMov.Usuario, oMov.Observaciones);
                 // Se aplica el color
+                decimal mImporteDev = (oMov.ImporteDev.Valor() + oMov.ImporteDevEsp.Valor());
                 // Se determinó que si el importe del gasto es cero, se marca en verde independientemente de si tiene devengado - Moi 12/07/2015
-                if (oMov.Importe == 0 || oMov.ImporteDev.Valor() >= oMov.Importe)
+                if (oMov.Importe == 0 || mImporteDev >= oMov.Importe)
                     this.dgvGastos.Rows[iFila].DefaultCellStyle.ForeColor = Color.FromArgb(79, 98, 40);
-                else if (oMov.ImporteDev.Valor() == 0)
+                else if (mImporteDev == 0)
                     this.dgvGastos.Rows[iFila].DefaultCellStyle.ForeColor = Color.FromArgb(226, 107, 10);
                 else
                     this.dgvGastos.Rows[iFila].DefaultCellStyle.ForeColor = Color.FromArgb(58, 79, 109);
@@ -376,12 +377,12 @@ namespace Refaccionaria.App
 
         private void LlenarGastoDev(int iEgresoID)
         {
-            var oDevs = General.GetListOf<ContaEgresoDevengado>(c => c.ContaEgresoID == iEgresoID);
+            var oDevs = General.GetListOf<ContaEgresosDevengadosView>(c => c.ContaEgresoID == iEgresoID);
             this.dgvGastoDev.Rows.Clear();
             foreach (var oDev in oDevs)
             {
-                string sSucursal = this.oSucursales.FirstOrDefault(c => c.SucursalID == oDev.SucursalID).NombreSucursal;
-                this.dgvGastoDev.Rows.Add(oDev.ContaEgresoDevengadoID, oDev.Fecha, sSucursal, oDev.Importe);
+                // string sSucursal = this.oSucursales.FirstOrDefault(c => c.SucursalID == oDev.SucursalID).NombreSucursal;
+                this.dgvGastoDev.Rows.Add(oDev.Id, oDev.Fecha, oDev.Grupo, oDev.Importe);
             }
         }
 
@@ -531,7 +532,7 @@ namespace Refaccionaria.App
                     oCuenta.Matriz,
                     oCuenta.Suc02,
                     oCuenta.Suc03,
-                    oCuenta.ImporteDev
+                    (oCuenta.ImporteDev + oCuenta.ImporteDevEsp)
                 );
                 this.oIndiceCuentas.Add(new ContaModelos.IndiceCuentasContables()
                 {
@@ -554,7 +555,7 @@ namespace Refaccionaria.App
                         case ColsCuentas.Matriz: mImporte = oCuenta.Matriz.Valor(); break;
                         case ColsCuentas.Sucursal2: mImporte = oCuenta.Suc02.Valor(); break;
                         case ColsCuentas.Sucursal3: mImporte = oCuenta.Suc03.Valor(); break;
-                        case ColsCuentas.ImporteDev: mImporte = oCuenta.ImporteDev.Valor(); break;
+                        case ColsCuentas.ImporteDev: mImporte = (oCuenta.ImporteDev.Valor() + oCuenta.ImporteDevEsp.Valor()); break;
                     }
                     oNodoCuentaDeMayor.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaDeMayor.Cells[iCol].Value) + mImporte);
                     oNodoSubcuenta.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoSubcuenta.Cells[iCol].Value) + mImporte);

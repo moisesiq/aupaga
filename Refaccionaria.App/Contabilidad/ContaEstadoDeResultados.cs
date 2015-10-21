@@ -11,7 +11,7 @@ namespace Refaccionaria.App
 {
     public partial class ContaEstadoDeResultados : UserControl
     {
-        int iFilasFijas;
+        int iColumnasFijas;
 
         public ContaEstadoDeResultados()
         {
@@ -27,7 +27,7 @@ namespace Refaccionaria.App
             this.cmbAnio.Text = DateTime.Now.Year.ToString();
             this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", General.GetListOf<Sucursal>(c => c.Estatus));
 
-            this.iFilasFijas = this.dgvDatos.Columns.Count;
+            this.iColumnasFijas = this.dgvDatos.Columns.Count;
         }
 
         private void nudDecimales_ValueChanged(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace Refaccionaria.App
         private void LlenarColumnasAnio(int iAnio)
         {
             // Se borran las columnas de semanas
-            for (int iCol = (this.dgvDatos.Columns.Count - 1); iCol >= this.iFilasFijas; iCol--)
+            for (int iCol = (this.dgvDatos.Columns.Count - 1); iCol >= this.iColumnasFijas; iCol--)
                 this.dgvDatos.Columns.RemoveAt(iCol);
 
             // Se agregan las nuevas columnas
@@ -92,6 +92,11 @@ namespace Refaccionaria.App
 
             var oFuenteT = new Font(FontFamily.GenericSansSerif, 9, FontStyle.Bold);
 
+            // Se limpian los datos
+            this.dgvDatos.Rows.Clear();
+            foreach (var oSerie in this.chrPorSemana.Series)
+                oSerie.Points.Clear();
+
             // Se llenan las columnas del año
             int iAnio = Helper.ConvertirEntero(this.cmbAnio.Text);
             this.LlenarColumnasAnio(iAnio);
@@ -114,7 +119,6 @@ namespace Refaccionaria.App
                 .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
                 .Select(c => new { c.Key.Semana, c.Key.Sucursal, PrecioSinIva = c.Sum(s => s.PrecioSinIvaActual), Costo = c.Sum(s => s.CostoDescActual) })
                 .OrderBy(c => c.Sucursal).ThenBy(c => c.Semana);
-            this.dgvDatos.Rows.Clear();
 
             // Se agrega la fila de ingresos
             int iFilaIngresos = this.dgvDatos.Rows.Add("+ Ingresos", oSemanas.Sum(c => c.PrecioSinIva), oSemanas.Average(c => c.PrecioSinIva));
@@ -275,6 +279,18 @@ namespace Refaccionaria.App
                     - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaGastos].Value)
                     - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaEsp].Value)
                 );
+            }
+
+            // Se llena la gráfica, en base al grid ya cargado
+            for (int iCol = this.iColumnasFijas; iCol < this.dgvDatos.Columns.Count; iCol++)
+            {
+                this.chrPorSemana.Series["Ingresos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaIngresos].Value));
+                this.chrPorSemana.Series["Costos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaCostos].Value));
+                this.chrPorSemana.Series["Margen"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaMargen].Value));
+                this.chrPorSemana.Series["Gastos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaGastos].Value));
+                this.chrPorSemana.Series["Utilidad"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaUtilidad].Value));
+                this.chrPorSemana.Series["Especiales"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEsp].Value));
+                this.chrPorSemana.Series["Dividendos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaDividendos].Value));
             }
 
             Cargando.Cerrar();

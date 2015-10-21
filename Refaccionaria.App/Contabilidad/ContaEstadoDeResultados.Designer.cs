@@ -31,7 +31,19 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Promedio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbSucursal = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnMostrar = new System.Windows.Forms.Button();
@@ -41,11 +53,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.rdbSemanalizar = new System.Windows.Forms.RadioButton();
             this.rdbFecha = new System.Windows.Forms.RadioButton();
-            this.Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Promedio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chrPorSemana = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chrPorSemana)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvDatos
@@ -76,8 +87,38 @@
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(824, 439);
+            this.dgvDatos.Size = new System.Drawing.Size(824, 233);
             this.dgvDatos.TabIndex = 4;
+            // 
+            // Concepto
+            // 
+            this.Concepto.Frozen = true;
+            this.Concepto.HeaderText = "Cuenta";
+            this.Concepto.Name = "Concepto";
+            this.Concepto.ReadOnly = true;
+            this.Concepto.Width = 120;
+            // 
+            // Total
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "C2";
+            this.Total.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Total.Frozen = true;
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.Width = 80;
+            // 
+            // Promedio
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            this.Promedio.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Promedio.Frozen = true;
+            this.Promedio.HeaderText = "Promedio";
+            this.Promedio.Name = "Promedio";
+            this.Promedio.ReadOnly = true;
+            this.Promedio.Width = 80;
             // 
             // cmbSucursal
             // 
@@ -180,41 +221,85 @@
             this.rdbFecha.Text = "Fecha";
             this.rdbFecha.UseVisualStyleBackColor = true;
             // 
-            // Concepto
+            // chrPorSemana
             // 
-            this.Concepto.Frozen = true;
-            this.Concepto.HeaderText = "Cuenta";
-            this.Concepto.Name = "Concepto";
-            this.Concepto.ReadOnly = true;
-            this.Concepto.Width = 120;
-            // 
-            // Total
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "C2";
-            this.Total.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Total.Frozen = true;
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            this.Total.Width = 80;
-            // 
-            // Promedio
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "C2";
-            this.Promedio.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Promedio.Frozen = true;
-            this.Promedio.HeaderText = "Promedio";
-            this.Promedio.Name = "Promedio";
-            this.Promedio.ReadOnly = true;
-            this.Promedio.Width = 80;
+            this.chrPorSemana.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chrPorSemana.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.AlignmentOrientation = ((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations)((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical | System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal)));
+            chartArea1.AxisX.Interval = 1D;
+            chartArea1.AxisX.IntervalOffset = 1D;
+            chartArea1.AxisX.IsLabelAutoFit = false;
+            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea1.AxisX.LineColor = System.Drawing.Color.DarkGray;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
+            chartArea1.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
+            chartArea1.AxisX.ScaleBreakStyle.LineColor = System.Drawing.Color.Maroon;
+            chartArea1.AxisX.ScaleView.Size = 52D;
+            chartArea1.AxisY.IsLabelAutoFit = false;
+            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea1.AxisY.LineColor = System.Drawing.Color.DarkGray;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
+            chartArea1.AxisY.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
+            chartArea1.AxisY.TitleForeColor = System.Drawing.Color.Empty;
+            chartArea1.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            chartArea1.Position.Auto = false;
+            chartArea1.Position.Height = 82.57899F;
+            chartArea1.Position.Width = 98F;
+            chartArea1.Position.Y = 3F;
+            this.chrPorSemana.ChartAreas.Add(chartArea1);
+            this.chrPorSemana.Location = new System.Drawing.Point(3, 269);
+            this.chrPorSemana.Margin = new System.Windows.Forms.Padding(0);
+            this.chrPorSemana.Name = "chrPorSemana";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Ingresos";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Name = "Costos";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Name = "Margen";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Name = "Gastos";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Name = "Utilidad";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Name = "Especiales";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Name = "Dividendos";
+            this.chrPorSemana.Series.Add(series1);
+            this.chrPorSemana.Series.Add(series2);
+            this.chrPorSemana.Series.Add(series3);
+            this.chrPorSemana.Series.Add(series4);
+            this.chrPorSemana.Series.Add(series5);
+            this.chrPorSemana.Series.Add(series6);
+            this.chrPorSemana.Series.Add(series7);
+            this.chrPorSemana.Size = new System.Drawing.Size(824, 200);
+            this.chrPorSemana.TabIndex = 187;
+            this.chrPorSemana.Text = "chart1";
+            title1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            title1.ForeColor = System.Drawing.Color.White;
+            title1.IsDockedInsideChartArea = false;
+            title1.Name = "Title1";
+            title1.ShadowOffset = 2;
+            title1.Text = "Gráfica semanal";
+            this.chrPorSemana.Titles.Add(title1);
             // 
             // ContaEstadoDeResultados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.chrPorSemana);
             this.Controls.Add(this.rdbFecha);
             this.Controls.Add(this.rdbSemanalizar);
             this.Controls.Add(this.nudDecimales);
@@ -230,6 +315,7 @@
             this.Load += new System.EventHandler(this.ContaEstadoDeResultados_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chrPorSemana)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,5 +336,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Concepto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn Promedio;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chrPorSemana;
     }
 }

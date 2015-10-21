@@ -103,17 +103,31 @@ namespace Refaccionaria.App
             if (oCelda == null || this.dgvDetalle.Columns.Count <= 0) return;
             var oLista = (oCelda.Tag as List<int>);
             if (oLista == null) return;
-            
+            bool bEspecial = Helper.ConvertirBool(this.tgvDatos.GetNodeForRow(oCelda.OwningRow).Parent.Parent.Parent.Parent.Tag);
+
             foreach (int iId in oLista)
             {
-                var oEgresoDev = General.GetEntity<ContaEgresoDevengado>(c => c.ContaEgresoDevengadoID == iId);
-                var oEgresoV = General.GetEntity<ContaEgresosView>(c => c.ContaEgresoID == oEgresoDev.ContaEgresoID);
-                if (oEgresoV != null)
+                // Se verifica si es especial o normal
+                if (bEspecial) { 
+                    var oDevEsp = General.GetEntity<ContaEgresoDevengadoEspecial>(c => c.ContaEgresoDevengadoEspecialID == iId);
+                    var oEgresoV = General.GetEntity<ContaEgresosView>(c => c.ContaEgresoID == oDevEsp.ContaEgresoID);
+                    if (oEgresoV != null)
+                    {
+                        this.dgvDetalle.Rows.Add(oDevEsp.Fecha, oEgresoV.Sucursal, oEgresoV.FormaDePago, oEgresoV.Usuario, oEgresoV.Importe
+                            , ((oDevEsp.Importe / oEgresoV.Importe) * 100), oDevEsp.Importe, oEgresoV.Observaciones);
+                    }
+                }
+                else
                 {
-                    // this.dgvDetalle.Rows.Add(oEgresoV.Observaciones, oEgresoV.Importe, oEgresoV.Sucursal, oEgresoV.FormaDePago, oEgresoV.Usuario
-                    //    , oEgresoDev.Fecha, ((oEgresoDev.Importe / oEgresoV.Importe) * 100), oEgresoDev.Importe);
-                    this.dgvDetalle.Rows.Add(oEgresoDev.Fecha, oEgresoV.Sucursal, oEgresoV.FormaDePago, oEgresoV.Usuario, oEgresoV.Importe
-                        , ((oEgresoDev.Importe / oEgresoV.Importe) * 100), oEgresoDev.Importe, oEgresoV.Observaciones);
+                    var oEgresoDev = General.GetEntity<ContaEgresoDevengado>(c => c.ContaEgresoDevengadoID == iId);
+                    var oEgresoV = General.GetEntity<ContaEgresosView>(c => c.ContaEgresoID == oEgresoDev.ContaEgresoID);
+                    if (oEgresoV != null)
+                    {
+                        // this.dgvDetalle.Rows.Add(oEgresoV.Observaciones, oEgresoV.Importe, oEgresoV.Sucursal, oEgresoV.FormaDePago, oEgresoV.Usuario
+                        //    , oEgresoDev.Fecha, ((oEgresoDev.Importe / oEgresoV.Importe) * 100), oEgresoDev.Importe);
+                        this.dgvDetalle.Rows.Add(oEgresoDev.Fecha, oEgresoV.Sucursal, oEgresoV.FormaDePago, oEgresoV.Usuario, oEgresoV.Importe
+                            , ((oEgresoDev.Importe / oEgresoV.Importe) * 100), oEgresoDev.Importe, oEgresoV.Observaciones);
+                    }
                 }
             }
         }
@@ -155,6 +169,7 @@ namespace Refaccionaria.App
                 {
                     sSucursal = oReg.Sucursal;
                     oNodoSucursal = this.tgvDatos.Nodes.Add(sSucursal);
+                    oNodoSucursal.Tag = false; // Se marca como false para indicar que no es devengado especial
                     sCuenta = "";
                 }
                 // Nodo de Cuenta
@@ -281,6 +296,7 @@ namespace Refaccionaria.App
                 {
                     sDuenio = oReg.Duenio;
                     oNodoDuenio = this.tgvDatos.Nodes.Add(sDuenio);
+                    oNodoDuenio.Tag = true; // Se marca como true para indicar que es devengado especial
                     sCuenta = "";
                 }
                 // Nodo de Cuenta
@@ -353,9 +369,9 @@ namespace Refaccionaria.App
                         dIniSem = dIniSem.AddDays(7);
 
                         // Para guardar los datos relacionados, para el grid de detalle devengado
-                        // if (oNodoCuentaAuxiliar.Cells[iCol].Tag == null)
-                        //     oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
-                        // (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoID);
+                        if (oNodoCuentaAuxiliar.Cells[iCol].Tag == null)
+                            oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
+                        (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoEspecialID);
 
                         // Para llenar las celdas
                         oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + mImporte); // mImporte;
@@ -370,9 +386,9 @@ namespace Refaccionaria.App
                     DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(oReg.Fecha).Date;
                     int iCol = this.tgvDatos.Columns["Sem" + dIniSem.ToString("d")].Index;
                     // Para guardar los datos relacionados, para el grid de detalle devengado
-                    // if (oNodoCuentaAuxiliar.Cells[iCol].Tag == null)
-                    //     oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
-                    // (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoID);
+                    if (oNodoCuentaAuxiliar.Cells[iCol].Tag == null)
+                        oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
+                    (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoEspecialID);
                     // Para llenar el importe
                     oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + oReg.ImporteDev);
                 }

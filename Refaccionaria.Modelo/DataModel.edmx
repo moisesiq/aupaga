@@ -3285,6 +3285,26 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaEgresosDevengadoEspe
           <Property Name="ImporteDev" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaEgresosDevengadosView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ContaEgresosDevengadosView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ContaEgresoID" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Importe" />
+            <PropertyRef Name="RealizoUsuarioID" />
+            <PropertyRef Name="EsEspecial" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ContaEgresoID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Importe" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Grupo" Type="nvarchar" MaxLength="128" />
+          <Property Name="RealizoUsuarioID" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
+          <Property Name="EsEspecial" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaEgresosView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ContaEgresosView">
           <Key>
@@ -3303,6 +3323,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaEgresosView' does no
           <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
           <Property Name="Observaciones" Type="nvarchar" MaxLength="512" />
           <Property Name="ImporteDev" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="ImporteDevEsp" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ContaPolizasDetalleAvanzadoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -11479,6 +11500,18 @@ FROM [dbo].[ContaEgresosDetalleView] AS [ContaEgresosDetalleView]</DefiningQuery
 [ContaEgresosDevengadoEspecialCuentasView].[ImporteDev] AS [ImporteDev]
 FROM [dbo].[ContaEgresosDevengadoEspecialCuentasView] AS [ContaEgresosDevengadoEspecialCuentasView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ContaEgresosDevengadosView" EntityType="Self.ContaEgresosDevengadosView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ContaEgresosDevengadosView].[Id] AS [Id], 
+[ContaEgresosDevengadosView].[ContaEgresoID] AS [ContaEgresoID], 
+[ContaEgresosDevengadosView].[Fecha] AS [Fecha], 
+[ContaEgresosDevengadosView].[Importe] AS [Importe], 
+[ContaEgresosDevengadosView].[Grupo] AS [Grupo], 
+[ContaEgresosDevengadosView].[RealizoUsuarioID] AS [RealizoUsuarioID], 
+[ContaEgresosDevengadosView].[Usuario] AS [Usuario], 
+[ContaEgresosDevengadosView].[EsEspecial] AS [EsEspecial]
+FROM [dbo].[ContaEgresosDevengadosView] AS [ContaEgresosDevengadosView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ContaEgresosView" EntityType="Self.ContaEgresosView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [ContaEgresosView].[ContaEgresoID] AS [ContaEgresoID], 
@@ -11490,7 +11523,8 @@ FROM [dbo].[ContaEgresosDevengadoEspecialCuentasView] AS [ContaEgresosDevengadoE
 [ContaEgresosView].[FormaDePago] AS [FormaDePago], 
 [ContaEgresosView].[Usuario] AS [Usuario], 
 [ContaEgresosView].[Observaciones] AS [Observaciones], 
-[ContaEgresosView].[ImporteDev] AS [ImporteDev]
+[ContaEgresosView].[ImporteDev] AS [ImporteDev], 
+[ContaEgresosView].[ImporteDevEsp] AS [ImporteDevEsp]
 FROM [dbo].[ContaEgresosView] AS [ContaEgresosView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ContaPolizasDetalleAvanzadoView" EntityType="Self.ContaPolizasDetalleAvanzadoView" store:Type="Views" store:Schema="dbo">
@@ -15101,7 +15135,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="CajaTipoEgreso" EntityType="RefaccionariaModelo.CajaTipoEgreso" />
           <EntitySet Name="VentasACreditoView" EntityType="RefaccionariaModelo.VentasACreditoView" />
           <EntitySet Name="ContaEgresoDevengado" EntityType="RefaccionariaModelo.ContaEgresoDevengado" />
-          <EntitySet Name="ContaEgresosView" EntityType="RefaccionariaModelo.ContaEgresosView" />
           <EntitySet Name="ContaEgresoDetalleDevengado" EntityType="RefaccionariaModelo.ContaEgresoDetalleDevengado" />
           <AssociationSet Name="FK__ContaEgre__Conta__1348B5CC" Association="RefaccionariaModelo.FK__ContaEgre__Conta__1348B5CC">
             <End Role="ContaEgresoDevengado" EntitySet="ContaEgresoDevengado" />
@@ -15194,10 +15227,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="Solo9500" Mode="In" Type="Boolean" />
             <Parameter Name="OmitirDomingo" Mode="In" Type="Boolean" />
             <Parameter Name="CostoConDescuento" Mode="In" Type="Boolean" />
-            <Parameter Name="Desde" Mode="In" Type="DateTime" />
-            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="pauContaCuentasTotales" ReturnType="Collection(RefaccionariaModelo.pauContaCuentasTotales_Result)">
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -16998,6 +17027,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ContaEgresoDevengadoEspecial" EntitySet="ContaEgresoDevengadoEspecial" />
           </AssociationSet>
+          <FunctionImport Name="pauContaCuentasTotales" ReturnType="Collection(RefaccionariaModelo.pauContaCuentasTotales_Result)">
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="ContaEgresosDevengadosView" EntityType="RefaccionariaModelo.ContaEgresosDevengadosView" />
+          <EntitySet Name="ContaEgresosView" EntityType="RefaccionariaModelo.ContaEgresosView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -19631,24 +19666,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ContaEgre__Reali__7E4D98E6" FromRole="ContaEgresoDevengado" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__ContaEgre__Sucur__7D5974AD" FromRole="ContaEgresoDevengado" ToRole="Sucursal" />
         </EntityType>
-        <EntityType Name="ContaEgresosView">
-          <Key>
-            <PropertyRef Name="ContaEgresoID" />
-            <PropertyRef Name="ContaCuentaAuxiliarID" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="Importe" />
-          </Key>
-          <Property Type="Int32" Name="ContaEgresoID" Nullable="false" />
-          <Property Type="Int32" Name="ContaCuentaAuxiliarID" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
-          <Property Type="String" Name="FolioDePago" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Importe" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="String" Name="Sucursal" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="FormaDePago" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Usuario" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Observaciones" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="ImporteDev" Precision="38" Scale="2" />
-        </EntityType>
         <EntityType Name="ContaEgresoDetalleDevengado">
           <Key>
             <PropertyRef Name="ContaEgresoDetalleDevengadoID" />
@@ -20163,22 +20180,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="CantidadActual" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="CantidadAnterior" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Int32" Name="ActualAnt" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="pauContaCuentasTotales_Result">
-          <Property Type="Int32" Name="ContaCuentaID" Nullable="false" />
-          <Property Type="Int32" Name="ContaSubcuentaID" Nullable="true" />
-          <Property Type="Int32" Name="ContaCuentaDeMayorID" Nullable="true" />
-          <Property Type="Int32" Name="ContaCuentaAuxiliarID" Nullable="true" />
-          <Property Type="String" Name="Cuenta" Nullable="false" MaxLength="32" />
-          <Property Type="String" Name="Subcuenta" Nullable="true" MaxLength="32" />
-          <Property Type="String" Name="CuentaDeMayor" Nullable="true" MaxLength="32" />
-          <Property Type="String" Name="CuentaAuxiliar" Nullable="true" MaxLength="32" />
-          <Property Type="Decimal" Name="Fiscal" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="Matriz" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="Suc02" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="Suc03" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="ImporteDev" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
         <ComplexType Name="pauComisiones_Result">
           <Property Type="Int32" Name="VentaID" Nullable="false" />
@@ -28585,6 +28586,60 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="pauContaCuentasTotales_Result">
+          <Property Type="Int32" Name="ContaCuentaID" Nullable="false" />
+          <Property Type="Int32" Name="ContaSubcuentaID" Nullable="true" />
+          <Property Type="Int32" Name="ContaCuentaDeMayorID" Nullable="true" />
+          <Property Type="Int32" Name="ContaCuentaAuxiliarID" Nullable="true" />
+          <Property Type="String" Name="Cuenta" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Subcuenta" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="CuentaDeMayor" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="CuentaAuxiliar" Nullable="true" MaxLength="64" />
+          <Property Type="Decimal" Name="Fiscal" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Matriz" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Suc02" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Suc03" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="ImporteDev" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="ImporteDevEsp" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <EntityType Name="ContaEgresosDevengadosView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ContaEgresoID" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Importe" />
+            <PropertyRef Name="RealizoUsuarioID" />
+            <PropertyRef Name="EsEspecial" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ContaEgresoID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Grupo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EsEspecial" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContaEgresosView">
+          <Key>
+            <PropertyRef Name="ContaEgresoID" />
+            <PropertyRef Name="ContaCuentaAuxiliarID" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Importe" />
+          </Key>
+          <Property Name="ContaEgresoID" Type="Int32" Nullable="false" />
+          <Property Name="ContaCuentaAuxiliarID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FolioDePago" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Sucursal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FormaDePago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Observaciones" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="ImporteDev" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="ImporteDevEsp" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -30710,22 +30765,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContaEgresosView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresosView">
-              <MappingFragment StoreEntitySet="ContaEgresosView">
-                <ScalarProperty Name="ImporteDev" ColumnName="ImporteDev" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="FormaDePago" ColumnName="FormaDePago" />
-                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="FolioDePago" ColumnName="FolioDePago" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
-                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ContaEgresoDetalleDevengado">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresoDetalleDevengado">
               <MappingFragment StoreEntitySet="ContaEgresoDetalleDevengado">
@@ -31122,26 +31161,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="CantidadActual" ColumnName="CantidadActual" />
                 <ScalarProperty Name="CantidadAnterior" ColumnName="CantidadAnterior" />
                 <ScalarProperty Name="ActualAnt" ColumnName="ActualAnt" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pauContaCuentasTotales" FunctionName="ControlRefaccionariaModel.Store.pauContaCuentasTotales">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RefaccionariaModelo.pauContaCuentasTotales_Result">
-                <ScalarProperty Name="ContaCuentaID" ColumnName="ContaCuentaID" />
-                <ScalarProperty Name="ContaSubcuentaID" ColumnName="ContaSubcuentaID" />
-                <ScalarProperty Name="ContaCuentaDeMayorID" ColumnName="ContaCuentaDeMayorID" />
-                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
-                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
-                <ScalarProperty Name="Subcuenta" ColumnName="Subcuenta" />
-                <ScalarProperty Name="CuentaDeMayor" ColumnName="CuentaDeMayor" />
-                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
-                <ScalarProperty Name="Fiscal" ColumnName="Fiscal" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Matriz" ColumnName="Matriz" />
-                <ScalarProperty Name="Suc02" ColumnName="Suc02" />
-                <ScalarProperty Name="Suc03" ColumnName="Suc03" />
-                <ScalarProperty Name="ImporteDev" ColumnName="ImporteDev" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -34451,6 +34470,58 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pauContaCuentasTotales" FunctionName="ControlRefaccionariaModel.Store.pauContaCuentasTotales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RefaccionariaModelo.pauContaCuentasTotales_Result">
+                <ScalarProperty Name="ContaCuentaID" ColumnName="ContaCuentaID" />
+                <ScalarProperty Name="ContaSubcuentaID" ColumnName="ContaSubcuentaID" />
+                <ScalarProperty Name="ContaCuentaDeMayorID" ColumnName="ContaCuentaDeMayorID" />
+                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="Subcuenta" ColumnName="Subcuenta" />
+                <ScalarProperty Name="CuentaDeMayor" ColumnName="CuentaDeMayor" />
+                <ScalarProperty Name="CuentaAuxiliar" ColumnName="CuentaAuxiliar" />
+                <ScalarProperty Name="Fiscal" ColumnName="Fiscal" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Matriz" ColumnName="Matriz" />
+                <ScalarProperty Name="Suc02" ColumnName="Suc02" />
+                <ScalarProperty Name="Suc03" ColumnName="Suc03" />
+                <ScalarProperty Name="ImporteDev" ColumnName="ImporteDev" />
+                <ScalarProperty Name="ImporteDevEsp" ColumnName="ImporteDevEsp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ContaEgresosDevengadosView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresosDevengadosView">
+              <MappingFragment StoreEntitySet="ContaEgresosDevengadosView">
+                <ScalarProperty Name="EsEspecial" ColumnName="EsEspecial" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContaEgresosView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresosView">
+              <MappingFragment StoreEntitySet="ContaEgresosView">
+                <ScalarProperty Name="ImporteDevEsp" ColumnName="ImporteDevEsp" />
+                <ScalarProperty Name="ImporteDev" ColumnName="ImporteDev" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="FormaDePago" ColumnName="FormaDePago" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="FolioDePago" ColumnName="FolioDePago" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ContaCuentaAuxiliarID" ColumnName="ContaCuentaAuxiliarID" />
+                <ScalarProperty Name="ContaEgresoID" ColumnName="ContaEgresoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -34965,7 +35036,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.CajaTipoEgreso" Width="1.5" PointX="3" PointY="82.375" Height="2.9417936197917243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasACreditoView" Width="1.5" PointX="15.375" PointY="20.75" Height="2.9417936197917243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDevengado" Width="1.5" PointX="16.5" PointY="47.875" Height="2.7494921874999818" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosView" Width="1.5" PointX="21.375" PointY="0.75" Height="2.9417936197917243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDetalleDevengado" Width="1.5" PointX="18.75" PointY="41.625" Height="2.1725878906249818" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__1348B5CC" >
           <ConnectorPoint PointX="18" PointY="47.875" />
@@ -42329,6 +42399,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__26667738" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Reali__284EBFAA" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosDevengadosView" Width="1.5" PointX="5.375" PointY="42.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosView" Width="1.5" PointX="21.375" PointY="0.75" />
         </Diagram>
     </Diagrams>
   </Designer>

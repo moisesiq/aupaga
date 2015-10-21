@@ -404,7 +404,7 @@ namespace Refaccionaria.App
                         {
                             if (!oVarCostos.ContainsKey(oReg.SucursalID))
                                 oVarCostos.Add(oReg.SucursalID, 0);
-                            oVarCostos[oReg.SucursalID] += mVarCosto;
+                            oVarCostos[oReg.SucursalID] += (mVarCosto * oReg.Existencia.Valor());
                         }
                         
                         //
