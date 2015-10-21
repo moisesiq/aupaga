@@ -13,12 +13,13 @@ DELETE FROM ContaEgresoDevengado WHERE ContaEgresoID IN
 */
 
 -- Para las de devengado especial (facilito :D)
--- INSERT INTO ContaEgresoDevengadoEspecial (ContaEgresoID, Fecha, DuenioID, Importe)
+-- INSERT INTO ContaEgresoDevengadoEspecial (ContaEgresoID, Fecha, DuenioID, Importe, RealizoUsuarioID)
 SELECT
 	ce.ContaEgresoID
 	, ce.Fecha
 	, de.DuenioID
 	, ce.Importe
+	, 1
 FROM
 	ContaEgreso ce
 	INNER JOIN ContaCuentaAuxiliar cca ON cca.ContaCuentaAuxiliarID = ce.ContaCuentaAuxiliarID
