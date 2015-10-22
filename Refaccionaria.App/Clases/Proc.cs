@@ -5,6 +5,9 @@ using System.Threading;
 using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -13,6 +16,10 @@ namespace Refaccionaria.App
 {
     public static class Proc
     {
+        static ServidorTcp oEscucha;
+
+        #region [ Aplicación ]
+
         public static void InicializarAplicacion()
         {
             // Se llena la cadena de conexión
@@ -25,6 +32,20 @@ namespace Refaccionaria.App
                 sCadenaDeConexion = sCadenaDeConexion.Replace(sContrasenia, Helper.Desencriptar(sContrasenia));
             ModelHelper.CadenaDeConexion = sCadenaDeConexion;
         }
+
+        public static void FinalizarAplicacion()
+        {
+            // Se limpian procesos asíncronos, si hubiera
+            foreach (var oTimer in Program.oTimers)
+            {
+                oTimer.Value.Change(Timeout.Infinite, Timeout.Infinite);
+            }
+
+            // Se detiene el socket de escucha Tcp
+            Proc.oEscucha.Detener();
+        }
+
+        #endregion
 
         /*
         public static Form MostrarPantallaIniciando()
@@ -125,6 +146,22 @@ namespace Refaccionaria.App
                 Guardar.Generico<UsuarioAsistencia>(oAsistencia);
             }
 
+            // Se registra la ip acutal del usuario
+            string sIp = Helper.IpLocal();
+            if (oUsuario.Ip != sIp)
+            {
+                oUsuario.Ip = sIp;
+                Guardar.Generico<Usuario>(oUsuario);
+            }
+
+            // Se inicializa el socket de escucha, si aplica
+            if (oUsuario.Alerta9500.Valor())
+            {
+                Proc.oEscucha = new ServidorTcp(GlobalClass.Puerto);
+                Proc.oEscucha.Escuchar();
+                Proc.oEscucha.ConexionRecibida += oEscucha_ConexionRecibida;
+            }
+            
             // Se configuran los recordatorios para Pedidos a Proveedores, si aplica
             if (oUsuario.AlertaPedidos.Valor())
             {
@@ -167,5 +204,35 @@ namespace Refaccionaria.App
             */
         }
 
+        #region [ Mensajes Tcp ]
+
+        public class MensajesTcp
+        {
+            public const string Alerta9500 = "01";
+        }
+
+        public static void EnviarMensajeTcp(string sEquipo, string sCodigo, string sMensaje)
+        {
+            var oTcpCli = new TcpClient(sEquipo, GlobalClass.Puerto);
+            var oStream = oTcpCli.GetStream();
+            var oMensaje = UTF8Encoding.UTF8.GetBytes(sCodigo + sMensaje);
+            oStream.Write(oMensaje, 0, oMensaje.Length);
+            oStream.Close(1000 * 1);
+        }
+
+        private static void oEscucha_ConexionRecibida(Socket oSocket, string sMensaje)
+        {
+            string sCodigo = sMensaje.Substring(0, 2);
+            sMensaje = sMensaje.Substring(2);
+
+            switch (sCodigo)
+            {
+                case MensajesTcp.Alerta9500:
+                    Helper.MensajeInformacion(sMensaje, "Notificación");
+                    break;
+            }
+        }
+
+        #endregion
     }
 }

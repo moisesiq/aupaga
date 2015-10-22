@@ -14,6 +14,7 @@ using System.Xml;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing;
 using System.Security.Cryptography;
+using System.Net.Sockets;
 
 namespace Refaccionaria.Negocio
 {
@@ -1637,6 +1638,17 @@ namespace Refaccionaria.Negocio
             tdes.Clear();
 
             return UTF8Encoding.UTF8.GetString(resultArray);
+        }
+
+        #endregion
+
+        #region [ Red ]
+
+        public static string IpLocal()
+        {
+            var oHost = Dns.GetHostEntry(Dns.GetHostName());
+            var oIp = oHost.AddressList.FirstOrDefault(c => c.AddressFamily == AddressFamily.InterNetwork);
+            return (oIp == null ? null : oIp.ToString());
         }
 
         #endregion

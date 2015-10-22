@@ -266,6 +266,8 @@ namespace Refaccionaria.App
             Guardar.Eliminar<Venta>(oVenta, true);
         }
 
+        #region [ 9500 ]
+
         public static void Cancelar9500(int i9500ID, string sMotivo, int iUsuarioID)
         {
             var o9500 = General.GetEntity<Cotizacion9500>(q => q.Cotizacion9500ID == i9500ID && q.Estatus);
@@ -352,6 +354,15 @@ namespace Refaccionaria.App
             o9500.EstatusGenericoID = Cat.EstatusGenericos.Pendiente;
             Guardar.Generico<Cotizacion9500>(o9500);
         }
+
+        public static void NotificarCreacion9500()
+        {
+            var oUsuarios = General.GetListOf<Usuario>(c => c.Alerta9500 == true && c.Estatus);
+            foreach (var oReg in oUsuarios)
+                Proc.EnviarMensajeTcp(oReg.Ip, Proc.MensajesTcp.Alerta9500, "Se acaba de crear un 9500. Revisar.");
+        }
+
+        #endregion
 
         public static void EliminarPagosVenta(int iVentaID)
         {

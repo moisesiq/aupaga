@@ -25,7 +25,7 @@ namespace Refaccionaria.App
 
         public static ResAcc Generico<T>(T Objeto) where T : EntityObject
         {
-            return Guardar.Generico<T>(Objeto, true); ;
+            return Guardar.Generico<T>(Objeto, true);
         }
 
         public static ResAcc Eliminar<T>(T oObjeto, bool bLogico) where T : EntityObject

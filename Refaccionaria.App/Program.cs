@@ -49,11 +49,7 @@ namespace Refaccionaria.App
             frmIniciando.Close();
             Application.Run(Principal.Instance);
 
-            // Se limpian procesos asíncronos, si hubiera
-            foreach (var oTimer in Program.oTimers)
-            {
-                oTimer.Value.Change(Timeout.Infinite, Timeout.Infinite);
-            }
+            Proc.FinalizarAplicacion();
         }
     }
 
@@ -70,6 +66,8 @@ namespace Refaccionaria.App
         public const string FormatoFechaHora = "dd/MM/yyyy HH:mm:ss";
 
         public const int TiempoNotificacion = (2 * 1000);
+
+        public const int Puerto = 32000;
                 
         private static String _NombreApp = Application.ProductName;
         private static String _NombreTienda = string.Empty;

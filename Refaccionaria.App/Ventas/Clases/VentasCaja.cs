@@ -601,6 +601,11 @@ namespace Refaccionaria.App
                 }
             }
 
+            // Se verifica si la venta es de un anticipo de 9500
+            if (General.Exists<Cotizacion9500>(c => c.AnticipoVentaID == iVentaID && c.Estatus))
+            {
+                VentasProc.NotificarCreacion9500();
+            }
             // Se verifica si la venta pertenece a un 9500, para tomar las acciones necesarias
             var o9500 = General.GetEntity<Cotizacion9500>(q => q.VentaID == iVentaID && q.Estatus);
             bool b9500 = (o9500 != null);

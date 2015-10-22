@@ -228,7 +228,6 @@
             this.chrPorSemana.BackColor = System.Drawing.Color.Transparent;
             chartArea1.AlignmentOrientation = ((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations)((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical | System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal)));
             chartArea1.AxisX.Interval = 1D;
-            chartArea1.AxisX.IntervalOffset = 1D;
             chartArea1.AxisX.IsLabelAutoFit = false;
             chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
@@ -236,7 +235,6 @@
             chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
             chartArea1.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
             chartArea1.AxisX.ScaleBreakStyle.LineColor = System.Drawing.Color.Maroon;
-            chartArea1.AxisX.ScaleView.Size = 52D;
             chartArea1.AxisY.IsLabelAutoFit = false;
             chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;

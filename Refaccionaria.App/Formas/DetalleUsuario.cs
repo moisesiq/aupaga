@@ -104,6 +104,7 @@ namespace Refaccionaria.App
 
                     this.clbAlertas.SetItemChecked(0, Helper.ConvertirBool(Usuario.AlertaCalendarioClientes));
                     this.clbAlertas.SetItemChecked(1, Helper.ConvertirBool(Usuario.AlertaPedidos));
+                    this.clbAlertas.SetItemChecked(2, Helper.ConvertirBool(Usuario.Alerta9500));
 
                 }
             }
@@ -135,7 +136,8 @@ namespace Refaccionaria.App
                         Estatus = true,
                         Actualizar = true,
                         AlertaCalendarioClientes = this.clbAlertas.GetItemChecked(0),
-                        AlertaPedidos = this.clbAlertas.GetItemChecked(1)
+                        AlertaPedidos = this.clbAlertas.GetItemChecked(1),
+                        Alerta9500 = this.clbAlertas.GetItemChecked(2)
                     };
                     Negocio.General.SaveOrUpdate<Usuario>(usr, usr);
                     UpdateUsuarioPerfiles(usr.UsuarioID, lista);
@@ -170,6 +172,7 @@ namespace Refaccionaria.App
                     //alertas
                     Usuario.AlertaCalendarioClientes = this.clbAlertas.GetItemChecked(0);
                     Usuario.AlertaPedidos = this.clbAlertas.GetItemChecked(1);
+                    Usuario.Alerta9500 = this.clbAlertas.GetItemChecked(2);
 
                     Negocio.General.SaveOrUpdate<Usuario>(Usuario, Usuario);
                     UpdateUsuarioPerfiles(Usuario.UsuarioID, lista);
@@ -233,6 +236,7 @@ namespace Refaccionaria.App
 
                 ((ListBox)clbAlertas).Items.Add("Alerta de Calendario de Clientes");
                 ((ListBox)clbAlertas).Items.Add("Alerta de Pedidos");
+                ((ListBox)clbAlertas).Items.Add("Alerta de 9500");
                 
             }
             catch (Exception ex)

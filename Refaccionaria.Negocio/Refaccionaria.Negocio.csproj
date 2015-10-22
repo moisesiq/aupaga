@@ -53,6 +53,7 @@
     <Compile Include="Clases\Ejec.cs" />
     <Compile Include="Clases\ListaEstatus.cs" />
     <Compile Include="Clases\ListViewColumnSorter.cs" />
+    <Compile Include="Clases\ServidorTcp.cs" />
     <Compile Include="Clases\Validador.cs" />
     <Compile Include="Controles\CheckBoxMod.cs">
       <SubType>Component</SubType>
