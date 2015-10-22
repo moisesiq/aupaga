@@ -359,7 +359,7 @@ namespace Refaccionaria.App
         {
             var oUsuarios = General.GetListOf<Usuario>(c => c.Alerta9500 == true && c.Estatus);
             foreach (var oReg in oUsuarios)
-                Proc.EnviarMensajeTcp(oReg.Ip, Proc.MensajesTcp.Alerta9500, "Se acaba de crear un 9500. Revisar.");
+                Proc.EnviarMensajeTcp(oReg.Ip, Proc.MensajesTcp.Alerta9500, (DateTime.Now.ToShortTimeString() + ": Se acaba de crear un 9500. Revisar."));
         }
 
         #endregion

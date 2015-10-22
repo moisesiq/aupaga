@@ -546,7 +546,7 @@ namespace Refaccionaria.App
 
                 // Se agregan totales para los niveles superiores
                 decimal mImporte = 0;
-                for (int iCol = 2; iCol < (this.tgvCuentas.Columns.Count - 1); iCol++)
+                for (int iCol = 2; iCol < this.tgvCuentas.Columns.Count; iCol++)
                 {
                     switch (iCol)
                     {

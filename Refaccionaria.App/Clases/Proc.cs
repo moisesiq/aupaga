@@ -213,11 +213,18 @@ namespace Refaccionaria.App
 
         public static void EnviarMensajeTcp(string sEquipo, string sCodigo, string sMensaje)
         {
-            var oTcpCli = new TcpClient(sEquipo, GlobalClass.Puerto);
-            var oStream = oTcpCli.GetStream();
-            var oMensaje = UTF8Encoding.UTF8.GetBytes(sCodigo + sMensaje);
-            oStream.Write(oMensaje, 0, oMensaje.Length);
-            oStream.Close(1000 * 1);
+            try
+            {
+                var oTcpCli = new TcpClient(sEquipo, GlobalClass.Puerto);
+                var oStream = oTcpCli.GetStream();
+                var oMensaje = UTF8Encoding.UTF8.GetBytes(sCodigo + sMensaje);
+                oStream.Write(oMensaje, 0, oMensaje.Length);
+                oStream.Close(1000 * 1);
+            }
+            catch
+            {
+
+            }
         }
 
         private static void oEscucha_ConexionRecibida(Socket oSocket, string sMensaje)

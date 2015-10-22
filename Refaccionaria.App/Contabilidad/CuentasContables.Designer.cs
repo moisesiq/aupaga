@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -40,7 +41,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvGastos = new System.Windows.Forms.DataGridView();
             this.Gastos_ContaEgresoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,7 +61,12 @@
             this.btnCuentaEliminar = new System.Windows.Forms.Button();
             this.btnCuentaMover = new System.Windows.Forms.Button();
             this.dgvGastoDev = new System.Windows.Forms.DataGridView();
+            this.DevengadoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tgvCuentas = new AdvancedDataGridView.TreeGridView();
+            this.txtBusqueda = new Refaccionaria.Negocio.TextoMod();
             this.Cuentas_Id = new AdvancedDataGridView.TreeGridColumn();
             this.Cuentas_Cuenta = new AdvancedDataGridView.TreeGridColumn();
             this.Cuentas_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,11 +76,6 @@
             this.Cuentas_Sucursal2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuentas_Sucursal3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuentas_ImporteDev = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtBusqueda = new Refaccionaria.Negocio.TextoMod();
-            this.DevengadoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGastos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGastoDev)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tgvCuentas)).BeginInit();
@@ -377,6 +377,36 @@
             this.dgvGastoDev.StandardTab = true;
             this.dgvGastoDev.TabIndex = 10;
             // 
+            // DevengadoID
+            // 
+            this.DevengadoID.HeaderText = "ContaEgresoDevengadoID";
+            this.DevengadoID.Name = "DevengadoID";
+            this.DevengadoID.ReadOnly = true;
+            this.DevengadoID.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Fecha";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 136;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tienda";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "C2";
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Importe";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
             // tgvCuentas
             // 
             this.tgvCuentas.AllowUserToAddRows = false;
@@ -417,6 +447,19 @@
             this.tgvCuentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvCuentas_CellClick);
             this.tgvCuentas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvCuentas_CellDoubleClick);
             this.tgvCuentas.CurrentCellChanged += new System.EventHandler(this.tgvCuentas_CurrentCellChanged);
+            // 
+            // txtBusqueda
+            // 
+            this.txtBusqueda.Etiqueta = "Búsqueda";
+            this.txtBusqueda.EtiquetaColor = System.Drawing.Color.Gray;
+            this.txtBusqueda.Location = new System.Drawing.Point(266, 3);
+            this.txtBusqueda.Name = "txtBusqueda";
+            this.txtBusqueda.PasarEnfoqueConEnter = false;
+            this.txtBusqueda.SeleccionarTextoAlEnfoque = true;
+            this.txtBusqueda.Size = new System.Drawing.Size(562, 20);
+            this.txtBusqueda.TabIndex = 2;
+            this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
+            this.txtBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBusqueda_KeyDown);
             // 
             // Cuentas_Id
             // 
@@ -510,49 +553,6 @@
             this.Cuentas_ImporteDev.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Cuentas_ImporteDev.Visible = false;
             // 
-            // txtBusqueda
-            // 
-            this.txtBusqueda.Etiqueta = "Búsqueda";
-            this.txtBusqueda.EtiquetaColor = System.Drawing.Color.Gray;
-            this.txtBusqueda.Location = new System.Drawing.Point(266, 3);
-            this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.PasarEnfoqueConEnter = false;
-            this.txtBusqueda.SeleccionarTextoAlEnfoque = true;
-            this.txtBusqueda.Size = new System.Drawing.Size(562, 20);
-            this.txtBusqueda.TabIndex = 2;
-            this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
-            this.txtBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBusqueda_KeyDown);
-            // 
-            // DevengadoID
-            // 
-            this.DevengadoID.HeaderText = "ContaEgresoDevengadoID";
-            this.DevengadoID.Name = "DevengadoID";
-            this.DevengadoID.ReadOnly = true;
-            this.DevengadoID.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Fecha";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 136;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Tienda";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "C2";
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Importe";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
             // CuentasContables
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -607,6 +607,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Gastos_Usuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Gastos_Observaciones;
         private Negocio.TextoMod txtBusqueda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DevengadoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private AdvancedDataGridView.TreeGridColumn Cuentas_Id;
         private AdvancedDataGridView.TreeGridColumn Cuentas_Cuenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuentas_Porcentaje;
@@ -616,10 +620,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuentas_Sucursal2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuentas_Sucursal3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuentas_ImporteDev;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DevengadoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
 
     }
 }
