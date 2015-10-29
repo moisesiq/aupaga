@@ -134,6 +134,8 @@ namespace Refaccionaria.App
 
         public string FormaDePagoLibre { get { return this.txtFormaDePagoLibre.Text; } }
 
+        public int VentaID { get; set; }
+
         #endregion
 
         #region [ Eventos ]
@@ -334,7 +336,7 @@ namespace Refaccionaria.App
         {
             if (this.ctlNotasDeCredito == null)
             {
-                this.ctlNotasDeCredito = new SeleccionarNotasDeCredito(this.ClienteID);
+                this.ctlNotasDeCredito = new SeleccionarNotasDeCredito(this.ClienteID, this.VentaID);
                 this.frmNotasDeCredito = new ContenedorControl("Vales", this.ctlNotasDeCredito);
             }
 
@@ -606,6 +608,7 @@ namespace Refaccionaria.App
             this.LimpiarDatos();
             // Se llenan los datos según la venta especificada
             var oVenta = General.GetEntity<Venta>(c => c.VentaID == iVentaID && c.Estatus);
+            this.VentaID = iVentaID;
             // this.ClienteID = oVenta.ClienteID;
             this.CambiarCliente(oVenta.ClienteID);
             this.rdbCredito.Checked = oVenta.ACredito;

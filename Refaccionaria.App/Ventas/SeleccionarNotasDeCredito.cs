@@ -11,12 +11,14 @@ namespace Refaccionaria.App
     {
         bool Cargado = false;
         int ClienteID;
+        int VentaID;
 
-        public SeleccionarNotasDeCredito(int iClienteID)
+        public SeleccionarNotasDeCredito(int iClienteID, int iVentaID)
         {
             InitializeComponent();
             
             this.ClienteID = iClienteID;
+            this.VentaID = iVentaID;
         }
 
         #region [ Eventos ]
@@ -25,8 +27,11 @@ namespace Refaccionaria.App
         {
             if (this.Cargado) return;
 
+            // Se obtiene la venta, para filtrar por sucursal
+            var oVenta = General.GetEntity<Venta>(c => c.VentaID == this.VentaID && c.Estatus);
+            int iSucursalID = (oVenta == null ? 0 : oVenta.SucursalID);
             // Se cargan las notas de crédito del cliente
-            var oNotas = General.GetListOf<NotaDeCredito>(q => q.ClienteID == this.ClienteID && q.Valida && q.Estatus);
+            var oNotas = General.GetListOf<NotaDeCredito>(q => q.ClienteID == this.ClienteID && (iSucursalID == 0 || q.SucursalID == iSucursalID) && q.Valida && q.Estatus);
             foreach (var oNota in oNotas)
                 this.dgvNotas.Rows.Add(oNota.ClienteID, false, oNota.NotaDeCreditoID, oNota.Importe, 0.00);
 

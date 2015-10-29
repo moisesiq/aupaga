@@ -27,6 +27,7 @@ namespace Refaccionaria.App
             this.cmbTipoDePoliza.CargarDatos("ContaTipoPolizaID", "TipoDePoliza", General.GetListOf<ContaTipoPoliza>());
             // this.CuentaAuxiliarID.CargarDatos("ContaCuentaAuxiliarID", "CuentaAuxiliar", General.GetListOf<ContaCuentaAuxiliar>());
             this.CargoAbono.Items.AddRange("Cargo", "Abono");
+            this.AsigSucursalID.CargarDatos("ContaPolizaAsigSucursalID", "Sucursal", General.GetListOf<ContaPolizaAsigSucursal>());
             this.dgvAfectaciones.Inicializar();
 
             // Se cargan los datos para el grid de búsqueda
@@ -147,7 +148,7 @@ namespace Refaccionaria.App
                 }
 
                 this.dgvAfectaciones.AgregarFila(oReg.ContaConfigAfectacionDetalleID, Cat.TiposDeAfectacion.SinCambios, eTipo
-                    , oReg.CuentaID, sCuenta, (oReg.EsCargo ? "Cargo" : "Abono"), oReg.Observacion);
+                    , oReg.CuentaID, sCuenta, (oReg.EsCargo ? "Cargo" : "Abono"), oReg.ContaPolizaAsigSucursalID, oReg.Observacion);
             }
         }
 
@@ -188,6 +189,7 @@ namespace Refaccionaria.App
                         oReg.EsCasoFijo = (eTipo == ConfigAfectaciones.TiposDeCuenta.CasoFijo);
                         oReg.CuentaID = (iCuentaID);
                         oReg.EsCargo = (Helper.ConvertirCadena(oFila.Cells["CargoAbono"].Value) == "Cargo");
+                        oReg.ContaPolizaAsigSucursalID = Helper.ConvertirEntero(oFila.Cells["AsigSucursalID"].Value);
                         oReg.Observacion = Helper.ConvertirCadena(oFila.Cells["Observacion"].Value);
                         
                         Guardar.Generico<ContaConfigAfectacionDetalle>(oReg);
@@ -209,7 +211,22 @@ namespace Refaccionaria.App
             if (Helper.ConvertirEntero(this.cmbOperacion.SelectedValue) <= 0)
                 this.ctlError.PonerError(this.cmbOperacion, "No se ha seleccionado ninguna operación.");
             if (Helper.ConvertirEntero(this.cmbTipoDePoliza.SelectedValue) <= 0)
-                this.ctlError.PonerError(this.cmbOperacion, "No se ha seleccionado un tipo de poliza válido.");
+                this.ctlError.PonerError(this.cmbTipoDePoliza, "No se ha seleccionado un tipo de poliza válido.");
+            // Se validan las filas del grid
+            bool bErrorGrid = false;
+            foreach (DataGridViewRow oFila in this.dgvAfectaciones.Rows)
+            {
+                if (oFila.IsNewRow) continue;
+                oFila.ErrorText = "";
+                if (Helper.ConvertirEntero(oFila.Cells["AsigSucursalID"].Value) <= 0)
+                {
+                    oFila.ErrorText = "Sucursal inválida.";
+                    bErrorGrid = true;
+                    break;
+                }
+            }
+            if (bErrorGrid)
+                this.ctlError.PonerError(this.btnGuardar, "Existen errores de validación. Verificar.", ErrorIconAlignment.MiddleLeft);
 
             return (this.ctlError.NumeroDeErrores == 0);
         }

@@ -42,7 +42,8 @@ namespace Refaccionaria.App
             }
 
             // Se detiene el socket de escucha Tcp
-            Proc.oEscucha.Detener();
+            if (Proc.oEscucha != null)
+                Proc.oEscucha.Detener();
         }
 
         #endregion
@@ -157,6 +158,10 @@ namespace Refaccionaria.App
             // Se inicializa el socket de escucha, si aplica
             if (oUsuario.Alerta9500.Valor())
             {
+                //
+                if (Proc.oEscucha != null)
+                    Proc.oEscucha.Detener();
+                //
                 Proc.oEscucha = new ServidorTcp(GlobalClass.Puerto);
                 Proc.oEscucha.Escuchar();
                 Proc.oEscucha.ConexionRecibida += oEscucha_ConexionRecibida;

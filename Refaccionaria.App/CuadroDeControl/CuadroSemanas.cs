@@ -90,16 +90,8 @@ namespace Refaccionaria.App
 
         private void nudDecimales_ValueChanged(object sender, EventArgs e)
         {
-            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
-            sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
-            this.dgvSemana.Columns["Semana_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvSemana.Columns["Semana_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvSemanaT.Columns["SemanaT_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvSemanaT.Columns["SemanaT_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvVendedor.Columns["Vendedor_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvVendedor.Columns["Vendedor_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvVendedorT.Columns["VendedorT_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvVendedorT.Columns["VendedorT_Anterior"].DefaultCellStyle.Format = sFormato;
+            if (this.nudDecimales.Focused)
+                this.AplicarFormatoColumnas();
         }
 
         private void btnMostrar_Click(object sender, EventArgs e)
@@ -129,6 +121,20 @@ namespace Refaccionaria.App
         #endregion
 
         #region [ Métodos ]
+
+        private void AplicarFormatoColumnas()
+        {
+            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
+            sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
+            this.dgvSemana.Columns["Semana_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvSemana.Columns["Semana_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvSemanaT.Columns["SemanaT_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvSemanaT.Columns["SemanaT_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedor.Columns["Vendedor_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedor.Columns["Vendedor_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedorT.Columns["VendedorT_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedorT.Columns["VendedorT_Anterior"].DefaultCellStyle.Format = sFormato;
+        }
 
         private Dictionary<string, object> ObtenerParametros()
         {
@@ -216,14 +222,7 @@ namespace Refaccionaria.App
             }
 
             // Se configuran columnas del grid
-            this.dgvSemana.Columns["Semana_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvSemana.Columns["Semana_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvSemanaT.Columns["SemanaT_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvSemanaT.Columns["SemanaT_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvVendedor.Columns["Vendedor_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvVendedor.Columns["Vendedor_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvVendedorSem.Columns["VendedorSem_Promedio"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N2" : "C2");
-            this.dgvVendedorSem.Columns["VendedorSem_Total"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
+            this.AplicarFormatoColumnas();
 
             Cargando.Cerrar();
         }

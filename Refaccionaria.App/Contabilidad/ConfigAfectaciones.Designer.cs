@@ -39,6 +39,7 @@
             this.CuentaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CargoAbono = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.AsigSucursalID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAfectaciones)).BeginInit();
             this.SuspendLayout();
@@ -101,9 +102,9 @@
             // dgvAfectaciones
             // 
             this.dgvAfectaciones.AllowUserToDeleteRows = false;
-            this.dgvAfectaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvAfectaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAfectaciones.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvAfectaciones.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvAfectaciones.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -116,6 +117,7 @@
             this.CuentaID,
             this.Cuenta,
             this.CargoAbono,
+            this.AsigSucursalID,
             this.Observacion});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
@@ -160,6 +162,12 @@
             this.CargoAbono.HeaderText = "Cargo / Abono";
             this.CargoAbono.Name = "CargoAbono";
             // 
+            // AsigSucursalID
+            // 
+            this.AsigSucursalID.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.AsigSucursalID.HeaderText = "Sucursal";
+            this.AsigSucursalID.Name = "AsigSucursalID";
+            // 
             // Observacion
             // 
             this.Observacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -201,6 +209,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CuentaID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta;
         private System.Windows.Forms.DataGridViewComboBoxColumn CargoAbono;
+        private System.Windows.Forms.DataGridViewComboBoxColumn AsigSucursalID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Observacion;
     }
 }

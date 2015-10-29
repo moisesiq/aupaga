@@ -1357,11 +1357,6 @@
             this.nudDecimales.Name = "nudDecimales";
             this.nudDecimales.Size = new System.Drawing.Size(40, 20);
             this.nudDecimales.TabIndex = 6;
-            this.nudDecimales.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
             this.nudDecimales.ValueChanged += new System.EventHandler(this.nudDecimales_ValueChanged);
             // 
             // CuadroVentas

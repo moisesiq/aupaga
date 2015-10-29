@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Drawing;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -170,74 +173,74 @@ namespace Refaccionaria.App
         {
             string sCalculo = this.cmbCalculo.Text;
             DateTime dDiaCero = new DateTime(DateTime.Now.Year, 1, 1).AddDays(-1);
-            var oPorDia = oDatos.GroupBy(g => new { g.Fecha.Date.DayOfYear, g.SucursalID });
+            var oPorDia = oDatos.GroupBy(g => new { g.Fecha.Date.DayOfYear });
             switch (sCalculo)
             {
                 case "Utilidad":
                     return oPorDia.Select(c => new AgrupadoPorSucursal()
                     {
                         LlaveFecha = dDiaCero.AddDays(c.Key.DayOfYear),
-                        Suc01_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.Actual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.Anterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.Actual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.Anterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.Actual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.Anterior : null)).Valor(),
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.Actual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.Anterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.Actual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.Anterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.Actual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.Anterior : null)).Valor(),
                     }).OrderBy(o => o.LlaveFecha);
                 case "Utilidad Desc.":
                     return oPorDia.Select(c => new AgrupadoPorSucursal()
                     {
                         LlaveFecha = dDiaCero.AddDays(c.Key.DayOfYear),
-                        Suc01_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.UtilDescActual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.UtilDescAnterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.UtilDescActual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.UtilDescAnterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.UtilDescActual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.UtilDescAnterior : null)).Valor(),
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.UtilDescActual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.UtilDescAnterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.UtilDescActual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.UtilDescAnterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.UtilDescActual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.UtilDescAnterior : null)).Valor(),
                     }).OrderBy(o => o.LlaveFecha);
                 case "Precio":
                     return oPorDia.Select(c => new AgrupadoPorSucursal()
                     {
                         LlaveFecha = dDiaCero.AddDays(c.Key.DayOfYear),
-                        Suc01_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.PrecioActual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.PrecioAnterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.PrecioActual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.PrecioAnterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.PrecioActual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.PrecioAnterior : null)).Valor(),
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.PrecioActual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.PrecioAnterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.PrecioActual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.PrecioAnterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.PrecioActual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.PrecioAnterior : null)).Valor(),
                     }).OrderBy(o => o.LlaveFecha);
                 case "Costo":
                     return oPorDia.Select(c => new AgrupadoPorSucursal()
                     {
                         LlaveFecha = dDiaCero.AddDays(c.Key.DayOfYear),
-                        Suc01_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.CostoActual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.CostoAnterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.CostoActual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.CostoAnterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.CostoActual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.CostoAnterior : null)).Valor(),
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.CostoActual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.CostoAnterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.CostoActual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.CostoAnterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.CostoActual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.CostoAnterior : null)).Valor(),
                     }).OrderBy(o => o.LlaveFecha);
                 case "Costo Desc.":
                     return oPorDia.Select(c => new AgrupadoPorSucursal()
                     {
                         LlaveFecha = dDiaCero.AddDays(c.Key.DayOfYear),
-                        Suc01_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.CostoDescActual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.CostoDescAnterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.CostoDescActual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.CostoDescAnterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.CostoDescActual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.CostoDescAnterior : null)).Valor(),
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.CostoDescActual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.CostoDescAnterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.CostoDescActual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.CostoDescAnterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.CostoDescActual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.CostoDescAnterior : null)).Valor(),
                     }).OrderBy(o => o.LlaveFecha);
                 case "Ventas":
                     return oPorDia.Select(c => new AgrupadoPorSucursal()
                     {
                         LlaveFecha = dDiaCero.AddDays(c.Key.DayOfYear),
-                        Suc01_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.VentasActual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Matriz ? s.VentasAnterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasActual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasAnterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasActual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (c.Key.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasAnterior : null)).Valor(),
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasActual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasAnterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasActual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasAnterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasActual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasAnterior : null)).Valor(),
                     }).OrderBy(o => o.LlaveFecha);
             }
 
@@ -542,7 +545,9 @@ namespace Refaccionaria.App
             // Se llena el grid de días
             var oPorDiaSem = this.AgruparPorEntero(oDatos.GroupBy(g => (int)g.Fecha.DayOfWeek));
             this.dgvPorDiaSem.Rows.Clear();
-            // this.chrPorDiaSem.Series["Actual"].Points.Clear();
+            this.chrPorDiaSem1.Series["Actual"].Points.Clear();
+            this.chrPorDiaSem2.Series["Actual"].Points.Clear();
+            this.chrPorDiaSem3.Series["Actual"].Points.Clear();
             foreach (var oReg in oPorDiaSem)
             {
                 this.dgvPorDiaSem.Rows.Add(CultureInfo.CurrentCulture.DateTimeFormat.GetDayName((DayOfWeek)oReg.LlaveEntero).ToUpper()
@@ -550,12 +555,20 @@ namespace Refaccionaria.App
                     , oReg.Suc02_Actual, Helper.DividirONull(oReg.Suc02_Actual, oReg.Suc02_Anterior), (Helper.DividirONull(oReg.Suc02_Actual, oTotales.Suc02_Actual) * 100)
                     , oReg.Suc03_Actual, Helper.DividirONull(oReg.Suc03_Actual, oReg.Suc03_Anterior), (Helper.DividirONull(oReg.Suc03_Actual, oTotales.Suc03_Actual) * 100)
                 );
-                // this.chrPorDiaSem.Series["Actual"].Points[iPunto].AxisLabel = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(oReg.Dia).ToUpper();
+                string sDia = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName((DayOfWeek)oReg.LlaveEntero).ToUpper();
+                int iPunto = this.chrPorDiaSem1.Series["Actual"].Points.AddXY(oReg.LlaveEntero, oReg.Suc01_Actual);
+                this.chrPorDiaSem1.Series["Actual"].Points[iPunto].AxisLabel = sDia;
+                iPunto = this.chrPorDiaSem2.Series["Actual"].Points.AddXY(oReg.LlaveEntero, oReg.Suc02_Actual);
+                this.chrPorDiaSem1.Series["Actual"].Points[iPunto].AxisLabel = sDia;
+                iPunto = this.chrPorDiaSem3.Series["Actual"].Points.AddXY(oReg.LlaveEntero, oReg.Suc03_Actual);
+                this.chrPorDiaSem1.Series["Actual"].Points[iPunto].AxisLabel = sDia;
             }
             // Se llena el grid de horas
             var oPorHora = this.AgruparPorEntero(oDatos.GroupBy(g => g.Fecha.Hour));
             this.dgvPorHora.Rows.Clear();
-            // this.chrPorHora.Series.Clear();
+            this.chrPorHora1.Series.Clear();
+            this.chrPorHora2.Series.Clear();
+            this.chrPorHora3.Series.Clear();
             foreach (var oReg in oPorHora)
             {
                 this.dgvPorHora.Rows.Add(string.Format("{0:00}:00", oReg.LlaveEntero)
@@ -563,10 +576,34 @@ namespace Refaccionaria.App
                     , oReg.Suc02_Actual, Helper.DividirONull(oReg.Suc02_Actual, oReg.Suc02_Anterior), (Helper.DividirONull(oReg.Suc02_Actual, oTotales.Suc02_Actual) * 100)
                     , oReg.Suc03_Actual, Helper.DividirONull(oReg.Suc03_Actual, oReg.Suc03_Anterior), (Helper.DividirONull(oReg.Suc03_Actual, oTotales.Suc03_Actual) * 100)
                 );
-                // this.AgregarSerieCilindro(this.chrPorHora, oReg.Llave, oReg.Actual);
+                this.AgregarSerieCilindro(this.chrPorHora1, oReg.LlaveEntero, oReg.Suc01_Actual);
+                this.AgregarSerieCilindro(this.chrPorHora2, oReg.LlaveEntero, oReg.Suc02_Actual);
+                this.AgregarSerieCilindro(this.chrPorHora3, oReg.LlaveEntero, oReg.Suc03_Actual);
             }
 
+            // Se configuran columnas del grid
+            this.FormatoColumnas();
+
             Cargando.Cerrar();
+        }
+
+        private void AgregarSerieCilindro(Chart oGrafica, int? iHora, decimal? mValor)
+        {
+            var oSerie = new Series()
+            {
+                BackGradientStyle = GradientStyle.VerticalCenter,
+                BackSecondaryColor = Color.Transparent,
+                BorderColor = Color.White,
+                ChartType = SeriesChartType.StackedColumn100,
+                Label = "#AXISLABEL",
+                LabelForeColor = Color.White,
+                CustomProperties = "PixelPointWidth=80"
+            };
+            oSerie.SmartLabelStyle.Enabled = false;
+            int iPunto = oSerie.Points.AddY(mValor);
+            oSerie.Points[iPunto].AxisLabel = iHora.ToString();
+
+            oGrafica.Series.Add(oSerie);
         }
 
         #endregion
@@ -616,6 +653,8 @@ namespace Refaccionaria.App
 
             // Para configurar las columnas de los grids
             this.ctlPorProveedor.FormatoColumnas(this.cmbCalculo.Text, (int)this.nudDecimales.Value);
+            // Orden
+            this.ctlPorProveedor.dgvPrincipal.Sort(this.ctlPorProveedor.dgvPrincipal.Columns["pri_Suc01_Actual"], ListSortDirection.Descending);
 
             Cargando.Cerrar();
         }
@@ -628,6 +667,8 @@ namespace Refaccionaria.App
             this.ctlPorProveedor.chrSemanas.Series["Suc03"].Points.Clear();
             if (iId <= 0)
                 return;
+
+            Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
@@ -647,6 +688,8 @@ namespace Refaccionaria.App
                 this.ctlPorProveedor.chrSemanas.Series["Suc02"].Points.AddXY(oReg.LlaveEntero, oReg.Suc02_Actual);
                 this.ctlPorProveedor.chrSemanas.Series["Suc03"].Points.AddXY(oReg.LlaveEntero, oReg.Suc03_Actual);
             }
+
+            Cargando.Cerrar();
         }
 
         private void PorProveedorLlenarMeses(int iId)
@@ -657,6 +700,8 @@ namespace Refaccionaria.App
             this.ctlPorProveedor.chrMeses.Series["Suc03"].Points.Clear();
             if (iId <= 0)
                 return;
+
+            Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
@@ -676,6 +721,8 @@ namespace Refaccionaria.App
                 this.ctlPorProveedor.chrMeses.Series["Suc02"].Points.AddXY(oReg.LlaveEntero, oReg.Suc02_Actual);
                 this.ctlPorProveedor.chrMeses.Series["Suc03"].Points.AddXY(oReg.LlaveEntero, oReg.Suc03_Actual);
             }
+
+            Cargando.Cerrar();
         }
 
         #endregion
@@ -725,6 +772,8 @@ namespace Refaccionaria.App
 
             // Para configurar las columnas de los grids
             this.ctlPorMarca.FormatoColumnas(this.cmbCalculo.Text, (int)this.nudDecimales.Value);
+            // Orden
+            this.ctlPorMarca.dgvPrincipal.Sort(this.ctlPorMarca.dgvPrincipal.Columns["pri_Suc01_Actual"], ListSortDirection.Descending);
 
             Cargando.Cerrar();
         }
@@ -737,6 +786,8 @@ namespace Refaccionaria.App
             this.ctlPorMarca.chrSemanas.Series["Suc03"].Points.Clear();
             if (iId <= 0)
                 return;
+
+            Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
@@ -756,6 +807,8 @@ namespace Refaccionaria.App
                 this.ctlPorMarca.chrSemanas.Series["Suc02"].Points.AddXY(oReg.LlaveEntero, oReg.Suc02_Actual);
                 this.ctlPorMarca.chrSemanas.Series["Suc03"].Points.AddXY(oReg.LlaveEntero, oReg.Suc03_Actual);
             }
+
+            Cargando.Cerrar();
         }
 
         private void PorMarcaLlenarMeses(int iId)
@@ -766,6 +819,8 @@ namespace Refaccionaria.App
             this.ctlPorMarca.chrMeses.Series["Suc03"].Points.Clear();
             if (iId <= 0)
                 return;
+
+            Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
@@ -785,6 +840,8 @@ namespace Refaccionaria.App
                 this.ctlPorMarca.chrMeses.Series["Suc02"].Points.AddXY(oReg.LlaveEntero, oReg.Suc02_Actual);
                 this.ctlPorMarca.chrMeses.Series["Suc03"].Points.AddXY(oReg.LlaveEntero, oReg.Suc03_Actual);
             }
+
+            Cargando.Cerrar();
         }
 
         #endregion
@@ -834,6 +891,8 @@ namespace Refaccionaria.App
 
             // Para configurar las columnas de los grids
             this.ctlPorLinea.FormatoColumnas(this.cmbCalculo.Text, (int)this.nudDecimales.Value);
+            // Orden
+            this.ctlPorLinea.dgvPrincipal.Sort(this.ctlPorLinea.dgvPrincipal.Columns["pri_Suc01_Actual"], ListSortDirection.Descending);
 
             Cargando.Cerrar();
         }
@@ -846,6 +905,8 @@ namespace Refaccionaria.App
             this.ctlPorLinea.chrSemanas.Series["Suc03"].Points.Clear();
             if (iId <= 0)
                 return;
+
+            Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
@@ -865,6 +926,8 @@ namespace Refaccionaria.App
                 this.ctlPorLinea.chrSemanas.Series["Suc02"].Points.AddXY(oReg.LlaveEntero, oReg.Suc02_Actual);
                 this.ctlPorLinea.chrSemanas.Series["Suc03"].Points.AddXY(oReg.LlaveEntero, oReg.Suc03_Actual);
             }
+
+            Cargando.Cerrar();
         }
 
         private void PorLineaLlenarMeses(int iId)
@@ -875,6 +938,8 @@ namespace Refaccionaria.App
             this.ctlPorLinea.chrMeses.Series["Suc03"].Points.Clear();
             if (iId <= 0)
                 return;
+
+            Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
@@ -894,6 +959,8 @@ namespace Refaccionaria.App
                 this.ctlPorLinea.chrMeses.Series["Suc02"].Points.AddXY(oReg.LlaveEntero, oReg.Suc02_Actual);
                 this.ctlPorLinea.chrMeses.Series["Suc03"].Points.AddXY(oReg.LlaveEntero, oReg.Suc03_Actual);
             }
+
+            Cargando.Cerrar();
         }
 
         #endregion

@@ -175,22 +175,8 @@ namespace Refaccionaria.App
 
         private void nudDecimales_ValueChanged(object sender, EventArgs e)
         {
-            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
-            sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
-            this.dgvPrincipal.Columns["Principal_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvPrincipal.Columns["Principal_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvPrincipalTotales.Columns["PrincipalT_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvPrincipalTotales.Columns["PrincipalT_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvGrupos.Columns["Grupos_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvGrupos.Columns["Grupos_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvMeses.Columns["Meses_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvMeses.Columns["Meses_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvSemanas.Columns["Semanas_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvSemanas.Columns["Semanas_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvSucursal.Columns["Sucursal_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvSucursal.Columns["Sucursal_Anterior"].DefaultCellStyle.Format = sFormato;
-            this.dgvVendedor.Columns["Vendedor_Actual"].DefaultCellStyle.Format = sFormato;
-            this.dgvVendedor.Columns["Vendedor_Anterior"].DefaultCellStyle.Format = sFormato;
+            if (this.nudDecimales.Focused)
+                this.AplicarFormatoColumnas();
         }
 
         private void btnMostrar_Click(object sender, EventArgs e)
@@ -282,7 +268,25 @@ namespace Refaccionaria.App
 
         #region [ Métodos ]
 
-        
+        private void AplicarFormatoColumnas()
+        {
+            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
+            sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
+            this.dgvPrincipal.Columns["Principal_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvPrincipal.Columns["Principal_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvPrincipalTotales.Columns["PrincipalT_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvPrincipalTotales.Columns["PrincipalT_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvGrupos.Columns["Grupos_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvGrupos.Columns["Grupos_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvMeses.Columns["Meses_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvMeses.Columns["Meses_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvSemanas.Columns["Semanas_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvSemanas.Columns["Semanas_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvSucursal.Columns["Sucursal_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvSucursal.Columns["Sucursal_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedor.Columns["Vendedor_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvVendedor.Columns["Vendedor_Anterior"].DefaultCellStyle.Format = sFormato;
+        }
 
         #endregion
 
@@ -328,20 +332,7 @@ namespace Refaccionaria.App
         protected virtual void CargarDatos()
         {
             // Se configuran columnas del grid
-            this.dgvPrincipal.Columns["Principal_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvPrincipal.Columns["Principal_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvPrincipalTotales.Columns["PrincipalT_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvPrincipalTotales.Columns["PrincipalT_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvGrupos.Columns["Grupos_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvGrupos.Columns["Grupos_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvMeses.Columns["Meses_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvMeses.Columns["Meses_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvSemanas.Columns["Semanas_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvSemanas.Columns["Semanas_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvSucursal.Columns["Sucursal_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvSucursal.Columns["Sucursal_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvVendedor.Columns["Vendedor_Actual"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
-            this.dgvVendedor.Columns["Vendedor_Anterior"].DefaultCellStyle.Format = (this.cmbCalculo.Text == "Ventas" ? "N0" : "C2");
+            this.AplicarFormatoColumnas();
         }
 
         protected virtual void LlenarGrupos(int iId) { }

@@ -31,6 +31,11 @@ namespace Refaccionaria.Negocio
 
         public void Escuchar()
         {
+            // Se cierra la conexión previa, si hubiera
+            if (this.Escucha != null)
+                this.Detener();
+            
+            //
             this.Escucha = new TcpListener(IPAddress.Any, this.Puerto);
             var oHiloEscucha = new Thread(this.ProcEscuchar);
             oHiloEscucha.Start();

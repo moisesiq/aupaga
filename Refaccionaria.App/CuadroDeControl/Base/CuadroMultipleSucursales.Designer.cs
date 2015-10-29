@@ -39,11 +39,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,6 +48,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -76,7 +76,6 @@
             this.dgvMeses = new System.Windows.Forms.DataGridView();
             this.dgvSemanas = new System.Windows.Forms.DataGridView();
             this.dgvPrincipal = new System.Windows.Forms.DataGridView();
-            this.chrMeses = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pri_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pri_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pri_Suc01_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +87,7 @@
             this.pri_Suc03_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pri_Suc03_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pri_Suc03_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chrMeses = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.sem_Semana = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sem_Suc01_Actual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sem_Suc01_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -365,75 +365,6 @@
             this.dgvPrincipal.TabIndex = 0;
             this.dgvPrincipal.CurrentCellChanged += new System.EventHandler(this.dgvPrincipal_CurrentCellChanged);
             // 
-            // chrMeses
-            // 
-            this.chrMeses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chrMeses.BackColor = System.Drawing.Color.Transparent;
-            chartArea2.Area3DStyle.Enable3D = true;
-            chartArea2.Area3DStyle.PointDepth = 60;
-            chartArea2.Area3DStyle.PointGapDepth = 60;
-            chartArea2.Area3DStyle.WallWidth = 0;
-            chartArea2.AxisX.IntervalOffset = 1D;
-            chartArea2.AxisX.IsLabelAutoFit = false;
-            chartArea2.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            chartArea2.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea2.AxisX.LineColor = System.Drawing.Color.DarkGray;
-            chartArea2.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
-            chartArea2.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
-            chartArea2.AxisX.ScaleView.Size = 11D;
-            chartArea2.AxisY.IsLabelAutoFit = false;
-            chartArea2.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            chartArea2.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea2.AxisY.LineColor = System.Drawing.Color.DarkGray;
-            chartArea2.AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
-            chartArea2.AxisY.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
-            chartArea2.AxisY.TitleForeColor = System.Drawing.Color.Empty;
-            chartArea2.BackColor = System.Drawing.Color.Transparent;
-            chartArea2.Name = "ChartArea1";
-            this.chrMeses.ChartAreas.Add(chartArea2);
-            this.chrMeses.Location = new System.Drawing.Point(1055, 254);
-            this.chrMeses.Name = "chrMeses";
-            series4.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
-            series4.BackSecondaryColor = System.Drawing.Color.Transparent;
-            series4.BorderColor = System.Drawing.Color.Transparent;
-            series4.BorderWidth = 0;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Color = System.Drawing.Color.Gray;
-            series4.CustomProperties = "PixelPointWidth=16";
-            series4.Name = "Suc01";
-            series4.ShadowColor = System.Drawing.Color.White;
-            series5.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
-            series5.BackSecondaryColor = System.Drawing.Color.Transparent;
-            series5.BorderColor = System.Drawing.Color.Transparent;
-            series5.BorderWidth = 0;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Color = System.Drawing.Color.White;
-            series5.CustomProperties = "PixelPointWidth=16";
-            series5.LabelToolTip = "#VAL{C}";
-            series5.MarkerSize = 7;
-            series5.Name = "Suc02";
-            series5.ShadowColor = System.Drawing.Color.White;
-            series6.BorderWidth = 0;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Name = "Suc03";
-            this.chrMeses.Series.Add(series4);
-            this.chrMeses.Series.Add(series5);
-            this.chrMeses.Series.Add(series6);
-            this.chrMeses.Size = new System.Drawing.Size(466, 287);
-            this.chrMeses.TabIndex = 4;
-            this.chrMeses.Text = "chart1";
-            title2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            title2.ForeColor = System.Drawing.Color.White;
-            title2.IsDockedInsideChartArea = false;
-            title2.Name = "Title1";
-            title2.ShadowOffset = 2;
-            title2.Text = "Gráfica anual";
-            this.chrMeses.Titles.Add(title2);
-            // 
             // pri_Id
             // 
             this.pri_Id.HeaderText = "No.";
@@ -541,6 +472,75 @@
             this.pri_Suc03_Porcentaje.ReadOnly = true;
             this.pri_Suc03_Porcentaje.Width = 35;
             // 
+            // chrMeses
+            // 
+            this.chrMeses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chrMeses.BackColor = System.Drawing.Color.Transparent;
+            chartArea2.Area3DStyle.Enable3D = true;
+            chartArea2.Area3DStyle.PointDepth = 60;
+            chartArea2.Area3DStyle.PointGapDepth = 60;
+            chartArea2.Area3DStyle.WallWidth = 0;
+            chartArea2.AxisX.IntervalOffset = 1D;
+            chartArea2.AxisX.IsLabelAutoFit = false;
+            chartArea2.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            chartArea2.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea2.AxisX.LineColor = System.Drawing.Color.DarkGray;
+            chartArea2.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
+            chartArea2.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
+            chartArea2.AxisX.ScaleView.Size = 11D;
+            chartArea2.AxisY.IsLabelAutoFit = false;
+            chartArea2.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            chartArea2.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea2.AxisY.LineColor = System.Drawing.Color.DarkGray;
+            chartArea2.AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
+            chartArea2.AxisY.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
+            chartArea2.AxisY.TitleForeColor = System.Drawing.Color.Empty;
+            chartArea2.BackColor = System.Drawing.Color.Transparent;
+            chartArea2.Name = "ChartArea1";
+            this.chrMeses.ChartAreas.Add(chartArea2);
+            this.chrMeses.Location = new System.Drawing.Point(1055, 254);
+            this.chrMeses.Name = "chrMeses";
+            series4.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
+            series4.BackSecondaryColor = System.Drawing.Color.Transparent;
+            series4.BorderColor = System.Drawing.Color.Transparent;
+            series4.BorderWidth = 0;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = System.Drawing.Color.Gray;
+            series4.CustomProperties = "PixelPointWidth=16";
+            series4.Name = "Suc01";
+            series4.ShadowColor = System.Drawing.Color.White;
+            series5.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
+            series5.BackSecondaryColor = System.Drawing.Color.Transparent;
+            series5.BorderColor = System.Drawing.Color.Transparent;
+            series5.BorderWidth = 0;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Color = System.Drawing.Color.White;
+            series5.CustomProperties = "PixelPointWidth=16";
+            series5.LabelToolTip = "#VAL{C}";
+            series5.MarkerSize = 7;
+            series5.Name = "Suc02";
+            series5.ShadowColor = System.Drawing.Color.White;
+            series6.BorderWidth = 0;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Name = "Suc03";
+            this.chrMeses.Series.Add(series4);
+            this.chrMeses.Series.Add(series5);
+            this.chrMeses.Series.Add(series6);
+            this.chrMeses.Size = new System.Drawing.Size(466, 287);
+            this.chrMeses.TabIndex = 4;
+            this.chrMeses.Text = "chart1";
+            title2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            title2.ForeColor = System.Drawing.Color.White;
+            title2.IsDockedInsideChartArea = false;
+            title2.Name = "Title1";
+            title2.ShadowOffset = 2;
+            title2.Text = "Gráfica anual";
+            this.chrMeses.Titles.Add(title2);
+            // 
             // sem_Semana
             // 
             this.sem_Semana.HeaderText = "Sem.";
@@ -551,6 +551,7 @@
             // sem_Suc01_Actual
             // 
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle12.Format = "C2";
             this.sem_Suc01_Actual.DefaultCellStyle = dataGridViewCellStyle12;
             this.sem_Suc01_Actual.HeaderText = "Matriz";
@@ -581,6 +582,7 @@
             // sem_Suc02_Actual
             // 
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle15.Format = "C2";
             this.sem_Suc02_Actual.DefaultCellStyle = dataGridViewCellStyle15;
             this.sem_Suc02_Actual.HeaderText = "Suc 02";
@@ -611,6 +613,7 @@
             // sem_Suc03_Actual
             // 
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle18.Format = "C2";
             this.sem_Suc03_Actual.DefaultCellStyle = dataGridViewCellStyle18;
             this.sem_Suc03_Actual.HeaderText = "Suc 03";
@@ -648,6 +651,7 @@
             // mes_Suc01_Actual
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.Format = "C2";
             this.mes_Suc01_Actual.DefaultCellStyle = dataGridViewCellStyle1;
             this.mes_Suc01_Actual.HeaderText = "Matriz";
@@ -679,6 +683,7 @@
             // mes_Suc02_Actual
             // 
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.Format = "C2";
             this.mes_Suc02_Actual.DefaultCellStyle = dataGridViewCellStyle4;
             this.mes_Suc02_Actual.HeaderText = "Suc 02";
@@ -709,6 +714,7 @@
             // mes_Suc03_Actual
             // 
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle7.Format = "C2";
             this.mes_Suc03_Actual.DefaultCellStyle = dataGridViewCellStyle7;
             this.mes_Suc03_Actual.HeaderText = "Suc 03";

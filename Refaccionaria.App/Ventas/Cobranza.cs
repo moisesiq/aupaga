@@ -620,7 +620,7 @@ namespace Refaccionaria.App
 
                 int iVentaID = Helper.ConvertirEntero(oFila.Cells["Ncf_VentaID"].Value);
                 int iListaPre = Helper.ConvertirEntero(oFila.Cells["Ncf_ListaDePrecios"].Value);
-
+                
                 var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == iVentaID);
                 var oNcVenta = oNcVentas.FirstOrDefault(c => c.VentaID == iVentaID);
                 if (oNcVenta == null) continue;
@@ -657,8 +657,13 @@ namespace Refaccionaria.App
             }
 
             // Se crea la póliza contable correspondiente (AfeConta)
+            // Una póliza por cada venta afectada
             var oNotaV = General.GetEntity<NotasDeCreditoFiscalesView>(c => c.NotaDeCreditoFiscalID == oRes.Respuesta);
-            ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.NotaDeCreditoDescuentoVenta, oNotaV.NotaDeCreditoFiscalID, (oNotaV.Serie + oNotaV.Folio), oNotaV.Cliente);
+            foreach (var oReg in oNcVentas)
+            {
+                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.NotaDeCreditoDescuentoVenta, oReg.NotaDeCreditoFiscalDetalleID
+                    , (oNotaV.Serie + oNotaV.Folio), oNotaV.Cliente);
+            }
 
             // Se guarda la autorización
             VentasProc.GenerarAutorizacion(Cat.AutorizacionesProcesos.NotaDeCreditoFiscalCrear, "NotaDeCreditoFiscal", oRes.Respuesta, iAutorizoID);

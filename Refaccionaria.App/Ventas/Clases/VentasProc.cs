@@ -125,6 +125,7 @@ namespace Refaccionaria.App
             var oNotaNueva = new NotaDeCredito()
             {
                 FechaDeEmision = DateTime.Now,
+                SucursalID = GlobalClass.SucursalID,
                 Importe = mImporte,
                 ClienteID = iClienteID,
                 Valida = true,

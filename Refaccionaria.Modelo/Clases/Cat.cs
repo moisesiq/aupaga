@@ -119,6 +119,7 @@ namespace Refaccionaria.Modelo
             public const string Lineas = "Linea";
 
             public const string NotaDeCreditoFiscal = "NotaDeCreditoFiscal";
+            public const string NotaDeCreditoFiscalDetalle = "NotaDeCreditoFiscalDetalle";
             public const string MovimientoInventario = "MovimientoInventario";
             public const string ProveedorPolizaDetalle = "ProveedorPolizaDetalle";
             public const string BancoCuentaMovimiento = "BancoCuentaMovimiento";
@@ -484,6 +485,13 @@ namespace Refaccionaria.Modelo
             public const int Gastos = 8;
             public const int Resguardos = 9;
             public const int Refuerzos = 10;
+        }
+
+        public class ContaPolizaAsignacionDeSucursales
+        {
+            public const int Local = 1;
+            public const int Matriz = 2;
+            public const int DondeSeHizo = 3;
         }
     }
 }
