@@ -47,6 +47,9 @@ namespace Refaccionaria.Negocio
             string sIpLocal = Helper.IpLocal();
             var oCliente = new TcpClient(sIpLocal, this.Puerto);
             oCliente.Close();
+            // Se mete un retraso para que se alcance a salir del ciclo y detener la "escucha", para que las próximas conexiones no marquen error
+            Thread.Sleep(100);
+            // this.Escucha.Stop();
         }
 
         #endregion
@@ -76,6 +79,7 @@ namespace Refaccionaria.Negocio
                     this.Errores.Add(oEx.Message);
                 }
             }
+            this.Escucha.Stop();
         }
 
         #endregion

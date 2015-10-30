@@ -163,8 +163,10 @@ namespace Refaccionaria.App
                     Proc.oEscucha.Detener();
                 //
                 Proc.oEscucha = new ServidorTcp(GlobalClass.Puerto);
-                Proc.oEscucha.Escuchar();
                 Proc.oEscucha.ConexionRecibida += oEscucha_ConexionRecibida;
+                Proc.oEscucha.Escuchar();
+
+                // Proc.oEscucha.Probar();
             }
             
             // Se configuran los recordatorios para Pedidos a Proveedores, si aplica

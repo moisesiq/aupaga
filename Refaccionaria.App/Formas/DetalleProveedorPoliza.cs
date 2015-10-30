@@ -710,10 +710,10 @@ namespace Refaccionaria.App
             {
                 var oPoliza = General.GetEntity<ProveedoresPolizasView>(pro => pro.ProveedorPolizaID == poliza.ProveedorPolizaID);
                 var oAbonos = General.GetListOf<ProveedoresPolizasDetalleAvanzadoView>(pr => pr.ProveedorPolizaID == poliza.ProveedorPolizaID);
-                var oFacturas = new List<ProveedoresComprasView>();
+                var oFacturas = new List<ProveedoresPagosView>();
                 var oIdsFacturas = oAbonos.Select(c => c.MovimientoInventarioID).Distinct();
                 foreach (int iMovId in oIdsFacturas)
-                    oFacturas.Add(General.GetEntity<ProveedoresComprasView>(c => c.MovimientoInventarioID == iMovId));
+                    oFacturas.Add(General.GetEntity<ProveedoresPagosView>(c => c.MovimientoInventarioID == iMovId));
 
                 // Se genera el ticket
                 var oRep = new Report();

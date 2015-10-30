@@ -4937,6 +4937,25 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresNotasDeCredito
           <Property Name="Disponible" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPagosView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProveedoresPagosView">
+          <Key>
+            <PropertyRef Name="ProveedorPolizaID" />
+            <PropertyRef Name="MovimientoInventarioID" />
+            <PropertyRef Name="Abonado" />
+          </Key>
+          <Property Name="ProveedorPolizaID" Type="int" Nullable="false" />
+          <Property Name="MovimientoInventarioID" Type="int" Nullable="false" />
+          <Property Name="ProveedorID" Type="int" />
+          <Property Name="Factura" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImporteFactura" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="ImporteTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Abonadototal" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="Abonado" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+          <Property Name="Descuento" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="Final" Type="numeric" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPartesGananciasLineasView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProveedoresPartesGananciasLineasView">
           <Key>
@@ -12635,6 +12654,20 @@ FROM [dbo].[ProveedoresMarcasLineasView] AS [ProveedoresMarcasLineasView]</Defin
 [ProveedoresNotasDeCreditoView].[Disponible] AS [Disponible]
 FROM [dbo].[ProveedoresNotasDeCreditoView] AS [ProveedoresNotasDeCreditoView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="ProveedoresPagosView" EntityType="Self.ProveedoresPagosView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ProveedoresPagosView].[ProveedorPolizaID] AS [ProveedorPolizaID], 
+[ProveedoresPagosView].[MovimientoInventarioID] AS [MovimientoInventarioID], 
+[ProveedoresPagosView].[ProveedorID] AS [ProveedorID], 
+[ProveedoresPagosView].[Factura] AS [Factura], 
+[ProveedoresPagosView].[ImporteFactura] AS [ImporteFactura], 
+[ProveedoresPagosView].[ImporteTotal] AS [ImporteTotal], 
+[ProveedoresPagosView].[Abonadototal] AS [Abonadototal], 
+[ProveedoresPagosView].[Abonado] AS [Abonado], 
+[ProveedoresPagosView].[Descuento] AS [Descuento], 
+[ProveedoresPagosView].[Final] AS [Final]
+FROM [dbo].[ProveedoresPagosView] AS [ProveedoresPagosView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ProveedoresPartesGananciasLineasView" EntityType="Self.ProveedoresPartesGananciasLineasView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [ProveedoresPartesGananciasLineasView].[ProveedorParteGananciaID] AS [ProveedorParteGananciaID], 
@@ -17088,6 +17121,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="SucursalCriterioABC" EntitySet="SucursalCriterioABC" />
           </AssociationSet>
           <EntitySet Name="ContaPolizasDetalleAvanzadoView" EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" />
+          <EntitySet Name="ProveedoresPagosView" EntityType="RefaccionariaModelo.ProveedoresPagosView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -28736,6 +28770,23 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Abono" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="Referencia" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ProveedoresPagosView">
+          <Key>
+            <PropertyRef Name="ProveedorPolizaID" />
+            <PropertyRef Name="MovimientoInventarioID" />
+            <PropertyRef Name="Abonado" />
+          </Key>
+          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImporteFactura" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ImporteTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Abonadototal" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Abonado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+          <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Final" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -34631,6 +34682,22 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresPagosView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPagosView">
+              <MappingFragment StoreEntitySet="ProveedoresPagosView">
+                <ScalarProperty Name="Final" ColumnName="Final" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Abonado" ColumnName="Abonado" />
+                <ScalarProperty Name="Abonadototal" ColumnName="Abonadototal" />
+                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
+                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -38481,6 +38548,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK_Sucursal_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_SucursalCriterioABC_Sucursal" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" Width="1.5" PointX="41.375" PointY="40.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPagosView" Width="1.5" PointX="42.375" PointY="15.75" />
         </Diagram>
     </Diagrams>
   </Designer>
