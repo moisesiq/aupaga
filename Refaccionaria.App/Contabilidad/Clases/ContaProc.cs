@@ -221,6 +221,11 @@ namespace Refaccionaria.App
             foreach (var oReg in oDetalle)
                 Guardar.Eliminar<ContaEgresoDetalle>(oReg);
 
+            // Se borran los datos del devengado especial, si hubiera
+            var oDevsEsp = General.GetListOf<ContaEgresoDevengadoEspecial>(c => c.ContaEgresoID == iEgresoID);
+            foreach (var oReg in oDevsEsp)
+                ContaProc.DevengadoEspecialEliminar(oReg.ContaEgresoDevengadoEspecialID);
+
             // Se borra el gasto en sí
             var oGasto = General.GetEntity<ContaEgreso>(c => c.ContaEgresoID == iEgresoID);
             Guardar.Eliminar<ContaEgreso>(oGasto);
@@ -600,6 +605,9 @@ namespace Refaccionaria.App
                         case Cat.ContaPolizaAsignacionDeSucursales.Matriz: oRegPoliza.SucursalID = Cat.Sucursales.Matriz; break;
                         case Cat.ContaPolizaAsignacionDeSucursales.DondeSeHizo: break;  // La sucursal se llena en la afectación del importe
                     }
+                    // Si no se llenó la sucursal, porque no se dió el caso, se llena con la sucursal local
+                    if (oRegPoliza.SucursalID == 0)
+                        oRegPoliza.SucursalID = iSucursalID;
 
                     oPolizaDet.Add(oRegPoliza);
 

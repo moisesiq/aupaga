@@ -128,7 +128,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvAfectaciones.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAfectaciones.Location = new System.Drawing.Point(3, 33);
-            this.dgvAfectaciones.MultiSelect = false;
             this.dgvAfectaciones.Name = "dgvAfectaciones";
             this.dgvAfectaciones.PermitirBorrar = true;
             this.dgvAfectaciones.Size = new System.Drawing.Size(1081, 280);

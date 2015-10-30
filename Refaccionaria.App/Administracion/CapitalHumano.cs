@@ -841,10 +841,10 @@ namespace Refaccionaria.App
             {
                 decimal mLiquido = Helper.ConvertirDecimal(oFila.Cells["Liquido"].Value);
                 // Se calculan las moendas del usuario
-                foreach (int iMon in oListaMon)
+                foreach (decimal mMon in oListaMon)
                 {
-                    oMonedas[iMon] = (int)(mLiquido / iMon);
-                    mLiquido -= (iMon * oMonedas[iMon]);
+                    oMonedas[mMon] = (int)(mLiquido / mMon);
+                    mLiquido -= (mMon * oMonedas[mMon]);
                     if (mLiquido <= 0)
                         break;
                 }

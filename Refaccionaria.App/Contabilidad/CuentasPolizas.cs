@@ -406,7 +406,7 @@ namespace Refaccionaria.App
             var oDetalle = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.ContaPolizaID == iPolizaID);
             this.dgvPoliza.Rows.Clear();
             foreach (var oReg in oDetalle)
-                this.dgvPoliza.Rows.Add(oReg.ContaPolizaDetalleID, oReg.CuentaAuxiliar, oReg.Cargo, oReg.Abono, oReg.Referencia);
+                this.dgvPoliza.Rows.Add(oReg.ContaPolizaDetalleID, oReg.CuentaAuxiliar, oReg.Cargo, oReg.Abono, oReg.Sucursal, oReg.Referencia);
             this.lblOrigenPoliza.Text = oDetalle[0].OrigenPoliza;
             this.txtConceptoPoliza.Text = (oDetalle.Count > 0 ? oDetalle[0].ConceptoPoliza : "");
         }

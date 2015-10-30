@@ -35,12 +35,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnPolizaAgregar = new System.Windows.Forms.Button();
             this.tgvCuentas = new AdvancedDataGridView.TreeGridView();
             this.Cuentas_Id = new AdvancedDataGridView.TreeGridColumn();
@@ -50,11 +50,6 @@
             this.Cuentas_Sucursal2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuentas_Sucursal3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPoliza = new System.Windows.Forms.DataGridView();
-            this.pol_PolizaDetalleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Abono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Referencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCuentaMover = new System.Windows.Forms.Button();
             this.btnCuentaEliminar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -78,6 +73,12 @@
             this.txtBusquedaPolizaDet = new Refaccionaria.Negocio.TextoMod();
             this.txtBusqueda = new Refaccionaria.Negocio.TextoMod();
             this.cmbSucursal = new Refaccionaria.Negocio.ComboEtiqueta();
+            this.pol_PolizaDetalleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Abono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Referencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tgvCuentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPoliza)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -129,7 +130,7 @@
             this.tgvCuentas.ReadOnly = true;
             this.tgvCuentas.RowHeadersVisible = false;
             this.tgvCuentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tgvCuentas.Size = new System.Drawing.Size(720, 430);
+            this.tgvCuentas.Size = new System.Drawing.Size(720, 567);
             this.tgvCuentas.TabIndex = 1;
             this.tgvCuentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvCuentas_CellClick);
             this.tgvCuentas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvCuentas_CellDoubleClick);
@@ -213,6 +214,7 @@
             this.pol_Cuenta,
             this.pol_Cargo,
             this.pol_Abono,
+            this.pol_Sucursal,
             this.pol_Referencia});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
@@ -223,7 +225,7 @@
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPoliza.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvPoliza.GridColor = System.Drawing.Color.White;
-            this.dgvPoliza.Location = new System.Drawing.Point(729, 248);
+            this.dgvPoliza.Location = new System.Drawing.Point(729, 363);
             this.dgvPoliza.Name = "dgvPoliza";
             this.dgvPoliza.ReadOnly = true;
             this.dgvPoliza.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
@@ -237,50 +239,9 @@
             this.dgvPoliza.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvPoliza.RowHeadersVisible = false;
             this.dgvPoliza.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPoliza.Size = new System.Drawing.Size(628, 177);
+            this.dgvPoliza.Size = new System.Drawing.Size(628, 199);
             this.dgvPoliza.StandardTab = true;
             this.dgvPoliza.TabIndex = 15;
-            // 
-            // pol_PolizaDetalleID
-            // 
-            this.pol_PolizaDetalleID.HeaderText = "PolizaID";
-            this.pol_PolizaDetalleID.Name = "pol_PolizaDetalleID";
-            this.pol_PolizaDetalleID.ReadOnly = true;
-            this.pol_PolizaDetalleID.Visible = false;
-            // 
-            // pol_Cuenta
-            // 
-            this.pol_Cuenta.HeaderText = "Cuenta";
-            this.pol_Cuenta.Name = "pol_Cuenta";
-            this.pol_Cuenta.ReadOnly = true;
-            this.pol_Cuenta.Width = 120;
-            // 
-            // pol_Cargo
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "C2";
-            this.pol_Cargo.DefaultCellStyle = dataGridViewCellStyle6;
-            this.pol_Cargo.HeaderText = "Cargo";
-            this.pol_Cargo.Name = "pol_Cargo";
-            this.pol_Cargo.ReadOnly = true;
-            this.pol_Cargo.Width = 80;
-            // 
-            // pol_Abono
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "C2";
-            this.pol_Abono.DefaultCellStyle = dataGridViewCellStyle7;
-            this.pol_Abono.HeaderText = "Abono";
-            this.pol_Abono.Name = "pol_Abono";
-            this.pol_Abono.ReadOnly = true;
-            this.pol_Abono.Width = 80;
-            // 
-            // pol_Referencia
-            // 
-            this.pol_Referencia.HeaderText = "Referencia";
-            this.pol_Referencia.Name = "pol_Referencia";
-            this.pol_Referencia.ReadOnly = true;
-            this.pol_Referencia.Width = 200;
             // 
             // btnCuentaMover
             // 
@@ -367,7 +328,7 @@
             this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(628, 166);
+            this.dgvDetalle.Size = new System.Drawing.Size(628, 282);
             this.dgvDetalle.StandardTab = true;
             this.dgvDetalle.TabIndex = 13;
             this.dgvDetalle.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellDoubleClick);
@@ -489,7 +450,7 @@
             // 
             this.txtConceptoPoliza.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtConceptoPoliza.Location = new System.Drawing.Point(729, 431);
+            this.txtConceptoPoliza.Location = new System.Drawing.Point(729, 568);
             this.txtConceptoPoliza.Multiline = true;
             this.txtConceptoPoliza.Name = "txtConceptoPoliza";
             this.txtConceptoPoliza.ReadOnly = true;
@@ -502,7 +463,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOrigenPoliza.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOrigenPoliza.ForeColor = System.Drawing.Color.White;
-            this.lblOrigenPoliza.Location = new System.Drawing.Point(732, 228);
+            this.lblOrigenPoliza.Location = new System.Drawing.Point(729, 343);
             this.lblOrigenPoliza.Name = "lblOrigenPoliza";
             this.lblOrigenPoliza.Size = new System.Drawing.Size(544, 17);
             this.lblOrigenPoliza.TabIndex = 14;
@@ -584,6 +545,54 @@
             this.cmbSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbSucursal_SelectedIndexChanged);
             this.cmbSucursal.TextChanged += new System.EventHandler(this.cmbSucursal_TextChanged);
             // 
+            // pol_PolizaDetalleID
+            // 
+            this.pol_PolizaDetalleID.HeaderText = "PolizaID";
+            this.pol_PolizaDetalleID.Name = "pol_PolizaDetalleID";
+            this.pol_PolizaDetalleID.ReadOnly = true;
+            this.pol_PolizaDetalleID.Visible = false;
+            // 
+            // pol_Cuenta
+            // 
+            this.pol_Cuenta.HeaderText = "Cuenta";
+            this.pol_Cuenta.Name = "pol_Cuenta";
+            this.pol_Cuenta.ReadOnly = true;
+            this.pol_Cuenta.Width = 120;
+            // 
+            // pol_Cargo
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "C2";
+            this.pol_Cargo.DefaultCellStyle = dataGridViewCellStyle6;
+            this.pol_Cargo.HeaderText = "Cargo";
+            this.pol_Cargo.Name = "pol_Cargo";
+            this.pol_Cargo.ReadOnly = true;
+            this.pol_Cargo.Width = 80;
+            // 
+            // pol_Abono
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "C2";
+            this.pol_Abono.DefaultCellStyle = dataGridViewCellStyle7;
+            this.pol_Abono.HeaderText = "Abono";
+            this.pol_Abono.Name = "pol_Abono";
+            this.pol_Abono.ReadOnly = true;
+            this.pol_Abono.Width = 80;
+            // 
+            // pol_Sucursal
+            // 
+            this.pol_Sucursal.HeaderText = "Sucursal";
+            this.pol_Sucursal.Name = "pol_Sucursal";
+            this.pol_Sucursal.ReadOnly = true;
+            this.pol_Sucursal.Width = 80;
+            // 
+            // pol_Referencia
+            // 
+            this.pol_Referencia.HeaderText = "Referencia";
+            this.pol_Referencia.Name = "pol_Referencia";
+            this.pol_Referencia.ReadOnly = true;
+            this.pol_Referencia.Width = 200;
+            // 
             // CuentasPolizas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -608,7 +617,7 @@
             this.Controls.Add(this.btnCuentaAgregar);
             this.Controls.Add(this.lblOrigenPoliza);
             this.Name = "CuentasPolizas";
-            this.Size = new System.Drawing.Size(1360, 463);
+            this.Size = new System.Drawing.Size(1360, 600);
             this.Load += new System.EventHandler(this.CuentasPolizas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tgvCuentas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPoliza)).EndInit();
@@ -639,11 +648,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuentas_Sucursal3;
         private Negocio.TextoMod txtBusqueda;
         private System.Windows.Forms.TextBox txtConceptoPoliza;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pol_PolizaDetalleID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Cuenta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Cargo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Abono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Referencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn det_ContaPolizaDetalleID;
         private System.Windows.Forms.DataGridViewTextBoxColumn det_Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn det_ContaPolizaID;
@@ -657,5 +661,11 @@
         private System.Windows.Forms.Button btnPolizaCambiarSucursal;
         private Negocio.TextoMod txtBusquedaPolizaDet;
         private Negocio.ComboEtiqueta cmbSucursal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pol_PolizaDetalleID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Cuenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Cargo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Abono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Sucursal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pol_Referencia;
     }
 }

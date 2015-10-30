@@ -1,6 +1,7 @@
 /*
 use ControlRefaccionariaTest
 GO
+delete from contapolizaresguardoocultar
 delete from contapolizadetalle
 delete from contapoliza
 */
