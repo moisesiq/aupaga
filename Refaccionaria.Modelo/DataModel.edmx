@@ -4948,6 +4948,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPagosView' doe
           <Property Name="MovimientoInventarioID" Type="int" Nullable="false" />
           <Property Name="ProveedorID" Type="int" />
           <Property Name="Factura" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaFactura" Type="datetime" />
           <Property Name="ImporteFactura" Type="decimal" Precision="12" Scale="2" />
           <Property Name="ImporteTotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Abonadototal" Type="decimal" Precision="38" Scale="2" />
@@ -12660,6 +12661,7 @@ FROM [dbo].[ProveedoresNotasDeCreditoView] AS [ProveedoresNotasDeCreditoView]</D
 [ProveedoresPagosView].[MovimientoInventarioID] AS [MovimientoInventarioID], 
 [ProveedoresPagosView].[ProveedorID] AS [ProveedorID], 
 [ProveedoresPagosView].[Factura] AS [Factura], 
+[ProveedoresPagosView].[FechaFactura] AS [FechaFactura], 
 [ProveedoresPagosView].[ImporteFactura] AS [ImporteFactura], 
 [ProveedoresPagosView].[ImporteTotal] AS [ImporteTotal], 
 [ProveedoresPagosView].[Abonadototal] AS [Abonadototal], 
@@ -28780,6 +28782,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
           <Property Name="ProveedorID" Type="Int32" />
           <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaFactura" Type="DateTime" Precision="3" />
           <Property Name="ImporteFactura" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="ImporteTotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Abonadototal" Type="Decimal" Precision="38" Scale="2" />
@@ -34691,6 +34694,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="Abonadototal" ColumnName="Abonadototal" />
                 <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
                 <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
                 <ScalarProperty Name="Factura" ColumnName="Factura" />
                 <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
                 <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
