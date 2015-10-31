@@ -713,7 +713,7 @@ namespace Refaccionaria.App
                 var oFacturas = new List<ProveedoresPagosView>();
                 var oIdsFacturas = oAbonos.Select(c => c.MovimientoInventarioID).Distinct();
                 foreach (int iMovId in oIdsFacturas)
-                    oFacturas.Add(General.GetEntity<ProveedoresPagosView>(c => c.MovimientoInventarioID == iMovId));
+                    oFacturas.Add(General.GetEntity<ProveedoresPagosView>(c => c.ProveedorPolizaID == poliza.ProveedorPolizaID && c.MovimientoInventarioID == iMovId));
 
                 // Se genera el ticket
                 var oRep = new Report();

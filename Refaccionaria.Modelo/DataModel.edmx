@@ -4954,7 +4954,6 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPagosView' doe
           <Property Name="Abonadototal" Type="decimal" Precision="38" Scale="2" />
           <Property Name="Abonado" Type="decimal" Precision="38" Scale="2" Nullable="false" />
           <Property Name="Descuento" Type="numeric" Precision="38" Scale="2" />
-          <Property Name="Final" Type="numeric" Precision="38" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPartesGananciasLineasView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -12666,8 +12665,7 @@ FROM [dbo].[ProveedoresNotasDeCreditoView] AS [ProveedoresNotasDeCreditoView]</D
 [ProveedoresPagosView].[ImporteTotal] AS [ImporteTotal], 
 [ProveedoresPagosView].[Abonadototal] AS [Abonadototal], 
 [ProveedoresPagosView].[Abonado] AS [Abonado], 
-[ProveedoresPagosView].[Descuento] AS [Descuento], 
-[ProveedoresPagosView].[Final] AS [Final]
+[ProveedoresPagosView].[Descuento] AS [Descuento]
 FROM [dbo].[ProveedoresPagosView] AS [ProveedoresPagosView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProveedoresPartesGananciasLineasView" EntityType="Self.ProveedoresPartesGananciasLineasView" store:Type="Views" store:Schema="dbo">
@@ -28788,7 +28786,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Abonadototal" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="Abonado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
           <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Final" Type="Decimal" Precision="38" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -34688,7 +34685,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySetMapping Name="ProveedoresPagosView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPagosView">
               <MappingFragment StoreEntitySet="ProveedoresPagosView">
-                <ScalarProperty Name="Final" ColumnName="Final" />
                 <ScalarProperty Name="Descuento" ColumnName="Descuento" />
                 <ScalarProperty Name="Abonado" ColumnName="Abonado" />
                 <ScalarProperty Name="Abonadototal" ColumnName="Abonadototal" />
