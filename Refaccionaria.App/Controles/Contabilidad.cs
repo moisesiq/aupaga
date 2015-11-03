@@ -84,6 +84,10 @@ namespace Refaccionaria.App
                     if (this.tbpEstadoDeResultados.Controls.Count <= 0)
                         this.tbpEstadoDeResultados.Controls.Add(new ContaEstadoDeResultados() { Dock = DockStyle.Fill });
                     break;
+                case "tbpFlujoDeEfectivo":
+                    if (this.tbpFlujoDeEfectivo.Controls.Count <= 0)
+                        this.tbpFlujoDeEfectivo.Controls.Add(new ContaFlujoDeEfectivo() { Dock = DockStyle.Fill });
+                    break;
             }
         }
 

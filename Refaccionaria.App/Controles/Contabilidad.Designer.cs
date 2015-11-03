@@ -42,6 +42,7 @@
             this.tbpReserva = new System.Windows.Forms.TabPage();
             this.tbpBalance = new System.Windows.Forms.TabPage();
             this.tbpEstadoDeResultados = new System.Windows.Forms.TabPage();
+            this.tbpFlujoDeEfectivo = new System.Windows.Forms.TabPage();
             this.tabContabilidad.SuspendLayout();
             this.tbpConfiguracion.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             this.tabContabilidad.Controls.Add(this.tbpReserva);
             this.tabContabilidad.Controls.Add(this.tbpBalance);
             this.tabContabilidad.Controls.Add(this.tbpEstadoDeResultados);
+            this.tabContabilidad.Controls.Add(this.tbpFlujoDeEfectivo);
             this.tabContabilidad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabContabilidad.Location = new System.Drawing.Point(0, 0);
             this.tabContabilidad.Name = "tabContabilidad";
@@ -185,6 +187,16 @@
             this.tbpEstadoDeResultados.Text = "Estado de Resultados";
             this.tbpEstadoDeResultados.UseVisualStyleBackColor = true;
             // 
+            // tbpFlujoDeEfectivo
+            // 
+            this.tbpFlujoDeEfectivo.Location = new System.Drawing.Point(4, 22);
+            this.tbpFlujoDeEfectivo.Name = "tbpFlujoDeEfectivo";
+            this.tbpFlujoDeEfectivo.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpFlujoDeEfectivo.Size = new System.Drawing.Size(744, 412);
+            this.tbpFlujoDeEfectivo.TabIndex = 10;
+            this.tbpFlujoDeEfectivo.Text = "Flujo de Efectivo";
+            this.tbpFlujoDeEfectivo.UseVisualStyleBackColor = true;
+            // 
             // Contabilidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,5 +227,6 @@
         private System.Windows.Forms.TabPage tbpReserva;
         private System.Windows.Forms.TabPage tbpBalance;
         private System.Windows.Forms.TabPage tbpEstadoDeResultados;
+        private System.Windows.Forms.TabPage tbpFlujoDeEfectivo;
     }
 }

@@ -151,6 +151,12 @@
     <Compile Include="Contabilidad\ContaEstadoDeResultados.Designer.cs">
       <DependentUpon>ContaEstadoDeResultados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\ContaFlujoDeEfectivo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contabilidad\ContaFlujoDeEfectivo.Designer.cs">
+      <DependentUpon>ContaFlujoDeEfectivo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Contabilidad\ContaReserva.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1431,6 +1437,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\ContaEstadoDeResultados.resx">
       <DependentUpon>ContaEstadoDeResultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contabilidad\ContaFlujoDeEfectivo.resx">
+      <DependentUpon>ContaFlujoDeEfectivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\ContaReserva.resx">
       <DependentUpon>ContaReserva.cs</DependentUpon>

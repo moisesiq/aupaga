@@ -251,7 +251,9 @@ namespace Refaccionaria.Modelo
             public const int Agua = 94;
             public const int InteresesBancarios = 33;
             public const int CuentasPorPagarCortoPlazo = 76;
+            public const int CuentasPorPagarLargoPlazo = 90;
             public const int ReparteDeUtilidades = 18;
+            public const int AcreedoresDiversos = 120;
         }
 
         public class ContaCuentasAuxiliares
@@ -289,6 +291,7 @@ namespace Refaccionaria.Modelo
             public const int ClientesEdgarAron = 577;
 
             public const int ReservaNomina = 1076;
+            public const int TarjetaDeCredito = 1344;
         }
 
         public class OrigenesNotaDeCredito
@@ -492,6 +495,11 @@ namespace Refaccionaria.Modelo
             public const int Local = 1;
             public const int Matriz = 2;
             public const int DondeSeHizo = 3;
+        }
+
+        public class ContaSubcuentas
+        {
+            public const int ActivoFijo = 2;
         }
     }
 }

@@ -279,7 +279,7 @@ namespace Refaccionaria.App
 
         #endregion
 
-        #region [ Utilidad ]
+        #region [ Consultas ]
 
         public static decimal GastoImporteSemana(pauContaCuentasPorSemana_Result oEgresoPorSem)
         {
@@ -329,6 +329,94 @@ namespace Refaccionaria.App
                 mImporte += (mImporteDiario * iDias);
             }
             return mImporte;
+        }
+
+        public class GastoSem
+        {
+            public DateTime Semana { get; set; }
+            public string Grupo { get; set; }
+            public decimal Importe { get; set; }
+        }
+        public static List<GastoSem> GastosSemanalizados(List<pauContaCuentasPorSemana_Result> oDatos, DateTime dUltSem)
+        {
+            var oGastosSem = new List<GastoSem>();
+
+            foreach (var oReg in oDatos)
+            {
+                if (oReg.PeriodicidadMes.HasValue)
+                {
+                    DateTime dInicioPer = oReg.Fecha.DiaPrimero().Date;
+                    DateTime dFinPer = dInicioPer.AddMonths(oReg.PeriodicidadMes.Valor()).AddDays(-1);
+                    decimal mImporteDiario = (oReg.ImporteDev.Valor() / ((dFinPer - dInicioPer).Days + 1));
+                    decimal mImporte; int iDias;
+                    DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(dInicioPer).Date;
+
+                    while (dIniSem <= dUltSem)
+                    {
+                        // Se verifica si ya existe la semana actual
+                        var oSem = oGastosSem.Find(c => c.Semana == dIniSem && c.Grupo == oReg.Sucursal);
+                        if (oSem == null)
+                            oGastosSem.Add(oSem = new GastoSem() { Semana = dIniSem, Grupo = oReg.Sucursal });
+
+                        // Se verifica si se debe de seguir semanalizando
+                        if (oReg.FinSemanalizar.HasValue && oReg.FinSemanalizar <= dIniSem)
+                            break;
+                        // Se verifica la fecha final, 
+                        if (dIniSem > dFinPer)
+                            break;
+
+                        // Se calcula el importe correspondiente
+                        DateTime dFinSem = dIniSem.AddDays(6);
+                        if (dIniSem < dInicioPer)
+                            iDias = dFinSem.Day;
+                        else if (dIniSem <= dFinPer && dFinSem > dFinPer)
+                            iDias = ((dIniSem.DiaUltimo().Day - dIniSem.Day) + 1);
+                        else if (dIniSem > dFinPer && (dIniSem - dFinPer).Days < 7)
+                        {
+                            iDias = (dIniSem.Day - 1);
+                        }
+                        else
+                        {
+                            iDias = 7;
+                        }
+                        mImporte = (mImporteDiario * iDias);
+                        dIniSem = dIniSem.AddDays(7);
+
+                        // Se va sumando el importe en la semana correspondiente
+                        oSem.Importe += mImporte;
+                    }
+                }
+                else
+                {
+                    // Se verifica si ya existe la semana actual
+                    DateTime dSem = UtilLocal.InicioSemanaSabAVie(oReg.Fecha).Date;
+                    var oSem = oGastosSem.Find(c => c.Semana == dSem && c.Grupo == oReg.Sucursal);
+                    if (oSem == null)
+                        oGastosSem.Add(oSem = new GastoSem() { Semana = dSem, Grupo = oReg.Sucursal });
+                    // Se va sumando el importe en la semana correspondiente
+                    oSem.Importe += oReg.ImporteDev.Valor();
+                }
+            }
+
+            return oGastosSem.OrderBy(c => c.Grupo).ThenBy(c => c.Semana).ToList();
+        }
+
+        public static List<GastoSem> GastosSemanalizados(List<ContaEgresosDevengadoEspecialCuentasView> oDatos, DateTime dUltSem)
+        {
+            var oListaSem = new List<pauContaCuentasPorSemana_Result>();
+            foreach (var oReg in oDatos)
+            {
+                oListaSem.Add(new pauContaCuentasPorSemana_Result()
+                {
+                    Fecha = oReg.Fecha,
+                    Sucursal = oReg.Duenio,
+                    ImporteDev = oReg.ImporteDev,
+                    PeriodicidadMes = oReg.PeriodicidadMes,
+                    FinSemanalizar = oReg.FinSemanalizar
+                });
+            }
+
+            return ContaProc.GastosSemanalizados(oListaSem, dUltSem);
         }
 
         #endregion
