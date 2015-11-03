@@ -1107,7 +1107,7 @@ namespace Refaccionaria.App
                 // Leyenda de la venta
                 oFacturaE.Adicionales.Add("LeyendaDeVenta", VentasProc.ObtenerQuitarLeyenda(oVentas[0].VentaID));
                 // Si no hay leyenda, se verifica si hay observación (por tickets convertidos a factura), y si hay, se manda como leyenda
-                if (oFacturaE.Adicionales["LeyendaDeVenta"] == "" && sObservacion != "")
+                if (string.IsNullOrEmpty(oFacturaE.Adicionales["LeyendaDeVenta"]) && sObservacion != "")
                     oFacturaE.Adicionales["LeyendaDeVenta"] = sObservacion;
                 // Leyenda de vehículo, si aplica
                 if (oVentas[0].ClienteVehiculoID.HasValue)
