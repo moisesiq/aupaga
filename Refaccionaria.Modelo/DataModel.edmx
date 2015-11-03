@@ -4948,6 +4948,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPagosView' doe
             <PropertyRef Name="Abonado" />
           </Key>
           <Property Name="ProveedorPolizaID" Type="int" Nullable="false" />
+          <Property Name="FechaPago" Type="datetime" />
           <Property Name="MovimientoInventarioID" Type="int" Nullable="false" />
           <Property Name="ProveedorID" Type="int" />
           <Property Name="Factura" Type="nvarchar" MaxLength="50" />
@@ -12663,6 +12664,7 @@ FROM [dbo].[ProveedoresNotasDeCreditoView] AS [ProveedoresNotasDeCreditoView]</D
           <EntitySet Name="ProveedoresPagosView" EntityType="Self.ProveedoresPagosView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [ProveedoresPagosView].[ProveedorPolizaID] AS [ProveedorPolizaID], 
+[ProveedoresPagosView].[FechaPago] AS [FechaPago], 
 [ProveedoresPagosView].[MovimientoInventarioID] AS [MovimientoInventarioID], 
 [ProveedoresPagosView].[ProveedorID] AS [ProveedorID], 
 [ProveedoresPagosView].[Factura] AS [Factura], 
@@ -17126,8 +17128,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="SucursalCriterioABC" EntitySet="SucursalCriterioABC" />
           </AssociationSet>
-          <EntitySet Name="ProveedoresPagosView" EntityType="RefaccionariaModelo.ProveedoresPagosView" />
           <EntitySet Name="ContaPolizasDetalleAvanzadoView" EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" />
+          <EntitySet Name="ProveedoresPagosView" EntityType="RefaccionariaModelo.ProveedoresPagosView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -28748,23 +28750,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ProveedoresPagosView">
-          <Key>
-            <PropertyRef Name="ProveedorPolizaID" />
-            <PropertyRef Name="MovimientoInventarioID" />
-            <PropertyRef Name="Abonado" />
-          </Key>
-          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
-          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
-          <Property Name="ProveedorID" Type="Int32" />
-          <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FechaFactura" Type="DateTime" Precision="3" />
-          <Property Name="ImporteFactura" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="ImporteTotal" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Abonadototal" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Abonado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
-          <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
-        </EntityType>
         <EntityType Name="ContaPolizasDetalleAvanzadoView">
           <Key>
             <PropertyRef Name="ContaPolizaDetalleID" />
@@ -28795,6 +28780,24 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Cargo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="Abono" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="Referencia" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProveedoresPagosView">
+          <Key>
+            <PropertyRef Name="ProveedorPolizaID" />
+            <PropertyRef Name="MovimientoInventarioID" />
+            <PropertyRef Name="Abonado" />
+          </Key>
+          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Precision="3" />
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaFactura" Type="DateTime" Precision="3" />
+          <Property Name="ImporteFactura" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ImporteTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Abonadototal" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Abonado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+          <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -34667,22 +34670,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProveedoresPagosView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPagosView">
-              <MappingFragment StoreEntitySet="ProveedoresPagosView">
-                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
-                <ScalarProperty Name="Abonado" ColumnName="Abonado" />
-                <ScalarProperty Name="Abonadototal" ColumnName="Abonadototal" />
-                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
-                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
-                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
-                <ScalarProperty Name="Factura" ColumnName="Factura" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
-                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ContaPolizasDetalleAvanzadoView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView">
               <MappingFragment StoreEntitySet="ContaPolizasDetalleAvanzadoView">
@@ -34707,6 +34694,23 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="FechaPoliza" ColumnName="FechaPoliza" />
                 <ScalarProperty Name="ContaPolizaID" ColumnName="ContaPolizaID" />
                 <ScalarProperty Name="ContaPolizaDetalleID" ColumnName="ContaPolizaDetalleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresPagosView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPagosView">
+              <MappingFragment StoreEntitySet="ProveedoresPagosView">
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Abonado" ColumnName="Abonado" />
+                <ScalarProperty Name="Abonadototal" ColumnName="Abonadototal" />
+                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
+                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -38559,8 +38563,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__Sucur__20A2B0EA" />
         <AssociationConnector Association="RefaccionariaModelo.FK_Sucursal_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_SucursalCriterioABC_Sucursal" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPagosView" Width="1.5" PointX="42.375" PointY="15.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" Width="1.5" PointX="41.375" PointY="40.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPagosView" Width="1.5" PointX="42.375" PointY="15.75" />
         </Diagram>
     </Diagrams>
   </Designer>

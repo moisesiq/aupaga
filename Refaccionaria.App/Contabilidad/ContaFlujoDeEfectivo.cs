@@ -94,8 +94,8 @@ namespace Refaccionaria.App
 
             // Se limpian los datos
             this.dgvDatos.Rows.Clear();
-            // foreach (var oSerie in this.chrPorSemana.Series)
-            //     oSerie.Points.Clear();
+            foreach (var oSerie in this.chrPorSemana.Series)
+                oSerie.Points.Clear();
 
             // Se llenan las columnas del año
             int iAnio = Helper.ConvertirEntero(this.cmbAnio.Text);
@@ -188,8 +188,8 @@ namespace Refaccionaria.App
             }
 
             // Para las compras
-            var oCompras = General.GetListOf<ProveedoresComprasView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1)
-                .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha.Valor()) })
+            var oCompras = General.GetListOf<ProveedoresPagosView>(c => c.FechaPago >= dDesde && c.FechaPago < dHastaMas1)
+                .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.FechaPago.Valor()) })
                 .Select(c => new { c.Key.Semana, Importe = c.Sum(s => s.Abonado) })
                 .OrderBy(c => c.Semana);
             mTotal += oCompras.Sum(c => c.Importe);
@@ -272,17 +272,17 @@ namespace Refaccionaria.App
             }
 
             // Se llena la gráfica, en base al grid ya cargado
-            /* for (int iCol = this.iColumnasFijas; iCol < this.dgvDatos.Columns.Count; iCol++)
+            for (int iCol = this.iColumnasFijas; iCol < this.dgvDatos.Columns.Count; iCol++)
             {
-                this.chrPorSemana.Series["Ingresos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaIngresos].Value));
-                this.chrPorSemana.Series["Costos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaCostos].Value));
-                this.chrPorSemana.Series["Margen"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaMargen].Value));
-                this.chrPorSemana.Series["Gastos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaGastos].Value));
-                this.chrPorSemana.Series["Utilidad"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaUtilidad].Value));
-                this.chrPorSemana.Series["Especiales"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEsp].Value));
-                this.chrPorSemana.Series["Dividendos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaDividendos].Value));
+                this.chrPorSemana.Series["Ventas"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaIngresos + 1].Value));
+                this.chrPorSemana.Series["Prestamos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaIngresos + 2].Value));
+                this.chrPorSemana.Series["Gastos"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 1].Value));
+                this.chrPorSemana.Series["Compras"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 2].Value));
+                this.chrPorSemana.Series["Deudas"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 3].Value));
+                this.chrPorSemana.Series["Inversiones"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 4].Value));
+                this.chrPorSemana.Series["Isidro"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 5].Value));
+                this.chrPorSemana.Series["DonIsidro"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 6].Value));
             }
-            */
 
             Cargando.Cerrar();
         }
