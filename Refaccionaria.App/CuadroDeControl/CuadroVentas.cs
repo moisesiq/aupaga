@@ -23,7 +23,7 @@ namespace Refaccionaria.App
         private void CuadroVentas_Load(object sender, EventArgs e)
         {
             // Se llenan los combos
-            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas" });
+            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
             this.cmbCalculo.SelectedIndex = 1;
             var oSucursales = General.GetListOf<Sucursal>(c => c.Estatus);
             oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
@@ -214,7 +214,7 @@ namespace Refaccionaria.App
 
         private void AplicarFormatoColumnas()
         {
-            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
+            string sFormato = ((this.cmbCalculo.Text == "Ventas" || this.cmbCalculo.Text == "Productos") ? "N" : "C");
             sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
             this.dgvPorDia.Columns["Dia_AnioActual"].DefaultCellStyle.Format = sFormato;
             this.dgvPorDia.Columns["Dia_AnioAnterior"].DefaultCellStyle.Format = sFormato;
@@ -282,8 +282,15 @@ namespace Refaccionaria.App
                     return oPorDia.Select(c => new TotalesPorFecha()
                     {
                         Llave = dDiaCero.AddDays(c.Key),
-                        Actual = c.Sum(s => s.VentasActual).Valor(),
-                        Anterior = c.Sum(s => s.VentasAnterior).Valor()
+                        Actual = c.Where(s => s.EsActual == true).Select(s => s.VentaID).Distinct().Count(),
+                        Anterior = c.Where(s => s.EsActual != true).Select(s => s.VentaID).Distinct().Count()
+                    }).OrderBy(o => o.Llave);
+                case "Productos":
+                    return oPorDia.Select(c => new TotalesPorFecha()
+                    {
+                        Llave = dDiaCero.AddDays(c.Key),
+                        Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        Anterior = c.Sum(s => s.ProductosAnterior).Valor()
                     }).OrderBy(o => o.Llave);
             }
 
@@ -338,8 +345,15 @@ namespace Refaccionaria.App
                     return oDatos.Select(c => new TotalesPorEntero()
                     {
                         Llave = c.Key,
-                        Actual = c.Sum(s => s.VentasActual).Valor(),
-                        Anterior = c.Sum(s => s.VentasAnterior).Valor()
+                        Actual = c.Where(s => s.EsActual == true).Select(s => s.VentaID).Distinct().Count(),
+                        Anterior = c.Where(s => s.EsActual != true).Select(s => s.VentaID).Distinct().Count()
+                    }).OrderBy(o => o.Llave);
+                case "Productos":
+                    return oDatos.Select(c => new TotalesPorEntero()
+                    {
+                        Llave = c.Key,
+                        Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        Anterior = c.Sum(s => s.ProductosAnterior).Valor()
                     }).OrderBy(o => o.Llave);
             }
 
@@ -392,8 +406,14 @@ namespace Refaccionaria.App
                 case "Ventas":
                     return new Totales()
                     {
-                        Actual = oDatos.Sum(c => c.VentasActual).Valor(),
-                        Anterior = oDatos.Sum(c => c.VentasAnterior).Valor()
+                        Actual = oDatos.Where(c => c.EsActual == true).Select(c => c.VentaID).Distinct().Count(),
+                        Anterior = oDatos.Where(c => c.EsActual != true).Select(c => c.VentaID).Distinct().Count()
+                    };
+                case "Productos":
+                    return new Totales()
+                    {
+                        Actual = oDatos.Sum(c => c.ProductosActual).Valor(),
+                        Anterior = oDatos.Sum(c => c.ProductosAnterior).Valor()
                     };
             }
 

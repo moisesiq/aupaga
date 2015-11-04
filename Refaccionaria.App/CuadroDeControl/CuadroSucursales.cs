@@ -25,7 +25,7 @@ namespace Refaccionaria.App
         private void CuadroSucursales_Load(object sender, EventArgs e)
         {
             // Se llenan los combos
-            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas" });
+            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
             this.cmbCalculo.SelectedIndex = 1;
             this.chkPagadas.Checked = true;
             // this.chkCostoConDescuento.Checked = true;
@@ -157,12 +157,22 @@ namespace Refaccionaria.App
                 case "Ventas":
                     return new AgrupadoPorSucursal()
                     {
-                        Suc01_Actual = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasActual : null)).Valor(),
-                        Suc01_Anterior = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasAnterior : null)).Valor(),
-                        Suc02_Actual = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasActual : null)).Valor(),
-                        Suc02_Anterior = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasAnterior : null)).Valor(),
-                        Suc03_Actual = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasActual : null)).Valor(),
-                        Suc03_Anterior = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasAnterior : null)).Valor(),
+                        Suc01_Actual = oDatos.Where(c => c.EsActual == true && c.SucursalID == Cat.Sucursales.Matriz).Select(c => c.VentaID).Distinct().Count(),
+                        Suc01_Anterior = oDatos.Where(c => c.EsActual != true && c.SucursalID == Cat.Sucursales.Matriz).Select(c => c.VentaID).Distinct().Count(),
+                        Suc02_Actual = oDatos.Where(c => c.EsActual == true && c.SucursalID == Cat.Sucursales.Sucursal2).Select(c => c.VentaID).Distinct().Count(),
+                        Suc02_Anterior = oDatos.Where(c => c.EsActual != true && c.SucursalID == Cat.Sucursales.Sucursal2).Select(c => c.VentaID).Distinct().Count(),
+                        Suc03_Actual = oDatos.Where(c => c.EsActual == true && c.SucursalID == Cat.Sucursales.Sucursal3).Select(c => c.VentaID).Distinct().Count(),
+                        Suc03_Anterior = oDatos.Where(c => c.EsActual != true && c.SucursalID == Cat.Sucursales.Sucursal3).Select(c => c.VentaID).Distinct().Count()
+                    };
+                case "Productos":
+                    return new AgrupadoPorSucursal()
+                    {
+                        Suc01_Actual = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.ProductosActual : null)).Valor(),
+                        Suc01_Anterior = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.ProductosAnterior : null)).Valor(),
+                        Suc02_Actual = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.ProductosActual : null)).Valor(),
+                        Suc02_Anterior = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.ProductosAnterior : null)).Valor(),
+                        Suc03_Actual = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.ProductosActual : null)).Valor(),
+                        Suc03_Anterior = oDatos.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.ProductosAnterior : null)).Valor(),
                     };
             }
 
@@ -235,12 +245,23 @@ namespace Refaccionaria.App
                     return oPorDia.Select(c => new AgrupadoPorSucursal()
                     {
                         LlaveFecha = dDiaCero.AddDays(c.Key.DayOfYear),
-                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasActual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasAnterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasActual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasAnterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasActual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasAnterior : null)).Valor(),
+                        Suc01_Actual = oDatos.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Matriz).Select(s => s.VentaID).Distinct().Count(),
+                        Suc01_Anterior = oDatos.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Matriz).Select(s => s.VentaID).Distinct().Count(),
+                        Suc02_Actual = oDatos.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Sucursal2).Select(s => s.VentaID).Distinct().Count(),
+                        Suc02_Anterior = oDatos.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Sucursal2).Select(s => s.VentaID).Distinct().Count(),
+                        Suc03_Actual = oDatos.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Sucursal3).Select(s => s.VentaID).Distinct().Count(),
+                        Suc03_Anterior = oDatos.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Sucursal3).Select(s => s.VentaID).Distinct().Count()
+                    }).OrderBy(o => o.LlaveFecha);
+                case "Productos":
+                    return oPorDia.Select(c => new AgrupadoPorSucursal()
+                    {
+                        LlaveFecha = dDiaCero.AddDays(c.Key.DayOfYear),
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.ProductosActual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.ProductosAnterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.ProductosActual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.ProductosAnterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.ProductosActual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.ProductosAnterior : null)).Valor(),
                     }).OrderBy(o => o.LlaveFecha);
             }
 
@@ -311,12 +332,23 @@ namespace Refaccionaria.App
                     return oDatos.Select(c => new AgrupadoPorSucursal()
                     {
                         LlaveEntero = c.Key,
-                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasActual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasAnterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasActual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasAnterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasActual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasAnterior : null)).Valor(),
+                        Suc01_Actual = c.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Matriz).Select(s => s.VentaID).Distinct().Count(),
+                        Suc01_Anterior = c.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Matriz).Select(s => s.VentaID).Distinct().Count(),
+                        Suc02_Actual = c.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Sucursal2).Select(s => s.VentaID).Distinct().Count(),
+                        Suc02_Anterior = c.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Sucursal2).Select(s => s.VentaID).Distinct().Count(),
+                        Suc03_Actual = c.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Sucursal3).Select(s => s.VentaID).Distinct().Count(),
+                        Suc03_Anterior = c.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Sucursal3).Select(s => s.VentaID).Distinct().Count()
+                    }).OrderBy(o => o.LlaveEntero);
+                case "Productos":
+                    return oDatos.Select(c => new AgrupadoPorSucursal()
+                    {
+                        LlaveEntero = c.Key,
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.ProductosActual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.ProductosAnterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.ProductosActual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.ProductosAnterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.ProductosActual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.ProductosAnterior : null)).Valor(),
                     }).OrderBy(o => o.LlaveEntero);
             }
 
@@ -393,12 +425,24 @@ namespace Refaccionaria.App
                     {
                         LlaveEntero = c.Key.Entero,
                         Cadena = c.Key.Cadena,
-                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasActual : null)).Valor(),
-                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.VentasAnterior : null)).Valor(),
-                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasActual : null)).Valor(),
-                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.VentasAnterior : null)).Valor(),
-                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasActual : null)).Valor(),
-                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.VentasAnterior : null)).Valor(),
+                        Suc01_Actual = c.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Matriz).Select(s => s.VentaID).Distinct().Count(),
+                        Suc01_Anterior = c.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Matriz).Select(s => s.VentaID).Distinct().Count(),
+                        Suc02_Actual = c.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Sucursal2).Select(s => s.VentaID).Distinct().Count(),
+                        Suc02_Anterior = c.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Sucursal2).Select(s => s.VentaID).Distinct().Count(),
+                        Suc03_Actual = c.Where(s => s.EsActual == true && s.SucursalID == Cat.Sucursales.Sucursal3).Select(s => s.VentaID).Distinct().Count(),
+                        Suc03_Anterior = c.Where(s => s.EsActual != true && s.SucursalID == Cat.Sucursales.Sucursal3).Select(s => s.VentaID).Distinct().Count()
+                    }).OrderBy(o => o.Cadena);
+                case "Productos":
+                    return oDatos.Select(c => new AgrupadoPorSucursal()
+                    {
+                        LlaveEntero = c.Key.Entero,
+                        Cadena = c.Key.Cadena,
+                        Suc01_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.ProductosActual : null)).Valor(),
+                        Suc01_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Matriz ? s.ProductosAnterior : null)).Valor(),
+                        Suc02_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.ProductosActual : null)).Valor(),
+                        Suc02_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal2 ? s.ProductosAnterior : null)).Valor(),
+                        Suc03_Actual = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.ProductosActual : null)).Valor(),
+                        Suc03_Anterior = c.Sum(s => (s.SucursalID == Cat.Sucursales.Sucursal3 ? s.ProductosAnterior : null)).Valor(),
                     }).OrderBy(o => o.Cadena);
             }
 
@@ -407,7 +451,7 @@ namespace Refaccionaria.App
 
         private void FormatoColumnas()
         {
-            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
+            string sFormato = ((this.cmbCalculo.Text == "Ventas" || this.cmbCalculo.Text == "Productos") ? "N" : "C");
             sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
 
             switch (this.tabSucursales.SelectedTab.Name)

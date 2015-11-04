@@ -110,7 +110,7 @@ namespace Refaccionaria.App
             if (this.DesignMode) return;
             
             // Se llenan los tipos de cálculo
-            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas" });
+            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
             this.cmbCalculo.SelectedIndex = 1;
             // Se llenan las Sucursales
             var oSucursales = General.GetListOf<Sucursal>(c => c.Estatus);
@@ -270,7 +270,7 @@ namespace Refaccionaria.App
 
         private void AplicarFormatoColumnas()
         {
-            string sFormato = (this.cmbCalculo.Text == "Ventas" ? "N" : "C");
+            string sFormato = ((this.cmbCalculo.Text == "Ventas" || this.cmbCalculo.Text == "Productos") ? "N" : "C");
             sFormato += Helper.ConvertirCadena((int)this.nudDecimales.Value);
             this.dgvPrincipal.Columns["Principal_Actual"].DefaultCellStyle.Format = sFormato;
             this.dgvPrincipal.Columns["Principal_Anterior"].DefaultCellStyle.Format = sFormato;
@@ -391,8 +391,15 @@ namespace Refaccionaria.App
                     return oDatos.Select(c => new TotalesPorEntero()
                     {
                         Llave = c.Key,
-                        Actual = c.Sum(s => s.VentasActual).Valor(),
-                        Anterior = c.Sum(s => s.VentasAnterior).Valor()
+                        Actual = c.Where(s => s.EsActual == true).Select(s => s.VentaID).Distinct().Count(),
+                        Anterior = c.Where(s => s.EsActual != true).Select(s => s.VentaID).Distinct().Count(),
+                    }).OrderBy(o => o.Llave);
+                case "Productos":
+                    return oDatos.Select(c => new TotalesPorEntero()
+                    {
+                        Llave = c.Key,
+                        Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        Anterior = c.Sum(s => s.ProductosAnterior).Valor()
                     }).OrderBy(o => o.Llave);
             }
 
@@ -449,8 +456,16 @@ namespace Refaccionaria.App
                     {
                         Llave = c.Key.Entero,
                         Cadena = c.Key.Cadena,
-                        Actual = c.Sum(s => s.VentasActual).Valor(),
-                        Anterior = c.Sum(s => s.VentasAnterior).Valor()
+                        Actual = c.Where(s => s.EsActual == true).Select(s => s.VentaID).Distinct().Count(),
+                        Anterior = c.Where(s => s.EsActual != true).Select(s => s.VentaID).Distinct().Count(),
+                    }).OrderBy(o => o.Llave);
+                case "Productos":
+                    return oDatos.Select(c => new TotalesPorEnteroCadena()
+                    {
+                        Llave = c.Key.Entero,
+                        Cadena = c.Key.Cadena,
+                        Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        Anterior = c.Sum(s => s.ProductosAnterior).Valor()
                     }).OrderBy(o => o.Llave);
             }
 
@@ -514,8 +529,17 @@ namespace Refaccionaria.App
                         Llave = c.Key.Llave,
                         Cadena = c.Key.Cadena,
                         Entero = c.Key.Entero,
-                        Actual = c.Sum(s => s.VentasActual).Valor(),
-                        Anterior = c.Sum(s => s.VentasAnterior).Valor()
+                        Actual = c.Where(s => s.EsActual == true).Select(s => s.VentaID).Distinct().Count(),
+                        Anterior = c.Where(s => s.EsActual != true).Select(s => s.VentaID).Distinct().Count(),
+                    }).OrderBy(o => o.Llave);
+                case "Productos":
+                    return oDatos.Select(c => new AgrupadoPorEnteroCadenaEntero()
+                    {
+                        Llave = c.Key.Llave,
+                        Cadena = c.Key.Cadena,
+                        Entero = c.Key.Entero,
+                        Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        Anterior = c.Sum(s => s.ProductosAnterior).Valor()
                     }).OrderBy(o => o.Llave);
             }
 
