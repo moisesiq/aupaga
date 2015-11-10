@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.cmbTipoPoliza = new System.Windows.Forms.ComboBox();
@@ -41,12 +41,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvDetalle = new Refaccionaria.Negocio.GridEditable();
-            this.ContaCuentaAuxiliarID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CuentaContpaq = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CuentaAuxiliar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Abono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Referencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -56,6 +50,13 @@
             this.tot_Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tot_Abono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tot_Adicional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContaCuentaAuxiliarID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CuentaContpaq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CuentaAuxiliar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Abono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Referencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SucursalID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotales)).BeginInit();
             this.SuspendLayout();
@@ -135,7 +136,8 @@
             this.CuentaAuxiliar,
             this.Cargo,
             this.Abono,
-            this.Referencia});
+            this.Referencia,
+            this.SucursalID});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -152,50 +154,6 @@
             this.dgvDetalle.TabIndex = 3;
             this.dgvDetalle.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellValueChanged);
             this.dgvDetalle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDetalle_KeyDown);
-            // 
-            // ContaCuentaAuxiliarID
-            // 
-            this.ContaCuentaAuxiliarID.HeaderText = "ContaCuentaAuxiliarID";
-            this.ContaCuentaAuxiliarID.Name = "ContaCuentaAuxiliarID";
-            this.ContaCuentaAuxiliarID.Visible = false;
-            // 
-            // CuentaContpaq
-            // 
-            this.CuentaContpaq.HeaderText = "Contpaq";
-            this.CuentaContpaq.Name = "CuentaContpaq";
-            this.CuentaContpaq.ReadOnly = true;
-            this.CuentaContpaq.Width = 80;
-            // 
-            // CuentaAuxiliar
-            // 
-            this.CuentaAuxiliar.HeaderText = "Cuenta";
-            this.CuentaAuxiliar.Name = "CuentaAuxiliar";
-            this.CuentaAuxiliar.ReadOnly = true;
-            this.CuentaAuxiliar.Width = 300;
-            // 
-            // Cargo
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "C2";
-            this.Cargo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Cargo.HeaderText = "Cargo";
-            this.Cargo.Name = "Cargo";
-            this.Cargo.Width = 80;
-            // 
-            // Abono
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "C2";
-            this.Abono.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Abono.HeaderText = "Abono";
-            this.Abono.Name = "Abono";
-            this.Abono.Width = 80;
-            // 
-            // Referencia
-            // 
-            this.Referencia.HeaderText = "Referencia";
-            this.Referencia.Name = "Referencia";
-            this.Referencia.Width = 80;
             // 
             // btnGuardar
             // 
@@ -314,6 +272,56 @@
             this.tot_Adicional.ReadOnly = true;
             this.tot_Adicional.Width = 80;
             // 
+            // ContaCuentaAuxiliarID
+            // 
+            this.ContaCuentaAuxiliarID.HeaderText = "ContaCuentaAuxiliarID";
+            this.ContaCuentaAuxiliarID.Name = "ContaCuentaAuxiliarID";
+            this.ContaCuentaAuxiliarID.Visible = false;
+            // 
+            // CuentaContpaq
+            // 
+            this.CuentaContpaq.HeaderText = "Contpaq";
+            this.CuentaContpaq.Name = "CuentaContpaq";
+            this.CuentaContpaq.ReadOnly = true;
+            this.CuentaContpaq.Width = 80;
+            // 
+            // CuentaAuxiliar
+            // 
+            this.CuentaAuxiliar.HeaderText = "Cuenta";
+            this.CuentaAuxiliar.Name = "CuentaAuxiliar";
+            this.CuentaAuxiliar.ReadOnly = true;
+            this.CuentaAuxiliar.Width = 300;
+            // 
+            // Cargo
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "C2";
+            this.Cargo.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Cargo.HeaderText = "Cargo";
+            this.Cargo.Name = "Cargo";
+            this.Cargo.Width = 80;
+            // 
+            // Abono
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            this.Abono.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Abono.HeaderText = "Abono";
+            this.Abono.Name = "Abono";
+            this.Abono.Width = 80;
+            // 
+            // Referencia
+            // 
+            this.Referencia.HeaderText = "Referencia";
+            this.Referencia.Name = "Referencia";
+            this.Referencia.Width = 80;
+            // 
+            // SucursalID
+            // 
+            this.SucursalID.HeaderText = "SucursalID";
+            this.SucursalID.Name = "SucursalID";
+            this.SucursalID.Width = 80;
+            // 
             // PolizaContable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -358,12 +366,6 @@
         protected Negocio.GridEditable dgvDetalle;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContaCuentaAuxiliarID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CuentaContpaq;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CuentaAuxiliar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cargo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Abono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Referencia;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtOrigen;
         private System.Windows.Forms.DataGridView dgvTotales;
@@ -371,5 +373,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tot_Cargo;
         private System.Windows.Forms.DataGridViewTextBoxColumn tot_Abono;
         private System.Windows.Forms.DataGridViewTextBoxColumn tot_Adicional;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContaCuentaAuxiliarID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CuentaContpaq;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CuentaAuxiliar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cargo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Abono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Referencia;
+        private System.Windows.Forms.DataGridViewComboBoxColumn SucursalID;
     }
 }

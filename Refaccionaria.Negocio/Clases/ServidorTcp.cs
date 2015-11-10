@@ -58,7 +58,16 @@ namespace Refaccionaria.Negocio
 
         private void ProcEscuchar()
         {
-            this.Escucha.Start();
+            try
+            {
+                this.Escucha.Start();
+            }
+            catch (Exception oEx)
+            {
+                this.AgregarError(oEx);
+                return;
+            }
+            
             while (!this.bCerrar)
             {
                 var oSocket = this.Escucha.AcceptSocket();
@@ -74,12 +83,17 @@ namespace Refaccionaria.Negocio
                 }
                 catch (Exception oEx)
                 {
-                    if (this.Errores == null)
-                        this.Errores = new List<string>();
-                    this.Errores.Add(oEx.Message);
+                    this.AgregarError(oEx);
                 }
             }
             this.Escucha.Stop();
+        }
+
+        private void AgregarError(Exception oEx)
+        {
+            if (this.Errores == null)
+                this.Errores = new List<string>();
+            this.Errores.Add(oEx.Message);
         }
 
         #endregion

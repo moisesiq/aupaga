@@ -44,6 +44,9 @@ namespace Refaccionaria.App
             // Se detiene el socket de escucha Tcp
             if (Proc.oEscucha != null)
                 Proc.oEscucha.Detener();
+
+            // Se manda cerrar la ventana de cargando, por si quedara alguna abierta
+            Cargando.Cerrar();
         }
 
         #endregion
@@ -164,6 +167,7 @@ namespace Refaccionaria.App
                 //
                 Proc.oEscucha = new ServidorTcp(GlobalClass.Puerto);
                 Proc.oEscucha.ConexionRecibida += oEscucha_ConexionRecibida;
+                
                 Proc.oEscucha.Escuchar();
 
                 // Proc.oEscucha.Probar();
@@ -236,6 +240,8 @@ namespace Refaccionaria.App
 
         private static void oEscucha_ConexionRecibida(Socket oSocket, string sMensaje)
         {
+            if (string.IsNullOrEmpty(sMensaje)) return;
+
             string sCodigo = sMensaje.Substring(0, 2);
             sMensaje = sMensaje.Substring(2);
 

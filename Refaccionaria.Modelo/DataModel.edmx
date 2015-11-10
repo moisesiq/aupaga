@@ -695,7 +695,7 @@
           <Property Name="CorteCategoriaID" Type="int" Nullable="false" />
           <Property Name="RelacionTabla" Type="nvarchar" MaxLength="64" />
           <Property Name="RelacionID" Type="int" />
-          <Property Name="Concepto" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Concepto" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="Importe" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Efectivo" Type="decimal" Precision="12" Scale="2" />
           <Property Name="Cheque" Type="decimal" Precision="12" Scale="2" />
@@ -10755,6 +10755,12 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <Parameter Name="Desde" Type="date" Mode="In" />
           <Parameter Name="Hasta" Type="date" Mode="In" />
         </Function>
+        <Function Name="pauContaCuentaAuxiliarPolizas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CuentaAuxiliarID" Type="int" Mode="In" />
+          <Parameter Name="Desde" Type="date" Mode="In" />
+          <Parameter Name="Hasta" Type="date" Mode="In" />
+          <Parameter Name="SucursalID" Type="int" Mode="In" />
+        </Function>
         <Function Name="pauContaCuentasMovimientosTotales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Desde" Type="date" Mode="In" />
           <Parameter Name="Hasta" Type="date" Mode="In" />
@@ -17129,6 +17135,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="OmitirDomingo" Mode="In" Type="Boolean" />
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pauContaCuentaAuxiliarPolizas" ReturnType="Collection(RefaccionariaModelo.pauContaCuentaAuxiliarPolizas_Result)">
+            <Parameter Name="CuentaAuxiliarID" Mode="In" Type="Int32" />
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="SucursalID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Configuracion">
@@ -25667,7 +25679,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="CorteCategoriaID" Type="Int32" Nullable="false" />
           <Property Name="RelacionTabla" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="RelacionID" Type="Int32" />
-          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="Efectivo" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Cheque" Type="Decimal" Precision="12" Scale="2" />
@@ -28799,6 +28811,18 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="ProductosActual" Nullable="true" />
           <Property Type="Int32" Name="ProductosAnterior" Nullable="true" />
           <Property Type="Boolean" Name="EsActual" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="pauContaCuentaAuxiliarPolizas_Result">
+          <Property Type="Int32" Name="ContaPolizaDetalleID" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ContaPolizaID" Nullable="false" />
+          <Property Type="String" Name="Referencia" Nullable="true" MaxLength="128" />
+          <Property Type="Decimal" Name="Cargo" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="Abono" Nullable="false" Precision="12" Scale="2" />
+          <Property Type="String" Name="Sucursal" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Concepto" Nullable="false" MaxLength="256" />
+          <Property Type="Boolean" Name="FueManual" Nullable="true" />
+          <Property Type="Boolean" Name="Error" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -34713,6 +34737,22 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="ProductosActual" ColumnName="ProductosActual" />
                 <ScalarProperty Name="ProductosAnterior" ColumnName="ProductosAnterior" />
                 <ScalarProperty Name="EsActual" ColumnName="EsActual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pauContaCuentaAuxiliarPolizas" FunctionName="ControlRefaccionariaModel.Store.pauContaCuentaAuxiliarPolizas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RefaccionariaModelo.pauContaCuentaAuxiliarPolizas_Result">
+                <ScalarProperty Name="ContaPolizaDetalleID" ColumnName="ContaPolizaDetalleID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ContaPolizaID" ColumnName="ContaPolizaID" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Abono" ColumnName="Abono" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="FueManual" ColumnName="FueManual" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

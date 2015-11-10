@@ -13,6 +13,11 @@ namespace Refaccionaria.App
 {
     public partial class CuentasPorSemana : UserControl
     {
+        private class ColsCuentas
+        {
+            public const int Cuenta = 0;
+            public const int Total = 1;
+        }
         private class DetalleSem
         {
             public string Observacion { get; set; }
@@ -126,7 +131,7 @@ namespace Refaccionaria.App
                         // this.dgvDetalle.Rows.Add(oEgresoV.Observaciones, oEgresoV.Importe, oEgresoV.Sucursal, oEgresoV.FormaDePago, oEgresoV.Usuario
                         //    , oEgresoDev.Fecha, ((oEgresoDev.Importe / oEgresoV.Importe) * 100), oEgresoDev.Importe);
                         this.dgvDetalle.Rows.Add(oEgresoDev.Fecha, oEgresoV.Sucursal, oEgresoV.FormaDePago, oEgresoV.Usuario, oEgresoV.Importe
-                            , ((oEgresoDev.Importe / oEgresoV.Importe) * 100), oEgresoDev.Importe, oEgresoV.Observaciones);
+                            , (Helper.DividirONull(oEgresoDev.Importe, oEgresoV.Importe) * 100), oEgresoDev.Importe, oEgresoV.Observaciones);
                     }
                 }
             }
@@ -391,6 +396,49 @@ namespace Refaccionaria.App
                     (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoEspecialID);
                     // Para llenar el importe
                     oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + oReg.ImporteDev);
+                }
+            }
+
+            // Se llena el nuevo grupo de Empresa (Totales)
+            int iColCuenta = ColsCuentas.Cuenta;
+            this.tgvDatos.Nodes.Insert(0, new TreeGridNode());
+            var oNodEmpresa = this.tgvDatos.Nodes[0];
+            oNodEmpresa.Cells[iColCuenta].Value = "EMPRESA";
+            foreach (var oNodSucursal in this.tgvDatos.Nodes)
+            {
+                if (Helper.ConvertirCadena(oNodSucursal.Cells[iColCuenta].Value) == "EMPRESA")
+                    continue;
+                foreach (var oNodCuenta in oNodSucursal.Nodes)
+                {
+                    var oNECuenta = oNodEmpresa.Nodes.FirstOrDefault(c => c.Cells[iColCuenta].Value.ToString() == oNodCuenta.Cells[iColCuenta].Value.ToString());
+                    if (oNECuenta == null)
+                        oNECuenta = oNodEmpresa.Nodes.Add(oNodCuenta.Cells[iColCuenta].Value);
+                    foreach (var oNodSubcuenta in oNodCuenta.Nodes)
+                    {
+                        var oNESubcuenta = oNECuenta.Nodes.FirstOrDefault(c => c.Cells[iColCuenta].Value.ToString() == oNodSubcuenta.Cells[iColCuenta].Value.ToString());
+                        if (oNESubcuenta == null)
+                            oNESubcuenta = oNECuenta.Nodes.Add(oNodSubcuenta.Cells[iColCuenta].Value);
+                        foreach (var oNodCuentaDeMayor in oNodSubcuenta.Nodes)
+                        {
+                            var oNECuentaDeMayor = oNESubcuenta.Nodes.FirstOrDefault(c => 
+                                c.Cells[iColCuenta].Value.ToString() == oNodCuentaDeMayor.Cells[iColCuenta].Value.ToString());
+                            if (oNECuentaDeMayor == null)
+                                oNECuentaDeMayor = oNESubcuenta.Nodes.Add(oNodCuentaDeMayor.Cells[iColCuenta].Value);
+                            foreach (var oNodCuentaAuxiliar in oNodCuentaDeMayor.Nodes)
+                            {
+                                var oNECuentaAuxiliar = oNECuentaDeMayor.Nodes.FirstOrDefault(c =>
+                                    c.Cells[iColCuenta].Value.ToString() == oNodCuentaAuxiliar.Cells[iColCuenta].Value.ToString());
+                                if (oNECuentaAuxiliar == null)
+                                    oNECuentaAuxiliar = oNECuentaDeMayor.Nodes.Add(oNodCuentaAuxiliar.Cells[iColCuenta].Value);
+
+                                for (int iCol = 2; iCol < this.tgvDatos.Columns.Count; iCol++)
+                                {
+                                    decimal mImporte = Helper.ConvertirDecimal(oNodCuentaAuxiliar.Cells[iCol].Value);
+                                    oNECuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNECuentaAuxiliar.Cells[iCol].Value) + mImporte);
+                                }
+                            }
+                        }
+                    }
                 }
             }
 

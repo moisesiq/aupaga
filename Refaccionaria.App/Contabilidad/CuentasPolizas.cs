@@ -326,29 +326,28 @@ namespace Refaccionaria.App
             DateTime dDesde = this.dtpDesde.Value.Date;
             DateTime dHasta = this.dtpHasta.Value.Date.AddDays(1);
             int iSucursalID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue);
-            var oMovs = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => 
-                c.ContaCuentaAuxiliarID == iCuentaID && (c.FechaPoliza >= dDesde && c.FechaPoliza < dHasta) && (iSucursalID == 0 || c.SucursalID == iSucursalID))
-                .OrderBy(c => c.FechaPoliza).ToList();
+            // var oMovs = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => 
+            //     c.ContaCuentaAuxiliarID == iCuentaID && (c.FechaPoliza >= dDesde && c.FechaPoliza < dHasta) && (iSucursalID == 0 || c.SucursalID == iSucursalID))
+            //     .OrderBy(c => c.FechaPoliza).ToList();
+            var oParams = new Dictionary<string, object>();
+            oParams.Add("CuentaAuxiliarID", iCuentaID);
+            oParams.Add("Desde", dDesde);
+            oParams.Add("Hasta", dHasta);
+            if (iSucursalID > 0)
+                oParams.Add("SucursalID", iSucursalID);
+            var oMovs = General.ExecuteProcedure<pauContaCuentaAuxiliarPolizas_Result>("pauContaCuentaAuxiliarPolizas", oParams);
 
             // Se llena a partir de un DataTable
             this.bdsDetalle = new BindingSource();
-            this.bdsDetalle.DataSource = Helper.ListaEntityADataTable<ContaPolizasDetalleAvanzadoView>(oMovs);
+            this.bdsDetalle.DataSource = Helper.ListaEntityADataTable<pauContaCuentaAuxiliarPolizas_Result>(oMovs);
             this.dgvDetalle.Columns.Clear();
             this.dgvDetalle.DataSource = null;
             this.dgvDetalle.DataSource = this.bdsDetalle;
             if (oMovs.Count <= 0) return;
             // Se configuran las columnas
-            this.dgvDetalle.MostrarColumnas("FechaPoliza", "ContaPolizaID", "Referencia", "Cargo", "Abono", "Sucursal", "ConceptoPoliza");
-            this.dgvDetalle.Columns["FechaPoliza"].HeaderText = "Fecha";
+            this.dgvDetalle.OcultarColumnas("ContaPolizaDetalleID", "FueManual", "Error");
             this.dgvDetalle.Columns["ContaPolizaID"].HeaderText = "Póliza";
-            this.dgvDetalle.Columns["ConceptoPoliza"].HeaderText = "Observación";
-            this.dgvDetalle.Columns["FechaPoliza"].DisplayIndex = 1;
-            this.dgvDetalle.Columns["ContaPolizaID"].DisplayIndex = 2;
-            this.dgvDetalle.Columns["Referencia"].DisplayIndex = 3;
-            this.dgvDetalle.Columns["Cargo"].DisplayIndex = 4;
-            this.dgvDetalle.Columns["Abono"].DisplayIndex = 5;
-            this.dgvDetalle.Columns["Sucursal"].DisplayIndex = 6;
-            this.dgvDetalle.Columns["ConceptoPoliza"].DisplayIndex = 7;
+            this.dgvDetalle.Columns["Concepto"].HeaderText = "Observación";
             // Se agrega la columna de "Manual"
             this.dgvDetalle.Columns.Add("Manual", "Manual");
             //
@@ -441,11 +440,15 @@ namespace Refaccionaria.App
             // Se obtiene la lista de los resugardos posibles para traspaso
             var oResg = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.ContaCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.Resguardo
                 && c.SucursalID != Cat.Sucursales.Matriz && c.Cargo > 0).OrderBy(c => c.SucursalID).ToList();
-            // Se quintan los resguardos marcados para ocultar manualmente
+            // Se quintan los resguardos marcados para ocultar manualmente, y también los no mover
             for (int i = 0; i < oResg.Count; i++)
             {
                 int iPolDetID = oResg[i].ContaPolizaDetalleID;
                 if (General.Exists<ContaPolizaResguardoOcultar>(c => c.ContaPolizaDetalleID == iPolDetID))
+                    oResg.RemoveAt(i--);
+
+                // Para quitar los resguardos de "NO MOVER"
+                if (oResg[i].Referencia == "NO MOVER")
                     oResg.RemoveAt(i--);
             }
             // Se crea el formulario para el listado

@@ -28,6 +28,7 @@ namespace Refaccionaria.App
         {
             this.dgvTotales.Rows.Add();
             this.cmbTipoPoliza.CargarDatos("ContaTipoPolizaID", "TipoDePoliza", General.GetListOf<ContaTipoPoliza>());
+            this.SucursalID.CargarDatos("SucursalID", "NombreSucursal", General.GetListOf<Sucursal>(c => c.Estatus));
             this.dgvDetalle.Inicializar();
 
             // Si es modificación, se mandan cargar los datos
@@ -165,6 +166,7 @@ namespace Refaccionaria.App
                         oReg.Cargo = Helper.ConvertirDecimal(oFila.Cells["Cargo"].Value);
                         oReg.Abono = Helper.ConvertirDecimal(oFila.Cells["Abono"].Value);
                         oReg.Referencia = Helper.ConvertirCadena(oFila.Cells["Referencia"].Value);
+                        oReg.SucursalID = Helper.ConvertirEntero(oFila.Cells["SucursalID"].Value);
 
                         Guardar.Generico<ContaPolizaDetalle>(oReg);
                         break;
@@ -213,11 +215,25 @@ namespace Refaccionaria.App
                 this.ctlError.PonerError(this.txtConcepto, "Debes especificar un Concepto.");
 
             decimal mCargo = 0, mAbono = 0;
+            bool bErrorGrid = false;
             foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
             {
+                if (oFila.IsNewRow) continue;
+
+                //
+                oFila.ErrorText = "";
+                if (Helper.ConvertirEntero(oFila.Cells["SucursalID"].Value) == 0)
+                {
+                    oFila.ErrorText = "Sucursal inválida.";
+                    bErrorGrid = true;
+                }
+
+                //
                 mCargo += Helper.ConvertirDecimal(oFila.Cells["Cargo"].Value);
                 mAbono += Helper.ConvertirDecimal(oFila.Cells["Abono"].Value);
             }
+            if (bErrorGrid)
+                this.ctlError.PonerError(this.btnGuardar, "Existen errores de validación. Verificar.", ErrorIconAlignment.MiddleLeft);
             if (mCargo != mAbono)
                 this.ctlError.PonerError(this.btnGuardar, "La suma de los Cargos es diferente a la suma de los Abonos.", ErrorIconAlignment.MiddleLeft);
 
@@ -242,7 +258,7 @@ namespace Refaccionaria.App
             this.dgvDetalle.Rows.Clear();
             foreach (var oReg in oPolizaDetV)
                 this.dgvDetalle.AgregarFila(oReg.ContaPolizaDetalleID, Cat.TiposDeAfectacion.SinCambios, oReg.ContaCuentaAuxiliarID, oReg.CuentaContpaq, oReg.CuentaAuxiliar
-                    , oReg.Cargo, oReg.Abono, oReg.Referencia);
+                    , oReg.Cargo, oReg.Abono, oReg.Referencia, oReg.SucursalID);
 
             this.CalcularTotales();
         }
