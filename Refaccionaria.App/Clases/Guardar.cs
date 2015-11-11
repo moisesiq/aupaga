@@ -130,13 +130,13 @@ namespace Refaccionaria.App
         public static ResAcc ParteEquivalencia(int iParteID, int iParteIDEquivalente)
         {
             // Se obtiene el grupo de cualquiera de las partes
-            var oParteEq1 = General.GetEntity<ParteEquivalente>(c => c.ParteID == iParteID && c.Estatus);
-            var oParteEq2 = General.GetEntity<ParteEquivalente>(c => c.ParteID == iParteIDEquivalente && c.Estatus);
+            var oParteEq1 = General.GetEntity<ParteEquivalente>(c => c.ParteID == iParteID);
+            var oParteEq2 = General.GetEntity<ParteEquivalente>(c => c.ParteID == iParteIDEquivalente);
             // Si ninguna de las partes tiene grupo, se crea uno nuevo
             int iGrupoID = 0;
             if (oParteEq1 == null && oParteEq2 == null)
             {
-                var oEquivalentes = General.GetListOf<ParteEquivalente>(c => c.Estatus);
+                var oEquivalentes = General.GetListOf<ParteEquivalente>();
                 iGrupoID = (oEquivalentes.Count > 0 ? oEquivalentes.Max(c => c.GrupoID) : 0);
                 iGrupoID++;
             }
@@ -164,7 +164,7 @@ namespace Refaccionaria.App
             // Se verifica si las dos ya tenían grupo, pero diferente, en cuyo caso todos se van a un mismo grupo
             if (oParteEq1.GrupoID != oParteEq2.GrupoID)
             {
-                var oPartesEq2 = General.GetListOf<ParteEquivalente>(c => c.GrupoID == oParteEq2.GrupoID && c.Estatus);
+                var oPartesEq2 = General.GetListOf<ParteEquivalente>(c => c.GrupoID == oParteEq2.GrupoID);
                 foreach (var oEq in oPartesEq2)
                 {
                     oEq.GrupoID = oParteEq1.GrupoID;

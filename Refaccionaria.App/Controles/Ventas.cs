@@ -1257,6 +1257,7 @@ namespace Refaccionaria.App
         private void BusquedaAvanzada()
         {
             // Experimental. Se restauran los valores de variables para retraso en búsqueda por descripción
+            DateTime dInicio = DateTime.Now;
             this.BusquedaLlamada = this.BusquedaIntento = 0;
             //
 
@@ -1357,6 +1358,7 @@ namespace Refaccionaria.App
             this.LlenarPartesFiltro(Partes);
 
             Cargando.Cerrar();
+            this.lblBusquedaDuracion.Text = (DateTime.Now - dInicio).TotalSeconds.ToString();
         }
 
         private void LlenarPartesFiltro(List<pauVentasPartesBusqueda_Result> Partes)
@@ -1365,6 +1367,7 @@ namespace Refaccionaria.App
             this.lsvPartes.Items.Clear();
             this.lsvPartesComplementarias.Items.Clear();
             this.lsvPartesEquivalentes.Items.Clear();
+            this.lblMensajeBusqueda.Visible = false;
 
             // Si no hay resultados, se muestra un mensaje
             if (Partes.Count == 0)
@@ -1374,17 +1377,15 @@ namespace Refaccionaria.App
                 return;
             }
             // Si son muchos resultados, no se muestra
-            int iMaximo = (this.lsvPartes.View == View.LargeIcon ? Ventas.MaximoElementosBusquedaImagen : Ventas.MaximoElementosBusquedaTexto);
+            /* int iMaximo = (this.lsvPartes.View == View.LargeIcon ? Ventas.MaximoElementosBusquedaImagen : Ventas.MaximoElementosBusquedaTexto);
             if (Partes.Count > iMaximo)
             {
                 this.lblMensajeBusqueda.Text = MsjMuchosRes.Replace("{__NumPartes}", Partes.Count.ToString(GlobalClass.FormatoEntero));
                 this.lblMensajeBusqueda.Visible = true;
                 return;
             }
-            else
-            {
-                this.lblMensajeBusqueda.Visible = false;
-            }
+            */
+            // Ahora el máximo ya viene desde sql, y se trae el número de registros máximo independientemente de la consulta
 
             string sLlaveImg;
             string sRutaImagen;

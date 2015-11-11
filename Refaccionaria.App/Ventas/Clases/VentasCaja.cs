@@ -290,7 +290,7 @@ namespace Refaccionaria.App
                 // Si es un gasto de la cuenta deudores diversos, se genera la póliza correspondiente (AfeConta)
                 if (General.Exists<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == iCuentaAuxiliarID && c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.DeudoresDiversos))
                 {
-                    ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, "Préstamo", iCuentaAuxiliarID, Cat.ContaCuentasAuxiliares.Caja, oGastoConta.Importe
+                    ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, "PRÉSTAMO", iCuentaAuxiliarID, Cat.ContaCuentasAuxiliares.Caja, oGastoConta.Importe
                         , oResUs.Respuesta.NombreUsuario, Cat.Tablas.CajaEgreso, oEgreso.CajaEgresoID);
                     // Se marca el gasto como ya afectado en pólizas, para que no aparezca en gastos pendientes
                     oEgreso.AfectadoEnPolizas = true;
@@ -1519,7 +1519,7 @@ namespace Refaccionaria.App
                     decimal mReserva = (mOficial - mFacturar);
                     mReserva = (mReserva > 0 ? mReserva : 0);
                     var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == GlobalClass.SucursalID && c.Estatus);
-                    ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Diario, "Reserva Nómina", Cat.ContaCuentasAuxiliares.ReservaNomina, Cat.ContaCuentasAuxiliares.Resguardo
+                    ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Diario, "RESERVA NÓMINA", Cat.ContaCuentasAuxiliares.ReservaNomina, Cat.ContaCuentasAuxiliares.Resguardo
                         , mReserva, oSucursal.NombreSucursal, Cat.Tablas.CajaFacturaGlobal, oFacturaGlobal.CajaFacturaGlobalID);
                     // Se crea una póliza nueva cargando a Caja y la otra cuenta en cero, para equilibrar caja (caso raro), sólo si la reserva fue mayor a cero
                     if (mReserva > 0)
