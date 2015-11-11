@@ -684,10 +684,10 @@ namespace Refaccionaria.App
                         var oGasto = General.GetEntity<CajaEgreso>(c => c.CajaEgresoID == iGastoID && c.Estatus);
                         if (oGasto.Facturado.Valor())
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoCompraCreditoGastoCajaFacturado, oReg.ProveedorPolizaDetalleID
-                                , oGasto.FolioFactura, oGasto.Concepto, poliza.FechaPago);
+                                , oGasto.FolioFactura, oGasto.Concepto, oGasto.SucursalID, poliza.FechaPago);
                         else
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoCompraCreditoGastoCaja, oReg.ProveedorPolizaDetalleID
-                                , "PAGO CAJA", oGasto.Concepto, poliza.FechaPago);
+                                , "PAGO CAJA", oGasto.Concepto, oGasto.SucursalID, poliza.FechaPago);
                         break;
                     case Cat.OrigenesPagosAProveedores.PagoDirecto:
                         if (poliza.BancoCuentaID == Cat.CuentasBancarias.Banamex || poliza.BancoCuentaID == Cat.CuentasBancarias.Scotiabank)

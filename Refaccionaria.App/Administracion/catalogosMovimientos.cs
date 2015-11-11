@@ -925,10 +925,10 @@ namespace Refaccionaria.App
                         // Se manda a afectar contabilidad (AfeConta)
                         if (this.chkEsNota.Checked)
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.CompraCreditoNota, movimientoEntrada.MovimientoInventarioID
-                                , movimientoEntrada.FolioFactura, this.cboProveedor.Text);
+                                , movimientoEntrada.FolioFactura, this.cboProveedor.Text, sucursalId);
                         else
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.CompraCreditoFactura, movimientoEntrada.MovimientoInventarioID
-                                , movimientoEntrada.FolioFactura, this.cboProveedor.Text);
+                                , movimientoEntrada.FolioFactura, this.cboProveedor.Text, sucursalId);
 
                         SplashScreen.Close();
                         this.btnFinish.Enabled = true;

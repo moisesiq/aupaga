@@ -447,6 +447,7 @@ namespace Refaccionaria.App
             {
                 ContaPolizaID = oPoliza.ContaPolizaID,
                 ContaCuentaAuxiliarID = iCuentaCargo,
+                SucursalID = oPoliza.SucursalID,
                 Cargo = mImporte,
                 Abono = 0,
                 Referencia = sReferencia
@@ -455,6 +456,7 @@ namespace Refaccionaria.App
             {
                 ContaPolizaID = oPoliza.ContaPolizaID,
                 ContaCuentaAuxiliarID = iCuentaAbono,
+                SucursalID = oPoliza.SucursalID,
                 Cargo = 0,
                 Abono = mImporte,
                 Referencia = sReferencia
@@ -2273,19 +2275,19 @@ namespace Refaccionaria.App
 
         private static void AfectarConImporteNotaDeCreditoFiscalDetalle(ref ContaPolizaDetalle oDetalle, int iId)
         {
-            var oReg = General.GetEntity<NotaDeCreditoFiscalDetalle>(c => c.NotaDeCreditoFiscalID == iId);
+            var oReg = General.GetEntity<NotaDeCreditoFiscalDetalle>(c => c.NotaDeCreditoFiscalDetalleID == iId);
             oDetalle.Cargo = (oReg.Descuento + oReg.IvaDescuento);
         }
 
         private static void AfectarConImporteSivIvaNotaDeCreditoFiscalDetalle(ref ContaPolizaDetalle oDetalle, int iId)
         {
-            var oReg = General.GetEntity<NotaDeCreditoFiscalDetalle>(c => c.NotaDeCreditoFiscalID == iId);
+            var oReg = General.GetEntity<NotaDeCreditoFiscalDetalle>(c => c.NotaDeCreditoFiscalDetalleID == iId);
             oDetalle.Cargo = oReg.Descuento;
         }
 
         private static void AfectarConIvaNotaDeCreditoFiscalDetalle(ref ContaPolizaDetalle oDetalle, int iId)
         {
-            var oReg = General.GetEntity<NotaDeCreditoFiscalDetalle>(c => c.NotaDeCreditoFiscalID == iId);
+            var oReg = General.GetEntity<NotaDeCreditoFiscalDetalle>(c => c.NotaDeCreditoFiscalDetalleID == iId);
             oDetalle.Cargo = oReg.IvaDescuento;
         }
 
@@ -2505,7 +2507,10 @@ namespace Refaccionaria.App
         {
             var oPagoDetV = General.GetEntity<VentasPagosDetalleAvanzadoView>(c => c.VentaPagoID == iId && c.FormaDePagoID == Cat.FormasDePago.Vale);
             if (oPagoDetV != null)
-                oDetalle.SucursalID = oPagoDetV.SucursalID.Valor();
+            {
+                var oVale = General.GetEntity<NotaDeCredito>(c => c.NotaDeCreditoID == oPagoDetV.NotaDeCreditoID && c.Estatus);
+                oDetalle.SucursalID = oVale.SucursalID.Valor();
+            }
         }
 
         private static void AfectarSucursalConValeDeVenta(ref ContaPolizaDetalle oDetalle, int iId)

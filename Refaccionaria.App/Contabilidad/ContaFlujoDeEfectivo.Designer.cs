@@ -193,6 +193,7 @@
             chartArea1.AxisY.LineColor = System.Drawing.Color.DarkGray;
             chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
             chartArea1.AxisY.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
+            chartArea1.AxisY.Maximum = 500000D;
             chartArea1.AxisY.TitleForeColor = System.Drawing.Color.Empty;
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";

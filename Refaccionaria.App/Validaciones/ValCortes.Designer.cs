@@ -59,6 +59,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -71,10 +75,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvVentas = new System.Windows.Forms.DataGridView();
             this.ven_Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ven_Efectivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -116,6 +116,12 @@
             this.cob_Inventario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cob_FacturaGlobal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvGastos = new System.Windows.Forms.DataGridView();
+            this.gas_Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gas_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gas_CuentaAuxiliar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gas_AsignarGasto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gas_Poliza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gas_CuentaCaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvVales = new System.Windows.Forms.DataGridView();
             this.val_Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.val_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -134,12 +140,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cmbSucursal = new System.Windows.Forms.ComboBox();
             this.btnMostrar = new System.Windows.Forms.Button();
-            this.gas_Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gas_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gas_CuentaAuxiliar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gas_AsignarGasto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gas_Poliza = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gas_CuentaCaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCobranza)).BeginInit();
@@ -683,6 +684,63 @@
             this.dgvGastos.Size = new System.Drawing.Size(1229, 120);
             this.dgvGastos.TabIndex = 5;
             // 
+            // gas_Concepto
+            // 
+            this.gas_Concepto.DividerWidth = 5;
+            this.gas_Concepto.HeaderText = "Concepto";
+            this.gas_Concepto.Name = "gas_Concepto";
+            this.gas_Concepto.ReadOnly = true;
+            this.gas_Concepto.Width = 200;
+            // 
+            // gas_Importe
+            // 
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle30.Format = "C2";
+            this.gas_Importe.DefaultCellStyle = dataGridViewCellStyle30;
+            this.gas_Importe.DividerWidth = 5;
+            this.gas_Importe.HeaderText = "Importe";
+            this.gas_Importe.Name = "gas_Importe";
+            this.gas_Importe.ReadOnly = true;
+            this.gas_Importe.Width = 80;
+            // 
+            // gas_CuentaAuxiliar
+            // 
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle31.Format = "C2";
+            this.gas_CuentaAuxiliar.DefaultCellStyle = dataGridViewCellStyle31;
+            this.gas_CuentaAuxiliar.HeaderText = "Cuenta a.";
+            this.gas_CuentaAuxiliar.Name = "gas_CuentaAuxiliar";
+            this.gas_CuentaAuxiliar.ReadOnly = true;
+            this.gas_CuentaAuxiliar.Width = 200;
+            // 
+            // gas_AsignarGasto
+            // 
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle32.Format = "C2";
+            this.gas_AsignarGasto.DefaultCellStyle = dataGridViewCellStyle32;
+            this.gas_AsignarGasto.DividerWidth = 5;
+            this.gas_AsignarGasto.HeaderText = "Asignar";
+            this.gas_AsignarGasto.Name = "gas_AsignarGasto";
+            this.gas_AsignarGasto.ReadOnly = true;
+            this.gas_AsignarGasto.Width = 80;
+            // 
+            // gas_Poliza
+            // 
+            this.gas_Poliza.HeaderText = "Póliza";
+            this.gas_Poliza.Name = "gas_Poliza";
+            this.gas_Poliza.ReadOnly = true;
+            this.gas_Poliza.Width = 80;
+            // 
+            // gas_CuentaCaja
+            // 
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle33.Format = "C2";
+            this.gas_CuentaCaja.DefaultCellStyle = dataGridViewCellStyle33;
+            this.gas_CuentaCaja.HeaderText = "Caja";
+            this.gas_CuentaCaja.Name = "gas_CuentaCaja";
+            this.gas_CuentaCaja.ReadOnly = true;
+            this.gas_CuentaCaja.Width = 80;
+            // 
             // dgvVales
             // 
             this.dgvVales.AllowUserToAddRows = false;
@@ -930,6 +988,7 @@
             // cmbSucursal
             // 
             this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSucursal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSucursal.FormattingEnabled = true;
             this.cmbSucursal.Location = new System.Drawing.Point(57, 5);
             this.cmbSucursal.Name = "cmbSucursal";
@@ -946,62 +1005,16 @@
             this.btnMostrar.UseVisualStyleBackColor = true;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
-            // gas_Concepto
+            // label5
             // 
-            this.gas_Concepto.DividerWidth = 5;
-            this.gas_Concepto.HeaderText = "Concepto";
-            this.gas_Concepto.Name = "gas_Concepto";
-            this.gas_Concepto.ReadOnly = true;
-            this.gas_Concepto.Width = 200;
-            // 
-            // gas_Importe
-            // 
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle30.Format = "C2";
-            this.gas_Importe.DefaultCellStyle = dataGridViewCellStyle30;
-            this.gas_Importe.DividerWidth = 5;
-            this.gas_Importe.HeaderText = "Importe";
-            this.gas_Importe.Name = "gas_Importe";
-            this.gas_Importe.ReadOnly = true;
-            this.gas_Importe.Width = 80;
-            // 
-            // gas_CuentaAuxiliar
-            // 
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle31.Format = "C2";
-            this.gas_CuentaAuxiliar.DefaultCellStyle = dataGridViewCellStyle31;
-            this.gas_CuentaAuxiliar.HeaderText = "Cuenta a.";
-            this.gas_CuentaAuxiliar.Name = "gas_CuentaAuxiliar";
-            this.gas_CuentaAuxiliar.ReadOnly = true;
-            this.gas_CuentaAuxiliar.Width = 200;
-            // 
-            // gas_AsignarGasto
-            // 
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle32.Format = "C2";
-            this.gas_AsignarGasto.DefaultCellStyle = dataGridViewCellStyle32;
-            this.gas_AsignarGasto.DividerWidth = 5;
-            this.gas_AsignarGasto.HeaderText = "Asignar";
-            this.gas_AsignarGasto.Name = "gas_AsignarGasto";
-            this.gas_AsignarGasto.ReadOnly = true;
-            this.gas_AsignarGasto.Width = 80;
-            // 
-            // gas_Poliza
-            // 
-            this.gas_Poliza.HeaderText = "Póliza";
-            this.gas_Poliza.Name = "gas_Poliza";
-            this.gas_Poliza.ReadOnly = true;
-            this.gas_Poliza.Width = 80;
-            // 
-            // gas_CuentaCaja
-            // 
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle33.Format = "C2";
-            this.gas_CuentaCaja.DefaultCellStyle = dataGridViewCellStyle33;
-            this.gas_CuentaCaja.HeaderText = "Caja";
-            this.gas_CuentaCaja.Name = "gas_CuentaCaja";
-            this.gas_CuentaCaja.ReadOnly = true;
-            this.gas_CuentaCaja.Width = 80;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(3, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(152, 18);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Detalle por Factura";
             // 
             // ValCortes
             // 
@@ -1014,6 +1027,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvResguardos);
             this.Controls.Add(this.dgvRefuerzos);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.dgvVales);
             this.Controls.Add(this.dgvGastos);
             this.Controls.Add(this.dgvCobranza);
@@ -1104,5 +1118,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn gas_AsignarGasto;
         private System.Windows.Forms.DataGridViewTextBoxColumn gas_Poliza;
         private System.Windows.Forms.DataGridViewTextBoxColumn gas_CuentaCaja;
+        private System.Windows.Forms.Label label5;
     }
 }

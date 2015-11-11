@@ -350,7 +350,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             DateTime dSemana = Helper.ConvertirFechaHora(this.cmbSemana.SelectedValue);
-            var oNomina = General.GetEntity<Nomina>(c => c.Semana == dSemana);
+            var oNomina = General.GetEntity<Nomina>(c => c.Semana == dSemana && (!c.Domingo.HasValue || !c.Domingo.Value));
             var oNomUsuariosV = General.GetListOf<NominaUsuariosView>(c => c.NominaID == oNomina.NominaID);
             var oNomUsuariosOficial = General.GetListOf<NominaUsuarioOficial>(c => c.NominaID == oNomina.NominaID);
             this.BorrarColumnasDinamicas();

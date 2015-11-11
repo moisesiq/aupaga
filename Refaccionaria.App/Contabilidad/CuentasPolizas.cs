@@ -445,7 +445,10 @@ namespace Refaccionaria.App
             {
                 int iPolDetID = oResg[i].ContaPolizaDetalleID;
                 if (General.Exists<ContaPolizaResguardoOcultar>(c => c.ContaPolizaDetalleID == iPolDetID))
+                {
                     oResg.RemoveAt(i--);
+                    continue;
+                }
 
                 // Para quitar los resguardos de "NO MOVER"
                 if (oResg[i].Referencia == "NO MOVER")
