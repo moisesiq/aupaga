@@ -809,14 +809,14 @@ namespace Refaccionaria.App
                 return;
             if (e.RowIndex > -1)
             {
-                int parteId = Helper.ConvertirEntero(this.dgvSugeridos.Rows[e.RowIndex].Cells["ParteID"].Value);
+                int parteId = Helper.ConvertirEntero(this.dgvSugeridos.Rows[e.RowIndex].Cells["sug_ParteID"].Value);
                 this.CargaExistencias(parteId);
 
                 this.CargarEquivalentes(parteId);
 
                 // Se llena la observación, para cuando es un reporte de faltante
                 
-                this.txtSugerenciaObservacion.Text = Helper.ConvertirCadena(this.dgvSugeridos["Observacion", e.RowIndex].Value);
+                this.txtSugerenciaObservacion.Text = Helper.ConvertirCadena(this.dgvSugeridos["sug_Observacion", e.RowIndex].Value);
 
                 // Se cargan los datos de las ventas para la parte seleccionada
                 this.ctlVentasPorMes.LlenarDatos(parteId);

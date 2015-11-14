@@ -131,6 +131,7 @@
             this.sug_Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_CostoConDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExistencias)).BeginInit();
@@ -405,7 +406,8 @@
             this.sug_Total,
             this.sug_Pedido,
             this.sug_CostoConDescuento,
-            this.sug_CostoTotal});
+            this.sug_CostoTotal,
+            this.sug_Observacion});
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1137,6 +1139,13 @@
             this.sug_CostoTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_CostoTotal.Width = 80;
             // 
+            // sug_Observacion
+            // 
+            this.sug_Observacion.HeaderText = "Observación";
+            this.sug_Observacion.Name = "sug_Observacion";
+            this.sug_Observacion.ReadOnly = true;
+            this.sug_Observacion.Visible = false;
+            // 
             // catalogosPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1257,5 +1266,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_Pedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_CostoConDescuento;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_CostoTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sug_Observacion;
     }
 }
