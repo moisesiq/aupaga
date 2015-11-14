@@ -35,6 +35,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -65,11 +67,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvSucursales = new System.Windows.Forms.DataGridView();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.dgvProveedores = new System.Windows.Forms.DataGridView();
+            this.pro_ProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pro_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pro_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pro_PCT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pro_Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvExistencias = new System.Windows.Forms.DataGridView();
             this.dgvHistorico = new System.Windows.Forms.DataGridView();
             this.tabPedidos = new System.Windows.Forms.TabControl();
@@ -111,6 +116,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ctlLineas = new Refaccionaria.Negocio.ComboMultiSel();
             this.ctlMarcas = new Refaccionaria.Negocio.ComboMultiSel();
+            this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
             this.sug_ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_ProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -127,12 +133,6 @@
             this.sug_CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
-            this.pro_ProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pro_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pro_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pro_PCT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pro_Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExistencias)).BeginInit();
@@ -258,6 +258,47 @@
             this.dgvProveedores.TabIndex = 164;
             this.dgvProveedores.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellClick);
             this.dgvProveedores.Sorted += new System.EventHandler(this.dgvProveedores_Sorted);
+            // 
+            // pro_ProveedorID
+            // 
+            this.pro_ProveedorID.HeaderText = "ProveedorID";
+            this.pro_ProveedorID.Name = "pro_ProveedorID";
+            this.pro_ProveedorID.ReadOnly = true;
+            this.pro_ProveedorID.Visible = false;
+            // 
+            // pro_Proveedor
+            // 
+            this.pro_Proveedor.HeaderText = "Proveedor";
+            this.pro_Proveedor.Name = "pro_Proveedor";
+            this.pro_Proveedor.ReadOnly = true;
+            this.pro_Proveedor.Width = 180;
+            // 
+            // pro_Importe
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "C2";
+            this.pro_Importe.DefaultCellStyle = dataGridViewCellStyle5;
+            this.pro_Importe.HeaderText = "Importe";
+            this.pro_Importe.Name = "pro_Importe";
+            this.pro_Importe.ReadOnly = true;
+            this.pro_Importe.Width = 80;
+            // 
+            // pro_PCT
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2%";
+            this.pro_PCT.DefaultCellStyle = dataGridViewCellStyle6;
+            this.pro_PCT.HeaderText = "PCT";
+            this.pro_PCT.Name = "pro_PCT";
+            this.pro_PCT.ReadOnly = true;
+            this.pro_PCT.Width = 60;
+            // 
+            // pro_Caracteristica
+            // 
+            this.pro_Caracteristica.HeaderText = "Característica";
+            this.pro_Caracteristica.Name = "pro_Caracteristica";
+            this.pro_Caracteristica.ReadOnly = true;
+            this.pro_Caracteristica.Visible = false;
             // 
             // dgvExistencias
             // 
@@ -438,9 +479,9 @@
             this.dgvSugeridos.TabIndex = 163;
             this.dgvSugeridos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSugeridos_CellClick);
             this.dgvSugeridos.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvSugeridos_CellValidating);
+            this.dgvSugeridos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSugeridos_CellValueChanged);
             this.dgvSugeridos.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvSugeridos_CurrentCellDirtyStateChanged);
             this.dgvSugeridos.Sorted += new System.EventHandler(this.dgvSugeridos_Sorted);
-            this.dgvSugeridos.DragOver += new System.Windows.Forms.DragEventHandler(this.dgvSugeridos_DragOver);
             this.dgvSugeridos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvSugeridos_KeyDown);
             this.dgvSugeridos.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvSugeridos_KeyUp);
             // 
@@ -952,6 +993,15 @@
             this.ctlMarcas.Size = new System.Drawing.Size(129, 20);
             this.ctlMarcas.TabIndex = 312;
             // 
+            // ctlVentasPorMes
+            // 
+            this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctlVentasPorMes.Location = new System.Drawing.Point(706, 566);
+            this.ctlVentasPorMes.Name = "ctlVentasPorMes";
+            this.ctlVentasPorMes.Size = new System.Drawing.Size(682, 101);
+            this.ctlVentasPorMes.TabIndex = 314;
+            // 
             // sug_ParteID
             // 
             this.sug_ParteID.HeaderText = "ParteID";
@@ -969,6 +1019,7 @@
             // 
             this.sug_Sel.HeaderText = "Sel";
             this.sug_Sel.Name = "sug_Sel";
+            this.sug_Sel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.sug_Sel.Width = 40;
             // 
             // sug_NumeroDeParte
@@ -977,7 +1028,6 @@
             this.sug_NumeroDeParte.Name = "sug_NumeroDeParte";
             this.sug_NumeroDeParte.ReadOnly = true;
             this.sug_NumeroDeParte.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_NumeroDeParte.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_NumeroDeParte.Width = 80;
             // 
             // sug_Descripcion
@@ -986,7 +1036,6 @@
             this.sug_Descripcion.Name = "sug_Descripcion";
             this.sug_Descripcion.ReadOnly = true;
             this.sug_Descripcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_Descripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_Descripcion.Width = 300;
             // 
             // sug_UnidadDeEmpaque
@@ -998,7 +1047,6 @@
             this.sug_UnidadDeEmpaque.Name = "sug_UnidadDeEmpaque";
             this.sug_UnidadDeEmpaque.ReadOnly = true;
             this.sug_UnidadDeEmpaque.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_UnidadDeEmpaque.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_UnidadDeEmpaque.Width = 60;
             // 
             // sug_AbcDeVentas
@@ -1007,7 +1055,6 @@
             this.sug_AbcDeVentas.Name = "sug_AbcDeVentas";
             this.sug_AbcDeVentas.ReadOnly = true;
             this.sug_AbcDeVentas.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_AbcDeVentas.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_AbcDeVentas.Width = 60;
             // 
             // sug_NecesidadMatriz
@@ -1018,7 +1065,6 @@
             this.sug_NecesidadMatriz.HeaderText = "Matriz";
             this.sug_NecesidadMatriz.Name = "sug_NecesidadMatriz";
             this.sug_NecesidadMatriz.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_NecesidadMatriz.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_NecesidadMatriz.Width = 60;
             // 
             // sug_NecesidadSuc02
@@ -1029,7 +1075,6 @@
             this.sug_NecesidadSuc02.HeaderText = "Suc 02";
             this.sug_NecesidadSuc02.Name = "sug_NecesidadSuc02";
             this.sug_NecesidadSuc02.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_NecesidadSuc02.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_NecesidadSuc02.Width = 60;
             // 
             // sug_NecesidadSuc03
@@ -1040,7 +1085,6 @@
             this.sug_NecesidadSuc03.HeaderText = "Suc 03";
             this.sug_NecesidadSuc03.Name = "sug_NecesidadSuc03";
             this.sug_NecesidadSuc03.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_NecesidadSuc03.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_NecesidadSuc03.Width = 60;
             // 
             // sug_Total
@@ -1052,7 +1096,6 @@
             this.sug_Total.Name = "sug_Total";
             this.sug_Total.ReadOnly = true;
             this.sug_Total.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_Total.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_Total.Width = 80;
             // 
             // sug_Pedido
@@ -1065,7 +1108,6 @@
             this.sug_Pedido.Name = "sug_Pedido";
             this.sug_Pedido.ReadOnly = true;
             this.sug_Pedido.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_Pedido.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_Pedido.Width = 60;
             // 
             // sug_CostoConDescuento
@@ -1077,7 +1119,6 @@
             this.sug_CostoConDescuento.Name = "sug_CostoConDescuento";
             this.sug_CostoConDescuento.ReadOnly = true;
             this.sug_CostoConDescuento.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_CostoConDescuento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_CostoConDescuento.Width = 80;
             // 
             // sug_CostoTotal
@@ -1089,7 +1130,6 @@
             this.sug_CostoTotal.Name = "sug_CostoTotal";
             this.sug_CostoTotal.ReadOnly = true;
             this.sug_CostoTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_CostoTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.sug_CostoTotal.Width = 80;
             // 
             // sug_Observacion
@@ -1105,56 +1145,6 @@
             this.sug_Caracteristica.Name = "sug_Caracteristica";
             this.sug_Caracteristica.ReadOnly = true;
             this.sug_Caracteristica.Visible = false;
-            // 
-            // ctlVentasPorMes
-            // 
-            this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctlVentasPorMes.Location = new System.Drawing.Point(706, 566);
-            this.ctlVentasPorMes.Name = "ctlVentasPorMes";
-            this.ctlVentasPorMes.Size = new System.Drawing.Size(682, 101);
-            this.ctlVentasPorMes.TabIndex = 314;
-            // 
-            // pro_ProveedorID
-            // 
-            this.pro_ProveedorID.HeaderText = "ProveedorID";
-            this.pro_ProveedorID.Name = "pro_ProveedorID";
-            this.pro_ProveedorID.ReadOnly = true;
-            this.pro_ProveedorID.Visible = false;
-            // 
-            // pro_Proveedor
-            // 
-            this.pro_Proveedor.HeaderText = "Proveedor";
-            this.pro_Proveedor.Name = "pro_Proveedor";
-            this.pro_Proveedor.ReadOnly = true;
-            this.pro_Proveedor.Width = 180;
-            // 
-            // pro_Importe
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "C2";
-            this.pro_Importe.DefaultCellStyle = dataGridViewCellStyle5;
-            this.pro_Importe.HeaderText = "Importe";
-            this.pro_Importe.Name = "pro_Importe";
-            this.pro_Importe.ReadOnly = true;
-            this.pro_Importe.Width = 80;
-            // 
-            // pro_PCT
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "P2";
-            this.pro_PCT.DefaultCellStyle = dataGridViewCellStyle6;
-            this.pro_PCT.HeaderText = "PCT";
-            this.pro_PCT.Name = "pro_PCT";
-            this.pro_PCT.ReadOnly = true;
-            this.pro_PCT.Width = 60;
-            // 
-            // pro_Caracteristica
-            // 
-            this.pro_Caracteristica.HeaderText = "Característica";
-            this.pro_Caracteristica.Name = "pro_Caracteristica";
-            this.pro_Caracteristica.ReadOnly = true;
-            this.pro_Caracteristica.Visible = false;
             // 
             // catalogosPedidos
             // 
@@ -1257,6 +1247,11 @@
         private Negocio.ComboMultiSel ctlMarcas;
         private Negocio.ComboMultiSel ctlLineas;
         private GridVentasMes ctlVentasPorMes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_ProveedorID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_PCT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Caracteristica;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_ParteID;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_ProveedorID;
         private System.Windows.Forms.DataGridViewCheckBoxColumn sug_Sel;
@@ -1273,10 +1268,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_CostoTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_Observacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_Caracteristica;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_ProveedorID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Proveedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Importe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_PCT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Caracteristica;
     }
 }

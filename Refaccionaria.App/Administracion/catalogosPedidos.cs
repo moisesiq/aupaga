@@ -130,6 +130,8 @@ namespace Refaccionaria.App
                 if (this.dgvProveedores.Columns.Count > 0)
                     this.dgvProveedores.Columns.Clear();
                 */
+                this.dgvProveedores.Rows.Clear();
+                this.dgvSugeridos.Rows.Clear();
 
                 this.dgvExistencias.DataSource = null;
 
@@ -172,6 +174,8 @@ namespace Refaccionaria.App
                 if (this.dgvProveedores.Columns.Count > 0)
                     this.dgvProveedores.Columns.Clear();
                 */
+                this.dgvProveedores.Rows.Clear();
+                this.dgvSugeridos.Rows.Clear();
 
                 this.dgvExistencias.DataSource = null;
 
@@ -400,6 +404,8 @@ namespace Refaccionaria.App
                 }
                 */
             }
+            // Se llena el total
+            this.txtImporteTotal.Text = oSugeridos.Sum(c => c.Costo).Valor().ToString(GlobalClass.FormatoMoneda);
 
             // Se obtienen los datos para lo de proveedores
             // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Llenando proveedores.");  // dPend
@@ -425,6 +431,8 @@ namespace Refaccionaria.App
                 }
                 */
             }
+            // Se llena el total
+            this.txtImporteTotalDos.Text = mTotalProv.ToString(GlobalClass.FormatoMoneda);
 
             // Se colorean algunas filas, según el caso
             // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Coloreando.");  // dPend
@@ -626,6 +634,20 @@ namespace Refaccionaria.App
             }
         }
 
+        private void AplicarCambioNecesidad(DataGridViewRow oFila)
+        {
+            decimal mTotal = (Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadMatriz"].Value) + Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadSuc02"].Value)
+                + Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadSuc03"].Value));
+            decimal mEmpaque = Helper.ConvertirDecimal(oFila.Cells["sug_UnidadDeEmpaque"].Value);
+            decimal mPedido = ((int)(((mTotal / mEmpaque) + 0.4M)) * mEmpaque);
+
+            oFila.Cells["sug_Total"].Value = mTotal;
+            oFila.Cells["sug_Pedido"].Value = mPedido;
+            oFila.Cells["sug_CostoTotal"].Value = (mPedido * Helper.ConvertirDecimal(oFila.Cells["sug_CostoConDescuento"].Value));
+            
+            this.sacarImporteTotal();
+        }
+
         #endregion
 
         #region [ Eventos ]
@@ -730,6 +752,16 @@ namespace Refaccionaria.App
             }
         }
 
+        private void dgvSugeridos_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            string sCol = this.dgvSugeridos[e.ColumnIndex, e.RowIndex].OwningColumn.Name;
+            if (sCol == "sug_NecesidadMatriz" || sCol == "sug_NecesidadSuc02" || sCol == "sug_NecesidadSuc03")
+            {
+                this.AplicarCambioNecesidad(this.dgvSugeridos.Rows[e.RowIndex]);
+            }
+        }
+
         private void dgvSugeridos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvSugeridos.CurrentRow == null)
@@ -817,8 +849,10 @@ namespace Refaccionaria.App
         {
             try
             {
-                if (this.dgvSugeridos.DataSource == null) return;
+                // if (this.dgvSugeridos.DataSource == null) return;
                 if (this.tabPedidos.SelectedIndex != 0) return;
+                
+                /*
                 DataTable t = new DataTable();
                 DataTable dt = new DataTable();
 
@@ -834,6 +868,16 @@ namespace Refaccionaria.App
                     dt = dv.ToTable();
                     t = dt.AsEnumerable().Where(x => x.Field<Boolean>("Sel") && x.Field<decimal>("Pedido") > 0).CopyToDataTable();
                 }
+                */
+
+                var t = this.dgvSugeridos.ADataTable();
+                // Se quitan los que no estén seleccionados y los que no tengan pedido
+                for (int iFila = 0; iFila < t.Rows.Count; iFila++)
+                {
+                    if (!Helper.ConvertirBool(t.Rows[iFila]["sug_Sel"]) || Helper.ConvertirEntero(t.Rows[iFila]["sug_Pedido"]) <= 0)
+                        t.Rows.RemoveAt(iFila--);
+                }
+
                 using (FastReport.Report report = new FastReport.Report())
                 {
                     report.Load(string.Format("{0}{1}", GlobalClass.ConfiguracionGlobal.pathReportes, "ReportePedidosSugeridos.frx"));
@@ -850,7 +894,7 @@ namespace Refaccionaria.App
 
         private void btnTodos_Click(object sender, EventArgs e)
         {
-            if (this.dgvSugeridos.DataSource == null) return;
+            // if (this.dgvSugeridos.DataSource == null) return;
             if (this.tabPedidos.SelectedIndex != 0) return;
             if (sel)
             {
@@ -864,13 +908,13 @@ namespace Refaccionaria.App
                 sel = true;
             }
 
-            if (this.dgvSugeridos.Columns.Contains("Sel"))
+            if (this.dgvSugeridos.Columns.Contains("sug_Sel"))
             {
                 foreach (DataGridViewRow row in this.dgvSugeridos.Rows)
                     if (sel)
-                        row.Cells["Sel"].Value = true;
+                        row.Cells["sug_Sel"].Value = true;
                     else
-                        row.Cells["Sel"].Value = false;
+                        row.Cells["sug_Sel"].Value = false;
             }
             this.sacarImporteTotal();
         }
@@ -886,13 +930,24 @@ namespace Refaccionaria.App
                     return;
                 }
 
-                if (this.dgvSugeridos.DataSource == null)
+                // Se valida que haya al menos una parte seleccionada
+                bool bError = true;
+                foreach (DataGridViewRow oFila in this.dgvSugeridos.Rows)
+                {
+                    if (Helper.ConvertirBool(oFila.Cells["sug_Sel"].Value))
+                    {
+                        bError = false;
+                        break;
+                    }
+                }
+                // if (this.dgvSugeridos.DataSource == null)
+                if (bError)
                 {
                     Helper.MensajeError("Debe seleccionar al menos un número de parte.", GlobalClass.NombreApp);
                     return;
                 }
 
-                var proveedorId = Helper.ConvertirEntero(this.dgvProveedores.CurrentRow.Cells["ProveedorID"].Value);
+                var proveedorId = Helper.ConvertirEntero(this.dgvProveedores.CurrentRow.Cells["pro_ProveedorID"].Value);
                 var proveedor = General.GetEntity<Proveedor>(p => p.ProveedorID == proveedorId);
                 if (proveedor != null)
                 {
@@ -930,7 +985,7 @@ namespace Refaccionaria.App
                 }
 
                 // DataTable dt = new DataTable();
-                BindingSource bs = (BindingSource)this.dgvSugeridos.DataSource;
+                // BindingSource bs = (BindingSource)this.dgvSugeridos.DataSource;
 
                 //Validación, debe estar seleccionado y el pedido debe ser mayor a 0
                 /* if (!string.IsNullOrEmpty(bs.Filter))
@@ -939,15 +994,16 @@ namespace Refaccionaria.App
                     dt = dv.ToTable().AsEnumerable().Where(x => x.Field<Boolean>("Sel") && x.Field<decimal>("Pedido") > 0).CopyToDataTable();
                 } */
 
-                var oTabla = this.dgvSugeridos.ADataTable();
-                foreach (DataRow fila in oTabla.Rows)
+                foreach (DataGridViewRow oFila in this.dgvSugeridos.Rows)
                 {
-                    int iParteID = Helper.ConvertirEntero(fila["ParteID"]);
+                    if (!oFila.Visible) continue;
+
+                    int iParteID = Helper.ConvertirEntero(oFila.Cells["sug_ParteID"].Value);
 
                     // Se verifica si no se debe pedir por existencia en equivalentes
                     var oNoPedir = General.GetEntity<ParteCaracteristicaTemporal>(c => c.ParteID == iParteID
                         && c.Caracteristica == Cat.CaracTempPartes.NoPedidosPorEquivalentes);
-                    if (Helper.ConvertirCadena(fila["Caracteristica"]) == "NP")
+                    if (Helper.ConvertirCadena(oFila.Cells["sug_Caracteristica"].Value) == "NP")
                     {
                         if (oNoPedir == null)
                         {
@@ -966,14 +1022,15 @@ namespace Refaccionaria.App
                     }
 
                     // Se verifica si está marcado o tiene pedidos para procesar, si no, se salta
-                    if (!Helper.ConvertirBool(fila["Sel"]) || Helper.ConvertirDecimal(fila["Pedido"]) <= 0)
+                    if (!Helper.ConvertirBool(oFila.Cells["sug_Sel"].Value) || Helper.ConvertirDecimal(oFila.Cells["sug_Pedido"].Value) <= 0)
                         continue;
 
-                    if (Helper.ConvertirEntero(fila["ProveedorID"]) != proveedorId)
+                    if (Helper.ConvertirEntero(oFila.Cells["sug_ProveedorID"].Value) != proveedorId)
                     {
                         this.Cursor = Cursors.Default;
                         SplashScreen.Close();
-                        var msj = string.Format("{0} {1} {2} {3}", "El número de Parte:", Helper.ConvertirCadena(fila["NumeroParte"]), "No está asignado al Proveedor:", proveedor.NombreProveedor);
+                        var msj = string.Format("{0} {1} {2} {3}", "El número de Parte:", Helper.ConvertirCadena(oFila.Cells["sug_NumeroDeParte"].Value)
+                            , "No está asignado al Proveedor:", proveedor.NombreProveedor);
                         Helper.MensajeError(msj, GlobalClass.NombreApp);
                         this.btnProcesar.Enabled = true;
                         return;
@@ -984,14 +1041,14 @@ namespace Refaccionaria.App
                     {
                         PedidoID = pedido.PedidoID,
                         ParteID = iParteID,
-                        CantidadPedido = Helper.ConvertirDecimal(fila["Pedido"]),
-                        CostosUnitario = Helper.ConvertirDecimal(fila["CostoConDescuento"]),
+                        CantidadPedido = Helper.ConvertirDecimal(oFila.Cells["sug_Pedido"].Value),
+                        CostosUnitario = Helper.ConvertirDecimal(oFila.Cells["sug_CostoConDescuento"].Value),
                         PedidoEstatusID = 2
                     };
                     Guardar.Generico<PedidoDetalle>(detallePedido);
 
                     // Se marca como pedido en reporte de faltante, si aplica
-                    if (Helper.ConvertirCadena(fila["Caracteristica"]) == "RF")
+                    if (Helper.ConvertirCadena(oFila.Cells["sug_Caracteristica"].Value) == "RF")
                     {
                         var oFaltantes = General.GetListOf<ReporteDeFaltante>(c => c.ParteID == iParteID && !c.Pedido && c.Estatus);
                         foreach (var oReg in oFaltantes)
@@ -1153,11 +1210,6 @@ namespace Refaccionaria.App
         }
 
         #endregion
-
-        private void dgvSugeridos_DragOver(object sender, DragEventArgs e)
-        {
-
-        }
                                                 
         #endregion
                 
