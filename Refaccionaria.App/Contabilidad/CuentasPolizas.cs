@@ -324,7 +324,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             DateTime dDesde = this.dtpDesde.Value.Date;
-            DateTime dHasta = this.dtpHasta.Value.Date.AddDays(1);
+            DateTime dHasta = this.dtpHasta.Value.Date;
             int iSucursalID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue);
             // var oMovs = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => 
             //     c.ContaCuentaAuxiliarID == iCuentaID && (c.FechaPoliza >= dDesde && c.FechaPoliza < dHasta) && (iSucursalID == 0 || c.SucursalID == iSucursalID))

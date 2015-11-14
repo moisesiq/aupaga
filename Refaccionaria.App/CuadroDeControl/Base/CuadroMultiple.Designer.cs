@@ -668,7 +668,7 @@
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chrMeses.ChartAreas.Add(chartArea1);
-            this.chrMeses.Location = new System.Drawing.Point(560, 653);
+            this.chrMeses.Location = new System.Drawing.Point(659, 604);
             this.chrMeses.Name = "chrMeses";
             series1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
             series1.BackSecondaryColor = System.Drawing.Color.Transparent;
@@ -692,7 +692,7 @@
             series2.ShadowColor = System.Drawing.Color.White;
             this.chrMeses.Series.Add(series1);
             this.chrMeses.Series.Add(series2);
-            this.chrMeses.Size = new System.Drawing.Size(400, 120);
+            this.chrMeses.Size = new System.Drawing.Size(318, 169);
             this.chrMeses.TabIndex = 20;
             this.chrMeses.Text = "chart1";
             title1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
@@ -728,7 +728,7 @@
             chartArea2.BackColor = System.Drawing.Color.Transparent;
             chartArea2.Name = "ChartArea1";
             this.chrSemanas.ChartAreas.Add(chartArea2);
-            this.chrSemanas.Location = new System.Drawing.Point(3, 653);
+            this.chrSemanas.Location = new System.Drawing.Point(3, 604);
             this.chrSemanas.Name = "chrSemanas";
             series3.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
             series3.BackSecondaryColor = System.Drawing.Color.Red;
@@ -770,7 +770,7 @@
             series4.SmartLabelStyle.Enabled = false;
             this.chrSemanas.Series.Add(series3);
             this.chrSemanas.Series.Add(series4);
-            this.chrSemanas.Size = new System.Drawing.Size(520, 120);
+            this.chrSemanas.Size = new System.Drawing.Size(670, 169);
             this.chrSemanas.TabIndex = 19;
             this.chrSemanas.Text = "chart1";
             title2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
