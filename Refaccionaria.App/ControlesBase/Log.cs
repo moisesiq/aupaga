@@ -36,6 +36,7 @@ namespace Refaccionaria.App
                     return;
                 }
                 this.txtLog.AppendText(string.Format("{0}{1}", value, Environment.NewLine));
+                Application.DoEvents();
             }
         }
 

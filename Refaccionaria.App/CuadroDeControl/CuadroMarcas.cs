@@ -203,7 +203,7 @@ namespace Refaccionaria.App
             }
 
             // Se llena el grid
-            this.LlenarDetalle(oConsulta, iIdPrincipal);
+            this.LlenarDetalle(oConsulta, null);
             /* foreach (var oReg in oConsulta)
             {
                 var oVentasDetV = General.GetListOf<VentasDetalleView>(c => c.VentaID == oReg.VentaID && c.LineaID == iIdPrincipal);

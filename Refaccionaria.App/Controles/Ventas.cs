@@ -1321,11 +1321,14 @@ namespace Refaccionaria.App
                     {
                         // Filtros.Add(Helper.ConvertirCadena(oControl.Tag), oControl.Text);
                         Filtros.Add(string.Format("Car{0:00}ID", ++iCaract), oControl.Tag);
-                        Filtros.Add(string.Format("Car{0:00}Val", iCaract), oControl.Text);
+                        Filtros.Add(string.Format("Car{0:00}", iCaract), oControl.Text);
                     }
                 }
                 if (iCaract > 0)
                     Filtros.Add("Caracteristicas", true);
+
+                // Si hay filtros en este punto, se marca para hacer la búsqueda
+                bool bFiltrar = (Filtros.Count > 1);
 
                 if (this.chkBusquedaPorAplicacion.Checked)
                 {
@@ -1340,7 +1343,7 @@ namespace Refaccionaria.App
                     Filtros.Add("Equivalentes", true);
 
                 // Si no hay ningún filtro, se limpian los resultados y se sale
-                if (Filtros.Count <= 1 || (Filtros.Count == 2 && Filtros.ContainsKey("Equivalentes")))
+                if (!bFiltrar)
                 {
                     this.lsvPartes.Items.Clear();
                     this.lsvPartesComplementarias.Items.Clear();
@@ -1385,7 +1388,13 @@ namespace Refaccionaria.App
                 return;
             }
             */
-            // Ahora el máximo ya viene desde sql, y se trae el número de registros máximo independientemente de la consulta
+            // Ahora el máximo ya viene desde sql, si trae un registro vacío, quiere decir que se excedió el máximo
+            if (Partes.Count == 1 && Partes[0].ParteID == 0)
+            {
+                this.lblMensajeBusqueda.Text = "* Se encontraron más de 200 resultados. Debes ser más específico en tu búsqueda para poder mostrar los productos.";
+                this.lblMensajeBusqueda.Visible = true;
+                return;
+            }
 
             string sLlaveImg;
             string sRutaImagen;

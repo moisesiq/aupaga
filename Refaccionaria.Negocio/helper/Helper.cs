@@ -245,6 +245,14 @@ namespace Refaccionaria.Negocio
             return Filtro.ToString();
         }
 
+        public static void FiltrarIgual(this DataGridView oGrid, object oValor, string sColumna)
+        {
+            foreach (DataGridViewRow oFila in oGrid.Rows)
+            {
+                oFila.Visible = (oFila.Cells[sColumna].Value == oValor);
+            }
+        }
+
         public static void FiltrarContiene(this DataGridView oGrid, string sBusqueda, params string[] oColumnas)
         {
             sBusqueda = sBusqueda.ToLower();
@@ -268,7 +276,7 @@ namespace Refaccionaria.Negocio
                 oFila.Visible = bCoincide;
             }
         }
-
+        
         public static void EncontrarContiene(this DataGridView oGrid, string sBusqueda, params string[] oColumnas)
         {
             if (string.IsNullOrEmpty(sBusqueda))

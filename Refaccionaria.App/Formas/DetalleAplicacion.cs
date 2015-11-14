@@ -251,9 +251,7 @@ namespace Refaccionaria.App
                                         Anio = anio,
                                         RegistroUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
                                         UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
-                                        FechaRegistro = DateTime.Now,
-                                        Estatus = true,
-                                        Actualizar = true
+                                        FechaRegistro = DateTime.Now
                                     };
                                 }
                                 else
@@ -266,8 +264,6 @@ namespace Refaccionaria.App
                                     parteVehiculo.RegistroUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID;
                                     parteVehiculo.UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID;
                                     parteVehiculo.FechaRegistro = DateTime.Now;
-                                    parteVehiculo.Estatus = true;
-                                    parteVehiculo.Actualizar = true;
                                 }
                                 General.SaveOrUpdate<ParteVehiculo>(parteVehiculo, parteVehiculo);
                             }
@@ -294,9 +290,7 @@ namespace Refaccionaria.App
                                     Anio = null,
                                     RegistroUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
                                     UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
-                                    FechaRegistro = DateTime.Now,
-                                    Estatus = true,
-                                    Actualizar = true
+                                    FechaRegistro = DateTime.Now
                                 };
                             }
                             else
@@ -309,8 +303,6 @@ namespace Refaccionaria.App
                                 parteVehiculo.RegistroUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID;
                                 parteVehiculo.UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID;
                                 parteVehiculo.FechaRegistro = DateTime.Now;
-                                parteVehiculo.Estatus = true;
-                                parteVehiculo.Actualizar = true;
                             }
                             General.SaveOrUpdate<ParteVehiculo>(parteVehiculo, parteVehiculo);
                         }
@@ -337,9 +329,7 @@ namespace Refaccionaria.App
                                     Anio = anio,
                                     RegistroUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
                                     UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
-                                    FechaRegistro = DateTime.Now,
-                                    Estatus = true,
-                                    Actualizar = true
+                                    FechaRegistro = DateTime.Now
                                 };
                             }
                             else
@@ -352,8 +342,6 @@ namespace Refaccionaria.App
                                 parteVehiculo.RegistroUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID;
                                 parteVehiculo.UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID;
                                 parteVehiculo.FechaRegistro = DateTime.Now;
-                                parteVehiculo.Estatus = true;
-                                parteVehiculo.Actualizar = true;
                             }
                             General.SaveOrUpdate<ParteVehiculo>(parteVehiculo, parteVehiculo);
                         }
@@ -377,9 +365,7 @@ namespace Refaccionaria.App
                                 Anio = null,
                                 RegistroUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
                                 UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
-                                FechaRegistro = DateTime.Now,
-                                Estatus = true,
-                                Actualizar = true
+                                FechaRegistro = DateTime.Now
                             };
                         }
                         else
@@ -392,8 +378,6 @@ namespace Refaccionaria.App
                             parteVehiculo.RegistroUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID;
                             parteVehiculo.UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID;
                             parteVehiculo.FechaRegistro = DateTime.Now;
-                            parteVehiculo.Estatus = true;
-                            parteVehiculo.Actualizar = true;
                         }
                         General.SaveOrUpdate<ParteVehiculo>(parteVehiculo, parteVehiculo);
                     }

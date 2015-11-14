@@ -120,7 +120,7 @@ namespace Refaccionaria.App
         public static void CopiarCodigosAlternosDeEquivalentes(int iParteID)
         {
             var oPartesEq = General.GetListOf<PartesEquivalentesView>(c => c.ParteID == iParteID);
-            var oCodigosAlt = General.GetListOf<ParteCodigoAlterno>(c => c.ParteID == iParteID && c.Estatus);
+            var oCodigosAlt = General.GetListOf<ParteCodigoAlterno>(c => c.ParteID == iParteID);
             foreach (var oParteEq in oPartesEq)
             {
                 foreach (var oCodigoAlt in oCodigosAlt)
