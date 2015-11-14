@@ -57,8 +57,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -67,6 +65,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvSucursales = new System.Windows.Forms.DataGridView();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.dgvProveedores = new System.Windows.Forms.DataGridView();
@@ -111,12 +111,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ctlLineas = new Refaccionaria.Negocio.ComboMultiSel();
             this.ctlMarcas = new Refaccionaria.Negocio.ComboMultiSel();
-            this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
-            this.pro_ProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pro_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pro_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pro_PCT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pro_Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_ProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -132,6 +126,13 @@
             this.sug_CostoConDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sug_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
+            this.pro_ProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pro_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pro_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pro_PCT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pro_Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExistencias)).BeginInit();
@@ -408,7 +409,8 @@
             this.sug_Pedido,
             this.sug_CostoConDescuento,
             this.sug_CostoTotal,
-            this.sug_Observacion});
+            this.sug_Observacion,
+            this.sug_Caracteristica});
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -950,56 +952,6 @@
             this.ctlMarcas.Size = new System.Drawing.Size(129, 20);
             this.ctlMarcas.TabIndex = 312;
             // 
-            // ctlVentasPorMes
-            // 
-            this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctlVentasPorMes.Location = new System.Drawing.Point(706, 566);
-            this.ctlVentasPorMes.Name = "ctlVentasPorMes";
-            this.ctlVentasPorMes.Size = new System.Drawing.Size(682, 101);
-            this.ctlVentasPorMes.TabIndex = 314;
-            // 
-            // pro_ProveedorID
-            // 
-            this.pro_ProveedorID.HeaderText = "ProveedorID";
-            this.pro_ProveedorID.Name = "pro_ProveedorID";
-            this.pro_ProveedorID.ReadOnly = true;
-            this.pro_ProveedorID.Visible = false;
-            // 
-            // pro_Proveedor
-            // 
-            this.pro_Proveedor.HeaderText = "Proveedor";
-            this.pro_Proveedor.Name = "pro_Proveedor";
-            this.pro_Proveedor.ReadOnly = true;
-            this.pro_Proveedor.Width = 180;
-            // 
-            // pro_Importe
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "C2";
-            this.pro_Importe.DefaultCellStyle = dataGridViewCellStyle5;
-            this.pro_Importe.HeaderText = "Importe";
-            this.pro_Importe.Name = "pro_Importe";
-            this.pro_Importe.ReadOnly = true;
-            this.pro_Importe.Width = 80;
-            // 
-            // pro_PCT
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2%";
-            this.pro_PCT.DefaultCellStyle = dataGridViewCellStyle6;
-            this.pro_PCT.HeaderText = "PCT";
-            this.pro_PCT.Name = "pro_PCT";
-            this.pro_PCT.ReadOnly = true;
-            this.pro_PCT.Width = 60;
-            // 
-            // pro_Caracteristica
-            // 
-            this.pro_Caracteristica.HeaderText = "Característica";
-            this.pro_Caracteristica.Name = "pro_Caracteristica";
-            this.pro_Caracteristica.ReadOnly = true;
-            this.pro_Caracteristica.Visible = false;
-            // 
             // sug_ParteID
             // 
             this.sug_ParteID.HeaderText = "ParteID";
@@ -1147,6 +1099,63 @@
             this.sug_Observacion.ReadOnly = true;
             this.sug_Observacion.Visible = false;
             // 
+            // sug_Caracteristica
+            // 
+            this.sug_Caracteristica.HeaderText = "Característica";
+            this.sug_Caracteristica.Name = "sug_Caracteristica";
+            this.sug_Caracteristica.ReadOnly = true;
+            this.sug_Caracteristica.Visible = false;
+            // 
+            // ctlVentasPorMes
+            // 
+            this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctlVentasPorMes.Location = new System.Drawing.Point(706, 566);
+            this.ctlVentasPorMes.Name = "ctlVentasPorMes";
+            this.ctlVentasPorMes.Size = new System.Drawing.Size(682, 101);
+            this.ctlVentasPorMes.TabIndex = 314;
+            // 
+            // pro_ProveedorID
+            // 
+            this.pro_ProveedorID.HeaderText = "ProveedorID";
+            this.pro_ProveedorID.Name = "pro_ProveedorID";
+            this.pro_ProveedorID.ReadOnly = true;
+            this.pro_ProveedorID.Visible = false;
+            // 
+            // pro_Proveedor
+            // 
+            this.pro_Proveedor.HeaderText = "Proveedor";
+            this.pro_Proveedor.Name = "pro_Proveedor";
+            this.pro_Proveedor.ReadOnly = true;
+            this.pro_Proveedor.Width = 180;
+            // 
+            // pro_Importe
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "C2";
+            this.pro_Importe.DefaultCellStyle = dataGridViewCellStyle5;
+            this.pro_Importe.HeaderText = "Importe";
+            this.pro_Importe.Name = "pro_Importe";
+            this.pro_Importe.ReadOnly = true;
+            this.pro_Importe.Width = 80;
+            // 
+            // pro_PCT
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "P2";
+            this.pro_PCT.DefaultCellStyle = dataGridViewCellStyle6;
+            this.pro_PCT.HeaderText = "PCT";
+            this.pro_PCT.Name = "pro_PCT";
+            this.pro_PCT.ReadOnly = true;
+            this.pro_PCT.Width = 60;
+            // 
+            // pro_Caracteristica
+            // 
+            this.pro_Caracteristica.HeaderText = "Característica";
+            this.pro_Caracteristica.Name = "pro_Caracteristica";
+            this.pro_Caracteristica.ReadOnly = true;
+            this.pro_Caracteristica.Visible = false;
+            // 
             // catalogosPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1248,11 +1257,6 @@
         private Negocio.ComboMultiSel ctlMarcas;
         private Negocio.ComboMultiSel ctlLineas;
         private GridVentasMes ctlVentasPorMes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_ProveedorID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Proveedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Importe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_PCT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Caracteristica;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_ParteID;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_ProveedorID;
         private System.Windows.Forms.DataGridViewCheckBoxColumn sug_Sel;
@@ -1268,5 +1272,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_CostoConDescuento;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_CostoTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn sug_Observacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sug_Caracteristica;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_ProveedorID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_PCT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pro_Caracteristica;
     }
 }

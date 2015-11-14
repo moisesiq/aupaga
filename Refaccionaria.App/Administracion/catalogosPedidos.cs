@@ -388,7 +388,8 @@ namespace Refaccionaria.App
                 oReg.Costo = (mPedido * oReg.CostoConDescuento);
 
                 int iFila = this.dgvSugeridos.Rows.Add(oReg.ParteID, oReg.ProveedorID, true, oReg.NumeroParte, oReg.NombreParte, oReg.UnidadEmpaque, oReg.CriterioABC
-                    , oReg.NecesidadMatriz, oReg.NecesidadSuc02, oReg.NecesidadSuc03, oReg.Total, mPedido, oReg.CostoConDescuento, oReg.Costo, oReg.Observacion);
+                    , oReg.NecesidadMatriz, oReg.NecesidadSuc02, oReg.NecesidadSuc03, oReg.Total, mPedido, oReg.CostoConDescuento, oReg.Costo
+                    , oReg.Observacion, oReg.Caracteristica);
                 var oFila = this.dgvSugeridos.Rows[iFila];
 
                 // Se colorean las filas
