@@ -380,6 +380,7 @@
             // 
             this.dgvSugeridos.AllowUserToAddRows = false;
             this.dgvSugeridos.AllowUserToDeleteRows = false;
+            this.dgvSugeridos.AllowUserToResizeRows = false;
             this.dgvSugeridos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvSugeridos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvSugeridos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;

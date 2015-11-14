@@ -245,11 +245,11 @@ namespace Refaccionaria.Negocio
             return Filtro.ToString();
         }
 
-        public static void FiltrarIgual(this DataGridView oGrid, object oValor, string sColumna)
+        public static void FiltrarEntero(this DataGridView oGrid, int iValor, string sColumna)
         {
             foreach (DataGridViewRow oFila in oGrid.Rows)
             {
-                oFila.Visible = (oFila.Cells[sColumna].Value == oValor);
+                oFila.Visible = (Helper.ConvertirEntero(oFila.Cells[sColumna].Value) == iValor);
             }
         }
 

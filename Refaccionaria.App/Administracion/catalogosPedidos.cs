@@ -14,9 +14,9 @@ namespace Refaccionaria.App
     public partial class catalogosPedidos : UserControl
     {
         ControlError cntError = new ControlError();
-        BindingSource fuenteDatos;
-        DataTable dtProveedores = new DataTable();
-        DataTable dtPedidos = new DataTable();
+        // BindingSource fuenteDatos;
+        // DataTable dtProveedores = new DataTable();
+        // DataTable dtPedidos = new DataTable();
         bool sel = true;
 
         public static catalogosPedidos Instance
@@ -184,72 +184,7 @@ namespace Refaccionaria.App
                 Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
             }
         }
-
-        public void configurarGridProveedor()
-        {
-            try
-            {
-                dtProveedores.Clear();
-                this.dgvProveedores.Refresh();
-                if (this.dgvProveedores.RowCount > 0)
-                    this.dgvProveedores.Rows.Clear();
-
-                if (this.dgvProveedores.Columns.Count > 0)
-                    this.dgvProveedores.Columns.Clear();
-
-                this.dgvProveedores.DataSource = null;
-                dtProveedores = new DataTable();
-
-                var colProveedorId = new DataColumn();
-                colProveedorId.DataType = System.Type.GetType("System.Int32");
-                colProveedorId.ColumnName = "ProveedorID";
-
-                var colNombreProveedor = new DataColumn();
-                colNombreProveedor.DataType = Type.GetType("System.String");
-                colNombreProveedor.ColumnName = "Nombre Proveedor";
-
-                var colImporte = new DataColumn();
-                colImporte.DataType = Type.GetType("System.Decimal");
-                colImporte.ColumnName = "Importe";
-
-                var colPct = new DataColumn();
-                colPct.DataType = Type.GetType("System.Decimal");
-                colPct.ColumnName = "PCT";
-
-                var colCaracteristica = new DataColumn();
-                colCaracteristica.DataType = Type.GetType("System.String");
-                colCaracteristica.ColumnName = "Caracteristica";
-
-                /* var colPctPedido = new DataColumn();
-                colPctPedido.DataType = Type.GetType("System.String");
-                colPctPedido.ColumnName = "Pct Pedido";
-                */
-
-                dtProveedores.Columns.AddRange(new DataColumn[] { colProveedorId, colNombreProveedor, colImporte, colPct, colCaracteristica });
-
-                this.dgvProveedores.DataSource = dtProveedores;
-                Helper.OcultarColumnas(this.dgvProveedores, new string[] { "ProveedorID" });
-                // Helper.FormatoDecimalColumnas(this.dgvProveedores, new string[] { "Importe" });
-                this.dgvProveedores.Columns["Importe"].FormatoMoneda();
-                this.dgvProveedores.Columns["PCT"].DefaultCellStyle.Format = GlobalClass.FormatoPorcentaje;
-                
-                this.dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-                foreach (DataGridViewColumn column in this.dgvProveedores.Columns)
-                {
-                    // column.SortMode = DataGridViewColumnSortMode.NotSortable;
-                    column.ReadOnly = true;
-                }
-
-                this.dgvProveedores.DefaultCellStyle.ForeColor = Color.Black;
-                this.dgvProveedores.BackgroundColor = Color.FromArgb(188, 199, 216);
-                this.dgvProveedores.ClearSelection();
-            }
-            catch (Exception ex)
-            {
-                Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
-            }
-        }
-
+        
         public void CargarSucursales()
         {
             try
@@ -323,8 +258,8 @@ namespace Refaccionaria.App
             decimal mTotal = 0;
             foreach (DataGridViewRow oFila in this.dgvSugeridos.Rows)
             {
-                if (!oFila.Visible || !Helper.ConvertirBool(oFila.Cells["Sel"].Value)) continue;
-                mTotal += Helper.ConvertirDecimal(oFila.Cells["Costo Total"].Value);
+                if (!oFila.Visible || !Helper.ConvertirBool(oFila.Cells["sug_Sel"].Value)) continue;
+                mTotal += Helper.ConvertirDecimal(oFila.Cells["sug_CostoTotal"].Value);
             }
             this.txtImporteTotal.Text = mTotal.ToString(GlobalClass.FormatoMoneda);
 
@@ -380,9 +315,9 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
             this.btnMostrar.Enabled = false;
             this.tabPedidos.SelectedIndex = 0;
-            var oLog = new Log();
-            oLog.Show();
-            oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Obteniendo datos.");  // dPend
+            // var oLog = new Log();
+            // oLog.Show();
+            // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Obteniendo datos.");  // dPend
 
             // Se obtienen los parámetros adicionales
             var dic = new Dictionary<string, object>();
@@ -406,7 +341,7 @@ namespace Refaccionaria.App
             var oSugeridos = General.ExecuteProcedure<pauPedidosSugeridos_Result>("pauPedidosSugeridos", dic);
 
             // Se comienzan a llenar los datos
-            oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Llenando sugeridos.");  // dPend
+            // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Llenando sugeridos.");  // dPend
 
             //     
             var selMatriz = false;
@@ -435,49 +370,38 @@ namespace Refaccionaria.App
             }
 
             // Se comienzan a llenar los datos
+            this.dgvSugeridos.Rows.Clear();
             foreach (var oReg in oSugeridos)
             {
+                // Se verifica si está seleccionada la sucursal
                 oReg.NecesidadMatriz = (selMatriz ? oReg.NecesidadMatriz : 0);
                 oReg.NecesidadSuc02 = (selSuc02 ? oReg.NecesidadSuc02 : 0);
                 oReg.NecesidadSuc03 = (selSuc03 ? oReg.NecesidadSuc03 : 0);
 
-                //Si la el criterio 'A' no se encuentra en el campo Nivel de cada sucursal, entonces ponener la necesidad de c/sucurasal en 0                
-                /* Duda aquí, preguntar
-                foreach (DataRow fila in dtPedidos.Rows)
-                {
-                    var criterio = Helper.ConvertirCadena(fila["CriterioABC"]);
-                    if (!string.IsNullOrEmpty(criterio) && !dtPedidos.Columns["CriterioABC"].ReadOnly)
-                    {
-                        if (!nivelMatriz.Contains(criterio) && !dtPedidos.Columns["NecesidadMatriz"].ReadOnly)
-                            fila["NecesidadMatriz"] = 0;
-
-                        if (!nivelSuc02.Contains(criterio) && !dtPedidos.Columns["NecesidadSuc02"].ReadOnly)
-                            fila["NecesidadSuc02"] = 0;
-
-                        if (!nivelSuc03.Contains(criterio) && !dtPedidos.Columns["NecesidadSuc03"].ReadOnly)
-                            fila["NecesidadSuc03"] = 0;
-                    }
-                }
-                */
+                // Si no se cumple el criterio Abc según el filtro, por sucursal, la necesidad se hace cero
+                oReg.NecesidadMatriz = (nivelMatriz.Contains(oReg.CriterioABC) ? oReg.NecesidadMatriz : 0);
+                oReg.NecesidadSuc02 = (nivelSuc02.Contains(oReg.CriterioABC) ? oReg.NecesidadSuc02 : 0);
+                oReg.NecesidadSuc03 = (nivelSuc02.Contains(oReg.CriterioABC) ? oReg.NecesidadSuc03 : 0);
 
                 decimal mTotal = (oReg.NecesidadMatriz + oReg.NecesidadSuc02 + oReg.NecesidadSuc03).Valor();
                 decimal mPedido = ((int)(((mTotal / oReg.UnidadEmpaque.Valor()) + 0.4M)) * oReg.UnidadEmpaque).Valor();
                 oReg.Costo = (mPedido * oReg.CostoConDescuento);
 
                 int iFila = this.dgvSugeridos.Rows.Add(oReg.ParteID, oReg.ProveedorID, true, oReg.NumeroParte, oReg.NombreParte, oReg.UnidadEmpaque, oReg.CriterioABC
-                    , oReg.NecesidadMatriz, oReg.NecesidadSuc02, oReg.NecesidadSuc03, oReg.Total, mPedido, oReg.CostoConDescuento, oReg.Costo);
+                    , oReg.NecesidadMatriz, oReg.NecesidadSuc02, oReg.NecesidadSuc03, oReg.Total, mPedido, oReg.CostoConDescuento, oReg.Costo, oReg.Observacion);
                 var oFila = this.dgvSugeridos.Rows[iFila];
 
                 // Se colorean las filas
-                switch (oReg.Caracteristica)
+                /* switch (oReg.Caracteristica)
                 {
                     case "9500": oFila.Cells["sug_Descripcion"].Style.ForeColor = Color.Blue; break;
                     case "RF": oFila.Cells["sug_Descripcion"].Style.ForeColor = Color.Red; break;
                 }
+                */
             }
 
             // Se obtienen los datos para lo de proveedores
-            oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Llenando proveedores.");  // dPend
+            // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Llenando proveedores.");  // dPend
             var oProveedores = oSugeridos.GroupBy(c => c.ProveedorID).Select(c => new
             {
                 ProveedorID = c.Key,
@@ -487,34 +411,36 @@ namespace Refaccionaria.App
             }).OrderByDescending(c => c.Importe);
             decimal mTotalProv = oProveedores.Sum(c => c.Importe).Valor();
             // Se llena el grid de proveedores
+            this.dgvProveedores.Rows.Clear();
             foreach (var oReg in oProveedores)
             {
                 int iFila = this.dgvProveedores.Rows.Add(oReg.ProveedorID, oReg.Proveedor, oReg.Importe, (oReg.Importe / mTotalProv), oReg.Caracteristica);
                 var oFila = this.dgvProveedores.Rows[iFila];
                 // Se colorean las filas
-                switch (oReg.Caracteristica)
+                /* switch (oReg.Caracteristica)
                 {
                     case "9500": oFila.Cells["pro_Proveedor"].Style.ForeColor = Color.Blue; break;
                     case "RF": oFila.Cells["pro_Proveedor"].Style.ForeColor = Color.Red; break;
                 }
+                */
             }
 
             // Se colorean algunas filas, según el caso
             // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Coloreando.");  // dPend
-            // this.ColorearSugeridos(true);
+            this.ColorearSugeridos(true);
 
             // Se calcula el presupuesto
-            oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Calculando presupuesto.");  // dPend
+            // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Calculando presupuesto.");  // dPend
             this.CalcularPresupuesto();
             
             // Se guardan las líneas y marcas seleccionadas
-            oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Guardando filtro.");  // dPend
+            // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Guardando filtro.");  // dPend
             this.GuardarFiltro();
 
             //
             this.btnMostrar.Enabled = true;
-            oLog.finalizo = true;
-            oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Finalizó.");  // dPend
+            // oLog.finalizo = true;
+            // oLog.AppendTextBox(DateTime.Now.ToString(GlobalClass.FormatoFechaHora) + ": Finalizó.");  // dPend
             Cargando.Cerrar();
         }
 
@@ -557,10 +483,10 @@ namespace Refaccionaria.App
                 }
                 */
 
-                switch (Helper.ConvertirCadena(oFila.Cells["Caracteristica"].Value))
+                switch (Helper.ConvertirCadena(oFila.Cells["sug_Caracteristica"].Value))
                 {
-                    case "9500": oFila.Cells["NombreParte"].Style.ForeColor = Color.Blue; break;
-                    case "RF": oFila.Cells["NombreParte"].Style.ForeColor = Color.Red; break;
+                    case "9500": oFila.Cells["sug_Descripcion"].Style.ForeColor = Color.Blue; break;
+                    case "RF": oFila.Cells["sug_Descripcion"].Style.ForeColor = Color.Red; break;
                 }
             }
 
@@ -569,10 +495,10 @@ namespace Refaccionaria.App
             {
                 foreach (DataGridViewRow oFila in this.dgvProveedores.Rows)
                 {
-                    switch (Helper.ConvertirCadena(oFila.Cells["Caracteristica"].Value))
+                    switch (Helper.ConvertirCadena(oFila.Cells["pro_Caracteristica"].Value))
                     {
-                        case "9500": oFila.Cells["Nombre Proveedor"].Style.ForeColor = Color.Blue; break;
-                        case "RF": oFila.Cells["Nombre Proveedor"].Style.ForeColor = Color.Red; break;
+                        case "9500": oFila.Cells["pro_Proveedor"].Style.ForeColor = Color.Blue; break;
+                        case "RF": oFila.Cells["pro_Proveedor"].Style.ForeColor = Color.Red; break;
                     }
                 }
             }
@@ -742,7 +668,7 @@ namespace Refaccionaria.App
 
         private void dgvProveedores_Sorted(object sender, EventArgs e)
         {
-            this.fuenteDatos.RemoveFilter();
+            // this.fuenteDatos.RemoveFilter();
             this.ColorearSugeridos(true);
         }
 
@@ -758,7 +684,7 @@ namespace Refaccionaria.App
             */
 
             int iProveedorID = Helper.ConvertirEntero(this.dgvProveedores.CurrentRow.Cells["pro_ProveedorID"].Value);
-            this.dgvSugeridos.FiltrarIgual(iProveedorID, "sug_ProveedorID");
+            this.dgvSugeridos.FiltrarEntero(iProveedorID, "sug_ProveedorID");
 
             this.sacarImporteTotal();
         }
