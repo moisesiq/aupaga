@@ -878,13 +878,11 @@ namespace Refaccionaria.App
                         t.Rows.RemoveAt(iFila--);
                 }
 
-                using (FastReport.Report report = new FastReport.Report())
-                {
-                    report.Load(string.Format("{0}{1}", GlobalClass.ConfiguracionGlobal.pathReportes, "ReportePedidosSugeridos.frx"));
-                    report.RegisterData(t, "PartesSugeridas");
-                    report.GetDataSource("PartesSugeridas").Enabled = true;
-                    report.Show(true);
-                }
+                var oRep = new FastReport.Report();
+                oRep.Load(string.Format("{0}{1}", GlobalClass.ConfiguracionGlobal.pathReportes, "ReportePedidosSugeridos.frx"));
+                oRep.RegisterData(t, "PartesSugeridas");
+                oRep.GetDataSource("PartesSugeridas").Enabled = true;
+                UtilLocal.EnviarReporteASalida("Reportes.Pedidos.Pedido", oRep);
             }
             catch (Exception ex)
             {
