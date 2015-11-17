@@ -387,12 +387,15 @@ namespace Refaccionaria.App
                 oReg.NecesidadSuc02 = (nivelSuc02.Contains(oReg.CriterioABC) ? oReg.NecesidadSuc02 : 0);
                 oReg.NecesidadSuc03 = (nivelSuc02.Contains(oReg.CriterioABC) ? oReg.NecesidadSuc03 : 0);
 
-                decimal mTotal = (oReg.NecesidadMatriz + oReg.NecesidadSuc02 + oReg.NecesidadSuc03).Valor();
-                decimal mPedido = ((int)(((mTotal / oReg.UnidadEmpaque.Valor()) + 0.4M)) * oReg.UnidadEmpaque).Valor();
-                oReg.Costo = (mPedido * oReg.CostoConDescuento);
+                if (oReg.UnidadEmpaque > 1)
+                {
+                    decimal mTotal = (oReg.NecesidadMatriz + oReg.NecesidadSuc02 + oReg.NecesidadSuc03).Valor();
+                    oReg.Pedido = this.CalcularPedido(mTotal, oReg.UnidadEmpaque.Valor());
+                }
+                decimal mCostoTotal = (oReg.Pedido * oReg.CostoConDescuento).Valor();
 
                 int iFila = this.dgvSugeridos.Rows.Add(oReg.ParteID, oReg.ProveedorID, true, oReg.NumeroParte, oReg.NombreParte, oReg.UnidadEmpaque, oReg.CriterioABC
-                    , oReg.NecesidadMatriz, oReg.NecesidadSuc02, oReg.NecesidadSuc03, oReg.Total, mPedido, oReg.CostoConDescuento, oReg.Costo
+                    , oReg.NecesidadMatriz, oReg.NecesidadSuc02, oReg.NecesidadSuc03, oReg.Total, oReg.Pedido, oReg.CostoConDescuento, mCostoTotal
                     , oReg.Observacion, oReg.Caracteristica);
                 var oFila = this.dgvSugeridos.Rows[iFila];
 
@@ -639,13 +642,22 @@ namespace Refaccionaria.App
             decimal mTotal = (Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadMatriz"].Value) + Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadSuc02"].Value)
                 + Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadSuc03"].Value));
             decimal mEmpaque = Helper.ConvertirDecimal(oFila.Cells["sug_UnidadDeEmpaque"].Value);
-            decimal mPedido = ((int)(((mTotal / mEmpaque) + 0.4M)) * mEmpaque);
+            decimal mPedido = this.CalcularPedido(mTotal, mEmpaque);
 
             oFila.Cells["sug_Total"].Value = mTotal;
             oFila.Cells["sug_Pedido"].Value = mPedido;
             oFila.Cells["sug_CostoTotal"].Value = (mPedido * Helper.ConvertirDecimal(oFila.Cells["sug_CostoConDescuento"].Value));
             
             this.sacarImporteTotal();
+        }
+
+        private decimal CalcularPedido(decimal mNecesidad, decimal mUnidadDeEmpaque)
+        {
+            decimal mFactor = (mNecesidad / mUnidadDeEmpaque);
+            mFactor = Math.Round(mFactor, 0);
+            if (mFactor == 0)
+                mFactor = 1;
+            return (mFactor * mUnidadDeEmpaque);
         }
 
         #endregion
@@ -718,10 +730,10 @@ namespace Refaccionaria.App
             if (e.KeyCode == Keys.ShiftKey || e.KeyCode == Keys.Space)
             {
                 var fila = dgvSugeridos.CurrentRow.Index;
-                if (Helper.ConvertirBool(dgvSugeridos.Rows[fila].Cells["Sel"].Value).Equals(true))
-                    dgvSugeridos.Rows[fila].Cells["Sel"].Value = false;
+                if (Helper.ConvertirBool(dgvSugeridos.Rows[fila].Cells["sug_Sel"].Value).Equals(true))
+                    dgvSugeridos.Rows[fila].Cells["sug_Sel"].Value = false;
                 else
-                    dgvSugeridos.Rows[fila].Cells["Sel"].Value = true;
+                    dgvSugeridos.Rows[fila].Cells["sug_Sel"].Value = true;
             }
         }
 
@@ -1117,6 +1129,7 @@ namespace Refaccionaria.App
                 Helper.ColumnasToHeaderText(this.dgvPedidos);
                 this.dgvPedidos.Columns["PedidoID"].HeaderText = "Pedido";
                 this.dgvPedidos.Columns["Abreviacion"].HeaderText = "Estatus";
+                this.dgvPedidos.AutoResizeColumns();
             }
             catch (Exception ex)
             {
@@ -1161,6 +1174,7 @@ namespace Refaccionaria.App
                 this.dgvDetallePedido.DataSource = General.GetListOf<PedidosDetalleView>(p => p.PedidoID == pedidoId).ToList();
                 Helper.OcultarColumnas(this.dgvDetallePedido, new string[] { "PedidoDetalleID", "PedidoID", "ParteID", "PedidoEstatusID", "NombrePedidoEstatus", "Abreviacion", "CostosUnitario", "FechaRegistro", "Fecha" });
                 Helper.ColumnasToHeaderText(this.dgvDetallePedido);
+                this.dgvDetallePedido.Columns["NombreParte"].Width = 400;
             }
             catch (Exception ex)
             {
