@@ -882,18 +882,36 @@ namespace Refaccionaria.App
                 }
                 */
 
-                var t = this.dgvSugeridos.ADataTable();
                 // Se quitan los que no estén seleccionados y los que no tengan pedido
-                for (int iFila = 0; iFila < t.Rows.Count; iFila++)
+                var oPartes = new List<pauPedidosSugeridos_Result>();
+                foreach (DataGridViewRow oFila in this.dgvSugeridos.Rows)
                 {
-                    if (!Helper.ConvertirBool(t.Rows[iFila]["sug_Sel"]) || Helper.ConvertirEntero(t.Rows[iFila]["sug_Pedido"]) <= 0)
-                        t.Rows.RemoveAt(iFila--);
+                    if (!oFila.Visible || !Helper.ConvertirBool(oFila.Cells["sug_Sel"].Value) || Helper.ConvertirDecimal(oFila.Cells["sug_Pedido"].Value) <= 0)
+                        continue;
+                    oPartes.Add(new pauPedidosSugeridos_Result()
+                    {
+                        ParteID = Helper.ConvertirEntero(oFila.Cells["sug_ParteID"].Value),
+                        NumeroParte = Helper.ConvertirCadena(oFila.Cells["sug_NumeroDeParte"].Value),
+                        NombreParte = Helper.ConvertirCadena(oFila.Cells["sug_Descripcion"].Value),
+                        UnidadEmpaque = Helper.ConvertirDecimal(oFila.Cells["sug_UnidadDeEmpaque"].Value),
+                        CriterioABC = Helper.ConvertirCadena(oFila.Cells["sug_AbcDeVentas"].Value),
+                        NecesidadMatriz = Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadMatriz"].Value),
+                        NecesidadSuc02 = Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadSuc02"].Value),
+                        NecesidadSuc03 = Helper.ConvertirDecimal(oFila.Cells["sug_NecesidadSuc03"].Value),
+                        Total = Helper.ConvertirDecimal(oFila.Cells["sug_Total"].Value),
+                        Pedido = Helper.ConvertirDecimal(oFila.Cells["sug_Pedido"].Value),
+                        CostoConDescuento = Helper.ConvertirDecimal(oFila.Cells["sug_CostoConDescuento"].Value),
+                        Costo = Helper.ConvertirDecimal(oFila.Cells["sug_CostoTotal"].Value),
+                        Observacion = Helper.ConvertirCadena(oFila.Cells["sug_Observacion"].Value),
+                    });
                 }
 
                 var oRep = new FastReport.Report();
                 oRep.Load(string.Format("{0}{1}", GlobalClass.ConfiguracionGlobal.pathReportes, "ReportePedidosSugeridos.frx"));
-                oRep.RegisterData(t, "PartesSugeridas");
-                oRep.GetDataSource("PartesSugeridas").Enabled = true;
+                oRep.RegisterData(oPartes, "PartesSugeridas");
+                oRep.SetParameterValue("Proveedor", this.dgvProveedores.CurrentRow.Cells["pro_Proveedor"].Value);
+                oRep.SetParameterValue("Usuario", GlobalClass.UsuarioGlobal.NombreUsuario);
+                // oRep.GetDataSource("PartesSugeridas").Enabled = true;
                 UtilLocal.EnviarReporteASalida("Reportes.Pedidos.Pedido", oRep);
             }
             catch (Exception ex)
