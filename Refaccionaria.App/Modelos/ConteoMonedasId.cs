@@ -1,8 +1,9 @@
 ﻿
 namespace Refaccionaria.App
 {
-    public class ConteoMonedasId : ConteoMonedas
+    public class ConteoMonedasUsuario : ConteoMonedas
     {
-        public int Id { get; set; }
+        public int UsuarioID { get; set; }
+        public string Usuario { get; set; }
     }
 }

@@ -133,6 +133,7 @@ namespace Refaccionaria.Modelo
         public class CajaTiposDeIngreso
         {
             public const int Refuerzo = 1;
+            public const int Otros = 5;
         }
 
         public class CajaTiposDeEgreso

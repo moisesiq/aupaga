@@ -1732,9 +1732,10 @@
             this.chkImporteFactura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkImporteFactura.AutoSize = true;
             this.chkImporteFactura.Enabled = false;
+            this.chkImporteFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkImporteFactura.Location = new System.Drawing.Point(252, 613);
             this.chkImporteFactura.Name = "chkImporteFactura";
-            this.chkImporteFactura.Size = new System.Drawing.Size(70, 17);
+            this.chkImporteFactura.Size = new System.Drawing.Size(67, 17);
             this.chkImporteFactura.TabIndex = 29;
             this.chkImporteFactura.Text = "Imp. Fac.";
             // 
@@ -1791,9 +1792,10 @@
             // chkEsNota
             // 
             this.chkEsNota.AutoSize = true;
+            this.chkEsNota.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkEsNota.Location = new System.Drawing.Point(828, 10);
             this.chkEsNota.Name = "chkEsNota";
-            this.chkEsNota.Size = new System.Drawing.Size(64, 17);
+            this.chkEsNota.Size = new System.Drawing.Size(61, 17);
             this.chkEsNota.TabIndex = 31;
             this.chkEsNota.Text = "Es Nota";
             this.chkEsNota.UseVisualStyleBackColor = true;

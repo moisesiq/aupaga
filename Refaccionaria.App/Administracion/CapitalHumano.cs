@@ -631,8 +631,22 @@ namespace Refaccionaria.App
                     var oCuentaAux = General.GetEntity<ContaCuentaAuxiliar>(c => c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.DeudoresDiversos
                         && c.RelacionID == oReg.UsuarioID);
                     if (oCuentaAux != null)
-                        ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, "ADELANTO", Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID
+                    {
+                        ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Ingreso, "ADELANTO", Cat.ContaCuentasAuxiliares.Caja, oCuentaAux.ContaCuentaAuxiliarID
                             , oReg.Adelanto, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor(), oReg.SucursalID);
+
+                        // Se crea adicionalmente, un ingreso de caja por el importe del adelanto
+                        var oIngreso = new CajaIngreso()
+                        {
+                            CajaTipoIngresoID = Cat.CajaTiposDeIngreso.Otros,
+                            Concepto = ("PAGO ADELANTO " + oReg.Usuario),
+                            Importe = oReg.Adelanto,
+                            Fecha = dAhora,
+                            SucursalID = Cat.Sucursales.Matriz,
+                            RealizoUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID
+                        };
+                        Guardar.Generico<CajaIngreso>(oIngreso);
+                    }
                 }
                 // Se crea la póliza de minutos tarde y otros, si aplica
                 if (oReg.MinutosTarde > 0 || oReg.Otros > 0)
@@ -652,6 +666,8 @@ namespace Refaccionaria.App
             }
 
             // Se genera el resguardo y refuerzo especiales
+            /* Este procedimiento hacía crecer el Resguardo, porque el dinero no se tomaba de ReservaNómina y se 
+             * mandaba a Resguardo cuando en realidad quedaba en el salario de los usuarios 17/11/2015
             var oResguardos = new Dictionary<int, decimal>();
             var oRefuerzos = new Dictionary<int, decimal>();
             foreach (DataGridViewRow oFila in this.dgvDatos.Rows)
@@ -687,6 +703,7 @@ namespace Refaccionaria.App
                 var oRefuerzo = VentasProc.GenerarRefuerzo(oReg.Value, oReg.Key);
                 ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.Refuerzo, oRefuerzo.CajaIngresoID, "REFUERZO", "REFUERZO NÓMINA", oReg.Key);
             }
+            */
 
             // Se manda a imprimir la nómina de cada usuario
             var oNominaUsuariosOfV = General.GetListOf<NominaUsuariosOficialView>(c => c.NominaID == oNomina.NominaID);
@@ -831,7 +848,7 @@ namespace Refaccionaria.App
 
         private void GenerarDesgloseLiquido()
         {
-            var oDesglose = new List<ConteoMonedasId>();
+            var oDesglose = new List<ConteoMonedasUsuario>();
             var oMonedas = new Dictionary<decimal, int>();
             var oListaMon = new List<decimal>() { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5M, 0.2M, 0.1M };
             foreach (decimal mMoneda in oListaMon)
@@ -850,9 +867,10 @@ namespace Refaccionaria.App
                 }
 
                 // Se agrega el usuario a la lista
-                oDesglose.Add(new ConteoMonedasId()
+                oDesglose.Add(new ConteoMonedasUsuario()
                 {
-                    Id = Helper.ConvertirEntero(oFila.Cells["UsuarioID"].Value),
+                    UsuarioID = Helper.ConvertirEntero(oFila.Cells["UsuarioID"].Value),
+                    Usuario = Helper.ConvertirCadena(oFila.Cells["Usuario"].Value),
                     Monedas500 = oMonedas[500],
                     Monedas200 = oMonedas[200],
                     Monedas100 = oMonedas[100],
