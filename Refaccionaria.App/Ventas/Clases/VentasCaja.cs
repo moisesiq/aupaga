@@ -297,6 +297,14 @@ namespace Refaccionaria.App
                     Guardar.Generico<CajaEgreso>(oEgreso);
                 }
 
+                // Se verifica si es una gasto de Reparto utilidades, para hacer un refuerzo por la misma cantidad
+                if (General.Exists<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == iCuentaAuxiliarID && c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.ReparteDeUtilidades))
+                {
+                    var oRef = VentasProc.GenerarRefuerzo(oEgreso.Importe, oEgreso.SucursalID);
+                    oRef.Fecha = oEgreso.Fecha;
+                    Guardar.Generico<CajaIngreso>(oRef);
+                }
+
                 // Se verifica si es un gasto de casco, para afectar la existencia
                 if (iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoChico || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoMediano
                     || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoGrande || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoExtragrande)
@@ -347,6 +355,13 @@ namespace Refaccionaria.App
                 {
                     var oPoliza = General.GetEntity<ContaPoliza>(c => c.RelacionTabla == Cat.Tablas.CajaEgreso && c.RelacionID == oMov.CajaEgresoID);
                     ContaProc.BorrarPoliza(oPoliza.ContaPolizaID);
+                }
+
+                // Se verifica si es una gasto de Reparto utilidades, para borrar el refuerzo creado
+                if (General.Exists<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == iCuentaAuxiliarID && c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.ReparteDeUtilidades))
+                {
+                    var oRef = General.GetEntity<CajaIngreso>(c => c.CajaTipoIngresoID == Cat.CajaTiposDeIngreso.Refuerzo && c.Importe == oMov.Importe && c.Fecha == oMov.Fecha);
+                    Guardar.Eliminar<CajaIngreso>(oRef, true);
                 }
 
                 // Se verifica si es un gasto de casco, para afectar la existencia
@@ -533,7 +548,8 @@ namespace Refaccionaria.App
                 if (!oPorCobrar.ctlCobro.CompletarCobro())
                     return false;                
             }
-            
+            decimal mEfectivoRecibido = oPorCobrar.ctlCobro.EfectivoRecibido;
+
             // Si la venta es a crédito y el cliente tiene personal, se muestran las firmas
             if (oPorCobrar.ctlCobro.ACredito)
             {
@@ -690,6 +706,10 @@ namespace Refaccionaria.App
                     VentasProc.GenerarAutorizacion(Cat.AutorizacionesProcesos.NotaDeCreditoOtroClienteUsar, Cat.Tablas.NotaDeCredito, oNotaOC, iAutorizoID);
             }
 
+            // Para la impresión del ticket o factura
+            var oAdicionales = new Dictionary<string, object>();
+            oAdicionales.Add("EfectivoRecibido", mEfectivoRecibido);
+
             // Se realiza la facturación, si aplica
             ResAcc<int> ResFactura = null;
             bool bGenerarFolio = true;
@@ -720,7 +740,7 @@ namespace Refaccionaria.App
                             if (++iFactura > 1)
                                 oProductos[0].NombreDeParte = string.Format("{0}\n(Complemento {1})", sDescripcion, (iFactura - 1));
                             // Se manda hacer la factura
-                            ResFactura = VentasProc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iAFClienteID, oProductos, sFormaDePago, "");
+                            ResFactura = VentasProc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iAFClienteID, oProductos, sFormaDePago, "", oAdicionales);
                             if (ResFactura.Error)
                                 break;
                             //
@@ -735,7 +755,7 @@ namespace Refaccionaria.App
                 }
                 
                 if (ResFactura == null)
-                    ResFactura = VentasProc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iAFClienteID, oProductos, sFormaDePago, "");
+                    ResFactura = VentasProc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iAFClienteID, oProductos, sFormaDePago, "", oAdicionales);
 
                 // Se obtiene la forma de pago
                 /* if (oPorCobrar.ctlCobro.FormaDePagoLibre == "")
@@ -794,7 +814,7 @@ namespace Refaccionaria.App
                 var o9500Ant = General.GetEntity<Cotizacion9500>(q => q.EstatusGenericoID == Cat.EstatusGenericos.Pendiente
                     && q.AnticipoVentaID.Value == oVenta.VentaID && q.Estatus);
                 if (o9500Ant == null) {
-                    VentasProc.GenerarTicketDeVenta(oVenta.VentaID, oPorCobrar.ctlDetalle.ObtenerListaVenta());
+                    VentasProc.GenerarTicketDeVenta(oVenta.VentaID, oPorCobrar.ctlDetalle.ObtenerListaVenta(), oAdicionales);
 					// Se verifica si se debe imprimir ticket precio 1
 					if(General.Exists<Cliente>(c => c.ClienteID == oPorCobrar.ClienteID && c.TicketPrecio1.HasValue && c.TicketPrecio1.Value))
 	                    VentasProc.GenerarTicketPrecio1(oVenta.VentaID);

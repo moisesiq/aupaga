@@ -136,6 +136,8 @@ namespace Refaccionaria.App
 
         public int VentaID { get; set; }
 
+        public decimal EfectivoRecibido { get; set; }
+
         #endregion
 
         #region [ Eventos ]
@@ -530,9 +532,12 @@ namespace Refaccionaria.App
             if (mEfectivo <= 0) return true;  // No hay necesidad de pedir efectivo
 
             bool bExito = false;
-            ContenedorControl frmEfectivo = new ContenedorControl("Dinero en Efectivo", new Efectivo(mEfectivo));
+            var frmEfectivo = new Efectivo(mEfectivo);
             if (frmEfectivo.ShowDialog(Principal.Instance) == DialogResult.OK)
+            {
                 bExito = true;
+                this.EfectivoRecibido = frmEfectivo.Recibido;
+            }
             frmEfectivo.Dispose();
 
             return bExito;

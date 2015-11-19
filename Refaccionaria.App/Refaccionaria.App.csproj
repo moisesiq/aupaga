@@ -1159,17 +1159,17 @@
     <Compile Include="Ventas\DetalleDevolucion.Designer.cs">
       <DependentUpon>DetalleDevolucion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ventas\Efectivo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Ventas\Efectivo.Designer.cs">
-      <DependentUpon>Efectivo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Contabilidad\GastoContable.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Contabilidad\GastoContable.Designer.cs">
       <DependentUpon>GastoContable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\Formas\Efectivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\Formas\Efectivo.Designer.cs">
+      <DependentUpon>Efectivo.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventas\Formas\ReportarErrorParte.cs">
       <SubType>Form</SubType>
@@ -1913,14 +1913,14 @@
     <EmbeddedResource Include="Ventas\DirectorioVentasDetalle.resx">
       <DependentUpon>DirectorioVentasDetalle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ventas\Efectivo.resx">
-      <DependentUpon>Efectivo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Ventas\FacturarVentas.resx">
       <DependentUpon>FacturarVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\GastoContable.resx">
       <DependentUpon>GastoContable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\Formas\Efectivo.resx">
+      <DependentUpon>Efectivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\Formas\ReportarErrorParte.resx">
       <DependentUpon>ReportarErrorParte.cs</DependentUpon>

@@ -501,7 +501,7 @@ namespace Refaccionaria.App
             oReporte.SetParameterValue("Leyenda7", oLeyendas["Tickets.Leyenda7"]);
         }
 
-        public static void GenerarTicketDeVenta(int iVentaID, List<ProductoVenta> oListaVenta)
+        public static void GenerarTicketDeVenta(int iVentaID, List<ProductoVenta> oListaVenta, Dictionary<string, object> oAdicionales)
         {
             var oVentaV = General.GetEntity<VentasView>(q => q.VentaID == iVentaID);
             var oVentaDetalle = General.GetListOf<VentasDetalleView>(q => q.VentaID == iVentaID);
@@ -532,13 +532,19 @@ namespace Refaccionaria.App
             oRep.SetParameterValue("LeyendaDeVenta", VentasProc.ObtenerQuitarLeyenda(iVentaID));
             oRep.SetParameterValue("LeyendaVehiculo", (oVentaV.ClienteVehiculoID.HasValue ? UtilDatos.LeyendaDeVehiculo(oVentaV.ClienteVehiculoID.Value) : ""));
             oRep.SetParameterValue("Precio1", false);
+            // Se agregan los adicionales, si hubiera
+            if (oAdicionales != null)
+            {
+                foreach (var oAd in oAdicionales)
+                    oRep.SetParameterValue(oAd.Key, oAd.Value);
+            }                
 
             UtilLocal.EnviarReporteASalida("Reportes.VentaTicket.Salida", oRep);
         }
 
         public static void GenerarTicketDeVenta(int iVentaID)
         {
-            VentasProc.GenerarTicketDeVenta(iVentaID, null);
+            VentasProc.GenerarTicketDeVenta(iVentaID, null, null);
         }
 
         public static void GenerarTicketDeCotizacion(VentasView oVenta, List<VentasDetalleView> oVentaDetalle)
@@ -897,6 +903,8 @@ namespace Refaccionaria.App
                     oRep.SetParameterValue("LeyendaDeVenta", oFacturaE.Adicionales["LeyendaDeVenta"]);
                 if (oFacturaE.Adicionales.ContainsKey("LeyendaDeVehiculo"))
                     oRep.SetParameterValue("LeyendaDeVehiculo", oFacturaE.Adicionales["LeyendaDeVehiculo"]);
+                if (oFacturaE.Adicionales.ContainsKey("EfectivoRecibido"))
+                    oRep.SetParameterValue("EfectivoRecibido", oFacturaE.Adicionales["EfectivoRecibido"]);
             }
             oRep.SetParameterValue("TotalConLetra", Helper.ImporteALetra(oFacturaE.Total).ToUpper());
 
@@ -1074,7 +1082,7 @@ namespace Refaccionaria.App
         }
 
         public static ResAcc<int> GenerarFacturaElectronica(List<int> VentasIDs, int iClienteID
-            , List<ProductoVenta> oListaVenta, string sFormaDePago, string sObservacion)
+            , List<ProductoVenta> oListaVenta, string sFormaDePago, string sObservacion, Dictionary<string, object> oAdicionales)
         {
             // Se crea la instancia de la clase de Facturación Electrónica
             var oFacturaE = new FacturaElectronica();
@@ -1112,6 +1120,12 @@ namespace Refaccionaria.App
                 // Leyenda de vehículo, si aplica
                 if (oVentas[0].ClienteVehiculoID.HasValue)
                     oFacturaE.Adicionales.Add("LeyendaDeVehiculo", UtilDatos.LeyendaDeVehiculo(oVentas[0].ClienteVehiculoID.Value));
+                // Se agregan los adicionales, si hubiera
+                if (oAdicionales != null)
+                {
+                    if (oAdicionales.ContainsKey("EfectivoRecibido"))
+                        oFacturaE.Adicionales.Add("EfectivoRecibido", oAdicionales["EfectivoRecibido"].ToString());
+                }
             }
             
             // Se llenan los datos referentes a la forma de pago
@@ -1228,20 +1242,10 @@ namespace Refaccionaria.App
 
             return new ResAcc<int>(true, oVentaFactura.VentaFacturaID);
         }
-        /*
-        public static ResAcc<int> GenerarFacturaElectronica(List<int> VentasIDs, int iClienteID, List<VentasPagosDetalleView> oFormasDePago, string sObservacion)
-        {
-            return VentasProc.GenerarFacturaElectronica(VentasIDs, iClienteID, null, oFormasDePago, sObservacion);
-        }
-        */
+        
         public static ResAcc<int> GenerarFacturaElectronica(List<int> VentasIDs, int iClienteID, string sObservacion)
         {
-            return VentasProc.GenerarFacturaElectronica(VentasIDs, iClienteID, null, null, sObservacion);
-        }
-
-        public static ResAcc<int> GenerarFacturaElectronica(int iVentaID, int iClienteID, string sObservacion)
-        {
-            return VentasProc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iClienteID, null, null, sObservacion);
+            return VentasProc.GenerarFacturaElectronica(VentasIDs, iClienteID, null, null, sObservacion, null);
         }
 
         public static ResAcc<int> GenerarFacturaGlobal(string sConceptoVentas, decimal mCostoTotal, decimal mTotalVentas
