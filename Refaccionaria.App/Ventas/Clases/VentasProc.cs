@@ -415,6 +415,21 @@ namespace Refaccionaria.App
             return oCajaIngreso;
         }
 
+        #region [ Clientes ]
+
+        public static int ObtenerClienteID(string sMensaje, bool bVentasMostrador)
+        {
+            int iClienteID = 0;
+            var frmValor = new MensajeObtenerValor(sMensaje, "", MensajeObtenerValor.Tipo.Combo);
+            frmValor.CargarCombo("ClienteID", "Nombre", General.GetListOf<Cliente>(c => (bVentasMostrador || c.ClienteID != Cat.Clientes.Mostrador) && c.Estatus));
+            if (frmValor.ShowDialog(Principal.Instance) == DialogResult.OK)
+                iClienteID = Helper.ConvertirEntero(frmValor.Valor);
+            frmValor.Dispose();
+            return iClienteID;
+        }
+
+        #endregion
+
         #region [ Auxiliares ]
 
         public static string GenerarFormaDePago(List<VentasPagosDetalleView> oPagoDetalle)

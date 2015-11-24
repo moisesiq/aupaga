@@ -282,7 +282,7 @@ namespace Refaccionaria.App
                 c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.CuentasPorPagarLargoPlazo
                 || (c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.CuentasPorPagarCortoPlazo && c.ContaCuentaAuxiliarID != Cat.ContaCuentasAuxiliares.TarjetaDeCredito)
                 || c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.AcreedoresDiversos
-                || c.ContaSubcuentaID == Cat.ContaSubcuentas.ActivoFijo
+                || (c.ContaSubcuentaID == Cat.ContaSubcuentas.ActivoFijo && c.ContaCuentaDeMayorID != Cat.ContaCuentasDeMayor.Edificios)
                 ));
             var oDeudas = oReinversiones.Where(c => c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.CuentasPorPagarLargoPlazo
                 || c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.CuentasPorPagarCortoPlazo || c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.AcreedoresDiversos)

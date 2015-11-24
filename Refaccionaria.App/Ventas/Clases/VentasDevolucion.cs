@@ -58,7 +58,7 @@ namespace Refaccionaria.App
             // Se valida la parte de búsqueda
             if (!this.ctlBusqueda.Validar())
                 return false;
-            
+           
             int iVentaID = this.ctlBusqueda.VentaID;
 
             // Se valida que no sea una venta usada para cobro de Control de Cascos
@@ -79,7 +79,7 @@ namespace Refaccionaria.App
                 if (UtilLocal.MensajePregunta("La Venta seleccionada es de otra Sucursal. ¿Deseas continuar?") != DialogResult.Yes)
                     return false;
             }
-
+            
             // Se verifica si es una cancelación de factura de varios tickets
             int iVentaFacturaID = 0;
             bool bFacturaMultiple = false;
@@ -96,6 +96,19 @@ namespace Refaccionaria.App
                     if (!this.MostrarDetalleVentasFactura(oVentasFactura))
                         return false;
                 }
+            }
+
+            // Se verifica si se creará vale, para pedir el cliente en caso de que no haya
+            int iValeClienteID = 0;
+            if (this.ctlBusqueda.FormaDeDevolucion == Cat.FormasDePago.Vale && oVentaV.ClienteID == Cat.Clientes.Mostrador)
+            {
+                var frmValor = new MensajeObtenerValor("Selecciona el cliente para crear el Vale:", "", MensajeObtenerValor.Tipo.Combo);
+                frmValor.CargarCombo("ClienteID", "Nombre", General.GetListOf<Cliente>(q => q.ClienteID != Cat.Clientes.Mostrador && q.Estatus));
+                if (frmValor.ShowDialog(Principal.Instance) == DialogResult.OK)
+                    iValeClienteID = Helper.ConvertirEntero(frmValor.Valor);
+                frmValor.Dispose();
+                if (iValeClienteID == 0)
+                    return false;
             }
 
             // Se pregunta el usuario que realiza la devolución
@@ -148,7 +161,7 @@ namespace Refaccionaria.App
                         });
                     }
                     // Se manda guardar la devolución
-                    this.GuardarDevolucion(oDev, oDevDet);
+                    this.GuardarDevolucion(oDev, oDevDet, iValeClienteID);
                     // Se agrega a la lisa de devoluciones
                     oIdsDev.Add(oDev.VentaDevolucionID);
 
@@ -182,7 +195,7 @@ namespace Refaccionaria.App
                     });
                 }
                 // Se guarda la devolución
-                this.GuardarDevolucion(oDevolucion, oDevDetalle);
+                this.GuardarDevolucion(oDevolucion, oDevDetalle, iValeClienteID);
                 //
                 oIdsDev.Add(oDevolucion.VentaDevolucionID);
 
@@ -319,7 +332,7 @@ namespace Refaccionaria.App
             return (oRes == DialogResult.OK);
         }
 
-        private void GuardarDevolucion(VentaDevolucion oDevolucion, List<VentaDevolucionDetalle> oDetalle)
+        private void GuardarDevolucion(VentaDevolucion oDevolucion, List<VentaDevolucionDetalle> oDetalle, int? iValeClienteID)
         {
             // Se obtiene el importe total de la venta antes de la devolución
             var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oDevolucion.VentaID);
@@ -347,10 +360,10 @@ namespace Refaccionaria.App
                         oResPagoNeg = VentasProc.GenerarDevolucionDeEfectivo(iVentaID, mImporteDev);
                         break;
                     case Cat.FormasDePago.Vale:
-                        var oVenta = General.GetEntity<Venta>(q => q.Estatus && q.VentaID == iVentaID);
-                        var oResVale = VentasProc.GenerarNotaDeCredito(oVenta.ClienteID, mImporteDev, "", Cat.OrigenesNotaDeCredito.Devolucion, iVentaID.ToString());
+                        // var oVenta = General.GetEntity<Venta>(q => q.Estatus && q.VentaID == iVentaID);
+                        var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Devolucion, iVentaID.ToString());
                         // Se genera el pago negativo por la nota de crédito generada
-                        oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(oVenta.VentaID, mImporteDev, oResVale.Respuesta);
+                        oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(iValeClienteID.Value, mImporteDev, oResVale.Respuesta);
                         break;
                     case Cat.FormasDePago.Cheque:
                     case Cat.FormasDePago.Tarjeta:
@@ -419,11 +432,12 @@ namespace Refaccionaria.App
 
                     // Se registra la salida del inventario
                     var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oDev.VentaID);
+                    var oCascoRecibidoPrecio = General.GetEntity<PartePrecio>(c => c.ParteID == oCascoReg.RecibidoCascoID.Value && c.Estatus);
                     AdmonProc.AfectarExistenciaYKardex(oCascoReg.RecibidoCascoID.Valor(), GlobalClass.SucursalID, Cat.OperacionesKardex.SalidaInventario
-                        , oCascoReg.CascoRegistroID.ToString(), iUsuarioID, oVentaV.Cliente, "CONTROL DE CASCOS", oVentaV.Sucursal, 1, oDevDet.Costo
+                        , oCascoReg.CascoRegistroID.ToString(), iUsuarioID, oVentaV.Cliente, "CONTROL DE CASCOS", oVentaV.Sucursal, 1, oCascoRecibidoPrecio.Costo.Valor()
                         , Cat.Tablas.CascoRegistro, oCascoReg.CascoRegistroID);
 
-                    // Acciones si no se recibió el caso adecuado
+                    // Acciones si no se recibió el casco adecuado
                     if (oCascoReg.RecibidoCascoID != oParte.RequiereCascoDe)
                     {
                         // Acción si hubo diferencia de importe entre el casco recibido y el esperado
@@ -514,7 +528,13 @@ namespace Refaccionaria.App
                             CostoConDescuento = oParteDet.CostoConDescuento
                         };
                         // Se guarda la devolución
-                        this.GuardarDevolucion(oDevolucion, new List<VentaDevolucionDetalle>() { oDetDev });
+                        int iValeClienteID = 0;
+                        if (iFormaDePagoID == Cat.FormasDePago.Vale)
+                        {
+                            var oVale = General.GetEntity<NotaDeCredito>(c => c.NotaDeCreditoID == oPagoDetV.NotaDeCreditoID && c.Estatus);
+                            iValeClienteID = oVale.ClienteID;
+                        }
+                        this.GuardarDevolucion(oDevolucion, new List<VentaDevolucionDetalle>() { oDetDev }, iValeClienteID);
                     }
                 }
             }

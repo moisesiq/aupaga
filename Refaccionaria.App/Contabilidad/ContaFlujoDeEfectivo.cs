@@ -68,7 +68,7 @@ namespace Refaccionaria.App
                 dIni = dIni.AddDays(7);
             }
 
-            // this.dgvDatos.FirstDisplayedScrollingColumnIndex = (iColSem - 1);
+            this.dgvDatos.FirstDisplayedScrollingColumnIndex = (iColSem - 1);
 
             this.FormatoColumnas();
         }
@@ -101,6 +101,9 @@ namespace Refaccionaria.App
             int iAnio = Helper.ConvertirEntero(this.cmbAnio.Text);
             this.LlenarColumnasAnio(iAnio);
 
+            // Se agrega la fila de saldo inicial
+            int iFilaSaldoInicial = this.dgvDatos.Rows.Add("Saldo inicial");
+            this.dgvDatos.Rows[iFilaSaldoInicial].DefaultCellStyle.Font = oFuenteT;
             // Se agrega la fila de ingresos
             int iFilaIngresos = this.dgvDatos.Rows.Add("+ Ingresos");
             this.dgvDatos.Rows[iFilaIngresos].DefaultCellStyle.Font = oFuenteT;
@@ -111,6 +114,10 @@ namespace Refaccionaria.App
             DateTime dDesde = new DateTime(iAnio, 1, 1);
             DateTime dHasta = new DateTime(iAnio, 12, 31);
             var oParams = new Dictionary<string, object>();
+            // Si es año 2015, se muestran sólo datos a partir de la semana del 6 al 12 de Junio. Pedido especial.
+            if (iAnio == 2015 && dDesde < new DateTime(iAnio, 6, 6))
+                dDesde = new DateTime(iAnio, 6, 6);
+            //
             // oParams.Add("SucursalID", (iSucursalID == 0 ? null : (int?)iSucursalID));
             oParams.Add("Pagadas", true);
             oParams.Add("Cobradas", false);
@@ -255,7 +262,7 @@ namespace Refaccionaria.App
                 this.dgvDatos[sSemana, iFilaEgresos].Value = (Helper.ConvertirDecimal(this.dgvDatos[sSemana, iFilaEgresos].Value) + oReg.Importe);
             }
 
-            // Se llenan los totales de egressos
+            // Se llenan los totales de egresos
             this.dgvDatos["Total", iFilaEgresos].Value = mTotal;
             this.dgvDatos["Promedio", iFilaEgresos].Value = (mPromedio / 2);
 
@@ -265,10 +272,15 @@ namespace Refaccionaria.App
             foreach (DataGridViewColumn oCol in this.dgvDatos.Columns)
             {
                 if (oCol.Index == 0) continue;
-                this.dgvDatos[oCol.Index, iFilaSaldo].Value = (
+                decimal mSaldo = (
                     Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaIngresos].Value)
                     - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaEgresos].Value)
                 );
+                this.dgvDatos[oCol.Index, iFilaSaldo].Value = mSaldo;
+
+                // Se llena el saldo inicial de la siguiente semana, si hay
+                if (oCol.Index >= this.iColumnasFijas && oCol.Index < (this.dgvDatos.Columns.Count - 1))
+                    this.dgvDatos[oCol.Index + 1, iFilaSaldoInicial].Value = mSaldo;
             }
 
             // Se llena la gráfica, en base al grid ya cargado

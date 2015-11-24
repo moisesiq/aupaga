@@ -34,6 +34,7 @@ namespace Refaccionaria.App
         const int MaximoElementosBusquedaTexto = 1000;
 
         ControlError ctlAdvertencia = new ControlError() { Icon = Properties.Resources._16_Ico_Advertencia };
+        ControlError ctlError = new ControlError();
         int ParteIDSel;
         BindingList<ProductoVenta> ListaVenta;
         ImageList ImagenesPartes;
@@ -1662,6 +1663,7 @@ namespace Refaccionaria.App
         {
             // Se restaura el cliente
             this.tacCliente.ValorSel = Cat.Clientes.Mostrador;
+            this.ctlError.LimpiarErrores();
             // this.cmbCliente.SelectedValue = Cat.Clientes.Mostrador;
 
             // Se limpian los datos del vehículo
@@ -2030,6 +2032,11 @@ namespace Refaccionaria.App
         //{
         //    return this.VOp;
         //}
+
+        public void PonerErrorCliente(string sError)
+        {
+            this.ctlError.PonerError(this.tacCliente, sError);
+        }
 
         #endregion
 

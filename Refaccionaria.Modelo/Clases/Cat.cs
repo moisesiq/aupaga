@@ -255,6 +255,7 @@ namespace Refaccionaria.Modelo
             public const int CuentasPorPagarLargoPlazo = 90;
             public const int ReparteDeUtilidades = 18;
             public const int AcreedoresDiversos = 120;
+            public const int Edificios = 118;
         }
 
         public class ContaCuentasAuxiliares

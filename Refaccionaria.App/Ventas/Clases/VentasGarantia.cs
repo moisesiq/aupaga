@@ -96,7 +96,20 @@ namespace Refaccionaria.App
                 UtilLocal.MensajeAdvertencia("Debes seleccionar sólo un producto al hacer una garantía.");
                 return false;
             }
-            
+
+            // Se verifica si se creará vale, para pedir el cliente en caso de que no haya
+            var oGarantia = this.ctlBusqueda.GenerarGarantia();
+            int iVentaID = this.ctlBusqueda.VentaID;
+            var oVentaV = General.GetEntity<VentasView>(q => q.VentaID == iVentaID);
+            int iValeClienteID = 0;
+            if ((oGarantia.AccionID == Cat.VentasGarantiasAcciones.ArticuloNuevo || oGarantia.AccionID == Cat.VentasGarantiasAcciones.NotaDeCredito)
+                && oVentaV.ClienteID == Cat.Clientes.Mostrador)
+            {
+                iValeClienteID = VentasProc.ObtenerClienteID("Selecciona el cliente para crear el Vale:", false);
+                if (iValeClienteID == 0)
+                    return false;
+            }
+
             // Se pregunta el usuario que realiza la devolución
             int iUsuarioID = 0;
             var ResU = UtilDatos.ValidarObtenerUsuario("Ventas.Garantia.Agregar");
@@ -109,16 +122,11 @@ namespace Refaccionaria.App
             ResU = UtilDatos.ValidarObtenerUsuario("Autorizaciones.Ventas.Garantia.Agregar", "Autorización");
             if (ResU.Exito)
                 iAutorizoID = ResU.Respuesta.UsuarioID;
-
-            // 
-            int iVentaID = this.ctlBusqueda.VentaID;
-            // var oVentaV = General.GetEntity<VentasView>(q => q.VentaID == iVentaID);
-
+            
             // Se procede a guardar los cambios
             DateTime dAhora = DateTime.Now;
             
             // Se genera la garantía
-            var oGarantia = this.ctlBusqueda.GenerarGarantia();
             oGarantia.Fecha = dAhora;
             oGarantia.RealizoUsuarioID = iUsuarioID;
             oGarantia.EstatusGenericoID = Cat.EstatusGenericos.Recibido;
@@ -136,7 +144,7 @@ namespace Refaccionaria.App
             // Si queda a revisión del proveedor, ya no se hace nada más que mandar el ticket
             if (oGarantia.AccionID != Cat.VentasGarantiasAcciones.RevisionDeProveedor)
             {
-                this.CompletarAccionGarantia(oGarantia.VentaGarantiaID);
+                this.CompletarAccionGarantia(oGarantia.VentaGarantiaID, iValeClienteID);
             }
 
             // Se guarda la autorización, si aplica
@@ -153,6 +161,21 @@ namespace Refaccionaria.App
             if (!this.ctlBusqueda.ValidarPendiente())
                 return false;
 
+            //
+            int iGarantiaID = this.ctlBusqueda.SeleccionGarantiaID;
+            var oGarantia = General.GetEntity<VentaGarantia>(c => c.VentaGarantiaID == iGarantiaID && c.Estatus);
+            var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oGarantia.VentaID);
+
+            // Se verifica si se creará vale, para pedir el cliente en caso de que no haya
+            int iValeClienteID = 0;
+            if ((this.ctlBusqueda.IdAccionPosterior == Cat.VentasGarantiasAcciones.ArticuloNuevo 
+                || this.ctlBusqueda.IdAccionPosterior == Cat.VentasGarantiasAcciones.NotaDeCredito) && oVentaV.ClienteID == Cat.Clientes.Mostrador)
+            {
+                iValeClienteID = VentasProc.ObtenerClienteID("Selecciona el cliente para crear el Vale:", false);
+                if (iValeClienteID == 0)
+                    return false;
+            }
+
             // Se pregunta el usuario que realiza la devolución
             int iUsuarioID = 0;
             var ResU = UtilDatos.ValidarObtenerUsuario("Ventas.Garantia.Agregar");
@@ -165,15 +188,11 @@ namespace Refaccionaria.App
             ResU = UtilDatos.ValidarObtenerUsuario("Autorizaciones.Ventas.Garantia.Agregar", "Autorización");
             if (ResU.Exito)
                 iAutorizoID = ResU.Respuesta.UsuarioID;
-
-            // 
-            int iGarantiaID = this.ctlBusqueda.SeleccionGarantiaID;
             
             // Se procede a guardar los cambios
             DateTime dAhora = DateTime.Now;
 
             // Se completan los datos de la garantía
-            var oGarantia = General.GetEntity<VentaGarantia>(c => c.VentaGarantiaID == iGarantiaID && c.Estatus);
             oGarantia.AccionID = this.ctlBusqueda.IdAccionPosterior;
             oGarantia.FechaCompletado = dAhora;
             oGarantia.EstatusGenericoID = Cat.EstatusGenericos.Completada;
@@ -201,7 +220,7 @@ namespace Refaccionaria.App
                     Guardar.Eliminar<VentaDetalle>(oParteVenta, true);
                 }
                 //
-                this.CompletarAccionGarantia(iGarantiaID);
+                this.CompletarAccionGarantia(iGarantiaID, iValeClienteID);
             }
 
             // Se guarda la autorización, si aplica
@@ -212,7 +231,7 @@ namespace Refaccionaria.App
             return true;
         }
 
-        private void CompletarAccionGarantia(int iGarantiaID)
+        private void CompletarAccionGarantia(int iGarantiaID, int? iValeClienteID)
         {
             var oGarantiaV = General.GetEntity<VentasGarantiasView>(c => c.VentaGarantiaID == iGarantiaID);
             var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oGarantiaV.VentaID);
@@ -238,9 +257,9 @@ namespace Refaccionaria.App
                     case Cat.VentasGarantiasAcciones.ArticuloNuevo:
                     case Cat.VentasGarantiasAcciones.NotaDeCredito:
                         // var oVenta = General.GetEntity<Venta>(q => q.Estatus && q.VentaID == iVentaID);
-                        var oResVale = VentasProc.GenerarNotaDeCredito(oVentaV.ClienteID, mImporteDev, "", Cat.OrigenesNotaDeCredito.Garantia, iVentaID.ToString());
+                        var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Garantia, iVentaID.ToString());
                         // Se genera el pago negativo por la nota de crédito generada
-                        oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(iVentaID, mImporteDev, oResVale.Respuesta);
+                        oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(iValeClienteID.Value, mImporteDev, oResVale.Respuesta);
                         break;
                     case Cat.VentasGarantiasAcciones.Efectivo:
                         oResPagoNeg = VentasProc.GenerarDevolucionDeEfectivo(iVentaID, mImporteDev);
