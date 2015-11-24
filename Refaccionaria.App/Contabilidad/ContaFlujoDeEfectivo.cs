@@ -101,13 +101,13 @@ namespace Refaccionaria.App
             int iAnio = Helper.ConvertirEntero(this.cmbAnio.Text);
             this.LlenarColumnasAnio(iAnio);
 
-            // Se agrega la fila de saldo inicial
-            int iFilaSaldoInicial = this.dgvDatos.Rows.Add("Saldo inicial");
-            this.dgvDatos.Rows[iFilaSaldoInicial].DefaultCellStyle.Font = oFuenteT;
             // Se agrega la fila de ingresos
             int iFilaIngresos = this.dgvDatos.Rows.Add("+ Ingresos");
             this.dgvDatos.Rows[iFilaIngresos].DefaultCellStyle.Font = oFuenteT;
             decimal mTotal = 0, mPromedio = 0;
+
+            // Se agrega la fila de saldo inicial
+            int iFilaSaldoInicial = this.dgvDatos.Rows.Add("Saldo inicial");
 
             // Se obtienen los datos para las ventas
             // int iSucursalID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue);
@@ -272,6 +272,16 @@ namespace Refaccionaria.App
             foreach (DataGridViewColumn oCol in this.dgvDatos.Columns)
             {
                 if (oCol.Index == 0) continue;
+
+                // Se modifica el saldo inicial de la semana actual, y se suma a la fila de ingresos
+                if (oCol.Index >= this.iColumnasFijas)
+                {
+                    this.dgvDatos[oCol.Index, iFilaIngresos].Value = (
+                        Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaIngresos].Value)
+                        + Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaSaldoInicial].Value)
+                    );
+                }
+
                 decimal mSaldo = (
                     Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaIngresos].Value)
                     - Helper.ConvertirDecimal(this.dgvDatos[oCol.Index, iFilaEgresos].Value)

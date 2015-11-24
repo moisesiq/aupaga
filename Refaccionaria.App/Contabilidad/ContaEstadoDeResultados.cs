@@ -68,7 +68,7 @@ namespace Refaccionaria.App
                 dIni = dIni.AddDays(7);
             }
 
-            // this.dgvDatos.FirstDisplayedScrollingColumnIndex = (iColSem - 1);
+            this.dgvDatos.FirstDisplayedScrollingColumnIndex = (iColSem - 1);
 
             this.FormatoColumnas();
         }
