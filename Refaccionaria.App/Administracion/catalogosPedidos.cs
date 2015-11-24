@@ -393,6 +393,7 @@ namespace Refaccionaria.App
                     oReg.Pedido = this.CalcularPedido(mTotal, oReg.UnidadEmpaque.Valor());
                 }
                 decimal mCostoTotal = (oReg.Pedido * oReg.CostoConDescuento).Valor();
+                oReg.Costo = mCostoTotal;
 
                 int iFila = this.dgvSugeridos.Rows.Add(oReg.ParteID, oReg.ProveedorID, true, oReg.NumeroParte, oReg.NombreParte, oReg.UnidadEmpaque, oReg.CriterioABC
                     , oReg.NecesidadMatriz, oReg.NecesidadSuc02, oReg.NecesidadSuc03, oReg.Total, oReg.Pedido, oReg.CostoConDescuento, mCostoTotal
