@@ -510,7 +510,7 @@ namespace Refaccionaria.App
                 {
                     // Actualmente sólo hay un caso fijo y por tanto no se verifica más ni se hacen casos
                     oRegPoliza = ContaProc.GafClientes(iAfectacionID, iId);
-                    switch (GlobalClass.SucursalID)
+                    switch (iSucursalID)
                     {
                         case Cat.Sucursales.Matriz: oRegPoliza.ContaCuentaAuxiliarID = Cat.ContaCuentasAuxiliares.ClientesHectorRicardo; break;
                         case Cat.Sucursales.Sucursal2: oRegPoliza.ContaCuentaAuxiliarID = Cat.ContaCuentasAuxiliares.ClientesEdgarAron; break;
