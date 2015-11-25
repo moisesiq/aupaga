@@ -172,7 +172,7 @@
     <value>Num Parte</value>
   </data>
   <data name="NumeroDeParte.Width" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>76</value>
   </data>
   <metadata name="Descripcion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -831,6 +831,9 @@
   <data name="btnEquCopiarDe.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="btnEquCopiarDe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnEquCopiarDe.Location" type="System.Drawing.Point, System.Drawing">
     <value>1208, 3</value>
   </data>
@@ -854,30 +857,6 @@
   </data>
   <data name="&gt;&gt;btnEquCopiarDe.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="txtEquBuscar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="txtEquBuscar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 5</value>
-  </data>
-  <data name="txtEquBuscar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1199, 20</value>
-  </data>
-  <data name="txtEquBuscar.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtEquBuscar.Name" xml:space="preserve">
-    <value>txtEquBuscar</value>
-  </data>
-  <data name="&gt;&gt;txtEquBuscar.Type" xml:space="preserve">
-    <value>Refaccionaria.Negocio.TextoMod, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtEquBuscar.Parent" xml:space="preserve">
-    <value>tbpEquivalentes</value>
-  </data>
-  <data name="&gt;&gt;txtEquBuscar.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="dgvEquivalentes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1036,6 +1015,30 @@
     <value>tbpEquivalentes</value>
   </data>
   <data name="&gt;&gt;dgvEquivalentes.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtEquBuscar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="txtEquBuscar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 5</value>
+  </data>
+  <data name="txtEquBuscar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1199, 20</value>
+  </data>
+  <data name="txtEquBuscar.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtEquBuscar.Name" xml:space="preserve">
+    <value>txtEquBuscar</value>
+  </data>
+  <data name="&gt;&gt;txtEquBuscar.Type" xml:space="preserve">
+    <value>Refaccionaria.Negocio.TextoMod, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtEquBuscar.Parent" xml:space="preserve">
+    <value>tbpEquivalentes</value>
+  </data>
+  <data name="&gt;&gt;txtEquBuscar.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="tbpEquivalentes.Location" type="System.Drawing.Point, System.Drawing">
@@ -4797,50 +4800,29 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>91</value>
   </data>
-  <data name="cmbCambios.Location" type="System.Drawing.Point, System.Drawing">
-    <value>946, 5</value>
+  <data name="ctlLineas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>729, 5</value>
   </data>
-  <data name="cmbCambios.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cmbCambios.TabIndex" type="System.Int32, mscorlib">
-    <value>270</value>
-  </data>
-  <data name="&gt;&gt;cmbCambios.Name" xml:space="preserve">
-    <value>cmbCambios</value>
-  </data>
-  <data name="&gt;&gt;cmbCambios.Type" xml:space="preserve">
-    <value>Refaccionaria.Negocio.ComboEtiqueta, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;cmbCambios.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmbCambios.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ctlProveedores.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 5</value>
-  </data>
-  <data name="ctlProveedores.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ctlLineas.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ctlProveedores.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 20</value>
+  <data name="ctlLineas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 20</value>
   </data>
-  <data name="ctlProveedores.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="ctlLineas.TabIndex" type="System.Int32, mscorlib">
+    <value>272</value>
   </data>
-  <data name="&gt;&gt;ctlProveedores.Name" xml:space="preserve">
-    <value>ctlProveedores</value>
+  <data name="&gt;&gt;ctlLineas.Name" xml:space="preserve">
+    <value>ctlLineas</value>
   </data>
-  <data name="&gt;&gt;ctlProveedores.Type" xml:space="preserve">
+  <data name="&gt;&gt;ctlLineas.Type" xml:space="preserve">
     <value>Refaccionaria.Negocio.ComboMultiSel, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ctlProveedores.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ctlLineas.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ctlProveedores.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;ctlLineas.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ctlMarcas.Location" type="System.Drawing.Point, System.Drawing">
     <value>476, 5</value>
@@ -4866,29 +4848,50 @@
   <data name="&gt;&gt;ctlMarcas.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ctlLineas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>729, 5</value>
+  <data name="ctlProveedores.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 5</value>
   </data>
-  <data name="ctlLineas.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ctlProveedores.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ctlLineas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 20</value>
+  <data name="ctlProveedores.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 20</value>
   </data>
-  <data name="ctlLineas.TabIndex" type="System.Int32, mscorlib">
-    <value>272</value>
+  <data name="ctlProveedores.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;ctlLineas.Name" xml:space="preserve">
-    <value>ctlLineas</value>
+  <data name="&gt;&gt;ctlProveedores.Name" xml:space="preserve">
+    <value>ctlProveedores</value>
   </data>
-  <data name="&gt;&gt;ctlLineas.Type" xml:space="preserve">
+  <data name="&gt;&gt;ctlProveedores.Type" xml:space="preserve">
     <value>Refaccionaria.Negocio.ComboMultiSel, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ctlLineas.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ctlProveedores.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ctlLineas.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;ctlProveedores.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmbCambios.Location" type="System.Drawing.Point, System.Drawing">
+    <value>946, 5</value>
+  </data>
+  <data name="cmbCambios.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cmbCambios.TabIndex" type="System.Int32, mscorlib">
+    <value>270</value>
+  </data>
+  <data name="&gt;&gt;cmbCambios.Name" xml:space="preserve">
+    <value>cmbCambios</value>
+  </data>
+  <data name="&gt;&gt;cmbCambios.Type" xml:space="preserve">
+    <value>Refaccionaria.Negocio.ComboEtiqueta, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cmbCambios.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmbCambios.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -4899,46 +4902,142 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1300, 454</value>
   </data>
-  <data name="&gt;&gt;ParteMaxMinReglaID.Name" xml:space="preserve">
-    <value>ParteMaxMinReglaID</value>
+  <data name="&gt;&gt;ParteID.Name" xml:space="preserve">
+    <value>ParteID</value>
   </data>
-  <data name="&gt;&gt;ParteMaxMinReglaID.Type" xml:space="preserve">
+  <data name="&gt;&gt;ParteID.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Reglas_Cambio.Name" xml:space="preserve">
-    <value>Reglas_Cambio</value>
+  <data name="&gt;&gt;colProcesar.Name" xml:space="preserve">
+    <value>colProcesar</value>
   </data>
-  <data name="&gt;&gt;Reglas_Cambio.Type" xml:space="preserve">
+  <data name="&gt;&gt;colProcesar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NumeroDeParte.Name" xml:space="preserve">
+    <value>NumeroDeParte</value>
+  </data>
+  <data name="&gt;&gt;NumeroDeParte.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Reglas_Orden.Name" xml:space="preserve">
-    <value>Reglas_Orden</value>
+  <data name="&gt;&gt;Descripcion.Name" xml:space="preserve">
+    <value>Descripcion</value>
   </data>
-  <data name="&gt;&gt;Reglas_Orden.Type" xml:space="preserve">
+  <data name="&gt;&gt;Descripcion.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Reglas_Regla.Name" xml:space="preserve">
-    <value>Reglas_Regla</value>
+  <data name="&gt;&gt;Proveedor.Name" xml:space="preserve">
+    <value>Proveedor</value>
   </data>
-  <data name="&gt;&gt;Reglas_Regla.Type" xml:space="preserve">
+  <data name="&gt;&gt;Proveedor.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Reglas_Condicion.Name" xml:space="preserve">
-    <value>Reglas_Condicion</value>
+  <data name="&gt;&gt;Linea.Name" xml:space="preserve">
+    <value>Linea</value>
   </data>
-  <data name="&gt;&gt;Reglas_Condicion.Type" xml:space="preserve">
+  <data name="&gt;&gt;Linea.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Reglas_Maximo.Name" xml:space="preserve">
-    <value>Reglas_Maximo</value>
+  <data name="&gt;&gt;Marca.Name" xml:space="preserve">
+    <value>Marca</value>
   </data>
-  <data name="&gt;&gt;Reglas_Maximo.Type" xml:space="preserve">
+  <data name="&gt;&gt;Marca.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Reglas_Minimo.Name" xml:space="preserve">
-    <value>Reglas_Minimo</value>
+  <data name="&gt;&gt;Existen.Name" xml:space="preserve">
+    <value>Existen</value>
   </data>
-  <data name="&gt;&gt;Reglas_Minimo.Type" xml:space="preserve">
+  <data name="&gt;&gt;Existen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column9.Name" xml:space="preserve">
+    <value>Column9</value>
+  </data>
+  <data name="&gt;&gt;Column9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column10.Name" xml:space="preserve">
+    <value>Column10</value>
+  </data>
+  <data name="&gt;&gt;Column10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column11.Name" xml:space="preserve">
+    <value>Column11</value>
+  </data>
+  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column22.Name" xml:space="preserve">
+    <value>Column22</value>
+  </data>
+  <data name="&gt;&gt;Column22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column23.Name" xml:space="preserve">
+    <value>Column23</value>
+  </data>
+  <data name="&gt;&gt;Column23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column12.Name" xml:space="preserve">
+    <value>Column12</value>
+  </data>
+  <data name="&gt;&gt;Column12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CantidadTotal.Name" xml:space="preserve">
+    <value>CantidadTotal</value>
+  </data>
+  <data name="&gt;&gt;CantidadTotal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Utilidad.Name" xml:space="preserve">
+    <value>Utilidad</value>
+  </data>
+  <data name="&gt;&gt;Utilidad.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Fijo.Name" xml:space="preserve">
+    <value>Fijo</value>
+  </data>
+  <data name="&gt;&gt;Fijo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MinimoActual.Name" xml:space="preserve">
+    <value>MinimoActual</value>
+  </data>
+  <data name="&gt;&gt;MinimoActual.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MaximoActual.Name" xml:space="preserve">
+    <value>MaximoActual</value>
+  </data>
+  <data name="&gt;&gt;MaximoActual.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Minimo.Name" xml:space="preserve">
+    <value>Minimo</value>
+  </data>
+  <data name="&gt;&gt;Minimo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Maximo.Name" xml:space="preserve">
+    <value>Maximo</value>
+  </data>
+  <data name="&gt;&gt;Maximo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Condiciones.Name" xml:space="preserve">
+    <value>Condiciones</value>
+  </data>
+  <data name="&gt;&gt;Condiciones.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FechaCalculo.Name" xml:space="preserve">
+    <value>FechaCalculo</value>
+  </data>
+  <data name="&gt;&gt;FechaCalculo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;equ_ParteID.Name" xml:space="preserve">
@@ -5079,142 +5178,46 @@
   <data name="&gt;&gt;Ventas.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ParteID.Name" xml:space="preserve">
-    <value>ParteID</value>
+  <data name="&gt;&gt;ParteMaxMinReglaID.Name" xml:space="preserve">
+    <value>ParteMaxMinReglaID</value>
   </data>
-  <data name="&gt;&gt;ParteID.Type" xml:space="preserve">
+  <data name="&gt;&gt;ParteMaxMinReglaID.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colProcesar.Name" xml:space="preserve">
-    <value>colProcesar</value>
+  <data name="&gt;&gt;Reglas_Cambio.Name" xml:space="preserve">
+    <value>Reglas_Cambio</value>
   </data>
-  <data name="&gt;&gt;colProcesar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NumeroDeParte.Name" xml:space="preserve">
-    <value>NumeroDeParte</value>
-  </data>
-  <data name="&gt;&gt;NumeroDeParte.Type" xml:space="preserve">
+  <data name="&gt;&gt;Reglas_Cambio.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Descripcion.Name" xml:space="preserve">
-    <value>Descripcion</value>
+  <data name="&gt;&gt;Reglas_Orden.Name" xml:space="preserve">
+    <value>Reglas_Orden</value>
   </data>
-  <data name="&gt;&gt;Descripcion.Type" xml:space="preserve">
+  <data name="&gt;&gt;Reglas_Orden.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Proveedor.Name" xml:space="preserve">
-    <value>Proveedor</value>
+  <data name="&gt;&gt;Reglas_Regla.Name" xml:space="preserve">
+    <value>Reglas_Regla</value>
   </data>
-  <data name="&gt;&gt;Proveedor.Type" xml:space="preserve">
+  <data name="&gt;&gt;Reglas_Regla.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Linea.Name" xml:space="preserve">
-    <value>Linea</value>
+  <data name="&gt;&gt;Reglas_Condicion.Name" xml:space="preserve">
+    <value>Reglas_Condicion</value>
   </data>
-  <data name="&gt;&gt;Linea.Type" xml:space="preserve">
+  <data name="&gt;&gt;Reglas_Condicion.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Marca.Name" xml:space="preserve">
-    <value>Marca</value>
+  <data name="&gt;&gt;Reglas_Maximo.Name" xml:space="preserve">
+    <value>Reglas_Maximo</value>
   </data>
-  <data name="&gt;&gt;Marca.Type" xml:space="preserve">
+  <data name="&gt;&gt;Reglas_Maximo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Existen.Name" xml:space="preserve">
-    <value>Existen</value>
+  <data name="&gt;&gt;Reglas_Minimo.Name" xml:space="preserve">
+    <value>Reglas_Minimo</value>
   </data>
-  <data name="&gt;&gt;Existen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column9.Name" xml:space="preserve">
-    <value>Column9</value>
-  </data>
-  <data name="&gt;&gt;Column9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column10.Name" xml:space="preserve">
-    <value>Column10</value>
-  </data>
-  <data name="&gt;&gt;Column10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column11.Name" xml:space="preserve">
-    <value>Column11</value>
-  </data>
-  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column22.Name" xml:space="preserve">
-    <value>Column22</value>
-  </data>
-  <data name="&gt;&gt;Column22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column23.Name" xml:space="preserve">
-    <value>Column23</value>
-  </data>
-  <data name="&gt;&gt;Column23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column12.Name" xml:space="preserve">
-    <value>Column12</value>
-  </data>
-  <data name="&gt;&gt;Column12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CantidadTotal.Name" xml:space="preserve">
-    <value>CantidadTotal</value>
-  </data>
-  <data name="&gt;&gt;CantidadTotal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Utilidad.Name" xml:space="preserve">
-    <value>Utilidad</value>
-  </data>
-  <data name="&gt;&gt;Utilidad.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Fijo.Name" xml:space="preserve">
-    <value>Fijo</value>
-  </data>
-  <data name="&gt;&gt;Fijo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MinimoActual.Name" xml:space="preserve">
-    <value>MinimoActual</value>
-  </data>
-  <data name="&gt;&gt;MinimoActual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MaximoActual.Name" xml:space="preserve">
-    <value>MaximoActual</value>
-  </data>
-  <data name="&gt;&gt;MaximoActual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Minimo.Name" xml:space="preserve">
-    <value>Minimo</value>
-  </data>
-  <data name="&gt;&gt;Minimo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Maximo.Name" xml:space="preserve">
-    <value>Maximo</value>
-  </data>
-  <data name="&gt;&gt;Maximo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Condiciones.Name" xml:space="preserve">
-    <value>Condiciones</value>
-  </data>
-  <data name="&gt;&gt;Condiciones.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FechaCalculo.Name" xml:space="preserve">
-    <value>FechaCalculo</value>
-  </data>
-  <data name="&gt;&gt;FechaCalculo.Type" xml:space="preserve">
+  <data name="&gt;&gt;Reglas_Minimo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

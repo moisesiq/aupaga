@@ -30,20 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MaxMin));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -55,14 +41,49 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.tabMaxMin = new System.Windows.Forms.TabControl();
             this.tbpDetalle = new System.Windows.Forms.TabPage();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
+            this.ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProcesar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Existen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Utilidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fijo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.MinimoActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaximoActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Condiciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCalculo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpCriteriosGenerales = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.trvPartesCalcular = new Refaccionaria.Negocio.LinkedTreeView();
-            this.trvVentasGlobales = new Refaccionaria.Negocio.LinkedTreeView();
             this.tbpReglas = new System.Windows.Forms.TabPage();
             this.btnReglasCopiar = new System.Windows.Forms.Button();
             this.btnReglasAyuda = new System.Windows.Forms.Button();
@@ -71,16 +92,8 @@
             this.btnReglasQuitar = new System.Windows.Forms.Button();
             this.btnReglasAgregar = new System.Windows.Forms.Button();
             this.dgvReglas = new System.Windows.Forms.DataGridView();
-            this.ParteMaxMinReglaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Cambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Regla = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpEquivalentes = new System.Windows.Forms.TabPage();
             this.btnEquCopiarDe = new System.Windows.Forms.Button();
-            this.txtEquBuscar = new Refaccionaria.Negocio.TextoMod();
             this.dgvEquivalentes = new System.Windows.Forms.DataGridView();
             this.equ_ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.equ_GrupoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -208,33 +221,20 @@
             this.lblMesG01 = new System.Windows.Forms.Label();
             this.lblVentasLocales = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbCambios = new Refaccionaria.Negocio.ComboEtiqueta();
-            this.ctlProveedores = new Refaccionaria.Negocio.ComboMultiSel();
-            this.ctlMarcas = new Refaccionaria.Negocio.ComboMultiSel();
             this.ctlLineas = new Refaccionaria.Negocio.ComboMultiSel();
-            this.ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProcesar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Existen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Utilidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fijo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.MinimoActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaximoActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Condiciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaCalculo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctlMarcas = new Refaccionaria.Negocio.ComboMultiSel();
+            this.ctlProveedores = new Refaccionaria.Negocio.ComboMultiSel();
+            this.cmbCambios = new Refaccionaria.Negocio.ComboEtiqueta();
+            this.trvPartesCalcular = new Refaccionaria.Negocio.LinkedTreeView();
+            this.trvVentasGlobales = new Refaccionaria.Negocio.LinkedTreeView();
+            this.txtEquBuscar = new Refaccionaria.Negocio.TextoMod();
+            this.ParteMaxMinReglaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Cambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Regla = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabMaxMin.SuspendLayout();
             this.tbpDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -326,6 +326,178 @@
             this.dgvDetalle.CurrentCellChanged += new System.EventHandler(this.dgvDetalle_CurrentCellChanged);
             this.dgvDetalle.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvDetalle_CurrentCellDirtyStateChanged);
             // 
+            // ParteID
+            // 
+            resources.ApplyResources(this.ParteID, "ParteID");
+            this.ParteID.Name = "ParteID";
+            this.ParteID.ReadOnly = true;
+            // 
+            // colProcesar
+            // 
+            this.colProcesar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            resources.ApplyResources(this.colProcesar, "colProcesar");
+            this.colProcesar.Name = "colProcesar";
+            this.colProcesar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // NumeroDeParte
+            // 
+            this.NumeroDeParte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.NumeroDeParte.DefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(this.NumeroDeParte, "NumeroDeParte");
+            this.NumeroDeParte.Name = "NumeroDeParte";
+            this.NumeroDeParte.ReadOnly = true;
+            // 
+            // Descripcion
+            // 
+            resources.ApplyResources(this.Descripcion, "Descripcion");
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            // 
+            // Proveedor
+            // 
+            resources.ApplyResources(this.Proveedor, "Proveedor");
+            this.Proveedor.Name = "Proveedor";
+            this.Proveedor.ReadOnly = true;
+            // 
+            // Linea
+            // 
+            resources.ApplyResources(this.Linea, "Linea");
+            this.Linea.Name = "Linea";
+            this.Linea.ReadOnly = true;
+            // 
+            // Marca
+            // 
+            resources.ApplyResources(this.Marca, "Marca");
+            this.Marca.Name = "Marca";
+            this.Marca.ReadOnly = true;
+            // 
+            // Existen
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Existen.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.Existen, "Existen");
+            this.Existen.Name = "Existen";
+            this.Existen.ReadOnly = true;
+            // 
+            // Column9
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Column9.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.Column9, "Column9");
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            // 
+            // Column10
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N0";
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle4;
+            resources.ApplyResources(this.Column10, "Column10");
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            // 
+            // Column11
+            // 
+            resources.ApplyResources(this.Column11, "Column11");
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            // 
+            // Column22
+            // 
+            resources.ApplyResources(this.Column22, "Column22");
+            this.Column22.Name = "Column22";
+            this.Column22.ReadOnly = true;
+            // 
+            // Column23
+            // 
+            resources.ApplyResources(this.Column23, "Column23");
+            this.Column23.Name = "Column23";
+            this.Column23.ReadOnly = true;
+            // 
+            // Column12
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle5;
+            resources.ApplyResources(this.Column12, "Column12");
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            // 
+            // CantidadTotal
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CantidadTotal.DefaultCellStyle = dataGridViewCellStyle6;
+            resources.ApplyResources(this.CantidadTotal, "CantidadTotal");
+            this.CantidadTotal.Name = "CantidadTotal";
+            this.CantidadTotal.ReadOnly = true;
+            // 
+            // Utilidad
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.Utilidad.DefaultCellStyle = dataGridViewCellStyle7;
+            resources.ApplyResources(this.Utilidad, "Utilidad");
+            this.Utilidad.Name = "Utilidad";
+            this.Utilidad.ReadOnly = true;
+            // 
+            // Fijo
+            // 
+            resources.ApplyResources(this.Fijo, "Fijo");
+            this.Fijo.Name = "Fijo";
+            this.Fijo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // MinimoActual
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N0";
+            this.MinimoActual.DefaultCellStyle = dataGridViewCellStyle8;
+            resources.ApplyResources(this.MinimoActual, "MinimoActual");
+            this.MinimoActual.Name = "MinimoActual";
+            this.MinimoActual.ReadOnly = true;
+            // 
+            // MaximoActual
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N0";
+            this.MaximoActual.DefaultCellStyle = dataGridViewCellStyle9;
+            resources.ApplyResources(this.MaximoActual, "MaximoActual");
+            this.MaximoActual.Name = "MaximoActual";
+            this.MaximoActual.ReadOnly = true;
+            // 
+            // Minimo
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
+            this.Minimo.DefaultCellStyle = dataGridViewCellStyle10;
+            resources.ApplyResources(this.Minimo, "Minimo");
+            this.Minimo.Name = "Minimo";
+            this.Minimo.ReadOnly = true;
+            // 
+            // Maximo
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N0";
+            this.Maximo.DefaultCellStyle = dataGridViewCellStyle11;
+            resources.ApplyResources(this.Maximo, "Maximo");
+            this.Maximo.Name = "Maximo";
+            this.Maximo.ReadOnly = true;
+            // 
+            // Condiciones
+            // 
+            resources.ApplyResources(this.Condiciones, "Condiciones");
+            this.Condiciones.Name = "Condiciones";
+            this.Condiciones.ReadOnly = true;
+            // 
+            // FechaCalculo
+            // 
+            resources.ApplyResources(this.FechaCalculo, "FechaCalculo");
+            this.FechaCalculo.Name = "FechaCalculo";
+            this.FechaCalculo.ReadOnly = true;
+            // 
             // tbpCriteriosGenerales
             // 
             this.tbpCriteriosGenerales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
@@ -345,20 +517,6 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.trvVentasGlobales);
-            // 
-            // trvPartesCalcular
-            // 
-            this.trvPartesCalcular.CheckBoxes = true;
-            resources.ApplyResources(this.trvPartesCalcular, "trvPartesCalcular");
-            this.trvPartesCalcular.Name = "trvPartesCalcular";
-            this.trvPartesCalcular.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvPartesCalcular_AfterCheck);
-            this.trvPartesCalcular.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvPartesCalcular_AfterSelect);
-            // 
-            // trvVentasGlobales
-            // 
-            this.trvVentasGlobales.CheckBoxes = true;
-            resources.ApplyResources(this.trvVentasGlobales, "trvVentasGlobales");
-            this.trvVentasGlobales.Name = "trvVentasGlobales";
             // 
             // tbpReglas
             // 
@@ -448,61 +606,11 @@
             this.dgvReglas.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvReglas.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReglas_CellValueChanged);
             // 
-            // ParteMaxMinReglaID
-            // 
-            resources.ApplyResources(this.ParteMaxMinReglaID, "ParteMaxMinReglaID");
-            this.ParteMaxMinReglaID.Name = "ParteMaxMinReglaID";
-            this.ParteMaxMinReglaID.ReadOnly = true;
-            // 
-            // Reglas_Cambio
-            // 
-            resources.ApplyResources(this.Reglas_Cambio, "Reglas_Cambio");
-            this.Reglas_Cambio.Name = "Reglas_Cambio";
-            this.Reglas_Cambio.ReadOnly = true;
-            this.Reglas_Cambio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Reglas_Orden
-            // 
-            resources.ApplyResources(this.Reglas_Orden, "Reglas_Orden");
-            this.Reglas_Orden.Name = "Reglas_Orden";
-            this.Reglas_Orden.ReadOnly = true;
-            this.Reglas_Orden.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Reglas_Regla
-            // 
-            resources.ApplyResources(this.Reglas_Regla, "Reglas_Regla");
-            this.Reglas_Regla.Name = "Reglas_Regla";
-            this.Reglas_Regla.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Reglas_Condicion
-            // 
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Condicion.DefaultCellStyle = dataGridViewCellStyle13;
-            resources.ApplyResources(this.Reglas_Condicion, "Reglas_Condicion");
-            this.Reglas_Condicion.Name = "Reglas_Condicion";
-            this.Reglas_Condicion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Reglas_Maximo
-            // 
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Maximo.DefaultCellStyle = dataGridViewCellStyle14;
-            resources.ApplyResources(this.Reglas_Maximo, "Reglas_Maximo");
-            this.Reglas_Maximo.Name = "Reglas_Maximo";
-            this.Reglas_Maximo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Reglas_Minimo
-            // 
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Minimo.DefaultCellStyle = dataGridViewCellStyle15;
-            resources.ApplyResources(this.Reglas_Minimo, "Reglas_Minimo");
-            this.Reglas_Minimo.Name = "Reglas_Minimo";
-            this.Reglas_Minimo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // tbpEquivalentes
             // 
             this.tbpEquivalentes.Controls.Add(this.btnEquCopiarDe);
-            this.tbpEquivalentes.Controls.Add(this.txtEquBuscar);
             this.tbpEquivalentes.Controls.Add(this.dgvEquivalentes);
+            this.tbpEquivalentes.Controls.Add(this.txtEquBuscar);
             resources.ApplyResources(this.tbpEquivalentes, "tbpEquivalentes");
             this.tbpEquivalentes.Name = "tbpEquivalentes";
             this.tbpEquivalentes.UseVisualStyleBackColor = true;
@@ -513,16 +621,6 @@
             this.btnEquCopiarDe.Name = "btnEquCopiarDe";
             this.btnEquCopiarDe.UseVisualStyleBackColor = true;
             this.btnEquCopiarDe.Click += new System.EventHandler(this.btnEquCopiarDe_Click);
-            // 
-            // txtEquBuscar
-            // 
-            resources.ApplyResources(this.txtEquBuscar, "txtEquBuscar");
-            this.txtEquBuscar.Etiqueta = "Buscar";
-            this.txtEquBuscar.EtiquetaColor = System.Drawing.Color.Gray;
-            this.txtEquBuscar.Name = "txtEquBuscar";
-            this.txtEquBuscar.PasarEnfoqueConEnter = true;
-            this.txtEquBuscar.SeleccionarTextoAlEnfoque = false;
-            this.txtEquBuscar.TextChanged += new System.EventHandler(this.txtEquBuscar_TextChanged);
             // 
             // dgvEquivalentes
             // 
@@ -1544,6 +1642,27 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Name = "label2";
             // 
+            // ctlLineas
+            // 
+            this.ctlLineas.AltoLista = 160;
+            this.ctlLineas.Etiqueta = null;
+            resources.ApplyResources(this.ctlLineas, "ctlLineas");
+            this.ctlLineas.Name = "ctlLineas";
+            // 
+            // ctlMarcas
+            // 
+            this.ctlMarcas.AltoLista = 160;
+            this.ctlMarcas.Etiqueta = null;
+            resources.ApplyResources(this.ctlMarcas, "ctlMarcas");
+            this.ctlMarcas.Name = "ctlMarcas";
+            // 
+            // ctlProveedores
+            // 
+            this.ctlProveedores.AltoLista = 160;
+            this.ctlProveedores.Etiqueta = null;
+            resources.ApplyResources(this.ctlProveedores, "ctlProveedores");
+            this.ctlProveedores.Name = "ctlProveedores";
+            // 
             // cmbCambios
             // 
             this.cmbCambios.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
@@ -1563,198 +1682,74 @@
             this.cmbCambios.ValueMember = "";
             this.cmbCambios.SelectedIndexChanged += new System.EventHandler(this.cmbCambios_SelectedIndexChanged);
             // 
-            // ctlProveedores
+            // trvPartesCalcular
             // 
-            this.ctlProveedores.AltoLista = 160;
-            this.ctlProveedores.Etiqueta = null;
-            resources.ApplyResources(this.ctlProveedores, "ctlProveedores");
-            this.ctlProveedores.Name = "ctlProveedores";
+            this.trvPartesCalcular.CheckBoxes = true;
+            resources.ApplyResources(this.trvPartesCalcular, "trvPartesCalcular");
+            this.trvPartesCalcular.Name = "trvPartesCalcular";
+            this.trvPartesCalcular.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvPartesCalcular_AfterCheck);
+            this.trvPartesCalcular.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvPartesCalcular_AfterSelect);
             // 
-            // ctlMarcas
+            // trvVentasGlobales
             // 
-            this.ctlMarcas.AltoLista = 160;
-            this.ctlMarcas.Etiqueta = null;
-            resources.ApplyResources(this.ctlMarcas, "ctlMarcas");
-            this.ctlMarcas.Name = "ctlMarcas";
+            this.trvVentasGlobales.CheckBoxes = true;
+            resources.ApplyResources(this.trvVentasGlobales, "trvVentasGlobales");
+            this.trvVentasGlobales.Name = "trvVentasGlobales";
             // 
-            // ctlLineas
+            // txtEquBuscar
             // 
-            this.ctlLineas.AltoLista = 160;
-            this.ctlLineas.Etiqueta = null;
-            resources.ApplyResources(this.ctlLineas, "ctlLineas");
-            this.ctlLineas.Name = "ctlLineas";
+            resources.ApplyResources(this.txtEquBuscar, "txtEquBuscar");
+            this.txtEquBuscar.Etiqueta = "Buscar";
+            this.txtEquBuscar.EtiquetaColor = System.Drawing.Color.Gray;
+            this.txtEquBuscar.Name = "txtEquBuscar";
+            this.txtEquBuscar.PasarEnfoqueConEnter = true;
+            this.txtEquBuscar.SeleccionarTextoAlEnfoque = false;
+            this.txtEquBuscar.TextChanged += new System.EventHandler(this.txtEquBuscar_TextChanged);
             // 
-            // ParteID
+            // ParteMaxMinReglaID
             // 
-            resources.ApplyResources(this.ParteID, "ParteID");
-            this.ParteID.Name = "ParteID";
-            this.ParteID.ReadOnly = true;
+            resources.ApplyResources(this.ParteMaxMinReglaID, "ParteMaxMinReglaID");
+            this.ParteMaxMinReglaID.Name = "ParteMaxMinReglaID";
+            this.ParteMaxMinReglaID.ReadOnly = true;
             // 
-            // colProcesar
+            // Reglas_Cambio
             // 
-            this.colProcesar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            resources.ApplyResources(this.colProcesar, "colProcesar");
-            this.colProcesar.Name = "colProcesar";
-            this.colProcesar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            resources.ApplyResources(this.Reglas_Cambio, "Reglas_Cambio");
+            this.Reglas_Cambio.Name = "Reglas_Cambio";
+            this.Reglas_Cambio.ReadOnly = true;
+            this.Reglas_Cambio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // NumeroDeParte
+            // Reglas_Orden
             // 
-            this.NumeroDeParte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.NumeroDeParte.DefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(this.NumeroDeParte, "NumeroDeParte");
-            this.NumeroDeParte.Name = "NumeroDeParte";
-            this.NumeroDeParte.ReadOnly = true;
+            resources.ApplyResources(this.Reglas_Orden, "Reglas_Orden");
+            this.Reglas_Orden.Name = "Reglas_Orden";
+            this.Reglas_Orden.ReadOnly = true;
             // 
-            // Descripcion
+            // Reglas_Regla
             // 
-            resources.ApplyResources(this.Descripcion, "Descripcion");
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
+            resources.ApplyResources(this.Reglas_Regla, "Reglas_Regla");
+            this.Reglas_Regla.Name = "Reglas_Regla";
             // 
-            // Proveedor
+            // Reglas_Condicion
             // 
-            resources.ApplyResources(this.Proveedor, "Proveedor");
-            this.Proveedor.Name = "Proveedor";
-            this.Proveedor.ReadOnly = true;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Condicion.DefaultCellStyle = dataGridViewCellStyle13;
+            resources.ApplyResources(this.Reglas_Condicion, "Reglas_Condicion");
+            this.Reglas_Condicion.Name = "Reglas_Condicion";
             // 
-            // Linea
+            // Reglas_Maximo
             // 
-            resources.ApplyResources(this.Linea, "Linea");
-            this.Linea.Name = "Linea";
-            this.Linea.ReadOnly = true;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Maximo.DefaultCellStyle = dataGridViewCellStyle14;
+            resources.ApplyResources(this.Reglas_Maximo, "Reglas_Maximo");
+            this.Reglas_Maximo.Name = "Reglas_Maximo";
             // 
-            // Marca
+            // Reglas_Minimo
             // 
-            resources.ApplyResources(this.Marca, "Marca");
-            this.Marca.Name = "Marca";
-            this.Marca.ReadOnly = true;
-            // 
-            // Existen
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Existen.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.Existen, "Existen");
-            this.Existen.Name = "Existen";
-            this.Existen.ReadOnly = true;
-            // 
-            // Column9
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            this.Column9.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.Column9, "Column9");
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            // 
-            // Column10
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N0";
-            this.Column10.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.Column10, "Column10");
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            // 
-            // Column11
-            // 
-            resources.ApplyResources(this.Column11, "Column11");
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            // 
-            // Column22
-            // 
-            resources.ApplyResources(this.Column22, "Column22");
-            this.Column22.Name = "Column22";
-            this.Column22.ReadOnly = true;
-            // 
-            // Column23
-            // 
-            resources.ApplyResources(this.Column23, "Column23");
-            this.Column23.Name = "Column23";
-            this.Column23.ReadOnly = true;
-            // 
-            // Column12
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle5;
-            resources.ApplyResources(this.Column12, "Column12");
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            // 
-            // CantidadTotal
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CantidadTotal.DefaultCellStyle = dataGridViewCellStyle6;
-            resources.ApplyResources(this.CantidadTotal, "CantidadTotal");
-            this.CantidadTotal.Name = "CantidadTotal";
-            this.CantidadTotal.ReadOnly = true;
-            // 
-            // Utilidad
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.Utilidad.DefaultCellStyle = dataGridViewCellStyle7;
-            resources.ApplyResources(this.Utilidad, "Utilidad");
-            this.Utilidad.Name = "Utilidad";
-            this.Utilidad.ReadOnly = true;
-            // 
-            // Fijo
-            // 
-            resources.ApplyResources(this.Fijo, "Fijo");
-            this.Fijo.Name = "Fijo";
-            this.Fijo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // MinimoActual
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N0";
-            this.MinimoActual.DefaultCellStyle = dataGridViewCellStyle8;
-            resources.ApplyResources(this.MinimoActual, "MinimoActual");
-            this.MinimoActual.Name = "MinimoActual";
-            this.MinimoActual.ReadOnly = true;
-            // 
-            // MaximoActual
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N0";
-            this.MaximoActual.DefaultCellStyle = dataGridViewCellStyle9;
-            resources.ApplyResources(this.MaximoActual, "MaximoActual");
-            this.MaximoActual.Name = "MaximoActual";
-            this.MaximoActual.ReadOnly = true;
-            // 
-            // Minimo
-            // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N0";
-            this.Minimo.DefaultCellStyle = dataGridViewCellStyle10;
-            resources.ApplyResources(this.Minimo, "Minimo");
-            this.Minimo.Name = "Minimo";
-            this.Minimo.ReadOnly = true;
-            // 
-            // Maximo
-            // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N0";
-            this.Maximo.DefaultCellStyle = dataGridViewCellStyle11;
-            resources.ApplyResources(this.Maximo, "Maximo");
-            this.Maximo.Name = "Maximo";
-            this.Maximo.ReadOnly = true;
-            // 
-            // Condiciones
-            // 
-            resources.ApplyResources(this.Condiciones, "Condiciones");
-            this.Condiciones.Name = "Condiciones";
-            this.Condiciones.ReadOnly = true;
-            // 
-            // FechaCalculo
-            // 
-            resources.ApplyResources(this.FechaCalculo, "FechaCalculo");
-            this.FechaCalculo.Name = "FechaCalculo";
-            this.FechaCalculo.ReadOnly = true;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Minimo.DefaultCellStyle = dataGridViewCellStyle15;
+            resources.ApplyResources(this.Reglas_Minimo, "Reglas_Minimo");
+            this.Reglas_Minimo.Name = "Reglas_Minimo";
             // 
             // MaxMin
             // 
@@ -1994,13 +1989,6 @@
         private System.Windows.Forms.Button btnReglasQuitar;
         private System.Windows.Forms.Button btnReglasAgregar;
         private System.Windows.Forms.Button btnReglasAyuda;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ParteMaxMinReglaID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Cambio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Orden;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Regla;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Condicion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Maximo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Minimo;
         private System.Windows.Forms.Button btnReglasCopiar;
         private System.Windows.Forms.Label lblVentasGlobales;
         private System.Windows.Forms.TabPage tbpEquivalentes;
@@ -2072,5 +2060,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Maximo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Condiciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCalculo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ParteMaxMinReglaID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Cambio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Orden;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Regla;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Condicion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Maximo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Minimo;
     }
 }
