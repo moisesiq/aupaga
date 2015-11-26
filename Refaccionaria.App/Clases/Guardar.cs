@@ -238,7 +238,7 @@ namespace Refaccionaria.App
                 decimal mComision = UtilDatos.VentaComisionCliente(oVenta.VentaID, oVenta.ComisionistaClienteID.Valor());
                 // Se genera una nota de crédito, por la comisión
                 if (mComision > 0)
-                    VentasProc.GenerarNotaDeCredito(oVenta.ComisionistaClienteID.Valor(), mComision, "", Cat.OrigenesNotaDeCredito.Comision, oVenta.VentaID.ToString());
+                    VentasProc.GenerarNotaDeCredito(oVenta.ComisionistaClienteID.Valor(), mComision, "", Cat.OrigenesNotaDeCredito.Comision, oVenta.VentaID);
             }
 
             return new ResAcc(true);
@@ -264,15 +264,17 @@ namespace Refaccionaria.App
                 if (PartePago.TipoFormaPagoID == Cat.FormasDePago.Vale && PartePago.Importe > 0)
                 {
                     int iNotaID = PartePago.NotaDeCreditoID.Valor();
-                    var oNota = General.GetEntity<NotaDeCredito>(q => q.NotaDeCreditoID == iNotaID);
+                    var oNota = General.GetEntity<NotaDeCredito>(q => q.NotaDeCreditoID == iNotaID && q.Estatus);
                     if (oNota != null)
                     {
                         // Se verifica si se usó el importe total o sólo una parte
                         if (PartePago.Importe < oNota.Importe)
                         {
                             // Se crea una nueva nota, con el importe restante
+                            // 25/11/2015 - Se busca el vale original para usarlo como origen de todas las notas derivadas, en vez de el OrigenVentaID que se mandaba antes
+                            int iOrigenValeID = (oNota.OrigenID == Cat.OrigenesNotaDeCredito.ImporteRestante ? oNota.RelacionID.Valor() : oNota.NotaDeCreditoID);
                             VentasProc.GenerarNotaDeCredito(oNota.ClienteID, (oNota.Importe - PartePago.Importe), "", Cat.OrigenesNotaDeCredito.ImporteRestante
-                                , oNota.OrigenVentaID.ToString());
+                                , iOrigenValeID);
                             //
                             oNota.Importe = PartePago.Importe;
                         }
@@ -381,7 +383,7 @@ namespace Refaccionaria.App
                 }
                 // Se genera una nota de crédito negativa
                 if (mComision > 0)
-                    VentasProc.GenerarNotaDeCredito(oComisionista.ClienteID, (mComision * -1), "", Cat.OrigenesNotaDeCredito.Devolucion, oVenta.VentaID.ToString());
+                    VentasProc.GenerarNotaDeCredito(oComisionista.ClienteID, (mComision * -1), "", Cat.OrigenesNotaDeCredito.Devolucion, oVenta.VentaID);
             }
 
             return new ResAcc(true);

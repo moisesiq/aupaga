@@ -82,7 +82,7 @@ namespace Refaccionaria.App
 
         #region [ Vales ]
 
-        public static ResAcc<int> GenerarNotaDeCredito(int iClienteID, decimal mImporte, string sObservacion, int iOrigenID, string sReferencia)
+        public static ResAcc<int> GenerarNotaDeCredito(int iClienteID, decimal mImporte, string sObservacion, int iOrigenID, int iRelacionID)
         {
             DateTime dAhora = DateTime.Now;
             
@@ -131,7 +131,7 @@ namespace Refaccionaria.App
                 Valida = true,
                 Observacion = sObservacion,
                 OrigenID = iOrigenID,
-                Referencia = sReferencia
+                RelacionID = iRelacionID
             };
             Guardar.Generico<NotaDeCredito>(oNotaNueva);
 
@@ -172,6 +172,25 @@ namespace Refaccionaria.App
             Guardar.Generico<NotaDeCredito>(oVale);
 
             return new ResAcc<bool>(true);
+        }
+
+        public static List<NotaDeCredito> ObtenerValesCreados(List<VentaPagoDetalle> oPagoDetalle)
+        {
+            var oVales = new List<NotaDeCredito>();
+            
+            foreach (var oReg in oPagoDetalle)
+            {
+                if (oReg.TipoFormaPagoID == Cat.FormasDePago.Vale)
+                {
+                    var oNota = General.GetEntity<NotaDeCredito>(c => c.NotaDeCreditoID == oReg.NotaDeCreditoID && c.Estatus);
+                    int iOrigenValeID = (oNota.OrigenID == Cat.OrigenesNotaDeCredito.ImporteRestante ? oNota.RelacionID.Valor() : oNota.NotaDeCreditoID);
+                    var oValeN = General.GetEntity<NotaDeCredito>(c => c.OrigenID == Cat.OrigenesNotaDeCredito.ImporteRestante
+                        && c.RelacionID == iOrigenValeID && c.Valida && c.FechaDeEmision >= oReg.FechaRegistro && c.Estatus);
+                    if (oValeN != null)
+                        oVales.Add(oValeN);
+                }
+            }
+            return oVales;
         }
 
         #endregion
@@ -340,7 +359,7 @@ namespace Refaccionaria.App
                 if (bDevolverEfectivo)
                     VentasProc.GenerarDevolucionDeEfectivo(oVentaAnt.VentaID, mSobrante);
                 else
-                    VentasProc.GenerarNotaDeCredito(o9500.ClienteID, mSobrante, "", Cat.OrigenesNotaDeCredito.Anticipo9500, oVentaAnt.VentaID.ToString());
+                    VentasProc.GenerarNotaDeCredito(o9500.ClienteID, mSobrante, "", Cat.OrigenesNotaDeCredito.Anticipo9500, oVentaAnt.VentaID);
             }
 
             // Se modifica el Estatus del 9500

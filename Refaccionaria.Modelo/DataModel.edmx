@@ -1309,7 +1309,7 @@
           <Property Name="OrigenVentaID" Type="int" />
           <Property Name="UsoVentaID" Type="int" />
           <Property Name="MotivoBaja" Type="varchar" MaxLength="512" />
-          <Property Name="Referencia" Type="nvarchar" MaxLength="32" />
+          <Property Name="RelacionID" Type="int" />
           <Property Name="OrigenID" Type="int" />
           <Property Name="SucursalID" Type="int" />
         </EntityType>
@@ -4278,7 +4278,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.NotasDeCreditoView' does 
           <Property Name="UsoVentaFolio" Type="nvarchar" MaxLength="16" />
           <Property Name="OrigenID" Type="int" />
           <Property Name="Origen" Type="nvarchar" MaxLength="64" />
-          <Property Name="Referencia" Type="nvarchar" MaxLength="32" />
+          <Property Name="RelacionID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesAvancesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -12245,7 +12245,7 @@ FROM [dbo].[NotasDeCreditoFiscalesView] AS [NotasDeCreditoFiscalesView]</Definin
 [NotasDeCreditoView].[UsoVentaFolio] AS [UsoVentaFolio], 
 [NotasDeCreditoView].[OrigenID] AS [OrigenID], 
 [NotasDeCreditoView].[Origen] AS [Origen], 
-[NotasDeCreditoView].[Referencia] AS [Referencia]
+[NotasDeCreditoView].[RelacionID] AS [RelacionID]
 FROM [dbo].[NotasDeCreditoView] AS [NotasDeCreditoView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PartesAvancesView" EntityType="Self.PartesAvancesView" store:Type="Views" store:Schema="dbo">
@@ -15728,7 +15728,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ContaConfigAfectacion" EntitySet="ContaConfigAfectacion" />
           </AssociationSet>
           <EntitySet Name="NotaDeCreditoOrigen" EntityType="RefaccionariaModelo.NotaDeCreditoOrigen" />
-          <EntitySet Name="NotasDeCreditoView" EntityType="RefaccionariaModelo.NotasDeCreditoView" />
           <EntitySet Name="VentasPagosDetalleView" EntityType="RefaccionariaModelo.VentasPagosDetalleView" />
           <EntitySet Name="VentasDetalleAvanzadoView" EntityType="RefaccionariaModelo.VentasDetalleAvanzadoView" />
           <EntitySet Name="VentasFacturasDetalleAvanzadoView" EntityType="RefaccionariaModelo.VentasFacturasDetalleAvanzadoView" />
@@ -16815,7 +16814,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ContaPolizaDetalle" EntitySet="ContaPolizaDetalle" />
             <End Role="ContaPolizaResguardoOcultar" EntitySet="ContaPolizaResguardoOcultar" />
           </AssociationSet>
-          <EntitySet Name="NotaDeCredito" EntityType="RefaccionariaModelo.NotaDeCredito" />
           <EntitySet Name="Sucursal" EntityType="RefaccionariaModelo.Sucursal" />
           <AssociationSet Name="FK__Autorizac__Sucur__2D9297B4" Association="RefaccionariaModelo.FK__Autorizac__Sucur__2D9297B4">
             <End Role="Sucursal" EntitySet="Sucursal" />
@@ -16844,10 +16842,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__CajaIngre__Sucur__321755AF" Association="RefaccionariaModelo.FK__CajaIngre__Sucur__321755AF">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="CajaIngreso" EntitySet="CajaIngreso" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NotaDeCre__Clien__59D0414E" Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
           </AssociationSet>
           <AssociationSet Name="FK__ContaCuen__Sucur__2AD6269A" Association="RefaccionariaModelo.FK__ContaCuen__Sucur__2AD6269A">
             <End Role="Sucursal" EntitySet="Sucursal" />
@@ -16912,30 +16906,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__NominaUsu__Sucur__7909C0DC" Association="RefaccionariaModelo.FK__NominaUsu__Sucur__7909C0DC">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="NominaUsuario" EntitySet="NominaUsuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NotaDeCre__Orige__0B879873" Association="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873">
-            <End Role="Venta" EntitySet="Venta" />
-            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NotaDeCre__Orige__1333A733" Association="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733">
-            <End Role="NotaDeCreditoOrigen" EntitySet="NotaDeCreditoOrigen" />
-            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NotaDeCre__Sucur__2FEFE172" Association="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172">
-            <End Role="Sucursal" EntitySet="Sucursal" />
-            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NotaDeCre__UsoVe__0C7BBCAC" Association="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC">
-            <End Role="Venta" EntitySet="Venta" />
-            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NotaDeCre__Usuar__5AC46587" Association="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaPago__NotaD__11207638" Association="RefaccionariaModelo.FK__VentaPago__NotaD__11207638">
-            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
-            <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK__NotaDeCre__Sucur__54775AAB" Association="RefaccionariaModelo.FK__NotaDeCre__Sucur__54775AAB">
             <End Role="Sucursal" EntitySet="Sucursal" />
@@ -17190,6 +17160,36 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__VentaGara__Venta__2429290B" Association="RefaccionariaModelo.FK__VentaGara__Venta__2429290B">
             <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
             <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <EntitySet Name="NotaDeCredito" EntityType="RefaccionariaModelo.NotaDeCredito" />
+          <EntitySet Name="NotasDeCreditoView" EntityType="RefaccionariaModelo.NotasDeCreditoView" />
+          <AssociationSet Name="FK__NotaDeCre__Clien__59D0414E" Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NotaDeCre__Orige__0B879873" Association="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NotaDeCre__Orige__1333A733" Association="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733">
+            <End Role="NotaDeCreditoOrigen" EntitySet="NotaDeCreditoOrigen" />
+            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NotaDeCre__Sucur__2FEFE172" Association="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NotaDeCre__UsoVe__0C7BBCAC" Association="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NotaDeCre__Usuar__5AC46587" Association="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaPago__NotaD__11207638" Association="RefaccionariaModelo.FK__VentaPago__NotaD__11207638">
+            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
+            <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Configuracion">
@@ -18182,8 +18182,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaPago__Venta__6CE315C2" FromRole="VentaPagoDetalle" ToRole="VentaPago" />
           <NavigationProperty Name="VentaDevolucion" Relationship="RefaccionariaModelo.FK__VentaDevo__Venta__233504D2" FromRole="VentaPagoDetalle" ToRole="VentaDevolucion" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaPago__Usuar__6FBF826D" FromRole="VentaPagoDetalle" ToRole="Usuario" />
-          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" FromRole="VentaPagoDetalle" ToRole="NotaDeCredito" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" FromRole="VentaPagoDetalle" ToRole="VentaGarantia" />
+          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" FromRole="VentaPagoDetalle" ToRole="NotaDeCredito" />
         </EntityType>
         <Association Name="FK__VentaPago__Banco__6ECB5E34">
           <End Type="RefaccionariaModelo.Banco" Role="Banco" Multiplicity="0..1" />
@@ -22415,29 +22415,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="String" Name="Origen" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733" FromRole="NotaDeCreditoOrigen" ToRole="NotaDeCredito" />
         </EntityType>
-        <EntityType Name="NotasDeCreditoView">
-          <Key>
-            <PropertyRef Name="NotaDeCreditoID" />
-            <PropertyRef Name="FechaDeEmision" />
-            <PropertyRef Name="Importe" />
-            <PropertyRef Name="ClienteID" />
-            <PropertyRef Name="Valida" />
-          </Key>
-          <Property Type="Int32" Name="NotaDeCreditoID" Nullable="false" />
-          <Property Type="DateTime" Name="FechaDeEmision" Nullable="false" Precision="3" />
-          <Property Type="Decimal" Name="Importe" Nullable="false" Precision="12" Scale="2" />
-          <Property Type="Int32" Name="ClienteID" Nullable="false" />
-          <Property Type="String" Name="Cliente" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="Valida" Nullable="false" />
-          <Property Type="DateTime" Name="FechaDeUso" Precision="3" />
-          <Property Type="String" Name="Observacion" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Autorizo" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="OrigenVentaFolio" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="UsoVentaFolio" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="OrigenID" />
-          <Property Type="String" Name="Origen" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Referencia" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="VentasPagosDetalleView">
           <Key>
             <PropertyRef Name="VentaPagoDetalleID" />
@@ -24699,11 +24676,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaParteAplicacion" Relationship="RefaccionariaModelo.FK__VentaPart__Venta__405B5365" FromRole="Venta" ToRole="VentaParteAplicacion" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__Venta__RealizoUs__7F01C5FD" FromRole="Venta" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__Venta__UsuarioID__32B6742D" FromRole="Venta" ToRole="Usuario" />
-          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" FromRole="Venta" ToRole="NotaDeCredito" />
-          <NavigationProperty Name="NotaDeCredito1" Relationship="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" FromRole="Venta" ToRole="NotaDeCredito" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__Venta__SucursalI__0F382DC6" FromRole="Venta" ToRole="Sucursal" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB" FromRole="Venta" ToRole="VentaGarantia" />
-        </EntityType>
+          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" FromRole="Venta" ToRole="NotaDeCredito" />
+          <NavigationProperty Name="NotaDeCredito1" Relationship="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" FromRole="Venta" ToRole="NotaDeCredito" />
+          </EntityType>
         <Association Name="FK__CascoRegi__Cobro__04266DCD">
           <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="0..1" />
           <End Type="RefaccionariaModelo.CascoRegistro" Role="CascoRegistro" Multiplicity="*" />
@@ -25958,7 +25935,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaFacturaDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__72BBEAA9" FromRole="Usuario" ToRole="VentaFacturaDetalle" />
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaPago__Usuar__644DCFC1" FromRole="Usuario" ToRole="VentaPago" />
           <NavigationProperty Name="VentaPagoDetalle" Relationship="RefaccionariaModelo.FK__VentaPago__Usuar__6FBF826D" FromRole="Usuario" ToRole="VentaPagoDetalle" />
-          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587" FromRole="Usuario" ToRole="NotaDeCredito" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__Sucursal__Gerent__129488B5" FromRole="Usuario" ToRole="Sucursal" />
           <NavigationProperty Name="Sucursal1" Relationship="RefaccionariaModelo.FK_Sucursal_Usuario" FromRole="Usuario" ToRole="Sucursal" />
           <NavigationProperty Name="ParteEquivalente" Relationship="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9" FromRole="Usuario" ToRole="ParteEquivalente" />
@@ -25969,6 +25945,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteVehiculo1" Relationship="RefaccionariaModelo.FK__ParteVehi__Usuar__10966653" FromRole="Usuario" ToRole="ParteVehiculo" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931" FromRole="Usuario" ToRole="VentaGarantia" />
           <NavigationProperty Name="VentaGarantia1" Relationship="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" FromRole="Usuario" ToRole="VentaGarantia" />
+          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587" FromRole="Usuario" ToRole="NotaDeCredito" />
         </EntityType>
         <Association Name="FK__Autorizac__Autor__21E0EDE6">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -27651,36 +27628,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="NotaDeCredito">
-          <Key>
-            <PropertyRef Name="NotaDeCreditoID" />
-          </Key>
-          <Property Name="NotaDeCreditoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FechaDeEmision" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="ClienteID" Type="Int32" Nullable="false" />
-          <Property Name="Valida" Type="Boolean" Nullable="false" />
-          <Property Name="FechaDeUso" Type="DateTime" Precision="3" />
-          <Property Name="Observacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
-          <Property Name="OrigenVentaID" Type="Int32" />
-          <Property Name="UsoVentaID" Type="Int32" />
-          <Property Name="MotivoBaja" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="Referencia" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="OrigenID" Type="Int32" />
-          <Property Name="SucursalID" Type="Int32" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" FromRole="NotaDeCredito" ToRole="Cliente" />
-          <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" FromRole="NotaDeCredito" ToRole="Venta" />
-          <NavigationProperty Name="NotaDeCreditoOrigen" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733" FromRole="NotaDeCredito" ToRole="NotaDeCreditoOrigen" />
-          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" FromRole="NotaDeCredito" ToRole="Sucursal" />
-          <NavigationProperty Name="Venta1" Relationship="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" FromRole="NotaDeCredito" ToRole="Venta" />
-          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587" FromRole="NotaDeCredito" ToRole="Usuario" />
-          <NavigationProperty Name="VentaPagoDetalle" Relationship="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" FromRole="NotaDeCredito" ToRole="VentaPagoDetalle" />
-        </EntityType>
         <EntityType Name="Sucursal">
           <Key>
             <PropertyRef Name="SucursalID" />
@@ -27717,7 +27664,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="MetaVendedor" Relationship="RefaccionariaModelo.FK__MetaVende__Sucur__72A6DC10" FromRole="Sucursal" ToRole="MetaVendedor" />
           <NavigationProperty Name="NominaImpuestoUsuario" Relationship="RefaccionariaModelo.FK__NominaImp__Sucur__33366271" FromRole="Sucursal" ToRole="NominaImpuestoUsuario" />
           <NavigationProperty Name="NominaUsuario" Relationship="RefaccionariaModelo.FK__NominaUsu__Sucur__7909C0DC" FromRole="Sucursal" ToRole="NominaUsuario" />
-          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" FromRole="Sucursal" ToRole="NotaDeCredito" />
           <NavigationProperty Name="NotaDeCreditoFiscal" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__54775AAB" FromRole="Sucursal" ToRole="NotaDeCreditoFiscal" />
           <NavigationProperty Name="ParteDomicializacion" Relationship="RefaccionariaModelo.FK_ParteDomicializacion_Sucursal" FromRole="Sucursal" ToRole="ParteDomicializacion" />
           <NavigationProperty Name="ParteKardex" Relationship="RefaccionariaModelo.FK__ParteKard__Sucur__65D6F0D7" FromRole="Sucursal" ToRole="ParteKardex" />
@@ -27738,6 +27684,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK_Sucursal_Usuario" FromRole="Sucursal" ToRole="Usuario" />
           <NavigationProperty Name="SucursalCriterioABC" Relationship="RefaccionariaModelo.FK_SucursalCriterioABC_Sucursal" FromRole="Sucursal" ToRole="SucursalCriterioABC" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" FromRole="Sucursal" ToRole="VentaGarantia" />
+          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" FromRole="Sucursal" ToRole="NotaDeCredito" />
         </EntityType>
         <Association Name="FK__Autorizac__Sucur__2D9297B4">
           <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
@@ -27820,18 +27767,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="CajaIngreso">
               <PropertyRef Name="SucursalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NotaDeCre__Clien__59D0414E">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="NotaDeCredito">
-              <PropertyRef Name="ClienteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -28024,78 +27959,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="NominaUsuario">
               <PropertyRef Name="SucursalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NotaDeCre__Orige__0B879873">
-          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Venta">
-              <PropertyRef Name="VentaID" />
-            </Principal>
-            <Dependent Role="NotaDeCredito">
-              <PropertyRef Name="OrigenVentaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NotaDeCre__Orige__1333A733">
-          <End Type="RefaccionariaModelo.NotaDeCreditoOrigen" Role="NotaDeCreditoOrigen" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NotaDeCreditoOrigen">
-              <PropertyRef Name="NotaDeCreditoOrigenID" />
-            </Principal>
-            <Dependent Role="NotaDeCredito">
-              <PropertyRef Name="OrigenID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NotaDeCre__Sucur__2FEFE172">
-          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sucursal">
-              <PropertyRef Name="SucursalID" />
-            </Principal>
-            <Dependent Role="NotaDeCredito">
-              <PropertyRef Name="SucursalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NotaDeCre__UsoVe__0C7BBCAC">
-          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Venta">
-              <PropertyRef Name="VentaID" />
-            </Principal>
-            <Dependent Role="NotaDeCredito">
-              <PropertyRef Name="UsoVentaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NotaDeCre__Usuar__5AC46587">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="NotaDeCredito">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaPago__NotaD__11207638">
-          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.VentaPagoDetalle" Role="VentaPagoDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NotaDeCredito">
-              <PropertyRef Name="NotaDeCreditoID" />
-            </Principal>
-            <Dependent Role="VentaPagoDetalle">
-              <PropertyRef Name="NotaDeCreditoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -28879,6 +28742,143 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="VentaGarantia">
               <PropertyRef Name="VentaPagoDetalleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NotaDeCredito">
+          <Key>
+            <PropertyRef Name="NotaDeCreditoID" />
+          </Key>
+          <Property Name="NotaDeCreditoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaDeEmision" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="Valida" Type="Boolean" Nullable="false" />
+          <Property Name="FechaDeUso" Type="DateTime" Precision="3" />
+          <Property Name="Observacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
+          <Property Name="OrigenVentaID" Type="Int32" />
+          <Property Name="UsoVentaID" Type="Int32" />
+          <Property Name="MotivoBaja" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="RelacionID" Type="Int32" />
+          <Property Name="OrigenID" Type="Int32" />
+          <Property Name="SucursalID" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" FromRole="NotaDeCredito" ToRole="Cliente" />
+          <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" FromRole="NotaDeCredito" ToRole="Venta" />
+          <NavigationProperty Name="NotaDeCreditoOrigen" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733" FromRole="NotaDeCredito" ToRole="NotaDeCreditoOrigen" />
+          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" FromRole="NotaDeCredito" ToRole="Sucursal" />
+          <NavigationProperty Name="Venta1" Relationship="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" FromRole="NotaDeCredito" ToRole="Venta" />
+          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587" FromRole="NotaDeCredito" ToRole="Usuario" />
+          <NavigationProperty Name="VentaPagoDetalle" Relationship="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" FromRole="NotaDeCredito" ToRole="VentaPagoDetalle" />
+        </EntityType>
+        <EntityType Name="NotasDeCreditoView">
+          <Key>
+            <PropertyRef Name="NotaDeCreditoID" />
+            <PropertyRef Name="FechaDeEmision" />
+            <PropertyRef Name="Importe" />
+            <PropertyRef Name="ClienteID" />
+            <PropertyRef Name="Valida" />
+          </Key>
+          <Property Name="NotaDeCreditoID" Type="Int32" Nullable="false" />
+          <Property Name="FechaDeEmision" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="Cliente" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Valida" Type="Boolean" Nullable="false" />
+          <Property Name="FechaDeUso" Type="DateTime" Precision="3" />
+          <Property Name="Observacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Autorizo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrigenVentaFolio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="UsoVentaFolio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="OrigenID" Type="Int32" />
+          <Property Name="Origen" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RelacionID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__NotaDeCre__Clien__59D0414E">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="NotaDeCredito">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NotaDeCre__Orige__0B879873">
+          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="VentaID" />
+            </Principal>
+            <Dependent Role="NotaDeCredito">
+              <PropertyRef Name="OrigenVentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NotaDeCre__Orige__1333A733">
+          <End Type="RefaccionariaModelo.NotaDeCreditoOrigen" Role="NotaDeCreditoOrigen" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotaDeCreditoOrigen">
+              <PropertyRef Name="NotaDeCreditoOrigenID" />
+            </Principal>
+            <Dependent Role="NotaDeCredito">
+              <PropertyRef Name="OrigenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NotaDeCre__Sucur__2FEFE172">
+          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="NotaDeCredito">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NotaDeCre__UsoVe__0C7BBCAC">
+          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="VentaID" />
+            </Principal>
+            <Dependent Role="NotaDeCredito">
+              <PropertyRef Name="UsoVentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NotaDeCre__Usuar__5AC46587">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="NotaDeCredito">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaPago__NotaD__11207638">
+          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.VentaPagoDetalle" Role="VentaPagoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotaDeCredito">
+              <PropertyRef Name="NotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="VentaPagoDetalle">
+              <PropertyRef Name="NotaDeCreditoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -32644,26 +32644,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NotasDeCreditoView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.NotasDeCreditoView">
-              <MappingFragment StoreEntitySet="NotasDeCreditoView">
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Origen" ColumnName="Origen" />
-                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
-                <ScalarProperty Name="UsoVentaFolio" ColumnName="UsoVentaFolio" />
-                <ScalarProperty Name="OrigenVentaFolio" ColumnName="OrigenVentaFolio" />
-                <ScalarProperty Name="Autorizo" ColumnName="Autorizo" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="FechaDeUso" ColumnName="FechaDeUso" />
-                <ScalarProperty Name="Valida" ColumnName="Valida" />
-                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
-                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="FechaDeEmision" ColumnName="FechaDeEmision" />
-                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VentasPagosDetalleView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.VentasPagosDetalleView">
               <MappingFragment StoreEntitySet="VentasPagosDetalleView">
@@ -34543,30 +34523,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NotaDeCredito">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.NotaDeCredito">
-              <MappingFragment StoreEntitySet="NotaDeCredito">
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="MotivoBaja" ColumnName="MotivoBaja" />
-                <ScalarProperty Name="UsoVentaID" ColumnName="UsoVentaID" />
-                <ScalarProperty Name="OrigenVentaID" ColumnName="OrigenVentaID" />
-                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="FechaDeUso" ColumnName="FechaDeUso" />
-                <ScalarProperty Name="Valida" ColumnName="Valida" />
-                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="FechaDeEmision" ColumnName="FechaDeEmision" />
-                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sucursal">
             <EntityTypeMapping TypeName="RefaccionariaModelo.Sucursal">
               <MappingFragment StoreEntitySet="Sucursal">
@@ -34809,6 +34765,50 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="NotaDeCredito">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.NotaDeCredito">
+              <MappingFragment StoreEntitySet="NotaDeCredito">
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
+                <ScalarProperty Name="MotivoBaja" ColumnName="MotivoBaja" />
+                <ScalarProperty Name="UsoVentaID" ColumnName="UsoVentaID" />
+                <ScalarProperty Name="OrigenVentaID" ColumnName="OrigenVentaID" />
+                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FechaDeUso" ColumnName="FechaDeUso" />
+                <ScalarProperty Name="Valida" ColumnName="Valida" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="FechaDeEmision" ColumnName="FechaDeEmision" />
+                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotasDeCreditoView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.NotasDeCreditoView">
+              <MappingFragment StoreEntitySet="NotasDeCreditoView">
+                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="UsoVentaFolio" ColumnName="UsoVentaFolio" />
+                <ScalarProperty Name="OrigenVentaFolio" ColumnName="OrigenVentaFolio" />
+                <ScalarProperty Name="Autorizo" ColumnName="Autorizo" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FechaDeUso" ColumnName="FechaDeUso" />
+                <ScalarProperty Name="Valida" ColumnName="Valida" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="FechaDeEmision" ColumnName="FechaDeEmision" />
+                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -34830,7 +34830,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="DataModel" ZoomLevel="16">
+      <Diagram Name="DataModel" ZoomLevel="82">
         <EntityTypeShape EntityType="RefaccionariaModelo.Configuracion" Width="1.5" PointX="2.75" PointY="0.75" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Perfil" Width="1.5" PointX="6" PointY="69.75" Height="0.40000000000000568" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Permiso" Width="1.5" PointX="0.75" PointY="2.75" Height="0.39999999999999858" IsExpanded="false" />
@@ -36609,7 +36609,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="5.25" PointY="86.728730357096381" />
         </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.NotaDeCreditoOrigen" Width="1.5" PointX="25" PointY="89.5" Height="1.5956835937499818" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.NotasDeCreditoView" Width="1.5" PointX="27.375" PointY="4.75" Height="3.710999348958353" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasPagosDetalleView" Width="1.5" PointX="35.375" PointY="4.75" Height="3.710999348958353" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasDetalleAvanzadoView" Width="1.5" PointX="10.375" PointY="31.75" Height="3.5186979166667243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasFacturasDetalleAvanzadoView" Width="1.5" PointX="12.375" PointY="31.75" Height="3.5186979166667243" />
@@ -38262,7 +38261,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__7C5041DB" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__7B5C1DA2" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__38EF3BC7" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.NotaDeCredito" Width="1.5" PointX="27.25" PointY="121.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Sucursal" Width="1.5" PointX="5.25" PointY="139.25" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Autorizac__Sucur__2D9297B4" />
         <AssociationConnector Association="RefaccionariaModelo.FK__BancoCuen__Sucur__4B780056" />
@@ -38271,7 +38269,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__CajaEgres__Sucur__3BA0BFE9" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CajaFactu__Sucur__0C1C9550" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CajaIngre__Sucur__321755AF" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaCuen__Sucur__2AD6269A" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Sucur__73D00A73" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Sucur__7D5974AD" />
@@ -38288,12 +38285,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__MetaVende__Sucur__72A6DC10" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NominaImp__Sucur__33366271" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Sucur__7909C0DC" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Sucur__54775AAB" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ParteDomicializacion_Sucursal" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteKard__Sucur__65D6F0D7" />
@@ -38345,6 +38336,15 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Motov__15F0184D" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Respu__2E1CA799" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.NotaDeCredito" Width="1.5" PointX="27.25" PointY="121.625" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.NotasDeCreditoView" Width="1.5" PointX="27.375" PointY="4.75" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" />
         </Diagram>
     </Diagrams>
   </Designer>

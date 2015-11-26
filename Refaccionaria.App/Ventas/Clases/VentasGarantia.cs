@@ -257,7 +257,7 @@ namespace Refaccionaria.App
                     case Cat.VentasGarantiasAcciones.ArticuloNuevo:
                     case Cat.VentasGarantiasAcciones.NotaDeCredito:
                         // var oVenta = General.GetEntity<Venta>(q => q.Estatus && q.VentaID == iVentaID);
-                        var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Garantia, iVentaID.ToString());
+                        var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Garantia, iVentaID);
                         // Se genera el pago negativo por la nota de crédito generada
                         oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(iValeClienteID.Value, mImporteDev, oResVale.Respuesta);
                         break;

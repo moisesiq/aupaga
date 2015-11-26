@@ -109,6 +109,7 @@ namespace Refaccionaria.App
             // Se generan los pagos para las ventas marcadas, hasta donde alcance el importe
             decimal mPago = this.ctlCobro.Suma;
             var oVentasAfectadas = new List<VentasACreditoView>();
+            var oPagosDetalleGen = new List<VentaPagoDetalle>();
             var oIdsPago = new List<int>();
             foreach (var oVentaACobrar in oVentasACobrar)
             {
@@ -151,6 +152,7 @@ namespace Refaccionaria.App
                 // Se agrega la venta actual a las ventas afectadas
                 oVentasAfectadas.Add(oVentaACobrar);
                 oIdsPago.Add(oPago.VentaPagoID);
+                oPagosDetalleGen.AddRange(oPagoDetalle);
 
                 if (mPago <= 0)
                     break;
@@ -195,6 +197,11 @@ namespace Refaccionaria.App
 
             // Se genera el ticket correspondiente
             VentasProc.GenerarTicketCobranza(sFolioCob);
+
+            // Si se pagó con vale, se verifica si se crearon nuevos vales por importes restantes. Y se mandan a imprimir
+            var oValesCreados = VentasProc.ObtenerValesCreados(oPagosDetalleGen);
+            foreach (var oReg in oValesCreados)
+                VentasProc.GenerarTicketNotaDeCredito(oReg.NotaDeCreditoID);
 
             // Se muestra una notifiación con el resultado
             UtilLocal.MostrarNotificacion("Procedimiento completado correctamente.");

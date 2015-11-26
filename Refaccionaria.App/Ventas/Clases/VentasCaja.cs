@@ -669,8 +669,8 @@ namespace Refaccionaria.App
             oVenta.VentaEstatusID = Cat.VentasEstatus.Cobrada;
             Guardar.Generico<Venta>(oVenta);
 
-            // Si la venta es a crédito, se guarda el dato
-            // si no, se generan los datos del pago
+            // Si la venta es a crédito, se guarda el dato, si no, se generan los datos del pago
+            int iVentaPagoID = 0;
             if (oPorCobrar.ctlCobro.ACredito)
             {
                 oVenta.ACredito = true;
@@ -688,6 +688,7 @@ namespace Refaccionaria.App
                 Guardar.VentaPago(oPago, oPagoDetalle);
                 // Se actualiza la venta, pues pudo haber cambiado en el proceso anterior
                 oVenta = General.GetEntity<Venta>(q => q.VentaID == oPorCobrar.VentaID && q.Estatus);
+                iVentaPagoID = oPago.VentaPagoID;
             }
             // Se muestra la ventana de "Cargando.."
             Cargando.Mostrar();
@@ -822,15 +823,15 @@ namespace Refaccionaria.App
                 else
                     VentasProc.GenerarTicketDe9500(o9500Ant.Cotizacion9500ID);
             }
-
+            
             // Se obtiene la vista de la venta actualizada, por el cambio de folio y otros cambios que pudo haber tenido
             var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oVenta.VentaID);
 
             // Se verifica si se crearon movimientos bancarios (por pagos de banco), en cuyo caso, se completan con el folio de venta asignado
-            var oPagoDet = General.GetListOf<VentasPagosDetalleView>(c => c.VentaID == iVentaID);
+            var oPagoDet = General.GetListOf<VentaPagoDetalle>(c => c.VentaPagoID == iVentaPagoID && c.Estatus);
             foreach (var oReg in oPagoDet)
             {
-                if (oReg.FormaDePagoID == Cat.FormasDePago.Cheque || oReg.FormaDePagoID == Cat.FormasDePago.Tarjeta || oReg.FormaDePagoID == Cat.FormasDePago.Transferencia)
+                if (oReg.TipoFormaPagoID == Cat.FormasDePago.Cheque || oReg.TipoFormaPagoID == Cat.FormasDePago.Tarjeta || oReg.TipoFormaPagoID == Cat.FormasDePago.Transferencia)
                 {
                     var oMovBanco = General.GetEntity<BancoCuentaMovimiento>(c => c.RelacionTabla == Cat.Tablas.VentaPagoDetalle && c.RelacionID == oReg.VentaPagoDetalleID);
                     oMovBanco.Referencia = oVentaV.Folio;
@@ -865,6 +866,11 @@ namespace Refaccionaria.App
                     RelacionID = iVentaID
                 });
             }
+
+            // Si se pagó con vale, se verifica si se crearon nuevos vales por importes restantes. Y se mandan a imprimir
+            var oValesCreados = VentasProc.ObtenerValesCreados(oPagoDet);
+            foreach (var oReg in oValesCreados)
+                VentasProc.GenerarTicketNotaDeCredito(oReg.NotaDeCreditoID);
 
             // Se cierra la ventana de "Cargando.."
             Cargando.Cerrar();
@@ -944,11 +950,11 @@ namespace Refaccionaria.App
                     decimal mComisionAntes = UtilDatos.VentaComisionCliente(iVentaID, oVenta.ComisionistaClienteID.Valor());
                     if (mComisionAntes > 0)
                         VentasProc.GenerarNotaDeCredito(oVenta.ComisionistaClienteID.Valor(), (mComisionAntes * -1), ""
-                            , Cat.OrigenesNotaDeCredito.CambioComisionista, iVentaID.ToString());
+                            , Cat.OrigenesNotaDeCredito.CambioComisionista, iVentaID);
                     decimal mComisionDespues = UtilDatos.VentaComisionCliente(iVentaID, oVentasCambios.ctlCobro.ComisionistaID);
                     if (mComisionDespues > 0)
                         VentasProc.GenerarNotaDeCredito(oVentasCambios.ctlCobro.ComisionistaID, mComisionDespues, ""
-                            , Cat.OrigenesNotaDeCredito.CambioComisionista, iVentaID.ToString());
+                            , Cat.OrigenesNotaDeCredito.CambioComisionista, iVentaID);
 
                     // Se registra el cambio en la venta
                     oVenta.ComisionistaClienteID = oVentasCambios.ctlCobro.ComisionistaID;

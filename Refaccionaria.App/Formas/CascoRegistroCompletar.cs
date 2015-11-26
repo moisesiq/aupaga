@@ -280,7 +280,10 @@ namespace Refaccionaria.App
             if (bCrearVale)
             {
                 var oRes = VentasProc.GenerarNotaDeCredito(iClienteID, (mFaltante * -1), "", Cat.OrigenesNotaDeCredito.CascoDeMayorValor
-                    , this.oCascoRegistro.CascoRegistroID.ToString());
+                    , this.oCascoRegistro.CascoRegistroID);
+                // Se crea la póliza contable (AfeConta)
+                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.ValeDirecto, oRes.Respuesta, oCliente.Nombre, "POR CASCO MAYOR");
+                // Se manda a imprimir el ticket
                 VentasProc.GenerarTicketNotaDeCredito(oRes.Respuesta);
             }
             // Se registra el casco a favor, si aplica

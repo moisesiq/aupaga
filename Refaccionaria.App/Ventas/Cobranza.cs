@@ -225,7 +225,7 @@ namespace Refaccionaria.App
             // Se genera la nota, si todo fue bien
             if (ResAut.Exito)
             {
-                var ResNC = VentasProc.GenerarNotaDeCredito(this.Cliente.ClienteID, mImporte, sConcepto, Cat.OrigenesNotaDeCredito.Directo, ResAut.Respuesta.NombreUsuario);
+                var ResNC = VentasProc.GenerarNotaDeCredito(this.Cliente.ClienteID, mImporte, sConcepto, Cat.OrigenesNotaDeCredito.Directo, ResAut.Respuesta.UsuarioID);
                 // Se manda a crear la póliza contable correspondiente (AfeConta)
                 var oVale = General.GetEntity<NotaDeCredito>(c => c.NotaDeCreditoID == ResNC.Respuesta && c.Estatus);
                 ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.ValeDirecto, oVale.NotaDeCreditoID, this.Cliente.Nombre, oVale.Observacion);
@@ -390,7 +390,7 @@ namespace Refaccionaria.App
             this.dgvNotasDeCredito.Rows.Clear();
             foreach (var oNota in oNotasDeCredito)
                 this.dgvNotasDeCredito.Rows.Add(oNota.NotaDeCreditoID, oNota.FechaDeEmision, oNota.Origen, 
-                    oNota.Referencia, oNota.Importe, oNota.UsoVentaFolio, oNota.FechaDeUso, oNota.Observacion);
+                    oNota.RelacionID, oNota.Importe, oNota.UsoVentaFolio, oNota.FechaDeUso, oNota.Observacion);
         }
 
         private void FilaMarcaCambiada(DataGridViewRow Fila)

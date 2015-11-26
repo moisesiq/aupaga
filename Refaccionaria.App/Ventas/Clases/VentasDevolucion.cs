@@ -361,7 +361,7 @@ namespace Refaccionaria.App
                         break;
                     case Cat.FormasDePago.Vale:
                         // var oVenta = General.GetEntity<Venta>(q => q.Estatus && q.VentaID == iVentaID);
-                        var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Devolucion, iVentaID.ToString());
+                        var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Devolucion, iVentaID);
                         // Se genera el pago negativo por la nota de crédito generada
                         oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(iValeClienteID.Value, mImporteDev, oResVale.Respuesta);
                         break;
@@ -443,9 +443,8 @@ namespace Refaccionaria.App
                         // Acción si hubo diferencia de importe entre el casco recibido y el esperado
                         iCancelarVentaID = oCascoReg.CobroVentaID.Valor();  // Por si se realizó un cobro
                         // Por si se generó un vale
-                        string sReferencia = oCascoReg.CascoRegistroID.ToString();
                         var oVale = General.GetEntity<NotaDeCredito>(c => c.OrigenID == Cat.OrigenesNotaDeCredito.CascoDeMayorValor
-                            && c.Referencia == sReferencia);
+                            && c.RelacionID == oCascoReg.CascoRegistroID);
                         if (oVale != null)
                         {
                             VentasProc.CancelarNotaDeCredito(oVale.NotaDeCreditoID, "POR CANCELACIÓN DE VENTA CON CASCO");

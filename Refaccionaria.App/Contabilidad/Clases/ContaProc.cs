@@ -499,6 +499,7 @@ namespace Refaccionaria.App
             var oPolizaDet = new List<ContaPolizaDetalle>();
 
             decimal mCargo = 0, mAbono = 0;
+            string sVales = "";
             var oAfectacion = General.GetEntity<ContaConfigAfectacion>(c => c.ContaConfigAfectacionID == iAfectacionID);
             var oAfectacionDet = General.GetListOf<ContaConfigAfectacionDetalle>(c => c.ContaConfigAfectacionID == iAfectacionID);
             foreach (var oReg in oAfectacionDet)
@@ -658,6 +659,10 @@ namespace Refaccionaria.App
                             break;
                         case Cat.ContaCuentasAuxiliares.AnticipoClientes:
                             oRegPoliza = ContaProc.GafAnticipoClientes(iAfectacionID, iId);
+                            // Se obtiene el vale usado de la afectación. Se guarda en la referencia
+                            if (oRegPoliza.Referencia != "")
+                                sVales += ("," + oRegPoliza.Referencia);
+                            //
                             if (iAfectacionID == Cat.ContaAfectaciones.VentaContadoPagoFacturaGlobal)
                                 bFacturaGlobalAnticipoClientes = true;
                             break;
@@ -777,6 +782,19 @@ namespace Refaccionaria.App
                 Origen = oAfectacion.Operacion,
                 Error = bError
             };
+
+            // Se verifica si se afectaron vales (cuanta anticipo clientes), para concatenarlos en la observación de la póliza
+            string sObsAnticipo = "";
+            var oVales = sVales.Split(',');
+            foreach (string sVale in oVales)
+            {
+                int iVale = Helper.ConvertirEntero(sVale);
+                var oVale = General.GetEntity<NotaDeCredito>(c => c.NotaDeCreditoID == iVale && c.Estatus);
+                if (oVale != null)
+                    sObsAnticipo += (", " + sVale + (oVale.OrigenID == Cat.OrigenesNotaDeCredito.ImporteRestante ? (" (" + oVale.RelacionID.ToString() + ")") : ""));
+            }
+            if (sObsAnticipo != "")
+                oPoliza.Concepto += (" / VALES: " + sObsAnticipo.Substring(2));
 
             // Se guardan los datos
             Guardar.Generico<ContaPoliza>(oPoliza);
@@ -1558,6 +1576,7 @@ namespace Refaccionaria.App
             {
                 case Cat.ContaAfectaciones.DevolucionVentaValeFactura:
                     ContaProc.AfectarConPrecioDevolucion(ref oDetalle, iId);
+                    oDetalle.Referencia = ContaProc.ObtenerValesDeDevolucion(iId);
                     break;
                 case Cat.ContaAfectaciones.VentaContadoVale:
                     ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
@@ -1565,21 +1584,26 @@ namespace Refaccionaria.App
                 case Cat.ContaAfectaciones.DevolucionVentaCreditoFacturadaVale:
                 case Cat.ContaAfectaciones.DevolucionVentaValeTicket:
                     ContaProc.AfectarConImporteDevueltoDevolucion(ref oDetalle, iId);
+                    oDetalle.Referencia = ContaProc.ObtenerValesDeDevolucion(iId);
                     break;
                 case Cat.ContaAfectaciones.ValeDirecto:
                     ContaProc.AfectarConVale(ref oDetalle, iId);
+                    oDetalle.Referencia = iId.ToString();
                     break;
                 case Cat.ContaAfectaciones.PagoVentaCredito:
                     ContaProc.AfectarConPagoVale(ref oDetalle, iId);
                     ContaProc.AfectarSucursalConValeDePago(ref oDetalle, iId);
+                    oDetalle.Referencia = ContaProc.ObtenerValesDePago(iId);
                     break;
                 case Cat.ContaAfectaciones.GarantiaVentaValeFactura:
                     ContaProc.AfectarConPrecioGarantia(ref oDetalle, iId);
                     ContaProc.AfectarSucursalConValeDeGarantia(ref oDetalle, iId);
+                    oDetalle.Referencia = ContaProc.ObtenerValesDeGarantia(iId);
                     break;
                 case Cat.ContaAfectaciones.GarantiaVentaCreditoFacturaVale:
                 case Cat.ContaAfectaciones.GarantiaVentaValeTicket:
                     ContaProc.AfectarConImporteDevueltoGarantia(ref oDetalle, iId);
+                    oDetalle.Referencia = ContaProc.ObtenerValesDeGarantia(iId);
                     break;
                 case Cat.ContaAfectaciones.VentaContadoPagoFacturaGlobal:
                     ContaProc.AfectarConFacturaGlobalValesDeFactura(ref oDetalle, iId);
@@ -1587,6 +1611,7 @@ namespace Refaccionaria.App
                 case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
                     ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
                     ContaProc.AfectarSucursalConValeDeVenta(ref oDetalle, iId);
+                    oDetalle.Referencia = ContaProc.ObtenerValesDeVenta(iId);
                     break;
                 case Cat.ContaAfectaciones.VentaContadoFacturaConvertida:
                     // Se verifica si la venta es del día o de días anteriores
@@ -1594,6 +1619,7 @@ namespace Refaccionaria.App
                         ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
                     // Para lo de la sucursal
                     ContaProc.AfectarSucursalConValeDeVenta(ref oDetalle, iId);
+                    oDetalle.Referencia = ContaProc.ObtenerValesDeVenta(iId);
                     break;
             }
             return oDetalle;
@@ -2518,6 +2544,33 @@ namespace Refaccionaria.App
             var oPagoDetV = General.GetEntity<VentasPagosDetalleAvanzadoView>(c => c.VentaID == iId && c.FormaDePagoID == Cat.FormasDePago.Vale);
             if (oPagoDetV != null)
                 oDetalle.SucursalID = oPagoDetV.SucursalID.Valor();
+        }
+
+        private static string ObtenerValesDeDevolucion(int iId)
+        {
+            var oDev = General.GetEntity<VentaDevolucion>(c => c.VentaDevolucionID == iId && c.Estatus);
+            var oPagoVale = General.GetEntity<VentaPagoDetalle>(c => c.VentaPagoDetalleID == oDev.VentaPagoDetalleID && c.Estatus);
+            return oPagoVale.NotaDeCreditoID.ToString();
+        }
+
+        private static string ObtenerValesDePago(int iId)
+        {
+            var oVales = General.GetListOf<VentaPagoDetalle>(c => c.VentaPagoID == iId && c.TipoFormaPagoID == Cat.FormasDePago.Vale && c.Estatus)
+                .Select(c => c.NotaDeCreditoID);
+            return string.Join(",", oVales);
+        }
+
+        private static string ObtenerValesDeGarantia(int iId)
+        {
+            var oGarantia = General.GetEntity<VentaGarantia>(c => c.VentaGarantiaID == iId && c.Estatus);
+            var oPagoVale = General.GetEntity<VentaPagoDetalle>(c => c.VentaPagoDetalleID == oGarantia.VentaPagoDetalleID && c.Estatus);
+            return oPagoVale.NotaDeCreditoID.ToString();
+        }
+
+        private static string ObtenerValesDeVenta(int iId)
+        {
+            var oVales = General.GetListOf<VentasPagosDetalleView>(c => c.VentaID == iId && c.FormaDePagoID == Cat.FormasDePago.Vale).Select(c => c.NotaDeCreditoID);
+            return string.Join(",", oVales);
         }
 
         #endregion
