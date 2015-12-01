@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="11/24/2015 12:24:32" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="\\CAJA01\TicketMatriz" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="11/26/2015 10:01:56" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="\\CAJA01\TicketMatriz" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
   <Dictionary>
     <BusinessObjectDataSource Name="Venta" ReferenceName="Venta" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.VentasView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="VentaID" DataType="System.Int32"/>
@@ -51,7 +51,7 @@
     <Parameter Name="LeyendaDeVenta" DataType="System.String"/>
     <Parameter Name="LeyendaVehiculo" DataType="System.String"/>
     <Parameter Name="Precio1" DataType="System.Boolean"/>
-    <Parameter Name="EfectivoRecibido" DataType="System.Decimal"/>
+    <Parameter Name="EfectivoRecibido" DataType="System.Decimal" Expression="0M"/>
   </Dictionary>
   <ReportPage Name="Page1" PaperWidth="80" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
     <PageHeaderBand Name="PageHeader1" Width="302.4" Height="182">
@@ -93,7 +93,7 @@
       <TextObject Name="Text29" Left="113.4" Top="20.9" Width="94.5" Height="12.9" Text="Importe Recibido:" HorzAlign="Right" Font="Arial, 8pt, style=Italic"/>
       <TextObject Name="Text30" Left="207.9" Top="20.95" Width="66.15" Height="12.85" Text="[EfectivoRecibido]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 8pt, style=Italic"/>
       <TextObject Name="Text31" Left="113.4" Top="35.35" Width="94.5" Height="12.9" Text="Cambio:" HorzAlign="Right" Font="Arial, 8pt, style=Italic"/>
-      <TextObject Name="Text32" Left="207.9" Top="35.4" Width="66.15" Height="12.85" Text="[[EfectivoRecibido]-[Venta.Total]]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 8pt, style=Italic"/>
+      <TextObject Name="Text32" Left="207.9" Top="35.4" Width="66.15" Height="12.85" Text="-" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 8pt, style=Italic"/>
     </DataBand>
     <PageFooterBand Name="PageFooter1" Top="351.6" Width="302.4" Height="94.5"/>
   </ReportPage>

@@ -99,8 +99,8 @@ namespace Refaccionaria.App
             }
 
             // Se verifica si se creará vale, para pedir el cliente en caso de que no haya
-            int iValeClienteID = 0;
-            if (this.ctlBusqueda.FormaDeDevolucion == Cat.FormasDePago.Vale && oVentaV.ClienteID == Cat.Clientes.Mostrador)
+            int iValeClienteID = oVentaV.ClienteID;
+            if (this.ctlBusqueda.FormaDeDevolucion == Cat.FormasDePago.Vale && iValeClienteID == Cat.Clientes.Mostrador)
             {
                 var frmValor = new MensajeObtenerValor("Selecciona el cliente para crear el Vale:", "", MensajeObtenerValor.Tipo.Combo);
                 frmValor.CargarCombo("ClienteID", "Nombre", General.GetListOf<Cliente>(q => q.ClienteID != Cat.Clientes.Mostrador && q.Estatus));
