@@ -114,9 +114,6 @@ namespace Refaccionaria.App
             DateTime dDesde = new DateTime(iAnio, 1, 1);
             DateTime dHasta = new DateTime(iAnio, 12, 31);
             var oParams = new Dictionary<string, object>();
-            // Si es año 2015, se muestran sólo datos a partir de la semana del 6 al 12 de Junio. Pedido especial.
-            if (iAnio == 2015 && dDesde < new DateTime(iAnio, 6, 6))
-                dDesde = new DateTime(iAnio, 6, 6);
             //
             // oParams.Add("SucursalID", (iSucursalID == 0 ? null : (int?)iSucursalID));
             oParams.Add("Pagadas", true);
@@ -126,6 +123,15 @@ namespace Refaccionaria.App
             oParams.Add("Desde", dDesde);
             oParams.Add("Hasta", dHasta);
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+
+            // Si es año 2015, se muestran sólo datos a partir de la semana del 6 al 12 de Junio. Pedido especial.
+            if (iAnio == 2015 && dDesde < new DateTime(iAnio, 6, 6))
+            {
+                var dDesdeEsp = new DateTime(iAnio, 6, 6);
+                oDatos = oDatos.Where(c => c.Fecha >= dDesdeEsp).ToList();
+            }
+            //
+
             var oSemanas = oDatos.Where(c => c.Fecha >= dDesde)
                 .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha) })
                 .Select(c => new { c.Key.Semana, PrecioSinIva = c.Sum(s => s.PrecioSinIvaActual) })

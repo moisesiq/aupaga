@@ -283,7 +283,7 @@ namespace Refaccionaria.App
                         oNodoCuentaAuxiliar.Cells[iCol].Tag = new List<int>();
                     (oNodoCuentaAuxiliar.Cells[iCol].Tag as List<int>).Add(oReg.ContaEgresoDevengadoID);
                     // Para llenar el importe
-                    oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + oReg.ImporteDev);
+                    oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + oReg.ImporteDev.Valor());
                 }
             }
 

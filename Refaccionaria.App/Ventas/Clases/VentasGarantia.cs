@@ -259,7 +259,7 @@ namespace Refaccionaria.App
                         // var oVenta = General.GetEntity<Venta>(q => q.Estatus && q.VentaID == iVentaID);
                         var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Garantia, iVentaID);
                         // Se genera el pago negativo por la nota de crédito generada
-                        oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(iValeClienteID.Value, mImporteDev, oResVale.Respuesta);
+                        oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(iVentaID, mImporteDev, oResVale.Respuesta);
                         break;
                     case Cat.VentasGarantiasAcciones.Efectivo:
                         oResPagoNeg = VentasProc.GenerarDevolucionDeEfectivo(iVentaID, mImporteDev);
