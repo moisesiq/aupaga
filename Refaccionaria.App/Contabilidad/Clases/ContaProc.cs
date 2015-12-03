@@ -340,6 +340,7 @@ namespace Refaccionaria.App
         public static List<GastoSem> GastosSemanalizados(List<pauContaCuentasPorSemana_Result> oDatos, DateTime dUltSem)
         {
             var oGastosSem = new List<GastoSem>();
+            List<int> oCuentasAuxProc = new List<int>();
 
             foreach (var oReg in oDatos)
             {
@@ -362,7 +363,7 @@ namespace Refaccionaria.App
                         if (oReg.FinSemanalizar.HasValue && oReg.FinSemanalizar <= dIniSem)
                             break;
                         // Se verifica la fecha final, 
-                        if (dIniSem > dFinPer)
+                        if (dIniSem > dFinPer && oCuentasAuxProc.Contains(oReg.ContaCuentaAuxiliarID))
                             break;
 
                         // Se calcula el importe correspondiente
@@ -374,6 +375,9 @@ namespace Refaccionaria.App
                         else if (dIniSem > dFinPer && (dIniSem - dFinPer).Days < 7)
                         {
                             iDias = (dIniSem.Day - 1);
+                            // Se debe trabajar con la semana anterior, para completar semana que tiene parte en el mes anterior y en el mes nuevo
+                            DateTime dSemAnt = dIniSem.AddDays(-7);
+                            oSem = oGastosSem.Find(c => c.Semana == dSemAnt && c.Grupo == oReg.Sucursal);
                         }
                         else
                         {
@@ -385,6 +389,10 @@ namespace Refaccionaria.App
                         // Se va sumando el importe en la semana correspondiente
                         oSem.Importe += mImporte;
                     }
+
+                    // Se marca la cuenta auxiliar, sólo la primera vez que un gasto tiene está cuenta, para que los gastos posteriores ya no se semanalicen hasta el final
+                    if (!oCuentasAuxProc.Contains(oReg.ContaCuentaAuxiliarID))
+                        oCuentasAuxProc.Add(oReg.ContaCuentaAuxiliarID);
                 }
                 else
                 {
