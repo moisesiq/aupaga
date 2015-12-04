@@ -95,6 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\Formas\MovimientosAgrupar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracion\Formas\MovimientosAgrupar.Designer.cs">
+      <DependentUpon>MovimientosAgrupar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Administracion\Gen\GridVentasMes.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1414,6 +1420,9 @@
     <Compile Include="Ventas\vdContactos.Designer.cs">
       <DependentUpon>vdContactos.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Administracion\Formas\MovimientosAgrupar.resx">
+      <DependentUpon>MovimientosAgrupar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Administracion\Gen\GridVentasMes.resx">
       <DependentUpon>GridVentasMes.cs</DependentUpon>
     </EmbeddedResource>

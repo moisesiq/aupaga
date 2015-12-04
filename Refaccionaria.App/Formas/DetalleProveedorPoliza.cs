@@ -536,7 +536,7 @@ namespace Refaccionaria.App
             {
                 ProveedorID = ProveedorId,
                 FechaPago = this.dtpFechaMovimiento.Value,
-                ImportePago = mImportePago,
+                // ImportePago = mImportePago,
                 BancoCuentaID = Helper.ConvertirEntero(this.cmbCuentaBancaria.SelectedValue),
                 TipoFormaPagoID = Helper.ConvertirEntero(this.cboFormaPago.SelectedValue),
                 FolioDePago = this.txtDocumento.Text,
@@ -566,7 +566,8 @@ namespace Refaccionaria.App
                     ProveedorPolizaID = poliza.ProveedorPolizaID,
                     MovimientoInventarioID = iMovID,
                     OrigenID = Cat.OrigenesPagosAProveedores.PagoDirecto,
-                    Importe = mImporte,
+                    Subtotal = UtilLocal.ObtenerPrecioSinIva(mImporte),
+                    Iva = UtilLocal.ObtenerIvaDePrecio(mImporte),
                     Folio = this.txtDocumento.Text
                 };
                 Guardar.Generico<ProveedorPolizaDetalle>(polizaDetalle);
@@ -600,7 +601,8 @@ namespace Refaccionaria.App
                     ProveedorPolizaID = poliza.ProveedorPolizaID,
                     MovimientoInventarioID = Helper.ConvertirEntero(oFila.Cells["abo_MovimientoInventarioID"].Value),
                     OrigenID = iOrigenID,
-                    Importe = mImporte,
+                    Subtotal = UtilLocal.ObtenerPrecioSinIva(mImporte),
+                    Iva = UtilLocal.ObtenerIvaDePrecio(mImporte),
                     NotaDeCreditoID = (iNotaDeCreditoID > 0 ? (int?)iNotaDeCreditoID : null),
                     CajaEgresoID = (iCajaEgresoID > 0 ? (int?)iCajaEgresoID : null),
                     Observacion = Helper.ConvertirCadena(oFila.Cells["abo_Observacion"].Value),
@@ -616,11 +618,12 @@ namespace Refaccionaria.App
                 // Se marca el gasto de caja como afectado en proveedores, si aplica
                 if (iCajaEgresoID > 0)
                 {
+                    var oGasto = General.GetEntity<CajaEgreso>(c => c.CajaEgresoID == iCajaEgresoID && c.Estatus);
+
                     // if (iOrigenID == Cat.OrigenesPagosAProveedores.PagoDeCaja)  // No sé x q se hacía está validación. No le vi caso - Moi 2015-08-17
                     // {
                         if (General.Exists<CajaEgresosProveedoresView>(c => c.CajaEgresoID == iCajaEgresoID && c.Restante <= 0))
                         {
-                            var oGasto = General.GetEntity<CajaEgreso>(c => c.CajaEgresoID == iCajaEgresoID && c.Estatus);
                             oGasto.AfectadoEnProveedores = true;
                             Guardar.Generico<CajaEgreso>(oGasto);    
                         }
@@ -628,6 +631,14 @@ namespace Refaccionaria.App
                         // Se agrega el CajaEgresoID a la lista oIdsPagosDeCaja para después mandarlos a la afectación contable (Pólizas)
                         oIdsPagosDeCaja.Add(iCajaEgresoID);
                     // }
+
+                    // Si es un gasto de caja y es nota, se modifica el pago, para incluir el iva en el subtotal y dejar el iva en cero
+                    if (oGasto.Facturado.HasValue && !oGasto.Facturado.Value)
+                    {
+                        polizaDetalle.Subtotal = mImporte;
+                        polizaDetalle.Iva = 0;
+                        Guardar.Generico<ProveedorPolizaDetalle>(polizaDetalle);
+                    }
                 }
 
                 // Se llena el dato del id asignado al registro de abono

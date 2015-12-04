@@ -851,12 +851,18 @@ namespace Refaccionaria.App
             var oDesglose = new List<ConteoMonedasUsuario>();
             var oMonedas = new Dictionary<decimal, int>();
             var oListaMon = new List<decimal>() { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5M, 0.2M, 0.1M };
-            foreach (decimal mMoneda in oListaMon)
-                oMonedas.Add(mMoneda, 0);
             
             foreach (DataGridViewRow oFila in this.dgvDatos.Rows)
             {
+                if (!Helper.ConvertirBool(oFila.Cells["Sel"].Value))
+                    continue;
+
+                // Se limpian los datos de monedas
+                foreach (decimal mMoneda in oListaMon)
+                    oMonedas[mMoneda] = 0;
+                //
                 decimal mLiquido = Helper.ConvertirDecimal(oFila.Cells["Liquido"].Value);
+                mLiquido = Math.Round(mLiquido, 1);
                 // Se calculan las moendas del usuario
                 foreach (decimal mMon in oListaMon)
                 {

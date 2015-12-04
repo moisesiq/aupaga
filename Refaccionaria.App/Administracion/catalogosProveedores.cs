@@ -337,6 +337,7 @@ namespace Refaccionaria.App
                 this.cboEstatusProveedor.ValueMember = "ProveedorEstatusID";
 
                 this.dgvMovimientosNoPagados.DefaultCellStyle.ForeColor = Color.Black;
+                this.dgvAgrupadosNoPagados.DefaultCellStyle.ForeColor = Color.Black;
                 this.dgvDevoluciones.DefaultCellStyle.ForeColor = Color.Black;
                 this.dgvOperaciones.DefaultCellStyle.ForeColor = Color.Black;
                 this.dgvDetalleOperaciones.DefaultCellStyle.ForeColor = Color.Black;
@@ -1304,10 +1305,36 @@ namespace Refaccionaria.App
         {
             if (this.dgvMovimientosNoPagados.VerSeleccionNueva())
             {
+                this.dgvAgrupadosNoPagados.Rows.Clear();
+
                 if (this.dgvMovimientosNoPagados.CurrentRow == null) return;
                 int iMovID = Helper.ConvertirEntero(this.dgvMovimientosNoPagados.CurrentRow.Cells["pen_MovimientoInventarioID"].Value);
                 this.CargarAbonos(this.dgvAbonos, iMovID);
+
+                // Se verifica si es agrupador, para cargar los movimientos correspondientes
+                if (Helper.ConvertirBool(this.dgvMovimientosNoPagados.CurrentRow.Cells["pen_EsAgrupador"].Value))
+                    this.CargarMovimientosAgrupados(iMovID);
             }
+        }
+
+        private void btnAgruparNoPagados_Click(object sender, EventArgs e)
+        {
+            this.AgruparMovimientos();
+        }
+
+        private void btnDesagruparNoPagados_Click(object sender, EventArgs e)
+        {
+            if (this.dgvMovimientosNoPagados.CurrentRow == null)
+                return;
+            if (!Helper.ConvertirBool(this.dgvMovimientosNoPagados.CurrentRow.Cells["pen_EsAgrupador"].Value))
+            {
+                UtilLocal.MensajeAdvertencia("El movimiento seleccionado no es agrupador.");
+                return;
+            }
+            if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que quieres desagrupar el movimiento seleccionado?") != DialogResult.Yes)
+                return;
+            int iMovID = Helper.ConvertirEntero(this.dgvMovimientosNoPagados.CurrentRow.Cells["pen_MovimientoInventarioID"].Value);
+            this.DesagruparMovimientos(iMovID);
         }
 
         private void btnAgregarPoliza_Click(object sender, EventArgs e)
@@ -1337,6 +1364,7 @@ namespace Refaccionaria.App
             if (this.dgvMovimientosNoPagados.CurrentRow == null)
                 return;
 
+            /*
             var ids = new List<int>();
             try
             {
@@ -1405,6 +1433,8 @@ namespace Refaccionaria.App
             this.CargarMovimientosNoPagados(Proveedor.ProveedorID);
             this.CargarDevoluciones(Proveedor.ProveedorID);
             // this.CargarPagosParcialesYdevoluciones(0, this.dgvDepositos);
+
+            */
         }
 
         private void dgvNotasDeCredito_CurrentCellChanged(object sender, EventArgs e)
@@ -1417,10 +1447,15 @@ namespace Refaccionaria.App
 
         public void CargarMovimientosNoPagados(int proveedorId)
         {
-            var oPendientes = General.GetListOf<ProveedoresComprasView>(m => m.ProveedorID == Proveedor.ProveedorID && m.Saldo > 0);
+            var oPendientes = General.GetListOf<ProveedoresComprasView>(m => m.ProveedorID == Proveedor.ProveedorID && m.Saldo > 0 && !m.MovimientoAgrupadorID.HasValue);
             this.dgvMovimientosNoPagados.Rows.Clear();
             foreach (var oReg in oPendientes)
-                this.dgvMovimientosNoPagados.Rows.Add(oReg.MovimientoInventarioID, false, oReg.Factura, oReg.Fecha, oReg.ImporteFactura, oReg.Abonado, oReg.Saldo, oReg.Usuario);
+            {
+                int iFila = this.dgvMovimientosNoPagados.Rows.Add(oReg.MovimientoInventarioID, false, oReg.Factura, oReg.Fecha
+                    , oReg.ImporteFactura, oReg.Abonado, oReg.Saldo, oReg.Usuario, oReg.EsAgrupador);
+                if (oReg.EsAgrupador)
+                    this.dgvMovimientosNoPagados.Rows[iFila].DefaultCellStyle.Font = new Font(this.dgvMovimientosNoPagados.Font, FontStyle.Bold);
+            }
 
             // Se llenan los totales
             this.dgvPendientesTotales.Rows.Clear();
@@ -1445,7 +1480,82 @@ namespace Refaccionaria.App
             foreach (var oReg in oNotas)
                 this.dgvNotasDeCredito.Rows.Add(oReg.ProveedorNotaDeCreditoID, oReg.Folio, oReg.Origen, oReg.Fecha, oReg.Total, oReg.Usado, oReg.Restante, oReg.Observacion);
         }
-        
+
+        private void CargarMovimientosAgrupados(int iMovID)
+        {
+            var oMovs = General.GetListOf<ProveedoresComprasView>(c => c.MovimientoAgrupadorID == iMovID);
+            this.dgvAgrupadosNoPagados.Rows.Clear();
+            foreach (var oReg in oMovs)
+                this.dgvAgrupadosNoPagados.Rows.Add(oReg.MovimientoInventarioID, oReg.Factura, oReg.Fecha, oReg.ImporteFactura, oReg.Abonado, oReg.Saldo, oReg.Usuario);
+        }
+
+        private void AgruparMovimientos()
+        {
+            var oMovsSel = new List<int>();
+            foreach (DataGridViewRow oFila in this.dgvMovimientosNoPagados.Rows)
+            {
+                // Se valida que no se seleccione un movimiento agrupador
+                if (Helper.ConvertirBool(oFila.Cells["pen_EsAgrupador"].Value))
+                {
+                    UtilLocal.MensajeAdvertencia("No se puede agrupar un movimiento que ya es agrupador.");
+                    return;
+                }
+                //
+                if (Helper.ConvertirBool(oFila.Cells["pen_Sel"].Value))
+                    oMovsSel.Add(Helper.ConvertirEntero(oFila.Cells["pen_MovimientoInventarioID"].Value));
+            }
+
+            var frmAgrupar = new MovimientosAgrupar(oMovsSel);
+            if (frmAgrupar.ShowDialog(Principal.Instance) == DialogResult.OK)
+            {
+                Cargando.Mostrar();
+                // Se obtienen los movimientos a agrupar
+                var oMovsAgr = new List<MovimientoInventario>();
+                foreach (int iMovID in oMovsSel)
+                    oMovsAgr.Add(General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iMovID && c.Estatus));
+                // Se crea el movimiento agrupador
+                var oMovAgr = new MovimientoInventario()
+                {
+                    TipoOperacionID = Cat.TiposDeOperacionMovimientos.EntradaCompra,
+                    ProveedorID = this.Proveedor.ProveedorID,
+                    FechaRecepcion = frmAgrupar.FechaGuardar,
+                    Subtotal = oMovsAgr.Sum(c => c.Subtotal),
+                    IVA = oMovsAgr.Sum(c => c.IVA),
+                    ImporteTotal = oMovsAgr.Sum(c => c.ImporteTotal),
+                    FueLiquidado = false,
+                    ImporteFactura = oMovsAgr.Sum(c => c.ImporteFactura),
+                    EsAgrupador = true
+                };
+                Guardar.Generico<MovimientoInventario>(oMovAgr);
+                // Se hace la agrupación
+                foreach (var oReg in oMovsAgr)
+                {
+                    oReg.MovimientoAgrupadorID = oMovAgr.MovimientoInventarioID;
+                    Guardar.Generico<MovimientoInventario>(oReg);
+                }
+                Cargando.Cerrar();
+                this.CargarMovimientosNoPagados(this.Proveedor.ProveedorID);
+            }
+            frmAgrupar.Dispose();
+        }
+
+        private void DesagruparMovimientos(int iMovimientoAgrupadorID)
+        {
+            Cargando.Mostrar();
+
+            var oMovs = General.GetListOf<MovimientoInventario>(c => c.MovimientoAgrupadorID == iMovimientoAgrupadorID);
+            foreach (var oReg in oMovs)
+            {
+                oReg.MovimientoAgrupadorID = null;
+                Guardar.Generico<MovimientoInventario>(oReg);
+            }
+            var oMovAgr = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iMovimientoAgrupadorID && c.EsAgrupador && c.Estatus);
+            Guardar.Eliminar<MovimientoInventario>(oMovAgr);
+
+            Cargando.Cerrar();
+            this.CargarMovimientosNoPagados(this.Proveedor.ProveedorID);
+        }
+
         #endregion
 
         #region [Tap Operaciones]

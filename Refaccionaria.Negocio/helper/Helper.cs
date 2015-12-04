@@ -1101,6 +1101,11 @@ namespace Refaccionaria.Negocio
                 return "";
         }
 
+        public static string Truncar(this string sCadena, int iCaracteres)
+        {
+            return (sCadena.Substring(0, (iCaracteres > sCadena.Length ? sCadena.Length : iCaracteres)));
+        }
+
         #endregion
         
         #region [ Extensiones DateTime ]

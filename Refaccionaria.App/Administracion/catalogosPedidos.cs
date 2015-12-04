@@ -661,6 +661,15 @@ namespace Refaccionaria.App
             return (mFactor * mUnidadDeEmpaque);
         }
 
+        private void LlenarDescripcionMaxMin(DataGridViewRow oFila)
+        {
+            this.txtDescripcionMaxMin.Clear();
+            if (oFila == null)
+                return;
+            this.txtDescripcionMaxMin.Text = string.Format("Condición: {0} Procesado: {1}\r\n{2}", Helper.ConvertirEntero(oFila.Cells["ParteMaxMinReglaID"].Value)
+                , Helper.ConvertirFechaHora(oFila.Cells["FechaMaxMin"].Value), Helper.ConvertirCadena(oFila.Cells["DescripcionMaxMin"].Value));
+        }
+
         #endregion
 
         #region [ Eventos ]
@@ -1119,6 +1128,11 @@ namespace Refaccionaria.App
             }
         }
 
+        private void dgvExistencias_CurrentCellChanged(object sender, EventArgs e)
+        {
+            this.LlenarDescripcionMaxMin(this.dgvExistencias.CurrentRow);
+        }
+
         #endregion
 
         #region [ Pedidos ]
@@ -1241,7 +1255,7 @@ namespace Refaccionaria.App
         }
 
         #endregion
-                                                
+                    
         #endregion
                 
     }

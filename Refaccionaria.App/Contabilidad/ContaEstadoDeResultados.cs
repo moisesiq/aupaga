@@ -170,8 +170,8 @@ namespace Refaccionaria.App
             oParams.Add("Desde", dDesde);
             oParams.Add("Hasta", dHasta);
             var oGastos = General.ExecuteProcedure<pauContaCuentasPorSemana_Result>("pauContaCuentasPorSemana", oParams);
-            // var oGastosSemFijo = oGastos.GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
-            //    .Select(c => new ContaProc.GastoSem() { Semana = c.Key.Semana, Grupo = c.Key.Sucursal, Importe = c.Sum(s => s.ImporteDev).Valor() });
+            var oGastosSemFijo = oGastos.GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
+                .Select(c => new ContaProc.GastoSem() { Semana = c.Key.Semana, Grupo = c.Key.Sucursal, Importe = c.Sum(s => s.ImporteDev).Valor() });
             // Se obtiene los datos según el tipo de semanalización
             List<ContaProc.GastoSem> oGastosSem;
             if (this.rdbSemanalizar.Checked)
@@ -180,9 +180,7 @@ namespace Refaccionaria.App
             }
             else
             {
-                oGastosSem = oGastos.GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
-                    .Select(c => new ContaProc.GastoSem() { Semana = c.Key.Semana, Grupo = c.Key.Sucursal, Importe = c.Sum(s => s.ImporteDev).Valor() })
-                    .OrderBy(c => c.Grupo).ThenBy(c => c.Semana).ToList();
+                oGastosSem = oGastosSemFijo.OrderBy(c => c.Grupo).ThenBy(c => c.Semana).ToList();
             }
 
             // Se agrega la fila de los Gastos
@@ -247,7 +245,9 @@ namespace Refaccionaria.App
             }
 
             // Se agrega la fila de Especiales
-            int iFilaEsp = this.dgvDatos.Rows.Add("- Especiales", oGastosSemEspFijo.Sum(c => c.Importe), oGastosSemEspFijo.Average(c => c.Importe));
+            bool bHay = (oGastosSemEspFijo.Count() > 0);
+            int iFilaEsp = this.dgvDatos.Rows.Add("- Especiales", (bHay ? oGastosSemEspFijo.Sum(c => c.Importe) : 0)
+                , (bHay ? oGastosSemEspFijo.Average(c => c.Importe) : 0));
             this.dgvDatos.Rows[iFilaEsp].DefaultCellStyle.Font = oFuenteT;
             // Se llenan los gastos
             string sDuenio = "";
@@ -293,14 +293,15 @@ namespace Refaccionaria.App
             var oInversiones = oReinversiones.Where(c => c.ContaSubcuentaID == Cat.ContaSubcuentas.ActivoFijo)
                 .GroupBy(c => UtilLocal.InicioSemanaSabAVie(c.FechaPoliza.Valor())).Select(c => new { Semana = c.Key, Importe = c.Sum(s => s.Cargo) });
             // Se agrega la fila de Reinversión
-            int iFilaReinversion = this.dgvDatos.Rows.Add("- Reinversión"
-                , (oDeudas.Sum(c => c.Importe) + oInversiones.Sum(c => c.Importe))
-                , ((oDeudas.Average(c => c.Importe) + oInversiones.Average(c => c.Importe)) / 2)
-            );
+            decimal mDeudas = (oDeudas.Count() > 0 ? oDeudas.Sum(c => c.Importe) : 0);
+            decimal mDeudasProm = (oDeudas.Count() > 0 ? oDeudas.Average(c => c.Importe) : 0);
+            decimal mInversiones = (oInversiones.Count() > 0 ? oInversiones.Sum(c => c.Importe) : 0);
+            decimal mInversionesProm = (oInversiones.Count() > 0 ? oInversiones.Average(c => c.Importe) : 0);
+            int iFilaReinversion = this.dgvDatos.Rows.Add("- Reinversión", (mDeudas + mInversiones), ((mDeudasProm + mInversionesProm) / 2));
             this.dgvDatos.Rows[iFilaReinversion].DefaultCellStyle.Font = oFuenteT;
             // Se llenan los datos de reinversión
             // Deudas
-            iFila = this.dgvDatos.Rows.Add("Deudas", oDeudas.Sum(c => c.Importe), oDeudas.Average(c => c.Importe));
+            iFila = this.dgvDatos.Rows.Add("Deudas", mDeudas, mDeudasProm);
             foreach (var oReg in oDeudas)
             {
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -308,7 +309,7 @@ namespace Refaccionaria.App
                 this.dgvDatos[sSemana, iFilaReinversion].Value = (Helper.ConvertirDecimal(this.dgvDatos[sSemana, iFilaReinversion].Value) + oReg.Importe);
             }
             // Inversión
-            iFila = this.dgvDatos.Rows.Add("Inversiones", oInversiones.Sum(c => c.Importe), oInversiones.Average(c => c.Importe));
+            iFila = this.dgvDatos.Rows.Add("Inversiones", mInversiones, mInversionesProm);
             foreach (var oReg in oInversiones)
             {
                 string sSemana = oReg.Semana.ToShortDateString();

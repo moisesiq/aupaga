@@ -165,6 +165,7 @@ namespace Refaccionaria.App
             this.DetalleUltimaFilaSel = this.dgvDetalle.CurrentRow;
             int iParteID = Helper.ConvertirEntero(this.dgvDetalle.CurrentRow.Cells["ParteID"].Value);
             this.LlenarDatosExtra(iParteID);
+            this.LlenarDescripcionMaxMin(this.dgvDetalle.CurrentRow);
         }
 
         private void dgvDetalle_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -465,7 +466,7 @@ namespace Refaccionaria.App
                 oParams.Add("Lineas/tpuTablaEnteros", oDtLineas);
             }
             //
-            var oMaxMin = General.ExecuteProcedure<pauPartesMaxMin_Result>("pauPartesMaxMin", oParams);
+            var oMaxMin = General.ExecuteProcedure<pauPartesMaxMin_Res>("pauPartesMaxMin", oParams);
 
 
             int iFila;
@@ -474,7 +475,8 @@ namespace Refaccionaria.App
             {
                 iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, true, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
                     , oParte.Existencia, oParte.UnidadEmpaque, oParte.TiempoReposicion, oParte.AbcDeNegocio, oParte.AbcDeVentas, oParte.AbcDeUtilidad
-                    , oParte.VentasTotal, oParte.CantidadTotal, oParte.UtilidadTotal, oParte.Fijo, oParte.Minimo, oParte.Maximo, null, null, null, oParte.FechaCalculo, "");
+                    , oParte.VentasTotal, oParte.CantidadTotal, oParte.UtilidadTotal, oParte.Fijo, oParte.Minimo, oParte.Maximo, null, null
+                    , oParte.ParteMaxMinReglaID, oParte.FechaCalculo);
                 this.dgvDetalle.Rows[iFila].Tag = oParte;
             }
             // this.dgvDetalle.AutoResizeColumns();
@@ -505,9 +507,9 @@ namespace Refaccionaria.App
             var oCodigo = new StringBuilder();
             foreach (var oRegla in oReglas)
             {
-                oCodigo.AppendFormat("public object Regla{0}_Condicion({1}) {{ return ({2}); }}", oRegla.Orden, sParamsMetodo, oRegla.Condicion);
-                oCodigo.AppendFormat("public object Regla{0}_Maximo({1}) {{ return ({2}); }}", oRegla.Orden, sParamsMetodo, oRegla.Maximo);
-                oCodigo.AppendFormat("public object Regla{0}_Minimo({1}) {{ return ({2}); }}", oRegla.Orden, sParamsMetodo, oRegla.Minimo);
+                oCodigo.AppendFormat("public object Regla{0}_Condicion({1}) {{ return ({2}); }}", oRegla.ParteMaxMinReglaID, sParamsMetodo, oRegla.Condicion);
+                oCodigo.AppendFormat("public object Regla{0}_Maximo({1}) {{ return ({2}); }}", oRegla.ParteMaxMinReglaID, sParamsMetodo, oRegla.Maximo);
+                oCodigo.AppendFormat("public object Regla{0}_Minimo({1}) {{ return ({2}); }}", oRegla.ParteMaxMinReglaID, sParamsMetodo, oRegla.Minimo);
             }
             // Se agrega la función para el múltiplo de la Unidad de Empaque
             oCodigo.AppendLine("public decimal MultiploSup(decimal mNumero, decimal mMultiplo) { if (mMultiplo == 0) return 0; decimal mResiduo = (mNumero % mMultiplo);"
@@ -562,7 +564,7 @@ namespace Refaccionaria.App
 
         private void CalcularMaxMinFilas(int iSucursalID, CodigoDinamico oDin, IEnumerable<ParteMaxMinRegla> oReglas, int iFilaDesde, int iFilaHasta)
         {
-            pauPartesMaxMin_Result oParte;
+            pauPartesMaxMin_Res oParte;
             DataGridViewRow oFila;
             for (int iFila = iFilaDesde; iFila <= iFilaHasta; iFila++)
             {
@@ -577,7 +579,7 @@ namespace Refaccionaria.App
                     continue;
                 }
 
-                oParte = (oFila.Tag as pauPartesMaxMin_Result);
+                oParte = (oFila.Tag as pauPartesMaxMin_Res);
 
                 // Se generan los parámetros
                 var oParams = new object[] {
@@ -591,21 +593,9 @@ namespace Refaccionaria.App
                 oParte.Minimo = 0;
                 // Se inicializan los datos extra
                 MaxMinFunciones.Inicializar(oParte.ParteID, iSucursalID);
-                // Se procesan las reglas, una por una
-                string sReglasAp = "";
-                foreach (var oRegla in oReglas)
-                {
-                    string sPrefijoMet = ("Regla" + oRegla.Orden.ToString() + "_");
-                    bool bProcesar = Helper.ConvertirBool(oDin.Ejecutar((sPrefijoMet + "Condicion"), oParams));
-                    if (bProcesar)
-                    {
-                        oParte.Maximo = Helper.ConvertirDecimal(oDin.Ejecutar((sPrefijoMet + "Maximo"), oParams));
-                        oParams[8] = oParte.Maximo;
-                        oParte.Minimo = Helper.ConvertirDecimal(oDin.Ejecutar((sPrefijoMet + "Minimo"), oParams));
-                        oParams[9] = oParte.Minimo;
-                        sReglasAp += (", " + oRegla.Orden.ToString());
-                    }
-                }
+                
+                // Se procesan la regla correspondiente, o todas si no se tiene una asignada
+                string sReglasAp = this.ProcesarReglas(oDin, oReglas, ref oParte, oParams);
 
                 // Si Maximo es cero, se vuelven a correr las reglas con las ventas globales, si aplica
                 if (oParte.VentasGlobales && oParte.Maximo.Valor() == 0 && iSucursalID == Cat.Sucursales.Matriz)
@@ -624,20 +614,8 @@ namespace Refaccionaria.App
                         , oParte.AbcDeVentas, oParte.AbcDeUtilidad, oParte.AbcDeNegocio, oParte.AbcDeProveedor, oParte.AbcDeLinea
                     };
                     MaxMinFunciones.Inicializar(oParte.ParteID, null);
-                    sReglasAp = "";
-                    foreach (var oRegla in oReglas)
-                    {
-                        string sPrefijoMet = ("Regla" + oRegla.Orden.ToString() + "_");
-                        bool bProcesar = Helper.ConvertirBool(oDin.Ejecutar((sPrefijoMet + "Condicion"), oParams));
-                        if (bProcesar)
-                        {
-                            oParte.Maximo = Helper.ConvertirDecimal(oDin.Ejecutar((sPrefijoMet + "Maximo"), oParams));
-                            oParams[8] = oParte.Maximo;
-                            oParte.Minimo = Helper.ConvertirDecimal(oDin.Ejecutar((sPrefijoMet + "Minimo"), oParams));
-                            oParams[9] = oParte.Minimo;
-                            sReglasAp += (", " + oRegla.Orden.ToString());
-                        }
-                    }
+                    // Se procesan las reglas
+                    sReglasAp = this.ProcesarReglas(oDin, oReglas, ref oParte, oParams);
                 }
 
                 // Se escriben los cambios en el grid
@@ -647,8 +625,57 @@ namespace Refaccionaria.App
                     oFila.DefaultCellStyle.ForeColor = this.dgvDetalle.DefaultCellStyle.ForeColor;
                 else
                     oFila.DefaultCellStyle.ForeColor = Color.Brown;
-                oFila.Cells["Condiciones"].Value = (sReglasAp.Length > 1 ? sReglasAp.Substring(2) : "");
+                oFila.Cells["Condiciones"].Value = sReglasAp;
             }
+        }
+
+        private string ProcesarReglas(CodigoDinamico oDin, IEnumerable<ParteMaxMinRegla> oReglas, ref pauPartesMaxMin_Res oParte, object[] oParams)
+        {
+            string sReglasAp = "";
+            // Se ejecuta la regla correspondiente si ya está asignada, si no, se ejecutan todas las reglas
+            if (oParte.ParteMaxMinReglaID > 0)
+            {
+                string sReglaID = oParte.ParteMaxMinReglaID.ToString();
+                string sPrefijoMet = ("Regla" + sReglaID + "_");
+                oParte.Maximo = Helper.ConvertirDecimal(oDin.Ejecutar((sPrefijoMet + "Maximo"), oParams));
+                oParams[8] = oParte.Maximo;
+                oParte.Minimo = Helper.ConvertirDecimal(oDin.Ejecutar((sPrefijoMet + "Minimo"), oParams));
+                // oParams[9] = oParte.Minimo;
+                sReglasAp += (", " + sReglaID);
+            }
+            else
+            {
+                foreach (var oRegla in oReglas)
+                {
+                    string sReglaID = oRegla.ParteMaxMinReglaID.ToString();
+                    string sPrefijoMet = ("Regla" + sReglaID + "_");
+                    bool bProcesar = Helper.ConvertirBool(oDin.Ejecutar((sPrefijoMet + "Condicion"), oParams));
+                    if (bProcesar)
+                    {
+                        oParte.Maximo = Helper.ConvertirDecimal(oDin.Ejecutar((sPrefijoMet + "Maximo"), oParams));
+                        oParams[8] = oParte.Maximo;
+                        oParte.Minimo = Helper.ConvertirDecimal(oDin.Ejecutar((sPrefijoMet + "Minimo"), oParams));
+                        oParams[9] = oParte.Minimo;
+                        sReglasAp += (", " + sReglaID);
+                    }
+                }
+            }
+
+            // Se ejecutan las reglas básicas finales
+            if (oParte.Maximo == 0) {
+                oParte.Minimo = 0;
+            }
+            else if (oParte.Minimo > 0)
+            {
+                if (oParte.Minimo < 1)
+                    oParte.Minimo = 1;
+                if (oParte.Minimo > oParte.Maximo)
+                    oParte.Minimo = (oParte.Maximo - 1);
+                if (oParte.Minimo == oParte.Maximo)
+                    oParte.Minimo--;
+            }
+
+            return (sReglasAp.Length > 1 ? sReglasAp.Substring(2) : "");
         }
 
         private bool VerFiltroDeCambios(DataGridViewRow oFila)
@@ -672,6 +699,22 @@ namespace Refaccionaria.App
 
         private void GuardarMaxMin()
         {
+            // Se valida que todas las filas tengan máximo una sola condición
+            bool bError = false;
+            foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
+            {
+                if (Helper.ConvertirCadena(oFila.Cells["Condiciones"].Value).Contains(","))
+                {
+                    bError = true;
+                    break;
+                }
+            }
+            if (bError)
+            {
+                UtilLocal.MensajeAdvertencia("Existe una o más partes que coinciden con más de una regla. Verificar.");
+                return;
+            }
+
             if (UtilLocal.MensajePregunta("¿Estás seguro que deseas guardar los Máximos y Mínimos mostrados?") != DialogResult.Yes)
                 return;
 
@@ -692,6 +735,7 @@ namespace Refaccionaria.App
                 oParteMaxMin.Maximo = Helper.ConvertirDecimal(Fila.Cells["Maximo"].Value);
                 oParteMaxMin.Minimo = Helper.ConvertirDecimal(Fila.Cells["Minimo"].Value);
                 oParteMaxMin.FechaCalculo = dAhora;
+                oParteMaxMin.ParteMaxMinReglaID = (oParteMaxMin.Fijo.Valor() ? null : (int?)Helper.ConvertirEntero(Fila.Cells["Condiciones"].Value));
                 Guardar.Generico<ParteMaxMin>(oParteMaxMin);
 
                 // Se verifica si aplica para 9500 y se guarda el dato Es9500
@@ -701,7 +745,7 @@ namespace Refaccionaria.App
             Cargando.Cerrar();
             UtilLocal.MostrarNotificacion("Proceso completado correctamente.");
         }
-
+        
         private void LlenarDatosExtra(int iParteID)
         {
             this.LimpiarDatosExtra();
@@ -1117,7 +1161,7 @@ namespace Refaccionaria.App
             var oReglas = General.GetListOf<ParteMaxMinRegla>(q => q.SucursalID == iSucursalID && q.Estatus).OrderBy(q => q.Orden);
             foreach (var oRegla in oReglas)
                 this.dgvReglas.Rows.Add(oRegla.ParteMaxMinReglaID, Cat.TiposDeAfectacion.SinCambios, oRegla.Orden, oRegla.Regla
-                    , oRegla.Condicion, oRegla.Maximo, oRegla.Minimo);
+                    , oRegla.Condicion, oRegla.Maximo, oRegla.Minimo, oRegla.Descripcion);
             this.dgvReglas.AutoResizeRows();
             Cargando.Cerrar();
         }
@@ -1183,6 +1227,7 @@ namespace Refaccionaria.App
                     oRegla.Condicion = Helper.ConvertirCadena(Fila.Cells["Reglas_Condicion"].Value);
                     oRegla.Maximo = Helper.ConvertirCadena(Fila.Cells["Reglas_Maximo"].Value);
                     oRegla.Minimo = Helper.ConvertirCadena(Fila.Cells["Reglas_Minimo"].Value);
+                    oRegla.Descripcion = Helper.ConvertirCadena(Fila.Cells["Reglas_Descripcion"].Value);
                     // Se valida la regla
                     if (!this.ValidarRegla(oRegla))
                     {
@@ -1396,6 +1441,15 @@ namespace Refaccionaria.App
             this.dgvSinMaxMin.AutoResizeColumns();
 
             Cargando.Cerrar();
+        }
+
+        private void LlenarDescripcionMaxMin(DataGridViewRow oFila)
+        {
+            this.txtDescripcionMaxMin.Clear();
+            var oParte = (this.dgvDetalle.CurrentRow.Tag as pauPartesMaxMin_Res);
+            if (oFila == null || oParte == null)
+                return;
+            this.txtDescripcionMaxMin.Text = string.Format("Condición: {0} Procesado: {1}\r\n{2}", oParte.ParteMaxMinReglaID, oParte.FechaCalculo, oParte.DescripcionCalculo);
         }
 
         #endregion

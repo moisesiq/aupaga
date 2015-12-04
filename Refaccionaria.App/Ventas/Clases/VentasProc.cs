@@ -939,6 +939,8 @@ namespace Refaccionaria.App
                     oRep.SetParameterValue("LeyendaDeVehiculo", oFacturaE.Adicionales["LeyendaDeVehiculo"]);
                 if (oFacturaE.Adicionales.ContainsKey("EfectivoRecibido"))
                     oRep.SetParameterValue("EfectivoRecibido", oFacturaE.Adicionales["EfectivoRecibido"]);
+                if (oFacturaE.Adicionales.ContainsKey("Cambio"))
+                    oRep.SetParameterValue("Cambio", oFacturaE.Adicionales["Cambio"]);
             }
             oRep.SetParameterValue("TotalConLetra", Helper.ImporteALetra(oFacturaE.Total).ToUpper());
 
@@ -1159,6 +1161,8 @@ namespace Refaccionaria.App
                 {
                     if (oAdicionales.ContainsKey("EfectivoRecibido"))
                         oFacturaE.Adicionales.Add("EfectivoRecibido", oAdicionales["EfectivoRecibido"].ToString());
+                    if (oAdicionales.ContainsKey("Cambio"))
+                        oFacturaE.Adicionales.Add("Cambio", oAdicionales["Cambio"].ToString());
                 }
             }
             

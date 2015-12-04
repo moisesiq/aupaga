@@ -548,7 +548,7 @@ namespace Refaccionaria.App
                 if (!oPorCobrar.ctlCobro.CompletarCobro())
                     return false;                
             }
-            decimal mEfectivoRecibido = oPorCobrar.ctlCobro.EfectivoRecibido;
+            decimal? mEfectivoRecibido = oPorCobrar.ctlCobro.EfectivoRecibido;
 
             // Si la venta es a crédito y el cliente tiene personal, se muestran las firmas
             if (oPorCobrar.ctlCobro.ACredito)
@@ -710,6 +710,7 @@ namespace Refaccionaria.App
             // Para la impresión del ticket o factura
             var oAdicionales = new Dictionary<string, object>();
             oAdicionales.Add("EfectivoRecibido", mEfectivoRecibido);
+            oAdicionales.Add("Cambio", (mEfectivoRecibido - oPorCobrar.ImporteVenta));
 
             // Se realiza la facturación, si aplica
             ResAcc<int> ResFactura = null;

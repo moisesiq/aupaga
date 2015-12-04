@@ -26,7 +26,10 @@ namespace Refaccionaria.App
             var oExistencias = General.GetListOf<ExistenciasView>(c => c.ParteID == iParteID);
             this.dgvExistencias.Rows.Clear();
             foreach (var oReg in oExistencias)
-                this.dgvExistencias.Rows.Add(oReg.Tienda, oReg.Exist, oReg.Max, oReg.Min);
+            {
+                int iFila = this.dgvExistencias.Rows.Add(oReg.Tienda, oReg.Exist, oReg.Max, oReg.Min);
+                this.dgvExistencias.Rows[iFila].Tag = oReg;
+            }
         }
 
         public void LimpiarDatos()

@@ -136,7 +136,7 @@ namespace Refaccionaria.App
 
         public int VentaID { get; set; }
 
-        public decimal EfectivoRecibido { get; set; }
+        public decimal? EfectivoRecibido { get; set; }
 
         #endregion
 
@@ -595,6 +595,8 @@ namespace Refaccionaria.App
             this.cmbClienteComisionista.SelectedIndex = -1;
             this.cmbVehiculo.SelectedIndex = -1;
             this.txtKilometraje.Clear();
+
+            this.EfectivoRecibido = null;
         }
 
         public void LimpiarFormasDePago()

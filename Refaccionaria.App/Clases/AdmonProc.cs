@@ -317,6 +317,15 @@ namespace Refaccionaria.App
             return AdmonProc.ObtenerParteDescuentoGanancia(iProveedorID, iMarcaID, iLineaID, iParteID, false);
         }
 
+        public static DateTime SugerirVencimientoCompra(DateTime dBase)
+        {
+            if (dBase.DayOfWeek == DayOfWeek.Saturday)
+                dBase = dBase.AddDays(-1);
+            else if (dBase.DayOfWeek == DayOfWeek.Sunday)
+                dBase = dBase.AddDays(1);
+            return dBase;
+        }
+
         #endregion
     }
 }

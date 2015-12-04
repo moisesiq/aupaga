@@ -446,6 +446,11 @@ namespace Refaccionaria.App
             }
         }
 
+        private void dgvExistencias_CurrentCellChanged(object sender, EventArgs e)
+        {
+            this.LlenarDescripcionMaxMin(this.dgvExistencias.CurrentRow);
+        }
+
         private void dgvExistencias_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             try
@@ -1682,7 +1687,8 @@ namespace Refaccionaria.App
                 this.dgvExistencias.Columns.Add("MaxMinFijo", "MaxMinFijo");
 
                 // Se oculta y ajustan las columnas
-                this.dgvExistencias.OcultarColumnas("ParteExistenciaID", "ParteID", "NumeroParte", "SucursalID", "UEmp", "MaxMinFijo");
+                // this.dgvExistencias.OcultarColumnas("ParteExistenciaID", "ParteID", "NumeroParte", "SucursalID", "UEmp", "MaxMinFijo");
+                this.dgvExistencias.MostrarColumnas("Tienda", "Exist", "Max", "Min");
                 Negocio.Helper.ColumnasToHeaderText(this.dgvExistencias);
             }
             catch (Exception ex)
@@ -2124,6 +2130,15 @@ namespace Refaccionaria.App
                 }
             }
             this.lblEncontrados.Text = string.Format("Encontrados: {0}", this.dgvDatos.Rows.Count.ToString(GlobalClass.FormatoEntero));
+        }
+
+        private void LlenarDescripcionMaxMin(DataGridViewRow oFila)
+        {
+            this.txtDescripcionMaxMin.Clear();
+            if (oFila == null)
+                return;
+            this.txtDescripcionMaxMin.Text = string.Format("Condición: {0} Procesado: {1}\r\n{2}", Helper.ConvertirEntero(oFila.Cells["ParteMaxMinReglaID"].Value)
+                , Helper.ConvertirFechaHora(oFila.Cells["FechaMaxMin"].Value), Helper.ConvertirCadena(oFila.Cells["DescripcionMaxMin"].Value));
         }
 
         #endregion

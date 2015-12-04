@@ -340,7 +340,8 @@ namespace Refaccionaria.App
         public static List<GastoSem> GastosSemanalizados(List<pauContaCuentasPorSemana_Result> oDatos, DateTime dUltSem)
         {
             var oGastosSem = new List<GastoSem>();
-            List<int> oCuentasAuxProc = new List<int>();
+            List<string> oCuentasAuxProc = new List<string>();
+            var oD = new Dictionary<int, decimal>();
 
             foreach (var oReg in oDatos)
             {
@@ -352,6 +353,7 @@ namespace Refaccionaria.App
                     decimal mImporte; int iDias;
                     DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(dInicioPer).Date;
 
+                    string sCuenta = (oReg.SucursalID.ToString() + oReg.ContaCuentaAuxiliarID.ToString());
                     while (dIniSem <= dUltSem)
                     {
                         // Se verifica si ya existe la semana actual
@@ -363,9 +365,9 @@ namespace Refaccionaria.App
                         if (oReg.FinSemanalizar.HasValue && oReg.FinSemanalizar <= dIniSem)
                             break;
                         // Se verifica la fecha final, 
-                        if (dIniSem > dFinPer && oCuentasAuxProc.Contains(oReg.ContaCuentaAuxiliarID))
+                        if (dIniSem > dFinPer && oCuentasAuxProc.Contains(sCuenta))
                             break;
-
+                        
                         // Se calcula el importe correspondiente
                         DateTime dFinSem = dIniSem.AddDays(6);
                         if (dIniSem < dInicioPer)
@@ -388,11 +390,18 @@ namespace Refaccionaria.App
 
                         // Se va sumando el importe en la semana correspondiente
                         oSem.Importe += mImporte;
+
+                        if (oReg.SucursalID == 1)
+                        {
+                            if (!oD.ContainsKey(oReg.ContaEgresoID))
+                                oD.Add(oReg.ContaEgresoID, 0);
+                            oD[oReg.ContaEgresoID] += mImporte;
+                        }
                     }
 
                     // Se marca la cuenta auxiliar, sólo la primera vez que un gasto tiene está cuenta, para que los gastos posteriores ya no se semanalicen hasta el final
-                    if (!oCuentasAuxProc.Contains(oReg.ContaCuentaAuxiliarID))
-                        oCuentasAuxProc.Add(oReg.ContaCuentaAuxiliarID);
+                    if (!oCuentasAuxProc.Contains(sCuenta))
+                        oCuentasAuxProc.Add(sCuenta);
                 }
                 else
                 {
@@ -802,7 +811,7 @@ namespace Refaccionaria.App
                     sObsAnticipo += (", " + sVale + (oVale.OrigenID == Cat.OrigenesNotaDeCredito.ImporteRestante ? (" (" + oVale.RelacionID.ToString() + ")") : ""));
             }
             if (sObsAnticipo != "")
-                oPoliza.Concepto += (" / VALES: " + sObsAnticipo.Substring(2));
+                oPoliza.Concepto += (" / VALES: " + sObsAnticipo.Substring(2).Truncar(256));
 
             // Se guardan los datos
             Guardar.Generico<ContaPoliza>(oPoliza);
@@ -893,6 +902,8 @@ namespace Refaccionaria.App
 
             return "";
         }
+
+        #region [ Afectaciones por cuenta auxiliar o de mayor ]
 
         public static ContaPolizaDetalle GafClientes(int iAfectacionID, int iId)
         {
@@ -1615,6 +1626,7 @@ namespace Refaccionaria.App
                     break;
                 case Cat.ContaAfectaciones.VentaContadoPagoFacturaGlobal:
                     ContaProc.AfectarConFacturaGlobalValesDeFactura(ref oDetalle, iId);
+                    oDetalle.Referencia = ContaProc.ObtenerValesDeFacturaGlobal(iId);
                     break;
                 case Cat.ContaAfectaciones.VentaContadoFacturaDirecta:
                     ContaProc.AfectarConPagoValeDeVenta(ref oDetalle, iId);
@@ -1731,6 +1743,10 @@ namespace Refaccionaria.App
             }
             return oDetalle;
         }
+
+        #endregion
+
+        #region [ Obtener cuentas auxiliares según el caso ]
 
         private static int ObtenerClienteCuentaAuxiliarID(int iAfectacionID, int iId)
         {
@@ -2011,7 +2027,11 @@ namespace Refaccionaria.App
 
             return iCuentaAuxID;
         }
-        
+
+        #endregion
+
+        #region [ Afectar importe ]
+
         private static void AfectarConCostoVenta(ref ContaPolizaDetalle oDetalle, int iId)
         {
             var oVenta = General.GetEntity<Venta>(c => c.VentaID == iId && c.Estatus);
@@ -2335,13 +2355,15 @@ namespace Refaccionaria.App
         private static void AfectarConPagoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
         {
             var oReg = General.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == iId && c.Estatus);
-            oDetalle.Cargo = oReg.ImportePago;
+            var oAbonos = General.GetListOf<ProveedorPolizaDetalle>(c => c.ProveedorPolizaID == iId && c.Estatus);
+            oDetalle.Cargo = oAbonos.Sum(c => c.Subtotal + c.Iva);
         }
 
         private static void AfectarConIvaPagoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
         {
             var oReg = General.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == iId && c.Estatus);
-            oDetalle.Cargo = UtilLocal.ObtenerIvaDePrecio(oReg.ImportePago);
+            var oAbonos = General.GetListOf<ProveedorPolizaDetalle>(c => c.ProveedorPolizaID == iId && c.Estatus);
+            oDetalle.Cargo = oAbonos.Sum(c => c.Iva);
         }
 
         private static void AfectarConSubtotalNotaDeCreditoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
@@ -2367,8 +2389,8 @@ namespace Refaccionaria.App
             // var oAbonos = General.GetListOf<ProveedorPolizaDetalle>(c => c.ProveedorPolizaID == iId && (c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoDirecto
             //    || c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoFactura) && c.Estatus);
             // oDetalle.Cargo = (oAbonos.Count > 0 ? oAbonos.Sum(c => c.Importe) : 0);
-            var oReg = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId);
-            oDetalle.Cargo = oReg.Importe;
+            var oReg = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId && c.Estatus);
+            oDetalle.Cargo = (oReg.Subtotal + oReg.Iva);
         }
 
         private static void AfectarConSubtotalAbonoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
@@ -2376,8 +2398,8 @@ namespace Refaccionaria.App
             // var oAbonos = General.GetListOf<ProveedorPolizaDetalle>(c => c.ProveedorPolizaID == iId && (c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoDirecto
             //    || c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoFactura) && c.Estatus);
             // oDetalle.Cargo = (oAbonos.Count > 0 ? UtilLocal.ObtenerPrecioSinIva(oAbonos.Sum(c => c.Importe)) : 0);
-            var oReg = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId);
-            oDetalle.Cargo = UtilLocal.ObtenerPrecioSinIva(oReg.Importe);
+            var oReg = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId && c.Estatus);
+            oDetalle.Cargo = oReg.Subtotal;
         }
 
         private static void AfectarConIvaAbonoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
@@ -2385,8 +2407,8 @@ namespace Refaccionaria.App
             // var oAbonos = General.GetListOf<ProveedorPolizaDetalle>(c => c.ProveedorPolizaID == iId && (c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoDirecto
             //    || c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoFactura) && c.Estatus);
             // oDetalle.Cargo = (oAbonos.Count > 0 ? UtilLocal.ObtenerPrecioSinIva(oAbonos.Sum(c => c.Importe)) : 0);
-            var oReg = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId);
-            oDetalle.Cargo = UtilLocal.ObtenerIvaDePrecio(oReg.Importe);
+            var oReg = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId && c.Estatus);
+            oDetalle.Cargo = oReg.Iva;
         }
 
         private static void AfectarConDevolucionMenosLoAbonado(ref ContaPolizaDetalle oDetalle, int iId)
@@ -2503,6 +2525,10 @@ namespace Refaccionaria.App
             oDetalle.Cargo = oReg.Retenido.Valor();
         }
 
+        #endregion
+
+        #region [ Afectar sucursal ]
+
         private static void AfectarSucursalConVentaDeDevolucion(ref ContaPolizaDetalle oDetalle, int iId)
         {
             var oVentaDev = General.GetEntity<VentaDevolucion>(c => c.VentaDevolucionID == iId && c.Estatus);
@@ -2554,11 +2580,15 @@ namespace Refaccionaria.App
                 oDetalle.SucursalID = oPagoDetV.SucursalID.Valor();
         }
 
+        #endregion
+
+        #region [ Obtener vales ]
+
         private static string ObtenerValesDeDevolucion(int iId)
         {
             var oDev = General.GetEntity<VentaDevolucion>(c => c.VentaDevolucionID == iId && c.Estatus);
             var oPagoVale = General.GetEntity<VentaPagoDetalle>(c => c.VentaPagoDetalleID == oDev.VentaPagoDetalleID && c.Estatus);
-            return (oPagoVale == null ? "" : oPagoVale.NotaDeCreditoID.ToString());
+            return oPagoVale.NotaDeCreditoID.ToString();
         }
 
         private static string ObtenerValesDePago(int iId)
@@ -2572,7 +2602,7 @@ namespace Refaccionaria.App
         {
             var oGarantia = General.GetEntity<VentaGarantia>(c => c.VentaGarantiaID == iId && c.Estatus);
             var oPagoVale = General.GetEntity<VentaPagoDetalle>(c => c.VentaPagoDetalleID == oGarantia.VentaPagoDetalleID && c.Estatus);
-            return (oPagoVale == null ? "" : oPagoVale.NotaDeCreditoID.ToString());
+            return oPagoVale.NotaDeCreditoID.ToString();
         }
 
         private static string ObtenerValesDeVenta(int iId)
@@ -2580,6 +2610,18 @@ namespace Refaccionaria.App
             var oVales = General.GetListOf<VentasPagosDetalleView>(c => c.VentaID == iId && c.FormaDePagoID == Cat.FormasDePago.Vale).Select(c => c.NotaDeCreditoID);
             return string.Join(",", oVales);
         }
+
+        private static string ObtenerValesDeFacturaGlobal(int iId)
+        {
+            var oFactura = General.GetEntity<VentaFactura>(c => c.VentaFacturaID == iId && c.Estatus);
+            DateTime dDia = oFactura.Fecha.Date;
+            var oPagosVales = General.GetListOf<VentasPagosDetalleAvanzadoView>(c => c.SucursalID == oFactura.SucursalID
+                && EntityFunctions.TruncateTime(c.Fecha) == dDia && !c.Facturada && c.FormaDePagoID == Cat.FormasDePago.Vale && c.Importe > 0)
+                .Select(c => c.NotaDeCreditoID);
+            return string.Join(",", oPagosVales);
+        }
+
+        #endregion
 
         #endregion
 

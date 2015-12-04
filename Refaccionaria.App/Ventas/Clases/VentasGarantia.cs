@@ -103,7 +103,7 @@ namespace Refaccionaria.App
             var oVentaV = General.GetEntity<VentasView>(q => q.VentaID == iVentaID);
             int iValeClienteID = oVentaV.ClienteID;
             if ((oGarantia.AccionID == Cat.VentasGarantiasAcciones.ArticuloNuevo || oGarantia.AccionID == Cat.VentasGarantiasAcciones.NotaDeCredito)
-                && iValeClienteID == Cat.Clientes.Mostrador)
+                && oVentaV.ClienteID == Cat.Clientes.Mostrador)
             {
                 iValeClienteID = VentasProc.ObtenerClienteID("Selecciona el cliente para crear el Vale:", false);
                 if (iValeClienteID == 0)
@@ -167,9 +167,9 @@ namespace Refaccionaria.App
             var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oGarantia.VentaID);
 
             // Se verifica si se creará vale, para pedir el cliente en caso de que no haya
-            int iValeClienteID = oVentaV.ClienteID;
+            int iValeClienteID = 0;
             if ((this.ctlBusqueda.IdAccionPosterior == Cat.VentasGarantiasAcciones.ArticuloNuevo 
-                || this.ctlBusqueda.IdAccionPosterior == Cat.VentasGarantiasAcciones.NotaDeCredito) && iValeClienteID == Cat.Clientes.Mostrador)
+                || this.ctlBusqueda.IdAccionPosterior == Cat.VentasGarantiasAcciones.NotaDeCredito) && oVentaV.ClienteID == Cat.Clientes.Mostrador)
             {
                 iValeClienteID = VentasProc.ObtenerClienteID("Selecciona el cliente para crear el Vale:", false);
                 if (iValeClienteID == 0)
@@ -257,7 +257,8 @@ namespace Refaccionaria.App
                     case Cat.VentasGarantiasAcciones.ArticuloNuevo:
                     case Cat.VentasGarantiasAcciones.NotaDeCredito:
                         // var oVenta = General.GetEntity<Venta>(q => q.Estatus && q.VentaID == iVentaID);
-                        var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Garantia, iVentaID);
+                        var oResVale = VentasProc.GenerarNotaDeCredito(iValeClienteID.Value, mImporteDev, "", Cat.OrigenesNotaDeCredito.Garantia
+                            , oGarantiaV.VentaGarantiaID);
                         // Se genera el pago negativo por la nota de crédito generada
                         oResPagoNeg = VentasProc.GenerarPagoNegativoPorNotaDeCredito(iVentaID, mImporteDev, oResVale.Respuesta);
                         break;
