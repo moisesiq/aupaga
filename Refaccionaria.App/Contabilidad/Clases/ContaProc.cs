@@ -354,6 +354,7 @@ namespace Refaccionaria.App
                     DateTime dIniSem = UtilLocal.InicioSemanaSabAVie(dInicioPer).Date;
 
                     string sCuenta = (oReg.SucursalID.ToString() + oReg.ContaCuentaAuxiliarID.ToString());
+                    bool bEntrarEx3 = true;
                     while (dIniSem <= dUltSem)
                     {
                         // Se verifica si ya existe la semana actual
@@ -374,12 +375,13 @@ namespace Refaccionaria.App
                             iDias = dFinSem.Day;
                         else if (dIniSem <= dFinPer && dFinSem > dFinPer)
                             iDias = ((dIniSem.DiaUltimo().Day - dIniSem.Day) + 1);
-                        else if (dIniSem > dFinPer && (dIniSem - dFinPer).Days < 7)
+                        else if (dIniSem > dFinPer && (dIniSem - dFinPer).Days < 7 && bEntrarEx3)
                         {
                             iDias = (dIniSem.Day - 1);
                             // Se debe trabajar con la semana anterior, para completar semana que tiene parte en el mes anterior y en el mes nuevo
-                            DateTime dSemAnt = dIniSem.AddDays(-7);
-                            oSem = oGastosSem.Find(c => c.Semana == dSemAnt && c.Grupo == oReg.Sucursal);
+                            dIniSem = dIniSem.AddDays(-7);
+                            oSem = oGastosSem.Find(c => c.Semana == dIniSem && c.Grupo == oReg.Sucursal);
+                            bEntrarEx3 = false;  // Se marca como falso para que no vuelva a entrar a este if
                         }
                         else
                         {
