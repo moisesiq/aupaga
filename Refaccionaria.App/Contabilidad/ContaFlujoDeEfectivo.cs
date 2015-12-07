@@ -114,6 +114,10 @@ namespace Refaccionaria.App
             DateTime dDesde = new DateTime(iAnio, 1, 1);
             DateTime dHasta = new DateTime(iAnio, 12, 31);
             var oParams = new Dictionary<string, object>();
+            // Si es año 2015, se muestran sólo datos a partir de la semana del 6 al 12 de Junio. Pedido especial.
+            if (iAnio == 2015 && dDesde < new DateTime(iAnio, 6, 6))
+                dDesde = new DateTime(iAnio, 6, 6);
+            //
             // oParams.Add("SucursalID", (iSucursalID == 0 ? null : (int?)iSucursalID));
             oParams.Add("Pagadas", true);
             oParams.Add("Cobradas", false);
@@ -191,9 +195,10 @@ namespace Refaccionaria.App
             }
             
             // Para las compras
-            var oCompras = General.GetListOf<ProveedoresPagosView>(c => c.FechaPago >= dDesde && c.FechaPago < dHastaMas1)
-                .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.FechaPago.Valor()) })
-                .Select(c => new { c.Key.Semana, Importe = c.Sum(s => s.AbonadoIva) })
+            var oCompras = General.GetListOf<ProveedoresPolizasDetalleAvanzadoView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1 
+                && (c.OrigenID == Cat.OrigenesPagosAProveedores.PagoDirecto || c.OrigenID == Cat.OrigenesPagosAProveedores.PagoDeCaja))
+                .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha.Valor()) })
+                .Select(c => new { c.Key.Semana, Importe = c.Sum(s => s.Subtotal) })
                 .OrderBy(c => c.Semana);
             mTotal += oCompras.Sum(c => c.Importe);
             mPromedio += oCompras.Average(c => c.Importe);
@@ -261,31 +266,6 @@ namespace Refaccionaria.App
             // Se llenan los totales de egresos
             this.dgvDatos["Total", iFilaEgresos].Value = mTotal;
             this.dgvDatos["Promedio", iFilaEgresos].Value = (mPromedio / 2);
-
-            // Ajuste especial para el año 2015, se quitan los datos antes del 01 de Julio
-            if (dDesde.Year == 2015)
-            {
-                DateTime dInicio = new DateTime(2015, 6, 1);
-                foreach (DataGridViewRow oFila in this.dgvDatos.Rows)
-                {
-                    mPromedio = 0;
-                    for (int iCol = this.iColumnasFijas; iCol < this.dgvDatos.Columns.Count; iCol++)
-                    {
-                        DateTime dSem = Helper.ConvertirFechaHora(this.dgvDatos.Columns[iCol].Name);
-                        oFila.Cells["Total"].Value = 0;
-                        if (dSem >= dInicio)
-                        {
-                            mPromedio++;
-                            oFila.Cells["Total"].Value = (Helper.ConvertirDecimal(oFila.Cells["Total"].Value) + Helper.ConvertirDecimal(oFila.Cells[iCol].Value));
-                        }
-                        else
-                        {
-                            oFila.Cells[iCol].Value = null;
-                        }
-                    }
-                    oFila.Cells["Promedio"].Value = (Helper.ConvertirDecimal(oFila.Cells["Total"].Value) / mPromedio);
-                }
-            }
 
             // Se agrega el saldo final
             int iFilaSaldo = this.dgvDatos.Rows.Add("= Saldo final");

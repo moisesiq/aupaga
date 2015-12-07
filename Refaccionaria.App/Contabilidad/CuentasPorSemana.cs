@@ -167,6 +167,7 @@ namespace Refaccionaria.App
             this.tgvDatos.Nodes.Clear();
             TreeGridNode oNodoSucursal = null, oNodoCuenta = null, oNodoSubcuenta = null, oNodoCuentaDeMayor = null, oNodoCuentaAuxiliar = null;
             string sSucursal = "", sCuenta = "", sSubcuenta = "", sCuentaDeMayor = "", sCuentaAuxiliar = "";
+            var oD = new Dictionary<int, decimal>();
             foreach (var oReg in oDatos)
             {
                 // Nodo de Sucursal
@@ -253,7 +254,14 @@ namespace Refaccionaria.App
 
                         // Para llenar las celdas
                         oNodoCuentaAuxiliar.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaAuxiliar.Cells[iCol].Value) + mImporte); // mImporte;
-                                                
+
+                        if (oReg.SucursalID == 1)
+                        {
+                            if (!oD.ContainsKey(oReg.ContaEgresoID))
+                                oD.Add(oReg.ContaEgresoID, 0);
+                            oD[oReg.ContaEgresoID] += mImporte;
+                        }
+
                         /*
                         // Para los niveles superiores
                         oNodoCuentaDeMayor.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaDeMayor.Cells[iCol].Value) + mImporte);
