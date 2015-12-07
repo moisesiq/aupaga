@@ -147,126 +147,6 @@
   <data name="tabMaxMin.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
     <value>FlatButtons</value>
   </data>
-  <data name="&gt;&gt;tbpDetalle.Name" xml:space="preserve">
-    <value>tbpDetalle</value>
-  </data>
-  <data name="&gt;&gt;tbpDetalle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpDetalle.Parent" xml:space="preserve">
-    <value>tabMaxMin</value>
-  </data>
-  <data name="&gt;&gt;tbpDetalle.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tbpCriteriosGenerales.Name" xml:space="preserve">
-    <value>tbpCriteriosGenerales</value>
-  </data>
-  <data name="&gt;&gt;tbpCriteriosGenerales.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpCriteriosGenerales.Parent" xml:space="preserve">
-    <value>tabMaxMin</value>
-  </data>
-  <data name="&gt;&gt;tbpCriteriosGenerales.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbpReglas.Name" xml:space="preserve">
-    <value>tbpReglas</value>
-  </data>
-  <data name="&gt;&gt;tbpReglas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpReglas.Parent" xml:space="preserve">
-    <value>tabMaxMin</value>
-  </data>
-  <data name="&gt;&gt;tbpReglas.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tbpEquivalentes.Name" xml:space="preserve">
-    <value>tbpEquivalentes</value>
-  </data>
-  <data name="&gt;&gt;tbpEquivalentes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpEquivalentes.Parent" xml:space="preserve">
-    <value>tabMaxMin</value>
-  </data>
-  <data name="&gt;&gt;tbpEquivalentes.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;tbpSinMaxMin.Name" xml:space="preserve">
-    <value>tbpSinMaxMin</value>
-  </data>
-  <data name="&gt;&gt;tbpSinMaxMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpSinMaxMin.Parent" xml:space="preserve">
-    <value>tabMaxMin</value>
-  </data>
-  <data name="&gt;&gt;tbpSinMaxMin.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tabMaxMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
-  </data>
-  <data name="tabMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1294, 320</value>
-  </data>
-  <data name="tabMaxMin.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;tabMaxMin.Name" xml:space="preserve">
-    <value>tabMaxMin</value>
-  </data>
-  <data name="&gt;&gt;tabMaxMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabMaxMin.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabMaxMin.ZOrder" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="&gt;&gt;dgvDetalle.Name" xml:space="preserve">
-    <value>dgvDetalle</value>
-  </data>
-  <data name="&gt;&gt;dgvDetalle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvDetalle.Parent" xml:space="preserve">
-    <value>tbpDetalle</value>
-  </data>
-  <data name="&gt;&gt;dgvDetalle.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpDetalle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 25</value>
-  </data>
-  <data name="tbpDetalle.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpDetalle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 291</value>
-  </data>
-  <data name="tbpDetalle.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tbpDetalle.Text" xml:space="preserve">
-    <value>Detalle</value>
-  </data>
-  <data name="&gt;&gt;tbpDetalle.Name" xml:space="preserve">
-    <value>tbpDetalle</value>
-  </data>
-  <data name="&gt;&gt;tbpDetalle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpDetalle.Parent" xml:space="preserve">
-    <value>tabMaxMin</value>
-  </data>
-  <data name="&gt;&gt;tbpDetalle.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="ParteID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -495,44 +375,32 @@
   <data name="&gt;&gt;dgvDetalle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
-    <value>splitContainer1</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
-    <value>tbpCriteriosGenerales</value>
-  </data>
-  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpCriteriosGenerales.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbpDetalle.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="tbpCriteriosGenerales.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tbpDetalle.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tbpCriteriosGenerales.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbpDetalle.Size" type="System.Drawing.Size, System.Drawing">
     <value>1286, 291</value>
   </data>
-  <data name="tbpCriteriosGenerales.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tbpDetalle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="tbpCriteriosGenerales.Text" xml:space="preserve">
-    <value>Criterios Generales</value>
+  <data name="tbpDetalle.Text" xml:space="preserve">
+    <value>Detalle</value>
   </data>
-  <data name="&gt;&gt;tbpCriteriosGenerales.Name" xml:space="preserve">
-    <value>tbpCriteriosGenerales</value>
+  <data name="&gt;&gt;tbpDetalle.Name" xml:space="preserve">
+    <value>tbpDetalle</value>
   </data>
-  <data name="&gt;&gt;tbpCriteriosGenerales.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbpDetalle.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbpCriteriosGenerales.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbpDetalle.Parent" xml:space="preserve">
     <value>tabMaxMin</value>
   </data>
-  <data name="&gt;&gt;tbpCriteriosGenerales.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;tbpDetalle.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -633,116 +501,32 @@
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;btnReglasCopiar.Name" xml:space="preserve">
-    <value>btnReglasCopiar</value>
-  </data>
-  <data name="&gt;&gt;btnReglasCopiar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnReglasCopiar.Parent" xml:space="preserve">
-    <value>tbpReglas</value>
-  </data>
-  <data name="&gt;&gt;btnReglasCopiar.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAyuda.Name" xml:space="preserve">
-    <value>btnReglasAyuda</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAyuda.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAyuda.Parent" xml:space="preserve">
-    <value>tbpReglas</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAyuda.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAbajo.Name" xml:space="preserve">
-    <value>btnReglasAbajo</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAbajo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAbajo.Parent" xml:space="preserve">
-    <value>tbpReglas</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAbajo.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnReglasArriba.Name" xml:space="preserve">
-    <value>btnReglasArriba</value>
-  </data>
-  <data name="&gt;&gt;btnReglasArriba.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnReglasArriba.Parent" xml:space="preserve">
-    <value>tbpReglas</value>
-  </data>
-  <data name="&gt;&gt;btnReglasArriba.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;btnReglasQuitar.Name" xml:space="preserve">
-    <value>btnReglasQuitar</value>
-  </data>
-  <data name="&gt;&gt;btnReglasQuitar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnReglasQuitar.Parent" xml:space="preserve">
-    <value>tbpReglas</value>
-  </data>
-  <data name="&gt;&gt;btnReglasQuitar.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAgregar.Name" xml:space="preserve">
-    <value>btnReglasAgregar</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAgregar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAgregar.Parent" xml:space="preserve">
-    <value>tbpReglas</value>
-  </data>
-  <data name="&gt;&gt;btnReglasAgregar.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;dgvReglas.Name" xml:space="preserve">
-    <value>dgvReglas</value>
-  </data>
-  <data name="&gt;&gt;dgvReglas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvReglas.Parent" xml:space="preserve">
-    <value>tbpReglas</value>
-  </data>
-  <data name="&gt;&gt;dgvReglas.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="tbpReglas.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbpCriteriosGenerales.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="tbpReglas.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tbpCriteriosGenerales.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tbpReglas.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbpCriteriosGenerales.Size" type="System.Drawing.Size, System.Drawing">
     <value>1286, 291</value>
   </data>
-  <data name="tbpReglas.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="tbpCriteriosGenerales.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="tbpReglas.Text" xml:space="preserve">
-    <value>Condiciones</value>
+  <data name="tbpCriteriosGenerales.Text" xml:space="preserve">
+    <value>Criterios Generales</value>
   </data>
-  <data name="&gt;&gt;tbpReglas.Name" xml:space="preserve">
-    <value>tbpReglas</value>
+  <data name="&gt;&gt;tbpCriteriosGenerales.Name" xml:space="preserve">
+    <value>tbpCriteriosGenerales</value>
   </data>
-  <data name="&gt;&gt;tbpReglas.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbpCriteriosGenerales.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbpReglas.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbpCriteriosGenerales.Parent" xml:space="preserve">
     <value>tabMaxMin</value>
   </data>
-  <data name="&gt;&gt;tbpReglas.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;tbpCriteriosGenerales.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="btnReglasCopiar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1026,68 +810,32 @@
   <data name="&gt;&gt;dgvReglas.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;btnEquCopiarDe.Name" xml:space="preserve">
-    <value>btnEquCopiarDe</value>
-  </data>
-  <data name="&gt;&gt;btnEquCopiarDe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnEquCopiarDe.Parent" xml:space="preserve">
-    <value>tbpEquivalentes</value>
-  </data>
-  <data name="&gt;&gt;btnEquCopiarDe.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dgvEquivalentes.Name" xml:space="preserve">
-    <value>dgvEquivalentes</value>
-  </data>
-  <data name="&gt;&gt;dgvEquivalentes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvEquivalentes.Parent" xml:space="preserve">
-    <value>tbpEquivalentes</value>
-  </data>
-  <data name="&gt;&gt;dgvEquivalentes.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtEquBuscar.Name" xml:space="preserve">
-    <value>txtEquBuscar</value>
-  </data>
-  <data name="&gt;&gt;txtEquBuscar.Type" xml:space="preserve">
-    <value>Refaccionaria.Negocio.TextoMod, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;txtEquBuscar.Parent" xml:space="preserve">
-    <value>tbpEquivalentes</value>
-  </data>
-  <data name="&gt;&gt;txtEquBuscar.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tbpEquivalentes.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbpReglas.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="tbpEquivalentes.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tbpReglas.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tbpEquivalentes.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbpReglas.Size" type="System.Drawing.Size, System.Drawing">
     <value>1286, 291</value>
   </data>
-  <data name="tbpEquivalentes.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="tbpReglas.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="tbpEquivalentes.Text" xml:space="preserve">
-    <value>Equivalentes</value>
+  <data name="tbpReglas.Text" xml:space="preserve">
+    <value>Condiciones</value>
   </data>
-  <data name="&gt;&gt;tbpEquivalentes.Name" xml:space="preserve">
-    <value>tbpEquivalentes</value>
+  <data name="&gt;&gt;tbpReglas.Name" xml:space="preserve">
+    <value>tbpReglas</value>
   </data>
-  <data name="&gt;&gt;tbpEquivalentes.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbpReglas.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbpEquivalentes.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbpReglas.Parent" xml:space="preserve">
     <value>tabMaxMin</value>
   </data>
-  <data name="&gt;&gt;tbpEquivalentes.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;tbpReglas.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="btnEquCopiarDe.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1302,44 +1050,32 @@
   <data name="&gt;&gt;txtEquBuscar.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;dgvSinMaxMin.Name" xml:space="preserve">
-    <value>dgvSinMaxMin</value>
-  </data>
-  <data name="&gt;&gt;dgvSinMaxMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvSinMaxMin.Parent" xml:space="preserve">
-    <value>tbpSinMaxMin</value>
-  </data>
-  <data name="&gt;&gt;dgvSinMaxMin.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbpSinMaxMin.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbpEquivalentes.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="tbpSinMaxMin.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tbpEquivalentes.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tbpSinMaxMin.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbpEquivalentes.Size" type="System.Drawing.Size, System.Drawing">
     <value>1286, 291</value>
   </data>
-  <data name="tbpSinMaxMin.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="tbpEquivalentes.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="tbpSinMaxMin.Text" xml:space="preserve">
-    <value>Sin MxMn</value>
+  <data name="tbpEquivalentes.Text" xml:space="preserve">
+    <value>Equivalentes</value>
   </data>
-  <data name="&gt;&gt;tbpSinMaxMin.Name" xml:space="preserve">
-    <value>tbpSinMaxMin</value>
+  <data name="&gt;&gt;tbpEquivalentes.Name" xml:space="preserve">
+    <value>tbpEquivalentes</value>
   </data>
-  <data name="&gt;&gt;tbpSinMaxMin.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbpEquivalentes.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbpSinMaxMin.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbpEquivalentes.Parent" xml:space="preserve">
     <value>tabMaxMin</value>
   </data>
-  <data name="&gt;&gt;tbpSinMaxMin.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;tbpEquivalentes.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <metadata name="SinMaxMin_ParteID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1415,6 +1151,54 @@
   </data>
   <data name="&gt;&gt;dgvSinMaxMin.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tbpSinMaxMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
+  </data>
+  <data name="tbpSinMaxMin.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpSinMaxMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1286, 291</value>
+  </data>
+  <data name="tbpSinMaxMin.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tbpSinMaxMin.Text" xml:space="preserve">
+    <value>Sin MxMn</value>
+  </data>
+  <data name="&gt;&gt;tbpSinMaxMin.Name" xml:space="preserve">
+    <value>tbpSinMaxMin</value>
+  </data>
+  <data name="&gt;&gt;tbpSinMaxMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpSinMaxMin.Parent" xml:space="preserve">
+    <value>tabMaxMin</value>
+  </data>
+  <data name="&gt;&gt;tbpSinMaxMin.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tabMaxMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 32</value>
+  </data>
+  <data name="tabMaxMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1294, 320</value>
+  </data>
+  <data name="tabMaxMin.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;tabMaxMin.Name" xml:space="preserve">
+    <value>tabMaxMin</value>
+  </data>
+  <data name="&gt;&gt;tabMaxMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabMaxMin.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabMaxMin.ZOrder" xml:space="preserve">
+    <value>25</value>
   </data>
   <data name="lblMes08.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -4018,7 +3802,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnExportar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1117, 355</value>
+    <value>1117, 359</value>
   </data>
   <data name="btnExportar.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 23</value>
@@ -4186,7 +3970,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnGuardar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1208, 355</value>
+    <value>1208, 359</value>
   </data>
   <data name="btnGuardar.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 23</value>
@@ -5118,17 +4902,14 @@
   <data name="&gt;&gt;cmbCambios.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="txtDescripcionMaxMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
   <data name="txtDescripcionMaxMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>621, 355</value>
+    <value>708, 364</value>
   </data>
   <data name="txtDescripcionMaxMin.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="txtDescripcionMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 38</value>
+    <value>176, 61</value>
   </data>
   <data name="txtDescripcionMaxMin.TabIndex" type="System.Int32, mscorlib">
     <value>316</value>

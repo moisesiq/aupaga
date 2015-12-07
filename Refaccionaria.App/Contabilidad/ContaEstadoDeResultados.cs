@@ -109,7 +109,7 @@ namespace Refaccionaria.App
             oParams.Add("Hasta", dHasta);
 
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
-            var oSemanas = oDatos.Where(c => c.Fecha >= dDesde)
+            var oSemanas = oDatos
                 .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
                 .Select(c => new { c.Key.Semana, c.Key.Sucursal, PrecioSinIva = c.Sum(s => s.PrecioSinIvaActual), Costo = c.Sum(s => s.CostoDescActual) })
                 .OrderBy(c => c.Sucursal).ThenBy(c => c.Semana);
