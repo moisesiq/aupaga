@@ -191,9 +191,10 @@ namespace Refaccionaria.App
             }
             
             // Para las compras
-            var oCompras = General.GetListOf<ProveedoresPagosView>(c => c.FechaPago >= dDesde && c.FechaPago < dHastaMas1)
-                .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.FechaPago.Valor()) })
-                .Select(c => new { c.Key.Semana, Importe = c.Sum(s => s.AbonadoIva) })
+            var oCompras = General.GetListOf<ProveedoresPolizasDetalleAvanzadoView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1
+                && (c.OrigenID == Cat.OrigenesPagosAProveedores.PagoDirecto || c.OrigenID == Cat.OrigenesPagosAProveedores.PagoDeCaja))
+                .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha.Valor()) })
+                .Select(c => new { c.Key.Semana, Importe = c.Sum(s => s.Subtotal) })
                 .OrderBy(c => c.Semana);
             mTotal += oCompras.Sum(c => c.Importe);
             mPromedio += oCompras.Average(c => c.Importe);
