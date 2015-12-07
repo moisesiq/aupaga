@@ -132,8 +132,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ctlLineas = new Refaccionaria.Negocio.ComboMultiSel();
             this.ctlMarcas = new Refaccionaria.Negocio.ComboMultiSel();
-            this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
             this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
+            this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExistencias)).BeginInit();
@@ -337,7 +337,7 @@
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvExistencias.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvExistencias.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvExistencias.Location = new System.Drawing.Point(402, 560);
+            this.dgvExistencias.Location = new System.Drawing.Point(402, 566);
             this.dgvExistencias.Name = "dgvExistencias";
             this.dgvExistencias.RowHeadersVisible = false;
             this.dgvExistencias.RowHeadersWidth = 25;
@@ -384,7 +384,7 @@
             dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvHistorico.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvHistorico.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvHistorico.Location = new System.Drawing.Point(717, 586);
+            this.dgvHistorico.Location = new System.Drawing.Point(717, 592);
             this.dgvHistorico.Name = "dgvHistorico";
             this.dgvHistorico.RowHeadersVisible = false;
             this.dgvHistorico.RowHeadersWidth = 25;
@@ -405,7 +405,7 @@
             this.tabPedidos.Location = new System.Drawing.Point(358, 3);
             this.tabPedidos.Name = "tabPedidos";
             this.tabPedidos.SelectedIndex = 0;
-            this.tabPedidos.Size = new System.Drawing.Size(1153, 553);
+            this.tabPedidos.Size = new System.Drawing.Size(1153, 557);
             this.tabPedidos.TabIndex = 167;
             this.tabPedidos.SelectedIndexChanged += new System.EventHandler(this.tabPedidos_SelectedIndexChanged);
             // 
@@ -416,7 +416,7 @@
             this.tabSugeridos.Location = new System.Drawing.Point(4, 25);
             this.tabSugeridos.Name = "tabSugeridos";
             this.tabSugeridos.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSugeridos.Size = new System.Drawing.Size(1145, 524);
+            this.tabSugeridos.Size = new System.Drawing.Size(1145, 528);
             this.tabSugeridos.TabIndex = 0;
             this.tabSugeridos.Text = "Sugeridos";
             // 
@@ -477,7 +477,7 @@
             this.dgvSugeridos.RowHeadersVisible = false;
             this.dgvSugeridos.RowHeadersWidth = 25;
             this.dgvSugeridos.RowTemplate.ContextMenuStrip = this.cmsSugeridos;
-            this.dgvSugeridos.Size = new System.Drawing.Size(1139, 518);
+            this.dgvSugeridos.Size = new System.Drawing.Size(1139, 522);
             this.dgvSugeridos.TabIndex = 163;
             this.dgvSugeridos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSugeridos_CellClick);
             this.dgvSugeridos.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvSugeridos_CellValidating);
@@ -657,7 +657,7 @@
             this.tabYaPedidos.Location = new System.Drawing.Point(4, 25);
             this.tabYaPedidos.Name = "tabYaPedidos";
             this.tabYaPedidos.Padding = new System.Windows.Forms.Padding(3);
-            this.tabYaPedidos.Size = new System.Drawing.Size(1145, 524);
+            this.tabYaPedidos.Size = new System.Drawing.Size(1145, 528);
             this.tabYaPedidos.TabIndex = 1;
             this.tabYaPedidos.Text = "Pedidos";
             // 
@@ -795,7 +795,7 @@
             this.btnImprimirSugerido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimirSugerido.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImprimirSugerido.ForeColor = System.Drawing.Color.White;
-            this.btnImprimirSugerido.Location = new System.Drawing.Point(1517, 508);
+            this.btnImprimirSugerido.Location = new System.Drawing.Point(1517, 512);
             this.btnImprimirSugerido.Name = "btnImprimirSugerido";
             this.btnImprimirSugerido.Size = new System.Drawing.Size(80, 21);
             this.btnImprimirSugerido.TabIndex = 170;
@@ -810,7 +810,7 @@
             this.btnTodos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTodos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTodos.ForeColor = System.Drawing.Color.White;
-            this.btnTodos.Location = new System.Drawing.Point(1517, 481);
+            this.btnTodos.Location = new System.Drawing.Point(1517, 485);
             this.btnTodos.Name = "btnTodos";
             this.btnTodos.Size = new System.Drawing.Size(80, 21);
             this.btnTodos.TabIndex = 168;
@@ -825,7 +825,7 @@
             this.btnProcesar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProcesar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProcesar.ForeColor = System.Drawing.Color.White;
-            this.btnProcesar.Location = new System.Drawing.Point(1517, 535);
+            this.btnProcesar.Location = new System.Drawing.Point(1517, 539);
             this.btnProcesar.Name = "btnProcesar";
             this.btnProcesar.Size = new System.Drawing.Size(80, 21);
             this.btnProcesar.TabIndex = 169;
@@ -836,7 +836,7 @@
             // txtImporteTotal
             // 
             this.txtImporteTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtImporteTotal.Location = new System.Drawing.Point(1517, 455);
+            this.txtImporteTotal.Location = new System.Drawing.Point(1517, 459);
             this.txtImporteTotal.Name = "txtImporteTotal";
             this.txtImporteTotal.ReadOnly = true;
             this.txtImporteTotal.Size = new System.Drawing.Size(80, 20);
@@ -887,7 +887,7 @@
             // txtSugerenciaObservacion
             // 
             this.txtSugerenciaObservacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSugerenciaObservacion.Location = new System.Drawing.Point(1394, 576);
+            this.txtSugerenciaObservacion.Location = new System.Drawing.Point(1394, 582);
             this.txtSugerenciaObservacion.Multiline = true;
             this.txtSugerenciaObservacion.Name = "txtSugerenciaObservacion";
             this.txtSugerenciaObservacion.ReadOnly = true;
@@ -899,7 +899,7 @@
             this.lblComentarios.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblComentarios.AutoSize = true;
             this.lblComentarios.ForeColor = System.Drawing.Color.White;
-            this.lblComentarios.Location = new System.Drawing.Point(1391, 560);
+            this.lblComentarios.Location = new System.Drawing.Point(1391, 566);
             this.lblComentarios.Name = "lblComentarios";
             this.lblComentarios.Size = new System.Drawing.Size(68, 13);
             this.lblComentarios.TabIndex = 202;
@@ -948,7 +948,7 @@
             dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvEquivalente.DefaultCellStyle = dataGridViewCellStyle38;
             this.dgvEquivalente.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvEquivalente.Location = new System.Drawing.Point(3, 560);
+            this.dgvEquivalente.Location = new System.Drawing.Point(3, 566);
             this.dgvEquivalente.Name = "dgvEquivalente";
             this.dgvEquivalente.ReadOnly = true;
             this.dgvEquivalente.RowHeadersVisible = false;
@@ -1025,7 +1025,7 @@
             this.lblEquivalente.AutoSize = true;
             this.lblEquivalente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEquivalente.ForeColor = System.Drawing.Color.White;
-            this.lblEquivalente.Location = new System.Drawing.Point(0, 545);
+            this.lblEquivalente.Location = new System.Drawing.Point(0, 551);
             this.lblEquivalente.Name = "lblEquivalente";
             this.lblEquivalente.Size = new System.Drawing.Size(84, 13);
             this.lblEquivalente.TabIndex = 204;
@@ -1111,7 +1111,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(1517, 437);
+            this.label2.Location = new System.Drawing.Point(1517, 441);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 310;
@@ -1139,27 +1139,23 @@
             this.ctlMarcas.Size = new System.Drawing.Size(129, 20);
             this.ctlMarcas.TabIndex = 312;
             // 
-            // txtDescripcionMaxMin
-            // 
-            this.txtDescripcionMaxMin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDescripcionMaxMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
-            this.txtDescripcionMaxMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDescripcionMaxMin.ForeColor = System.Drawing.Color.White;
-            this.txtDescripcionMaxMin.Location = new System.Drawing.Point(706, 650);
-            this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
-            this.txtDescripcionMaxMin.ReadOnly = true;
-            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(682, 13);
-            this.txtDescripcionMaxMin.TabIndex = 315;
-            // 
             // ctlVentasPorMes
             // 
             this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctlVentasPorMes.Location = new System.Drawing.Point(706, 560);
+            this.ctlVentasPorMes.Location = new System.Drawing.Point(706, 566);
             this.ctlVentasPorMes.Name = "ctlVentasPorMes";
             this.ctlVentasPorMes.Size = new System.Drawing.Size(682, 101);
             this.ctlVentasPorMes.TabIndex = 314;
+            // 
+            // txtDescripcionMaxMin
+            // 
+            this.txtDescripcionMaxMin.Location = new System.Drawing.Point(717, 563);
+            this.txtDescripcionMaxMin.Multiline = true;
+            this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
+            this.txtDescripcionMaxMin.ReadOnly = true;
+            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(147, 91);
+            this.txtDescripcionMaxMin.TabIndex = 315;
             // 
             // catalogosPedidos
             // 
