@@ -16,17 +16,19 @@ namespace Refaccionaria.App
     {
         BindingSource fuenteDatos;
         public Proveedor Proveedor;
-        ControlError cntError = new ControlError();
+        ControlError ctlError = new ControlError();
+        ControlError ctlInfo = new ControlError() { Icon = Properties.Resources.Ico_Info };
         public bool EsNuevo = true;
         public int Modo = 0;
         bool sel = true;
         bool unaVez = true;
         bool bCargandoDescuentosGanancias = false;
 
-        bool paiting = false;
+        /* bool paiting = false;
         decimal sumaImporte = 0;
         decimal sumaPagos = 0;
         decimal sumaSaldo = 0;
+        */
 
         bool tabMarcasOneTime = false; //Solo cargar la tabmarcas una vez
         bool tabDatosProveedoresOneTime = false;//Solo cargar la tabDatosProveedores una vez
@@ -594,14 +596,14 @@ namespace Refaccionaria.App
             {
                 Negocio.Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
             }
-            this.cntError.LimpiarErrores();
+            this.ctlError.LimpiarErrores();
             if (this.txtNombreProveedor.Text == "")
-                this.cntError.PonerError(this.txtNombreProveedor, "El campo es necesario.", ErrorIconAlignment.MiddleRight);
+                this.ctlError.PonerError(this.txtNombreProveedor, "El campo es necesario.", ErrorIconAlignment.MiddleRight);
 
             if (this.chkCobraSeguro.CheckState == CheckState.Checked && this.txtSeguro.Text == "")
-                this.cntError.PonerError(this.txtSeguro, "El campo es necesario.", ErrorIconAlignment.MiddleRight);
+                this.ctlError.PonerError(this.txtSeguro, "El campo es necesario.", ErrorIconAlignment.MiddleRight);
 
-            return (this.cntError.NumeroDeErrores == 0);
+            return (this.ctlError.NumeroDeErrores == 0);
         }
 
         private void CargarTableroControl(int proveedorId)
@@ -714,7 +716,7 @@ namespace Refaccionaria.App
                 this.Proveedor = General.GetEntity<Proveedor>(p => p.ProveedorID.Equals(proveedorId));
                 this.tabDatosProveedores.SelectedIndex = 0;
                 EsNuevo = false;
-                this.cntError.LimpiarErrores();
+                this.ctlError.LimpiarErrores();
                 this.catalogosProveedores_Load(sender, null);
             }
             catch (Exception ex)
@@ -2092,33 +2094,31 @@ namespace Refaccionaria.App
 
         private DateTime ObtenerFechaAdeudoMasViejo(int iProveedorID)
         {
-            var oProveedor = General.GetEntity<Proveedor>(c => c.ProveedorID == iProveedorID && c.Estatus);
-            int iDiasDePlazo = oProveedor.DiasPlazo.Valor();
-            DateTime dFinMas1 = DateTime.Now.Date.AddDays(iDiasDePlazo * -1).AddDays(1);
-            DateTime dInicio = dFinMas1.DiaPrimero();
-            var oCompras = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && c.ProveedorID == iProveedorID && !c.MovimientoAgrupadorID.HasValue
-                && c.Fecha >= dInicio && c.Fecha < dFinMas1);
-            var oMasViejo = oCompras.OrderBy(c => c.Fecha).FirstOrDefault();
-            return (oMasViejo == null ? DateTime.Now : oMasViejo.Fecha.Valor().AddDays(iDiasDePlazo));
+            var oCompras = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && !c.MovimientoAgrupadorID.HasValue);
+            var oMasViejo = oCompras.OrderBy(c => c.Fecha.Value.AddDays(c.DiasPlazo.Valor())).FirstOrDefault();
+            return (oMasViejo == null ? DateTime.Now : oMasViejo.Fecha.Valor().AddDays(oMasViejo.DiasPlazo.Valor()));
         }
 
         private void CargarListaVencimientos(int iProveedorID)
         {
             Cargando.Mostrar();
 
-            var oProveedor = General.GetEntity<Proveedor>(c => c.ProveedorID == iProveedorID && c.Estatus);
-            int iDiasDePlazo = oProveedor.DiasPlazo.Valor();
-            DateTime dInicio = this.dtpCppListaInicio.Value.Date.AddDays(iDiasDePlazo * -1);
+            DateTime dInicio = this.dtpCppListaInicio.Value.Date;
             DateTime dFinMas1 = dInicio.AddMonths(1).DiaUltimo().AddDays(1);
-            var oCompras = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && c.ProveedorID == iProveedorID && !c.MovimientoAgrupadorID.HasValue
-                && c.Fecha >= dInicio && c.Fecha < dFinMas1);
-            var oComprasA = oCompras.GroupBy(c => new { Dia = c.Fecha.Value.Date.AddDays(iDiasDePlazo), c.Proveedor })
+            var oCompras = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && !c.MovimientoAgrupadorID.HasValue && c.Fecha < dFinMas1);
+            var oComprasA = oCompras
+                .Where(c => c.Fecha.Value.AddDays(c.DiasPlazo.Valor()) >= dInicio && c.Fecha.Value.AddDays(c.DiasPlazo.Valor()) < dFinMas1)
+                .GroupBy(c => new { Dia = c.Fecha.Value.Date.AddDays(c.DiasPlazo.Valor()), c.Proveedor })
                 .Select(c => new { c.Key.Dia, c.Key.Proveedor, Saldo = c.Sum(s => s.Saldo) })
                 .OrderBy(c => c.Dia).ThenBy(c => c.Proveedor).ToList();
+            decimal mSaldoIni = oCompras.Where(c => c.Fecha.Value.AddDays(c.DiasPlazo.Valor()) < dInicio).Sum(c => c.Saldo).Valor();
+            this.ctlInfo.QuitarError(this.dtpCppListaInicio);
+            if (mSaldoIni > 0)
+                this.ctlInfo.PonerError(this.dtpCppListaInicio, "Existen adeudos con fechas anteriores a la seleccionada.");
+            decimal mSaldoAcum = mSaldoIni;
 
             // Se empiezan a llenar los datos
             DateTime dFecha = DateTime.MinValue;
-            decimal mSaldoAcum = 0;
             TreeGridNode oNodoDia = null;
             this.tgvCuentasPorPagar.Nodes.Clear();
             foreach (var oReg in oComprasA)
@@ -2126,7 +2126,7 @@ namespace Refaccionaria.App
                 if (oReg.Dia != dFecha)
                 {
                     dFecha = oReg.Dia;
-                    oNodoDia = this.tgvCuentasPorPagar.Nodes.Add(dFecha.ToString("dddd dd, MMMM").ToUpper(), 0, 0);
+                    oNodoDia = this.tgvCuentasPorPagar.Nodes.Add(dFecha.ToString("dd-MMM").ToUpper(), 0, 0);
                 }
                 mSaldoAcum += oReg.Saldo.Valor();
                 oNodoDia.Nodes.Add(oReg.Proveedor, oReg.Saldo, mSaldoAcum);
@@ -2134,7 +2134,7 @@ namespace Refaccionaria.App
                 oNodoDia.Cells["cpp_Importe"].Value = (Helper.ConvertirDecimal(oNodoDia.Cells["cpp_Importe"].Value) + oReg.Saldo.Valor());
             }
             // Se llena el acumulado
-            mSaldoAcum = 0;
+            mSaldoAcum = mSaldoIni;
             foreach (TreeGridNode oNodo in this.tgvCuentasPorPagar.Nodes)
             {
                 mSaldoAcum += Helper.ConvertirDecimal(oNodo.Cells["cpp_Importe"].Value);
