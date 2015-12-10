@@ -29,32 +29,33 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MaxMin));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.tabMaxMin = new System.Windows.Forms.TabControl();
             this.tbpDetalle = new System.Windows.Forms.TabPage();
@@ -94,14 +95,6 @@
             this.btnReglasQuitar = new System.Windows.Forms.Button();
             this.btnReglasAgregar = new System.Windows.Forms.Button();
             this.dgvReglas = new System.Windows.Forms.DataGridView();
-            this.ParteMaxMinReglaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Cambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Regla = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpEquivalentes = new System.Windows.Forms.TabPage();
             this.btnEquCopiarDe = new System.Windows.Forms.Button();
             this.dgvEquivalentes = new System.Windows.Forms.DataGridView();
@@ -237,6 +230,14 @@
             this.ctlProveedores = new Refaccionaria.Negocio.ComboMultiSel();
             this.cmbCambios = new Refaccionaria.Negocio.ComboEtiqueta();
             this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
+            this.ParteMaxMinReglaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Cambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Regla = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabMaxMin.SuspendLayout();
             this.tbpDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -314,14 +315,14 @@
             this.dgvDetalle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellValueChanged);
             this.dgvDetalle.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvDetalle_ColumnHeaderMouseClick);
@@ -344,8 +345,8 @@
             // NumeroDeParte
             // 
             this.NumeroDeParte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.NumeroDeParte.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.NumeroDeParte.DefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(this.NumeroDeParte, "NumeroDeParte");
             this.NumeroDeParte.Name = "NumeroDeParte";
             this.NumeroDeParte.ReadOnly = true;
@@ -376,27 +377,27 @@
             // 
             // Existen
             // 
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Existen.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Existen.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.Existen, "Existen");
             this.Existen.Name = "Existen";
             this.Existen.ReadOnly = true;
             // 
             // Column9
             // 
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle29.Format = "N0";
-            dataGridViewCellStyle29.NullValue = null;
-            this.Column9.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Column9.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.Column9, "Column9");
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
             // 
             // Column10
             // 
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle30.Format = "N0";
-            this.Column10.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N0";
+            this.Column10.DefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(this.Column10, "Column10");
             this.Column10.Name = "Column10";
             this.Column10.ReadOnly = true;
@@ -421,27 +422,27 @@
             // 
             // Column12
             // 
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column12.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column12.DefaultCellStyle = dataGridViewCellStyle5;
             resources.ApplyResources(this.Column12, "Column12");
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
             // 
             // CantidadTotal
             // 
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.CantidadTotal.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.CantidadTotal.DefaultCellStyle = dataGridViewCellStyle6;
             resources.ApplyResources(this.CantidadTotal, "CantidadTotal");
             this.CantidadTotal.Name = "CantidadTotal";
             this.CantidadTotal.ReadOnly = true;
             // 
             // Utilidad
             // 
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle33.Format = "N2";
-            dataGridViewCellStyle33.NullValue = null;
-            this.Utilidad.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.Utilidad.DefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(this.Utilidad, "Utilidad");
             this.Utilidad.Name = "Utilidad";
             this.Utilidad.ReadOnly = true;
@@ -454,36 +455,36 @@
             // 
             // MinimoActual
             // 
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle34.Format = "N0";
-            this.MinimoActual.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N0";
+            this.MinimoActual.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.MinimoActual, "MinimoActual");
             this.MinimoActual.Name = "MinimoActual";
             this.MinimoActual.ReadOnly = true;
             // 
             // MaximoActual
             // 
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle35.Format = "N0";
-            this.MaximoActual.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N0";
+            this.MaximoActual.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.MaximoActual, "MaximoActual");
             this.MaximoActual.Name = "MaximoActual";
             this.MaximoActual.ReadOnly = true;
             // 
             // Minimo
             // 
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle36.Format = "N0";
-            this.Minimo.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
+            this.Minimo.DefaultCellStyle = dataGridViewCellStyle10;
             resources.ApplyResources(this.Minimo, "Minimo");
             this.Minimo.Name = "Minimo";
             this.Minimo.ReadOnly = true;
             // 
             // Maximo
             // 
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle37.Format = "N0";
-            this.Maximo.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N0";
+            this.Maximo.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.Maximo, "Maximo");
             this.Maximo.Name = "Maximo";
             this.Maximo.ReadOnly = true;
@@ -612,65 +613,15 @@
             this.dgvReglas.MultiSelect = false;
             this.dgvReglas.Name = "dgvReglas";
             this.dgvReglas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle42.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvReglas.RowHeadersDefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReglas.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvReglas.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReglas_CellValueChanged);
-            // 
-            // ParteMaxMinReglaID
-            // 
-            resources.ApplyResources(this.ParteMaxMinReglaID, "ParteMaxMinReglaID");
-            this.ParteMaxMinReglaID.Name = "ParteMaxMinReglaID";
-            this.ParteMaxMinReglaID.ReadOnly = true;
-            // 
-            // Reglas_Cambio
-            // 
-            resources.ApplyResources(this.Reglas_Cambio, "Reglas_Cambio");
-            this.Reglas_Cambio.Name = "Reglas_Cambio";
-            this.Reglas_Cambio.ReadOnly = true;
-            this.Reglas_Cambio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Reglas_Orden
-            // 
-            resources.ApplyResources(this.Reglas_Orden, "Reglas_Orden");
-            this.Reglas_Orden.Name = "Reglas_Orden";
-            this.Reglas_Orden.ReadOnly = true;
-            // 
-            // Reglas_Regla
-            // 
-            resources.ApplyResources(this.Reglas_Regla, "Reglas_Regla");
-            this.Reglas_Regla.Name = "Reglas_Regla";
-            // 
-            // Reglas_Condicion
-            // 
-            dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Condicion.DefaultCellStyle = dataGridViewCellStyle39;
-            resources.ApplyResources(this.Reglas_Condicion, "Reglas_Condicion");
-            this.Reglas_Condicion.Name = "Reglas_Condicion";
-            // 
-            // Reglas_Maximo
-            // 
-            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Maximo.DefaultCellStyle = dataGridViewCellStyle40;
-            resources.ApplyResources(this.Reglas_Maximo, "Reglas_Maximo");
-            this.Reglas_Maximo.Name = "Reglas_Maximo";
-            // 
-            // Reglas_Minimo
-            // 
-            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Minimo.DefaultCellStyle = dataGridViewCellStyle41;
-            resources.ApplyResources(this.Reglas_Minimo, "Reglas_Minimo");
-            this.Reglas_Minimo.Name = "Reglas_Minimo";
-            // 
-            // Reglas_Descripcion
-            // 
-            resources.ApplyResources(this.Reglas_Descripcion, "Reglas_Descripcion");
-            this.Reglas_Descripcion.Name = "Reglas_Descripcion";
             // 
             // tbpEquivalentes
             // 
@@ -717,14 +668,14 @@
             this.dgvEquivalentes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvEquivalentes.Name = "dgvEquivalentes";
             this.dgvEquivalentes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle50.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEquivalentes.RowHeadersDefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEquivalentes.RowHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvEquivalentes.RowHeadersVisible = false;
             this.dgvEquivalentes.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEquivalentes_CellValueChanged);
             this.dgvEquivalentes.CurrentCellChanged += new System.EventHandler(this.dgvEquivalentes_CurrentCellChanged);
@@ -775,62 +726,62 @@
             // 
             // equ_Existencia
             // 
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle43.Format = "N2";
-            this.equ_Existencia.DefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Format = "N2";
+            this.equ_Existencia.DefaultCellStyle = dataGridViewCellStyle18;
             resources.ApplyResources(this.equ_Existencia, "equ_Existencia");
             this.equ_Existencia.Name = "equ_Existencia";
             this.equ_Existencia.ReadOnly = true;
             // 
             // equ_Ventas
             // 
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle44.Format = "N2";
-            this.equ_Ventas.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Format = "N2";
+            this.equ_Ventas.DefaultCellStyle = dataGridViewCellStyle19;
             resources.ApplyResources(this.equ_Ventas, "equ_Ventas");
             this.equ_Ventas.Name = "equ_Ventas";
             this.equ_Ventas.ReadOnly = true;
             // 
             // equ_Costo
             // 
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle45.Format = "C2";
-            this.equ_Costo.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "C2";
+            this.equ_Costo.DefaultCellStyle = dataGridViewCellStyle20;
             resources.ApplyResources(this.equ_Costo, "equ_Costo");
             this.equ_Costo.Name = "equ_Costo";
             this.equ_Costo.ReadOnly = true;
             // 
             // equ_MinimoActual
             // 
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle46.Format = "N0";
-            this.equ_MinimoActual.DefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Format = "N0";
+            this.equ_MinimoActual.DefaultCellStyle = dataGridViewCellStyle21;
             resources.ApplyResources(this.equ_MinimoActual, "equ_MinimoActual");
             this.equ_MinimoActual.Name = "equ_MinimoActual";
             this.equ_MinimoActual.ReadOnly = true;
             // 
             // equ_MaximoActual
             // 
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle47.Format = "N0";
-            this.equ_MaximoActual.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle22.Format = "N0";
+            this.equ_MaximoActual.DefaultCellStyle = dataGridViewCellStyle22;
             resources.ApplyResources(this.equ_MaximoActual, "equ_MaximoActual");
             this.equ_MaximoActual.Name = "equ_MaximoActual";
             this.equ_MaximoActual.ReadOnly = true;
             // 
             // equ_Minimo
             // 
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle48.Format = "N0";
-            this.equ_Minimo.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.Format = "N0";
+            this.equ_Minimo.DefaultCellStyle = dataGridViewCellStyle23;
             resources.ApplyResources(this.equ_Minimo, "equ_Minimo");
             this.equ_Minimo.Name = "equ_Minimo";
             // 
             // equ_Maximo
             // 
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle49.Format = "N0";
-            this.equ_Maximo.DefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle24.Format = "N0";
+            this.equ_Maximo.DefaultCellStyle = dataGridViewCellStyle24;
             resources.ApplyResources(this.equ_Maximo, "equ_Maximo");
             this.equ_Maximo.Name = "equ_Maximo";
             // 
@@ -880,14 +831,14 @@
             this.dgvSinMaxMin.Name = "dgvSinMaxMin";
             this.dgvSinMaxMin.ReadOnly = true;
             this.dgvSinMaxMin.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle52.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle52.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSinMaxMin.RowHeadersDefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSinMaxMin.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.dgvSinMaxMin.RowHeadersVisible = false;
             this.dgvSinMaxMin.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSinMaxMin.CurrentCellChanged += new System.EventHandler(this.dgvSinMaxMin_CurrentCellChanged);
@@ -936,9 +887,9 @@
             // 
             // Ventas
             // 
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle51.Format = "N2";
-            this.Ventas.DefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle26.Format = "N2";
+            this.Ventas.DefaultCellStyle = dataGridViewCellStyle26;
             resources.ApplyResources(this.Ventas, "Ventas");
             this.Ventas.Name = "Ventas";
             this.Ventas.ReadOnly = true;
@@ -1767,6 +1718,58 @@
             this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
             this.txtDescripcionMaxMin.ReadOnly = true;
             // 
+            // ParteMaxMinReglaID
+            // 
+            resources.ApplyResources(this.ParteMaxMinReglaID, "ParteMaxMinReglaID");
+            this.ParteMaxMinReglaID.Name = "ParteMaxMinReglaID";
+            this.ParteMaxMinReglaID.ReadOnly = true;
+            // 
+            // Reglas_Cambio
+            // 
+            resources.ApplyResources(this.Reglas_Cambio, "Reglas_Cambio");
+            this.Reglas_Cambio.Name = "Reglas_Cambio";
+            this.Reglas_Cambio.ReadOnly = true;
+            this.Reglas_Cambio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Reglas_Orden
+            // 
+            resources.ApplyResources(this.Reglas_Orden, "Reglas_Orden");
+            this.Reglas_Orden.Name = "Reglas_Orden";
+            this.Reglas_Orden.ReadOnly = true;
+            // 
+            // Reglas_Regla
+            // 
+            resources.ApplyResources(this.Reglas_Regla, "Reglas_Regla");
+            this.Reglas_Regla.Name = "Reglas_Regla";
+            // 
+            // Reglas_Condicion
+            // 
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Condicion.DefaultCellStyle = dataGridViewCellStyle13;
+            resources.ApplyResources(this.Reglas_Condicion, "Reglas_Condicion");
+            this.Reglas_Condicion.Name = "Reglas_Condicion";
+            // 
+            // Reglas_Maximo
+            // 
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Maximo.DefaultCellStyle = dataGridViewCellStyle14;
+            resources.ApplyResources(this.Reglas_Maximo, "Reglas_Maximo");
+            this.Reglas_Maximo.Name = "Reglas_Maximo";
+            // 
+            // Reglas_Minimo
+            // 
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Minimo.DefaultCellStyle = dataGridViewCellStyle15;
+            resources.ApplyResources(this.Reglas_Minimo, "Reglas_Minimo");
+            this.Reglas_Minimo.Name = "Reglas_Minimo";
+            // 
+            // Reglas_Descripcion
+            // 
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Descripcion.DefaultCellStyle = dataGridViewCellStyle16;
+            resources.ApplyResources(this.Reglas_Descripcion, "Reglas_Descripcion");
+            this.Reglas_Descripcion.Name = "Reglas_Descripcion";
+            // 
             // MaxMin
             // 
             resources.ApplyResources(this, "$this");
@@ -2077,6 +2080,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Maximo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Condiciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCalculo;
+        private System.Windows.Forms.TextBox txtDescripcionMaxMin;
         private System.Windows.Forms.DataGridViewTextBoxColumn ParteMaxMinReglaID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Cambio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Orden;
@@ -2085,6 +2089,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Maximo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Minimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Descripcion;
-        private System.Windows.Forms.TextBox txtDescripcionMaxMin;
     }
 }
