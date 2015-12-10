@@ -77,8 +77,7 @@ namespace Refaccionaria.App
             // Se sugiere la fecha de vencimiento
             var oProveedor = General.GetEntity<Proveedor>(c => c.ProveedorID == iProveedorID && c.Estatus);
             this.iDiasDePlazo = oProveedor.DiasPlazo.Valor();
-            dVencimiento = dVencimiento.AddDays(iDiasDePlazo);
-            dVencimiento = AdmonProc.SugerirVencimientoCompra(dVencimiento);
+            dVencimiento = AdmonProc.SugerirVencimientoCompra(dVencimiento, iDiasDePlazo);
             this.dtpVencimiento.Value = dVencimiento;
         }
 

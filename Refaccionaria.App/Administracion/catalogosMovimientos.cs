@@ -647,10 +647,6 @@ namespace Refaccionaria.App
                             FechaFactura = this.dtpFechaFacturacion.Value,
                             FechaRecepcion = this.dtpFechaRecepcion.Value,
                             FolioFactura = this.txtFolioFactura.Text,
-
-                            AplicaEnMovimientoInventarioID = null,
-                            FechaAplicacion = null,
-
                             Subtotal = subtotal,
                             IVA = importeTotal - subtotal,
                             ImporteTotal = importeTotal,
@@ -969,10 +965,6 @@ namespace Refaccionaria.App
                             FechaFactura = this.dtpFechaFacturacion.Value,
                             FechaRecepcion = this.dtpFechaRecepcion.Value,
                             FolioFactura = null,
-
-                            AplicaEnMovimientoInventarioID = null,
-                            FechaAplicacion = null,
-
                             Subtotal = null,
                             IVA = null,
                             ImporteTotal = 0,
@@ -1134,10 +1126,6 @@ namespace Refaccionaria.App
                             FechaFactura = this.dtpFechaFacturacion.Value,
                             FechaRecepcion = this.dtpFechaRecepcion.Value,
                             FolioFactura = null,
-
-                            AplicaEnMovimientoInventarioID = null,
-                            FechaAplicacion = null,
-
                             Subtotal = null,
                             IVA = null,
                             ImporteTotal = 0,
@@ -1243,6 +1231,11 @@ namespace Refaccionaria.App
 
                         #region [ Devolucion ]
 
+                        // Se obtiene el movimiento fuente (la compra a la cual se le aplica la devolución / garantía)
+                        int iFuenteMovDetID = Helper.ConvertirEntero(this.dgvDetalleCaptura["FuenteMovimientoInventarioDetalleID", 0].Value);
+                        var oFuenteMovDet = General.GetEntity<MovimientoInventarioDetalle>(c => c.MovimientoInventarioDetalleID == iFuenteMovDetID && c.Estatus);
+                        var oFuenteMov = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oFuenteMovDet.MovimientoInventarioID && c.Estatus);
+
                         //Validaciones
                         foreach (DataGridViewRow row in this.dgvDetalleCaptura.Rows)
                         {
@@ -1315,10 +1308,8 @@ namespace Refaccionaria.App
                             }
                             */
 
-                            int iDetMovCompra = Helper.ConvertirEntero(row.Cells["FuenteMovimientoInventarioDetalleID"].Value);
                             decimal mCantidad = Helper.ConvertirDecimal(row.Cells["UNS"].Value);
-                            var oDetMovCompra = General.GetEntity<MovimientoInventarioDetalle>(c => c.MovimientoInventarioDetalleID == iDetMovCompra && c.Estatus);
-                            if (oDetMovCompra != null && (oDetMovCompra.Cantidad - oDetMovCompra.CantidadDevuelta) < mCantidad)
+                            if (oFuenteMovDet != null && (oFuenteMovDet.Cantidad - oFuenteMovDet.CantidadDevuelta) < mCantidad)
                             {
                                 this.Cursor = Cursors.Default;
                                 SplashScreen.Close();
@@ -1332,12 +1323,9 @@ namespace Refaccionaria.App
                         // Se obtiene el folio factura del primer artículo a devolver
                         if (this.dgvDetalleCaptura.Rows.Count > 0)
                         {
-                            int iMovDetID = Helper.ConvertirEntero(this.dgvDetalleCaptura["FuenteMovimientoInventarioDetalleID", 0].Value);
-                            var oMovDet = General.GetEntity<MovimientoInventarioDetalle>(c => c.MovimientoInventarioDetalleID == iMovDetID && c.Estatus);
-                            var oMov = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oMovDet.MovimientoInventarioID && c.Estatus);
-                            this.txtFolioFactura.Text = oMov.FolioFactura;
+                            this.txtFolioFactura.Text = oFuenteMov.FolioFactura;
                         }
-
+                        
                         //Insertar Movimiento
                         var movimientoDevolucion = new MovimientoInventario()
                         {
@@ -1349,10 +1337,6 @@ namespace Refaccionaria.App
                             FechaFactura = this.dtpFechaFacturacion.Value,
                             FechaRecepcion = this.dtpFechaRecepcion.Value,
                             FolioFactura = this.txtFolioFactura.Text,
-
-                            AplicaEnMovimientoInventarioID = null,
-                            FechaAplicacion = null,
-
                             Subtotal = null,
                             IVA = null,
                             ImporteTotal = Helper.ConvertirDecimal(this.lblTotal.Text),
@@ -1363,6 +1347,7 @@ namespace Refaccionaria.App
                             Unidades = Helper.ConvertirDecimal(this.lblUnidades.Text),
                             Seguro = null,
                             ImporteTotalSinDescuento = null,
+                            DeMovimientoInventarioID = oFuenteMov.MovimientoInventarioID
                         };
                         Guardar.Generico<MovimientoInventario>(movimientoDevolucion);
 
@@ -1418,12 +1403,10 @@ namespace Refaccionaria.App
                             }
 
                             // Se modifica la cantidad devuelta, en el detalle de la compra utilizada
-                            int iDetMovCompra = Helper.ConvertirEntero(row.Cells["FuenteMovimientoInventarioDetalleID"].Value);
-                            var oDetMovCompra = General.GetEntity<MovimientoInventarioDetalle>(c => c.MovimientoInventarioDetalleID == iDetMovCompra && c.Estatus);
-                            if (oDetMovCompra != null)
+                            if (oFuenteMovDet != null)
                             {
-                                oDetMovCompra.CantidadDevuelta += cantidad;
-                                Guardar.Generico<MovimientoInventarioDetalle>(oDetMovCompra);
+                                oFuenteMovDet.CantidadDevuelta += cantidad;
+                                Guardar.Generico<MovimientoInventarioDetalle>(oFuenteMovDet);
                             }
 
                             // Se verifica si es una garantía, para cambiar el estatus correspondiente, y relacionar la garantía con el Mov
@@ -1434,7 +1417,7 @@ namespace Refaccionaria.App
                                 if (oGarantia != null)
                                 {
                                     oGarantia.EstatusGenericoID = Cat.EstatusGenericos.EnRevision;
-                                    oGarantia.MovimientoInventarioDetalleID = iDetMovCompra;
+                                    oGarantia.MovimientoInventarioID = oFuenteMov.MovimientoInventarioID;
                                     Guardar.Generico<VentaGarantia>(oGarantia);
                                 }
                             }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/07/2013 12:00:26" ReportInfo.Modified="10/22/2015 17:10:06" ReportInfo.CreatorVersion="2015.3.13.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/07/2013 12:00:26" ReportInfo.Modified="11/22/2013 13:58:23" ReportInfo.CreatorVersion="2013.3.2.0">
   <Dictionary>
     <BusinessObjectDataSource Name="movimiento" ReferenceName="movimiento" DataType="null" Enabled="true">
       <Column Name="MovimientoInventarioID" DataType="System.Int32"/>
@@ -61,43 +61,60 @@
       <Column Name="DescuentoCinco" DataType="System.Decimal"/>
     </BusinessObjectDataSource>
   </Dictionary>
-  <ReportPage Name="Page1" PaperWidth="70" PaperHeight="280" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+  <ReportPage Name="Page1" PaperWidth="80" PaperHeight="160" LeftMargin="5" TopMargin="5" RightMargin="5" BottomMargin="5">
     <ReportTitleBand Name="ReportTitle1" Width="264.6" Height="18.9">
-      <TextObject Name="Text1" Left="-0.72" Width="245.1" Height="18.9" Text="Autopartes Garibaldi" HorzAlign="Center"/>
+      <TextObject Name="Text1" Left="61.43" Width="141.75" Height="18.9" Text="Autopartes Garibaldi" HorzAlign="Center"/>
     </ReportTitleBand>
-    <PageHeaderBand Name="PageHeader1" Top="22.1" Width="264.6" Height="110.53">
-      <TextObject Name="Text3" Left="103.95" Width="47.25" Height="15.12" Text="Folio:" HorzAlign="Right" Font="Arial, 9pt"/>
-      <TextObject Name="Text2" Left="149.88" Width="94.5" Height="15.12" Text="[movimiento.MovimientoInventarioID]" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
-      <TextObject Name="Text4" Left="85.05" Top="14.9" Width="66.15" Height="15.12" Text="Factura:" HorzAlign="Right" Font="Arial, 9pt"/>
-      <TextObject Name="Text5" Left="149.88" Top="14.9" Width="94.5" Height="15.12" Text="[movimiento.FolioFactura]" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
-      <TextObject Name="Text6" Left="149.88" Top="30.8" Width="94.5" Height="15.12" Text="[movimiento.NombreUsuario]" HorzAlign="Right" Font="Arial, 9pt"/>
-      <TextObject Name="Text7" Left="-0.72" Top="31.35" Width="245.1" Height="15.12" Text="[movimiento.NombreProveedor]" Font="Arial, 9pt, style=Bold"/>
-      <TextObject Name="Text8" Top="46.8" Width="75.6" Height="15.12" Text="Movimiento:" Font="Arial, 9pt"/>
-      <TextObject Name="Text9" Left="74.28" Top="46.8" Width="170.1" Height="15.12" Text="[movimiento.NombreTipoOperacion]" Font="Arial, 9pt, style=Bold"/>
-      <TextObject Name="Text10" Top="62.7" Width="75.6" Height="15.12" Text="A:" HorzAlign="Right" Font="Arial, 9pt"/>
-      <TextObject Name="Text11" Left="74.28" Top="62.7" Width="170.1" Height="15.12" Text="[movimiento.SucursalDestino]" Font="Arial, 9pt"/>
-      <TextObject Name="Text12" Top="78.6" Width="103.95" Height="15.12" Text="Forma de pago:" Font="Arial, 9pt"/>
-      <TextObject Name="Text13" Left="101.83" Top="78.6" Width="142.55" Height="15.12" Text="[movimiento.NombreTipoPago]" Font="Arial, 9pt"/>
-      <TextObject Name="Text14" Left="0.62" Top="15.09" Width="94.5" Height="15.12" Text="[movimiento.FechaRegistro]" Format="Date" Format.Format="d" Font="Arial, 9pt"/>
-      <TextObject Name="Text15" Top="96.37" Width="66.15" Height="12.58" Text="NúmParte" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
-      <TextObject Name="Text16" Left="66.15" Top="96.37" Width="75.6" Height="12.58" Text="Descripción" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
-      <TextObject Name="Text17" Left="141.75" Top="96.37" Width="37.8" Height="12.58" Text="Cant." VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
-      <TextObject Name="Text19" Left="187.25" Top="96.37" Width="57.13" Height="12.58" Text="Importe" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+    <PageHeaderBand Name="PageHeader1" Top="22.9" Width="264.6" Height="141.75">
+      <TextObject Name="Text3" Left="122.85" Width="47.25" Height="18.9" Text="Folio:" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text2" Left="170.1" Width="94.5" Height="18.9" Text="[movimiento.MovimientoInventarioID]" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text4" Left="103.95" Top="18.9" Width="66.15" Height="18.9" Text="Factura:" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text5" Left="170.1" Top="18.9" Width="94.5" Height="18.9" Text="[movimiento.FolioFactura]" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text6" Left="170.1" Top="37.8" Width="94.5" Height="18.9" Text="[movimiento.NombreUsuario]" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text7" Top="56.7" Width="255.15" Height="18.9" Text="[movimiento.NombreProveedor]" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text8" Top="75.6" Width="75.6" Height="18.9" Text="Movimiento:" Font="Arial, 9pt"/>
+      <TextObject Name="Text9" Left="75.6" Top="75.6" Width="189" Height="18.9" Text="[movimiento.NombreTipoOperacion]" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text10" Top="94.5" Width="75.6" Height="18.9" Text="A:" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text11" Left="75.6" Top="94.5" Width="189" Height="18.9" Text="[movimiento.SucursalDestino]" Font="Arial, 9pt"/>
+      <TextObject Name="Text12" Top="113.4" Width="103.95" Height="18.9" Text="Forma de pago:" Font="Arial, 9pt"/>
+      <TextObject Name="Text13" Left="103.95" Top="113.4" Width="160.65" Height="18.9" Text="[movimiento.NombreTipoPago]" Font="Arial, 9pt"/>
+      <TextObject Name="Text14" Top="37.8" Width="94.5" Height="18.9" Text="[movimiento.FechaRegistro]" Format="Date" Format.Format="d" Font="Arial, 9pt"/>
+      <TextObject Name="Text15" Top="132.3" Width="56.7" Height="9.45" Text="Núm. Parte" Font="Arial, 6pt, style=Bold"/>
+      <TextObject Name="Text16" Left="56.7" Top="132.3" Width="85.05" Height="9.45" Text="Descripción" Font="Arial, 6pt, style=Bold"/>
+      <TextObject Name="Text17" Left="141.75" Top="132.3" Width="28.35" Height="9.45" Text="Cant." Font="Arial, 6pt, style=Bold"/>
+      <TextObject Name="Text18" Left="170.1" Top="132.3" Width="37.8" Height="9.45" Text="Unitario" Font="Arial, 6pt, style=Bold"/>
+      <TextObject Name="Text19" Left="207.9" Top="132.3" Width="56.7" Height="9.45" Text="Importe" Font="Arial, 6pt, style=Bold"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="135.83" Width="264.6" Height="37.29" CanGrow="true" DataSource="detalle">
-      <TextObject Name="Text20" Width="242.04" Height="36.04" Text="[detalle.NumeroParte] // [detalle.Cantidad] // [detalle.Importe] // [detalle.NombreParte]" Font="Arial, 9pt" LineHeight="11.34"/>
+    <DataBand Name="Data1" Top="168.65" Width="264.6" Height="37.8" CanGrow="true" DataSource="detalle">
+      <TextObject Name="Text20" Width="94.5" Height="18.9" Text="[detalle.NumeroParte]" Font="Arial, 6pt, style=Bold"/>
+      <TextObject Name="Text22" Left="141.75" Width="28.35" Height="18.9" Text="[detalle.Cantidad]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" WordWrap="false" Font="Arial, 6pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text23" Left="170.1" Width="37.8" Height="18.9" Text="[detalle.PrecioUnitario]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 6pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text24" Left="207.9" Width="56.7" Height="18.9" Text="[detalle.Importe]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 6pt, style=Bold" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text25" Top="18.9" Width="264.6" Height="18.9" Text="[detalle.NombreParte]" Font="Arial, 6pt"/>
     </DataBand>
-    <DataBand Name="Data2" Top="176.32" Width="264.6" Height="66.15">
-      <TextObject Name="Text26" Width="54.82" Height="15.12" Text="Unidades:" Font="Arial Narrow, 9pt"/>
-      <TextObject Name="Text27" Left="51.7" Width="28.35" Height="15.12" Text="[movimiento.Unidades]" Font="Arial Narrow, 9pt"/>
-      <TextObject Name="Text28" Left="85.05" Width="66.15" Height="15.12" Text="Subtotal:" HorzAlign="Right" Font="Arial Narrow, 9pt"/>
-      <TextObject Name="Text31" Left="147.88" Width="94.5" Height="15.12" Text="[movimiento.Subtotal]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt"/>
-      <TextObject Name="Text29" Left="85.05" Top="14.9" Width="66.15" Height="15.12" Text="Iva:" HorzAlign="Right" Font="Arial Narrow, 9pt"/>
-      <TextObject Name="Text32" Left="147.88" Top="14.9" Width="94.5" Height="15.12" Text="[movimiento.IVA]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt"/>
-      <TextObject Name="Text30" Left="85.05" Top="29.8" Width="66.15" Height="15.12" Text="Total:" HorzAlign="Right" Font="Arial Narrow, 9pt"/>
-      <TextObject Name="Text33" Left="147.88" Top="29.8" Width="94.5" Height="15.12" Text="[movimiento.ImporteTotal]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 9pt, style=Bold" Trimming="EllipsisCharacter"/>
-      <TextObject Name="Text34" Left="94.5" Top="48.15" Width="141.75" Height="15.12" Text="TOTAL SIN DESCUENTO" Font="Arial Narrow, 9pt, style=Bold, Italic"/>
-      <TextObject Name="Text35" Left="6.13" Top="48.15" Width="86.5" Height="15.12" Text="[movimiento.ImporteFactura]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt, style=Bold, Italic"/>
+    <PageFooterBand Name="PageFooter1" Top="210.45" Width="264.6" Height="94.5" CanGrow="true">
+      <TextObject Name="Text26" Width="66.15" Height="18.9" Text="Unidades:" Font="Arial, 9pt"/>
+      <TextObject Name="Text27" Left="66.15" Width="37.8" Height="18.9" Text="[movimiento.Unidades]" Font="Arial, 9pt"/>
+      <TextObject Name="Text28" Left="103.95" Width="66.15" Height="18.9" Text="Subtotal:" Font="Arial, 9pt"/>
+      <TextObject Name="Text29" Left="103.95" Top="18.9" Width="66.15" Height="18.9" Text="Iva:" Font="Arial, 9pt"/>
+      <TextObject Name="Text30" Left="103.95" Top="37.8" Width="66.15" Height="18.9" Text="Total:" Font="Arial, 9pt"/>
+      <TextObject Name="Text31" Left="170.1" Width="94.5" Height="18.9" Text="[movimiento.Subtotal]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text32" Left="170.1" Top="18.9" Width="94.5" Height="18.9" Text="[movimiento.IVA]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text33" Left="170.1" Top="37.8" Width="94.5" Height="18.9" Text="[movimiento.ImporteTotal]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 9pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text34" Left="47.25" Top="56.7" Width="122.85" Height="18.9" Text="Total sin descuento:" Font="Arial, 9pt"/>
+      <TextObject Name="Text35" Left="170.1" Top="56.7" Width="94.5" Height="18.9" Text="[movimiento.ImporteTotalSinDescuento]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt"/>
+      <SubreportObject Name="Subreport1" Top="75.6" Width="94.5" Height="18.9" ReportPage="Page2" PrintOnParent="true"/>
+    </PageFooterBand>
+  </ReportPage>
+  <ReportPage Name="Page2" PaperWidth="80" PaperHeight="60" LeftMargin="5" TopMargin="5" RightMargin="5" BottomMargin="5">
+    <DataBand Name="Data2" Width="264.6" Height="18.9" CanGrow="true" DataSource="descuentosGenerales">
+      <TextObject Name="Text36" Width="85.05" Height="18.9" Text="[descuentosGenerales.NombreTipoDescuento]" Font="Arial, 6pt"/>
+      <TextObject Name="Text37" Left="122.85" Width="28.35" Height="18.9" Text="[ToDouble([descuentosGenerales.DescuentoUno])] * 100" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 6pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text38" Left="151.2" Width="28.35" Height="18.9" Text="[descuentosGenerales.DescuentoDos]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 6pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text39" Left="179.55" Width="28.35" Height="18.9" Text="[descuentosGenerales.DescuentoTres]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 6pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text40" Left="207.9" Width="28.35" Height="18.9" Text="[descuentosGenerales.DescuentoCuatro]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 6pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text41" Left="236.25" Width="28.35" Height="18.9" Text="[descuentosGenerales.DescuentoCinco]" Format="Number" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 6pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text42" Left="85.05" Width="37.8" Height="18.9" Text="[descuentosGenerales.NumeroParte]" Font="Arial, 6pt"/>
     </DataBand>
   </ReportPage>
 </Report>

@@ -1478,7 +1478,8 @@ namespace Refaccionaria.App
             var oNotas = General.GetListOf<ProveedoresNotasDeCreditoView>(c => c.ProveedorID == iProveedorID && c.Disponible);
             this.dgvNotasDeCredito.Rows.Clear();
             foreach (var oReg in oNotas)
-                this.dgvNotasDeCredito.Rows.Add(oReg.ProveedorNotaDeCreditoID, oReg.Folio, oReg.Origen, oReg.Fecha, oReg.Total, oReg.Usado, oReg.Restante, oReg.Observacion);
+                this.dgvNotasDeCredito.Rows.Add(oReg.ProveedorNotaDeCreditoID, oReg.Folio, oReg.Origen, oReg.Fecha, oReg.Total, oReg.Usado, oReg.Restante
+                        , oReg.Facturas, oReg.Observacion);
         }
 
         private void CargarMovimientosAgrupados(int iMovID)
@@ -1914,7 +1915,7 @@ namespace Refaccionaria.App
 
         #endregion
 
-        #region [ Calendario]
+        #region [ Cuentas por pagar ]
         
         // Cuando se active el control de la tab, cargar el calendario
         private void tabCalendario_Enter(object sender, EventArgs e)
@@ -1997,6 +1998,8 @@ namespace Refaccionaria.App
 
         private void CargarEventosCalendario()
         {
+            Cargando.Mostrar();
+
             // Se obtienen los datos
             List<ProveedoresComprasView> oEventos;
             if (this.chkCppSoloProveedorSel.Checked)
@@ -2004,33 +2007,31 @@ namespace Refaccionaria.App
                 if (this.Proveedor == null || this.Proveedor.ProveedorID <= 0)
                 {
                     UtilLocal.MensajeAdvertencia("No hay ningún Proveedor seleccionado.");
+                    Cargando.Cerrar();
                     return;
                 }
-                oEventos = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && c.ProveedorID == this.Proveedor.ProveedorID);
+                oEventos = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && c.ProveedorID == this.Proveedor.ProveedorID 
+                    && !c.MovimientoAgrupadorID.HasValue);
             }
             else
             {
-                oEventos = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0);
+                oEventos = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && !c.MovimientoAgrupadorID.HasValue);
             }
 
-            Proveedor oProveedor;
             this.oEventosCalendario = new List<CalendarItem>();
             foreach (var oReg in oEventos)
             {
-                // Se obtiene el proveedor correspondiente al evento
-                if (this.chkCppSoloProveedorSel.Checked)
-                    oProveedor = this.Proveedor;
-                else
-                    oProveedor = General.GetEntity<Proveedor>(c => c.ProveedorID == oReg.ProveedorID && c.Estatus);
                 // Se obtiene el día de pago
-                DateTime dPago = oReg.Fecha.Valor().AddDays(oProveedor.DiasPlazo.Valor());
+                DateTime dPago = AdmonProc.SugerirVencimientoCompra(oReg.Fecha.Valor(), oReg.DiasPlazo.Valor());
                 
                 var citemp = new CalendarItem(this.calProveedor, dPago, dPago.AddMinutes(30)
-                    , string.Format("{0} - {1}\n{2}\n{3}", oProveedor.NombreProveedor, oReg.Saldo.Valor().ToString(GlobalClass.FormatoMoneda), dPago, "FECHA DE PAGO"));
+                    , string.Format("{0} - {1}\n{2}\n{3}", oReg.Proveedor, oReg.Saldo.Valor().ToString(GlobalClass.FormatoMoneda), dPago, "FECHA DE PAGO"));
                 citemp.Tag = oReg.Saldo;
                 this.oEventosCalendario.Add(citemp);
             }
             this.CalendarioEstablecerRangoMostrado(this.mvCalendarioProveedor.SelectionStart, this.mvCalendarioProveedor.SelectionEnd);
+
+            Cargando.Cerrar();
         }
 
         private void CalendarioEstablecerRangoMostrado(DateTime dInicio, DateTime dFin)
@@ -2040,11 +2041,11 @@ namespace Refaccionaria.App
                 dInicio = DateTime.Now.DiaPrimero();
                 dFin = DateTime.Now.DiaUltimo();
             }
-
+            
             dInicio = dInicio.Date.AddHours(9);
             dFin = dFin.Date.AddHours(20);
             this.calProveedor.SetViewRange(dInicio, dFin);
-
+            
             // Se vuelven a agregar los Items porque el .SetViewRange los quita
             // Se agregan los eventos
             foreach (var oReg in this.oEventosCalendario)
@@ -2066,6 +2067,81 @@ namespace Refaccionaria.App
             // Para que se muestre el calendario recorrido hasta las 20 hrs.
             if (this.calProveedor.GetTimeUnit(this.calProveedor.ViewStart.Date.AddHours(18)) != null)
                 this.calProveedor.EnsureVisible(this.calProveedor.GetTimeUnit(this.calProveedor.ViewStart.Date.AddHours(20.5)));
+        }
+
+        private void tabCuentasPorPagar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (this.tabCuentasPorPagar.SelectedTab.Name)
+            {
+                case "tbpLista":
+                    if (this.dtpCppListaInicio.Tag == null)
+                    {
+                        this.dtpCppListaInicio.Value = this.ObtenerFechaAdeudoMasViejo(this.Proveedor.ProveedorID);
+                        this.dtpCppListaInicio.Tag = true;
+                        this.CargarListaVencimientos(this.Proveedor.ProveedorID);
+                    }
+                    break;
+            }
+        }
+
+        private void dtpCppListaInicio_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.dtpCppListaInicio.Focused)
+                this.CargarListaVencimientos(this.Proveedor.ProveedorID);
+        }
+
+        private DateTime ObtenerFechaAdeudoMasViejo(int iProveedorID)
+        {
+            var oProveedor = General.GetEntity<Proveedor>(c => c.ProveedorID == iProveedorID && c.Estatus);
+            int iDiasDePlazo = oProveedor.DiasPlazo.Valor();
+            DateTime dFinMas1 = DateTime.Now.Date.AddDays(iDiasDePlazo * -1).AddDays(1);
+            DateTime dInicio = dFinMas1.DiaPrimero();
+            var oCompras = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && c.ProveedorID == iProveedorID && !c.MovimientoAgrupadorID.HasValue
+                && c.Fecha >= dInicio && c.Fecha < dFinMas1);
+            var oMasViejo = oCompras.OrderBy(c => c.Fecha).FirstOrDefault();
+            return (oMasViejo == null ? DateTime.Now : oMasViejo.Fecha.Valor().AddDays(iDiasDePlazo));
+        }
+
+        private void CargarListaVencimientos(int iProveedorID)
+        {
+            Cargando.Mostrar();
+
+            var oProveedor = General.GetEntity<Proveedor>(c => c.ProveedorID == iProveedorID && c.Estatus);
+            int iDiasDePlazo = oProveedor.DiasPlazo.Valor();
+            DateTime dInicio = this.dtpCppListaInicio.Value.Date.AddDays(iDiasDePlazo * -1);
+            DateTime dFinMas1 = dInicio.AddMonths(1).DiaUltimo().AddDays(1);
+            var oCompras = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && c.ProveedorID == iProveedorID && !c.MovimientoAgrupadorID.HasValue
+                && c.Fecha >= dInicio && c.Fecha < dFinMas1);
+            var oComprasA = oCompras.GroupBy(c => new { Dia = c.Fecha.Value.Date.AddDays(iDiasDePlazo), c.Proveedor })
+                .Select(c => new { c.Key.Dia, c.Key.Proveedor, Saldo = c.Sum(s => s.Saldo) })
+                .OrderBy(c => c.Dia).ThenBy(c => c.Proveedor).ToList();
+
+            // Se empiezan a llenar los datos
+            DateTime dFecha = DateTime.MinValue;
+            decimal mSaldoAcum = 0;
+            TreeGridNode oNodoDia = null;
+            this.tgvCuentasPorPagar.Nodes.Clear();
+            foreach (var oReg in oComprasA)
+            {
+                if (oReg.Dia != dFecha)
+                {
+                    dFecha = oReg.Dia;
+                    oNodoDia = this.tgvCuentasPorPagar.Nodes.Add(dFecha.ToString("dddd dd, MMMM").ToUpper(), 0, 0);
+                }
+                mSaldoAcum += oReg.Saldo.Valor();
+                oNodoDia.Nodes.Add(oReg.Proveedor, oReg.Saldo, mSaldoAcum);
+                // Se llena el total
+                oNodoDia.Cells["cpp_Importe"].Value = (Helper.ConvertirDecimal(oNodoDia.Cells["cpp_Importe"].Value) + oReg.Saldo.Valor());
+            }
+            // Se llena el acumulado
+            mSaldoAcum = 0;
+            foreach (TreeGridNode oNodo in this.tgvCuentasPorPagar.Nodes)
+            {
+                mSaldoAcum += Helper.ConvertirDecimal(oNodo.Cells["cpp_Importe"].Value);
+                oNodo.Cells["cpp_Acumulado"].Value = mSaldoAcum;
+            }
+
+            Cargando.Cerrar();
         }
 
         #endregion
@@ -2197,6 +2273,13 @@ namespace Refaccionaria.App
                         oGarantia.RespuestaID = Cat.VentasGarantiasRespuestas.NotaDeCredito;
                         oGarantia.EstatusGenericoID = Cat.EstatusGenericos.Resuelto;
                         Guardar.Generico<VentaGarantia>(oGarantia);
+
+                        // Se guarda el detalle de la Nota de crédito
+                        var oNotaDet = new ProveedorNotaDeCreditoDetalle()
+                        {
+                            ProveedorNotaDeCreditoID = oNotaC.ProveedorNotaDeCreditoID,
+                            MovimientoInventarioID = oGarantia.MovimientoInventarioID.Valor()
+                        };
                     }
 
                     Cargando.Cerrar();
@@ -2242,16 +2325,53 @@ namespace Refaccionaria.App
 
         private void btnDevNotaDeCredito_Click(object sender, EventArgs e)
         {
+            this.DevolucionesNotasDeCredito();
+        }
+
+        public void CargarDevoluciones(int proveedorId)
+        {
+            Cargando.Mostrar();
+
+            var devs = Negocio.General.GetListOf<MovimientoInventario>(c => c.ProveedorID == Proveedor.ProveedorID
+                && c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.DevolucionAProveedor 
+                && c.TipoConceptoOperacionID != Cat.MovimientosConceptosDeOperacion.DevolucionGarantia
+                && (this.chkDevMostrarTodas.Checked || (!c.FueLiquidado)));
+                // Aquí quizá sea necesario agregar un filtro para no mostrar las devoluciones ya usadas, o algo así
+                // && (this.chkDevMostrarTodas.Checked || (!c.AplicaEnMovimientoInventarioID.HasValue && !c.FueLiquidado)));
+            this.dgvDevoluciones.Rows.Clear();
+            foreach (var oReg in devs)
+                this.dgvDevoluciones.Rows.Add(oReg.MovimientoInventarioID, false, oReg.MovimientoInventarioID, oReg.FolioFactura, oReg.FechaRegistro
+                    , oReg.ImporteTotal, oReg.Observacion);
+            // this.dgvDevoluciones.DefaultCellStyle.ForeColor = Color.Black;
+            // this.dgvDevoluciones.BackgroundColor = Color.FromArgb(188, 199, 216);
+
+            Cargando.Cerrar();
+        }
+
+        private void LlenarDetalleDevolucion()
+        {
+            this.dgvDevolucionesDetalle.Rows.Clear();
+            if (this.dgvDevoluciones.CurrentRow == null)
+                return;
+
+            int iDevID = Helper.ConvertirEntero(this.dgvDevoluciones.CurrentRow.Cells["des_MovimientoInventarioID"].Value);
+            var oDetalle = General.GetListOf<MovimientosInventarioDetalleAvanzadoView>(c => c.MovimientoInventarioID == iDevID);
+            foreach (var oReg in oDetalle)
+                this.dgvDevolucionesDetalle.Rows.Add(oReg.MovimientoInventarioDetalleID, oReg.Linea, oReg.Marca, oReg.NumeroDeParte, oReg.Descripcion);
+        }
+
+        private void DevolucionesNotasDeCredito()
+        {
             // Se verifican las filas marcadas, que tengan el estatus correcto
-            var oGarantias = new List<int>();
+            var oDevs = new List<int>();
             foreach (DataGridViewRow oFila in this.dgvDevoluciones.Rows)
             {
                 if (!Helper.ConvertirBool(oFila.Cells["des_Sel"].Value))
                     continue;
-                oGarantias.Add(Helper.ConvertirEntero(oFila.Cells["des_MovimientoInventarioID"].Value));
+                oDevs.Add(Helper.ConvertirEntero(oFila.Cells["des_MovimientoInventarioID"].Value));
             }
 
-            if (oGarantias.Count > 0)
+            if (oDevs.Count > 0)
             {
                 // Se piden los datos de la nota de crédito
                 var frmNotaDeCredito = new ProveedorNotaDeCreditoForma();
@@ -2274,11 +2394,18 @@ namespace Refaccionaria.App
                     AdmonProc.CrearNotaDeCreditoProveedor(oNotaC);
 
                     // Se marcan los movimientos afectados
-                    foreach (int iMovID in oGarantias)
+                    foreach (int iMovID in oDevs)
                     {
                         var oMovDev = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iMovID && c.Estatus);
                         oMovDev.FueLiquidado = true;
                         Guardar.Generico<MovimientoInventario>(oMovDev);
+
+                        // Se guarda el detalle de la Nota de crédito
+                        var oNotaDet = new ProveedorNotaDeCreditoDetalle()
+                        {
+                            ProveedorNotaDeCreditoID = oNotaC.ProveedorNotaDeCreditoID,
+                            MovimientoInventarioID = iMovID
+                        };
                     }
 
                     Cargando.Cerrar();
@@ -2287,35 +2414,6 @@ namespace Refaccionaria.App
 
                 this.CargarDevoluciones(this.Proveedor.ProveedorID);
             }
-        }
-
-        public void CargarDevoluciones(int proveedorId)
-        {
-            Cargando.Mostrar();
-
-            var devs = Negocio.General.GetListOf<MovimientoInventario>(c => c.ProveedorID == Proveedor.ProveedorID
-                && c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.DevolucionAProveedor && c.TipoConceptoOperacionID != Cat.MovimientosConceptosDeOperacion.DevolucionGarantia
-                && (this.chkDevMostrarTodas.Checked || (!c.AplicaEnMovimientoInventarioID.HasValue && !c.FueLiquidado)));
-            this.dgvDevoluciones.Rows.Clear();
-            foreach (var oReg in devs)
-                this.dgvDevoluciones.Rows.Add(oReg.MovimientoInventarioID, false, oReg.MovimientoInventarioID, oReg.FolioFactura, oReg.FechaRegistro
-                    , oReg.ImporteTotal, oReg.Observacion);
-            // this.dgvDevoluciones.DefaultCellStyle.ForeColor = Color.Black;
-            // this.dgvDevoluciones.BackgroundColor = Color.FromArgb(188, 199, 216);
-
-            Cargando.Cerrar();
-        }
-
-        private void LlenarDetalleDevolucion()
-        {
-            this.dgvDevolucionesDetalle.Rows.Clear();
-            if (this.dgvDevoluciones.CurrentRow == null)
-                return;
-
-            int iDevID = Helper.ConvertirEntero(this.dgvDevoluciones.CurrentRow.Cells["des_MovimientoInventarioID"].Value);
-            var oDetalle = General.GetListOf<MovimientosInventarioDetalleAvanzadoView>(c => c.MovimientoInventarioID == iDevID);
-            foreach (var oReg in oDetalle)
-                this.dgvDevolucionesDetalle.Rows.Add(oReg.MovimientoInventarioDetalleID, oReg.Linea, oReg.Marca, oReg.NumeroDeParte, oReg.Descripcion);
         }
 
         #endregion

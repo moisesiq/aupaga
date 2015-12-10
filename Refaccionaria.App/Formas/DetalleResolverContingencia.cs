@@ -140,10 +140,6 @@ namespace Refaccionaria.App
                                 FechaFactura = DateTime.Now,
                                 FechaRecepcion = DateTime.Now,
                                 FolioFactura = null,
-
-                                AplicaEnMovimientoInventarioID = null,
-                                FechaAplicacion = null,
-
                                 Subtotal = null,
                                 IVA = null,
                                 ImporteTotal = 0,
@@ -208,10 +204,6 @@ namespace Refaccionaria.App
                                 FechaFactura = DateTime.Now,
                                 FechaRecepcion = DateTime.Now,
                                 FolioFactura = null,
-
-                                AplicaEnMovimientoInventarioID = null,
-                                FechaAplicacion = null,
-
                                 Subtotal = null,
                                 IVA = null,
                                 ImporteTotal = 0,

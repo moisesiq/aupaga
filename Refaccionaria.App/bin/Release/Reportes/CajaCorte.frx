@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="11/19/2014 16:35:49" ReportInfo.CreatorVersion="2013.3.2.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="09/17/2015 14:15:28" ReportInfo.CreatorVersion="2013.3.2.0">
   <Dictionary>
     <TableDataSource Name="Corte" ReferenceName="Corte" DataType="System.Int32" Enabled="true">
       <Column Name="Pendientes" DataType="System.String"/>
@@ -20,7 +20,16 @@
       <Column Name="RegistroID" DataType="System.String"/>
       <Column Name="Caracteristica" DataType="System.String"/>
     </TableDataSource>
-    <BusinessObjectDataSource Name="Conteo" ReferenceName="Conteo" DataType="null" Enabled="true">
+    <BusinessObjectDataSource Name="Conteo" ReferenceName="Conteo" DataType="System.Collections.Generic.List`1[[Refaccionaria.App.ConteoCaja, THEOS, Version=1.15.16.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <BusinessObjectDataSource Name="BusinessObjectDataSource1" Alias="Comprobantes" DataType="System.Collections.Generic.List`1[[Refaccionaria.App.ConteoComprobante, THEOS, Version=1.15.16.0, Culture=neutral, PublicKeyToken=null]]" PropName="Comprobantes" Enabled="true">
+        <Column Name="Tipo" DataType="System.String"/>
+        <Column Name="Importe" DataType="System.Decimal"/>
+        <Column Name="Banco" DataType="System.String"/>
+        <Column Name="Cuenta" DataType="System.String"/>
+        <Column Name="Folio" DataType="System.String"/>
+      </BusinessObjectDataSource>
+      <Column Name="TotalConteoComprobantes" DataType="System.Decimal"/>
+      <Column Name="TotalConteo" DataType="System.Decimal"/>
       <Column Name="Monedas1000" DataType="System.Int32"/>
       <Column Name="Monedas500" DataType="System.Int32"/>
       <Column Name="Monedas200" DataType="System.Int32"/>
@@ -34,13 +43,6 @@
       <Column Name="Monedas05" DataType="System.Int32"/>
       <Column Name="Monedas02" DataType="System.Int32"/>
       <Column Name="Monedas01" DataType="System.Int32"/>
-      <BusinessObjectDataSource Name="BusinessObjectDataSource1" Alias="Comprobantes" DataType="null" PropName="Comprobantes" Enabled="true">
-        <Column Name="Tipo" DataType="System.String"/>
-        <Column Name="Importe" DataType="System.Decimal"/>
-        <Column Name="Banco" DataType="System.String"/>
-        <Column Name="Cuenta" DataType="System.String"/>
-        <Column Name="Folio" DataType="System.String"/>
-      </BusinessObjectDataSource>
       <Column Name="TotalDe1000" DataType="System.Decimal"/>
       <Column Name="TotalDe500" DataType="System.Decimal"/>
       <Column Name="TotalDe200" DataType="System.Decimal"/>
@@ -55,8 +57,6 @@
       <Column Name="TotalDe02" DataType="System.Decimal"/>
       <Column Name="TotalDe01" DataType="System.Decimal"/>
       <Column Name="TotalConteoMonedas" DataType="System.Decimal"/>
-      <Column Name="TotalConteoComprobantes" DataType="System.Decimal"/>
-      <Column Name="TotalConteo" DataType="System.Decimal"/>
     </BusinessObjectDataSource>
     <Parameter Name="Sucursal" DataType="System.String"/>
     <Parameter Name="Entrega" DataType="System.String"/>
@@ -73,7 +73,7 @@
       <TextObject Name="Text70" Left="408.35" Top="47.25" Width="94.5" Height="9.45" Text="[Entrega]" Font="Consolas, 8pt" TextFill.Color="SteelBlue"/>
       <TextObject Name="Text71" Left="510.3" Top="47.25" Width="94.5" Height="9.45" Text="[Recibe]" Font="Consolas, 8pt" TextFill.Color="SteelBlue"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="68.34" Width="740.5" Height="18.9" DataSource="Corte">
+    <DataBand Name="Data1" Top="69.5" Width="740.5" Height="18.9" DataSource="Corte">
       <TextObject Name="Text1" Left="9.45" Width="37.8" Height="18.9" Text="[Corte.Pendientes]" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue">
         <Highlight>
           <Condition Expression="Replace(Replace(Value, &quot;[&quot;, &quot;&quot;), &quot;]&quot;, &quot;&quot;) != &quot;0&quot;"/>
@@ -81,8 +81,8 @@
       </TextObject>
       <TextObject Name="Text2" Left="56.7" Width="538.65" Height="18.9" Text="[Corte.Contenido]" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue">
         <Highlight>
-          <Condition Expression="[Row#] == 1 || [Row#] == 2 || [Row#] == 14" TextFill.Color="CadetBlue" Font="Consolas, 12pt, style=Bold" ApplyFont="true"/>
-          <Condition Expression="[Row#] == 3 || [Row#] == 9 || [Row#] == 15 || [Row#] == 18 || [Row#] == 21 || [Row#] == 22 || [Row#] == 23" TextFill.Color="CadetBlue" Font="Consolas, 9.75pt, style=Bold" ApplyTextFill="false" ApplyFont="true"/>
+          <Condition Expression="[Corte.Formato] == &quot;Titulo&quot;" TextFill.Color="CadetBlue" Font="Consolas, 12pt, style=Bold" ApplyFont="true"/>
+          <Condition Expression="[Corte.Formato] == &quot;Encabezado&quot;" TextFill.Color="CadetBlue" Font="Consolas, 9.75pt, style=Bold" ApplyTextFill="false" ApplyFont="true"/>
         </Highlight>
       </TextObject>
       <TextObject Name="Text3" Left="604.8" Width="122.85" Height="18.9" Text="[Corte.Totales]" Font="Consolas, 9.75pt, style=Bold" TextFill.Color="SteelBlue">
@@ -91,7 +91,7 @@
         </Highlight>
       </TextObject>
     </DataBand>
-    <DataBand Name="Data6" Top="90.07" Width="740.5" Height="179.55" Guides="0" DataSource="Conteo">
+    <DataBand Name="Data6" Top="92.4" Width="740.5" Height="179.55" Guides="0" DataSource="Conteo">
       <TextObject Name="Text11" Left="66.15" Top="48.8" Width="37.8" Height="13.23" Border.Lines="Bottom" Border.Color="DimGray" Border.Width="0.25" Text="[Conteo.Monedas1000]" HorzAlign="Right" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue"/>
       <TextObject Name="Text13" Left="66.14" Top="63.5" Width="37.8" Height="13.23" Border.Lines="Bottom" Border.Color="DimGray" Border.Width="0.25" Text="[Conteo.Monedas500]" HorzAlign="Right" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue"/>
       <TextObject Name="Text14" Left="18.9" Top="48.8" Width="37.8" Height="13.23" Text="1000" HorzAlign="Right" Font="Consolas, 9.75pt, style=Bold" TextFill.Color="DimGray"/>
@@ -145,25 +145,25 @@
       <TextObject Name="Text66" Left="491.4" Top="122.3" Width="141.75" Height="13.23" Text="Documentos:" HorzAlign="Right" Font="Consolas, 9.75pt, style=Bold" TextFill.Color="DimGray"/>
       <TextObject Name="Text67" Left="491.4" Top="136.72" Width="141.75" Height="13.23" Text="Total:" HorzAlign="Right" Font="Consolas, 9.75pt, style=Bold" TextFill.Color="DimGray"/>
     </DataBand>
-    <DataBand Name="Data8" Top="272.46" Width="740.5" Height="16.23">
+    <DataBand Name="Data8" Top="275.95" Width="740.5" Height="16.23">
       <TextObject Name="Text16" Left="9.45" Width="113.4" Height="13.23" Text="[Conteo.Comprobantes.Tipo]" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue"/>
       <TextObject Name="Text17" Left="340.2" Width="94.5" Height="13.23" Text="[Conteo.Comprobantes.Importe]" Format="Currency" Format.UseLocale="true" HorzAlign="Center" WordWrap="false" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue" Trimming="EllipsisCharacter"/>
       <TextObject Name="Text18" Left="122.85" Width="141.75" Height="13.23" Text="[Conteo.Comprobantes.Banco]" HorzAlign="Right" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue"/>
       <TextObject Name="Text19" Left="274.05" Width="56.7" Height="13.23" Text="[Conteo.Comprobantes.Cuenta]" HorzAlign="Center" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue"/>
     </DataBand>
-    <DataBand Name="Data9" Top="291.53" Width="740.5" Height="18.9"/>
-    <DataBand Name="Data3" Top="313.26" Width="740.5" Height="18.9" DataSource="Detalle">
-      <TextObject Name="Text5" Left="9.45" Width="718.2" Height="18.9" Text="[Detalle.Contenido]" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue">
+    <DataBand Name="Data9" Top="296.18" Width="740.5" Height="18.9"/>
+    <DataBand Name="Data3" Top="319.08" Width="740.5" Height="18.9" DataSource="Detalle">
+      <TextObject Name="Text5" Left="9.45" Width="623.7" Height="18.9" Text="[Detalle.Contenido]" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue">
         <Highlight>
           <Condition Expression="[Detalle.Formato] == &quot;Titulo&quot;" TextFill.Color="CadetBlue" Font="Consolas, 12pt, style=Bold" ApplyFont="true"/>
           <Condition Expression="[Detalle.Formato] == &quot;Encabezado&quot;" Font="Consolas, 9.75pt, style=Bold" ApplyTextFill="false" ApplyFont="true"/>
           <Condition Expression="[Detalle.Caracteristica] == &quot;D&quot;" Font="Consolas, 9.75pt, style=Bold" ApplyTextFill="false" ApplyFont="true"/>
         </Highlight>
       </TextObject>
-      <TextObject Name="Text68" Left="604.8" Width="122.85" Height="18.9" Text="[Detalle.TextoCheck]" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue"/>
+      <TextObject Name="Text68" Left="642.6" Width="85.05" Height="18.9" Text="[Detalle.TextoCheck]" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue"/>
     </DataBand>
-    <DataBand Name="Data4" Top="335" Width="740.5" Height="18.9"/>
-    <DataBand Name="Data5" Top="356.74" Width="740.5" Height="18.9" DataSource="Cambios">
+    <DataBand Name="Data4" Top="341.98" Width="740.5" Height="18.9"/>
+    <DataBand Name="Data5" Top="364.88" Width="740.5" Height="18.9" DataSource="Cambios">
       <TextObject Name="Text4" Left="9.45" Width="718.2" Height="18.9" Text="[Cambios.CambiosContenido]" Font="Consolas, 9.75pt" TextFill.Color="SteelBlue">
         <Highlight>
           <Condition Expression="[Row#] == 1" TextFill.Color="CadetBlue" Font="Consolas, 12pt, style=Bold" ApplyFont="true"/>
@@ -171,7 +171,7 @@
         </Highlight>
       </TextObject>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="378.48" Width="740.5" Height="18.9">
+    <PageFooterBand Name="PageFooter1" Top="387.78" Width="740.5" Height="18.9">
       <TextObject Name="Text6" Left="510.3" Width="217.35" Height="18.9" Text="[Page#] - [TotalPages#]" HorzAlign="Right" Font="Tahoma, 8pt" TextFill.Color="DimGray"/>
       <LineObject Name="Line1" Left="9.45" Width="718.2" Border.Color="DimGray" Diagonal="true"/>
       <TextObject Name="Text7" Left="9.45" Width="236.25" Height="18.9" Text="[Date]" Font="Tahoma, 8pt" TextFill.Color="DimGray"/>

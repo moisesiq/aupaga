@@ -1064,8 +1064,6 @@
           <Property Name="FechaFactura" Type="datetime" />
           <Property Name="FechaRecepcion" Type="datetime" />
           <Property Name="FolioFactura" Type="nvarchar" MaxLength="50" />
-          <Property Name="AplicaEnMovimientoInventarioID" Type="int" />
-          <Property Name="FechaAplicacion" Type="datetime" />
           <Property Name="Subtotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IVA" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ImporteTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -1089,6 +1087,7 @@
           <Property Name="TipoConceptoOperacionID" Type="int" />
           <Property Name="EsAgrupador" Type="bit" Nullable="false" />
           <Property Name="MovimientoAgrupadorID" Type="int" />
+          <Property Name="DeMovimientoInventarioID" Type="int" />
         </EntityType>
         <EntityType Name="MovimientoInventarioDescuento">
           <Key>
@@ -2027,6 +2026,14 @@
           <Property Name="Observacion" Type="nvarchar" MaxLength="128" />
           <Property Name="Disponible" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ProveedorNotaDeCreditoDetalle">
+          <Key>
+            <PropertyRef Name="ProveedorNotaDeCreditoDetalleID" />
+          </Key>
+          <Property Name="ProveedorNotaDeCreditoDetalleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProveedorNotaDeCreditoID" Type="int" Nullable="false" />
+          <Property Name="MovimientoInventarioID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProveedorNotaDeCreditoOrigen">
           <Key>
             <PropertyRef Name="ProveedorNotaDeCreditoOrigenID" />
@@ -2650,8 +2657,8 @@
           <Property Name="Iva" Type="decimal" Precision="12" Scale="4" Nullable="false" />
           <Property Name="RespuestaID" Type="int" />
           <Property Name="VentaPagoDetalleID" Type="int" />
-          <Property Name="MovimientoInventarioDetalleID" Type="int" />
-          <Property Name="ProveedorNotaDeCreditoID" Type="int" />
+          <Property Name="_MovimientoInventarioDetalleID" Type="int" />
+          <Property Name="MovimientoInventarioID" Type="int" />
         </EntityType>
         <EntityType Name="VentaGarantiaAccion">
           <Key>
@@ -4895,6 +4902,8 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresComprasView' d
           <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
           <Property Name="EsAgrupador" Type="bit" Nullable="false" />
           <Property Name="MovimientoAgrupadorID" Type="int" />
+          <Property Name="Proveedor" Type="nvarchar" MaxLength="200" />
+          <Property Name="DiasPlazo" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresMarcasLineasView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4943,6 +4952,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresNotasDeCredito
           <Property Name="Origen" Type="nvarchar" MaxLength="32" />
           <Property Name="Observacion" Type="nvarchar" MaxLength="128" />
           <Property Name="Disponible" Type="bit" Nullable="false" />
+          <Property Name="Facturas" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPagosView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -7495,6 +7505,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Movimient__DeMov__49AFB375">
+          <End Role="MovimientoInventario" Type="Self.MovimientoInventario" Multiplicity="0..1" />
+          <End Role="MovimientoInventario1" Type="Self.MovimientoInventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="MovimientoInventario1">
+              <PropertyRef Name="DeMovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Movimient__Movim__420E91AD">
           <End Role="MovimientoInventario" Type="Self.MovimientoInventario" Multiplicity="0..1" />
           <End Role="MovimientoInventario1" Type="Self.MovimientoInventario" Multiplicity="*" />
@@ -8359,6 +8381,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Proveedor__Movim__47C76B03">
+          <End Role="MovimientoInventario" Type="Self.MovimientoInventario" Multiplicity="1" />
+          <End Role="ProveedorNotaDeCreditoDetalle" Type="Self.ProveedorNotaDeCreditoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalle">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Proveedor__NotaD__70A98505">
           <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="0..1" />
           <End Role="ProveedorPolizaDetalle" Type="Self.ProveedorPolizaDetalle" Multiplicity="*" />
@@ -8404,6 +8438,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Principal>
             <Dependent Role="ProveedorParteGanancia">
               <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Prove__46D346CA">
+          <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="1" />
+          <End Role="ProveedorNotaDeCreditoDetalle" Type="Self.ProveedorNotaDeCreditoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalle">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9183,7 +9229,19 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
               <PropertyRef Name="MovimientoInventarioDetalleID" />
             </Principal>
             <Dependent Role="VentaGarantia">
-              <PropertyRef Name="MovimientoInventarioDetalleID" />
+              <PropertyRef Name="_MovimientoInventarioDetalleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Movim__48BB8F3C">
+          <End Role="MovimientoInventario" Type="Self.MovimientoInventario" Multiplicity="0..1" />
+          <End Role="VentaGarantia" Type="Self.VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="MovimientoInventarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9196,18 +9254,6 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Principal>
             <Dependent Role="VentaGarantia">
               <PropertyRef Name="ParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Prove__3F322502">
-          <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="0..1" />
-          <End Role="VentaGarantia" Type="Self.VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProveedorNotaDeCredito">
-              <PropertyRef Name="ProveedorNotaDeCreditoID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="ProveedorNotaDeCreditoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -11178,6 +11224,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <EntitySet Name="ProveedorGanancia" EntityType="Self.ProveedorGanancia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorMarcaParte" EntityType="Self.ProveedorMarcaParte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorNotaDeCredito" EntityType="Self.ProveedorNotaDeCredito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProveedorNotaDeCreditoDetalle" EntityType="Self.ProveedorNotaDeCreditoDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorNotaDeCreditoOrigen" EntityType="Self.ProveedorNotaDeCreditoOrigen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorObservacion" EntityType="Self.ProveedorObservacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorPaqueteria" EntityType="Self.ProveedorPaqueteria" Schema="dbo" store:Type="Tables" />
@@ -12689,7 +12736,9 @@ FROM [dbo].[ProveedorEquivalContactoPpalView] AS [ProveedorEquivalContactoPpalVi
 [ProveedoresComprasView].[Final] AS [Final], 
 [ProveedoresComprasView].[Usuario] AS [Usuario], 
 [ProveedoresComprasView].[EsAgrupador] AS [EsAgrupador], 
-[ProveedoresComprasView].[MovimientoAgrupadorID] AS [MovimientoAgrupadorID]
+[ProveedoresComprasView].[MovimientoAgrupadorID] AS [MovimientoAgrupadorID], 
+[ProveedoresComprasView].[Proveedor] AS [Proveedor], 
+[ProveedoresComprasView].[DiasPlazo] AS [DiasPlazo]
 FROM [dbo].[ProveedoresComprasView] AS [ProveedoresComprasView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProveedoresMarcasLineasView" EntityType="Self.ProveedoresMarcasLineasView" store:Type="Views" store:Schema="dbo">
@@ -12719,7 +12768,8 @@ FROM [dbo].[ProveedoresMarcasLineasView] AS [ProveedoresMarcasLineasView]</Defin
 [ProveedoresNotasDeCreditoView].[OrigenID] AS [OrigenID], 
 [ProveedoresNotasDeCreditoView].[Origen] AS [Origen], 
 [ProveedoresNotasDeCreditoView].[Observacion] AS [Observacion], 
-[ProveedoresNotasDeCreditoView].[Disponible] AS [Disponible]
+[ProveedoresNotasDeCreditoView].[Disponible] AS [Disponible], 
+[ProveedoresNotasDeCreditoView].[Facturas] AS [Facturas]
 FROM [dbo].[ProveedoresNotasDeCreditoView] AS [ProveedoresNotasDeCreditoView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProveedoresPagosView" EntityType="Self.ProveedoresPagosView" store:Type="Views" store:Schema="dbo">
@@ -13904,6 +13954,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="MetaVendedor" EntitySet="MetaVendedor" />
           </AssociationSet>
+          <AssociationSet Name="FK__Movimient__DeMov__49AFB375" Association="Self.FK__Movimient__DeMov__49AFB375">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="MovimientoInventario1" EntitySet="MovimientoInventario" />
+          </AssociationSet>
           <AssociationSet Name="FK__Movimient__Movim__420E91AD" Association="Self.FK__Movimient__Movim__420E91AD">
             <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
             <End Role="MovimientoInventario1" EntitySet="MovimientoInventario" />
@@ -14192,6 +14246,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="MarcaParte" EntitySet="MarcaParte" />
             <End Role="ProveedorParteGanancia" EntitySet="ProveedorParteGanancia" />
           </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Movim__47C76B03" Association="Self.FK__Proveedor__Movim__47C76B03">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
+          </AssociationSet>
           <AssociationSet Name="FK__Proveedor__NotaD__70A98505" Association="Self.FK__Proveedor__NotaD__70A98505">
             <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
             <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
@@ -14207,6 +14265,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__Proveedor__Parte__5185DF67" Association="Self.FK__Proveedor__Parte__5185DF67">
             <End Role="Parte" EntitySet="Parte" />
             <End Role="ProveedorParteGanancia" EntitySet="ProveedorParteGanancia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Prove__46D346CA" Association="Self.FK__Proveedor__Prove__46D346CA">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK__Proveedor__Prove__4EA972BC" Association="Self.FK__Proveedor__Prove__4EA972BC">
             <End Role="Proveedor" EntitySet="Proveedor" />
@@ -14468,12 +14530,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="MovimientoInventarioDetalle" EntitySet="MovimientoInventarioDetalle" />
             <End Role="VentaGarantia" EntitySet="VentaGarantia" />
           </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Parte__2B403AEE" Association="Self.FK__VentaGara__Parte__2B403AEE">
-            <End Role="Parte" EntitySet="Parte" />
+          <AssociationSet Name="FK__VentaGara__Movim__48BB8F3C" Association="Self.FK__VentaGara__Movim__48BB8F3C">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
             <End Role="VentaGarantia" EntitySet="VentaGarantia" />
           </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Prove__3F322502" Association="Self.FK__VentaGara__Prove__3F322502">
-            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+          <AssociationSet Name="FK__VentaGara__Parte__2B403AEE" Association="Self.FK__VentaGara__Parte__2B403AEE">
+            <End Role="Parte" EntitySet="Parte" />
             <End Role="VentaGarantia" EntitySet="VentaGarantia" />
           </AssociationSet>
           <AssociationSet Name="FK__VentaGara__Reali__19C0A931" Association="Self.FK__VentaGara__Reali__19C0A931">
@@ -17038,60 +17100,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="TipoFuente" EntitySet="TipoFuente" />
             <End Role="ParteVehiculo" EntitySet="ParteVehiculo" />
           </AssociationSet>
-          <EntitySet Name="VentaGarantia" EntityType="RefaccionariaModelo.VentaGarantia" />
-          <EntitySet Name="VentasGarantiasView" EntityType="RefaccionariaModelo.VentasGarantiasView" />
-          <AssociationSet Name="FK__VentaGara__Estat__18CC84F8" Association="RefaccionariaModelo.FK__VentaGara__Estat__18CC84F8">
-            <End Role="EstatusGenerico" EntitySet="EstatusGenerico" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Movim__3EA8151D" Association="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D">
-            <End Role="MovimientoInventarioDetalle" EntitySet="MovimientoInventarioDetalle" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Parte__2B403AEE" Association="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE">
-            <End Role="Parte" EntitySet="Parte" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Prove__3F322502" Association="RefaccionariaModelo.FK__VentaGara__Prove__3F322502">
-            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Sucur__14FBF414" Association="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414">
-            <End Role="Sucursal" EntitySet="Sucursal" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Reali__19C0A931" Association="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Usuar__1AB4CD6A" Association="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Venta__1407CFDB" Association="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB">
-            <End Role="Venta" EntitySet="Venta" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaFact__Venta__2BDF596C" Association="RefaccionariaModelo.FK__VentaFact__Venta__2BDF596C">
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-            <End Role="VentaFacturaDevolucionDetalle" EntitySet="VentaFacturaDevolucionDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Accio__16E43C86" Association="RefaccionariaModelo.FK__VentaGara__Accio__16E43C86">
-            <End Role="VentaGarantiaAccion" EntitySet="VentaGarantiaAccion" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Motov__15F0184D" Association="RefaccionariaModelo.FK__VentaGara__Motov__15F0184D">
-            <End Role="VentaGarantiaMotivo" EntitySet="VentaGarantiaMotivo" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Respu__2E1CA799" Association="RefaccionariaModelo.FK__VentaGara__Respu__2E1CA799">
-            <End Role="VentaGarantiaRespuesta" EntitySet="VentaGarantiaRespuesta" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaGara__Venta__2429290B" Association="RefaccionariaModelo.FK__VentaGara__Venta__2429290B">
-            <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
-            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
-          </AssociationSet>
           <EntitySet Name="NotaDeCredito" EntityType="RefaccionariaModelo.NotaDeCredito" />
           <EntitySet Name="NotasDeCreditoView" EntityType="RefaccionariaModelo.NotasDeCreditoView" />
           <AssociationSet Name="FK__NotaDeCre__Clien__59D0414E" Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E">
@@ -17149,38 +17157,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ParteMaxMinRegla" EntitySet="ParteMaxMinRegla" />
           </AssociationSet>
           <EntitySet Name="ExistenciasView" EntityType="RefaccionariaModelo.ExistenciasView" />
-          <EntitySet Name="MovimientoInventario" EntityType="RefaccionariaModelo.MovimientoInventario" />
-          <AssociationSet Name="FK__Movimient__Movim__420E91AD" Association="RefaccionariaModelo.FK__Movimient__Movim__420E91AD">
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
-            <End Role="MovimientoInventario1" EntitySet="MovimientoInventario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Movimient__TipoC__3DB3F0E4" Association="RefaccionariaModelo.FK__Movimient__TipoC__3DB3F0E4">
-            <End Role="TipoConceptoOperacion" EntitySet="TipoConceptoOperacion" />
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MovimientoInventarioDescuento_MovimientoInventario" Association="RefaccionariaModelo.FK_MovimientoInventarioDescuento_MovimientoInventario">
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
-            <End Role="MovimientoInventarioDescuento" EntitySet="MovimientoInventarioDescuento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MovimientoInventarioDetalle_MovimientoInventario" Association="RefaccionariaModelo.FK_MovimientoInventarioDetalle_MovimientoInventario">
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
-            <End Role="MovimientoInventarioDetalle" EntitySet="MovimientoInventarioDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MovimientoInventarioEtiqueta_MovimientoInventario" Association="RefaccionariaModelo.FK_MovimientoInventarioEtiqueta_MovimientoInventario">
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
-            <End Role="MovimientoInventarioEtiqueta" EntitySet="MovimientoInventarioEtiqueta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario" Association="RefaccionariaModelo.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario">
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
-            <End Role="MovimientoInventarioTraspasoContingencia" EntitySet="MovimientoInventarioTraspasoContingencia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PartePrecioHistorico_MovimientoInventario" Association="RefaccionariaModelo.FK_PartePrecioHistorico_MovimientoInventario">
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
-            <End Role="PartePrecioHistorico" EntitySet="PartePrecioHistorico" />
-          </AssociationSet>
           <EntitySet Name="CajaEgresosProveedoresView" EntityType="RefaccionariaModelo.CajaEgresosProveedoresView" />
-          <EntitySet Name="ProveedoresComprasView" EntityType="RefaccionariaModelo.ProveedoresComprasView" />
-          <EntitySet Name="ProveedoresNotasDeCreditoView" EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" />
           <EntitySet Name="ProveedoresPolizasView" EntityType="RefaccionariaModelo.ProveedoresPolizasView" />
           <EntitySet Name="ProveedorPoliza" EntityType="RefaccionariaModelo.ProveedorPoliza" />
           <EntitySet Name="ProveedorPolizaDetalle" EntityType="RefaccionariaModelo.ProveedorPolizaDetalle" />
@@ -17190,10 +17167,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <AssociationSet Name="FK__Proveedor__CajaE__2977EE0D" Association="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D">
             <End Role="CajaEgreso" EntitySet="CajaEgreso" />
-            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProveedorPolizaDetalle_MovimientoInventario" Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario">
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
             <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_ProveedorPoliza_Proveedor" Association="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor">
@@ -17222,6 +17195,108 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="ProveedoresPolizasDetalleAvanzadoView" EntityType="RefaccionariaModelo.ProveedoresPolizasDetalleAvanzadoView" />
           <EntitySet Name="ProveedoresPagosView" EntityType="RefaccionariaModelo.ProveedoresPagosView" />
+          <EntitySet Name="ProveedorNotaDeCreditoDetalle" EntityType="RefaccionariaModelo.ProveedorNotaDeCreditoDetalle" />
+          <AssociationSet Name="FK__Proveedor__Prove__46D346CA" Association="RefaccionariaModelo.FK__Proveedor__Prove__46D346CA">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
+          </AssociationSet>
+          <EntitySet Name="MovimientoInventario" EntityType="RefaccionariaModelo.MovimientoInventario" />
+          <EntitySet Name="VentaGarantia" EntityType="RefaccionariaModelo.VentaGarantia" />
+          <AssociationSet Name="FK__VentaGara__Estat__18CC84F8" Association="RefaccionariaModelo.FK__VentaGara__Estat__18CC84F8">
+            <End Role="EstatusGenerico" EntitySet="EstatusGenerico" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movimient__DeMov__49AFB375" Association="RefaccionariaModelo.FK__Movimient__DeMov__49AFB375">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="MovimientoInventario1" EntitySet="MovimientoInventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movimient__Movim__420E91AD" Association="RefaccionariaModelo.FK__Movimient__Movim__420E91AD">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="MovimientoInventario1" EntitySet="MovimientoInventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movimient__TipoC__3DB3F0E4" Association="RefaccionariaModelo.FK__Movimient__TipoC__3DB3F0E4">
+            <End Role="TipoConceptoOperacion" EntitySet="TipoConceptoOperacion" />
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Movim__47C76B03" Association="RefaccionariaModelo.FK__Proveedor__Movim__47C76B03">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Movim__48BB8F3C" Association="RefaccionariaModelo.FK__VentaGara__Movim__48BB8F3C">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovimientoInventarioDescuento_MovimientoInventario" Association="RefaccionariaModelo.FK_MovimientoInventarioDescuento_MovimientoInventario">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="MovimientoInventarioDescuento" EntitySet="MovimientoInventarioDescuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovimientoInventarioDetalle_MovimientoInventario" Association="RefaccionariaModelo.FK_MovimientoInventarioDetalle_MovimientoInventario">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="MovimientoInventarioDetalle" EntitySet="MovimientoInventarioDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovimientoInventarioEtiqueta_MovimientoInventario" Association="RefaccionariaModelo.FK_MovimientoInventarioEtiqueta_MovimientoInventario">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="MovimientoInventarioEtiqueta" EntitySet="MovimientoInventarioEtiqueta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario" Association="RefaccionariaModelo.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="MovimientoInventarioTraspasoContingencia" EntitySet="MovimientoInventarioTraspasoContingencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartePrecioHistorico_MovimientoInventario" Association="RefaccionariaModelo.FK_PartePrecioHistorico_MovimientoInventario">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="PartePrecioHistorico" EntitySet="PartePrecioHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorPolizaDetalle_MovimientoInventario" Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Movim__3EA8151D" Association="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D">
+            <End Role="MovimientoInventarioDetalle" EntitySet="MovimientoInventarioDetalle" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Parte__2B403AEE" Association="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Sucur__14FBF414" Association="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Reali__19C0A931" Association="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Usuar__1AB4CD6A" Association="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Venta__1407CFDB" Association="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaFact__Venta__2BDF596C" Association="RefaccionariaModelo.FK__VentaFact__Venta__2BDF596C">
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+            <End Role="VentaFacturaDevolucionDetalle" EntitySet="VentaFacturaDevolucionDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Accio__16E43C86" Association="RefaccionariaModelo.FK__VentaGara__Accio__16E43C86">
+            <End Role="VentaGarantiaAccion" EntitySet="VentaGarantiaAccion" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Motov__15F0184D" Association="RefaccionariaModelo.FK__VentaGara__Motov__15F0184D">
+            <End Role="VentaGarantiaMotivo" EntitySet="VentaGarantiaMotivo" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Respu__2E1CA799" Association="RefaccionariaModelo.FK__VentaGara__Respu__2E1CA799">
+            <End Role="VentaGarantiaRespuesta" EntitySet="VentaGarantiaRespuesta" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaGara__Venta__2429290B" Association="RefaccionariaModelo.FK__VentaGara__Venta__2429290B">
+            <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+          </AssociationSet>
+          <EntitySet Name="VentasGarantiasView" EntityType="RefaccionariaModelo.VentasGarantiasView" />
+          <EntitySet Name="ProveedoresNotasDeCreditoView" EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" />
+          <EntitySet Name="ProveedoresComprasView" EntityType="RefaccionariaModelo.ProveedoresComprasView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -18213,8 +18288,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaPago__Venta__6CE315C2" FromRole="VentaPagoDetalle" ToRole="VentaPago" />
           <NavigationProperty Name="VentaDevolucion" Relationship="RefaccionariaModelo.FK__VentaDevo__Venta__233504D2" FromRole="VentaPagoDetalle" ToRole="VentaDevolucion" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaPago__Usuar__6FBF826D" FromRole="VentaPagoDetalle" ToRole="Usuario" />
-          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" FromRole="VentaPagoDetalle" ToRole="VentaGarantia" />
           <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" FromRole="VentaPagoDetalle" ToRole="NotaDeCredito" />
+          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" FromRole="VentaPagoDetalle" ToRole="VentaGarantia" />
         </EntityType>
         <Association Name="FK__VentaPago__Banco__6ECB5E34">
           <End Type="RefaccionariaModelo.Banco" Role="Banco" Multiplicity="0..1" />
@@ -21420,8 +21495,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="PrecioUnitarioConDescuento" Precision="12" Scale="2" />
           <Property Type="Decimal" Name="CantidadDevuelta" Nullable="false" Precision="12" Scale="2" />
           <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK_MovimientoInventarioDetalle_Parte" FromRole="MovimientoInventarioDetalle" ToRole="Parte" />
-          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D" FromRole="MovimientoInventarioDetalle" ToRole="VentaGarantia" />
           <NavigationProperty Name="MovimientoInventario" Relationship="RefaccionariaModelo.FK_MovimientoInventarioDetalle_MovimientoInventario" FromRole="MovimientoInventarioDetalle" ToRole="MovimientoInventario" />
+          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D" FromRole="MovimientoInventarioDetalle" ToRole="VentaGarantia" />
         </EntityType>
         <ComplexType Name="pauPartesMovimientosDevoluciones_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -21537,8 +21612,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteEquivalente" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Parte" FromRole="Parte" ToRole="ParteEquivalente" />
           <NavigationProperty Name="ParteCodigoAlterno" Relationship="RefaccionariaModelo.FK_ParteCodigoAlterno_Parte" FromRole="Parte" ToRole="ParteCodigoAlterno" />
           <NavigationProperty Name="ParteVehiculo" Relationship="RefaccionariaModelo.FK__ParteVehi__Parte__0EAE1DE1" FromRole="Parte" ToRole="ParteVehiculo" />
-          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" FromRole="Parte" ToRole="VentaGarantia" />
           <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688" FromRole="Parte" ToRole="ParteMaxMin" />
+          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" FromRole="Parte" ToRole="VentaGarantia" />
         </EntityType>
         <Association Name="FK__CascoRegi__Parte__023E255B">
           <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
@@ -22715,8 +22790,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Proveedor" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__69FC8776" FromRole="ProveedorNotaDeCredito" ToRole="Proveedor" />
           <NavigationProperty Name="ProveedorNotaDeCreditoOrigen" Relationship="RefaccionariaModelo.FK__Proveedor__Orige__6BE4CFE8" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoOrigen" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__Proveedor__Reali__6CD8F421" FromRole="ProveedorNotaDeCredito" ToRole="Usuario" />
-          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Prove__3F322502" FromRole="ProveedorNotaDeCredito" ToRole="VentaGarantia" />
           <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorPolizaDetalle" />
+          <NavigationProperty Name="ProveedorNotaDeCreditoDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__46D346CA" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoDetalle" />
         </EntityType>
         <Association Name="FK__Proveedor__Prove__69FC8776">
           <End Type="RefaccionariaModelo.Proveedor" Role="Proveedor" Multiplicity="1" />
@@ -24227,9 +24302,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__Venta__RealizoUs__7F01C5FD" FromRole="Venta" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__Venta__UsuarioID__32B6742D" FromRole="Venta" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__Venta__SucursalI__0F382DC6" FromRole="Venta" ToRole="Sucursal" />
-          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB" FromRole="Venta" ToRole="VentaGarantia" />
           <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" FromRole="Venta" ToRole="NotaDeCredito" />
           <NavigationProperty Name="NotaDeCredito1" Relationship="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" FromRole="Venta" ToRole="NotaDeCredito" />
+          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB" FromRole="Venta" ToRole="VentaGarantia" />
           </EntityType>
         <Association Name="FK__CascoRegi__Cobro__04266DCD">
           <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="0..1" />
@@ -25490,12 +25565,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteCodigoAlterno1" Relationship="RefaccionariaModelo.FK_ParteCodigoAlterno_Usuario" FromRole="Usuario" ToRole="ParteCodigoAlterno" />
           <NavigationProperty Name="ParteVehiculo" Relationship="RefaccionariaModelo.FK__ParteVehi__Regis__257C74A0" FromRole="Usuario" ToRole="ParteVehiculo" />
           <NavigationProperty Name="ParteVehiculo1" Relationship="RefaccionariaModelo.FK__ParteVehi__Usuar__10966653" FromRole="Usuario" ToRole="ParteVehiculo" />
-          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931" FromRole="Usuario" ToRole="VentaGarantia" />
-          <NavigationProperty Name="VentaGarantia1" Relationship="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" FromRole="Usuario" ToRole="VentaGarantia" />
           <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587" FromRole="Usuario" ToRole="NotaDeCredito" />
           <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" FromRole="Usuario" ToRole="ParteMaxMin" />
           <NavigationProperty Name="ParteMaxMinRegla" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__630F92C5" FromRole="Usuario" ToRole="ParteMaxMinRegla" />
           <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Usuario" FromRole="Usuario" ToRole="ProveedorPoliza" />
+          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931" FromRole="Usuario" ToRole="VentaGarantia" />
+          <NavigationProperty Name="VentaGarantia1" Relationship="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" FromRole="Usuario" ToRole="VentaGarantia" />
         </EntityType>
         <Association Name="FK__Autorizac__Autor__21E0EDE6">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -27195,10 +27270,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaPago__Sucur__20A2B0EA" FromRole="Sucursal" ToRole="VentaPago" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK_Sucursal_Usuario" FromRole="Sucursal" ToRole="Usuario" />
           <NavigationProperty Name="SucursalCriterioABC" Relationship="RefaccionariaModelo.FK_SucursalCriterioABC_Sucursal" FromRole="Sucursal" ToRole="SucursalCriterioABC" />
-          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" FromRole="Sucursal" ToRole="VentaGarantia" />
           <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" FromRole="Sucursal" ToRole="NotaDeCredito" />
           <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1" FromRole="Sucursal" ToRole="ParteMaxMin" />
           <NavigationProperty Name="ParteMaxMinRegla" Relationship="RefaccionariaModelo.FK__ParteMaxM__Sucur__17835B04" FromRole="Sucursal" ToRole="ParteMaxMinRegla" />
+          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" FromRole="Sucursal" ToRole="VentaGarantia" />
         </EntityType>
         <Association Name="FK__Autorizac__Sucur__2D9297B4">
           <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
@@ -27959,264 +28034,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="VentaGarantia">
-          <Key>
-            <PropertyRef Name="VentaGarantiaID" />
-          </Key>
-          <Property Name="VentaGarantiaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VentaID" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SucursalID" Type="Int32" Nullable="false" />
-          <Property Name="MotivoID" Type="Int32" Nullable="false" />
-          <Property Name="MotivoObservacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="AccionID" Type="Int32" Nullable="false" />
-          <Property Name="EstatusGenericoID" Type="Int32" Nullable="false" />
-          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-          <Property Name="FechaCompletado" Type="DateTime" Precision="3" />
-          <Property Name="ObservacionCompletado" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="CostoConDescuento" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="PrecioUnitario" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
-          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
-          <Property Name="RespuestaID" Type="Int32" />
-          <Property Name="VentaPagoDetalleID" Type="Int32" />
-          <Property Name="MovimientoInventarioDetalleID" Type="Int32" />
-          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" />
-          <NavigationProperty Name="EstatusGenerico" Relationship="RefaccionariaModelo.FK__VentaGara__Estat__18CC84F8" FromRole="VentaGarantia" ToRole="EstatusGenerico" />
-          <NavigationProperty Name="MovimientoInventarioDetalle" Relationship="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D" FromRole="VentaGarantia" ToRole="MovimientoInventarioDetalle" />
-          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" FromRole="VentaGarantia" ToRole="Parte" />
-          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="RefaccionariaModelo.FK__VentaGara__Prove__3F322502" FromRole="VentaGarantia" ToRole="ProveedorNotaDeCredito" />
-          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" FromRole="VentaGarantia" ToRole="Sucursal" />
-          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931" FromRole="VentaGarantia" ToRole="Usuario" />
-          <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" FromRole="VentaGarantia" ToRole="Usuario" />
-          <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB" FromRole="VentaGarantia" ToRole="Venta" />
-          <NavigationProperty Name="VentaFacturaDevolucionDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__2BDF596C" FromRole="VentaGarantia" ToRole="VentaFacturaDevolucionDetalle" />
-          <NavigationProperty Name="VentaGarantiaAccion" Relationship="RefaccionariaModelo.FK__VentaGara__Accio__16E43C86" FromRole="VentaGarantia" ToRole="VentaGarantiaAccion" />
-          <NavigationProperty Name="VentaGarantiaMotivo" Relationship="RefaccionariaModelo.FK__VentaGara__Motov__15F0184D" FromRole="VentaGarantia" ToRole="VentaGarantiaMotivo" />
-          <NavigationProperty Name="VentaGarantiaRespuesta" Relationship="RefaccionariaModelo.FK__VentaGara__Respu__2E1CA799" FromRole="VentaGarantia" ToRole="VentaGarantiaRespuesta" />
-          <NavigationProperty Name="VentaPagoDetalle" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" FromRole="VentaGarantia" ToRole="VentaPagoDetalle" />
-        </EntityType>
-        <EntityType Name="VentasGarantiasView">
-          <Key>
-            <PropertyRef Name="VentaGarantiaID" />
-            <PropertyRef Name="Facturada" />
-            <PropertyRef Name="VentaID" />
-            <PropertyRef Name="SucursalID" />
-            <PropertyRef Name="VentaACredito" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="MotivoID" />
-            <PropertyRef Name="AccionID" />
-            <PropertyRef Name="EstatusGenericoID" />
-            <PropertyRef Name="RealizoUsuarioID" />
-            <PropertyRef Name="Autorizado" />
-            <PropertyRef Name="AutorizoUsuario" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="Costo" />
-            <PropertyRef Name="PrecioUnitario" />
-            <PropertyRef Name="Iva" />
-          </Key>
-          <Property Name="VentaGarantiaID" Type="Int32" Nullable="false" />
-          <Property Name="Facturada" Type="Boolean" Nullable="false" />
-          <Property Name="VentaID" Type="Int32" Nullable="false" />
-          <Property Name="FolioDeVenta" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="FechaDeVenta" Type="DateTime" Precision="3" />
-          <Property Name="ClienteID" Type="Int32" />
-          <Property Name="SucursalID" Type="Int32" Nullable="false" />
-          <Property Name="Sucursal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="VentaACredito" Type="Boolean" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MotivoID" Type="Int32" Nullable="false" />
-          <Property Name="Motivo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="MotivoObservacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="AccionID" Type="Int32" Nullable="false" />
-          <Property Name="Accion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="EstatusGenericoID" Type="Int32" Nullable="false" />
-          <Property Name="Estatus" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="Realizo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Autorizado" Type="Boolean" Nullable="false" />
-          <Property Name="AutorizoUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Total" Type="Decimal" Precision="13" Scale="4" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="NumeroDeParte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NombreDeParte" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="PrecioUnitario" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
-          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
-          <Property Name="Medida" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProveedorID" Type="Int32" />
-          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="RespuestaID" Type="Int32" />
-          <Property Name="FechaCompletado" Type="DateTime" Precision="3" />
-          <Property Name="ObservacionCompletado" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="VentaPagoDetalleID" Type="Int32" />
-          <Property Name="NotaDeCreditoID" Type="Int32" />
-          <Property Name="FacturaDeCompra" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" />
-        </EntityType>
-        <Association Name="FK__VentaGara__Estat__18CC84F8">
-          <End Type="RefaccionariaModelo.EstatusGenerico" Role="EstatusGenerico" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstatusGenerico">
-              <PropertyRef Name="EstatusGenericoID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="EstatusGenericoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Movim__3EA8151D">
-          <End Type="RefaccionariaModelo.MovimientoInventarioDetalle" Role="MovimientoInventarioDetalle" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventarioDetalle">
-              <PropertyRef Name="MovimientoInventarioDetalleID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="MovimientoInventarioDetalleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Parte__2B403AEE">
-          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ParteID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="ParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Prove__3F322502">
-          <End Type="RefaccionariaModelo.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProveedorNotaDeCredito">
-              <PropertyRef Name="ProveedorNotaDeCreditoID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="ProveedorNotaDeCreditoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Sucur__14FBF414">
-          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sucursal">
-              <PropertyRef Name="SucursalID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="SucursalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Reali__19C0A931">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="RealizoUsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Usuar__1AB4CD6A">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Venta__1407CFDB">
-          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Venta">
-              <PropertyRef Name="VentaID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="VentaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaFact__Venta__2BDF596C">
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.VentaFacturaDevolucionDetalle" Role="VentaFacturaDevolucionDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaGarantia">
-              <PropertyRef Name="VentaGarantiaID" />
-            </Principal>
-            <Dependent Role="VentaFacturaDevolucionDetalle">
-              <PropertyRef Name="VentaGarantiaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Accio__16E43C86">
-          <End Type="RefaccionariaModelo.VentaGarantiaAccion" Role="VentaGarantiaAccion" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaGarantiaAccion">
-              <PropertyRef Name="VentaGarantiaAccionID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="AccionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Motov__15F0184D">
-          <End Type="RefaccionariaModelo.VentaGarantiaMotivo" Role="VentaGarantiaMotivo" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaGarantiaMotivo">
-              <PropertyRef Name="VentaGarantiaMotivoID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="MotivoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Respu__2E1CA799">
-          <End Type="RefaccionariaModelo.VentaGarantiaRespuesta" Role="VentaGarantiaRespuesta" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaGarantiaRespuesta">
-              <PropertyRef Name="VentaGarantiaRespuestaID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="RespuestaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaGara__Venta__2429290B">
-          <End Type="RefaccionariaModelo.VentaPagoDetalle" Role="VentaPagoDetalle" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaPagoDetalle">
-              <PropertyRef Name="VentaPagoDetalleID" />
-            </Principal>
-            <Dependent Role="VentaGarantia">
-              <PropertyRef Name="VentaPagoDetalleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="NotaDeCredito">
           <Key>
             <PropertyRef Name="NotaDeCreditoID" />
@@ -28525,138 +28342,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="FechaMaxMin" Type="DateTime" Precision="3" />
           <Property Name="DescripcionMaxMin" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="MovimientoInventario">
-          <Key>
-            <PropertyRef Name="MovimientoInventarioID" />
-          </Key>
-          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TipoOperacionID" Type="Int32" Nullable="false" />
-          <Property Name="TipoPagoID" Type="Int32" />
-          <Property Name="ProveedorID" Type="Int32" />
-          <Property Name="SucursalOrigenID" Type="Int32" />
-          <Property Name="SucursalDestinoID" Type="Int32" />
-          <Property Name="FechaFactura" Type="DateTime" Precision="3" />
-          <Property Name="FechaRecepcion" Type="DateTime" Precision="3" />
-          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AplicaEnMovimientoInventarioID" Type="Int32" />
-          <Property Name="FechaAplicacion" Type="DateTime" Precision="3" />
-          <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ImporteTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="FueLiquidado" Type="Boolean" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
-          <Property Name="NombreImagen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Articulos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Unidades" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Seguro" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ImporteTotalSinDescuento" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="UsuarioSolicitoTraspasoID" Type="Int32" />
-          <Property Name="UsuarioRecibioTraspasoID" Type="Int32" />
-          <Property Name="ExisteContingencia" Type="Boolean" />
-          <Property Name="TraspasoEntregado" Type="Boolean" />
-          <Property Name="ImporteFactura" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="TipoConceptoOperacionID" Type="Int32" />
-          <Property Name="EsAgrupador" Type="Boolean" Nullable="false" />
-          <Property Name="MovimientoAgrupadorID" Type="Int32" />
-          <NavigationProperty Name="MovimientoInventario1" Relationship="RefaccionariaModelo.FK__Movimient__Movim__420E91AD" FromRole="MovimientoInventario" ToRole="MovimientoInventario1" />
-          <NavigationProperty Name="MovimientoInventario2" Relationship="RefaccionariaModelo.FK__Movimient__Movim__420E91AD" FromRole="MovimientoInventario1" ToRole="MovimientoInventario" />
-          <NavigationProperty Name="TipoConceptoOperacion" Relationship="RefaccionariaModelo.FK__Movimient__TipoC__3DB3F0E4" FromRole="MovimientoInventario" ToRole="TipoConceptoOperacion" />
-          <NavigationProperty Name="MovimientoInventarioDescuento" Relationship="RefaccionariaModelo.FK_MovimientoInventarioDescuento_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioDescuento" />
-          <NavigationProperty Name="MovimientoInventarioDetalle" Relationship="RefaccionariaModelo.FK_MovimientoInventarioDetalle_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioDetalle" />
-          <NavigationProperty Name="MovimientoInventarioEtiqueta" Relationship="RefaccionariaModelo.FK_MovimientoInventarioEtiqueta_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioEtiqueta" />
-          <NavigationProperty Name="MovimientoInventarioTraspasoContingencia" Relationship="RefaccionariaModelo.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioTraspasoContingencia" />
-          <NavigationProperty Name="PartePrecioHistorico" Relationship="RefaccionariaModelo.FK_PartePrecioHistorico_MovimientoInventario" FromRole="MovimientoInventario" ToRole="PartePrecioHistorico" />
-          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" FromRole="MovimientoInventario" ToRole="ProveedorPolizaDetalle" />
-        </EntityType>
-        <Association Name="FK__Movimient__Movim__420E91AD">
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventario">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Principal>
-            <Dependent Role="MovimientoInventario1">
-              <PropertyRef Name="MovimientoAgrupadorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Movimient__TipoC__3DB3F0E4">
-          <End Type="RefaccionariaModelo.TipoConceptoOperacion" Role="TipoConceptoOperacion" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoConceptoOperacion">
-              <PropertyRef Name="TipoConceptoOperacionID" />
-            </Principal>
-            <Dependent Role="MovimientoInventario">
-              <PropertyRef Name="TipoConceptoOperacionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MovimientoInventarioDescuento_MovimientoInventario">
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.MovimientoInventarioDescuento" Role="MovimientoInventarioDescuento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventario">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Principal>
-            <Dependent Role="MovimientoInventarioDescuento">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MovimientoInventarioDetalle_MovimientoInventario">
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.MovimientoInventarioDetalle" Role="MovimientoInventarioDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventario">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Principal>
-            <Dependent Role="MovimientoInventarioDetalle">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MovimientoInventarioEtiqueta_MovimientoInventario">
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.MovimientoInventarioEtiqueta" Role="MovimientoInventarioEtiqueta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventario">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Principal>
-            <Dependent Role="MovimientoInventarioEtiqueta">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario">
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.MovimientoInventarioTraspasoContingencia" Role="MovimientoInventarioTraspasoContingencia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventario">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Principal>
-            <Dependent Role="MovimientoInventarioTraspasoContingencia">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PartePrecioHistorico_MovimientoInventario">
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.PartePrecioHistorico" Role="PartePrecioHistorico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventario">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Principal>
-            <Dependent Role="PartePrecioHistorico">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="CajaEgresosProveedoresView">
           <Key>
             <PropertyRef Name="CajaEgresoID" />
@@ -28675,54 +28360,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="ContaCuentaAuxiliarID" Type="Int32" />
           <Property Name="Facturado" Type="Boolean" />
           <Property Name="AfectadoEnProveedores" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="ProveedoresComprasView">
-          <Key>
-            <PropertyRef Name="MovimientoInventarioID" />
-            <PropertyRef Name="ImporteFactura" />
-            <PropertyRef Name="ImporteTotal" />
-            <PropertyRef Name="Abonado" />
-            <PropertyRef Name="EsAgrupador" />
-          </Key>
-          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
-          <Property Name="ProveedorID" Type="Int32" />
-          <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <Property Name="ImporteFactura" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="ImporteTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Abonado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
-          <Property Name="Saldo" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Final" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EsAgrupador" Type="Boolean" Nullable="false" />
-          <Property Name="MovimientoAgrupadorID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="ProveedoresNotasDeCreditoView">
-          <Key>
-            <PropertyRef Name="ProveedorNotaDeCreditoID" />
-            <PropertyRef Name="ProveedorID" />
-            <PropertyRef Name="Folio" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="Subtotal" />
-            <PropertyRef Name="Iva" />
-            <PropertyRef Name="Usado" />
-            <PropertyRef Name="OrigenID" />
-            <PropertyRef Name="Disponible" />
-          </Key>
-          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" Nullable="false" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="Folio" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Total" Type="Decimal" Precision="13" Scale="2" />
-          <Property Name="Usado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
-          <Property Name="Restante" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="OrigenID" Type="Int32" Nullable="false" />
-          <Property Name="Origen" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Disponible" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ProveedoresPolizasView">
           <Key>
@@ -28784,10 +28421,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <NavigationProperty Name="CajaEgreso" Relationship="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D" FromRole="ProveedorPolizaDetalle" ToRole="CajaEgreso" />
-          <NavigationProperty Name="MovimientoInventario" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" FromRole="ProveedorPolizaDetalle" ToRole="MovimientoInventario" />
           <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorNotaDeCredito" />
           <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="ProveedorPolizaDetalleOrigen" Relationship="RefaccionariaModelo.FK__Proveedor__Orige__7EF7A45C" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorPolizaDetalleOrigen" />
+          <NavigationProperty Name="MovimientoInventario" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" FromRole="ProveedorPolizaDetalle" ToRole="MovimientoInventario" />
         </EntityType>
         <Association Name="FK__Proveedor__Banco__169A23C3">
           <End Type="RefaccionariaModelo.BancoCuenta" Role="BancoCuenta" Multiplicity="1" />
@@ -28810,18 +28447,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="ProveedorPolizaDetalle">
               <PropertyRef Name="CajaEgresoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProveedorPolizaDetalle_MovimientoInventario">
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventario">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Principal>
-            <Dependent Role="ProveedorPolizaDetalle">
-              <PropertyRef Name="MovimientoInventarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -28946,6 +28571,508 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="AbonadoIva" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
           <Property Name="AbonadoImporte" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
           <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="ProveedorNotaDeCreditoDetalle">
+          <Key>
+            <PropertyRef Name="ProveedorNotaDeCreditoDetalleID" />
+          </Key>
+          <Property Name="ProveedorNotaDeCreditoDetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" Nullable="false" />
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__46D346CA" FromRole="ProveedorNotaDeCreditoDetalle" ToRole="ProveedorNotaDeCredito" />
+          <NavigationProperty Name="MovimientoInventario" Relationship="RefaccionariaModelo.FK__Proveedor__Movim__47C76B03" FromRole="ProveedorNotaDeCreditoDetalle" ToRole="MovimientoInventario" />
+        </EntityType>
+        <Association Name="FK__Proveedor__Prove__46D346CA">
+          <End Type="RefaccionariaModelo.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorNotaDeCreditoDetalle" Role="ProveedorNotaDeCreditoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalle">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MovimientoInventario">
+          <Key>
+            <PropertyRef Name="MovimientoInventarioID" />
+          </Key>
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoOperacionID" Type="Int32" Nullable="false" />
+          <Property Name="TipoPagoID" Type="Int32" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <Property Name="SucursalOrigenID" Type="Int32" />
+          <Property Name="SucursalDestinoID" Type="Int32" />
+          <Property Name="FechaFactura" Type="DateTime" Precision="3" />
+          <Property Name="FechaRecepcion" Type="DateTime" Precision="3" />
+          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FueLiquidado" Type="Boolean" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
+          <Property Name="NombreImagen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Articulos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Unidades" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Seguro" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteTotalSinDescuento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UsuarioSolicitoTraspasoID" Type="Int32" />
+          <Property Name="UsuarioRecibioTraspasoID" Type="Int32" />
+          <Property Name="ExisteContingencia" Type="Boolean" />
+          <Property Name="TraspasoEntregado" Type="Boolean" />
+          <Property Name="ImporteFactura" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="TipoConceptoOperacionID" Type="Int32" />
+          <Property Name="EsAgrupador" Type="Boolean" Nullable="false" />
+          <Property Name="MovimientoAgrupadorID" Type="Int32" />
+          <Property Name="DeMovimientoInventarioID" Type="Int32" />
+          <NavigationProperty Name="MovimientoInventario1" Relationship="RefaccionariaModelo.FK__Movimient__DeMov__49AFB375" FromRole="MovimientoInventario" ToRole="MovimientoInventario1" />
+          <NavigationProperty Name="MovimientoInventario2" Relationship="RefaccionariaModelo.FK__Movimient__DeMov__49AFB375" FromRole="MovimientoInventario1" ToRole="MovimientoInventario" />
+          <NavigationProperty Name="MovimientoInventario11" Relationship="RefaccionariaModelo.FK__Movimient__Movim__420E91AD" FromRole="MovimientoInventario" ToRole="MovimientoInventario1" />
+          <NavigationProperty Name="MovimientoInventario3" Relationship="RefaccionariaModelo.FK__Movimient__Movim__420E91AD" FromRole="MovimientoInventario1" ToRole="MovimientoInventario" />
+          <NavigationProperty Name="TipoConceptoOperacion" Relationship="RefaccionariaModelo.FK__Movimient__TipoC__3DB3F0E4" FromRole="MovimientoInventario" ToRole="TipoConceptoOperacion" />
+          <NavigationProperty Name="ProveedorNotaDeCreditoDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__Movim__47C76B03" FromRole="MovimientoInventario" ToRole="ProveedorNotaDeCreditoDetalle" />
+          <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Movim__48BB8F3C" FromRole="MovimientoInventario" ToRole="VentaGarantia" />
+          <NavigationProperty Name="MovimientoInventarioDescuento" Relationship="RefaccionariaModelo.FK_MovimientoInventarioDescuento_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioDescuento" />
+          <NavigationProperty Name="MovimientoInventarioDetalle" Relationship="RefaccionariaModelo.FK_MovimientoInventarioDetalle_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioDetalle" />
+          <NavigationProperty Name="MovimientoInventarioEtiqueta" Relationship="RefaccionariaModelo.FK_MovimientoInventarioEtiqueta_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioEtiqueta" />
+          <NavigationProperty Name="MovimientoInventarioTraspasoContingencia" Relationship="RefaccionariaModelo.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioTraspasoContingencia" />
+          <NavigationProperty Name="PartePrecioHistorico" Relationship="RefaccionariaModelo.FK_PartePrecioHistorico_MovimientoInventario" FromRole="MovimientoInventario" ToRole="PartePrecioHistorico" />
+          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" FromRole="MovimientoInventario" ToRole="ProveedorPolizaDetalle" />
+        </EntityType>
+        <EntityType Name="VentaGarantia">
+          <Key>
+            <PropertyRef Name="VentaGarantiaID" />
+          </Key>
+          <Property Name="VentaGarantiaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VentaID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="MotivoID" Type="Int32" Nullable="false" />
+          <Property Name="MotivoObservacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="AccionID" Type="Int32" Nullable="false" />
+          <Property Name="EstatusGenericoID" Type="Int32" Nullable="false" />
+          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="FechaCompletado" Type="DateTime" Precision="3" />
+          <Property Name="ObservacionCompletado" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CostoConDescuento" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="PrecioUnitario" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="RespuestaID" Type="Int32" />
+          <Property Name="VentaPagoDetalleID" Type="Int32" />
+          <Property Name="C_MovimientoInventarioDetalleID" Type="Int32" />
+          <Property Name="MovimientoInventarioID" Type="Int32" />
+          <NavigationProperty Name="EstatusGenerico" Relationship="RefaccionariaModelo.FK__VentaGara__Estat__18CC84F8" FromRole="VentaGarantia" ToRole="EstatusGenerico" />
+          <NavigationProperty Name="MovimientoInventario" Relationship="RefaccionariaModelo.FK__VentaGara__Movim__48BB8F3C" FromRole="VentaGarantia" ToRole="MovimientoInventario" />
+          <NavigationProperty Name="MovimientoInventarioDetalle" Relationship="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D" FromRole="VentaGarantia" ToRole="MovimientoInventarioDetalle" />
+          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" FromRole="VentaGarantia" ToRole="Parte" />
+          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" FromRole="VentaGarantia" ToRole="Sucursal" />
+          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931" FromRole="VentaGarantia" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" FromRole="VentaGarantia" ToRole="Usuario" />
+          <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB" FromRole="VentaGarantia" ToRole="Venta" />
+          <NavigationProperty Name="VentaFacturaDevolucionDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__2BDF596C" FromRole="VentaGarantia" ToRole="VentaFacturaDevolucionDetalle" />
+          <NavigationProperty Name="VentaGarantiaAccion" Relationship="RefaccionariaModelo.FK__VentaGara__Accio__16E43C86" FromRole="VentaGarantia" ToRole="VentaGarantiaAccion" />
+          <NavigationProperty Name="VentaGarantiaMotivo" Relationship="RefaccionariaModelo.FK__VentaGara__Motov__15F0184D" FromRole="VentaGarantia" ToRole="VentaGarantiaMotivo" />
+          <NavigationProperty Name="VentaGarantiaRespuesta" Relationship="RefaccionariaModelo.FK__VentaGara__Respu__2E1CA799" FromRole="VentaGarantia" ToRole="VentaGarantiaRespuesta" />
+          <NavigationProperty Name="VentaPagoDetalle" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" FromRole="VentaGarantia" ToRole="VentaPagoDetalle" />
+        </EntityType>
+        <Association Name="FK__VentaGara__Estat__18CC84F8">
+          <End Type="RefaccionariaModelo.EstatusGenerico" Role="EstatusGenerico" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstatusGenerico">
+              <PropertyRef Name="EstatusGenericoID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="EstatusGenericoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movimient__DeMov__49AFB375">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="MovimientoInventario1">
+              <PropertyRef Name="DeMovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movimient__Movim__420E91AD">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="MovimientoInventario1">
+              <PropertyRef Name="MovimientoAgrupadorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movimient__TipoC__3DB3F0E4">
+          <End Type="RefaccionariaModelo.TipoConceptoOperacion" Role="TipoConceptoOperacion" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoConceptoOperacion">
+              <PropertyRef Name="TipoConceptoOperacionID" />
+            </Principal>
+            <Dependent Role="MovimientoInventario">
+              <PropertyRef Name="TipoConceptoOperacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Movim__47C76B03">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorNotaDeCreditoDetalle" Role="ProveedorNotaDeCreditoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalle">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Movim__48BB8F3C">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovimientoInventarioDescuento_MovimientoInventario">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.MovimientoInventarioDescuento" Role="MovimientoInventarioDescuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="MovimientoInventarioDescuento">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovimientoInventarioDetalle_MovimientoInventario">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.MovimientoInventarioDetalle" Role="MovimientoInventarioDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="MovimientoInventarioDetalle">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovimientoInventarioEtiqueta_MovimientoInventario">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.MovimientoInventarioEtiqueta" Role="MovimientoInventarioEtiqueta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="MovimientoInventarioEtiqueta">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.MovimientoInventarioTraspasoContingencia" Role="MovimientoInventarioTraspasoContingencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="MovimientoInventarioTraspasoContingencia">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartePrecioHistorico_MovimientoInventario">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.PartePrecioHistorico" Role="PartePrecioHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="PartePrecioHistorico">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorPolizaDetalle_MovimientoInventario">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Movim__3EA8151D">
+          <End Type="RefaccionariaModelo.MovimientoInventarioDetalle" Role="MovimientoInventarioDetalle" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventarioDetalle">
+              <PropertyRef Name="MovimientoInventarioDetalleID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="C_MovimientoInventarioDetalleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Parte__2B403AEE">
+          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Sucur__14FBF414">
+          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Reali__19C0A931">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="RealizoUsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Usuar__1AB4CD6A">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Venta__1407CFDB">
+          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="VentaID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="VentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaFact__Venta__2BDF596C">
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.VentaFacturaDevolucionDetalle" Role="VentaFacturaDevolucionDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaGarantia">
+              <PropertyRef Name="VentaGarantiaID" />
+            </Principal>
+            <Dependent Role="VentaFacturaDevolucionDetalle">
+              <PropertyRef Name="VentaGarantiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Accio__16E43C86">
+          <End Type="RefaccionariaModelo.VentaGarantiaAccion" Role="VentaGarantiaAccion" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaGarantiaAccion">
+              <PropertyRef Name="VentaGarantiaAccionID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="AccionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Motov__15F0184D">
+          <End Type="RefaccionariaModelo.VentaGarantiaMotivo" Role="VentaGarantiaMotivo" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaGarantiaMotivo">
+              <PropertyRef Name="VentaGarantiaMotivoID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="MotivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Respu__2E1CA799">
+          <End Type="RefaccionariaModelo.VentaGarantiaRespuesta" Role="VentaGarantiaRespuesta" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaGarantiaRespuesta">
+              <PropertyRef Name="VentaGarantiaRespuestaID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="RespuestaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaGara__Venta__2429290B">
+          <End Type="RefaccionariaModelo.VentaPagoDetalle" Role="VentaPagoDetalle" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaPagoDetalle">
+              <PropertyRef Name="VentaPagoDetalleID" />
+            </Principal>
+            <Dependent Role="VentaGarantia">
+              <PropertyRef Name="VentaPagoDetalleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VentasGarantiasView">
+          <Key>
+            <PropertyRef Name="VentaGarantiaID" />
+            <PropertyRef Name="Facturada" />
+            <PropertyRef Name="VentaID" />
+            <PropertyRef Name="SucursalID" />
+            <PropertyRef Name="VentaACredito" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="MotivoID" />
+            <PropertyRef Name="AccionID" />
+            <PropertyRef Name="EstatusGenericoID" />
+            <PropertyRef Name="RealizoUsuarioID" />
+            <PropertyRef Name="Autorizado" />
+            <PropertyRef Name="AutorizoUsuario" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="PrecioUnitario" />
+            <PropertyRef Name="Iva" />
+          </Key>
+          <Property Name="VentaGarantiaID" Type="Int32" Nullable="false" />
+          <Property Name="Facturada" Type="Boolean" Nullable="false" />
+          <Property Name="VentaID" Type="Int32" Nullable="false" />
+          <Property Name="FolioDeVenta" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="FechaDeVenta" Type="DateTime" Precision="3" />
+          <Property Name="ClienteID" Type="Int32" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="Sucursal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VentaACredito" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MotivoID" Type="Int32" Nullable="false" />
+          <Property Name="Motivo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="MotivoObservacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="AccionID" Type="Int32" Nullable="false" />
+          <Property Name="Accion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="EstatusGenericoID" Type="Int32" Nullable="false" />
+          <Property Name="Estatus" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="Realizo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Autorizado" Type="Boolean" Nullable="false" />
+          <Property Name="AutorizoUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Decimal" Precision="13" Scale="4" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="NumeroDeParte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NombreDeParte" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="PrecioUnitario" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="Medida" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RespuestaID" Type="Int32" />
+          <Property Name="FechaCompletado" Type="DateTime" Precision="3" />
+          <Property Name="ObservacionCompletado" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="VentaPagoDetalleID" Type="Int32" />
+          <Property Name="NotaDeCreditoID" Type="Int32" />
+          <Property Name="FacturaDeCompra" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProveedoresNotasDeCreditoView">
+          <Key>
+            <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="Folio" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Subtotal" />
+            <PropertyRef Name="Iva" />
+            <PropertyRef Name="Usado" />
+            <PropertyRef Name="OrigenID" />
+            <PropertyRef Name="Disponible" />
+          </Key>
+          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="Folio" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="Usado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+          <Property Name="Restante" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="OrigenID" Type="Int32" Nullable="false" />
+          <Property Name="Origen" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Disponible" Type="Boolean" Nullable="false" />
+          <Property Name="Facturas" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProveedoresComprasView">
+          <Key>
+            <PropertyRef Name="MovimientoInventarioID" />
+            <PropertyRef Name="ImporteFactura" />
+            <PropertyRef Name="ImporteTotal" />
+            <PropertyRef Name="Abonado" />
+            <PropertyRef Name="EsAgrupador" />
+          </Key>
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="ImporteFactura" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ImporteTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Abonado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
+          <Property Name="Saldo" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Final" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EsAgrupador" Type="Boolean" Nullable="false" />
+          <Property Name="MovimientoAgrupadorID" Type="Int32" />
+          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DiasPlazo" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -34508,82 +34635,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VentaGarantia">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.VentaGarantia">
-              <MappingFragment StoreEntitySet="VentaGarantia">
-                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
-                <ScalarProperty Name="MovimientoInventarioDetalleID" ColumnName="MovimientoInventarioDetalleID" />
-                <ScalarProperty Name="VentaPagoDetalleID" ColumnName="VentaPagoDetalleID" />
-                <ScalarProperty Name="RespuestaID" ColumnName="RespuestaID" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
-                <ScalarProperty Name="CostoConDescuento" ColumnName="CostoConDescuento" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="ObservacionCompletado" ColumnName="ObservacionCompletado" />
-                <ScalarProperty Name="FechaCompletado" ColumnName="FechaCompletado" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
-                <ScalarProperty Name="EstatusGenericoID" ColumnName="EstatusGenericoID" />
-                <ScalarProperty Name="AccionID" ColumnName="AccionID" />
-                <ScalarProperty Name="MotivoObservacion" ColumnName="MotivoObservacion" />
-                <ScalarProperty Name="MotivoID" ColumnName="MotivoID" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="VentaID" ColumnName="VentaID" />
-                <ScalarProperty Name="VentaGarantiaID" ColumnName="VentaGarantiaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VentasGarantiasView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.VentasGarantiasView">
-              <MappingFragment StoreEntitySet="VentasGarantiasView">
-                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
-                <ScalarProperty Name="FacturaDeCompra" ColumnName="FacturaDeCompra" />
-                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
-                <ScalarProperty Name="VentaPagoDetalleID" ColumnName="VentaPagoDetalleID" />
-                <ScalarProperty Name="ObservacionCompletado" ColumnName="ObservacionCompletado" />
-                <ScalarProperty Name="FechaCompletado" ColumnName="FechaCompletado" />
-                <ScalarProperty Name="RespuestaID" ColumnName="RespuestaID" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="Medida" ColumnName="Medida" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="NombreDeParte" ColumnName="NombreDeParte" />
-                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="AutorizoUsuario" ColumnName="AutorizoUsuario" />
-                <ScalarProperty Name="Autorizado" ColumnName="Autorizado" />
-                <ScalarProperty Name="Realizo" ColumnName="Realizo" />
-                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="EstatusGenericoID" ColumnName="EstatusGenericoID" />
-                <ScalarProperty Name="Accion" ColumnName="Accion" />
-                <ScalarProperty Name="AccionID" ColumnName="AccionID" />
-                <ScalarProperty Name="MotivoObservacion" ColumnName="MotivoObservacion" />
-                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
-                <ScalarProperty Name="MotivoID" ColumnName="MotivoID" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="VentaACredito" ColumnName="VentaACredito" />
-                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
-                <ScalarProperty Name="FechaDeVenta" ColumnName="FechaDeVenta" />
-                <ScalarProperty Name="FolioDeVenta" ColumnName="FolioDeVenta" />
-                <ScalarProperty Name="VentaID" ColumnName="VentaID" />
-                <ScalarProperty Name="Facturada" ColumnName="Facturada" />
-                <ScalarProperty Name="VentaGarantiaID" ColumnName="VentaGarantiaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NotaDeCredito">
             <EntityTypeMapping TypeName="RefaccionariaModelo.NotaDeCredito">
               <MappingFragment StoreEntitySet="NotaDeCredito">
@@ -34684,46 +34735,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MovimientoInventario">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.MovimientoInventario">
-              <MappingFragment StoreEntitySet="MovimientoInventario">
-                <ScalarProperty Name="MovimientoAgrupadorID" ColumnName="MovimientoAgrupadorID" />
-                <ScalarProperty Name="EsAgrupador" ColumnName="EsAgrupador" />
-                <ScalarProperty Name="TipoConceptoOperacionID" ColumnName="TipoConceptoOperacionID" />
-                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
-                <ScalarProperty Name="TraspasoEntregado" ColumnName="TraspasoEntregado" />
-                <ScalarProperty Name="ExisteContingencia" ColumnName="ExisteContingencia" />
-                <ScalarProperty Name="UsuarioRecibioTraspasoID" ColumnName="UsuarioRecibioTraspasoID" />
-                <ScalarProperty Name="UsuarioSolicitoTraspasoID" ColumnName="UsuarioSolicitoTraspasoID" />
-                <ScalarProperty Name="ImporteTotalSinDescuento" ColumnName="ImporteTotalSinDescuento" />
-                <ScalarProperty Name="Seguro" ColumnName="Seguro" />
-                <ScalarProperty Name="Unidades" ColumnName="Unidades" />
-                <ScalarProperty Name="Articulos" ColumnName="Articulos" />
-                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
-                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="FueLiquidado" ColumnName="FueLiquidado" />
-                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
-                <ScalarProperty Name="IVA" ColumnName="IVA" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="FechaAplicacion" ColumnName="FechaAplicacion" />
-                <ScalarProperty Name="AplicaEnMovimientoInventarioID" ColumnName="AplicaEnMovimientoInventarioID" />
-                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
-                <ScalarProperty Name="FechaRecepcion" ColumnName="FechaRecepcion" />
-                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
-                <ScalarProperty Name="SucursalDestinoID" ColumnName="SucursalDestinoID" />
-                <ScalarProperty Name="SucursalOrigenID" ColumnName="SucursalOrigenID" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="TipoPagoID" ColumnName="TipoPagoID" />
-                <ScalarProperty Name="TipoOperacionID" ColumnName="TipoOperacionID" />
-                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CajaEgresosProveedoresView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.CajaEgresosProveedoresView">
               <MappingFragment StoreEntitySet="CajaEgresosProveedoresView">
@@ -34738,44 +34749,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="Concepto" ColumnName="Concepto" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="CajaEgresoID" ColumnName="CajaEgresoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedoresComprasView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresComprasView">
-              <MappingFragment StoreEntitySet="ProveedoresComprasView">
-                <ScalarProperty Name="MovimientoAgrupadorID" ColumnName="MovimientoAgrupadorID" />
-                <ScalarProperty Name="EsAgrupador" ColumnName="EsAgrupador" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Final" ColumnName="Final" />
-                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="Abonado" ColumnName="Abonado" />
-                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
-                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Factura" ColumnName="Factura" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedoresNotasDeCreditoView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresNotasDeCreditoView">
-              <MappingFragment StoreEntitySet="ProveedoresNotasDeCreditoView">
-                <ScalarProperty Name="Disponible" ColumnName="Disponible" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Origen" ColumnName="Origen" />
-                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
-                <ScalarProperty Name="Restante" ColumnName="Restante" />
-                <ScalarProperty Name="Usado" ColumnName="Usado" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -34874,6 +34847,171 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProveedorNotaDeCreditoDetalle">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorNotaDeCreditoDetalle">
+              <MappingFragment StoreEntitySet="ProveedorNotaDeCreditoDetalle">
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
+                <ScalarProperty Name="ProveedorNotaDeCreditoDetalleID" ColumnName="ProveedorNotaDeCreditoDetalleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovimientoInventario">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.MovimientoInventario">
+              <MappingFragment StoreEntitySet="MovimientoInventario">
+                <ScalarProperty Name="DeMovimientoInventarioID" ColumnName="DeMovimientoInventarioID" />
+                <ScalarProperty Name="MovimientoAgrupadorID" ColumnName="MovimientoAgrupadorID" />
+                <ScalarProperty Name="EsAgrupador" ColumnName="EsAgrupador" />
+                <ScalarProperty Name="TipoConceptoOperacionID" ColumnName="TipoConceptoOperacionID" />
+                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
+                <ScalarProperty Name="TraspasoEntregado" ColumnName="TraspasoEntregado" />
+                <ScalarProperty Name="ExisteContingencia" ColumnName="ExisteContingencia" />
+                <ScalarProperty Name="UsuarioRecibioTraspasoID" ColumnName="UsuarioRecibioTraspasoID" />
+                <ScalarProperty Name="UsuarioSolicitoTraspasoID" ColumnName="UsuarioSolicitoTraspasoID" />
+                <ScalarProperty Name="ImporteTotalSinDescuento" ColumnName="ImporteTotalSinDescuento" />
+                <ScalarProperty Name="Seguro" ColumnName="Seguro" />
+                <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+                <ScalarProperty Name="Articulos" ColumnName="Articulos" />
+                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
+                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FueLiquidado" ColumnName="FueLiquidado" />
+                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
+                <ScalarProperty Name="FechaRecepcion" ColumnName="FechaRecepcion" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+                <ScalarProperty Name="SucursalDestinoID" ColumnName="SucursalDestinoID" />
+                <ScalarProperty Name="SucursalOrigenID" ColumnName="SucursalOrigenID" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="TipoPagoID" ColumnName="TipoPagoID" />
+                <ScalarProperty Name="TipoOperacionID" ColumnName="TipoOperacionID" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VentaGarantia">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.VentaGarantia">
+              <MappingFragment StoreEntitySet="VentaGarantia">
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+                <ScalarProperty Name="C_MovimientoInventarioDetalleID" ColumnName="_MovimientoInventarioDetalleID" />
+                <ScalarProperty Name="VentaPagoDetalleID" ColumnName="VentaPagoDetalleID" />
+                <ScalarProperty Name="RespuestaID" ColumnName="RespuestaID" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="CostoConDescuento" ColumnName="CostoConDescuento" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="ObservacionCompletado" ColumnName="ObservacionCompletado" />
+                <ScalarProperty Name="FechaCompletado" ColumnName="FechaCompletado" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
+                <ScalarProperty Name="EstatusGenericoID" ColumnName="EstatusGenericoID" />
+                <ScalarProperty Name="AccionID" ColumnName="AccionID" />
+                <ScalarProperty Name="MotivoObservacion" ColumnName="MotivoObservacion" />
+                <ScalarProperty Name="MotivoID" ColumnName="MotivoID" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="VentaID" ColumnName="VentaID" />
+                <ScalarProperty Name="VentaGarantiaID" ColumnName="VentaGarantiaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VentasGarantiasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.VentasGarantiasView">
+              <MappingFragment StoreEntitySet="VentasGarantiasView">
+                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
+                <ScalarProperty Name="FacturaDeCompra" ColumnName="FacturaDeCompra" />
+                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
+                <ScalarProperty Name="VentaPagoDetalleID" ColumnName="VentaPagoDetalleID" />
+                <ScalarProperty Name="ObservacionCompletado" ColumnName="ObservacionCompletado" />
+                <ScalarProperty Name="FechaCompletado" ColumnName="FechaCompletado" />
+                <ScalarProperty Name="RespuestaID" ColumnName="RespuestaID" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="Medida" ColumnName="Medida" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="NombreDeParte" ColumnName="NombreDeParte" />
+                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="AutorizoUsuario" ColumnName="AutorizoUsuario" />
+                <ScalarProperty Name="Autorizado" ColumnName="Autorizado" />
+                <ScalarProperty Name="Realizo" ColumnName="Realizo" />
+                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="EstatusGenericoID" ColumnName="EstatusGenericoID" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="AccionID" ColumnName="AccionID" />
+                <ScalarProperty Name="MotivoObservacion" ColumnName="MotivoObservacion" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="MotivoID" ColumnName="MotivoID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="VentaACredito" ColumnName="VentaACredito" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="FechaDeVenta" ColumnName="FechaDeVenta" />
+                <ScalarProperty Name="FolioDeVenta" ColumnName="FolioDeVenta" />
+                <ScalarProperty Name="VentaID" ColumnName="VentaID" />
+                <ScalarProperty Name="Facturada" ColumnName="Facturada" />
+                <ScalarProperty Name="VentaGarantiaID" ColumnName="VentaGarantiaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresNotasDeCreditoView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresNotasDeCreditoView">
+              <MappingFragment StoreEntitySet="ProveedoresNotasDeCreditoView">
+                <ScalarProperty Name="Facturas" ColumnName="Facturas" />
+                <ScalarProperty Name="Disponible" ColumnName="Disponible" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="Restante" ColumnName="Restante" />
+                <ScalarProperty Name="Usado" ColumnName="Usado" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresComprasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresComprasView">
+              <MappingFragment StoreEntitySet="ProveedoresComprasView">
+                <ScalarProperty Name="DiasPlazo" ColumnName="DiasPlazo" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="MovimientoAgrupadorID" ColumnName="MovimientoAgrupadorID" />
+                <ScalarProperty Name="EsAgrupador" ColumnName="EsAgrupador" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Final" ColumnName="Final" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Abonado" ColumnName="Abonado" />
+                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
+                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -34895,7 +35033,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="DataModel" ZoomLevel="60">
+      <Diagram Name="DataModel" ZoomLevel="54">
         <EntityTypeShape EntityType="RefaccionariaModelo.Configuracion" Width="1.5" PointX="2.75" PointY="0.75" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Perfil" Width="1.5" PointX="6" PointY="69.75" Height="0.40000000000000568" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Permiso" Width="1.5" PointX="0.75" PointY="2.75" Height="0.39999999999999858" IsExpanded="false" />
@@ -38192,21 +38330,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteVehi__Regis__257C74A0" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteVehi__Usuar__10966653" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ParteVehiculo_TipoFuente" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.VentaGarantia" Width="1.5" PointX="39.875" PointY="81.625" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.VentasGarantiasView" Width="1.5" PointX="42.375" PointY="19.75" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Estat__18CC84F8" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Prove__3F322502" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Venta__2BDF596C" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Accio__16E43C86" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Motov__15F0184D" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Respu__2E1CA799" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" />
         <EntityTypeShape EntityType="RefaccionariaModelo.NotaDeCredito" Width="1.5" PointX="27.25" PointY="121.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.NotasDeCreditoView" Width="1.5" PointX="27.375" PointY="4.75" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" />
@@ -38225,23 +38348,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__17835B04" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Usuar__630F92C5" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ExistenciasView" Width="1.5" PointX="36.375" PointY="16.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.MovimientoInventario" Width="1.5" PointX="5.25" PointY="89.125" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Movimient__Movim__420E91AD" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Movimient__TipoC__3DB3F0E4" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioDescuento_MovimientoInventario" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioDetalle_MovimientoInventario" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioEtiqueta_MovimientoInventario" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_PartePrecioHistorico_MovimientoInventario" />
         <EntityTypeShape EntityType="RefaccionariaModelo.CajaEgresosProveedoresView" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresComprasView" Width="1.5" PointX="17.75" PointY="24.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" Width="1.5" PointX="31.75" PointY="17.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPolizasView" Width="1.5" PointX="42.75" PointY="15.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorPoliza" Width="1.5" PointX="36.375" PointY="102.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorPolizaDetalle" Width="1.5" PointX="38.625" PointY="73.625" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Banco__169A23C3" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__TipoF__178E47FC" />
@@ -38250,6 +38362,36 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Orige__7EF7A45C" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPolizasDetalleAvanzadoView" Width="1.5" PointX="43.375" PointY="0.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPagosView" Width="1.5" PointX="42.375" PointY="29.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorNotaDeCreditoDetalle" Width="1.5" PointX="27" PointY="79.875" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Prove__46D346CA" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.MovimientoInventario" Width="1.5" PointX="37.625" PointY="78.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.VentaGarantia" Width="1.5" PointX="39.875" PointY="81.625" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Estat__18CC84F8" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Movimient__DeMov__49AFB375" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Movimient__Movim__420E91AD" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Movimient__TipoC__3DB3F0E4" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Movim__47C76B03" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Movim__48BB8F3C" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioDescuento_MovimientoInventario" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioDetalle_MovimientoInventario" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioEtiqueta_MovimientoInventario" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_PartePrecioHistorico_MovimientoInventario" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Venta__2BDF596C" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Accio__16E43C86" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Motov__15F0184D" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Respu__2E1CA799" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.VentasGarantiasView" Width="1.5" PointX="42.375" PointY="19.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" Width="1.5" PointX="31.375" PointY="17.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresComprasView" Width="1.5" PointX="17.375" PointY="24.75" />
         </Diagram>
     </Diagrams>
   </Designer>

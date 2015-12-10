@@ -1340,10 +1340,10 @@
     <Compile Include="Formas\DetalleProveedorObservacion.Designer.cs">
       <DependentUpon>DetalleProveedorObservacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formas\DetalleProveedorPoliza.cs">
+    <Compile Include="Administracion\Formas\DetalleProveedorPoliza.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formas\DetalleProveedorPoliza.Designer.cs">
+    <Compile Include="Administracion\Formas\DetalleProveedorPoliza.Designer.cs">
       <DependentUpon>DetalleProveedorPoliza.cs</DependentUpon>
     </Compile>
     <Compile Include="Formas\DetalleProveedorProntoPago.cs">
@@ -2008,7 +2008,7 @@
     <EmbeddedResource Include="Formas\DetalleProveedorObservacion.resx">
       <DependentUpon>DetalleProveedorObservacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formas\DetalleProveedorPoliza.resx">
+    <EmbeddedResource Include="Administracion\Formas\DetalleProveedorPoliza.resx">
       <DependentUpon>DetalleProveedorPoliza.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formas\DetalleProveedorProntoPago.resx">
@@ -2102,6 +2102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AG.ico" />
+    <None Include="Resources\Info.ico" />
     <None Include="Resources\Hotmail.png" />
     <None Include="Resources\HotmailClic.png" />
     <None Include="Resources\HotmailSobre.png" />
@@ -2285,6 +2286,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contabilidad\Formas\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
