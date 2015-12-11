@@ -4077,8 +4077,6 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.MovimientoInventarioView'
           <Property Name="FechaFactura" Type="datetime" />
           <Property Name="FechaRecepcion" Type="datetime" />
           <Property Name="FolioFactura" Type="nvarchar" MaxLength="50" />
-          <Property Name="AplicaEnMovimientoInventarioID" Type="int" />
-          <Property Name="FechaAplicacion" Type="datetime" />
           <Property Name="Subtotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IVA" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ImporteTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -5286,26 +5284,6 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedorProntoPagosView'
           <Property Name="NumeroDias" Type="int" Nullable="false" />
           <Property Name="PorcentajeDescuento" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Comentario" Type="nvarchar" MaxLength="255" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedorReporteDevolucionDetalleView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ProveedorReporteDevolucionDetalleView">
-          <Key>
-            <PropertyRef Name="MovimientoInventarioID" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="NumeroParte" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="ImporteTotal" />
-          </Key>
-          <Property Name="MovimientoInventarioID" Type="int" Nullable="false" />
-          <Property Name="ProveedorID" Type="int" />
-          <Property Name="FacturaOrigen" Type="nvarchar" MaxLength="50" />
-          <Property Name="AplicaEnMovimientoInventarioID" Type="int" />
-          <Property Name="ParteID" Type="int" Nullable="false" />
-          <Property Name="NumeroParte" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="FechaAplicacion" Type="datetime" />
-          <Property Name="ImporteTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.SistemasView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -12174,8 +12152,6 @@ FROM [dbo].[MovimientoInventarioTraspasosView] AS [MovimientoInventarioTraspasos
 [MovimientoInventarioView].[FechaFactura] AS [FechaFactura], 
 [MovimientoInventarioView].[FechaRecepcion] AS [FechaRecepcion], 
 [MovimientoInventarioView].[FolioFactura] AS [FolioFactura], 
-[MovimientoInventarioView].[AplicaEnMovimientoInventarioID] AS [AplicaEnMovimientoInventarioID], 
-[MovimientoInventarioView].[FechaAplicacion] AS [FechaAplicacion], 
 [MovimientoInventarioView].[Subtotal] AS [Subtotal], 
 [MovimientoInventarioView].[IVA] AS [IVA], 
 [MovimientoInventarioView].[ImporteTotal] AS [ImporteTotal], 
@@ -12997,19 +12973,6 @@ FROM [dbo].[ProveedorProductosCompradosView] AS [ProveedorProductosCompradosView
 [ProveedorProntoPagosView].[PorcentajeDescuento] AS [PorcentajeDescuento], 
 [ProveedorProntoPagosView].[Comentario] AS [Comentario]
 FROM [dbo].[ProveedorProntoPagosView] AS [ProveedorProntoPagosView]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ProveedorReporteDevolucionDetalleView" EntityType="Self.ProveedorReporteDevolucionDetalleView" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[ProveedorReporteDevolucionDetalleView].[MovimientoInventarioID] AS [MovimientoInventarioID], 
-[ProveedorReporteDevolucionDetalleView].[ProveedorID] AS [ProveedorID], 
-[ProveedorReporteDevolucionDetalleView].[FacturaOrigen] AS [FacturaOrigen], 
-[ProveedorReporteDevolucionDetalleView].[AplicaEnMovimientoInventarioID] AS [AplicaEnMovimientoInventarioID], 
-[ProveedorReporteDevolucionDetalleView].[ParteID] AS [ParteID], 
-[ProveedorReporteDevolucionDetalleView].[NumeroParte] AS [NumeroParte], 
-[ProveedorReporteDevolucionDetalleView].[Descripcion] AS [Descripcion], 
-[ProveedorReporteDevolucionDetalleView].[FechaAplicacion] AS [FechaAplicacion], 
-[ProveedorReporteDevolucionDetalleView].[ImporteTotal] AS [ImporteTotal]
-FROM [dbo].[ProveedorReporteDevolucionDetalleView] AS [ProveedorReporteDevolucionDetalleView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SistemasView" EntityType="Self.SistemasView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -15282,7 +15245,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="ProveedorDetalleDocumentosView" EntityType="RefaccionariaModelo.ProveedorDetalleDocumentosView" />
           <EntitySet Name="ProveedorKardexDetalleOperacionesView" EntityType="RefaccionariaModelo.ProveedorKardexDetalleOperacionesView" />
           <EntitySet Name="ProveedorProductosCompradosView" EntityType="RefaccionariaModelo.ProveedorProductosCompradosView" />
-          <EntitySet Name="ProveedorReporteDevolucionDetalleView" EntityType="RefaccionariaModelo.ProveedorReporteDevolucionDetalleView" />
           <EntitySet Name="ParteAbc" EntityType="RefaccionariaModelo.ParteAbc" />
           <FunctionImport Name="pauParteMaxMinDatosExtra" ReturnType="Collection(RefaccionariaModelo.pauParteMaxMinDatosExtra_Result)">
             <Parameter Name="ParteID" Mode="In" Type="Int32" />
@@ -16219,7 +16181,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="CorteValidacionView" EntityType="RefaccionariaModelo.CorteValidacionView" />
           <EntitySet Name="Duenio" EntityType="RefaccionariaModelo.Duenio" />
-          <EntitySet Name="MovimientoInventarioView" EntityType="RefaccionariaModelo.MovimientoInventarioView" />
           <EntitySet Name="ContaCuentaAuxiliarDevengadoEspecial" EntityType="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" />
           <EntitySet Name="ContaEgresoDetalleDevengadoEspecial" EntityType="RefaccionariaModelo.ContaEgresoDetalleDevengadoEspecial" />
           <EntitySet Name="ContaEgresosDetalleView" EntityType="RefaccionariaModelo.ContaEgresosDetalleView" />
@@ -17297,6 +17258,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="VentasGarantiasView" EntityType="RefaccionariaModelo.VentasGarantiasView" />
           <EntitySet Name="ProveedoresNotasDeCreditoView" EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" />
           <EntitySet Name="ProveedoresComprasView" EntityType="RefaccionariaModelo.ProveedoresComprasView" />
+          <EntitySet Name="MovimientoInventarioView" EntityType="RefaccionariaModelo.MovimientoInventarioView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -19427,24 +19389,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Cantidad" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="Importe" Nullable="false" Precision="18" Scale="2" />
           <Property Type="DateTime" Name="FechaRecepcion" Precision="3" />
-        </EntityType>
-        <EntityType Name="ProveedorReporteDevolucionDetalleView">
-          <Key>
-            <PropertyRef Name="MovimientoInventarioID" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="NumeroParte" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="ImporteTotal" />
-          </Key>
-          <Property Type="Int32" Name="MovimientoInventarioID" Nullable="false" />
-          <Property Type="Int32" Name="ProveedorID" />
-          <Property Type="String" Name="FacturaOrigen" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="AplicaEnMovimientoInventarioID" />
-          <Property Type="Int32" Name="ParteID" Nullable="false" />
-          <Property Type="String" Name="NumeroParte" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="FechaAplicacion" Precision="3" />
-          <Property Type="Decimal" Name="ImporteTotal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ParteAbc">
           <Key>
@@ -25046,53 +24990,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ContaCuentaAuxiliarDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaCuen__Dueni__20AD9DE2" FromRole="Duenio" ToRole="ContaCuentaAuxiliarDevengadoEspecial" />
           <NavigationProperty Name="ContaEgresoDevengadoEspecial" Relationship="RefaccionariaModelo.FK__ContaEgre__Dueni__1A00A053" FromRole="Duenio" ToRole="ContaEgresoDevengadoEspecial" />
         </EntityType>
-        <EntityType Name="MovimientoInventarioView">
-          <Key>
-            <PropertyRef Name="MovimientoInventarioID" />
-            <PropertyRef Name="TipoOperacionID" />
-            <PropertyRef Name="NombreTipoOperacion" />
-            <PropertyRef Name="SucursalOrigen" />
-            <PropertyRef Name="SucursalDestino" />
-            <PropertyRef Name="ImporteTotal" />
-            <PropertyRef Name="ImporteFactura" />
-            <PropertyRef Name="FueLiquidado" />
-            <PropertyRef Name="UsuarioID" />
-            <PropertyRef Name="NombreUsuario" />
-          </Key>
-          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
-          <Property Name="TipoOperacionID" Type="Int32" Nullable="false" />
-          <Property Name="NombreTipoOperacion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TipoPagoID" Type="Int32" />
-          <Property Name="NombreTipoPago" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProveedorID" Type="Int32" />
-          <Property Name="NombreProveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SucursalOrigenID" Type="Int32" />
-          <Property Name="SucursalOrigen" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SucursalDestinoID" Type="Int32" />
-          <Property Name="SucursalDestino" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FechaFactura" Type="DateTime" Precision="3" />
-          <Property Name="FechaRecepcion" Type="DateTime" Precision="3" />
-          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AplicaEnMovimientoInventarioID" Type="Int32" />
-          <Property Name="FechaAplicacion" Type="DateTime" Precision="3" />
-          <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ImporteTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ImporteFactura" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="FueLiquidado" Type="Boolean" Nullable="false" />
-          <Property Name="TipoConceptoOperacionID" Type="Int32" />
-          <Property Name="ConceptoOperacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="NombreUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="NombreImagen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Articulos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Unidades" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Seguro" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ImporteTotalSinDescuento" Type="Decimal" Precision="18" Scale="2" />
-        </EntityType>
         <EntityType Name="ContaCuentaAuxiliarDevengadoEspecial">
           <Key>
             <PropertyRef Name="ContaCuentaAuxiliarDevengadoEspecialID" />
@@ -29074,6 +28971,51 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="DiasPlazo" Type="Int32" />
         </EntityType>
+        <EntityType Name="MovimientoInventarioView">
+          <Key>
+            <PropertyRef Name="MovimientoInventarioID" />
+            <PropertyRef Name="TipoOperacionID" />
+            <PropertyRef Name="NombreTipoOperacion" />
+            <PropertyRef Name="SucursalOrigen" />
+            <PropertyRef Name="SucursalDestino" />
+            <PropertyRef Name="ImporteTotal" />
+            <PropertyRef Name="ImporteFactura" />
+            <PropertyRef Name="FueLiquidado" />
+            <PropertyRef Name="UsuarioID" />
+            <PropertyRef Name="NombreUsuario" />
+          </Key>
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
+          <Property Name="TipoOperacionID" Type="Int32" Nullable="false" />
+          <Property Name="NombreTipoOperacion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TipoPagoID" Type="Int32" />
+          <Property Name="NombreTipoPago" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <Property Name="NombreProveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SucursalOrigenID" Type="Int32" />
+          <Property Name="SucursalOrigen" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SucursalDestinoID" Type="Int32" />
+          <Property Name="SucursalDestino" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaFactura" Type="DateTime" Precision="3" />
+          <Property Name="FechaRecepcion" Type="DateTime" Precision="3" />
+          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteFactura" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="FueLiquidado" Type="Boolean" Nullable="false" />
+          <Property Name="TipoConceptoOperacionID" Type="Int32" />
+          <Property Name="ConceptoOperacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="NombreUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="NombreImagen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Articulos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Unidades" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Seguro" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteTotalSinDescuento" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -30803,21 +30745,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
                 <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
                 <ScalarProperty Name="MovimientoInventarioDetalleID" ColumnName="MovimientoInventarioDetalleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedorReporteDevolucionDetalleView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorReporteDevolucionDetalleView">
-              <MappingFragment StoreEntitySet="ProveedorReporteDevolucionDetalleView">
-                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
-                <ScalarProperty Name="FechaAplicacion" ColumnName="FechaAplicacion" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="NumeroParte" ColumnName="NumeroParte" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="AplicaEnMovimientoInventarioID" ColumnName="AplicaEnMovimientoInventarioID" />
-                <ScalarProperty Name="FacturaOrigen" ColumnName="FacturaOrigen" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -34212,45 +34139,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MovimientoInventarioView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.MovimientoInventarioView">
-              <MappingFragment StoreEntitySet="MovimientoInventarioView">
-                <ScalarProperty Name="ImporteTotalSinDescuento" ColumnName="ImporteTotalSinDescuento" />
-                <ScalarProperty Name="Seguro" ColumnName="Seguro" />
-                <ScalarProperty Name="Unidades" ColumnName="Unidades" />
-                <ScalarProperty Name="Articulos" ColumnName="Articulos" />
-                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="ConceptoOperacion" ColumnName="ConceptoOperacion" />
-                <ScalarProperty Name="TipoConceptoOperacionID" ColumnName="TipoConceptoOperacionID" />
-                <ScalarProperty Name="FueLiquidado" ColumnName="FueLiquidado" />
-                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
-                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
-                <ScalarProperty Name="IVA" ColumnName="IVA" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="FechaAplicacion" ColumnName="FechaAplicacion" />
-                <ScalarProperty Name="AplicaEnMovimientoInventarioID" ColumnName="AplicaEnMovimientoInventarioID" />
-                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
-                <ScalarProperty Name="FechaRecepcion" ColumnName="FechaRecepcion" />
-                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
-                <ScalarProperty Name="SucursalDestino" ColumnName="SucursalDestino" />
-                <ScalarProperty Name="SucursalDestinoID" ColumnName="SucursalDestinoID" />
-                <ScalarProperty Name="SucursalOrigen" ColumnName="SucursalOrigen" />
-                <ScalarProperty Name="SucursalOrigenID" ColumnName="SucursalOrigenID" />
-                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="NombreTipoPago" ColumnName="NombreTipoPago" />
-                <ScalarProperty Name="TipoPagoID" ColumnName="TipoPagoID" />
-                <ScalarProperty Name="NombreTipoOperacion" ColumnName="NombreTipoOperacion" />
-                <ScalarProperty Name="TipoOperacionID" ColumnName="TipoOperacionID" />
-                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ContaCuentaAuxiliarDevengadoEspecial">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial">
               <MappingFragment StoreEntitySet="ContaCuentaAuxiliarDevengadoEspecial">
@@ -35012,6 +34900,43 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MovimientoInventarioView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.MovimientoInventarioView">
+              <MappingFragment StoreEntitySet="MovimientoInventarioView">
+                <ScalarProperty Name="ImporteTotalSinDescuento" ColumnName="ImporteTotalSinDescuento" />
+                <ScalarProperty Name="Seguro" ColumnName="Seguro" />
+                <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+                <ScalarProperty Name="Articulos" ColumnName="Articulos" />
+                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="ConceptoOperacion" ColumnName="ConceptoOperacion" />
+                <ScalarProperty Name="TipoConceptoOperacionID" ColumnName="TipoConceptoOperacionID" />
+                <ScalarProperty Name="FueLiquidado" ColumnName="FueLiquidado" />
+                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
+                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
+                <ScalarProperty Name="FechaRecepcion" ColumnName="FechaRecepcion" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+                <ScalarProperty Name="SucursalDestino" ColumnName="SucursalDestino" />
+                <ScalarProperty Name="SucursalDestinoID" ColumnName="SucursalDestinoID" />
+                <ScalarProperty Name="SucursalOrigen" ColumnName="SucursalOrigen" />
+                <ScalarProperty Name="SucursalOrigenID" ColumnName="SucursalOrigenID" />
+                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="NombreTipoPago" ColumnName="NombreTipoPago" />
+                <ScalarProperty Name="TipoPagoID" ColumnName="TipoPagoID" />
+                <ScalarProperty Name="NombreTipoOperacion" ColumnName="NombreTipoOperacion" />
+                <ScalarProperty Name="TipoOperacionID" ColumnName="TipoOperacionID" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -35408,7 +35333,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorDetalleDocumentosView" Width="1.5" PointX="8.75" PointY="18.75" Height="0.39999999999997726" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorKardexDetalleOperacionesView" Width="1.5" PointX="18.75" PointY="10.75" Height="0.39999999999997726" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorProductosCompradosView" Width="1.5" PointX="18.75" PointY="12.75" Height="0.39999999999997726" IsExpanded="false" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorReporteDevolucionDetalleView" Width="1.5" PointX="12.75" PointY="18.75" Height="0.39999999999997726" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ParteAbc" Width="1.5" PointX="7.5" PointY="39" Height="0.40000000000000568" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ParteAbcRango" Width="1.5" PointX="18.75" PointY="14.75" Height="0.39999999999999858" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ParteMaxMinCriterioPredefinido" Width="1.5" PointX="5.25" PointY="39.375" Height="0.40000000000000568" IsExpanded="false" />
@@ -38116,7 +38040,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Corte__73DAF76B" />
         <EntityTypeShape EntityType="RefaccionariaModelo.CorteValidacionView" Width="1.5" PointX="38.375" PointY="41.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Duenio" Width="1.5" PointX="12.375" PointY="26.875" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.MovimientoInventarioView" Width="1.5" PointX="32.375" PointY="38.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaCuentaAuxiliarDevengadoEspecial" Width="1.5" PointX="35.375" PointY="56.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDetalleDevengadoEspecial" Width="1.5" PointX="40.875" PointY="48.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresosDetalleView" Width="1.5" PointX="17.375" PointY="20.75" />
@@ -38392,6 +38315,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasGarantiasView" Width="1.5" PointX="42.375" PointY="19.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" Width="1.5" PointX="31.375" PointY="17.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresComprasView" Width="1.5" PointX="17.375" PointY="24.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.MovimientoInventarioView" Width="1.5" PointX="32.375" PointY="38.75" />
         </Diagram>
     </Diagrams>
   </Designer>

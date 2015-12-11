@@ -2054,9 +2054,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Reportes\ReporteDevolucion.rdlc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Ventas\SeleccionarNotasDeCredito.resx">
       <DependentUpon>SeleccionarNotasDeCredito.cs</DependentUpon>
     </EmbeddedResource>
