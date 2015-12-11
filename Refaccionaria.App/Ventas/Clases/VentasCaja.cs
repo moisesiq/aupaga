@@ -737,8 +737,8 @@ namespace Refaccionaria.App
                             if (mRestante < mImporteFac)
                                 mImporteFac = mRestante;
                             // Se ajustan los datos del producto
-                            oProductos[0].PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(mImporteFac);
-                            oProductos[0].Iva = UtilLocal.ObtenerIvaDePrecio(mImporteFac);
+                            oProductos[0].PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(mImporteFac, 3);
+                            oProductos[0].Iva = UtilLocal.ObtenerIvaDePrecio(mImporteFac, 3);
                             if (++iFactura > 1)
                                 oProductos[0].NombreDeParte = string.Format("{0}\n(Complemento {1})", sDescripcion, (iFactura - 1));
                             // Se manda hacer la factura

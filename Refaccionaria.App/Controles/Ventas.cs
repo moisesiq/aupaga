@@ -1168,8 +1168,8 @@ namespace Refaccionaria.App
 
         private void AplicarPrecioProducto(ProductoVenta Producto, decimal mPrecio)
         {
-            Producto.PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(mPrecio);
-            Producto.Iva = (mPrecio - Producto.PrecioUnitario);
+            Producto.PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(mPrecio, 3);
+            Producto.Iva = UtilLocal.ObtenerIvaDePrecio(mPrecio, 3);
             /* Producto.PrecioConIva = mPrecio;
             Producto.Descripcion = this.DescripcionParteVenta(Producto);
             Producto.Importe = (mPrecio * Producto.Cantidad);

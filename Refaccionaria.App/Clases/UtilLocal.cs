@@ -22,25 +22,35 @@ namespace Refaccionaria.App
 
         #endregion
 
+        public static decimal ObtenerPrecioSinIva(decimal mPrecio, int iDecimales)
+        {
+            return Math.Round(mPrecio / (1 + (GlobalClass.ConfiguracionGlobal.IVA / 100)), iDecimales);
+        }
+
         public static decimal ObtenerPrecioSinIva(decimal mPrecio)
         {
-            return Math.Round(mPrecio / (1 + (GlobalClass.ConfiguracionGlobal.IVA / 100)), 3);
+            return UtilLocal.ObtenerPrecioSinIva(mPrecio, 2);
+        }
+
+        public static decimal ObtenerIvaDePrecio(decimal mPrecio, int iDecimales)
+        {
+            // return Math.Round(mPrecio - UtilLocal.ObtenerPrecioSinIva(mPrecio), 2);
+            return (mPrecio - UtilLocal.ObtenerPrecioSinIva(mPrecio, iDecimales));
         }
 
         public static decimal ObtenerIvaDePrecio(decimal mPrecio)
         {
-            // return Math.Round(mPrecio - UtilLocal.ObtenerPrecioSinIva(mPrecio), 2);
-            return (mPrecio - UtilLocal.ObtenerPrecioSinIva(mPrecio));
+            return UtilLocal.ObtenerIvaDePrecio(mPrecio, 2);
         }
 
         public static decimal ObtenerImporteMasIva(decimal mImporte)
         {
-            return Math.Round(mImporte * (1 + (GlobalClass.ConfiguracionGlobal.IVA / 100)), 3);
+            return Math.Round(mImporte * (1 + (GlobalClass.ConfiguracionGlobal.IVA / 100)), 2);
         }
 
-        public static decimal ObtenerIvaDeImporte(decimal mImporte)
+        public static decimal ObtenerIvaDeSubtotal(decimal mImporte)
         {
-            return Math.Round(mImporte * (GlobalClass.ConfiguracionGlobal.IVA / 100), 3);
+            return Math.Round(mImporte * (GlobalClass.ConfiguracionGlobal.IVA / 100), 2);
         }
 
         public static int SemanaSabAVie(DateTime dFecha)

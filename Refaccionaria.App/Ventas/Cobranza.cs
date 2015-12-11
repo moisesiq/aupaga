@@ -588,14 +588,13 @@ namespace Refaccionaria.App
                 mTotal += mImporte;
 
                 var oVenta = General.GetEntity<Venta>(c => c.VentaID == iVentaID && c.Estatus);
-                decimal mImporteSinIva = UtilLocal.ObtenerPrecioSinIva(mImporte);
                 oNotaDetalle.Add(new ProductoVenta()
                 {
                     NumeroDeParte = iVentaID.ToString(), // Se usa para mete la VentaID
                     NombreDeParte = string.Format("FACTURA: {0}", oVenta.Folio), // Se usa para mostrar la factura
                     Cantidad = 1,
-                    PrecioUnitario = mImporteSinIva,
-                    Iva = (mImporte - mImporteSinIva),
+                    PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(mImporte),
+                    Iva = UtilLocal.ObtenerIvaDePrecio(mImporte),
                     UnidadDeMedida = "."
                 });
             }

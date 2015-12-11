@@ -514,8 +514,8 @@ namespace Refaccionaria.App
                     NumeroDeParte = Producto.NumeroParte,
                     NombreDeParte = Producto.NombreParte,
                     Cantidad = Producto.Cantidad,
-                    PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(Producto.PrecioAlCliente),
-                    Iva = UtilLocal.ObtenerIvaDePrecio(Producto.PrecioAlCliente)
+                    PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(Producto.PrecioAlCliente, 3),
+                    Iva = UtilLocal.ObtenerIvaDePrecio(Producto.PrecioAlCliente, 3)
                     // PrecioConIva = Producto.PrecioAlCliente
                 };
                 this.o9500.ctlComDetalle.AgregarProducto(oProductoV);

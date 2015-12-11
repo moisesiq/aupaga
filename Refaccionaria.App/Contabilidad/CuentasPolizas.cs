@@ -260,6 +260,11 @@ namespace Refaccionaria.App
             frmValor.Dispose();
         }
 
+        private void btnPolizasCambiarFecha_Click(object sender, EventArgs e)
+        {
+            this.PolizasCambiarFecha();
+        }
+
         #endregion
 
         #region [ Métodos ]
@@ -512,6 +517,35 @@ namespace Refaccionaria.App
                 }
             }
             frmListado.Dispose();
+        }
+
+        private void PolizasCambiarFecha()
+        {
+            if (this.dgvDetalle.SelectedRows.Count <= 0)
+            {
+                UtilLocal.MensajeAdvertencia("No hay ninguna póliza seleccionada.");
+                return;
+            }
+
+            if (UtilLocal.MensajePregunta(string.Format("Se han seleccionado {0} pólizas. ¿Estás seguro que deseas cambiar la fecha de todas esas pólizas?"
+                , this.dgvDetalle.SelectedRows.Count)) != DialogResult.Yes)
+                return;
+
+            // Se pide la nueva sucursal
+            var frmValor = new MensajeObtenerValor("Selecciona la nueva fecha:", DateTime.Now, MensajeObtenerValor.Tipo.Fecha);
+            if (frmValor.ShowDialog(Principal.Instance) == DialogResult.OK)
+            {
+                DateTime dNueva = Helper.ConvertirFechaHora(frmValor.Valor).Date;
+                foreach (DataGridViewRow oFila in this.dgvDetalle.SelectedRows)
+                {
+                    int iPolizaID = Helper.ConvertirEntero(oFila.Cells["ContaPolizaID"].Value);
+                    var oPoliza = General.GetEntity<ContaPoliza>(c => c.ContaPolizaID == iPolizaID);
+                    oPoliza.Fecha = (dNueva.Add(oPoliza.Fecha - oPoliza.Fecha.Date));
+                    Guardar.Generico<ContaPoliza>(oPoliza);
+                }
+                this.LlenarArbol();
+            }
+            frmValor.Dispose();
         }
 
         #endregion

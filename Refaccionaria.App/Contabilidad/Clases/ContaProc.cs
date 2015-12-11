@@ -2156,7 +2156,7 @@ namespace Refaccionaria.App
         private static void AfectarConIvaCostoParteDeMovimientoInventario(ref ContaPolizaDetalle oDetalle, int iId)
         {
             ContaProc.AfectarConCostoParteDeMovimientoInventario(ref oDetalle, iId);
-            oDetalle.Cargo = UtilLocal.ObtenerIvaDeImporte(oDetalle.Cargo);
+            oDetalle.Cargo = UtilLocal.ObtenerIvaDeSubtotal(oDetalle.Cargo);
         }
 
         private static void AfectarConCostoMasIvaParteDeMovimientoInventario(ref ContaPolizaDetalle oDetalle, int iId)

@@ -14,8 +14,8 @@ namespace Refaccionaria.App
             InitializeComponent();
 
             this.txtImporte.Text = mImporte.ToString();
-            this.txtSubtotal.Text = Math.Round(UtilLocal.ObtenerPrecioSinIva(mImporte), 2).ToString();
-            this.txtIva.Text = Math.Round(UtilLocal.ObtenerIvaDePrecio(mImporte), 2).ToString();
+            this.txtSubtotal.Text = UtilLocal.ObtenerPrecioSinIva(mImporte).ToString();
+            this.txtIva.Text = UtilLocal.ObtenerIvaDePrecio(mImporte).ToString();
         }
 
         #region [ Propiedades ]

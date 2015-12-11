@@ -35,12 +35,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnPolizaAgregar = new System.Windows.Forms.Button();
             this.tgvCuentas = new AdvancedDataGridView.TreeGridView();
             this.Cuentas_Id = new AdvancedDataGridView.TreeGridColumn();
@@ -50,6 +50,12 @@
             this.Cuentas_Sucursal2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuentas_Sucursal3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPoliza = new System.Windows.Forms.DataGridView();
+            this.pol_PolizaDetalleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Abono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pol_Referencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCuentaMover = new System.Windows.Forms.Button();
             this.btnCuentaEliminar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -73,12 +79,7 @@
             this.txtBusquedaPolizaDet = new Refaccionaria.Negocio.TextoMod();
             this.txtBusqueda = new Refaccionaria.Negocio.TextoMod();
             this.cmbSucursal = new Refaccionaria.Negocio.ComboEtiqueta();
-            this.pol_PolizaDetalleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Abono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pol_Referencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnPolizasCambiarFecha = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tgvCuentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPoliza)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -242,6 +243,54 @@
             this.dgvPoliza.Size = new System.Drawing.Size(628, 199);
             this.dgvPoliza.StandardTab = true;
             this.dgvPoliza.TabIndex = 15;
+            // 
+            // pol_PolizaDetalleID
+            // 
+            this.pol_PolizaDetalleID.HeaderText = "PolizaID";
+            this.pol_PolizaDetalleID.Name = "pol_PolizaDetalleID";
+            this.pol_PolizaDetalleID.ReadOnly = true;
+            this.pol_PolizaDetalleID.Visible = false;
+            // 
+            // pol_Cuenta
+            // 
+            this.pol_Cuenta.HeaderText = "Cuenta";
+            this.pol_Cuenta.Name = "pol_Cuenta";
+            this.pol_Cuenta.ReadOnly = true;
+            this.pol_Cuenta.Width = 120;
+            // 
+            // pol_Cargo
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "C2";
+            this.pol_Cargo.DefaultCellStyle = dataGridViewCellStyle6;
+            this.pol_Cargo.HeaderText = "Cargo";
+            this.pol_Cargo.Name = "pol_Cargo";
+            this.pol_Cargo.ReadOnly = true;
+            this.pol_Cargo.Width = 80;
+            // 
+            // pol_Abono
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "C2";
+            this.pol_Abono.DefaultCellStyle = dataGridViewCellStyle7;
+            this.pol_Abono.HeaderText = "Abono";
+            this.pol_Abono.Name = "pol_Abono";
+            this.pol_Abono.ReadOnly = true;
+            this.pol_Abono.Width = 80;
+            // 
+            // pol_Sucursal
+            // 
+            this.pol_Sucursal.HeaderText = "Sucursal";
+            this.pol_Sucursal.Name = "pol_Sucursal";
+            this.pol_Sucursal.ReadOnly = true;
+            this.pol_Sucursal.Width = 80;
+            // 
+            // pol_Referencia
+            // 
+            this.pol_Referencia.HeaderText = "Referencia";
+            this.pol_Referencia.Name = "pol_Referencia";
+            this.pol_Referencia.ReadOnly = true;
+            this.pol_Referencia.Width = 200;
             // 
             // btnCuentaMover
             // 
@@ -545,59 +594,26 @@
             this.cmbSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbSucursal_SelectedIndexChanged);
             this.cmbSucursal.TextChanged += new System.EventHandler(this.cmbSucursal_TextChanged);
             // 
-            // pol_PolizaDetalleID
+            // btnPolizasCambiarFecha
             // 
-            this.pol_PolizaDetalleID.HeaderText = "PolizaID";
-            this.pol_PolizaDetalleID.Name = "pol_PolizaDetalleID";
-            this.pol_PolizaDetalleID.ReadOnly = true;
-            this.pol_PolizaDetalleID.Visible = false;
-            // 
-            // pol_Cuenta
-            // 
-            this.pol_Cuenta.HeaderText = "Cuenta";
-            this.pol_Cuenta.Name = "pol_Cuenta";
-            this.pol_Cuenta.ReadOnly = true;
-            this.pol_Cuenta.Width = 120;
-            // 
-            // pol_Cargo
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "C2";
-            this.pol_Cargo.DefaultCellStyle = dataGridViewCellStyle6;
-            this.pol_Cargo.HeaderText = "Cargo";
-            this.pol_Cargo.Name = "pol_Cargo";
-            this.pol_Cargo.ReadOnly = true;
-            this.pol_Cargo.Width = 80;
-            // 
-            // pol_Abono
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "C2";
-            this.pol_Abono.DefaultCellStyle = dataGridViewCellStyle7;
-            this.pol_Abono.HeaderText = "Abono";
-            this.pol_Abono.Name = "pol_Abono";
-            this.pol_Abono.ReadOnly = true;
-            this.pol_Abono.Width = 80;
-            // 
-            // pol_Sucursal
-            // 
-            this.pol_Sucursal.HeaderText = "Sucursal";
-            this.pol_Sucursal.Name = "pol_Sucursal";
-            this.pol_Sucursal.ReadOnly = true;
-            this.pol_Sucursal.Width = 80;
-            // 
-            // pol_Referencia
-            // 
-            this.pol_Referencia.HeaderText = "Referencia";
-            this.pol_Referencia.Name = "pol_Referencia";
-            this.pol_Referencia.ReadOnly = true;
-            this.pol_Referencia.Width = 200;
+            this.btnPolizasCambiarFecha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnPolizasCambiarFecha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPolizasCambiarFecha.ForeColor = System.Drawing.Color.White;
+            this.btnPolizasCambiarFecha.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnPolizasCambiarFecha.Location = new System.Drawing.Point(1289, 341);
+            this.btnPolizasCambiarFecha.Name = "btnPolizasCambiarFecha";
+            this.btnPolizasCambiarFecha.Size = new System.Drawing.Size(68, 22);
+            this.btnPolizasCambiarFecha.TabIndex = 29;
+            this.btnPolizasCambiarFecha.Text = "/ Fecha +";
+            this.btnPolizasCambiarFecha.UseVisualStyleBackColor = false;
+            this.btnPolizasCambiarFecha.Click += new System.EventHandler(this.btnPolizasCambiarFecha_Click);
             // 
             // CuentasPolizas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.btnPolizasCambiarFecha);
             this.Controls.Add(this.cmbSucursal);
             this.Controls.Add(this.txtBusquedaPolizaDet);
             this.Controls.Add(this.btnPolizaCambiarSucursal);
@@ -667,5 +683,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pol_Abono;
         private System.Windows.Forms.DataGridViewTextBoxColumn pol_Sucursal;
         private System.Windows.Forms.DataGridViewTextBoxColumn pol_Referencia;
+        private System.Windows.Forms.Button btnPolizasCambiarFecha;
     }
 }

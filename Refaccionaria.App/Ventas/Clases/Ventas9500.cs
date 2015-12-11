@@ -322,8 +322,8 @@ namespace Refaccionaria.App
                     Costo = oPartePrecio.Costo.Valor(),
                     CostoConDescuento = (oPartePrecio.CostoConDescuento ?? oPartePrecio.Costo.Valor()),
                     Cantidad = oParte.Cantidad,
-                    PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(mPrecio),
-                    Iva = UtilLocal.ObtenerIvaDePrecio(mPrecio)
+                    PrecioUnitario = UtilLocal.ObtenerPrecioSinIva(mPrecio, 3),
+                    Iva = UtilLocal.ObtenerIvaDePrecio(mPrecio, 3)
                 });
             }
             // Se guarda la venta

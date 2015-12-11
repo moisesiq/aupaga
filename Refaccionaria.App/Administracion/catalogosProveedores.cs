@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
+using System.ComponentModel;
+
 using AdvancedDataGridView;
 
 using Refaccionaria.Modelo;
@@ -1345,8 +1347,16 @@ namespace Refaccionaria.App
             try
             {
                 foreach (DataGridViewRow row in dgvMovimientosNoPagados.Rows)
-                    if (Helper.ConvertirBool(row.Cells["pen_Sel"].Value).Equals(true))
-                        ids.Add(Negocio.Helper.ConvertirEntero(row.Cells["pen_MovimientoInventarioID"].Value));
+                {
+                    if (!Helper.ConvertirBool(row.Cells["pen_Sel"].Value))
+                        continue;
+
+                    int iMovID = Helper.ConvertirEntero(row.Cells["pen_MovimientoInventarioID"].Value);
+                    if (Helper.ConvertirBool(row.Cells["pen_EsAgrupador"].Value))
+                        ids.AddRange(General.GetListOf<MovimientoInventario>(c => c.MovimientoAgrupadorID == iMovID && c.Estatus).Select(c => c.MovimientoInventarioID));
+                    else
+                        ids.Add(iMovID);
+                }
             }
             catch (Exception ex)
             {
@@ -1454,10 +1464,12 @@ namespace Refaccionaria.App
             foreach (var oReg in oPendientes)
             {
                 int iFila = this.dgvMovimientosNoPagados.Rows.Add(oReg.MovimientoInventarioID, false, oReg.Factura, oReg.Fecha
-                    , oReg.ImporteFactura, oReg.Abonado, oReg.Saldo, oReg.Usuario, oReg.EsAgrupador);
+                    , oReg.ImporteFactura, oReg.Abonado, oReg.Saldo, (oReg.Fecha.Value.AddDays(oReg.DiasPlazo.Valor())), oReg.Usuario, oReg.EsAgrupador);
                 if (oReg.EsAgrupador)
                     this.dgvMovimientosNoPagados.Rows[iFila].DefaultCellStyle.Font = new Font(this.dgvMovimientosNoPagados.Font, FontStyle.Bold);
             }
+            // Se ordena el grid
+            this.dgvMovimientosNoPagados.Sort(this.dgvMovimientosNoPagados.Columns["pen_Fecha"], ListSortDirection.Ascending);
 
             // Se llenan los totales
             this.dgvPendientesTotales.Rows.Clear();
@@ -1497,6 +1509,9 @@ namespace Refaccionaria.App
             var oMovsSel = new List<int>();
             foreach (DataGridViewRow oFila in this.dgvMovimientosNoPagados.Rows)
             {
+                if (!Helper.ConvertirBool(oFila.Cells["pen_Sel"].Value))
+                    continue;
+
                 // Se valida que no se seleccione un movimiento agrupador
                 if (Helper.ConvertirBool(oFila.Cells["pen_EsAgrupador"].Value))
                 {
@@ -1506,6 +1521,11 @@ namespace Refaccionaria.App
                 //
                 if (Helper.ConvertirBool(oFila.Cells["pen_Sel"].Value))
                     oMovsSel.Add(Helper.ConvertirEntero(oFila.Cells["pen_MovimientoInventarioID"].Value));
+            }
+            if (oMovsSel.Count <= 0)
+            {
+                UtilLocal.MensajeAdvertencia("No hay movimientos seleccionados para agrupar.");
+                return;
             }
 
             var frmAgrupar = new MovimientosAgrupar(oMovsSel);
