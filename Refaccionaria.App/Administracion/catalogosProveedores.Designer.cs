@@ -124,7 +124,6 @@
             this.dtpHoraMaxima = new System.Windows.Forms.DateTimePicker();
             this.lblHoraMaxima = new System.Windows.Forms.Label();
             this.lblMontoPaqueteria = new System.Windows.Forms.Label();
-            this.txtMontoPaqueteria = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkUsarDescuentosItemFactura = new System.Windows.Forms.CheckBox();
             this.chkAceptaDevolucion = new System.Windows.Forms.CheckBox();
             this.txtBeneficiario = new System.Windows.Forms.TextBox();
@@ -142,7 +141,6 @@
             this.chkLunes = new System.Windows.Forms.CheckBox();
             this.nudCalendarioPedido = new System.Windows.Forms.NumericUpDown();
             this.lblSeguro = new System.Windows.Forms.Label();
-            this.txtSeguro = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkCobraSeguro = new System.Windows.Forms.CheckBox();
             this.dtpHoraTope = new System.Windows.Forms.DateTimePicker();
             this.cboEstatusProveedor = new System.Windows.Forms.ComboBox();
@@ -166,17 +164,7 @@
             this.cboPaqueteria = new System.Windows.Forms.ComboBox();
             this.lblPaqueteria = new System.Windows.Forms.Label();
             this.gpoDescuentosFacturas = new System.Windows.Forms.GroupBox();
-            this.txtDescuentoFacturaCinco = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaCuatro = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaTres = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaDos = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaUno = new Refaccionaria.App.textBoxOnlyDouble();
             this.gpoDescuentosItems = new System.Windows.Forms.GroupBox();
-            this.txtDescuentoItemCinco = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemCuatro = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemTres = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemDos = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemUno = new Refaccionaria.App.textBoxOnlyDouble();
             this.lblPlazo = new System.Windows.Forms.Label();
             this.npdDiasPlazo = new System.Windows.Forms.NumericUpDown();
             this.txtPaginaWeb = new System.Windows.Forms.TextBox();
@@ -347,6 +335,18 @@
             this.smiCambiarFolio = new System.Windows.Forms.ToolStripMenuItem();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.txtMontoPaqueteria = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtSeguro = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaCinco = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaCuatro = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaTres = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaDos = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaUno = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemCinco = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemCuatro = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemTres = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemDos = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemUno = new Refaccionaria.App.textBoxOnlyDouble();
             this.pen_MovimientoInventarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pen_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pen_Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -643,15 +643,6 @@
             this.lblMontoPaqueteria.TabIndex = 67;
             this.lblMontoPaqueteria.Text = "Monto Paqueteria";
             // 
-            // txtMontoPaqueteria
-            // 
-            this.txtMontoPaqueteria.Enabled = false;
-            this.txtMontoPaqueteria.Location = new System.Drawing.Point(348, 165);
-            this.txtMontoPaqueteria.Name = "txtMontoPaqueteria";
-            this.txtMontoPaqueteria.Size = new System.Drawing.Size(71, 20);
-            this.txtMontoPaqueteria.TabIndex = 66;
-            this.txtMontoPaqueteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // chkUsarDescuentosItemFactura
             // 
             this.chkUsarDescuentosItemFactura.AutoSize = true;
@@ -834,15 +825,6 @@
             this.lblSeguro.Size = new System.Drawing.Size(41, 13);
             this.lblSeguro.TabIndex = 54;
             this.lblSeguro.Text = "Seguro";
-            // 
-            // txtSeguro
-            // 
-            this.txtSeguro.Enabled = false;
-            this.txtSeguro.Location = new System.Drawing.Point(175, 348);
-            this.txtSeguro.Name = "txtSeguro";
-            this.txtSeguro.Size = new System.Drawing.Size(70, 20);
-            this.txtSeguro.TabIndex = 53;
-            this.txtSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // chkCobraSeguro
             // 
@@ -1169,46 +1151,6 @@
             this.gpoDescuentosFacturas.TabStop = false;
             this.gpoDescuentosFacturas.Text = "Descuentos a Facturas";
             // 
-            // txtDescuentoFacturaCinco
-            // 
-            this.txtDescuentoFacturaCinco.Location = new System.Drawing.Point(194, 18);
-            this.txtDescuentoFacturaCinco.Name = "txtDescuentoFacturaCinco";
-            this.txtDescuentoFacturaCinco.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaCinco.TabIndex = 4;
-            this.txtDescuentoFacturaCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaCuatro
-            // 
-            this.txtDescuentoFacturaCuatro.Location = new System.Drawing.Point(147, 18);
-            this.txtDescuentoFacturaCuatro.Name = "txtDescuentoFacturaCuatro";
-            this.txtDescuentoFacturaCuatro.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaCuatro.TabIndex = 3;
-            this.txtDescuentoFacturaCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaTres
-            // 
-            this.txtDescuentoFacturaTres.Location = new System.Drawing.Point(100, 18);
-            this.txtDescuentoFacturaTres.Name = "txtDescuentoFacturaTres";
-            this.txtDescuentoFacturaTres.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaTres.TabIndex = 2;
-            this.txtDescuentoFacturaTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaDos
-            // 
-            this.txtDescuentoFacturaDos.Location = new System.Drawing.Point(53, 18);
-            this.txtDescuentoFacturaDos.Name = "txtDescuentoFacturaDos";
-            this.txtDescuentoFacturaDos.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaDos.TabIndex = 1;
-            this.txtDescuentoFacturaDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaUno
-            // 
-            this.txtDescuentoFacturaUno.Location = new System.Drawing.Point(6, 18);
-            this.txtDescuentoFacturaUno.Name = "txtDescuentoFacturaUno";
-            this.txtDescuentoFacturaUno.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaUno.TabIndex = 0;
-            this.txtDescuentoFacturaUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // gpoDescuentosItems
             // 
             this.gpoDescuentosItems.Controls.Add(this.txtDescuentoItemCinco);
@@ -1222,46 +1164,6 @@
             this.gpoDescuentosItems.TabIndex = 18;
             this.gpoDescuentosItems.TabStop = false;
             this.gpoDescuentosItems.Text = "Descuentos a items";
-            // 
-            // txtDescuentoItemCinco
-            // 
-            this.txtDescuentoItemCinco.Location = new System.Drawing.Point(194, 18);
-            this.txtDescuentoItemCinco.Name = "txtDescuentoItemCinco";
-            this.txtDescuentoItemCinco.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemCinco.TabIndex = 4;
-            this.txtDescuentoItemCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemCuatro
-            // 
-            this.txtDescuentoItemCuatro.Location = new System.Drawing.Point(147, 18);
-            this.txtDescuentoItemCuatro.Name = "txtDescuentoItemCuatro";
-            this.txtDescuentoItemCuatro.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemCuatro.TabIndex = 3;
-            this.txtDescuentoItemCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemTres
-            // 
-            this.txtDescuentoItemTres.Location = new System.Drawing.Point(100, 18);
-            this.txtDescuentoItemTres.Name = "txtDescuentoItemTres";
-            this.txtDescuentoItemTres.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemTres.TabIndex = 2;
-            this.txtDescuentoItemTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemDos
-            // 
-            this.txtDescuentoItemDos.Location = new System.Drawing.Point(53, 18);
-            this.txtDescuentoItemDos.Name = "txtDescuentoItemDos";
-            this.txtDescuentoItemDos.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemDos.TabIndex = 1;
-            this.txtDescuentoItemDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemUno
-            // 
-            this.txtDescuentoItemUno.Location = new System.Drawing.Point(6, 18);
-            this.txtDescuentoItemUno.Name = "txtDescuentoItemUno";
-            this.txtDescuentoItemUno.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemUno.TabIndex = 0;
-            this.txtDescuentoItemUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblPlazo
             // 
@@ -2484,7 +2386,7 @@
             this.calProveedor.Location = new System.Drawing.Point(213, 7);
             this.calProveedor.MaximumViewDays = 126;
             this.calProveedor.Name = "calProveedor";
-            this.calProveedor.Size = new System.Drawing.Size(944, 625);
+            this.calProveedor.Size = new System.Drawing.Size(1331, 625);
             this.calProveedor.TabIndex = 2;
             this.calProveedor.Text = "Calendario";
             this.calProveedor.ItemCreating += new System.Windows.Forms.Calendar.Calendar.CalendarItemCancelEventHandler(this.calProveedor_ItemCreating);
@@ -3489,6 +3391,104 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // txtMontoPaqueteria
+            // 
+            this.txtMontoPaqueteria.Enabled = false;
+            this.txtMontoPaqueteria.Location = new System.Drawing.Point(348, 165);
+            this.txtMontoPaqueteria.Name = "txtMontoPaqueteria";
+            this.txtMontoPaqueteria.Size = new System.Drawing.Size(71, 20);
+            this.txtMontoPaqueteria.TabIndex = 66;
+            this.txtMontoPaqueteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtSeguro
+            // 
+            this.txtSeguro.Enabled = false;
+            this.txtSeguro.Location = new System.Drawing.Point(175, 348);
+            this.txtSeguro.Name = "txtSeguro";
+            this.txtSeguro.Size = new System.Drawing.Size(70, 20);
+            this.txtSeguro.TabIndex = 53;
+            this.txtSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaCinco
+            // 
+            this.txtDescuentoFacturaCinco.Location = new System.Drawing.Point(194, 18);
+            this.txtDescuentoFacturaCinco.Name = "txtDescuentoFacturaCinco";
+            this.txtDescuentoFacturaCinco.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaCinco.TabIndex = 4;
+            this.txtDescuentoFacturaCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaCuatro
+            // 
+            this.txtDescuentoFacturaCuatro.Location = new System.Drawing.Point(147, 18);
+            this.txtDescuentoFacturaCuatro.Name = "txtDescuentoFacturaCuatro";
+            this.txtDescuentoFacturaCuatro.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaCuatro.TabIndex = 3;
+            this.txtDescuentoFacturaCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaTres
+            // 
+            this.txtDescuentoFacturaTres.Location = new System.Drawing.Point(100, 18);
+            this.txtDescuentoFacturaTres.Name = "txtDescuentoFacturaTres";
+            this.txtDescuentoFacturaTres.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaTres.TabIndex = 2;
+            this.txtDescuentoFacturaTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaDos
+            // 
+            this.txtDescuentoFacturaDos.Location = new System.Drawing.Point(53, 18);
+            this.txtDescuentoFacturaDos.Name = "txtDescuentoFacturaDos";
+            this.txtDescuentoFacturaDos.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaDos.TabIndex = 1;
+            this.txtDescuentoFacturaDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaUno
+            // 
+            this.txtDescuentoFacturaUno.Location = new System.Drawing.Point(6, 18);
+            this.txtDescuentoFacturaUno.Name = "txtDescuentoFacturaUno";
+            this.txtDescuentoFacturaUno.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaUno.TabIndex = 0;
+            this.txtDescuentoFacturaUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemCinco
+            // 
+            this.txtDescuentoItemCinco.Location = new System.Drawing.Point(194, 18);
+            this.txtDescuentoItemCinco.Name = "txtDescuentoItemCinco";
+            this.txtDescuentoItemCinco.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemCinco.TabIndex = 4;
+            this.txtDescuentoItemCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemCuatro
+            // 
+            this.txtDescuentoItemCuatro.Location = new System.Drawing.Point(147, 18);
+            this.txtDescuentoItemCuatro.Name = "txtDescuentoItemCuatro";
+            this.txtDescuentoItemCuatro.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemCuatro.TabIndex = 3;
+            this.txtDescuentoItemCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemTres
+            // 
+            this.txtDescuentoItemTres.Location = new System.Drawing.Point(100, 18);
+            this.txtDescuentoItemTres.Name = "txtDescuentoItemTres";
+            this.txtDescuentoItemTres.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemTres.TabIndex = 2;
+            this.txtDescuentoItemTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemDos
+            // 
+            this.txtDescuentoItemDos.Location = new System.Drawing.Point(53, 18);
+            this.txtDescuentoItemDos.Name = "txtDescuentoItemDos";
+            this.txtDescuentoItemDos.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemDos.TabIndex = 1;
+            this.txtDescuentoItemDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemUno
+            // 
+            this.txtDescuentoItemUno.Location = new System.Drawing.Point(6, 18);
+            this.txtDescuentoItemUno.Name = "txtDescuentoItemUno";
+            this.txtDescuentoItemUno.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemUno.TabIndex = 0;
+            this.txtDescuentoItemUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // pen_MovimientoInventarioID
             // 
             this.pen_MovimientoInventarioID.HeaderText = "MovimientoInventarioID";
@@ -3502,7 +3502,7 @@
             this.pen_Sel.Name = "pen_Sel";
             this.pen_Sel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.pen_Sel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.pen_Sel.Width = 40;
+            this.pen_Sel.Width = 30;
             // 
             // pen_Factura
             // 
@@ -3526,7 +3526,7 @@
             this.pen_Importe.HeaderText = "Importe";
             this.pen_Importe.Name = "pen_Importe";
             this.pen_Importe.ReadOnly = true;
-            this.pen_Importe.Width = 80;
+            this.pen_Importe.Width = 70;
             // 
             // pen_Pagado
             // 
@@ -3536,11 +3536,12 @@
             this.pen_Pagado.HeaderText = "Pagado";
             this.pen_Pagado.Name = "pen_Pagado";
             this.pen_Pagado.ReadOnly = true;
-            this.pen_Pagado.Width = 80;
+            this.pen_Pagado.Width = 70;
             // 
             // pen_Saldo
             // 
             dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle34.Format = "C2";
             this.pen_Saldo.DefaultCellStyle = dataGridViewCellStyle34;
             this.pen_Saldo.HeaderText = "Saldo";
@@ -3554,13 +3555,14 @@
             this.pen_Vencimiento.DefaultCellStyle = dataGridViewCellStyle35;
             this.pen_Vencimiento.HeaderText = "Fecha pago";
             this.pen_Vencimiento.Name = "pen_Vencimiento";
-            this.pen_Vencimiento.Width = 80;
+            this.pen_Vencimiento.Width = 50;
             // 
             // pen_Usuario
             // 
             this.pen_Usuario.HeaderText = "Usuario";
             this.pen_Usuario.Name = "pen_Usuario";
             this.pen_Usuario.ReadOnly = true;
+            this.pen_Usuario.Width = 60;
             // 
             // pen_EsAgrupador
             // 
