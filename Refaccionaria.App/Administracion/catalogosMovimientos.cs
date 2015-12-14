@@ -1363,7 +1363,7 @@ namespace Refaccionaria.App
                         foreach (DataGridViewRow row in this.dgvDetalleCaptura.Rows)
                         {
                             var parteId = Helper.ConvertirEntero(row.Cells["ParteID"].Value);
-                            var cantidad = Helper.ConvertirEntero(row.Cells["UNS"].Value);
+                            var cantidad = Helper.ConvertirDecimal(row.Cells["UNS"].Value);
                             var detalleMovimiento = new MovimientoInventarioDetalle()
                             {
                                 MovimientoInventarioID = movimientoDevolucion.MovimientoInventarioID,

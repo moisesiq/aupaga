@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="10/31/2015 11:00:05" ReportInfo.CreatorVersion="2013.3.2.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="12/11/2015 19:14:26" ReportInfo.CreatorVersion="2013.3.2.0">
   <Dictionary>
     <BusinessObjectDataSource Name="Poliza" ReferenceName="Poliza" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.ProveedoresPolizasView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="ProveedorPolizaID" DataType="System.Int32"/>
       <Column Name="ProveedorID" DataType="System.Int32"/>
       <Column Name="Proveedor" DataType="System.String"/>
       <Column Name="FechaPago" DataType="System.DateTime"/>
-      <Column Name="ImportePago" DataType="System.Decimal"/>
       <Column Name="UsuarioID" DataType="System.Int32"/>
       <Column Name="Usuario" DataType="System.String"/>
       <Column Name="BancoCuentaID" DataType="System.Int32"/>
@@ -23,7 +22,7 @@
       <Column Name="Fecha" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
       <Column Name="MovimientoInventarioID" DataType="System.Int32"/>
       <Column Name="FolioFactura" DataType="System.String"/>
-      <Column Name="Importe" DataType="System.Decimal"/>
+      <Column Name="Importe" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
       <Column Name="FormaDePago" DataType="System.String"/>
       <Column Name="FolioDePago" DataType="System.String"/>
       <Column Name="NotaDeCreditoID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
@@ -32,6 +31,8 @@
       <Column Name="NotaDeCredito" DataType="System.String"/>
       <Column Name="NotaDeCreditoOrigenID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
       <Column Name="NotaDeCreditoOrigen" DataType="System.String"/>
+      <Column Name="Subtotal" DataType="System.Decimal"/>
+      <Column Name="Iva" DataType="System.Decimal"/>
     </BusinessObjectDataSource>
     <BusinessObjectDataSource Name="Facturas" ReferenceName="Facturas" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.ProveedoresPagosView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="ProveedorPolizaID" DataType="System.Int32"/>
@@ -40,13 +41,18 @@
       <Column Name="Factura" DataType="System.String"/>
       <Column Name="ImporteFactura" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
       <Column Name="ImporteTotal" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
-      <Column Name="Abonadototal" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
-      <Column Name="Abonado" DataType="System.Decimal"/>
       <Column Name="Descuento" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
       <Column Name="FechaFactura" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="FechaPago" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="AbonadoTotal" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="AbonadoSubtotal" DataType="System.Decimal"/>
+      <Column Name="AbonadoIva" DataType="System.Decimal"/>
+      <Column Name="AbonadoImporte" DataType="System.Decimal"/>
     </BusinessObjectDataSource>
+    <Parameter Name="Parameter" DataType="System.Int32" Expression="[Abonos]"/>
     <Total Name="Descuento" Expression="[Facturas.Descuento]" Evaluator="Data4"/>
     <Total Name="Abonos" Expression="[Abonos.Importe]" Evaluator="Data1"/>
+    <Total Name="Abonos2" Expression="[Facturas.AbonadoImporte] - [Facturas.Descuento]" Evaluator="Data4"/>
   </Dictionary>
   <ReportPage Name="Page1" PaperWidth="215.9" PaperHeight="279.4" RawPaperSize="1">
     <PageHeaderBand Name="PageHeader1" Width="740.5" Height="149.76">
@@ -69,23 +75,21 @@
       <TextObject Name="Text105" Left="633.15" Top="57.13" Width="103.95" Height="13.61" Text="[Poliza.FolioDePago]" HorzAlign="Right" Font="Calibri, 11pt, style=Bold"/>
       <TextObject Name="Text106" Left="633.15" Top="85.91" Width="103.95" Height="13.61" Text="[Poliza.Usuario]" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text1" Top="66.8" Width="340.2" Height="37.15" Text="[Poliza.Proveedor]" Font="Calibri, 20pt, style=Bold"/>
-      <TextObject Name="Text2" Top="101.95" Width="302.4" Height="18.9" Text="[Poliza.ImportePago]" Format="Currency" Format.UseLocale="true" WordWrap="false" Font="Calibri, 12pt, style=Bold" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text2" Top="101.95" Width="302.4" Height="18.9" Text="[Facturas.Descuento]" Format="Currency" Format.UseLocale="true" WordWrap="false" Font="Calibri, 12pt, style=Bold" Trimming="EllipsisCharacter"/>
     </PageHeaderBand>
     <DataBand Name="Data4" Top="152.96" Width="740.5" Height="18.41" DataSource="Facturas">
       <TextObject Name="Text108" Left="103.95" Width="94.5" Height="15.21" Text="[Facturas.Factura]" Font="Calibri, 11pt"/>
       <TextObject Name="Text109" Left="217.35" Width="85.05" Height="15.21" Text="[Facturas.ImporteFactura]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text112" Left="543.36" Width="85.05" Height="15.21" Text="[Facturas.Descuento]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt, style=Bold"/>
-      <TextObject Name="Text113" Left="652.05" Width="85.05" Height="15.21" Text="[[Facturas.Abonado] - [Facturas.Descuento]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt, style=Bold"/>
-      <TextObject Name="Text110" Left="326.02" Width="85.05" Height="15.21" Text="[[Facturas.Abonadototal]-[Facturas.Abonado]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt"/>
-      <TextObject Name="Text111" Left="434.69" Width="85.05" Height="15.21" Text="[[Facturas.ImporteFactura]-([Facturas.Abonadototal]-[Facturas.Abonado])]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt"/>
+      <TextObject Name="Text113" Left="652.05" Width="85.05" Height="15.21" Text="[[Facturas.AbonadoImporte] - [Facturas.Descuento]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt, style=Bold"/>
+      <TextObject Name="Text110" Left="326.02" Width="85.05" Height="15.21" Text="[[Facturas.AbonadoTotal]-[Facturas.AbonadoImporte]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt"/>
+      <TextObject Name="Text111" Left="434.69" Width="85.05" Height="15.21" Text="[[Facturas.ImporteFactura]-([Facturas.AbonadoTotal]-[Facturas.AbonadoImporte])]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text129" Width="103.95" Height="15.21" Text="[Facturas.FechaFactura]" Font="Calibri, 11pt"/>
       <DataFooterBand Name="DataFooter1" Top="174.57" Width="740.5" Height="18.9">
         <TextObject Name="Text114" Left="113.4" Top="3" Width="103.95" Height="13.99" Text="Totales" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
         <TextObject Name="Text115" Left="217.35" Top="3" Width="94.5" Height="13.99" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
-        <TextObject Name="Text116" Left="321.3" Top="3" Width="94.5" Height="13.99" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
-        <TextObject Name="Text117" Left="434.7" Top="3" Width="94.5" Height="13.99" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
         <TextObject Name="Text118" Left="538.65" Top="3" Width="94.5" Height="13.99" Border.Lines="Top" Border.Color="Gray" Text="[Descuento]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
-        <TextObject Name="Text119" Left="642.6" Top="3" Width="94.5" Height="13.99" Border.Lines="Top" Border.Color="Gray" Text="[Poliza.ImportePago]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
+        <TextObject Name="Text119" Left="642.6" Top="3" Width="94.5" Height="13.99" Border.Lines="Top" Border.Color="Gray" Text="[Abonos2]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
       </DataFooterBand>
     </DataBand>
     <DataBand Name="Data1" Top="218.77" Width="740.5" Height="18.9" DataSource="Abonos">

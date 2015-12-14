@@ -2582,7 +2582,7 @@ namespace Refaccionaria.App
         {
             var oDev = General.GetEntity<VentaDevolucion>(c => c.VentaDevolucionID == iId && c.Estatus);
             var oPagoVale = General.GetEntity<VentaPagoDetalle>(c => c.VentaPagoDetalleID == oDev.VentaPagoDetalleID && c.Estatus);
-            return oPagoVale.NotaDeCreditoID.ToString();
+            return (oPagoVale == null ? "" : oPagoVale.NotaDeCreditoID.ToString());
         }
 
         private static string ObtenerValesDePago(int iId)
@@ -2596,7 +2596,7 @@ namespace Refaccionaria.App
         {
             var oGarantia = General.GetEntity<VentaGarantia>(c => c.VentaGarantiaID == iId && c.Estatus);
             var oPagoVale = General.GetEntity<VentaPagoDetalle>(c => c.VentaPagoDetalleID == oGarantia.VentaPagoDetalleID && c.Estatus);
-            return oPagoVale.NotaDeCreditoID.ToString();
+            return (oPagoVale == null ? "" : oPagoVale.NotaDeCreditoID.ToString());
         }
 
         private static string ObtenerValesDeVenta(int iId)

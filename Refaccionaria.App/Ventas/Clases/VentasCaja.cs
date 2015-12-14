@@ -1179,7 +1179,7 @@ namespace Refaccionaria.App
             // Se manda a generar la Factura Global
             bool bFacturaGlobal = this.FacturaGlobal(oDia);
             if (!bFacturaGlobal)
-                return false;
+               return false;
 
             // Se manda guardar el histórico del corte
             bool bSeguir = this.GuardarHistoricoCorte();

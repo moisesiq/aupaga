@@ -619,7 +619,6 @@ namespace Refaccionaria.App
                     Iva = UtilLocal.ObtenerIvaDePrecio(mImporte),
                     Folio = this.txtDocumento.Text
                 };
-                return false;
                 Guardar.Generico<ProveedorPolizaDetalle>(polizaDetalle);
                 oPolizaDetalle.Add(polizaDetalle);
 
