@@ -1084,8 +1084,11 @@ namespace Refaccionaria.App
                         , Cat.ContaCuentasAuxiliares.Inventario, mCostoTotal, ResU.Respuesta.NombreUsuario, Cat.Tablas.MovimientoInventario, traspaso.MovimientoInventarioID
                         , Helper.ConvertirEntero(this.cboUbicacionOrigen.SelectedValue));
                     var oCuentaQuitar = General.GetEntity<ContaPolizaDetalle>(c => c.ContaPolizaID == oPoliza.ContaPolizaID && c.Cargo > 0);
-                    oCuentaQuitar.Cargo = 0;
-                    Guardar.Generico<ContaPolizaDetalle>(oCuentaQuitar);
+                    if (oCuentaQuitar != null)
+                    {
+                        oCuentaQuitar.Cargo = 0;
+                        Guardar.Generico<ContaPolizaDetalle>(oCuentaQuitar);
+                    }
                 }
 
                 //Visor de ticket de traspaso

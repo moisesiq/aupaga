@@ -49,7 +49,7 @@ namespace Refaccionaria.App
             foreach (var oReg in oLineas)
                 this.ctlLineas.AgregarElemento(oReg.LineaID, oReg.NombreLinea);
             //
-            this.cmbCambios.Items.AddRange(new object[] { "0 a > 0", "> 0 a > Actual", "Actual baja a > 0 ", "Max a 0" });
+            this.cmbCambios.Items.AddRange(new object[] { "0 a > 0", "> 0 a > Actual", "Actual baja a > 0 ", "Max a 0", "Max igual" });
 
             // Se configura el grid de detalle
             this.dgvDetalle.Columns["NumeroDeParte"].ValueType = typeof(string);
@@ -692,6 +692,8 @@ namespace Refaccionaria.App
                     return (mMaximoNuevo < mMaximo && mMaximoNuevo > 0);
                 case 3:
                     return (mMaximoNuevo != mMaximo && mMaximoNuevo == 0);
+                case 4:
+                    return (mMaximoNuevo == mMaximo);
                 default:
                     return true;
             }

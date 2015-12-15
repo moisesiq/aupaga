@@ -530,7 +530,7 @@ namespace Refaccionaria.App
 
         private void QuitarSugerido(DataGridViewRow oFila)
         {
-            int iParteID = Helper.ConvertirEntero(oFila.Cells["ParteID"].Value);
+            int iParteID = Helper.ConvertirEntero(oFila.Cells["sug_ParteID"].Value);
             for (int iCont = 1; iCont < 4; iCont++)
             {
                 var oReporteF = General.GetEntity<ReporteDeFaltante>(c => c.ParteID == iParteID && c.SucursalID == iCont && !c.Pedido && c.Estatus);
@@ -840,13 +840,13 @@ namespace Refaccionaria.App
         {
             //this.cmsSugeridos.Items["tmiSugeridosQuitar"].Enabled = false;// (Helper.ConvertirCadena(this.dgvSugeridos.CurrentRow.Cells["Caracteristica"].Value) == "RF");
             //this.tmiSugeridosQuitar.Visible = (Helper.ConvertirCadena(this.dgvSugeridos.CurrentRow.Cells["Caracteristica"].Value) == "RF");
-            if (this.dgvSugeridos.CurrentRow == null || Helper.ConvertirCadena(this.dgvSugeridos.CurrentRow.Cells["Caracteristica"].Value) != "RF")
+            if (this.dgvSugeridos.CurrentRow == null || Helper.ConvertirCadena(this.dgvSugeridos.CurrentRow.Cells["sug_Caracteristica"].Value) != "RF")
                 e.Cancel = true;
         }
 
         private void tmiSugeridosQuitar_Click(object sender, EventArgs e)
         {
-            if (this.dgvSugeridos.CurrentRow == null || Helper.ConvertirCadena(this.dgvSugeridos.CurrentRow.Cells["Caracteristica"].Value) != "RF") return;
+            if (this.dgvSugeridos.CurrentRow == null || Helper.ConvertirCadena(this.dgvSugeridos.CurrentRow.Cells["sug_Caracteristica"].Value) != "RF") return;
             if (UtilLocal.MensajePregunta("¿Estás seguro que deseas quitar la sugerencia seleccionada?") == DialogResult.Yes)
             {
                 this.QuitarSugerido(this.dgvSugeridos.CurrentRow);

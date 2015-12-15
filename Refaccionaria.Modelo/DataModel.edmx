@@ -4491,6 +4491,10 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesErroresView' does n
           <Property Name="ParteID" Type="int" Nullable="false" />
           <Property Name="NumeroDeParte" Type="nvarchar" MaxLength="50" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="512" />
+          <Property Name="MarcaID" Type="int" />
+          <Property Name="Marca" Type="nvarchar" MaxLength="200" />
+          <Property Name="LineaID" Type="int" />
+          <Property Name="Linea" Type="nvarchar" MaxLength="100" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="Foto" Type="bit" Nullable="false" />
           <Property Name="Equivalente" Type="bit" Nullable="false" />
@@ -12428,6 +12432,10 @@ FROM [dbo].[PartesEquivalentesView] AS [PartesEquivalentesView]</DefiningQuery>
 [PartesErroresView].[ParteID] AS [ParteID], 
 [PartesErroresView].[NumeroDeParte] AS [NumeroDeParte], 
 [PartesErroresView].[Descripcion] AS [Descripcion], 
+[PartesErroresView].[MarcaID] AS [MarcaID], 
+[PartesErroresView].[Marca] AS [Marca], 
+[PartesErroresView].[LineaID] AS [LineaID], 
+[PartesErroresView].[Linea] AS [Linea], 
 [PartesErroresView].[Fecha] AS [Fecha], 
 [PartesErroresView].[Foto] AS [Foto], 
 [PartesErroresView].[Equivalente] AS [Equivalente], 
@@ -15854,7 +15862,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="VentaFacturaDetalle" EntitySet="VentaFacturaDetalle" />
           </AssociationSet>
           <EntitySet Name="ParteError" EntityType="RefaccionariaModelo.ParteError" />
-          <EntitySet Name="PartesErroresView" EntityType="RefaccionariaModelo.PartesErroresView" />
           <AssociationSet Name="FK__ParteErro__Parte__1D7C2B7C" Association="RefaccionariaModelo.FK__ParteErro__Parte__1D7C2B7C">
             <End Role="Parte" EntitySet="Parte" />
             <End Role="ParteError" EntitySet="ParteError" />
@@ -17259,6 +17266,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="CorteDetalleHistorico" EntitySet="CorteDetalleHistorico" />
           </AssociationSet>
+          <EntitySet Name="PartesErroresView" EntityType="RefaccionariaModelo.PartesErroresView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -22901,37 +22909,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ParteErro__Error__1E704FB5" FromRole="ParteError" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__ParteErro__Soluc__1F6473EE" FromRole="ParteError" ToRole="Usuario" />
           </EntityType>
-        <EntityType Name="PartesErroresView">
-          <Key>
-            <PropertyRef Name="ParteErrorID" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="Foto" />
-            <PropertyRef Name="Equivalente" />
-            <PropertyRef Name="Aplicacion" />
-            <PropertyRef Name="Alterno" />
-            <PropertyRef Name="Complemento" />
-            <PropertyRef Name="Otro" />
-            <PropertyRef Name="ErrorUsuarioID" />
-          </Key>
-          <Property Type="Int32" Name="ParteErrorID" Nullable="false" />
-          <Property Type="Int32" Name="ParteID" Nullable="false" />
-          <Property Type="String" Name="NumeroDeParte" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Descripcion" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
-          <Property Type="Boolean" Name="Foto" Nullable="false" />
-          <Property Type="Boolean" Name="Equivalente" Nullable="false" />
-          <Property Type="Boolean" Name="Aplicacion" Nullable="false" />
-          <Property Type="Boolean" Name="Alterno" Nullable="false" />
-          <Property Type="Boolean" Name="Complemento" Nullable="false" />
-          <Property Type="Boolean" Name="Otro" Nullable="false" />
-          <Property Type="String" Name="ComentarioError" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ComentarioSolucion" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="ErrorUsuarioID" Nullable="false" />
-          <Property Type="String" Name="UsuarioError" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="SolucionUsuarioID" />
-          <Property Type="String" Name="UsuarioSolucion" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <Association Name="FK__ParteErro__Parte__1D7C2B7C">
           <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
           <End Type="RefaccionariaModelo.ParteError" Role="ParteError" Multiplicity="*" />
@@ -29016,6 +28993,41 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PartesErroresView">
+          <Key>
+            <PropertyRef Name="ParteErrorID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Foto" />
+            <PropertyRef Name="Equivalente" />
+            <PropertyRef Name="Aplicacion" />
+            <PropertyRef Name="Alterno" />
+            <PropertyRef Name="Complemento" />
+            <PropertyRef Name="Otro" />
+            <PropertyRef Name="ErrorUsuarioID" />
+          </Key>
+          <Property Name="ParteErrorID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="NumeroDeParte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="MarcaID" Type="Int32" />
+          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LineaID" Type="Int32" />
+          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Foto" Type="Boolean" Nullable="false" />
+          <Property Name="Equivalente" Type="Boolean" Nullable="false" />
+          <Property Name="Aplicacion" Type="Boolean" Nullable="false" />
+          <Property Name="Alterno" Type="Boolean" Nullable="false" />
+          <Property Name="Complemento" Type="Boolean" Nullable="false" />
+          <Property Name="Otro" Type="Boolean" Nullable="false" />
+          <Property Name="ComentarioError" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ComentarioSolucion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorUsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioError" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SolucionUsuarioID" Type="Int32" />
+          <Property Name="UsuarioSolucion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -32977,29 +32989,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PartesErroresView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.PartesErroresView">
-              <MappingFragment StoreEntitySet="PartesErroresView">
-                <ScalarProperty Name="UsuarioSolucion" ColumnName="UsuarioSolucion" />
-                <ScalarProperty Name="SolucionUsuarioID" ColumnName="SolucionUsuarioID" />
-                <ScalarProperty Name="UsuarioError" ColumnName="UsuarioError" />
-                <ScalarProperty Name="ErrorUsuarioID" ColumnName="ErrorUsuarioID" />
-                <ScalarProperty Name="ComentarioSolucion" ColumnName="ComentarioSolucion" />
-                <ScalarProperty Name="ComentarioError" ColumnName="ComentarioError" />
-                <ScalarProperty Name="Otro" ColumnName="Otro" />
-                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
-                <ScalarProperty Name="Alterno" ColumnName="Alterno" />
-                <ScalarProperty Name="Aplicacion" ColumnName="Aplicacion" />
-                <ScalarProperty Name="Equivalente" ColumnName="Equivalente" />
-                <ScalarProperty Name="Foto" ColumnName="Foto" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="ParteErrorID" ColumnName="ParteErrorID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NotaDeCreditoFiscalDetalle">
             <EntityTypeMapping TypeName="RefaccionariaModelo.NotaDeCreditoFiscalDetalle">
               <MappingFragment StoreEntitySet="NotaDeCreditoFiscalDetalle">
@@ -34934,6 +34923,33 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
                 <ScalarProperty Name="Dia" ColumnName="Dia" />
                 <ScalarProperty Name="CorteDetalleHistoricoID" ColumnName="CorteDetalleHistoricoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartesErroresView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.PartesErroresView">
+              <MappingFragment StoreEntitySet="PartesErroresView">
+                <ScalarProperty Name="UsuarioSolucion" ColumnName="UsuarioSolucion" />
+                <ScalarProperty Name="SolucionUsuarioID" ColumnName="SolucionUsuarioID" />
+                <ScalarProperty Name="UsuarioError" ColumnName="UsuarioError" />
+                <ScalarProperty Name="ErrorUsuarioID" ColumnName="ErrorUsuarioID" />
+                <ScalarProperty Name="ComentarioSolucion" ColumnName="ComentarioSolucion" />
+                <ScalarProperty Name="ComentarioError" ColumnName="ComentarioError" />
+                <ScalarProperty Name="Otro" ColumnName="Otro" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Alterno" ColumnName="Alterno" />
+                <ScalarProperty Name="Aplicacion" ColumnName="Aplicacion" />
+                <ScalarProperty Name="Equivalente" ColumnName="Equivalente" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="ParteErrorID" ColumnName="ParteErrorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -37172,7 +37188,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="11.25" PointY="56.775000000000006" />
         </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.ParteError" Width="1.5" PointX="26.75" PointY="71.375" Height="4.0956022135417243" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.PartesErroresView" Width="1.5" PointX="37.375" PointY="5.75" Height="4.287903645833353" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteErro__Parte__1D7C2B7C" >
           <ConnectorPoint PointX="26" PointY="73.422801106770862" />
           <ConnectorPoint PointX="26.166666666666668" PointY="73.422801106770862" />
@@ -38316,6 +38331,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.CorteDetalleHistorico" Width="1.5" PointX="8.25" PointY="132.5" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Corte__73DAF76B" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Sucur__72E6D332" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.PartesErroresView" Width="1.5" PointX="43.375" PointY="6.75" />
         </Diagram>
     </Diagrams>
   </Designer>

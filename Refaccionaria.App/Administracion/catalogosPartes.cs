@@ -2570,7 +2570,8 @@ namespace Refaccionaria.App
             var oErrores = General.GetListOf<PartesErroresView>(c => bTodos || (c.Foto || c.Equivalente || c.Aplicacion || c.Alterno || c.Complemento || c.Otro));
             this.dgvErrores.Rows.Clear();
             foreach (var oReg in oErrores)
-                this.dgvErrores.Rows.Add(oReg.ParteErrorID, oReg.Fecha, oReg.Foto, oReg.Equivalente, oReg.Aplicacion, oReg.Alterno, oReg.Complemento, oReg.Otro
+                this.dgvErrores.Rows.Add(oReg.ParteErrorID, oReg.NumeroDeParte, oReg.Descripcion, oReg.Marca, oReg.Linea
+                    , oReg.Fecha, oReg.Foto, oReg.Equivalente, oReg.Aplicacion, oReg.Alterno, oReg.Complemento, oReg.Otro
                     , oReg.ComentarioError, oReg.ComentarioSolucion, oReg.UsuarioError, oReg.UsuarioSolucion);
 
             Cargando.Cerrar();
