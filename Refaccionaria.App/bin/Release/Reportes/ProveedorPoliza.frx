@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="12/11/2015 19:14:26" ReportInfo.CreatorVersion="2013.3.2.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="12/14/2015 18:49:35" ReportInfo.CreatorVersion="2013.3.2.0">
   <Dictionary>
     <BusinessObjectDataSource Name="Poliza" ReferenceName="Poliza" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.ProveedoresPolizasView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="ProveedorPolizaID" DataType="System.Int32"/>
@@ -49,10 +49,9 @@
       <Column Name="AbonadoIva" DataType="System.Decimal"/>
       <Column Name="AbonadoImporte" DataType="System.Decimal"/>
     </BusinessObjectDataSource>
-    <Parameter Name="Parameter" DataType="System.Int32" Expression="[Abonos]"/>
     <Total Name="Descuento" Expression="[Facturas.Descuento]" Evaluator="Data4"/>
     <Total Name="Abonos" Expression="[Abonos.Importe]" Evaluator="Data1"/>
-    <Total Name="Abonos2" Expression="[Facturas.AbonadoImporte] - [Facturas.Descuento]" Evaluator="Data4"/>
+    <Total Name="PagoDirecto" Expression="[Abonos.Importe]" Evaluator="Data1" EvaluateCondition="[Abonos.OrigenID]==1"/>
   </Dictionary>
   <ReportPage Name="Page1" PaperWidth="215.9" PaperHeight="279.4" RawPaperSize="1">
     <PageHeaderBand Name="PageHeader1" Width="740.5" Height="149.76">
@@ -75,7 +74,7 @@
       <TextObject Name="Text105" Left="633.15" Top="57.13" Width="103.95" Height="13.61" Text="[Poliza.FolioDePago]" HorzAlign="Right" Font="Calibri, 11pt, style=Bold"/>
       <TextObject Name="Text106" Left="633.15" Top="85.91" Width="103.95" Height="13.61" Text="[Poliza.Usuario]" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text1" Top="66.8" Width="340.2" Height="37.15" Text="[Poliza.Proveedor]" Font="Calibri, 20pt, style=Bold"/>
-      <TextObject Name="Text2" Top="101.95" Width="302.4" Height="18.9" Text="[Facturas.Descuento]" Format="Currency" Format.UseLocale="true" WordWrap="false" Font="Calibri, 12pt, style=Bold" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text2" Top="101.95" Width="302.4" Height="18.9" Text="[PagoDirecto]" ProcessAt="ReportFinished" Format="Currency" Format.UseLocale="true" WordWrap="false" Font="Calibri, 12pt, style=Bold" Trimming="EllipsisCharacter"/>
     </PageHeaderBand>
     <DataBand Name="Data4" Top="152.96" Width="740.5" Height="18.41" DataSource="Facturas">
       <TextObject Name="Text108" Left="103.95" Width="94.5" Height="15.21" Text="[Facturas.Factura]" Font="Calibri, 11pt"/>
@@ -89,7 +88,7 @@
         <TextObject Name="Text114" Left="113.4" Top="3" Width="103.95" Height="13.99" Text="Totales" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
         <TextObject Name="Text115" Left="217.35" Top="3" Width="94.5" Height="13.99" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
         <TextObject Name="Text118" Left="538.65" Top="3" Width="94.5" Height="13.99" Border.Lines="Top" Border.Color="Gray" Text="[Descuento]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
-        <TextObject Name="Text119" Left="642.6" Top="3" Width="94.5" Height="13.99" Border.Lines="Top" Border.Color="Gray" Text="[Abonos2]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
+        <TextObject Name="Text119" Left="642.6" Top="3" Width="94.5" Height="13.99" Border.Lines="Top" Border.Color="Gray" Text="[PagoDirecto]" ProcessAt="ReportFinished" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
       </DataFooterBand>
     </DataBand>
     <DataBand Name="Data1" Top="218.77" Width="740.5" Height="18.9" DataSource="Abonos">

@@ -553,10 +553,10 @@ namespace Refaccionaria.App
                 this.RecalcularAcumulado(dFechaMenor);
             }
 
-            // Se mandan a conciliar los agrupados, del grid de abajo, si hubiera
+            // Se mandan a conciliar los agrupados, del grid de abajo, si hubiera | y si es que no se han conciliado ya anteriormente
             foreach (DataGridViewRow oFila in this.dgvConciliacionDetalle.Rows)
             {
-                if (Helper.ConvertirBool(oFila.Cells["cnd_Sel"].Value))
+                if (!oFila.Cells["cnd_Sel"].ReadOnly && Helper.ConvertirBool(oFila.Cells["cnd_Sel"].Value))
                 {
                     int iMovID = Helper.ConvertirEntero(oFila.Cells["cnd_BancoCuentaMovimientoID"].Value);
                     this.ConciliarMovimiento(iMovID);
