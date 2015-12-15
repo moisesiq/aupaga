@@ -735,7 +735,8 @@ namespace Refaccionaria.App
                 oParteMaxMin.Maximo = Helper.ConvertirDecimal(Fila.Cells["Maximo"].Value);
                 oParteMaxMin.Minimo = Helper.ConvertirDecimal(Fila.Cells["Minimo"].Value);
                 oParteMaxMin.FechaCalculo = dAhora;
-                oParteMaxMin.ParteMaxMinReglaID = (oParteMaxMin.Fijo.Valor() ? null : (int?)Helper.ConvertirEntero(Fila.Cells["Condiciones"].Value));
+                oParteMaxMin.ParteMaxMinReglaID = ((oParteMaxMin.Fijo.Valor() || Helper.ConvertirEntero(Fila.Cells["Condiciones"].Value) == 0)
+                    ? null : (int?)Helper.ConvertirEntero(Fila.Cells["Condiciones"].Value));
                 Guardar.Generico<ParteMaxMin>(oParteMaxMin);
 
                 // Se verifica si aplica para 9500 y se guarda el dato Es9500
