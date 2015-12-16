@@ -292,7 +292,14 @@
             this.proCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpErrores = new System.Windows.Forms.TabPage();
             this.dgvErrores = new System.Windows.Forms.DataGridView();
+            this.chkErr_MostrarTodos = new System.Windows.Forms.CheckBox();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.err_ParteErrorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.err_NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.err_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.err_Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.err_Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.err_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.err_Foto = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.err_Equivalente = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -304,9 +311,6 @@
             this.err_ComentarioSolucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.err_UsuarioError = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.err_UsuarioSolucion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkErr_MostrarTodos = new System.Windows.Forms.CheckBox();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabExistencia.SuspendLayout();
             this.tabExistencias.SuspendLayout();
@@ -3029,6 +3033,10 @@
             this.dgvErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.err_ParteErrorID,
+            this.err_NumeroDeParte,
+            this.err_Descripcion,
+            this.err_Marca,
+            this.err_Linea,
             this.err_Fecha,
             this.err_Foto,
             this.err_Equivalente,
@@ -3067,12 +3075,83 @@
             this.dgvErrores.TabIndex = 2;
             this.dgvErrores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvErrores_CellDoubleClick);
             // 
+            // chkErr_MostrarTodos
+            // 
+            this.chkErr_MostrarTodos.AutoSize = true;
+            this.chkErr_MostrarTodos.ForeColor = System.Drawing.Color.White;
+            this.chkErr_MostrarTodos.Location = new System.Drawing.Point(3, 3);
+            this.chkErr_MostrarTodos.Name = "chkErr_MostrarTodos";
+            this.chkErr_MostrarTodos.Size = new System.Drawing.Size(90, 17);
+            this.chkErr_MostrarTodos.TabIndex = 0;
+            this.chkErr_MostrarTodos.Text = "Mostrar todos";
+            this.chkErr_MostrarTodos.UseVisualStyleBackColor = true;
+            this.chkErr_MostrarTodos.CheckedChanged += new System.EventHandler(this.chkErr_MostrarTodos_CheckedChanged);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.ForeColor = System.Drawing.Color.White;
+            this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
+            this.btnModificar.Location = new System.Drawing.Point(1025, 5);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(91, 23);
+            this.btnModificar.TabIndex = 2;
+            this.btnModificar.Text = "&Modificar";
+            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.ForeColor = System.Drawing.Color.White;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.Location = new System.Drawing.Point(930, 5);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(85, 23);
+            this.btnAgregar.TabIndex = 1;
+            this.btnAgregar.Text = "&Nuevo";
+            this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
             // err_ParteErrorID
             // 
             this.err_ParteErrorID.HeaderText = "ParteErrorID";
             this.err_ParteErrorID.Name = "err_ParteErrorID";
             this.err_ParteErrorID.ReadOnly = true;
             this.err_ParteErrorID.Visible = false;
+            // 
+            // err_NumeroDeParte
+            // 
+            this.err_NumeroDeParte.HeaderText = "No. Parte";
+            this.err_NumeroDeParte.Name = "err_NumeroDeParte";
+            this.err_NumeroDeParte.ReadOnly = true;
+            // 
+            // err_Descripcion
+            // 
+            this.err_Descripcion.HeaderText = "Descripción";
+            this.err_Descripcion.Name = "err_Descripcion";
+            this.err_Descripcion.ReadOnly = true;
+            this.err_Descripcion.Width = 200;
+            // 
+            // err_Marca
+            // 
+            this.err_Marca.HeaderText = "Marca";
+            this.err_Marca.Name = "err_Marca";
+            this.err_Marca.ReadOnly = true;
+            // 
+            // err_Linea
+            // 
+            this.err_Linea.HeaderText = "Línea";
+            this.err_Linea.Name = "err_Linea";
+            this.err_Linea.ReadOnly = true;
             // 
             // err_Fecha
             // 
@@ -3185,52 +3264,6 @@
             this.err_UsuarioSolucion.HeaderText = "Usuario sol.";
             this.err_UsuarioSolucion.Name = "err_UsuarioSolucion";
             this.err_UsuarioSolucion.ReadOnly = true;
-            // 
-            // chkErr_MostrarTodos
-            // 
-            this.chkErr_MostrarTodos.AutoSize = true;
-            this.chkErr_MostrarTodos.ForeColor = System.Drawing.Color.White;
-            this.chkErr_MostrarTodos.Location = new System.Drawing.Point(3, 3);
-            this.chkErr_MostrarTodos.Name = "chkErr_MostrarTodos";
-            this.chkErr_MostrarTodos.Size = new System.Drawing.Size(90, 17);
-            this.chkErr_MostrarTodos.TabIndex = 0;
-            this.chkErr_MostrarTodos.Text = "Mostrar todos";
-            this.chkErr_MostrarTodos.UseVisualStyleBackColor = true;
-            this.chkErr_MostrarTodos.CheckedChanged += new System.EventHandler(this.chkErr_MostrarTodos_CheckedChanged);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.ForeColor = System.Drawing.Color.White;
-            this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
-            this.btnModificar.Location = new System.Drawing.Point(1025, 5);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(91, 23);
-            this.btnModificar.TabIndex = 2;
-            this.btnModificar.Text = "&Modificar";
-            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnModificar.UseVisualStyleBackColor = false;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.Location = new System.Drawing.Point(930, 5);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(85, 23);
-            this.btnAgregar.TabIndex = 1;
-            this.btnAgregar.Text = "&Nuevo";
-            this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // catalogosPartes
             // 
@@ -3486,18 +3519,6 @@
         private System.Windows.Forms.TabPage tbpErrores;
         private System.Windows.Forms.DataGridView dgvErrores;
         private System.Windows.Forms.CheckBox chkErr_MostrarTodos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn err_ParteErrorID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn err_Fecha;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Foto;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Equivalente;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Aplicacion;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Alterno;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Complementario;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Otro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn err_ComentarioError;
-        private System.Windows.Forms.DataGridViewTextBoxColumn err_ComentarioSolucion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn err_UsuarioError;
-        private System.Windows.Forms.DataGridViewTextBoxColumn err_UsuarioSolucion;
         private System.Windows.Forms.PictureBox pcbEqu_Imagen;
         private System.Windows.Forms.DataGridViewTextBoxColumn equ_ParteEquivalenteID;
         private System.Windows.Forms.DataGridViewTextBoxColumn equ_ParteIDEquivalente;
@@ -3509,6 +3530,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn equ_ExistenciaSuc03;
         private GridVentasMes ctlVentasPorMes;
         private System.Windows.Forms.TextBox txtDescripcionMaxMin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_ParteErrorID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_NumeroDeParte;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_Marca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_Linea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_Fecha;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Foto;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Equivalente;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Aplicacion;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Alterno;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Complementario;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn err_Otro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_ComentarioError;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_ComentarioSolucion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_UsuarioError;
+        private System.Windows.Forms.DataGridViewTextBoxColumn err_UsuarioSolucion;
 
     }
 }
