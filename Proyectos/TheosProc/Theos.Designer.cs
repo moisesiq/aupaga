@@ -28,9 +28,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__ParteExis__Usuar__534E2C48", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "ParteExistencia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ParteExistencia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__ParteKard__Reali__66CB1510", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "ParteKardex", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ParteKardex), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_PartePrecio_Usuario", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "PartePrecio", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.PartePrecio), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioDetalle_MovimientoInventario", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.MovimientoInventario), "MovimientoInventarioDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventarioDetalle), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioDetalle_Parte", "Parte", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Parte), "MovimientoInventarioDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventarioDetalle), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.MovimientoInventario), "MovimientoInventarioTraspasoContingencia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventarioTraspasoContingencia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioTraspasoContingencia_Parte", "Parte", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Parte), "MovimientoInventarioTraspasoContingencia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventarioTraspasoContingencia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioTraspasoContingencia_Usuario", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "MovimientoInventarioTraspasoContingencia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventarioTraspasoContingencia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__ContaCuen__Conta__685E57C7", "ContaCuentaDeMayor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.ContaCuentaDeMayor), "ContaCuentaAuxiliar", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ContaCuentaAuxiliar), true)]
@@ -53,32 +50,21 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__ContaEgre__Conta__70F39DC8", "ContaCuentaAuxiliar", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.ContaCuentaAuxiliar), "ContaEgreso", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ContaEgreso), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__ContaEgre__Reali__74C42EAC", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "ContaEgreso", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ContaEgreso), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__ContaEgre__Usuar__75B852E5", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "ContaEgreso", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ContaEgreso), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Movim__3EA8151D", "MovimientoInventarioDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.MovimientoInventarioDetalle), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Reali__556B7EE4", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "NotaDeCreditoFiscal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCreditoFiscal), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Usuar__565FA31D", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "NotaDeCreditoFiscal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCreditoFiscal), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDeta__Parte__43E1002F", "Parte", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Parte), "VentaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDetalle), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Parte__2B403AEE", "Parte", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Parte), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_Parte_Proveedor", "Proveedor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Proveedor), "Parte", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.Parte), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_Proveedor_Usuario", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "Proveedor", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.Proveedor), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Venta__RealizoUs__7F01C5FD", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.Venta), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Venta__UsuarioID__32B6742D", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.Venta), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDeta__Usuar__44D52468", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDetalle), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Reali__19C0A931", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Usuar__1AB4CD6A", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaPago__Usuar__644DCFC1", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaPago", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaPago), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaPago__Usuar__6FBF826D", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaPagoDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaPagoDetalle), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDeta__Venta__42ECDBF6", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Venta), "VentaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDetalle), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Venta__1407CFDB", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Venta), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaPago__Venta__6265874F", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Venta), "VentaPago", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaPago), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Venta__2429290B", "VentaPagoDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.VentaPagoDetalle), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaPago__Venta__6CE315C2", "VentaPago", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.VentaPago), "VentaPagoDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaPagoDetalle), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_ProveedorPolizaDetalle_MovimientoInventario", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.MovimientoInventario), "ProveedorPolizaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPolizaDetalle), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_ProveedorPoliza_Proveedor", "Proveedor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Proveedor), "ProveedorPoliza", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPoliza), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_ProveedorPoliza_Usuario", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "ProveedorPoliza", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPoliza), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.ProveedorPoliza), "ProveedorPolizaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPolizaDetalle), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__ContaEgre__Banco__214CBC60", "BancoCuenta", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.BancoCuenta), "ContaEgreso", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ContaEgreso), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Nomina__BancoCue__725CC34D", "BancoCuenta", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.BancoCuenta), "Nomina", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.Nomina), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Proveedor__Banco__169A23C3", "BancoCuenta", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.BancoCuenta), "ProveedorPoliza", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPoliza), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NominaImp__Banco__2AA11C70", "BancoCuentaMovimiento", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.BancoCuentaMovimiento), "NominaImpuesto", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NominaImpuesto), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NominaImp__Conta__29ACF837", "ContaCuentaDeMayor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.ContaCuentaDeMayor), "NominaImpuesto", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NominaImpuesto), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NominaUsu__Nomin__7721786A", "Nomina", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Nomina), "NominaUsuario", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NominaUsuario), true)]
@@ -93,14 +79,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__CajaEfect__Usuar__0DD9F539", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "CajaEfectivoPorDia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.CajaEfectivoPorDia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Parte__41C3AD93", "Parte", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Parte), "VentaDevolucionDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDevolucionDetalle), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Proveedor__Prove__69FC8776", "Proveedor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Proveedor), "ProveedorNotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorNotaDeCredito), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Proveedor__NotaD__70A98505", "ProveedorNotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.ProveedorNotaDeCredito), "ProveedorPolizaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPolizaDetalle), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Proveedor__Reali__6CD8F421", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "ProveedorNotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorNotaDeCredito), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Usuar__42B7D1CC", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaDevolucionDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDevolucionDetalle), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Clien__59D0414E", "Cliente", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Cliente), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Orige__0B879873", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.Venta), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__UsoVe__0C7BBCAC", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.Venta), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Usuar__5AC46587", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaPago__NotaD__11207638", "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.NotaDeCredito), "VentaPagoDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaPagoDetalle), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Reali__383A4359", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaDevolucion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDevolucion), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Usuar__392E6792", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaDevolucion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDevolucion), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Venta__355DD6AE", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Venta), "VentaDevolucion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDevolucion), true)]
@@ -131,9 +111,35 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Venta__SucursalI__0F382DC6", "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Sucursal), "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.Venta), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Sucur__3651FAE7", "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Sucursal), "VentaDevolucion", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaDevolucion), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaFact__Sucur__77809FC6", "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Sucursal), "VentaFactura", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaFactura), true)]
-[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Sucur__14FBF414", "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Sucursal), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaPago__Sucur__20A2B0EA", "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Sucursal), "VentaPago", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaPago), true)]
 [assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_Sucursal_Usuario", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.Sucursal), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__ContaPoli__Sucur__2EFBBD39", "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Sucursal), "ContaPolizaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ContaPolizaDetalle), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Movimient__DeMov__49AFB375", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.MovimientoInventario), "MovimientoInventario1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventario), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Movimient__Movim__420E91AD", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.MovimientoInventario), "MovimientoInventario1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventario), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioDetalle_MovimientoInventario", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.MovimientoInventario), "MovimientoInventarioDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventarioDetalle), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.MovimientoInventario), "MovimientoInventarioTraspasoContingencia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventarioTraspasoContingencia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioDetalle_Parte", "Parte", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Parte), "MovimientoInventarioDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.MovimientoInventarioDetalle), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Proveedor__Banco__169A23C3", "BancoCuenta", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.BancoCuenta), "ProveedorPoliza", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPoliza), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_ProveedorPoliza_Proveedor", "Proveedor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Proveedor), "ProveedorPoliza", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPoliza), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_ProveedorPoliza_Usuario", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "ProveedorPoliza", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPoliza), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Proveedor__CajaE__2977EE0D", "CajaEgreso", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.CajaEgreso), "ProveedorPolizaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPolizaDetalle), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Movim__48BB8F3C", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.MovimientoInventario), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_ProveedorPolizaDetalle_MovimientoInventario", "MovimientoInventario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.MovimientoInventario), "ProveedorPolizaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPolizaDetalle), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Movim__3EA8151D", "MovimientoInventarioDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.MovimientoInventarioDetalle), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Parte__2B403AEE", "Parte", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Parte), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__Proveedor__NotaD__70A98505", "ProveedorNotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.ProveedorNotaDeCredito), "ProveedorPolizaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPolizaDetalle), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.ProveedorPoliza), "ProveedorPolizaDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.ProveedorPolizaDetalle), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Sucur__14FBF414", "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Sucursal), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Reali__19C0A931", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Usuar__1AB4CD6A", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Venta__1407CFDB", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Venta), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaGara__Venta__2429290B", "VentaPagoDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.VentaPagoDetalle), "VentaGarantia", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaGarantia), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Clien__59D0414E", "Cliente", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Cliente), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Orige__0B879873", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.Venta), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Sucur__2FEFE172", "Sucursal", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.Sucursal), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__UsoVe__0C7BBCAC", "Venta", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.Venta), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Usuar__5AC46587", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(TheosProc.Usuario), "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.NotaDeCredito), true)]
+[assembly: EdmRelationshipAttribute("ControlRefaccionariaModel", "FK__VentaPago__NotaD__11207638", "NotaDeCredito", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(TheosProc.NotaDeCredito), "VentaPagoDetalle", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(TheosProc.VentaPagoDetalle), true)]
 
 #endregion
 
@@ -268,22 +274,6 @@ namespace TheosProc
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<MovimientoInventario> MovimientoInventario
-        {
-            get
-            {
-                if ((_MovimientoInventario == null))
-                {
-                    _MovimientoInventario = base.CreateObjectSet<MovimientoInventario>("MovimientoInventario");
-                }
-                return _MovimientoInventario;
-            }
-        }
-        private ObjectSet<MovimientoInventario> _MovimientoInventario;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<MovimientoInventarioHistorial> MovimientoInventarioHistorial
         {
             get
@@ -364,22 +354,6 @@ namespace TheosProc
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<MovimientoInventarioDetalle> MovimientoInventarioDetalle
-        {
-            get
-            {
-                if ((_MovimientoInventarioDetalle == null))
-                {
-                    _MovimientoInventarioDetalle = base.CreateObjectSet<MovimientoInventarioDetalle>("MovimientoInventarioDetalle");
-                }
-                return _MovimientoInventarioDetalle;
-            }
-        }
-        private ObjectSet<MovimientoInventarioDetalle> _MovimientoInventarioDetalle;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<MovimientoInventarioTraspasoContingencia> MovimientoInventarioTraspasoContingencia
         {
             get
@@ -392,22 +366,6 @@ namespace TheosProc
             }
         }
         private ObjectSet<MovimientoInventarioTraspasoContingencia> _MovimientoInventarioTraspasoContingencia;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<MovimientoInventarioView> MovimientoInventarioView
-        {
-            get
-            {
-                if ((_MovimientoInventarioView == null))
-                {
-                    _MovimientoInventarioView = base.CreateObjectSet<MovimientoInventarioView>("MovimientoInventarioView");
-                }
-                return _MovimientoInventarioView;
-            }
-        }
-        private ObjectSet<MovimientoInventarioView> _MovimientoInventarioView;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -700,22 +658,6 @@ namespace TheosProc
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<VentaGarantia> VentaGarantia
-        {
-            get
-            {
-                if ((_VentaGarantia == null))
-                {
-                    _VentaGarantia = base.CreateObjectSet<VentaGarantia>("VentaGarantia");
-                }
-                return _VentaGarantia;
-            }
-        }
-        private ObjectSet<VentaGarantia> _VentaGarantia;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<VentaPago> VentaPago
         {
             get
@@ -792,38 +734,6 @@ namespace TheosProc
             }
         }
         private ObjectSet<VentasPagosView> _VentasPagosView;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ProveedorPoliza> ProveedorPoliza
-        {
-            get
-            {
-                if ((_ProveedorPoliza == null))
-                {
-                    _ProveedorPoliza = base.CreateObjectSet<ProveedorPoliza>("ProveedorPoliza");
-                }
-                return _ProveedorPoliza;
-            }
-        }
-        private ObjectSet<ProveedorPoliza> _ProveedorPoliza;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ProveedorPolizaDetalle> ProveedorPolizaDetalle
-        {
-            get
-            {
-                if ((_ProveedorPolizaDetalle == null))
-                {
-                    _ProveedorPolizaDetalle = base.CreateObjectSet<ProveedorPolizaDetalle>("ProveedorPolizaDetalle");
-                }
-                return _ProveedorPolizaDetalle;
-            }
-        }
-        private ObjectSet<ProveedorPolizaDetalle> _ProveedorPolizaDetalle;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -968,22 +878,6 @@ namespace TheosProc
             }
         }
         private ObjectSet<VentasPagosDetalleView> _VentasPagosDetalleView;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<NotaDeCredito> NotaDeCredito
-        {
-            get
-            {
-                if ((_NotaDeCredito == null))
-                {
-                    _NotaDeCredito = base.CreateObjectSet<NotaDeCredito>("NotaDeCredito");
-                }
-                return _NotaDeCredito;
-            }
-        }
-        private ObjectSet<NotaDeCredito> _NotaDeCredito;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1144,6 +1038,118 @@ namespace TheosProc
             }
         }
         private ObjectSet<InventarioUsuariosView> _InventarioUsuariosView;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<MovimientoInventario> MovimientoInventario
+        {
+            get
+            {
+                if ((_MovimientoInventario == null))
+                {
+                    _MovimientoInventario = base.CreateObjectSet<MovimientoInventario>("MovimientoInventario");
+                }
+                return _MovimientoInventario;
+            }
+        }
+        private ObjectSet<MovimientoInventario> _MovimientoInventario;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<MovimientoInventarioDetalle> MovimientoInventarioDetalle
+        {
+            get
+            {
+                if ((_MovimientoInventarioDetalle == null))
+                {
+                    _MovimientoInventarioDetalle = base.CreateObjectSet<MovimientoInventarioDetalle>("MovimientoInventarioDetalle");
+                }
+                return _MovimientoInventarioDetalle;
+            }
+        }
+        private ObjectSet<MovimientoInventarioDetalle> _MovimientoInventarioDetalle;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<MovimientoInventarioView> MovimientoInventarioView
+        {
+            get
+            {
+                if ((_MovimientoInventarioView == null))
+                {
+                    _MovimientoInventarioView = base.CreateObjectSet<MovimientoInventarioView>("MovimientoInventarioView");
+                }
+                return _MovimientoInventarioView;
+            }
+        }
+        private ObjectSet<MovimientoInventarioView> _MovimientoInventarioView;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProveedorPoliza> ProveedorPoliza
+        {
+            get
+            {
+                if ((_ProveedorPoliza == null))
+                {
+                    _ProveedorPoliza = base.CreateObjectSet<ProveedorPoliza>("ProveedorPoliza");
+                }
+                return _ProveedorPoliza;
+            }
+        }
+        private ObjectSet<ProveedorPoliza> _ProveedorPoliza;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ProveedorPolizaDetalle> ProveedorPolizaDetalle
+        {
+            get
+            {
+                if ((_ProveedorPolizaDetalle == null))
+                {
+                    _ProveedorPolizaDetalle = base.CreateObjectSet<ProveedorPolizaDetalle>("ProveedorPolizaDetalle");
+                }
+                return _ProveedorPolizaDetalle;
+            }
+        }
+        private ObjectSet<ProveedorPolizaDetalle> _ProveedorPolizaDetalle;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<VentaGarantia> VentaGarantia
+        {
+            get
+            {
+                if ((_VentaGarantia == null))
+                {
+                    _VentaGarantia = base.CreateObjectSet<VentaGarantia>("VentaGarantia");
+                }
+                return _VentaGarantia;
+            }
+        }
+        private ObjectSet<VentaGarantia> _VentaGarantia;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<NotaDeCredito> NotaDeCredito
+        {
+            get
+            {
+                if ((_NotaDeCredito == null))
+                {
+                    _NotaDeCredito = base.CreateObjectSet<NotaDeCredito>("NotaDeCredito");
+                }
+                return _NotaDeCredito;
+            }
+        }
+        private ObjectSet<NotaDeCredito> _NotaDeCredito;
 
         #endregion
 
@@ -1190,14 +1196,6 @@ namespace TheosProc
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the MovimientoInventario EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMovimientoInventario(MovimientoInventario movimientoInventario)
-        {
-            base.AddObject("MovimientoInventario", movimientoInventario);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the MovimientoInventarioHistorial EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToMovimientoInventarioHistorial(MovimientoInventarioHistorial movimientoInventarioHistorial)
@@ -1238,27 +1236,11 @@ namespace TheosProc
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the MovimientoInventarioDetalle EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMovimientoInventarioDetalle(MovimientoInventarioDetalle movimientoInventarioDetalle)
-        {
-            base.AddObject("MovimientoInventarioDetalle", movimientoInventarioDetalle);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the MovimientoInventarioTraspasoContingencia EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToMovimientoInventarioTraspasoContingencia(MovimientoInventarioTraspasoContingencia movimientoInventarioTraspasoContingencia)
         {
             base.AddObject("MovimientoInventarioTraspasoContingencia", movimientoInventarioTraspasoContingencia);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the MovimientoInventarioView EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMovimientoInventarioView(MovimientoInventarioView movimientoInventarioView)
-        {
-            base.AddObject("MovimientoInventarioView", movimientoInventarioView);
         }
     
         /// <summary>
@@ -1406,14 +1388,6 @@ namespace TheosProc
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the VentaGarantia EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToVentaGarantia(VentaGarantia ventaGarantia)
-        {
-            base.AddObject("VentaGarantia", ventaGarantia);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the VentaPago EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToVentaPago(VentaPago ventaPago)
@@ -1451,22 +1425,6 @@ namespace TheosProc
         public void AddToVentasPagosView(VentasPagosView ventasPagosView)
         {
             base.AddObject("VentasPagosView", ventasPagosView);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ProveedorPoliza EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProveedorPoliza(ProveedorPoliza proveedorPoliza)
-        {
-            base.AddObject("ProveedorPoliza", proveedorPoliza);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ProveedorPolizaDetalle EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToProveedorPolizaDetalle(ProveedorPolizaDetalle proveedorPolizaDetalle)
-        {
-            base.AddObject("ProveedorPolizaDetalle", proveedorPolizaDetalle);
         }
     
         /// <summary>
@@ -1539,14 +1497,6 @@ namespace TheosProc
         public void AddToVentasPagosDetalleView(VentasPagosDetalleView ventasPagosDetalleView)
         {
             base.AddObject("VentasPagosDetalleView", ventasPagosDetalleView);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the NotaDeCredito EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToNotaDeCredito(NotaDeCredito notaDeCredito)
-        {
-            base.AddObject("NotaDeCredito", notaDeCredito);
         }
     
         /// <summary>
@@ -1627,6 +1577,62 @@ namespace TheosProc
         public void AddToInventarioUsuariosView(InventarioUsuariosView inventarioUsuariosView)
         {
             base.AddObject("InventarioUsuariosView", inventarioUsuariosView);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the MovimientoInventario EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMovimientoInventario(MovimientoInventario movimientoInventario)
+        {
+            base.AddObject("MovimientoInventario", movimientoInventario);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the MovimientoInventarioDetalle EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMovimientoInventarioDetalle(MovimientoInventarioDetalle movimientoInventarioDetalle)
+        {
+            base.AddObject("MovimientoInventarioDetalle", movimientoInventarioDetalle);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the MovimientoInventarioView EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMovimientoInventarioView(MovimientoInventarioView movimientoInventarioView)
+        {
+            base.AddObject("MovimientoInventarioView", movimientoInventarioView);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProveedorPoliza EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProveedorPoliza(ProveedorPoliza proveedorPoliza)
+        {
+            base.AddObject("ProveedorPoliza", proveedorPoliza);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ProveedorPolizaDetalle EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToProveedorPolizaDetalle(ProveedorPolizaDetalle proveedorPolizaDetalle)
+        {
+            base.AddObject("ProveedorPolizaDetalle", proveedorPolizaDetalle);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the VentaGarantia EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToVentaGarantia(VentaGarantia ventaGarantia)
+        {
+            base.AddObject("VentaGarantia", ventaGarantia);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the NotaDeCredito EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToNotaDeCredito(NotaDeCredito notaDeCredito)
+        {
+            base.AddObject("NotaDeCredito", notaDeCredito);
         }
 
         #endregion
@@ -3806,6 +3812,28 @@ namespace TheosProc
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__CajaE__2977EE0D", "ProveedorPolizaDetalle")]
+        public EntityCollection<ProveedorPolizaDetalle> ProveedorPolizaDetalle
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProveedorPolizaDetalle>("ControlRefaccionariaModel.FK__Proveedor__CajaE__2977EE0D", "ProveedorPolizaDetalle");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProveedorPolizaDetalle>("ControlRefaccionariaModel.FK__Proveedor__CajaE__2977EE0D", "ProveedorPolizaDetalle", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -5884,7 +5912,8 @@ namespace TheosProc
         /// <param name="cuentaID">Initial value of the CuentaID property.</param>
         /// <param name="esCargo">Initial value of the EsCargo property.</param>
         /// <param name="esCasoFijo">Initial value of the EsCasoFijo property.</param>
-        public static ContaConfigAfectacionDetalle CreateContaConfigAfectacionDetalle(global::System.Int32 contaConfigAfectacionDetalleID, global::System.Int32 contaConfigAfectacionID, global::System.Boolean esCuentaDeMayor, global::System.Int32 cuentaID, global::System.Boolean esCargo, global::System.Boolean esCasoFijo)
+        /// <param name="contaPolizaAsigSucursalID">Initial value of the ContaPolizaAsigSucursalID property.</param>
+        public static ContaConfigAfectacionDetalle CreateContaConfigAfectacionDetalle(global::System.Int32 contaConfigAfectacionDetalleID, global::System.Int32 contaConfigAfectacionID, global::System.Boolean esCuentaDeMayor, global::System.Int32 cuentaID, global::System.Boolean esCargo, global::System.Boolean esCasoFijo, global::System.Int32 contaPolizaAsigSucursalID)
         {
             ContaConfigAfectacionDetalle contaConfigAfectacionDetalle = new ContaConfigAfectacionDetalle();
             contaConfigAfectacionDetalle.ContaConfigAfectacionDetalleID = contaConfigAfectacionDetalleID;
@@ -5893,6 +5922,7 @@ namespace TheosProc
             contaConfigAfectacionDetalle.CuentaID = cuentaID;
             contaConfigAfectacionDetalle.EsCargo = esCargo;
             contaConfigAfectacionDetalle.EsCasoFijo = esCasoFijo;
+            contaConfigAfectacionDetalle.ContaPolizaAsigSucursalID = contaPolizaAsigSucursalID;
             return contaConfigAfectacionDetalle;
         }
 
@@ -6070,6 +6100,30 @@ namespace TheosProc
         private global::System.Boolean _EsCasoFijo;
         partial void OnEsCasoFijoChanging(global::System.Boolean value);
         partial void OnEsCasoFijoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ContaPolizaAsigSucursalID
+        {
+            get
+            {
+                return _ContaPolizaAsigSucursalID;
+            }
+            set
+            {
+                OnContaPolizaAsigSucursalIDChanging(value);
+                ReportPropertyChanging("ContaPolizaAsigSucursalID");
+                _ContaPolizaAsigSucursalID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContaPolizaAsigSucursalID");
+                OnContaPolizaAsigSucursalIDChanged();
+            }
+        }
+        private global::System.Int32 _ContaPolizaAsigSucursalID;
+        partial void OnContaPolizaAsigSucursalIDChanging(global::System.Int32 value);
+        partial void OnContaPolizaAsigSucursalIDChanged();
 
         #endregion
 
@@ -6515,6 +6569,30 @@ namespace TheosProc
         private Nullable<global::System.Int32> _RelacionID;
         partial void OnRelacionIDChanging(Nullable<global::System.Int32> value);
         partial void OnRelacionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> DevengarAutEsp
+        {
+            get
+            {
+                return _DevengarAutEsp;
+            }
+            set
+            {
+                OnDevengarAutEspChanging(value);
+                ReportPropertyChanging("DevengarAutEsp");
+                _DevengarAutEsp = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DevengarAutEsp");
+                OnDevengarAutEspChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _DevengarAutEsp;
+        partial void OnDevengarAutEspChanging(Nullable<global::System.Boolean> value);
+        partial void OnDevengarAutEspChanged();
 
         #endregion
 
@@ -8014,7 +8092,8 @@ namespace TheosProc
         /// <param name="contaCuentaAuxiliarID">Initial value of the ContaCuentaAuxiliarID property.</param>
         /// <param name="cargo">Initial value of the Cargo property.</param>
         /// <param name="abono">Initial value of the Abono property.</param>
-        public static ContaPolizaDetalle CreateContaPolizaDetalle(global::System.Int32 contaPolizaDetalleID, global::System.Int32 contaPolizaID, global::System.Int32 contaCuentaAuxiliarID, global::System.Decimal cargo, global::System.Decimal abono)
+        /// <param name="sucursalID">Initial value of the SucursalID property.</param>
+        public static ContaPolizaDetalle CreateContaPolizaDetalle(global::System.Int32 contaPolizaDetalleID, global::System.Int32 contaPolizaID, global::System.Int32 contaCuentaAuxiliarID, global::System.Decimal cargo, global::System.Decimal abono, global::System.Int32 sucursalID)
         {
             ContaPolizaDetalle contaPolizaDetalle = new ContaPolizaDetalle();
             contaPolizaDetalle.ContaPolizaDetalleID = contaPolizaDetalleID;
@@ -8022,6 +8101,7 @@ namespace TheosProc
             contaPolizaDetalle.ContaCuentaAuxiliarID = contaCuentaAuxiliarID;
             contaPolizaDetalle.Cargo = cargo;
             contaPolizaDetalle.Abono = abono;
+            contaPolizaDetalle.SucursalID = sucursalID;
             return contaPolizaDetalle;
         }
 
@@ -8175,6 +8255,30 @@ namespace TheosProc
         private global::System.Decimal _Abono;
         partial void OnAbonoChanging(global::System.Decimal value);
         partial void OnAbonoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SucursalID
+        {
+            get
+            {
+                return _SucursalID;
+            }
+            set
+            {
+                OnSucursalIDChanging(value);
+                ReportPropertyChanging("SucursalID");
+                _SucursalID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SucursalID");
+                OnSucursalIDChanged();
+            }
+        }
+        private global::System.Int32 _SucursalID;
+        partial void OnSucursalIDChanging(global::System.Int32 value);
+        partial void OnSucursalIDChanged();
 
         #endregion
 
@@ -8253,6 +8357,44 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ContaPoliza>("ControlRefaccionariaModel.FK__ContaPoli__Conta__7B5C1DA2", "ContaPoliza", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__ContaPoli__Sucur__2EFBBD39", "Sucursal")]
+        public Sucursal Sucursal
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__ContaPoli__Sucur__2EFBBD39", "Sucursal").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__ContaPoli__Sucur__2EFBBD39", "Sucursal").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Sucursal> SucursalReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__ContaPoli__Sucur__2EFBBD39", "Sucursal");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__ContaPoli__Sucur__2EFBBD39", "Sucursal", value);
                 }
             }
         }
@@ -10190,7 +10332,8 @@ namespace TheosProc
         /// <param name="estatus">Initial value of the Estatus property.</param>
         /// <param name="actualizar">Initial value of the Actualizar property.</param>
         /// <param name="importeFactura">Initial value of the ImporteFactura property.</param>
-        public static MovimientoInventario CreateMovimientoInventario(global::System.Int32 movimientoInventarioID, global::System.Int32 tipoOperacionID, global::System.Decimal importeTotal, global::System.Boolean fueLiquidado, global::System.Int32 usuarioID, global::System.Boolean estatus, global::System.Boolean actualizar, global::System.Decimal importeFactura)
+        /// <param name="esAgrupador">Initial value of the EsAgrupador property.</param>
+        public static MovimientoInventario CreateMovimientoInventario(global::System.Int32 movimientoInventarioID, global::System.Int32 tipoOperacionID, global::System.Decimal importeTotal, global::System.Boolean fueLiquidado, global::System.Int32 usuarioID, global::System.Boolean estatus, global::System.Boolean actualizar, global::System.Decimal importeFactura, global::System.Boolean esAgrupador)
         {
             MovimientoInventario movimientoInventario = new MovimientoInventario();
             movimientoInventario.MovimientoInventarioID = movimientoInventarioID;
@@ -10201,6 +10344,7 @@ namespace TheosProc
             movimientoInventario.Estatus = estatus;
             movimientoInventario.Actualizar = actualizar;
             movimientoInventario.ImporteFactura = importeFactura;
+            movimientoInventario.EsAgrupador = esAgrupador;
             return movimientoInventario;
         }
 
@@ -10426,54 +10570,6 @@ namespace TheosProc
         private global::System.String _FolioFactura;
         partial void OnFolioFacturaChanging(global::System.String value);
         partial void OnFolioFacturaChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AplicaEnMovimientoInventarioID
-        {
-            get
-            {
-                return _AplicaEnMovimientoInventarioID;
-            }
-            set
-            {
-                OnAplicaEnMovimientoInventarioIDChanging(value);
-                ReportPropertyChanging("AplicaEnMovimientoInventarioID");
-                _AplicaEnMovimientoInventarioID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AplicaEnMovimientoInventarioID");
-                OnAplicaEnMovimientoInventarioIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _AplicaEnMovimientoInventarioID;
-        partial void OnAplicaEnMovimientoInventarioIDChanging(Nullable<global::System.Int32> value);
-        partial void OnAplicaEnMovimientoInventarioIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> FechaAplicacion
-        {
-            get
-            {
-                return _FechaAplicacion;
-            }
-            set
-            {
-                OnFechaAplicacionChanging(value);
-                ReportPropertyChanging("FechaAplicacion");
-                _FechaAplicacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FechaAplicacion");
-                OnFechaAplicacionChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _FechaAplicacion;
-        partial void OnFechaAplicacionChanging(Nullable<global::System.DateTime> value);
-        partial void OnFechaAplicacionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -10978,11 +11074,203 @@ namespace TheosProc
         private Nullable<global::System.Int32> _TipoConceptoOperacionID;
         partial void OnTipoConceptoOperacionIDChanging(Nullable<global::System.Int32> value);
         partial void OnTipoConceptoOperacionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean EsAgrupador
+        {
+            get
+            {
+                return _EsAgrupador;
+            }
+            set
+            {
+                OnEsAgrupadorChanging(value);
+                ReportPropertyChanging("EsAgrupador");
+                _EsAgrupador = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EsAgrupador");
+                OnEsAgrupadorChanged();
+            }
+        }
+        private global::System.Boolean _EsAgrupador;
+        partial void OnEsAgrupadorChanging(global::System.Boolean value);
+        partial void OnEsAgrupadorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MovimientoAgrupadorID
+        {
+            get
+            {
+                return _MovimientoAgrupadorID;
+            }
+            set
+            {
+                OnMovimientoAgrupadorIDChanging(value);
+                ReportPropertyChanging("MovimientoAgrupadorID");
+                _MovimientoAgrupadorID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MovimientoAgrupadorID");
+                OnMovimientoAgrupadorIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _MovimientoAgrupadorID;
+        partial void OnMovimientoAgrupadorIDChanging(Nullable<global::System.Int32> value);
+        partial void OnMovimientoAgrupadorIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DeMovimientoInventarioID
+        {
+            get
+            {
+                return _DeMovimientoInventarioID;
+            }
+            set
+            {
+                OnDeMovimientoInventarioIDChanging(value);
+                ReportPropertyChanging("DeMovimientoInventarioID");
+                _DeMovimientoInventarioID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DeMovimientoInventarioID");
+                OnDeMovimientoInventarioIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DeMovimientoInventarioID;
+        partial void OnDeMovimientoInventarioIDChanging(Nullable<global::System.Int32> value);
+        partial void OnDeMovimientoInventarioIDChanged();
 
         #endregion
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Movimient__DeMov__49AFB375", "MovimientoInventario1")]
+        public EntityCollection<MovimientoInventario> MovimientoInventario1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__DeMov__49AFB375", "MovimientoInventario1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__DeMov__49AFB375", "MovimientoInventario1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Movimient__DeMov__49AFB375", "MovimientoInventario")]
+        public MovimientoInventario MovimientoInventario2
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__DeMov__49AFB375", "MovimientoInventario").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__DeMov__49AFB375", "MovimientoInventario").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<MovimientoInventario> MovimientoInventario2Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__DeMov__49AFB375", "MovimientoInventario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__DeMov__49AFB375", "MovimientoInventario", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Movimient__Movim__420E91AD", "MovimientoInventario1")]
+        public EntityCollection<MovimientoInventario> MovimientoInventario11
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__Movim__420E91AD", "MovimientoInventario1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__Movim__420E91AD", "MovimientoInventario1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Movimient__Movim__420E91AD", "MovimientoInventario")]
+        public MovimientoInventario MovimientoInventario3
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__Movim__420E91AD", "MovimientoInventario").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__Movim__420E91AD", "MovimientoInventario").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<MovimientoInventario> MovimientoInventario3Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__Movim__420E91AD", "MovimientoInventario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__Movimient__Movim__420E91AD", "MovimientoInventario", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -11024,6 +11312,28 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MovimientoInventarioTraspasoContingencia>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventarioTraspasoContingencia", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Movim__48BB8F3C", "VentaGarantia")]
+        public EntityCollection<VentaGarantia> VentaGarantia
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Movim__48BB8F3C", "VentaGarantia");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Movim__48BB8F3C", "VentaGarantia", value);
                 }
             }
         }
@@ -12309,44 +12619,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario")]
-        public MovimientoInventario MovimientoInventario
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<MovimientoInventario> MovimientoInventarioReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioTraspasoContingencia_Parte", "Parte")]
         public Parte Parte
         {
@@ -12413,6 +12685,44 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Usuario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_Usuario", "Usuario", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario")]
+        public MovimientoInventario MovimientoInventario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<MovimientoInventario> MovimientoInventarioReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario", "MovimientoInventario", value);
                 }
             }
         }
@@ -12805,10 +13115,11 @@ namespace TheosProc
         /// <param name="sucursalOrigen">Initial value of the SucursalOrigen property.</param>
         /// <param name="sucursalDestino">Initial value of the SucursalDestino property.</param>
         /// <param name="importeTotal">Initial value of the ImporteTotal property.</param>
+        /// <param name="importeFactura">Initial value of the ImporteFactura property.</param>
         /// <param name="fueLiquidado">Initial value of the FueLiquidado property.</param>
         /// <param name="usuarioID">Initial value of the UsuarioID property.</param>
         /// <param name="nombreUsuario">Initial value of the NombreUsuario property.</param>
-        public static MovimientoInventarioView CreateMovimientoInventarioView(global::System.Int32 movimientoInventarioID, global::System.Int32 tipoOperacionID, global::System.String nombreTipoOperacion, global::System.String sucursalOrigen, global::System.String sucursalDestino, global::System.Decimal importeTotal, global::System.Boolean fueLiquidado, global::System.Int32 usuarioID, global::System.String nombreUsuario)
+        public static MovimientoInventarioView CreateMovimientoInventarioView(global::System.Int32 movimientoInventarioID, global::System.Int32 tipoOperacionID, global::System.String nombreTipoOperacion, global::System.String sucursalOrigen, global::System.String sucursalDestino, global::System.Decimal importeTotal, global::System.Decimal importeFactura, global::System.Boolean fueLiquidado, global::System.Int32 usuarioID, global::System.String nombreUsuario)
         {
             MovimientoInventarioView movimientoInventarioView = new MovimientoInventarioView();
             movimientoInventarioView.MovimientoInventarioID = movimientoInventarioID;
@@ -12817,6 +13128,7 @@ namespace TheosProc
             movimientoInventarioView.SucursalOrigen = sucursalOrigen;
             movimientoInventarioView.SucursalDestino = sucursalDestino;
             movimientoInventarioView.ImporteTotal = importeTotal;
+            movimientoInventarioView.ImporteFactura = importeFactura;
             movimientoInventarioView.FueLiquidado = fueLiquidado;
             movimientoInventarioView.UsuarioID = usuarioID;
             movimientoInventarioView.NombreUsuario = nombreUsuario;
@@ -13183,54 +13495,6 @@ namespace TheosProc
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AplicaEnMovimientoInventarioID
-        {
-            get
-            {
-                return _AplicaEnMovimientoInventarioID;
-            }
-            set
-            {
-                OnAplicaEnMovimientoInventarioIDChanging(value);
-                ReportPropertyChanging("AplicaEnMovimientoInventarioID");
-                _AplicaEnMovimientoInventarioID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AplicaEnMovimientoInventarioID");
-                OnAplicaEnMovimientoInventarioIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _AplicaEnMovimientoInventarioID;
-        partial void OnAplicaEnMovimientoInventarioIDChanging(Nullable<global::System.Int32> value);
-        partial void OnAplicaEnMovimientoInventarioIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> FechaAplicacion
-        {
-            get
-            {
-                return _FechaAplicacion;
-            }
-            set
-            {
-                OnFechaAplicacionChanging(value);
-                ReportPropertyChanging("FechaAplicacion");
-                _FechaAplicacion = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("FechaAplicacion");
-                OnFechaAplicacionChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _FechaAplicacion;
-        partial void OnFechaAplicacionChanging(Nullable<global::System.DateTime> value);
-        partial void OnFechaAplicacionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.Decimal> Subtotal
         {
             get
@@ -13300,6 +13564,33 @@ namespace TheosProc
         private global::System.Decimal _ImporteTotal;
         partial void OnImporteTotalChanging(global::System.Decimal value);
         partial void OnImporteTotalChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ImporteFactura
+        {
+            get
+            {
+                return _ImporteFactura;
+            }
+            set
+            {
+                if (_ImporteFactura != value)
+                {
+                    OnImporteFacturaChanging(value);
+                    ReportPropertyChanging("ImporteFactura");
+                    _ImporteFactura = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ImporteFactura");
+                    OnImporteFacturaChanged();
+                }
+            }
+        }
+        private global::System.Decimal _ImporteFactura;
+        partial void OnImporteFacturaChanging(global::System.Decimal value);
+        partial void OnImporteFacturaChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -16904,24 +17195,24 @@ namespace TheosProc
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Referencia
+        public Nullable<global::System.Int32> RelacionID
         {
             get
             {
-                return _Referencia;
+                return _RelacionID;
             }
             set
             {
-                OnReferenciaChanging(value);
-                ReportPropertyChanging("Referencia");
-                _Referencia = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Referencia");
-                OnReferenciaChanged();
+                OnRelacionIDChanging(value);
+                ReportPropertyChanging("RelacionID");
+                _RelacionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RelacionID");
+                OnRelacionIDChanged();
             }
         }
-        private global::System.String _Referencia;
-        partial void OnReferenciaChanging(global::System.String value);
-        partial void OnReferenciaChanged();
+        private Nullable<global::System.Int32> _RelacionID;
+        partial void OnRelacionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnRelacionIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -16946,6 +17237,30 @@ namespace TheosProc
         private Nullable<global::System.Int32> _OrigenID;
         partial void OnOrigenIDChanging(Nullable<global::System.Int32> value);
         partial void OnOrigenIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SucursalID
+        {
+            get
+            {
+                return _SucursalID;
+            }
+            set
+            {
+                OnSucursalIDChanging(value);
+                ReportPropertyChanging("SucursalID");
+                _SucursalID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SucursalID");
+                OnSucursalIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SucursalID;
+        partial void OnSucursalIDChanging(Nullable<global::System.Int32> value);
+        partial void OnSucursalIDChanged();
 
         #endregion
 
@@ -17024,6 +17339,44 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Venta>("ControlRefaccionariaModel.FK__NotaDeCre__Orige__0B879873", "Venta", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Sucur__2FEFE172", "Sucursal")]
+        public Sucursal Sucursal
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__NotaDeCre__Sucur__2FEFE172", "Sucursal").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__NotaDeCre__Sucur__2FEFE172", "Sucursal").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Sucursal> SucursalReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__NotaDeCre__Sucur__2FEFE172", "Sucursal");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__NotaDeCre__Sucur__2FEFE172", "Sucursal", value);
                 }
             }
         }
@@ -19110,28 +19463,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioDetalle_Parte", "MovimientoInventarioDetalle")]
-        public EntityCollection<MovimientoInventarioDetalle> MovimientoInventarioDetalle
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MovimientoInventarioDetalle>("ControlRefaccionariaModel.FK_MovimientoInventarioDetalle_Parte", "MovimientoInventarioDetalle");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MovimientoInventarioDetalle>("ControlRefaccionariaModel.FK_MovimientoInventarioDetalle_Parte", "MovimientoInventarioDetalle", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioTraspasoContingencia_Parte", "MovimientoInventarioTraspasoContingencia")]
         public EntityCollection<MovimientoInventarioTraspasoContingencia> MovimientoInventarioTraspasoContingencia
         {
@@ -19166,28 +19497,6 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaDetalle>("ControlRefaccionariaModel.FK__VentaDeta__Parte__43E1002F", "VentaDetalle", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Parte__2B403AEE", "VentaGarantia")]
-        public EntityCollection<VentaGarantia> VentaGarantia
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Parte__2B403AEE", "VentaGarantia");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Parte__2B403AEE", "VentaGarantia", value);
                 }
             }
         }
@@ -19270,6 +19579,50 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InventarioConteo>("ControlRefaccionariaModel.FK__Inventari__Parte__0446695E", "InventarioConteo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_MovimientoInventarioDetalle_Parte", "MovimientoInventarioDetalle")]
+        public EntityCollection<MovimientoInventarioDetalle> MovimientoInventarioDetalle
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MovimientoInventarioDetalle>("ControlRefaccionariaModel.FK_MovimientoInventarioDetalle_Parte", "MovimientoInventarioDetalle");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MovimientoInventarioDetalle>("ControlRefaccionariaModel.FK_MovimientoInventarioDetalle_Parte", "MovimientoInventarioDetalle", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Parte__2B403AEE", "VentaGarantia")]
+        public EntityCollection<VentaGarantia> VentaGarantia
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Parte__2B403AEE", "VentaGarantia");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Parte__2B403AEE", "VentaGarantia", value);
                 }
             }
         }
@@ -20048,6 +20401,54 @@ namespace TheosProc
         private global::System.Decimal _ExistenciaNueva;
         partial void OnExistenciaNuevaChanging(global::System.Decimal value);
         partial void OnExistenciaNuevaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RelacionTabla
+        {
+            get
+            {
+                return _RelacionTabla;
+            }
+            set
+            {
+                OnRelacionTablaChanging(value);
+                ReportPropertyChanging("RelacionTabla");
+                _RelacionTabla = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("RelacionTabla");
+                OnRelacionTablaChanged();
+            }
+        }
+        private global::System.String _RelacionTabla;
+        partial void OnRelacionTablaChanging(global::System.String value);
+        partial void OnRelacionTablaChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RelacionID
+        {
+            get
+            {
+                return _RelacionID;
+            }
+            set
+            {
+                OnRelacionIDChanging(value);
+                ReportPropertyChanging("RelacionID");
+                _RelacionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RelacionID");
+                OnRelacionIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RelacionID;
+        partial void OnRelacionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnRelacionIDChanged();
 
         #endregion
 
@@ -22031,28 +22432,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_ProveedorPoliza_Proveedor", "ProveedorPoliza")]
-        public EntityCollection<ProveedorPoliza> ProveedorPoliza
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPoliza_Proveedor", "ProveedorPoliza");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPoliza_Proveedor", "ProveedorPoliza", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__Prove__69FC8776", "ProveedorNotaDeCredito")]
         public EntityCollection<ProveedorNotaDeCredito> ProveedorNotaDeCredito
         {
@@ -22065,6 +22444,28 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProveedorNotaDeCredito>("ControlRefaccionariaModel.FK__Proveedor__Prove__69FC8776", "ProveedorNotaDeCredito", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_ProveedorPoliza_Proveedor", "ProveedorPoliza")]
+        public EntityCollection<ProveedorPoliza> ProveedorPoliza
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPoliza_Proveedor", "ProveedorPoliza");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPoliza_Proveedor", "ProveedorPoliza", value);
                 }
             }
         }
@@ -22406,28 +22807,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__NotaD__70A98505", "ProveedorPolizaDetalle")]
-        public EntityCollection<ProveedorPolizaDetalle> ProveedorPolizaDetalle
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProveedorPolizaDetalle>("ControlRefaccionariaModel.FK__Proveedor__NotaD__70A98505", "ProveedorPolizaDetalle");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProveedorPolizaDetalle>("ControlRefaccionariaModel.FK__Proveedor__NotaD__70A98505", "ProveedorPolizaDetalle", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__Reali__6CD8F421", "Usuario")]
         public Usuario Usuario
         {
@@ -22459,6 +22838,28 @@ namespace TheosProc
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__NotaD__70A98505", "ProveedorPolizaDetalle")]
+        public EntityCollection<ProveedorPolizaDetalle> ProveedorPolizaDetalle
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProveedorPolizaDetalle>("ControlRefaccionariaModel.FK__Proveedor__NotaD__70A98505", "ProveedorPolizaDetalle");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProveedorPolizaDetalle>("ControlRefaccionariaModel.FK__Proveedor__NotaD__70A98505", "ProveedorPolizaDetalle", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -22484,11 +22885,10 @@ namespace TheosProc
         /// <param name="fechaRegistro">Initial value of the FechaRegistro property.</param>
         /// <param name="estatus">Initial value of the Estatus property.</param>
         /// <param name="actualizar">Initial value of the Actualizar property.</param>
-        /// <param name="importePago">Initial value of the ImportePago property.</param>
         /// <param name="bancoCuentaID">Initial value of the BancoCuentaID property.</param>
         /// <param name="tipoFormaPagoID">Initial value of the TipoFormaPagoID property.</param>
         /// <param name="folioDePago">Initial value of the FolioDePago property.</param>
-        public static ProveedorPoliza CreateProveedorPoliza(global::System.Int32 proveedorPolizaID, global::System.Int32 proveedorID, global::System.DateTime fechaPago, global::System.Int32 usuarioID, global::System.DateTime fechaRegistro, global::System.Boolean estatus, global::System.Boolean actualizar, global::System.Decimal importePago, global::System.Int32 bancoCuentaID, global::System.Int32 tipoFormaPagoID, global::System.String folioDePago)
+        public static ProveedorPoliza CreateProveedorPoliza(global::System.Int32 proveedorPolizaID, global::System.Int32 proveedorID, global::System.DateTime fechaPago, global::System.Int32 usuarioID, global::System.DateTime fechaRegistro, global::System.Boolean estatus, global::System.Boolean actualizar, global::System.Int32 bancoCuentaID, global::System.Int32 tipoFormaPagoID, global::System.String folioDePago)
         {
             ProveedorPoliza proveedorPoliza = new ProveedorPoliza();
             proveedorPoliza.ProveedorPolizaID = proveedorPolizaID;
@@ -22498,7 +22898,6 @@ namespace TheosProc
             proveedorPoliza.FechaRegistro = fechaRegistro;
             proveedorPoliza.Estatus = estatus;
             proveedorPoliza.Actualizar = actualizar;
-            proveedorPoliza.ImportePago = importePago;
             proveedorPoliza.BancoCuentaID = bancoCuentaID;
             proveedorPoliza.TipoFormaPagoID = tipoFormaPagoID;
             proveedorPoliza.FolioDePago = folioDePago;
@@ -22709,30 +23108,6 @@ namespace TheosProc
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Decimal ImportePago
-        {
-            get
-            {
-                return _ImportePago;
-            }
-            set
-            {
-                OnImportePagoChanging(value);
-                ReportPropertyChanging("ImportePago");
-                _ImportePago = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ImportePago");
-                OnImportePagoChanged();
-            }
-        }
-        private global::System.Decimal _ImportePago;
-        partial void OnImportePagoChanging(global::System.Decimal value);
-        partial void OnImportePagoChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 BancoCuentaID
         {
             get
@@ -22804,6 +23179,44 @@ namespace TheosProc
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__Banco__169A23C3", "BancoCuenta")]
+        public BancoCuenta BancoCuenta
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BancoCuenta>("ControlRefaccionariaModel.FK__Proveedor__Banco__169A23C3", "BancoCuenta").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BancoCuenta>("ControlRefaccionariaModel.FK__Proveedor__Banco__169A23C3", "BancoCuenta").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<BancoCuenta> BancoCuentaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BancoCuenta>("ControlRefaccionariaModel.FK__Proveedor__Banco__169A23C3", "BancoCuenta");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<BancoCuenta>("ControlRefaccionariaModel.FK__Proveedor__Banco__169A23C3", "BancoCuenta", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -22902,44 +23315,6 @@ namespace TheosProc
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__Banco__169A23C3", "BancoCuenta")]
-        public BancoCuenta BancoCuenta
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BancoCuenta>("ControlRefaccionariaModel.FK__Proveedor__Banco__169A23C3", "BancoCuenta").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BancoCuenta>("ControlRefaccionariaModel.FK__Proveedor__Banco__169A23C3", "BancoCuenta").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<BancoCuenta> BancoCuentaReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BancoCuenta>("ControlRefaccionariaModel.FK__Proveedor__Banco__169A23C3", "BancoCuenta");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<BancoCuenta>("ControlRefaccionariaModel.FK__Proveedor__Banco__169A23C3", "BancoCuenta", value);
-                }
-            }
-        }
 
         #endregion
 
@@ -22961,20 +23336,22 @@ namespace TheosProc
         /// <param name="proveedorPolizaDetalleID">Initial value of the ProveedorPolizaDetalleID property.</param>
         /// <param name="proveedorPolizaID">Initial value of the ProveedorPolizaID property.</param>
         /// <param name="movimientoInventarioID">Initial value of the MovimientoInventarioID property.</param>
-        /// <param name="importe">Initial value of the Importe property.</param>
         /// <param name="fechaRegistro">Initial value of the FechaRegistro property.</param>
         /// <param name="estatus">Initial value of the Estatus property.</param>
         /// <param name="origenID">Initial value of the OrigenID property.</param>
-        public static ProveedorPolizaDetalle CreateProveedorPolizaDetalle(global::System.Int32 proveedorPolizaDetalleID, global::System.Int32 proveedorPolizaID, global::System.Int32 movimientoInventarioID, global::System.Decimal importe, global::System.DateTime fechaRegistro, global::System.Boolean estatus, global::System.Int32 origenID)
+        /// <param name="subtotal">Initial value of the Subtotal property.</param>
+        /// <param name="iva">Initial value of the Iva property.</param>
+        public static ProveedorPolizaDetalle CreateProveedorPolizaDetalle(global::System.Int32 proveedorPolizaDetalleID, global::System.Int32 proveedorPolizaID, global::System.Int32 movimientoInventarioID, global::System.DateTime fechaRegistro, global::System.Boolean estatus, global::System.Int32 origenID, global::System.Decimal subtotal, global::System.Decimal iva)
         {
             ProveedorPolizaDetalle proveedorPolizaDetalle = new ProveedorPolizaDetalle();
             proveedorPolizaDetalle.ProveedorPolizaDetalleID = proveedorPolizaDetalleID;
             proveedorPolizaDetalle.ProveedorPolizaID = proveedorPolizaID;
             proveedorPolizaDetalle.MovimientoInventarioID = movimientoInventarioID;
-            proveedorPolizaDetalle.Importe = importe;
             proveedorPolizaDetalle.FechaRegistro = fechaRegistro;
             proveedorPolizaDetalle.Estatus = estatus;
             proveedorPolizaDetalle.OrigenID = origenID;
+            proveedorPolizaDetalle.Subtotal = subtotal;
+            proveedorPolizaDetalle.Iva = iva;
             return proveedorPolizaDetalle;
         }
 
@@ -23056,30 +23433,6 @@ namespace TheosProc
         private global::System.Int32 _MovimientoInventarioID;
         partial void OnMovimientoInventarioIDChanging(global::System.Int32 value);
         partial void OnMovimientoInventarioIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Decimal Importe
-        {
-            get
-            {
-                return _Importe;
-            }
-            set
-            {
-                OnImporteChanging(value);
-                ReportPropertyChanging("Importe");
-                _Importe = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Importe");
-                OnImporteChanged();
-            }
-        }
-        private global::System.Decimal _Importe;
-        partial void OnImporteChanging(global::System.Decimal value);
-        partial void OnImporteChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -23224,11 +23577,121 @@ namespace TheosProc
         private global::System.String _Folio;
         partial void OnFolioChanging(global::System.String value);
         partial void OnFolioChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> CajaEgresoID
+        {
+            get
+            {
+                return _CajaEgresoID;
+            }
+            set
+            {
+                OnCajaEgresoIDChanging(value);
+                ReportPropertyChanging("CajaEgresoID");
+                _CajaEgresoID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CajaEgresoID");
+                OnCajaEgresoIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _CajaEgresoID;
+        partial void OnCajaEgresoIDChanging(Nullable<global::System.Int32> value);
+        partial void OnCajaEgresoIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Subtotal
+        {
+            get
+            {
+                return _Subtotal;
+            }
+            set
+            {
+                OnSubtotalChanging(value);
+                ReportPropertyChanging("Subtotal");
+                _Subtotal = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Subtotal");
+                OnSubtotalChanged();
+            }
+        }
+        private global::System.Decimal _Subtotal;
+        partial void OnSubtotalChanging(global::System.Decimal value);
+        partial void OnSubtotalChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Iva
+        {
+            get
+            {
+                return _Iva;
+            }
+            set
+            {
+                OnIvaChanging(value);
+                ReportPropertyChanging("Iva");
+                _Iva = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Iva");
+                OnIvaChanged();
+            }
+        }
+        private global::System.Decimal _Iva;
+        partial void OnIvaChanging(global::System.Decimal value);
+        partial void OnIvaChanged();
 
         #endregion
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__CajaE__2977EE0D", "CajaEgreso")]
+        public CajaEgreso CajaEgreso
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CajaEgreso>("ControlRefaccionariaModel.FK__Proveedor__CajaE__2977EE0D", "CajaEgreso").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CajaEgreso>("ControlRefaccionariaModel.FK__Proveedor__CajaE__2977EE0D", "CajaEgreso").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<CajaEgreso> CajaEgresoReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CajaEgreso>("ControlRefaccionariaModel.FK__Proveedor__CajaE__2977EE0D", "CajaEgreso");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CajaEgreso>("ControlRefaccionariaModel.FK__Proveedor__CajaE__2977EE0D", "CajaEgreso", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -23274,44 +23737,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza")]
-        public ProveedorPoliza ProveedorPoliza
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<ProveedorPoliza> ProveedorPolizaReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__Proveedor__NotaD__70A98505", "ProveedorNotaDeCredito")]
         public ProveedorNotaDeCredito ProveedorNotaDeCredito
         {
@@ -23340,6 +23765,44 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProveedorNotaDeCredito>("ControlRefaccionariaModel.FK__Proveedor__NotaD__70A98505", "ProveedorNotaDeCredito", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza")]
+        public ProveedorPoliza ProveedorPoliza
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ProveedorPoliza> ProveedorPolizaReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPolizaDetalle_ProveedorPoliza", "ProveedorPoliza", value);
                 }
             }
         }
@@ -24005,28 +24468,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Sucur__14FBF414", "VentaGarantia")]
-        public EntityCollection<VentaGarantia> VentaGarantia
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "VentaGarantia");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "VentaGarantia", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaPago__Sucur__20A2B0EA", "VentaPago")]
         public EntityCollection<VentaPago> VentaPago
         {
@@ -24077,6 +24518,72 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Usuario>("ControlRefaccionariaModel.FK_Sucursal_Usuario", "Usuario", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__ContaPoli__Sucur__2EFBBD39", "ContaPolizaDetalle")]
+        public EntityCollection<ContaPolizaDetalle> ContaPolizaDetalle
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ContaPolizaDetalle>("ControlRefaccionariaModel.FK__ContaPoli__Sucur__2EFBBD39", "ContaPolizaDetalle");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ContaPolizaDetalle>("ControlRefaccionariaModel.FK__ContaPoli__Sucur__2EFBBD39", "ContaPolizaDetalle", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Sucur__14FBF414", "VentaGarantia")]
+        public EntityCollection<VentaGarantia> VentaGarantia
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "VentaGarantia");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "VentaGarantia", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Sucur__2FEFE172", "NotaDeCredito")]
+        public EntityCollection<NotaDeCredito> NotaDeCredito
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Sucur__2FEFE172", "NotaDeCredito");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Sucur__2FEFE172", "NotaDeCredito", value);
                 }
             }
         }
@@ -24414,6 +24921,54 @@ namespace TheosProc
         private Nullable<global::System.Int32> _TipoUsuarioID;
         partial void OnTipoUsuarioIDChanging(Nullable<global::System.Int32> value);
         partial void OnTipoUsuarioIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Alerta9500
+        {
+            get
+            {
+                return _Alerta9500;
+            }
+            set
+            {
+                OnAlerta9500Changing(value);
+                ReportPropertyChanging("Alerta9500");
+                _Alerta9500 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Alerta9500");
+                OnAlerta9500Changed();
+            }
+        }
+        private Nullable<global::System.Boolean> _Alerta9500;
+        partial void OnAlerta9500Changing(Nullable<global::System.Boolean> value);
+        partial void OnAlerta9500Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Ip
+        {
+            get
+            {
+                return _Ip;
+            }
+            set
+            {
+                OnIpChanging(value);
+                ReportPropertyChanging("Ip");
+                _Ip = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Ip");
+                OnIpChanged();
+            }
+        }
+        private global::System.String _Ip;
+        partial void OnIpChanging(global::System.String value);
+        partial void OnIpChanged();
 
         #endregion
 
@@ -24888,50 +25443,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Reali__19C0A931", "VentaGarantia")]
-        public EntityCollection<VentaGarantia> VentaGarantia
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Reali__19C0A931", "VentaGarantia");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Reali__19C0A931", "VentaGarantia", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Usuar__1AB4CD6A", "VentaGarantia")]
-        public EntityCollection<VentaGarantia> VentaGarantia1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Usuar__1AB4CD6A", "VentaGarantia");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Usuar__1AB4CD6A", "VentaGarantia", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaPago__Usuar__644DCFC1", "VentaPago")]
         public EntityCollection<VentaPago> VentaPago
         {
@@ -24966,28 +25477,6 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaPagoDetalle>("ControlRefaccionariaModel.FK__VentaPago__Usuar__6FBF826D", "VentaPagoDetalle", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_ProveedorPoliza_Usuario", "ProveedorPoliza")]
-        public EntityCollection<ProveedorPoliza> ProveedorPoliza
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPoliza_Usuario", "ProveedorPoliza");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPoliza_Usuario", "ProveedorPoliza", value);
                 }
             }
         }
@@ -25196,28 +25685,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Usuar__5AC46587", "NotaDeCredito")]
-        public EntityCollection<NotaDeCredito> NotaDeCredito
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Usuar__5AC46587", "NotaDeCredito");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Usuar__5AC46587", "NotaDeCredito", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Reali__383A4359", "VentaDevolucion")]
         public EntityCollection<VentaDevolucion> VentaDevolucion
         {
@@ -25384,6 +25851,94 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Sucursal>("ControlRefaccionariaModel.FK_Sucursal_Usuario", "Sucursal", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK_ProveedorPoliza_Usuario", "ProveedorPoliza")]
+        public EntityCollection<ProveedorPoliza> ProveedorPoliza
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPoliza_Usuario", "ProveedorPoliza");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ProveedorPoliza>("ControlRefaccionariaModel.FK_ProveedorPoliza_Usuario", "ProveedorPoliza", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Reali__19C0A931", "VentaGarantia")]
+        public EntityCollection<VentaGarantia> VentaGarantia
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Reali__19C0A931", "VentaGarantia");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Reali__19C0A931", "VentaGarantia", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Usuar__1AB4CD6A", "VentaGarantia")]
+        public EntityCollection<VentaGarantia> VentaGarantia1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Usuar__1AB4CD6A", "VentaGarantia");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Usuar__1AB4CD6A", "VentaGarantia", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Usuar__5AC46587", "NotaDeCredito")]
+        public EntityCollection<NotaDeCredito> NotaDeCredito
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Usuar__5AC46587", "NotaDeCredito");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Usuar__5AC46587", "NotaDeCredito", value);
                 }
             }
         }
@@ -26065,6 +26620,30 @@ namespace TheosProc
         private global::System.String _OrdenDeCompra;
         partial void OnOrdenDeCompraChanging(global::System.String value);
         partial void OnOrdenDeCompraChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> FacturaDividida
+        {
+            get
+            {
+                return _FacturaDividida;
+            }
+            set
+            {
+                OnFacturaDivididaChanging(value);
+                ReportPropertyChanging("FacturaDividida");
+                _FacturaDividida = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FacturaDividida");
+                OnFacturaDivididaChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _FacturaDividida;
+        partial void OnFacturaDivididaChanging(Nullable<global::System.Boolean> value);
+        partial void OnFacturaDivididaChanged();
 
         #endregion
 
@@ -26251,28 +26830,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Venta__1407CFDB", "VentaGarantia")]
-        public EntityCollection<VentaGarantia> VentaGarantia
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Venta__1407CFDB", "VentaGarantia");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Venta__1407CFDB", "VentaGarantia", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaPago__Venta__6265874F", "VentaPago")]
         public EntityCollection<VentaPago> VentaPago
         {
@@ -26285,50 +26842,6 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaPago>("ControlRefaccionariaModel.FK__VentaPago__Venta__6265874F", "VentaPago", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Orige__0B879873", "NotaDeCredito")]
-        public EntityCollection<NotaDeCredito> NotaDeCredito
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Orige__0B879873", "NotaDeCredito");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Orige__0B879873", "NotaDeCredito", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__UsoVe__0C7BBCAC", "NotaDeCredito")]
-        public EntityCollection<NotaDeCredito> NotaDeCredito1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__UsoVe__0C7BBCAC", "NotaDeCredito");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__UsoVe__0C7BBCAC", "NotaDeCredito", value);
                 }
             }
         }
@@ -26389,6 +26902,72 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__Venta__SucursalI__0F382DC6", "Sucursal", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Venta__1407CFDB", "VentaGarantia")]
+        public EntityCollection<VentaGarantia> VentaGarantia
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Venta__1407CFDB", "VentaGarantia");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Venta__1407CFDB", "VentaGarantia", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__Orige__0B879873", "NotaDeCredito")]
+        public EntityCollection<NotaDeCredito> NotaDeCredito
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Orige__0B879873", "NotaDeCredito");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__Orige__0B879873", "NotaDeCredito", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__NotaDeCre__UsoVe__0C7BBCAC", "NotaDeCredito")]
+        public EntityCollection<NotaDeCredito> NotaDeCredito1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__UsoVe__0C7BBCAC", "NotaDeCredito");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<NotaDeCredito>("ControlRefaccionariaModel.FK__NotaDeCre__UsoVe__0C7BBCAC", "NotaDeCredito", value);
                 }
             }
         }
@@ -29262,29 +29841,91 @@ namespace TheosProc
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MovimientoInventarioDetalleID
+        public Nullable<global::System.Int32> C_MovimientoInventarioDetalleID
         {
             get
             {
-                return _MovimientoInventarioDetalleID;
+                return _C_MovimientoInventarioDetalleID;
             }
             set
             {
-                OnMovimientoInventarioDetalleIDChanging(value);
-                ReportPropertyChanging("MovimientoInventarioDetalleID");
-                _MovimientoInventarioDetalleID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MovimientoInventarioDetalleID");
-                OnMovimientoInventarioDetalleIDChanged();
+                OnC_MovimientoInventarioDetalleIDChanging(value);
+                ReportPropertyChanging("C_MovimientoInventarioDetalleID");
+                _C_MovimientoInventarioDetalleID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("C_MovimientoInventarioDetalleID");
+                OnC_MovimientoInventarioDetalleIDChanged();
             }
         }
-        private Nullable<global::System.Int32> _MovimientoInventarioDetalleID;
-        partial void OnMovimientoInventarioDetalleIDChanging(Nullable<global::System.Int32> value);
-        partial void OnMovimientoInventarioDetalleIDChanged();
+        private Nullable<global::System.Int32> _C_MovimientoInventarioDetalleID;
+        partial void OnC_MovimientoInventarioDetalleIDChanging(Nullable<global::System.Int32> value);
+        partial void OnC_MovimientoInventarioDetalleIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> MovimientoInventarioID
+        {
+            get
+            {
+                return _MovimientoInventarioID;
+            }
+            set
+            {
+                OnMovimientoInventarioIDChanging(value);
+                ReportPropertyChanging("MovimientoInventarioID");
+                _MovimientoInventarioID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MovimientoInventarioID");
+                OnMovimientoInventarioIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _MovimientoInventarioID;
+        partial void OnMovimientoInventarioIDChanging(Nullable<global::System.Int32> value);
+        partial void OnMovimientoInventarioIDChanged();
 
         #endregion
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Movim__48BB8F3C", "MovimientoInventario")]
+        public MovimientoInventario MovimientoInventario
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__VentaGara__Movim__48BB8F3C", "MovimientoInventario").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__VentaGara__Movim__48BB8F3C", "MovimientoInventario").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<MovimientoInventario> MovimientoInventarioReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__VentaGara__Movim__48BB8F3C", "MovimientoInventario");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MovimientoInventario>("ControlRefaccionariaModel.FK__VentaGara__Movim__48BB8F3C", "MovimientoInventario", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -29358,6 +29999,44 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Parte>("ControlRefaccionariaModel.FK__VentaGara__Parte__2B403AEE", "Parte", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Sucur__14FBF414", "Sucursal")]
+        public Sucursal Sucursal
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "Sucursal").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "Sucursal").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Sucursal> SucursalReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "Sucursal");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "Sucursal", value);
                 }
             }
         }
@@ -29510,44 +30189,6 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<VentaPagoDetalle>("ControlRefaccionariaModel.FK__VentaGara__Venta__2429290B", "VentaPagoDetalle", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Sucur__14FBF414", "Sucursal")]
-        public Sucursal Sucursal
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "Sucursal").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "Sucursal").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Sucursal> SucursalReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "Sucursal");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Sucursal>("ControlRefaccionariaModel.FK__VentaGara__Sucur__14FBF414", "Sucursal", value);
                 }
             }
         }
@@ -30362,28 +31003,6 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Venta__2429290B", "VentaGarantia")]
-        public EntityCollection<VentaGarantia> VentaGarantia
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Venta__2429290B", "VentaGarantia");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Venta__2429290B", "VentaGarantia", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaPago__Venta__6CE315C2", "VentaPago")]
         public VentaPago VentaPago
         {
@@ -30422,6 +31041,50 @@ namespace TheosProc
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Venta__233504D2", "VentaDevolucion")]
+        public EntityCollection<VentaDevolucion> VentaDevolucion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaDevolucion>("ControlRefaccionariaModel.FK__VentaDevo__Venta__233504D2", "VentaDevolucion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaDevolucion>("ControlRefaccionariaModel.FK__VentaDevo__Venta__233504D2", "VentaDevolucion", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaGara__Venta__2429290B", "VentaGarantia")]
+        public EntityCollection<VentaGarantia> VentaGarantia
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Venta__2429290B", "VentaGarantia");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaGarantia>("ControlRefaccionariaModel.FK__VentaGara__Venta__2429290B", "VentaGarantia", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaPago__NotaD__11207638", "NotaDeCredito")]
         public NotaDeCredito NotaDeCredito
         {
@@ -30450,28 +31113,6 @@ namespace TheosProc
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<NotaDeCredito>("ControlRefaccionariaModel.FK__VentaPago__NotaD__11207638", "NotaDeCredito", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ControlRefaccionariaModel", "FK__VentaDevo__Venta__233504D2", "VentaDevolucion")]
-        public EntityCollection<VentaDevolucion> VentaDevolucion
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<VentaDevolucion>("ControlRefaccionariaModel.FK__VentaDevo__Venta__233504D2", "VentaDevolucion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VentaDevolucion>("ControlRefaccionariaModel.FK__VentaDevo__Venta__233504D2", "VentaDevolucion", value);
                 }
             }
         }

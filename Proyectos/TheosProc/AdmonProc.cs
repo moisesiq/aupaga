@@ -141,8 +141,11 @@ namespace TheosProc
                 , Cat.ContaCuentasAuxiliares.Inventario, Cat.ContaCuentasAuxiliares.Inventario, mCostoTotal, "Aquí va el nombre de usuario dmod"
                 , Cat.Tablas.MovimientoInventario, iMovID, iSucursalID);
             var oCuentaQuitar = Datos.GetEntity<ContaPolizaDetalle>(c => c.ContaPolizaID == oPoliza.ContaPolizaID && c.Abono > 0);
-            oCuentaQuitar.Abono = 0;
-            Datos.Guardar<ContaPolizaDetalle>(oCuentaQuitar);
+            if (oCuentaQuitar != null)
+            {
+                oCuentaQuitar.Abono = 0;
+                Datos.Guardar<ContaPolizaDetalle>(oCuentaQuitar);
+            }
 
             //Actualizar el movimiento con los datos (fecha y usuario que recibio)
             var movimiento = Datos.GetEntity<MovimientoInventario>(m => m.MovimientoInventarioID == iMovID);

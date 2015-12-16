@@ -622,9 +622,14 @@ namespace Refaccionaria.App
                 oFila.Cells["Maximo"].Value = oParte.Maximo;
                 oFila.Cells["Minimo"].Value = oParte.Minimo;
                 if (Helper.ConvertirDecimal(oFila.Cells["MaximoActual"].Value) == oParte.Maximo && Helper.ConvertirDecimal(oFila.Cells["MinimoActual"].Value) == oParte.Minimo)
+                {
                     oFila.DefaultCellStyle.ForeColor = this.dgvDetalle.DefaultCellStyle.ForeColor;
+                }
                 else
+                {
                     oFila.DefaultCellStyle.ForeColor = Color.Brown;
+                    oFila.DefaultCellStyle.Font = new Font(this.dgvDetalle.DefaultCellStyle.Font, FontStyle.Bold);
+                }
                 oFila.Cells["Condiciones"].Value = sReglasAp;
             }
         }
@@ -1449,10 +1454,12 @@ namespace Refaccionaria.App
         private void LlenarDescripcionMaxMin(DataGridViewRow oFila)
         {
             this.txtDescripcionMaxMin.Clear();
-            var oParte = (this.dgvDetalle.CurrentRow.Tag as pauPartesMaxMin_Res);
-            if (oFila == null || oParte == null)
-                return;
-            this.txtDescripcionMaxMin.Text = string.Format("Condición: {0} Procesado: {1}\r\n{2}", oParte.ParteMaxMinReglaID, oParte.FechaCalculo, oParte.DescripcionCalculo);
+            if (oFila == null) return;
+            int iRegla = Helper.ConvertirEntero(oFila.Cells["Condiciones"].Value);
+            if (iRegla == 0) return;
+            var oRegla = General.GetEntity<ParteMaxMinRegla>(c => c.ParteMaxMinReglaID == iRegla && c.Estatus);
+            if (oRegla != null)
+                this.txtDescripcionMaxMin.Text = string.Format("Condición: {0}\r\n{1}", iRegla, oRegla.Descripcion);
         }
 
         #endregion

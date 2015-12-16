@@ -28147,7 +28147,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="CantidadMaxMes" Nullable="false" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="UtilidadTotal" Nullable="false" Precision="38" Scale="4" />
           <Property Type="Boolean" Name="VentasGlobales" Nullable="false" />
-          <Property Type="String" Name="DescripcionCalculo" Nullable="true" />
         </ComplexType>
         <EntityType Name="ExistenciasView">
           <Key>

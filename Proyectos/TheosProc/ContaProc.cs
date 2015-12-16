@@ -1723,13 +1723,15 @@ namespace TheosProc
         private static void AfectarConPagoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
         {
             var oReg = Datos.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == iId && c.Estatus);
-            oDetalle.Cargo = oReg.ImportePago;
+            var oAbonos = Datos.GetListOf<ProveedorPolizaDetalle>(c => c.ProveedorPolizaID == iId && c.Estatus);
+            oDetalle.Cargo = oAbonos.Sum(c => c.Subtotal + c.Iva);
         }
 
         private static void AfectarConIvaPagoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
         {
             var oReg = Datos.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == iId && c.Estatus);
-            oDetalle.Cargo = UtilTheos.ObtenerIvaDePrecio(oReg.ImportePago);
+            var oAbonos = Datos.GetListOf<ProveedorPolizaDetalle>(c => c.ProveedorPolizaID == iId && c.Estatus);
+            oDetalle.Cargo = oAbonos.Sum(c => c.Iva);
         }
 
         private static void AfectarConSubtotalNotaDeCreditoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
@@ -1756,7 +1758,7 @@ namespace TheosProc
             //    || c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoFactura) && c.Estatus);
             // oDetalle.Cargo = (oAbonos.Count > 0 ? oAbonos.Sum(c => c.Importe) : 0);
             var oReg = Datos.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId);
-            oDetalle.Cargo = oReg.Importe;
+            oDetalle.Cargo = (oReg.Subtotal + oReg.Iva);
         }
 
         private static void AfectarConSubtotalAbonoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
@@ -1765,7 +1767,7 @@ namespace TheosProc
             //    || c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoFactura) && c.Estatus);
             // oDetalle.Cargo = (oAbonos.Count > 0 ? UtilLocal.ObtenerPrecioSinIva(oAbonos.Sum(c => c.Importe)) : 0);
             var oReg = Datos.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId);
-            oDetalle.Cargo = UtilTheos.ObtenerPrecioSinIva(oReg.Importe);
+            oDetalle.Cargo = oReg.Subtotal;
         }
 
         private static void AfectarConIvaAbonoProveedor(ref ContaPolizaDetalle oDetalle, int iId)
@@ -1774,7 +1776,7 @@ namespace TheosProc
             //    || c.OrigenID == Cat.OrigenesPagosAProveedores.DescuentoFactura) && c.Estatus);
             // oDetalle.Cargo = (oAbonos.Count > 0 ? UtilLocal.ObtenerPrecioSinIva(oAbonos.Sum(c => c.Importe)) : 0);
             var oReg = Datos.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId);
-            oDetalle.Cargo = UtilTheos.ObtenerIvaDePrecio(oReg.Importe);
+            oDetalle.Cargo = oReg.Iva;
         }
 
         private static void AfectarConDevolucionMenosLoAbonado(ref ContaPolizaDetalle oDetalle, int iId)
