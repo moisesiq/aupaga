@@ -65,9 +65,9 @@ window.contenido = {
 		$(window).on("swipeleft", function(e) {
 			var bVerMenu = ($("a[data-id=aMenu]:visible").length > 0);
 			var mDistSwipe = $(window).width() * 0.85;
-		    if (e.swipestart.coords[0] > mDistSwipe && bVerMenu) {
-		    	jPanel.panel("open");
-		   }
+			if (e.swipestart.coords[0] > mDistSwipe && bVerMenu) {
+				jPanel.panel("open");
+			}
 		});
 		
 		// Se definen los eventos --------------------------------------------------
@@ -105,7 +105,7 @@ window.contenido = {
 			var sHtml = '\
 				<div id="divAccesoPopup" data-role="popup" data-theme="a" data-overlay-theme="b"> \
 					<form action="#"> \
-						<span class="Titulo">Validación de usuario</span> \
+						<h4>Validación de usuario</h4> \
 						<div class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset"> \
 							<input type="password" name="Contrasenia" placeholder="Contraseña" /> \
 						</div> \
@@ -203,5 +203,89 @@ window.contenido = {
 		jMensaje.popup();
 		jMensaje.popup("open");
 		window.setTimeout(function() { jMensaje.popup("close"); }, iDuracion)
+	}
+
+	, TecladoNumerico: function(oInput) {
+		if (oInput.jNumerico !== undefined) {
+			if (oInput.jNumerico === false)
+				oInput.jNumerico = undefined;
+			return;
+		}
+
+		var jInput = $(oInput);
+		jInput.attr("readonly", "readonly");
+		jInput.focusout(function() {
+			var jNum = $("div.TelcadoNumerico");
+			window.setTimeout(function() {
+				if (document.activeElement.parentElement.className === "TecladoNumerico"
+				|| document.activeElement === oInput)
+					return;
+				window.contenido.EsconderTecladoNumerico(oInput);
+			}, 0);
+		});
+		// jInput.blur();
+		var sNumerico = '\
+			<div class="TecladoNumerico"> \
+				<a class="uno" data-val="1" href="#">1</a> \
+				<a class="dos" data-val="2" href="#">2</a> \
+				<a class="tres" data-val="3" href="#">3</a> \
+				<a class="cuatro" data-val="4" href="#">4</a> \
+				<a class="cinco" data-val="5" href="#">5</a> \
+				<a class="seis" data-val="6" href="#">6</a> \
+				<a class="siete" data-val="7" href="#">7</a> \
+				<a class="ocho" data-val="8" href="#">8</a> \
+				<a class="nueve" data-val="9" href="#">9</a> \
+				<a class="punto" data-val="." href="#">.</a> \
+				<a class="cero" data-val="0" href="#">0</a> \
+				<a class="borrar" data-val="b" href="#">&lt;</a> \
+				<a class="siguiente" data-val="s" href="#">&gt;</a> \
+				<a class="esconder" data-val="e" href="#">v</a> \
+			</div> \
+		';
+		var jNumerico = $(sNumerico).appendTo("body");
+		jNumerico.find("a").click(function(e) {
+			e.preventDefault();
+			var sCaracter = $(this).attr("data-val");
+			var sValor = oInput.value;
+			switch (sCaracter) {
+				case "b":
+					oInput.value = sValor.substr(0, (sValor.length - 1));
+					jInput.focus();
+					break;
+				case "s":
+					var jForm = $(oInput).parentsUntil("form").parent();
+					var jInputs = jForm.find("input").filter(":visible:enabled");
+					var oSig = jInputs.get(jInputs.index(oInput) + 1);
+					if (oSig) {
+						var iAltoTn = oInput.jNumerico.height();
+						window.contenido.EsconderTecladoNumerico(oInput);
+						jInput = $(oSig);
+						// Se verifica si el control es visible
+						var iVisibleA = (window.innerHeight - iAltoTn);
+						var oRectIn = oSig.getBoundingClientRect();
+						if (oRectIn.bottom >= iVisibleA) {
+							window.scrollBy(0, oRectIn.bottom - iVisibleA + 8);
+							// $.mobile.silentScroll(oRectIn.bottom + 40);
+						}
+					}
+					jInput.focus();
+					break;
+				case "e":
+					window.contenido.EsconderTecladoNumerico(oInput);
+					break;
+				default:
+					oInput.value += sCaracter;
+					jInput.focus();
+					break;
+			}
+		});
+		oInput.jNumerico = jNumerico;
+	}
+	, EsconderTecladoNumerico: function(oInput) {
+		$(oInput).removeAttr("readonly");
+		if (oInput.jNumerico) {
+			oInput.jNumerico.remove();
+			oInput.jNumerico = undefined;
+		}
 	}
 }

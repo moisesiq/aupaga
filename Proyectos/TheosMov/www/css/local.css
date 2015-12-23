@@ -68,6 +68,31 @@ body .derecha {
 .ui-page { background: transparent; color: white; }
 .ui-content { background: transparent; }
 
+/* Para el teclado numérico ------------------------------------------------- */
+
+div.TecladoNumerico {
+	background-color: #3a4f6d;
+	bottom: 0px;
+	color: white;
+	font-size: 20px;
+	padding-top: 5px;
+	position: fixed;
+	text-align: center;
+	width: 100%;
+}
+	div.TecladoNumerico a {
+		border: 1px solid;
+		display: inline-block;
+		height: 32px;
+		margin-bottom: 5px;
+		margin-right: 5px;
+		width: 32px;
+	}
+	div.TecladoNumerico a:hover {
+		background-color: black;
+		color: white;
+	}
+
 /* -------------------------------------------------------------------------- */
 
 * {
@@ -80,7 +105,10 @@ a {
 	text-decoration: none;
 }
 ul { list-style: none; }
-h4 { margin-bottom: 10px; }
+h4 {
+	font-family: initial;
+	margin-bottom: 10px;
+}
 
 body {
 	background-attachment: scroll;
@@ -100,6 +128,9 @@ table {
 	color: black;
 }
 th, td { border: 1px solid gray; }
+th._Orden { background-color: orange; }
+th._Asc::after { content: " ▴"; }
+th._Desc::after { content: " ▾"; }
 tbody tr:hover {
 	background-color: #3399ff;
 	color: white;

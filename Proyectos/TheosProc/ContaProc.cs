@@ -50,6 +50,7 @@ namespace TheosProc
             {
                 ContaPolizaID = oPoliza.ContaPolizaID,
                 ContaCuentaAuxiliarID = iCuentaCargo,
+                SucursalID = oPoliza.SucursalID,
                 Cargo = mImporte,
                 Abono = 0,
                 Referencia = sReferencia
@@ -58,12 +59,16 @@ namespace TheosProc
             {
                 ContaPolizaID = oPoliza.ContaPolizaID,
                 ContaCuentaAuxiliarID = iCuentaAbono,
+                SucursalID = oPoliza.SucursalID,
                 Cargo = 0,
                 Abono = mImporte,
                 Referencia = sReferencia
             };
-            Datos.Guardar<ContaPolizaDetalle>(oDetCargo);
-            Datos.Guardar<ContaPolizaDetalle>(oDetAbono);
+			if (iCuentaCargo > 0)
+	            Datos.Guardar<ContaPolizaDetalle>(oDetCargo);
+			if (iCuentaAbono > 0)            
+				Datos.Guardar<ContaPolizaDetalle>(oDetAbono);
+			
 
             return oPoliza;
         }

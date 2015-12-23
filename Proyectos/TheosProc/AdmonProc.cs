@@ -124,7 +124,7 @@ namespace TheosProc
                     Folio = iMovID.ToString(),
                     Fecha = DateTime.Now,
                     RealizoUsuarioID = iUsuarioID,
-                    Entidad = oTraspasoV.NombreProveedor,
+                    Entidad = Util.Cadena(oTraspasoV.NombreProveedor),
                     Origen = oTraspasoV.SucursalOrigen,
                     Destino = oTraspasoV.SucursalDestino,
                     Cantidad = oReg.Recibido,
@@ -136,16 +136,10 @@ namespace TheosProc
             }
 
             // Se genera la póliza especial correspondiente (AfeConta)
+            var oUsuario = Datos.GetEntity<Usuario>(c => c.UsuarioID == iUsuarioID && c.Estatus);
             var oPoliza = ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Diario, string.Format("TRASPASO ORIGEN {0:00} DESTINO {1:00}"
-                , oTraspasoV.SucursalOrigenID, oTraspasoV.SucursalDestinoID)
-                , Cat.ContaCuentasAuxiliares.Inventario, Cat.ContaCuentasAuxiliares.Inventario, mCostoTotal, "Aquí va el nombre de usuario dmod"
-                , Cat.Tablas.MovimientoInventario, iMovID, iSucursalID);
-            var oCuentaQuitar = Datos.GetEntity<ContaPolizaDetalle>(c => c.ContaPolizaID == oPoliza.ContaPolizaID && c.Abono > 0);
-            if (oCuentaQuitar != null)
-            {
-                oCuentaQuitar.Abono = 0;
-                Datos.Guardar<ContaPolizaDetalle>(oCuentaQuitar);
-            }
+                , oTraspasoV.SucursalOrigenID, oTraspasoV.SucursalDestinoID), Cat.ContaCuentasAuxiliares.Inventario, 0, mCostoTotal
+                , oUsuario.NombreUsuario, Cat.Tablas.MovimientoInventario, iMovID, iSucursalID);
 
             //Actualizar el movimiento con los datos (fecha y usuario que recibio)
             var movimiento = Datos.GetEntity<MovimientoInventario>(m => m.MovimientoInventarioID == iMovID);

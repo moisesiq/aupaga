@@ -29,11 +29,10 @@ namespace TheosWeb
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            /* Exception oError = this.Server.GetLastError();
+            Exception oError = this.Server.GetLastError();
             this.Server.ClearError();
             string sError = string.Format("<pre>{0}\n{1}\n{2}</pre>", "Error de aplicación", oError.Message, oError.InnerException.Message);
             this.Response.Redirect("/Servicio/Error/" + sError);
-            */
         }
 
         protected void Session_Start(object sender, EventArgs e)

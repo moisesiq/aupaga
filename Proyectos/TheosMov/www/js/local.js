@@ -37,6 +37,7 @@ window.local = {
 			type: "post"
 			, dataType: "json"
 			, error: function(oAjax, sEstatus, sError) {
+				console.log(oAjax);
 				window.contenido.MensajeAdvertencia("Hubo un error al realizar la petición."
 					+ "<br /><br />" + sError
 					+ "<br /><br />" + oAjax.responseText);

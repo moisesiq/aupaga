@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="js/jquery.mobile.min.js"></script>
 		<script type="text/javascript" src="js/html.js"></script>
 		<script type="text/javascript" src="js/util.js"></script>
+		<script type="text/javascript" src="js/util.vista.js"></script>
 		<script type="text/javascript" src="js/config.js"></script>
 		<script type="text/javascript" src="js/local.js"></script>
 		<script type="text/javascript" src="js/proc.js"></script>
@@ -20,7 +21,14 @@
 
 		<!-- Css -->
 		<style type="text/css">
-			
+			table th { cursor: pointer; }
+			#tableRecibir th:last-child { width: 50px; }
+			#tableRecibir td:last-child { width: 50px; }
+			#tableRecibir input[type=text][readonly] {
+				background-color: #3a4f6d;
+				box-shadow: 0px 0px 4px #3a4f6d;
+				color: white;
+			}
 		</style>
 
 		<!-- Javascript -->
@@ -41,7 +49,7 @@
 							for (var i = 0; i < oRes.length; i++) {
 								var oReg = oRes[i];
 								jTabla.append(window.html.Fila([ oReg.MovimientoInventarioID, window.local.Ef.Fecha(oReg.FechaRegistro)
-									, oReg.Solicito, window.local.Ef.Cadena(oReg.Observacion) ]));
+									, oReg.Origen, oReg.Solicito, oReg.Registro ]));
 							}
 
 							$("#tableTraspasos tbody tr").click(function() {
@@ -62,6 +70,12 @@
 								break;
 						}
 					}
+				});
+
+				$("table th").click(function() {
+					var bAscendente = !($(this).hasClass("_Asc"));
+					var jTabla = $(this).parent().parent().parent();
+					window.vista.OrdenarTabla(jTabla[0], jTabla.find("th").index(this), bAscendente);
 				});
 
 				$("#formRecibir").submit(function() {
@@ -103,12 +117,17 @@
 								window.html.hidden("MovimientoInventarioDetalleID", oReg.MovimientoInventarioDetalleID)
 								+ window.html.hidden("ParteID", oReg.ParteID)
 								+ window.html.hidden("Cantidad", oReg.Cantidad)
-								+ window.html.td(oReg.MovimientoInventarioDetalleID)
+								// + window.html.td(oReg.MovimientoInventarioDetalleID)
 								+ window.html.td(oReg.NumeroDeParte)
 								+ window.html.td(oReg.Descripcion)
-								+ window.html.td(window.html.number("Recibido", ""))
+								+ window.html.td(window.html.text("Recibido", ""))
 							));
 						}
+						jTabla.find("input[type=text]").focus(function() {
+							window.contenido.TecladoNumerico(this);
+						});
+						
+						jTabla.find("input[name=Recibido]").eq(0).focus();
 					}
 				});
 			}
@@ -127,7 +146,9 @@
 						if (oRes && oRes.Exito) {
 							window.contenido.Notificacion("Proceso completado exitosamente.");
 							// $("body").pagecontainer("change", "traspasos.html", { reload: true });
-							window.location.href = "traspasos.html";
+							window.setTimeout(function() {
+								window.location.href = "traspasos.html";
+							}, 2000);
 						} else {
 							if (oRes.Codigo > 0) {
 								window.contenido.MensajePregunta("El traspaso tiene uno o más conflictos. ¿Deseas continuar?"
@@ -162,8 +183,9 @@
 						<tr>
 							<th>Id</th>
 							<th>Fecha</th>
+							<th>Origen</th>
 							<th>Solicitó</th>
-							<th>Observación</th>
+							<th>Registró</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -183,7 +205,7 @@
 					<table id="tableRecibir" data-role="table" data-mode="column">
 						<thead>
 							<tr>
-								<th>Id</th>
+								<!--tableRecibir <th>Id</th> -->
 								<th>No. Parte</th>
 								<th>Descripción</th>
 								<th>Recibido</th>
@@ -199,7 +221,7 @@
 			</div>
 
 			<div class="Pie Botones" data-role="footer">
-				<a href="#" data-rel="back" class="ui-btn-left ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete no-top">Cancelar</a>
+				<a href="#" data-rel="back" class="ui-btn-left ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete no-top">Regresar</a>
 				<a id="aRec_Guardar" href="#" class="ui-btn-right ui-btn ui-corner-all ui-btn-icon-right ui-icon-check ui-btn-b no-top">Guardar</a>
 				<!-- <button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Save</button> -->
 			</div>
