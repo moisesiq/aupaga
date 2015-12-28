@@ -123,6 +123,10 @@
             this.imp_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbImpTipo = new System.Windows.Forms.ComboBox();
+            this.dtpOficial = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dtpComplementaria = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabCapitalHumano.SuspendLayout();
             this.tbpNomina.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
@@ -148,6 +152,10 @@
             // tbpNomina
             // 
             this.tbpNomina.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.tbpNomina.Controls.Add(this.dtpComplementaria);
+            this.tbpNomina.Controls.Add(this.label12);
+            this.tbpNomina.Controls.Add(this.dtpOficial);
+            this.tbpNomina.Controls.Add(this.label11);
             this.tbpNomina.Controls.Add(this.btnDomingo);
             this.tbpNomina.Controls.Add(this.btnDesgloseLiquido);
             this.tbpNomina.Controls.Add(this.lblReserva);
@@ -173,7 +181,7 @@
             this.btnDomingo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnDomingo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDomingo.ForeColor = System.Drawing.Color.White;
-            this.btnDomingo.Location = new System.Drawing.Point(384, 4);
+            this.btnDomingo.Location = new System.Drawing.Point(791, 5);
             this.btnDomingo.Name = "btnDomingo";
             this.btnDomingo.Size = new System.Drawing.Size(75, 23);
             this.btnDomingo.TabIndex = 3;
@@ -259,7 +267,7 @@
             this.btnMostar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnMostar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMostar.ForeColor = System.Drawing.Color.White;
-            this.btnMostar.Location = new System.Drawing.Point(303, 4);
+            this.btnMostar.Location = new System.Drawing.Point(710, 5);
             this.btnMostar.Name = "btnMostar";
             this.btnMostar.Size = new System.Drawing.Size(75, 23);
             this.btnMostar.TabIndex = 2;
@@ -969,6 +977,42 @@
             this.cmbImpTipo.TabIndex = 0;
             this.cmbImpTipo.SelectedIndexChanged += new System.EventHandler(this.cmbImpTipo_SelectedIndexChanged);
             // 
+            // dtpOficial
+            // 
+            this.dtpOficial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpOficial.Location = new System.Drawing.Point(365, 6);
+            this.dtpOficial.Name = "dtpOficial";
+            this.dtpOficial.Size = new System.Drawing.Size(100, 20);
+            this.dtpOficial.TabIndex = 18;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(292, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(67, 13);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "Fecha oficial";
+            // 
+            // dtpComplementaria
+            // 
+            this.dtpComplementaria.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpComplementaria.Location = new System.Drawing.Point(591, 6);
+            this.dtpComplementaria.Name = "dtpComplementaria";
+            this.dtpComplementaria.Size = new System.Drawing.Size(100, 20);
+            this.dtpComplementaria.TabIndex = 20;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(471, 9);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(114, 13);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Fecha complementaria";
+            // 
             // CapitalHumano
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1057,5 +1101,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Otros;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalDescuentos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Liquido;
+        private System.Windows.Forms.DateTimePicker dtpComplementaria;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DateTimePicker dtpOficial;
+        private System.Windows.Forms.Label label11;
     }
 }

@@ -1226,6 +1226,7 @@
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="BancoCuentaID" Type="int" Nullable="false" />
           <Property Name="Domingo" Type="bit" />
+          <Property Name="EsAguinaldo" Type="bit" />
         </EntityType>
         <EntityType Name="NominaImpuesto">
           <Key>
@@ -16002,19 +16003,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ContaTipoPoliza" EntitySet="ContaTipoPoliza" />
             <End Role="ContaPoliza" EntitySet="ContaPoliza" />
           </AssociationSet>
-          <EntitySet Name="Nomina" EntityType="RefaccionariaModelo.Nomina" />
-          <AssociationSet Name="FK__Nomina__BancoCue__725CC34D" Association="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D">
-            <End Role="BancoCuenta" EntitySet="BancoCuenta" />
-            <End Role="Nomina" EntitySet="Nomina" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NominaUsu__Nomin__7721786A" Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A">
-            <End Role="Nomina" EntitySet="Nomina" />
-            <End Role="NominaUsuario" EntitySet="NominaUsuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NominaUsu__Nomin__7DCE75F9" Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9">
-            <End Role="Nomina" EntitySet="Nomina" />
-            <End Role="NominaUsuarioOficial" EntitySet="NominaUsuarioOficial" />
-          </AssociationSet>
           <EntitySet Name="VentasPagosDetalleAvanzadoView" EntityType="RefaccionariaModelo.VentasPagosDetalleAvanzadoView" />
           <EntitySet Name="InventarioLineasAgrupadoView" EntityType="RefaccionariaModelo.InventarioLineasAgrupadoView" />
           <EntitySet Name="InventarioLineasPartesView" EntityType="RefaccionariaModelo.InventarioLineasPartesView" />
@@ -17267,6 +17255,19 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="CorteDetalleHistorico" EntitySet="CorteDetalleHistorico" />
           </AssociationSet>
           <EntitySet Name="PartesErroresView" EntityType="RefaccionariaModelo.PartesErroresView" />
+          <EntitySet Name="Nomina" EntityType="RefaccionariaModelo.Nomina" />
+          <AssociationSet Name="FK__Nomina__BancoCue__725CC34D" Association="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D">
+            <End Role="BancoCuenta" EntitySet="BancoCuenta" />
+            <End Role="Nomina" EntitySet="Nomina" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NominaUsu__Nomin__7721786A" Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A">
+            <End Role="Nomina" EntitySet="Nomina" />
+            <End Role="NominaUsuario" EntitySet="NominaUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NominaUsu__Nomin__7DCE75F9" Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9">
+            <End Role="Nomina" EntitySet="Nomina" />
+            <End Role="NominaUsuarioOficial" EntitySet="NominaUsuarioOficial" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -23301,8 +23302,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Importe" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Boolean" Name="Suma" Nullable="false" />
           <NavigationProperty Name="ContaCuentaDeMayor" Relationship="RefaccionariaModelo.FK__NominaUsu__Conta__7FB6BE6B" FromRole="NominaUsuarioOficial" ToRole="ContaCuentaDeMayor" />
-          <NavigationProperty Name="Nomina" Relationship="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9" FromRole="NominaUsuarioOficial" ToRole="Nomina" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__NominaUsu__IdUsu__7EC29A32" FromRole="NominaUsuarioOficial" ToRole="Usuario" />
+          <NavigationProperty Name="Nomina" Relationship="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9" FromRole="NominaUsuarioOficial" ToRole="Nomina" />
         </EntityType>
         <EntityType Name="NominaUsuario">
           <Key>
@@ -23323,9 +23324,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="MinutosTarde" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Decimal" Name="Otros" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Boolean" Name="SuperoMinimo" Nullable="false" />
-          <NavigationProperty Name="Nomina" Relationship="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A" FromRole="NominaUsuario" ToRole="Nomina" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__NominaUsu__IdUsu__78159CA3" FromRole="NominaUsuario" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__NominaUsu__Sucur__7909C0DC" FromRole="NominaUsuario" ToRole="Sucursal" />
+          <NavigationProperty Name="Nomina" Relationship="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A" FromRole="NominaUsuario" ToRole="Nomina" />
         </EntityType>
         <EntityType Name="NominaUsuariosView">
           <Key>
@@ -23535,8 +23536,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Boolean" Name="EsCpcp" Nullable="false" />
           <NavigationProperty Name="Banco" Relationship="RefaccionariaModelo.FK__BancoCuen__Banco__1EA559DF" FromRole="BancoCuenta" ToRole="Banco" />
           <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__ContaEgre__Banco__214CBC60" FromRole="BancoCuenta" ToRole="ContaEgreso" />
-          <NavigationProperty Name="Nomina" Relationship="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" FromRole="BancoCuenta" ToRole="Nomina" />
           <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK__Proveedor__Banco__169A23C3" FromRole="BancoCuenta" ToRole="ProveedorPoliza" />
+          <NavigationProperty Name="Nomina" Relationship="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" FromRole="BancoCuenta" ToRole="Nomina" />
         </EntityType>
         <Association Name="FK__BancoCuen__Banco__1EA559DF">
           <End Type="RefaccionariaModelo.Banco" Role="Banco" Multiplicity="1" />
@@ -23879,55 +23880,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="ContaPoliza">
               <PropertyRef Name="ContaTipoPolizaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Nomina">
-          <Key>
-            <PropertyRef Name="NominaID" />
-          </Key>
-          <Property Name="NominaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Semana" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="BancoCuentaID" Type="Int32" Nullable="false" />
-          <Property Name="Domingo" Type="Boolean" />
-          <NavigationProperty Name="BancoCuenta" Relationship="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" FromRole="Nomina" ToRole="BancoCuenta" />
-          <NavigationProperty Name="NominaUsuario" Relationship="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A" FromRole="Nomina" ToRole="NominaUsuario" />
-          <NavigationProperty Name="NominaUsuarioOficial" Relationship="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9" FromRole="Nomina" ToRole="NominaUsuarioOficial" />
-        </EntityType>
-        <Association Name="FK__Nomina__BancoCue__725CC34D">
-          <End Type="RefaccionariaModelo.BancoCuenta" Role="BancoCuenta" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.Nomina" Role="Nomina" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BancoCuenta">
-              <PropertyRef Name="BancoCuentaID" />
-            </Principal>
-            <Dependent Role="Nomina">
-              <PropertyRef Name="BancoCuentaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NominaUsu__Nomin__7721786A">
-          <End Type="RefaccionariaModelo.Nomina" Role="Nomina" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.NominaUsuario" Role="NominaUsuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Nomina">
-              <PropertyRef Name="NominaID" />
-            </Principal>
-            <Dependent Role="NominaUsuario">
-              <PropertyRef Name="NominaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NominaUsu__Nomin__7DCE75F9">
-          <End Type="RefaccionariaModelo.Nomina" Role="Nomina" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.NominaUsuarioOficial" Role="NominaUsuarioOficial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Nomina">
-              <PropertyRef Name="NominaID" />
-            </Principal>
-            <Dependent Role="NominaUsuarioOficial">
-              <PropertyRef Name="NominaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -29027,6 +28979,56 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="SolucionUsuarioID" Type="Int32" />
           <Property Name="UsuarioSolucion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Nomina">
+          <Key>
+            <PropertyRef Name="NominaID" />
+          </Key>
+          <Property Name="NominaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Semana" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BancoCuentaID" Type="Int32" Nullable="false" />
+          <Property Name="Domingo" Type="Boolean" />
+          <Property Name="EsAguinaldo" Type="Boolean" />
+          <NavigationProperty Name="BancoCuenta" Relationship="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" FromRole="Nomina" ToRole="BancoCuenta" />
+          <NavigationProperty Name="NominaUsuario" Relationship="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A" FromRole="Nomina" ToRole="NominaUsuario" />
+          <NavigationProperty Name="NominaUsuarioOficial" Relationship="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9" FromRole="Nomina" ToRole="NominaUsuarioOficial" />
+        </EntityType>
+        <Association Name="FK__Nomina__BancoCue__725CC34D">
+          <End Type="RefaccionariaModelo.BancoCuenta" Role="BancoCuenta" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.Nomina" Role="Nomina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BancoCuenta">
+              <PropertyRef Name="BancoCuentaID" />
+            </Principal>
+            <Dependent Role="Nomina">
+              <PropertyRef Name="BancoCuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NominaUsu__Nomin__7721786A">
+          <End Type="RefaccionariaModelo.Nomina" Role="Nomina" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.NominaUsuario" Role="NominaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nomina">
+              <PropertyRef Name="NominaID" />
+            </Principal>
+            <Dependent Role="NominaUsuario">
+              <PropertyRef Name="NominaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NominaUsu__Nomin__7DCE75F9">
+          <End Type="RefaccionariaModelo.Nomina" Role="Nomina" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.NominaUsuarioOficial" Role="NominaUsuarioOficial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nomina">
+              <PropertyRef Name="NominaID" />
+            </Principal>
+            <Dependent Role="NominaUsuarioOficial">
+              <PropertyRef Name="NominaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -33544,17 +33546,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Nomina">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.Nomina">
-              <MappingFragment StoreEntitySet="Nomina">
-                <ScalarProperty Name="Domingo" ColumnName="Domingo" />
-                <ScalarProperty Name="BancoCuentaID" ColumnName="BancoCuentaID" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Semana" ColumnName="Semana" />
-                <ScalarProperty Name="NominaID" ColumnName="NominaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VentasPagosDetalleAvanzadoView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.VentasPagosDetalleAvanzadoView">
               <MappingFragment StoreEntitySet="VentasPagosDetalleAvanzadoView">
@@ -34949,6 +34940,18 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
                 <ScalarProperty Name="ParteID" ColumnName="ParteID" />
                 <ScalarProperty Name="ParteErrorID" ColumnName="ParteErrorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nomina">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.Nomina">
+              <MappingFragment StoreEntitySet="Nomina">
+                <ScalarProperty Name="EsAguinaldo" ColumnName="EsAguinaldo" />
+                <ScalarProperty Name="Domingo" ColumnName="Domingo" />
+                <ScalarProperty Name="BancoCuentaID" ColumnName="BancoCuentaID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Semana" ColumnName="Semana" />
+                <ScalarProperty Name="NominaID" ColumnName="NominaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -37988,10 +37991,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.MovimientosInventarioDetalleAvanzadoView" Width="1.5" PointX="5.375" PointY="16.75" Height="4.287903645833353" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaPoliza" Width="1.5" PointX="18.25" PointY="59.375" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaPoli__Conta__5CD79682" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.Nomina" Width="1.5" PointX="7.5" PointY="77.25" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasPagosDetalleAvanzadoView" Width="1.5" PointX="30.375" PointY="38.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.InventarioLineasAgrupadoView" Width="1.5" PointX="19.375" PointY="37.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.InventarioLineasPartesView" Width="1.5" PointX="26.375" PointY="33.75" />
@@ -38331,6 +38330,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Corte__73DAF76B" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Sucur__72E6D332" />
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesErroresView" Width="1.5" PointX="43.375" PointY="6.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.Nomina" Width="1.5" PointX="7.5" PointY="77.25" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9" />
         </Diagram>
     </Diagrams>
   </Designer>

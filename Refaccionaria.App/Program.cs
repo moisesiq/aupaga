@@ -32,7 +32,7 @@ namespace Refaccionaria.App
             
             // Se inicializan parámetros de la aplicación
             Proc.InicializarAplicacion();
-
+                        
             // Se muestra la pantalla de iniciando..
             var frmIniciando = new Iniciando();
             frmIniciando.Show();

@@ -40,6 +40,9 @@ namespace Refaccionaria.App
             if (this.cmbSemana.SelectedIndex > 0 && DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
                 this.cmbSemana.SelectedIndex -= 1;
 
+            // Se configuran las fechas predeterminadas
+            this.dtpOficial.Value = DateTime.Now.AddDays(-1);
+
             // Se llenan las cuentas bancarias
             this.cmbCuentaBancaria.CargarDatos("BancoCuentaID", "NombreDeCuenta", General.GetListOf<BancoCuenta>().OrderBy(c => c.NombreDeCuenta).ToList());
             this.cmbCuentaBancaria.SelectedValue = Cat.CuentasBancarias.Banamex;
@@ -199,6 +202,9 @@ namespace Refaccionaria.App
                 oSemanas.Add(oSem);
                 oFecha = oFecha.AddDays(1);
             }
+            // Se agrega la semana especial de aguinaldo
+            oSemanas.Add(new DosVal<DateTime, string>(DateTime.Now, "AGUINALDO"));
+
             this.cmbSemana.CargarDatos("Valor1", "Valor2", oSemanas);
         }
 
@@ -211,14 +217,26 @@ namespace Refaccionaria.App
         private void LlenarNomina()
         {
             // Se verifica si ya se había guardado, para mostrar el histórico
-            DateTime dSemana = Helper.ConvertirFechaHora(this.cmbSemana.SelectedValue);
-            bool bHistorico = General.Exists<Nomina>(c => c.Semana == dSemana && (!c.Domingo.HasValue || !c.Domingo.Value));
+            // Se verifica si es aguinaldo o no
+            Nomina oNomina = null;
+            if (this.cmbSemana.Text == "AGUINALDO")
+            {
+                int iAnio = (int)this.nudAnio.Value;
+                oNomina = General.GetEntity<Nomina>(c => c.Semana.Year == iAnio && c.EsAguinaldo == true);
+            }
+            else
+            {
+                DateTime dSemana = Helper.ConvertirFechaHora(this.cmbSemana.SelectedValue);
+                oNomina = General.GetEntity<Nomina>(c => c.Semana == dSemana && (!c.Domingo.HasValue || !c.Domingo.Value)
+                    && (!c.EsAguinaldo.HasValue || !c.EsAguinaldo.Value));
+            }
+            bool bHistorico = (oNomina != null);
             this.dgvDatos.ReadOnly = bHistorico;
             this.cmbCuentaBancaria.Enabled = !bHistorico;
             this.btnGuardar.Enabled = !bHistorico;
             if (bHistorico)
             {
-                this.LlenarNominaHistorico();
+                this.LlenarNominaHistorico(oNomina.NominaID);
                 return;
             }
             this.cmbCuentaBancaria.SelectedValue = Cat.CuentasBancarias.Banamex;
@@ -345,12 +363,11 @@ namespace Refaccionaria.App
                 this.dgvDatos.Columns[i].Visible = true;
         }
 
-        private void LlenarNominaHistorico()
+        private void LlenarNominaHistorico(int iNominaID)
         {
             Cargando.Mostrar();
 
-            DateTime dSemana = Helper.ConvertirFechaHora(this.cmbSemana.SelectedValue);
-            var oNomina = General.GetEntity<Nomina>(c => c.Semana == dSemana && (!c.Domingo.HasValue || !c.Domingo.Value));
+            var oNomina = General.GetEntity<Nomina>(c => c.NominaID == iNominaID);
             var oNomUsuariosV = General.GetListOf<NominaUsuariosView>(c => c.NominaID == oNomina.NominaID);
             var oNomUsuariosOficial = General.GetListOf<NominaUsuarioOficial>(c => c.NominaID == oNomina.NominaID);
             this.BorrarColumnasDinamicas();
@@ -481,13 +498,19 @@ namespace Refaccionaria.App
             
             // Se guarda la nómina
             int iBancoCuentaID = Helper.ConvertirEntero(this.cmbCuentaBancaria.SelectedValue);
-            string sDia = DateTime.Now.ToString("yyMMdd");
+            DateTime dAhora = DateTime.Now;
+            DateTime dOficial = this.dtpOficial.Value;
+            DateTime dComplementaria = this.dtpComplementaria.Value;
+            string sDiaOficial = dOficial.ToString("yyMMdd");
+            string sDiaComplementaria = dComplementaria.ToString("yyMMdd");
             DateTime dSemana = Helper.ConvertirFechaHora(this.cmbSemana.SelectedValue);
+            bool bEsAguinaldo = (this.cmbSemana.Text == "AGUINALDO");
             var oNomina = new Nomina()
             {
                 Semana = dSemana,
-                Fecha = DateTime.Now,
-                BancoCuentaID = iBancoCuentaID
+                Fecha = dAhora,
+                BancoCuentaID = iBancoCuentaID,
+                EsAguinaldo = bEsAguinaldo
             };
             Guardar.Generico<Nomina>(oNomina);
 
@@ -546,16 +569,16 @@ namespace Refaccionaria.App
                     var oGasto = new ContaEgreso()
                     {
                         ContaCuentaAuxiliarID = oCuentaAux.ContaCuentaAuxiliarID,
-                        Fecha = DateTime.Now,
+                        Fecha = dOficial,
                         Importe = mImporte,
                         TipoFormaPagoID = Cat.FormasDePago.Transferencia,
-                        FolioDePago = sDia,
+                        FolioDePago = sDiaOficial,
                         TipoDocumentoID = Cat.TiposDeDocumento.Factura,
                         EsFiscal = true,
                         Observaciones = ("NÓMINA " + this.cmbSemana.Text),
                         SucursalID = iSucursalID,
                         RealizoUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
-                        FolioFactura = sDia,
+                        FolioFactura = sDiaOficial,
                         BancoCuentaID = iBancoCuentaID
                     };
                     ContaProc.GastoCrear(oGasto);
@@ -570,7 +593,7 @@ namespace Refaccionaria.App
                         var oGasto = new ContaEgreso()
                         {
                             ContaCuentaAuxiliarID = oCuentaAux.ContaCuentaAuxiliarID,
-                            Fecha = DateTime.Now,
+                            Fecha = dComplementaria,
                             Importe = mDiferencia,
                             TipoFormaPagoID = Cat.FormasDePago.Efectivo,
                             TipoDocumentoID = Cat.TiposDeDocumento.Nota,
@@ -578,7 +601,7 @@ namespace Refaccionaria.App
                             Observaciones = ("CN " + this.cmbSemana.Text),
                             SucursalID = iSucursalID,
                             RealizoUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
-                            FolioFactura = sDia,
+                            FolioFactura = sDiaComplementaria,
                         };
                         ContaProc.GastoCrear(oGasto);
                     }
@@ -588,12 +611,11 @@ namespace Refaccionaria.App
             }
 
             // Se genera el moviemiento bancario, con lo oficial
-            DateTime dAhora = DateTime.Now;
             var oMov = new BancoCuentaMovimiento()
             {
                 BancoCuentaID = iBancoCuentaID,
                 EsIngreso = false,
-                Fecha = dAhora,
+                Fecha = dOficial,
                 FechaAsignado = dAhora,
                 SucursalID = GlobalClass.SucursalID,
                 Importe = mTotalOficial,
@@ -607,10 +629,17 @@ namespace Refaccionaria.App
 
             // Se generan las pólizas contables correspondientes (AfeConta)
             var oNominaUsuariosV = General.GetListOf<NominaUsuariosView>(c => c.NominaID == oNomina.NominaID);
+            var oPolizaBase = new ContaPoliza()
+            {
+                ContaTipoPolizaID = Cat.ContaTiposDePoliza.Egreso,
+                Fecha = dComplementaria,
+                RelacionTabla = Cat.Tablas.NominaUsuario,
+                RelacionID = oNomina.NominaID
+            };
             foreach (var oReg in oNominaUsuariosV)
             {
                 // Se crea la póliza de lo oficial
-                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.NominaOficial, oReg.NominaUsuarioID, this.cmbSemana.Text, ("NÓMINA " + this.cmbSemana.Text));
+                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.NominaOficial, oReg.NominaUsuarioID, this.cmbSemana.Text, ("NÓMINA " + this.cmbSemana.Text), dOficial);
                 // Se crea la póliza de la diferencia, si aplica
                 if (oReg.Diferencia != 0)
                 {
@@ -620,9 +649,13 @@ namespace Refaccionaria.App
                         UtilLocal.MensajeAdvertencia("No se encontró la cuenta auxiliar: Salarios -> " + oReg.Usuario + ". No se creará la póliza de Complemento Nómina.");
                         continue;
                     }
-                    ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, ("COMPLEMENTO NÓMINA " + this.cmbSemana.Text)
+                    var oPoliza = Helper.CrearCopia<ContaPoliza>(oPolizaBase);
+                    oPoliza.Concepto = ("COMPLEMENTO NÓMINA " + this.cmbSemana.Text);
+                    ContaProc.CrearPoliza(oPoliza, oCuentaAux.ContaCuentaAuxiliarID, Cat.ContaCuentasAuxiliares.ReservaNomina, oReg.Diferencia.Valor(), oReg.Usuario);
+                    /* ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, ("COMPLEMENTO NÓMINA " + this.cmbSemana.Text)
                         , oCuentaAux.ContaCuentaAuxiliarID, Cat.ContaCuentasAuxiliares.ReservaNomina, oReg.Diferencia.Valor(), oReg.Usuario
                         , Cat.Tablas.NominaUsuario, oReg.NominaID.Valor());
+                    */
                 }
 
                 // Se crea la póliza del adelanto, si aplica
@@ -632,8 +665,13 @@ namespace Refaccionaria.App
                         && c.RelacionID == oReg.UsuarioID);
                     if (oCuentaAux != null)
                     {
-                        ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Ingreso, "ADELANTO", Cat.ContaCuentasAuxiliares.Caja, oCuentaAux.ContaCuentaAuxiliarID
-                            , oReg.Adelanto, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor(), oReg.SucursalID);
+                        // ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Ingreso, "ADELANTO", Cat.ContaCuentasAuxiliares.Caja, oCuentaAux.ContaCuentaAuxiliarID
+                        //    , oReg.Adelanto, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor(), oReg.SucursalID);
+                        var oPoliza = Helper.CrearCopia<ContaPoliza>(oPolizaBase);
+                        oPoliza.ContaTipoPolizaID = Cat.ContaTiposDePoliza.Ingreso;
+                        oPoliza.Concepto = "ADELANTO";
+                        oPoliza.SucursalID = oReg.SucursalID;
+                        ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.Caja, oCuentaAux.ContaCuentaAuxiliarID, oReg.Adelanto, oReg.Usuario);
 
                         // Se crea adicionalmente, un ingreso de caja por el importe del adelanto
                         var oIngreso = new CajaIngreso()
@@ -656,11 +694,21 @@ namespace Refaccionaria.App
                     if (oCuentaAux != null)
                     {
                         if (oReg.MinutosTarde > 0)
-                            ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, "MINUTOS TARDE", Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID
-                                , oReg.MinutosTarde, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor());
+                        {
+                            // ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, "MINUTOS TARDE", Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID
+                            //     , oReg.MinutosTarde, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor());
+                            var oPoliza = Helper.CrearCopia<ContaPoliza>(oPolizaBase);
+                            oPoliza.Concepto = "MINUTOS TARDE";
+                            ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID, oReg.MinutosTarde, oReg.Usuario);
+                        }
                         if (oReg.Otros > 0)
-                            ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, "OTROS DESCUENTOS", Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID
-                                , oReg.Otros, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor());
+                        {
+                            // ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, "OTROS DESCUENTOS", Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID
+                            //     , oReg.Otros, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor());
+                            var oPoliza = Helper.CrearCopia<ContaPoliza>(oPolizaBase);
+                            oPoliza.Concepto = "OTROS DESCUENTOS";
+                            ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID, oReg.Otros, oReg.Usuario);
+                        }
                     }
                 }
             }
@@ -1043,15 +1091,15 @@ namespace Refaccionaria.App
                 {
                     case Cat.ContaCuentasDeMayor.Nomina2Por:
                         ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.Pago2Por, oImpUsuario.NominaImpuestoUsuarioID, oImpuesto.FolioDePago
-                            , ("PAGO 2% " + sPeriodo));
+                            , ("PAGO 2% " + sPeriodo), oImpuesto.Fecha);
                         break;
                     case Cat.ContaCuentasDeMayor.Imss:
                         ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoImss, oImpUsuario.NominaImpuestoUsuarioID, oImpuesto.FolioDePago
-                            , ("PAGO IMSS " + sPeriodo));
+                            , ("PAGO IMSS " + sPeriodo), oImpuesto.Fecha);
                         break;
                     case Cat.ContaCuentasDeMayor.Infonavit:
                         ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoInfonavit, oImpUsuario.NominaImpuestoUsuarioID, oImpuesto.FolioDePago
-                            , ("PAGO INFONAVIT " + sPeriodo));
+                            , ("PAGO INFONAVIT " + sPeriodo), oImpuesto.Fecha);
                         break;
                 }
             }

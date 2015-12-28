@@ -24,8 +24,22 @@ namespace Refaccionaria.Negocio
         private static readonly Regex RFCPattern = new Regex("[A-Z,\x00d1,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]{2}[0-9,A]");
         private static readonly Regex UUIDPattern = new Regex(@"^[0-9A-F]{8}\-[0-9A-F]{4}\-[0-9A-F]{4}\-[0-9A-F]{4}\-[0-9A-F]{12}$");
         private static readonly Regex emailPattern = new Regex(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
-
+        
         #region [Conversion DataTable]
+
+        public static bool EsTipoSimple(this Type oTipo)
+        {
+            string sTipo = oTipo.Name.ToLower();
+            return (
+                sTipo == "char"
+                || sTipo == "string"
+                || sTipo == "int32"
+                || sTipo == "decimal"
+                || sTipo == "double"
+                || sTipo == "boolean"
+                || sTipo == "datetime"
+            );
+        }
 
         public static DataTable ListaEntityADataTable<T>(List<T> oLista)
         {
@@ -35,7 +49,7 @@ namespace Refaccionaria.Negocio
 
             // Se obtienen las propiedades y se generan las columnas de DataTable
             PropertyInfo[] oPropiedades = oLista[0].GetType().GetProperties();
-            string sTipo;
+            // string sTipo;
             foreach (PropertyInfo oPropiedad in oPropiedades)
             {
                 Type oTipo = oPropiedad.PropertyType;
@@ -43,14 +57,8 @@ namespace Refaccionaria.Negocio
                 if (oTipo.IsGenericType && (oTipo.GetGenericTypeDefinition() == typeof(Nullable<>)))
                     oTipo = oTipo.GetGenericArguments()[0];
                 // Si no es tipo por valor, no se considera
-                sTipo = oTipo.Name.ToLower();
-                if (!(
-                    sTipo == "string"
-                    || sTipo == "int32"
-                    || sTipo == "decimal"
-                    || sTipo == "boolean"
-                    || sTipo == "datetime"
-                    )) continue;
+                if (!oTipo.EsTipoSimple())
+                    continue;
                 // Se agrega la columna al DataTable
                 Datos.Columns.Add(new DataColumn(oPropiedad.Name, oTipo));
             }
@@ -1662,6 +1670,26 @@ namespace Refaccionaria.Negocio
             var oHost = Dns.GetHostEntry(Dns.GetHostName());
             var oIp = oHost.AddressList.FirstOrDefault(c => c.AddressFamily == AddressFamily.InterNetwork);
             return (oIp == null ? null : oIp.ToString());
+        }
+
+        #endregion
+
+        #region [ General ]
+
+        public static T CrearCopia<T>(T oOriginal)
+        {
+            var oCopia = Activator.CreateInstance<T>();
+            PropertyInfo[] oPropiedades = oOriginal.GetType().GetProperties();
+            // string sTipo;
+            foreach (PropertyInfo oPropiedad in oPropiedades)
+            {
+                Type oTipo = oPropiedad.PropertyType;
+                if (!oTipo.EsTipoSimple())
+                    continue;
+                oPropiedad.SetValue(oCopia, oPropiedad.GetValue(oOriginal, null), null);
+            }
+
+            return oCopia;
         }
 
         #endregion
