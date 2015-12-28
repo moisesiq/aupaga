@@ -6,6 +6,7 @@
 		<link rel="shortcut icon" type="image/png" href="img/Icono.png" />
 		<!-- Hojas de estilo -->
 		<link rel="stylesheet" type="text/css" href="css/jquery.mobile.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/util.css" />
 		<link rel="stylesheet" type="text/css" href="css/local.css" />
 		<!-- Scripts -->
 		<script type="text/javascript" src="cordova.js"></script>
@@ -22,8 +23,19 @@
 		<!-- Css -->
 		<style type="text/css">
 			table th { cursor: pointer; }
-			#tableRecibir th:last-child { width: 50px; }
+			div.Grid { display: inline-block; width: 80%; }
+			div.Teclado {
+				display: inline-block;
+				min-height: 200px;
+				min-width: 20%;
+				position: fixed;
+				vertical-align: top;
+				top: 79px;
+			}
+			/* #tableRecibir th:last-child { width: 50px; }
 			#tableRecibir td:last-child { width: 50px; }
+			*/
+			#tableRecibir input[type=text] { width: 70px; }
 			#tableRecibir input[type=text][readonly] {
 				background-color: #3a4f6d;
 				box-shadow: 0px 0px 4px #3a4f6d;
@@ -38,6 +50,9 @@
 				window.contenido.Inicializar("divTraspasos");
 				// Se verifica la sesión
 				window.proc.VerSesion();
+
+				// Para el teclado numérico
+				window.contenido.TecladoNumerico($("div.Teclado")[0]);
 
 				// Se obtienen los traspasos a recibir
 				window.proc.Inicializado = function() {
@@ -124,9 +139,18 @@
 							));
 						}
 						jTabla.find("input[type=text]").focus(function() {
-							window.contenido.TecladoNumerico(this);
+							$(this).attr("readonly", "readonly");
+							var oNum = $("div.TecladoNumerico")[0];
+							oNum.oInput = this;
+						}).focusout(function() {
+							window.setTimeout(function(oInput) {
+								var oNum = $("div.TecladoNumerico")[0];
+								if (oNum.oInput !== oInput) {
+									$(oInput).removeAttr("readonly");
+								}
+							}, 0, this);
 						});
-						
+
 						jTabla.find("input[name=Recibido]").eq(0).focus();
 					}
 				});
@@ -202,21 +226,27 @@
 				<h4>Indica las cantidades a recibir:</h4>
 				<form id="formRecibir" action="#">
 					<input type="hidden" id="hndOperUsID" name="OperUsID" />
-					<table id="tableRecibir" data-role="table" data-mode="column">
-						<thead>
-							<tr>
-								<!--tableRecibir <th>Id</th> -->
-								<th>No. Parte</th>
-								<th>Descripción</th>
-								<th>Recibido</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<br />
-					<label for="txtMotivo">Motivo</label>
-					<input id="txtMotivo" name="Motivo" type="text" />
+					<div class="Grid">
+						<table id="tableRecibir" data-role="table" data-mode="column">
+							<thead>
+								<tr>
+									<!--tableRecibir <th>Id</th> -->
+									<th>No. Parte</th>
+									<th>Descripción</th>
+									<th>Recibido</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div class="Teclado">
+						
+					</div>
+					<div class="margen-ab5">
+						<label for="txtMotivo">Motivo</label>
+						<input id="txtMotivo" name="Motivo" type="text" />
+					</div>
 				</form>
 			</div>
 

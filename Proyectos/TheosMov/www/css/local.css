@@ -1,99 +1,9 @@
 /* -------------------------------------------------------------------------- */
 
-.FondoComun {
-	background-color: #3a4f6d;
-}
-
-.Centrado {
-	left: 50%;
-	margin-left: -25%;
-	margin-top: -25%;
-	position: absolute;
-	top: 50%;
-}
-
-.BordeRedon5 {
-	border: 1px solid;
-	border-radius: 5px;
-}
-
-.Forma {
-	background-color: #3a4f6d;
-	border: 1px solid;
-	border-radius: 5px;
-	height: 25%;
-	left: 50%;
-	margin-left: -25%;
-	margin-top: -12%;
-	padding: 5px;
-	position: absolute;
-	top: 50%;
-	width: 50%;
-}
-
-.no-top { top: 0px; }
-
-span.Titulo {
-	color: white;
-	display: inline-block;
-	font-weight: bold;
-	margin-bottom: 10px;
-}
-
-div.Pop {
-	padding: 4px 2px;
-	text-align: center;
-}
-
-body .boton {
-	background-color: rgb(47, 63, 87);
-	border: 1px solid white;
-	border-radius: 4px;
-	color: white;
-	font-weight: normal;
-	padding: 2px 4px;
-}
-body .boton:hover {
-	background-color: #55647A;
-	color: white;
-}
-
-body .derecha {
-	position: absolute;
-	right: 10px;
-}
-
-/* -------------------------------------------------------------------------- */
-
 .ui-page { background: transparent; color: white; }
 .ui-content { background: transparent; }
 
-/* Para el teclado numérico ------------------------------------------------- */
-
-div.TecladoNumerico {
-	background-color: #3a4f6d;
-	bottom: 0px;
-	color: white;
-	font-size: 20px;
-	padding-top: 5px;
-	position: fixed;
-	text-align: center;
-	width: 100%;
-}
-	div.TecladoNumerico a {
-		border: 1px solid;
-		display: inline-block;
-		height: 32px;
-		margin-bottom: 5px;
-		margin-right: 5px;
-		width: 32px;
-	}
-	div.TecladoNumerico a:hover {
-		background-color: black;
-		color: white;
-	}
-
-/* -------------------------------------------------------------------------- */
+/* Modificaciones a tags ---------------------------------------------------- */
 
 * {
 	margin: 0px;
@@ -128,17 +38,65 @@ table {
 	color: black;
 }
 th, td { border: 1px solid gray; }
-th._Orden { background-color: orange; }
-th._Asc::after { content: " ▴"; }
-th._Desc::after { content: " ▾"; }
 tbody tr:hover {
 	background-color: #3399ff;
 	color: white;
 }
 
+/* Utilidades --------------------------------------------------------------- */
+
+.Forma {
+	background-color: #3a4f6d;
+	border: 1px solid;
+	border-radius: 5px;
+	height: 25%;
+	left: 50%;
+	margin-left: -25%;
+	margin-top: -12%;
+	padding: 5px;
+	position: absolute;
+	top: 50%;
+	width: 50%;
+}
+
+span.Titulo {
+	color: white;
+	display: inline-block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+div.Pop {
+	padding: 4px 2px;
+	text-align: center;
+}
+
+body .boton {
+	background-color: rgb(47, 63, 87);
+	border: 1px solid white;
+	border-radius: 4px;
+	color: white;
+	font-weight: normal;
+	padding: 2px 4px;
+}
+body .boton:hover {
+	background-color: #55647A;
+	color: white;
+}
+body .derecha {
+	position: absolute;
+	right: 10px;
+}
+
+th._Orden { background-color: orange; }
+th._Asc::after { content: " ▴"; }
+th._Desc::after { content: " ▾"; }
+
 span.Error { color: red; }
 div.Contenido { padding: 10px; }
 div.Botones { height: 48px; }
+
+div.ContenidoIz { float: left; }
 
 #divPanel {
 	background-color: #3a4f6d;
@@ -160,5 +118,30 @@ div.Botones { height: 48px; }
 	}
 
 
-/* -------------------------------------------------------------------------- */
+/* Para el teclado numérico ------------------------------------------------- */
+
+div.TecladoNumerico {
+	background-color: #3a4f6d;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	/* width: 100%;
+	height: 100%;
+	*/
+}
+	div.TecladoNumerico a {
+		border: 1px solid;
+		color: white;
+		display: inline-block;
+		height: 34px;
+		margin-bottom: -1px;
+		margin-right: -7px;
+		padding-top: 6px;
+		width: 40px;
+	}
+	div.TecladoNumerico a:hover {
+		background-color: black;
+		color: white;
+	}
+		div.TecladoNumerico a.borrar { width: 122px; }
 
