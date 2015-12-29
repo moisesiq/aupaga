@@ -1640,8 +1640,9 @@ namespace Refaccionaria.App
             oFacturaE.MetodoDePago = sFormaDePago;
 
             // Se llenan los datos del receptor
-            var oVenta = General.GetEntity<Venta>(q => q.VentaID == iVentaID && q.Estatus);
-            int iClienteID = oVenta.ClienteID;
+            // var oVenta = General.GetEntity<Venta>(q => q.VentaID == iVentaID && q.Estatus);
+            var oVentaFactV = General.GetEntity<VentasFacturasDetalleAvanzadoView>(c => c.VentaID == iVentaID);
+            int iClienteID = oVentaFactV.ClienteID.Valor();
             var ResRec = VentasProc.FeLlenarDatosReceptor(ref oFacturaE, iClienteID);
             if (ResRec.Error)
                 return new ResAcc<int>(false, ResRec.Mensaje);

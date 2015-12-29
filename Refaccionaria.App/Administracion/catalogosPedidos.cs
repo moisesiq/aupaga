@@ -247,8 +247,9 @@ namespace Refaccionaria.App
                     dgvExistencias.Rows.Clear();
 
                 this.dgvExistencias.DataSource = General.GetListOf<ExistenciasView>(ex => ex.ParteID.Equals(parteId));
+                this.dgvExistencias.MostrarColumnas("Tienda", "Exist", "Max", "Min");
                 this.dgvExistencias.AutoResizeColumns();
-                Negocio.Helper.OcultarColumnas(this.dgvExistencias, new string[] { "ParteExistenciaID", "ParteID", "NumeroParte", "SucursalID" });
+                // Negocio.Helper.OcultarColumnas(this.dgvExistencias, new string[] { "ParteExistenciaID", "ParteID", "NumeroParte", "SucursalID" });
                 Negocio.Helper.ColumnasToHeaderText(this.dgvExistencias);
             }
             catch (Exception ex)

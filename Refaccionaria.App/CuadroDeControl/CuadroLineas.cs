@@ -176,7 +176,7 @@ namespace Refaccionaria.App
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
 
-            var oConsulta = oDatos.Where(c => c.LineaID == iIdPrincipal);
+            var oConsulta = oDatos.Where(c => c.LineaID == iIdPrincipal && c.Fecha >= this.dtpDesde.Value.Date);
             switch (iGridFuente)
             {
                 case CuadroMultiple.GridFuente.Grupos:

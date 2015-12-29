@@ -283,6 +283,13 @@ namespace Refaccionaria.App
         {
             if (this.Cliente == null) return;
 
+            // Se valida que el cliente no sea "Ventas Mostrador"
+            if (this.Cliente.ClienteID == Cat.Clientes.Mostrador)
+            {
+                UtilLocal.MensajeAdvertencia("El cliente especificado no se puede editar.");
+                return;
+            }
+
             var ctlClientes = new clientes();
             ctlClientes.ModificaCredito = false;
             ctlClientes.ModificaCaracteristicas = false;

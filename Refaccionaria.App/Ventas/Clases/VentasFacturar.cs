@@ -81,6 +81,7 @@ namespace Refaccionaria.App
 
             var oFactura = General.GetEntity<VentaFactura>(q => q.VentaFacturaID == ResFe.Respuesta && q.Estatus);
             oFactura.Convertida = true;
+            oFactura.RealizoUsuarioID = iUsuarioID;
             Guardar.Generico<VentaFactura>(oFactura);
 
             // Se manda a afectar contabilidad (AfeConta)
