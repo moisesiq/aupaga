@@ -8,7 +8,7 @@
 window.local = {
 	Cargando: {
 		Mostrar: function() {
-			$("<img id='_imgCargando' class='Centrado' src='img/64_Procesando.gif' />")
+			$("<img id='_imgCargando' class='centrado' src='img/64_Procesando.gif' />")
 				.css("margin", "-32px 0px 0px -32px").appendTo("body");
 		}
 		, Cerrar: function() {

@@ -7,10 +7,10 @@
 
 window.config = {
 	Aplicacion: "TheosMov"
-	, Version: "0.0.13"
+	, Version: "0.1.0"
 	, Servidor: "http://garibaldi.dyndns-server.com:5601/TheosWeb/"
 	// , Servidor: "http://192.168.100.4:5601/TheosWeb/"
-	// , Servidor: "http://192.168.1.144/TheosWeb/"
+	// , Servidor: "http://192.168.100.4/TheosWeb/"
 }
 
 /*
