@@ -633,6 +633,7 @@ namespace Refaccionaria.App
             {
                 ContaTipoPolizaID = Cat.ContaTiposDePoliza.Egreso,
                 Fecha = dComplementaria,
+                Concepto = "",
                 RelacionTabla = Cat.Tablas.NominaUsuario,
                 RelacionID = oNomina.NominaID
             };
