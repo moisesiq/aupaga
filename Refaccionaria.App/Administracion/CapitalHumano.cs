@@ -633,14 +633,14 @@ namespace Refaccionaria.App
             {
                 ContaTipoPolizaID = Cat.ContaTiposDePoliza.Egreso,
                 Fecha = dComplementaria,
-                Concepto = "",
                 RelacionTabla = Cat.Tablas.NominaUsuario,
                 RelacionID = oNomina.NominaID
             };
             foreach (var oReg in oNominaUsuariosV)
             {
                 // Se crea la póliza de lo oficial
-                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.NominaOficial, oReg.NominaUsuarioID, this.cmbSemana.Text, ("NÓMINA " + this.cmbSemana.Text), dOficial);
+                ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.NominaOficial, oReg.NominaUsuarioID, this.cmbSemana.Text, ("NÓMINA " + this.cmbSemana.Text)
+                    , oReg.SucursalID, dOficial);
                 // Se crea la póliza de la diferencia, si aplica
                 if (oReg.Diferencia != 0)
                 {
@@ -652,7 +652,8 @@ namespace Refaccionaria.App
                     }
                     var oPoliza = Helper.CrearCopia<ContaPoliza>(oPolizaBase);
                     oPoliza.Concepto = ("COMPLEMENTO NÓMINA " + this.cmbSemana.Text);
-                    ContaProc.CrearPoliza(oPoliza, oCuentaAux.ContaCuentaAuxiliarID, Cat.ContaCuentasAuxiliares.ReservaNomina, oReg.Diferencia.Valor(), oReg.Usuario);
+                    ContaProc.CrearPoliza(oPoliza, oCuentaAux.ContaCuentaAuxiliarID, Cat.ContaCuentasAuxiliares.ReservaNomina, oReg.Diferencia.Valor(), oReg.Usuario
+                        , oReg.SucursalID, Cat.Sucursales.Matriz);
                     /* ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, ("COMPLEMENTO NÓMINA " + this.cmbSemana.Text)
                         , oCuentaAux.ContaCuentaAuxiliarID, Cat.ContaCuentasAuxiliares.ReservaNomina, oReg.Diferencia.Valor(), oReg.Usuario
                         , Cat.Tablas.NominaUsuario, oReg.NominaID.Valor());
@@ -672,7 +673,8 @@ namespace Refaccionaria.App
                         oPoliza.ContaTipoPolizaID = Cat.ContaTiposDePoliza.Ingreso;
                         oPoliza.Concepto = "ADELANTO";
                         oPoliza.SucursalID = oReg.SucursalID;
-                        ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.Caja, oCuentaAux.ContaCuentaAuxiliarID, oReg.Adelanto, oReg.Usuario);
+                        ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.Caja, oCuentaAux.ContaCuentaAuxiliarID, oReg.Adelanto, oReg.Usuario
+                            , Cat.Sucursales.Matriz, oReg.SucursalID);
 
                         // Se crea adicionalmente, un ingreso de caja por el importe del adelanto
                         var oIngreso = new CajaIngreso()
@@ -681,7 +683,7 @@ namespace Refaccionaria.App
                             Concepto = ("PAGO ADELANTO " + oReg.Usuario),
                             Importe = oReg.Adelanto,
                             Fecha = dAhora,
-                            SucursalID = Cat.Sucursales.Matriz,
+                            SucursalID = oReg.SucursalID,
                             RealizoUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID
                         };
                         Guardar.Generico<CajaIngreso>(oIngreso);
@@ -700,7 +702,8 @@ namespace Refaccionaria.App
                             //     , oReg.MinutosTarde, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor());
                             var oPoliza = Helper.CrearCopia<ContaPoliza>(oPolizaBase);
                             oPoliza.Concepto = "MINUTOS TARDE";
-                            ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID, oReg.MinutosTarde, oReg.Usuario);
+                            ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID, oReg.MinutosTarde, oReg.Usuario
+                                , Cat.Sucursales.Matriz, oReg.SucursalID);
                         }
                         if (oReg.Otros > 0)
                         {
@@ -708,7 +711,8 @@ namespace Refaccionaria.App
                             //     , oReg.Otros, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor());
                             var oPoliza = Helper.CrearCopia<ContaPoliza>(oPolizaBase);
                             oPoliza.Concepto = "OTROS DESCUENTOS";
-                            ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID, oReg.Otros, oReg.Usuario);
+                            ContaProc.CrearPoliza(oPoliza, Cat.ContaCuentasAuxiliares.ReservaNomina, oCuentaAux.ContaCuentaAuxiliarID, oReg.Otros, oReg.Usuario
+                                , Cat.Sucursales.Matriz, oReg.SucursalID);
                         }
                     }
                 }
@@ -856,13 +860,27 @@ namespace Refaccionaria.App
                 }
 
                 // Se crea la póliza del adelanto, si aplica
+                DateTime dAhora = DateTime.Now;
                 if (oReg.Adelanto > 0)
                 {
                     var oCuentaAux = General.GetEntity<ContaCuentaAuxiliar>(c => c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.DeudoresDiversos
                         && c.RelacionID == oReg.UsuarioID);
                     if (oCuentaAux != null)
+                    {
                         ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Egreso, "ADELANTO", Cat.ContaCuentasAuxiliares.Caja, oCuentaAux.ContaCuentaAuxiliarID
                             , oReg.Adelanto, oReg.Usuario, Cat.Tablas.NominaUsuario, oReg.NominaID.Valor(), oReg.SucursalID);
+                        // Se crea adicionalmente, un ingreso de caja por el importe del adelanto
+                        var oIngreso = new CajaIngreso()
+                        {
+                            CajaTipoIngresoID = Cat.CajaTiposDeIngreso.Otros,
+                            Concepto = ("PAGO ADELANTO " + oReg.Usuario),
+                            Importe = oReg.Adelanto,
+                            Fecha = dAhora,
+                            SucursalID = oReg.SucursalID,
+                            RealizoUsuarioID = GlobalClass.UsuarioGlobal.UsuarioID
+                        };
+                        Guardar.Generico<CajaIngreso>(oIngreso);
+                    }
                 }
                 // Se crea la póliza de minutos tarde y otros, si aplica
                 if (oReg.MinutosTarde > 0 || oReg.Otros > 0)

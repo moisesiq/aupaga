@@ -333,6 +333,7 @@
           <Property Name="CobroPorEnvio" Type="bit" />
           <Property Name="ImporteParaCobroPorEnvio" Type="decimal" Precision="12" Scale="2" />
           <Property Name="ImporteCobroPorEnvio" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="SiempreTicket" Type="bit" />
         </EntityType>
         <EntityType Name="ClienteCredito">
           <Key>
@@ -3087,6 +3088,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ClientesCreditoView' does
           <Property Name="DiaDeCobro" Type="int" />
           <Property Name="HoraDeCobro" Type="time" Precision="7" />
           <Property Name="SiempreFactura" Type="bit" />
+          <Property Name="SiempreTicket" Type="bit" />
           <Property Name="SiempreVale" Type="bit" />
           <Property Name="TicketPrecio1" Type="bit" />
           <Property Name="Adeudo" Type="decimal" Precision="38" Scale="2" />
@@ -11485,6 +11487,7 @@ FROM [dbo].[ClientesAdeudosView] AS [ClientesAdeudosView]</DefiningQuery>
 [ClientesCreditoView].[DiaDeCobro] AS [DiaDeCobro], 
 [ClientesCreditoView].[HoraDeCobro] AS [HoraDeCobro], 
 [ClientesCreditoView].[SiempreFactura] AS [SiempreFactura], 
+[ClientesCreditoView].[SiempreTicket] AS [SiempreTicket], 
 [ClientesCreditoView].[SiempreVale] AS [SiempreVale], 
 [ClientesCreditoView].[TicketPrecio1] AS [TicketPrecio1], 
 [ClientesCreditoView].[Adeudo] AS [Adeudo], 
@@ -15456,7 +15459,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ParteCaracteristica" EntitySet="ParteCaracteristica" />
           </AssociationSet>
           <EntitySet Name="PartesCaracteristicasView" EntityType="RefaccionariaModelo.PartesCaracteristicasView" />
-          <EntitySet Name="ClientesCreditoView" EntityType="RefaccionariaModelo.ClientesCreditoView" />
           <EntitySet Name="ContaEgresoDetalle" EntityType="RefaccionariaModelo.ContaEgresoDetalle" />
           <AssociationSet Name="FK__ContaEgre__Conta__11CA81AE" Association="RefaccionariaModelo.FK__ContaEgre__Conta__11CA81AE">
             <End Role="ContaConsumible" EntitySet="ContaConsumible" />
@@ -15506,39 +15508,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="Descripcion9" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="PartesView" EntityType="RefaccionariaModelo.PartesView" />
-          <EntitySet Name="Cliente" EntityType="RefaccionariaModelo.Cliente" />
-          <AssociationSet Name="FK__ClienteFa__Clien__609D3A6E" Association="RefaccionariaModelo.FK__ClienteFa__Clien__609D3A6E">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ClienteFacturacion" EntitySet="ClienteFacturacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ClienteFl__Clien__15261146" Association="RefaccionariaModelo.FK__ClienteFl__Clien__15261146">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ClienteFlotilla" EntitySet="ClienteFlotilla" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CobranzaT__Clien__31783731" Association="RefaccionariaModelo.FK__CobranzaT__Clien__31783731">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="CobranzaTicket" EntitySet="CobranzaTicket" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NotaDeCre__Clien__53833672" Association="RefaccionariaModelo.FK__NotaDeCre__Clien__53833672">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="NotaDeCreditoFiscal" EntitySet="NotaDeCreditoFiscal" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Comis__172E5549" Association="RefaccionariaModelo.FK__VentaCamb__Comis__172E5549">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Comis__18227982" Association="RefaccionariaModelo.FK__VentaCamb__Comis__18227982">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClienteCredito_Cliente" Association="RefaccionariaModelo.FK_ClienteCredito_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ClienteCredito" EntitySet="ClienteCredito" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientePersonal_Cliente" Association="RefaccionariaModelo.FK_ClientePersonal_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ClientePersonal" EntitySet="ClientePersonal" />
-          </AssociationSet>
           <EntitySet Name="ClientesDatosView" EntityType="RefaccionariaModelo.ClientesDatosView" />
           <EntitySet Name="ParteComplementaria" EntityType="RefaccionariaModelo.ParteComplementaria" />
           <EntitySet Name="CascoImporte" EntityType="RefaccionariaModelo.CascoImporte" />
@@ -15727,14 +15696,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Cotizacion9500" EntityType="RefaccionariaModelo.Cotizacion9500" />
-          <AssociationSet Name="FK__Cotizacio__Clien__7760A435" Association="RefaccionariaModelo.FK__Cotizacio__Clien__7760A435">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cotizacio__Comis__41248F15" Association="RefaccionariaModelo.FK__Cotizacio__Comis__41248F15">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
-          </AssociationSet>
           <AssociationSet Name="FK__Cotizacio__Cotiz__73901351" Association="RefaccionariaModelo.FK__Cotizacio__Cotiz__73901351">
             <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
             <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
@@ -15744,10 +15705,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
           </AssociationSet>
           <EntitySet Name="ClienteEventoCalendario" EntityType="RefaccionariaModelo.ClienteEventoCalendario" />
-          <AssociationSet Name="FK__ClienteEv__Clien__7CBA562F" Association="RefaccionariaModelo.FK__ClienteEv__Clien__7CBA562F">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ClienteEventoCalendario" EntitySet="ClienteEventoCalendario" />
-          </AssociationSet>
           <EntitySet Name="PartesEquivalentesMaxMinView" EntityType="RefaccionariaModelo.PartesEquivalentesMaxMinView" />
           <EntitySet Name="PartesComplementariasView" EntityType="RefaccionariaModelo.PartesComplementariasView" />
           <EntitySet Name="PartesEquivalentesView" EntityType="RefaccionariaModelo.PartesEquivalentesView" />
@@ -15850,10 +15807,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="CajaEgreso" EntitySet="CajaEgreso" />
           </AssociationSet>
           <EntitySet Name="VentaFactura" EntityType="RefaccionariaModelo.VentaFactura" />
-          <AssociationSet Name="FK__VentaFact__Clien__6561EF8B" Association="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="VentaFactura" EntitySet="VentaFactura" />
-          </AssociationSet>
           <AssociationSet Name="FK__VentaFact__Estat__7874C3FF" Association="RefaccionariaModelo.FK__VentaFact__Estat__7874C3FF">
             <End Role="EstatusGenerico" EntitySet="EstatusGenerico" />
             <End Role="VentaFactura" EntitySet="VentaFactura" />
@@ -16047,14 +16000,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__CascoRegi__Venta__014A0122" Association="RefaccionariaModelo.FK__CascoRegi__Venta__014A0122">
             <End Role="Venta" EntitySet="Venta" />
             <End Role="CascoRegistro" EntitySet="CascoRegistro" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Venta__ClienteID__30CE2BBB" Association="RefaccionariaModelo.FK__Venta__ClienteID__30CE2BBB">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Venta" EntitySet="Venta" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Venta__Comisioni__5DF5D7ED" Association="RefaccionariaModelo.FK__Venta__Comisioni__5DF5D7ED">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Venta" EntitySet="Venta" />
           </AssociationSet>
           <AssociationSet Name="FK__Venta__ClienteVe__00F4FB67" Association="RefaccionariaModelo.FK__Venta__ClienteVe__00F4FB67">
             <End Role="ClienteFlotilla" EntitySet="ClienteFlotilla" />
@@ -16311,10 +16256,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK_Ciudad_Usuario" Association="RefaccionariaModelo.FK_Ciudad_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Ciudad" EntitySet="Ciudad" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cliente__Usuario__70E8B0D0" Association="RefaccionariaModelo.FK__Cliente__Usuario__70E8B0D0">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_ClienteCredito_Usuario" Association="RefaccionariaModelo.FK_ClienteCredito_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -16996,19 +16937,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="VehiculoMotorID" Mode="In" Type="Int32" />
             <Parameter Name="Equivalentes" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <EntitySet Name="ParteEquivalente" EntityType="RefaccionariaModelo.ParteEquivalente" />
-          <AssociationSet Name="FK_ParteEquivalente_Parte" Association="RefaccionariaModelo.FK_ParteEquivalente_Parte">
-            <End Role="Parte" EntitySet="Parte" />
-            <End Role="ParteEquivalente" EntitySet="ParteEquivalente" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ParteEqui__Reali__61D155C9" Association="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="ParteEquivalente" EntitySet="ParteEquivalente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ParteEquivalente_Usuario" Association="RefaccionariaModelo.FK_ParteEquivalente_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="ParteEquivalente" EntitySet="ParteEquivalente" />
-          </AssociationSet>
           <EntitySet Name="ParteCodigoAlterno" EntityType="RefaccionariaModelo.ParteCodigoAlterno" />
           <AssociationSet Name="FK_ParteCodigoAlterno_Parte" Association="RefaccionariaModelo.FK_ParteCodigoAlterno_Parte">
             <End Role="Parte" EntitySet="Parte" />
@@ -17049,10 +16977,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="NotaDeCredito" EntityType="RefaccionariaModelo.NotaDeCredito" />
           <EntitySet Name="NotasDeCreditoView" EntityType="RefaccionariaModelo.NotasDeCreditoView" />
-          <AssociationSet Name="FK__NotaDeCre__Clien__59D0414E" Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
-          </AssociationSet>
           <AssociationSet Name="FK__NotaDeCre__Orige__0B879873" Association="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873">
             <End Role="Venta" EntitySet="Venta" />
             <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
@@ -17267,6 +17191,85 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__NominaUsu__Nomin__7DCE75F9" Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9">
             <End Role="Nomina" EntitySet="Nomina" />
             <End Role="NominaUsuarioOficial" EntitySet="NominaUsuarioOficial" />
+          </AssociationSet>
+          <EntitySet Name="Cliente" EntityType="RefaccionariaModelo.Cliente" />
+          <AssociationSet Name="FK__Cliente__Usuario__70E8B0D0" Association="RefaccionariaModelo.FK__Cliente__Usuario__70E8B0D0">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClienteEv__Clien__7CBA562F" Association="RefaccionariaModelo.FK__ClienteEv__Clien__7CBA562F">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteEventoCalendario" EntitySet="ClienteEventoCalendario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClienteFa__Clien__609D3A6E" Association="RefaccionariaModelo.FK__ClienteFa__Clien__609D3A6E">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteFacturacion" EntitySet="ClienteFacturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClienteFl__Clien__15261146" Association="RefaccionariaModelo.FK__ClienteFl__Clien__15261146">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteFlotilla" EntitySet="ClienteFlotilla" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CobranzaT__Clien__31783731" Association="RefaccionariaModelo.FK__CobranzaT__Clien__31783731">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="CobranzaTicket" EntitySet="CobranzaTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Clien__7760A435" Association="RefaccionariaModelo.FK__Cotizacio__Clien__7760A435">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Comis__41248F15" Association="RefaccionariaModelo.FK__Cotizacio__Comis__41248F15">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NotaDeCre__Clien__53833672" Association="RefaccionariaModelo.FK__NotaDeCre__Clien__53833672">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="NotaDeCreditoFiscal" EntitySet="NotaDeCreditoFiscal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NotaDeCre__Clien__59D0414E" Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Venta__ClienteID__30CE2BBB" Association="RefaccionariaModelo.FK__Venta__ClienteID__30CE2BBB">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Venta__Comisioni__5DF5D7ED" Association="RefaccionariaModelo.FK__Venta__Comisioni__5DF5D7ED">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Comis__172E5549" Association="RefaccionariaModelo.FK__VentaCamb__Comis__172E5549">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Comis__18227982" Association="RefaccionariaModelo.FK__VentaCamb__Comis__18227982">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaFact__Clien__6561EF8B" Association="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VentaFactura" EntitySet="VentaFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteCredito_Cliente" Association="RefaccionariaModelo.FK_ClienteCredito_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteCredito" EntitySet="ClienteCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientePersonal_Cliente" Association="RefaccionariaModelo.FK_ClientePersonal_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClientePersonal" EntitySet="ClientePersonal" />
+          </AssociationSet>
+          <EntitySet Name="ClientesCreditoView" EntityType="RefaccionariaModelo.ClientesCreditoView" />
+          <EntitySet Name="ParteEquivalente" EntityType="RefaccionariaModelo.ParteEquivalente" />
+          <AssociationSet Name="FK_ParteEquivalente_Parte" Association="RefaccionariaModelo.FK_ParteEquivalente_Parte">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteEquivalente" EntitySet="ParteEquivalente" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteEqui__Reali__61D155C9" Association="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ParteEquivalente" EntitySet="ParteEquivalente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParteEquivalente_Usuario" Association="RefaccionariaModelo.FK_ParteEquivalente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ParteEquivalente" EntitySet="ParteEquivalente" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Configuracion">
@@ -18569,8 +18572,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="DateTime" Name="FechaModificacion" Precision="0" />
           <Property Type="Boolean" Name="Estatus" Nullable="false" />
           <Property Type="Boolean" Name="Actualizar" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK_ClientePersonal_Cliente" FromRole="ClientePersonal" ToRole="Cliente" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK_ClientePersonal_Usuario" FromRole="ClientePersonal" ToRole="Usuario" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK_ClientePersonal_Cliente" FromRole="ClientePersonal" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="TipoCliente">
           <Key>
@@ -18628,8 +18631,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="DateTime" Name="FechaModificacion" Precision="0" />
           <Property Type="Boolean" Name="Estatus" Nullable="false" />
           <Property Type="Boolean" Name="Actualizar" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK_ClienteCredito_Cliente" FromRole="ClienteCredito" ToRole="Cliente" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK_ClienteCredito_Usuario" FromRole="ClienteCredito" ToRole="Usuario" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK_ClienteCredito_Cliente" FromRole="ClienteCredito" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="ClientesAdeudosView">
           <Key>
@@ -18685,13 +18688,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Boolean" Name="Estatus" Nullable="false" />
           <Property Type="Boolean" Name="Actualizar" Nullable="false" />
           <Property Type="Int32" Name="SucursalID" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__VentaCamb__Comis__172E5549" FromRole="VentaCambio" ToRole="Cliente" />
-          <NavigationProperty Name="Cliente1" Relationship="RefaccionariaModelo.FK__VentaCamb__Comis__18227982" FromRole="VentaCambio" ToRole="Cliente" />
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaCamb__Venta__1451E89E" FromRole="VentaCambio" ToRole="VentaPago" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaCamb__Reali__15460CD7" FromRole="VentaCambio" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__VentaCamb__Reali__163A3110" FromRole="VentaCambio" ToRole="Usuario" />
           <NavigationProperty Name="Usuario2" Relationship="RefaccionariaModelo.FK__VentaCamb__Usuar__19169DBB" FromRole="VentaCambio" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__VentaCamb__Sucur__530E3526" FromRole="VentaCambio" ToRole="Sucursal" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__VentaCamb__Comis__172E5549" FromRole="VentaCambio" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente1" Relationship="RefaccionariaModelo.FK__VentaCamb__Comis__18227982" FromRole="VentaCambio" ToRole="Cliente" />
           </EntityType>
         <EntityType Name="VentasCambiosView">
           <Key>
@@ -18900,8 +18903,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="EstadoID" Nullable="false" />
           <Property Type="Int32" Name="MunicipioID" Nullable="false" />
           <Property Type="Int32" Name="CiudadID" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__ClienteFa__Clien__609D3A6E" FromRole="ClienteFacturacion" ToRole="Cliente" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ClienteFa__Usuar__61915EA7" FromRole="ClienteFacturacion" ToRole="Usuario" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__ClienteFa__Clien__609D3A6E" FromRole="ClienteFacturacion" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="LineasView">
           <Key>
@@ -19694,9 +19697,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Pagado" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Decimal" Name="Restante" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Int32" Name="VentaPagoID" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__CobranzaT__Clien__31783731" FromRole="CobranzaTicket" ToRole="Cliente" />
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__CobranzaT__Venta__29A20B3F" FromRole="CobranzaTicket" ToRole="VentaPago" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__CobranzaT__Venta__308412F8" FromRole="CobranzaTicket" ToRole="Venta" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__CobranzaT__Clien__31783731" FromRole="CobranzaTicket" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="ContaConsumible">
           <Key>
@@ -20096,9 +20099,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="VehiculoTipoID" />
           <NavigationProperty Name="Motor" Relationship="RefaccionariaModelo.FK__ClienteFl__Motor__161A357F" FromRole="ClienteFlotilla" ToRole="Motor" />
           <NavigationProperty Name="VehiculoTipo" Relationship="RefaccionariaModelo.FK__ClienteFl__Vehic__29F710FA" FromRole="ClienteFlotilla" ToRole="VehiculoTipo" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__ClienteFl__Clien__15261146" FromRole="ClienteFlotilla" ToRole="Cliente" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Venta__ClienteVe__00F4FB67" FromRole="ClienteFlotilla" ToRole="Venta" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ClienteFl__Usuar__170E59B8" FromRole="ClienteFlotilla" ToRole="Usuario" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__ClienteFl__Clien__15261146" FromRole="ClienteFlotilla" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="VehiculoTipo">
           <Key>
@@ -20792,28 +20795,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Boolean" Name="Multiple" />
           <Property Type="String" Name="Valor" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="ClientesCreditoView">
-          <Key>
-            <PropertyRef Name="ClienteID" />
-            <PropertyRef Name="TieneCredito" />
-          </Key>
-          <Property Type="Int32" Name="ClienteID" Nullable="false" />
-          <Property Type="String" Name="Nombre" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="TieneCredito" Nullable="false" />
-          <Property Type="Decimal" Name="LimiteDeCredito" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="DiasDeCredito" />
-          <Property Type="Boolean" Name="Tolerancia" />
-          <Property Type="Int32" Name="DiaDeCobro" />
-          <Property Type="Time" Name="HoraDeCobro" Precision="7" />
-          <Property Type="Boolean" Name="SiempreFactura" />
-          <Property Type="Boolean" Name="SiempreVale" />
-          <Property Type="Boolean" Name="TicketPrecio1" />
-          <Property Type="Decimal" Name="Adeudo" Precision="38" Scale="2" />
-          <Property Type="DateTime" Name="FechaPrimerAdeudo" Precision="3" />
-          <Property Type="Decimal" Name="AdeudoVencido" Precision="38" Scale="2" />
-          <Property Type="Int32" Name="PromedioDePagoAnual" />
-          <Property Type="Int32" Name="PromedioDePago3Meses" />
-        </EntityType>
         <EntityType Name="ContaEgresoDetalle">
           <Key>
             <PropertyRef Name="ContaEgresoDetalleID" />
@@ -20873,11 +20854,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="UsuarioID" Nullable="false" />
           <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="3" />
           <Property Type="DateTime" Name="FechaModificacion" Precision="3" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__53833672" FromRole="NotaDeCreditoFiscal" ToRole="Cliente" />
           <NavigationProperty Name="NotaDeCreditoFiscalDetalle" Relationship="RefaccionariaModelo.FK__NotaDeCre__NotaD__0114F6F8" FromRole="NotaDeCreditoFiscal" ToRole="NotaDeCreditoFiscalDetalle" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__NotaDeCre__Reali__556B7EE4" FromRole="NotaDeCreditoFiscal" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__NotaDeCre__Usuar__565FA31D" FromRole="NotaDeCreditoFiscal" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__54775AAB" FromRole="NotaDeCreditoFiscal" ToRole="Sucursal" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__53833672" FromRole="NotaDeCreditoFiscal" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="NotasDeCreditoFiscalesView">
           <Key>
@@ -21082,168 +21063,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="0" />
           <Property Type="String" Name="Busqueda" MaxLength="862" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Cliente">
-          <Key>
-            <PropertyRef Name="ClienteID" />
-          </Key>
-          <Property Type="Int32" Name="ClienteID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Nombre" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Calle" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="NumeroExterior" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="NumeroInterior" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Colonia" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="CodigoPostal" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Telefono" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Celular" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="ListaDePrecios" Nullable="false" />
-          <Property Type="Boolean" Name="TieneCredito" Nullable="false" />
-          <Property Type="Int32" Name="UsuarioID" Nullable="false" />
-          <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="FechaModificacion" Precision="3" />
-          <Property Type="Boolean" Name="Estatus" Nullable="false" />
-          <Property Type="Boolean" Name="Actualizar" Nullable="false" />
-          <Property Type="Int32" Name="DiasDeCredito" />
-          <Property Type="String" Name="Alias" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="EstadoID" Nullable="false" />
-          <Property Type="Int32" Name="MunicipioID" Nullable="false" />
-          <Property Type="Int32" Name="CiudadID" Nullable="false" />
-          <Property Type="Int32" Name="TipoFormaPagoID" />
-          <Property Type="Int32" Name="BancoID" />
-          <Property Type="Int32" Name="TipoClienteID" />
-          <Property Type="String" Name="Particular" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Nextel" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="CuentaBancaria" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="Tolerancia" />
-          <Property Type="Decimal" Name="LimiteCredito" Precision="18" Scale="2" />
-          <Property Type="Boolean" Name="EsClienteComisionista" />
-          <Property Type="Boolean" Name="EsTallerElectrico" />
-          <Property Type="Boolean" Name="EsTallerMecanico" />
-          <Property Type="Boolean" Name="EsTallerDiesel" />
-          <Property Type="Int32" Name="ClienteComisionistaID" />
-          <Property Type="Decimal" Name="Acumulado" Precision="12" Scale="2" />
-          <Property Type="Boolean" Name="Vip" />
-          <Property Type="Time" Name="HoraDeCobro" Precision="7" />
-          <Property Type="Int32" Name="DiaDeCobro" />
-          <Property Type="Boolean" Name="SiempreFactura" />
-          <Property Type="Boolean" Name="SiempreVale" />
-          <Property Type="Boolean" Name="TicketPrecio1" />
-          <Property Type="String" Name="LatLong" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="CobroPorEnvio" />
-          <Property Type="Decimal" Name="ImporteParaCobroPorEnvio" Precision="12" Scale="2" />
-          <Property Type="Decimal" Name="ImporteCobroPorEnvio" Precision="12" Scale="2" />
-          <NavigationProperty Name="ClienteFacturacion" Relationship="RefaccionariaModelo.FK__ClienteFa__Clien__609D3A6E" FromRole="Cliente" ToRole="ClienteFacturacion" />
-          <NavigationProperty Name="ClienteFlotilla" Relationship="RefaccionariaModelo.FK__ClienteFl__Clien__15261146" FromRole="Cliente" ToRole="ClienteFlotilla" />
-          <NavigationProperty Name="CobranzaTicket" Relationship="RefaccionariaModelo.FK__CobranzaT__Clien__31783731" FromRole="Cliente" ToRole="CobranzaTicket" />
-          <NavigationProperty Name="NotaDeCreditoFiscal" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__53833672" FromRole="Cliente" ToRole="NotaDeCreditoFiscal" />
-          <NavigationProperty Name="VentaCambio" Relationship="RefaccionariaModelo.FK__VentaCamb__Comis__172E5549" FromRole="Cliente" ToRole="VentaCambio" />
-          <NavigationProperty Name="VentaCambio1" Relationship="RefaccionariaModelo.FK__VentaCamb__Comis__18227982" FromRole="Cliente" ToRole="VentaCambio" />
-          <NavigationProperty Name="ClienteCredito" Relationship="RefaccionariaModelo.FK_ClienteCredito_Cliente" FromRole="Cliente" ToRole="ClienteCredito" />
-          <NavigationProperty Name="ClientePersonal" Relationship="RefaccionariaModelo.FK_ClientePersonal_Cliente" FromRole="Cliente" ToRole="ClientePersonal" />
-          <NavigationProperty Name="Cotizacion9500" Relationship="RefaccionariaModelo.FK__Cotizacio__Clien__7760A435" FromRole="Cliente" ToRole="Cotizacion9500" />
-          <NavigationProperty Name="Cotizacion95001" Relationship="RefaccionariaModelo.FK__Cotizacio__Comis__41248F15" FromRole="Cliente" ToRole="Cotizacion9500" />
-          <NavigationProperty Name="ClienteEventoCalendario" Relationship="RefaccionariaModelo.FK__ClienteEv__Clien__7CBA562F" FromRole="Cliente" ToRole="ClienteEventoCalendario" />
-          <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B" FromRole="Cliente" ToRole="VentaFactura" />
-          <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Venta__ClienteID__30CE2BBB" FromRole="Cliente" ToRole="Venta" />
-          <NavigationProperty Name="Venta1" Relationship="RefaccionariaModelo.FK__Venta__Comisioni__5DF5D7ED" FromRole="Cliente" ToRole="Venta" />
-          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__Cliente__Usuario__70E8B0D0" FromRole="Cliente" ToRole="Usuario" />
-          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" FromRole="Cliente" ToRole="NotaDeCredito" />
-        </EntityType>
-        <Association Name="FK__ClienteFa__Clien__609D3A6E">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ClienteFacturacion" Role="ClienteFacturacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="ClienteFacturacion">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ClienteFl__Clien__15261146">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ClienteFlotilla" Role="ClienteFlotilla" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="ClienteFlotilla">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CobranzaT__Clien__31783731">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.CobranzaTicket" Role="CobranzaTicket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="CobranzaTicket">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NotaDeCre__Clien__53833672">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.NotaDeCreditoFiscal" Role="NotaDeCreditoFiscal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="NotaDeCreditoFiscal">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaCamb__Comis__172E5549">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="ComisionistaIDAntes" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaCamb__Comis__18227982">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="ComisionistaIDDespues" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClienteCredito_Cliente">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ClienteCredito" Role="ClienteCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="ClienteCredito">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientePersonal_Cliente">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ClientePersonal" Role="ClientePersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="ClientePersonal">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ClientesDatosView">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -21562,11 +21381,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorParteGanancia" Relationship="RefaccionariaModelo.FK__Proveedor__Parte__5185DF67" FromRole="Parte" ToRole="ProveedorParteGanancia" />
           <NavigationProperty Name="ParteExistenciaHistorico" Relationship="RefaccionariaModelo.FK__ParteExis__Parte__0E8EEDA7" FromRole="Parte" ToRole="ParteExistenciaHistorico" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK_Parte_Fabricante" FromRole="Parte" ToRole="Usuario" />
-          <NavigationProperty Name="ParteEquivalente" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Parte" FromRole="Parte" ToRole="ParteEquivalente" />
           <NavigationProperty Name="ParteCodigoAlterno" Relationship="RefaccionariaModelo.FK_ParteCodigoAlterno_Parte" FromRole="Parte" ToRole="ParteCodigoAlterno" />
           <NavigationProperty Name="ParteVehiculo" Relationship="RefaccionariaModelo.FK__ParteVehi__Parte__0EAE1DE1" FromRole="Parte" ToRole="ParteVehiculo" />
           <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688" FromRole="Parte" ToRole="ParteMaxMin" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" FromRole="Parte" ToRole="VentaGarantia" />
+          <NavigationProperty Name="ParteEquivalente" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Parte" FromRole="Parte" ToRole="ParteEquivalente" />
         </EntityType>
         <Association Name="FK__CascoRegi__Parte__023E255B">
           <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
@@ -22091,8 +21910,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Int32" Name="VentaID" />
           <Property Type="Int32" Name="BajaUsuarioID" />
           <Property Type="String" Name="BajaMotivo" MaxLength="512" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__Cotizacio__Clien__7760A435" FromRole="Cotizacion9500" ToRole="Cliente" />
-          <NavigationProperty Name="Cliente1" Relationship="RefaccionariaModelo.FK__Cotizacio__Comis__41248F15" FromRole="Cotizacion9500" ToRole="Cliente" />
           <NavigationProperty Name="Cotizacion9500Detalle" Relationship="RefaccionariaModelo.FK__Cotizacio__Cotiz__73901351" FromRole="Cotizacion9500" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="EstatusGenerico" Relationship="RefaccionariaModelo.FK__Cotizacio__Estat__002AF460" FromRole="Cotizacion9500" ToRole="EstatusGenerico" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Cotizacio__Antic__674A37FD" FromRole="Cotizacion9500" ToRole="Venta" />
@@ -22101,31 +21918,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__Cotizacio__Reali__7FF5EA36" FromRole="Cotizacion9500" ToRole="Usuario" />
           <NavigationProperty Name="Usuario2" Relationship="RefaccionariaModelo.FK__Cotizacio__Usuar__02133CD2" FromRole="Cotizacion9500" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__Cotizacio__Sucur__011F1899" FromRole="Cotizacion9500" ToRole="Sucursal" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__Cotizacio__Clien__7760A435" FromRole="Cotizacion9500" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente1" Relationship="RefaccionariaModelo.FK__Cotizacio__Comis__41248F15" FromRole="Cotizacion9500" ToRole="Cliente" />
           </EntityType>
-        <Association Name="FK__Cotizacio__Clien__7760A435">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.Cotizacion9500" Role="Cotizacion9500" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="Cotizacion9500">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cotizacio__Comis__41248F15">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.Cotizacion9500" Role="Cotizacion9500" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="Cotizacion9500">
-              <PropertyRef Name="ComisionistaClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Cotizacio__Cotiz__73901351">
           <End Type="RefaccionariaModelo.Cotizacion9500" Role="Cotizacion9500" Multiplicity="1" />
           <End Type="RefaccionariaModelo.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
@@ -22161,18 +21956,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="3" />
           <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__ClienteEv__Clien__7CBA562F" FromRole="ClienteEventoCalendario" ToRole="Cliente" />
         </EntityType>
-        <Association Name="FK__ClienteEv__Clien__7CBA562F">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.ClienteEventoCalendario" Role="ClienteEventoCalendario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="ClienteEventoCalendario">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PartesEquivalentesMaxMinView">
           <Key>
             <PropertyRef Name="ParteEquivalenteID" />
@@ -22844,7 +22627,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Subtotal" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Decimal" Name="Iva" Nullable="false" Precision="12" Scale="2" />
           <Property Type="Decimal" Name="Costo" Nullable="false" Precision="12" Scale="2" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B" FromRole="VentaFactura" ToRole="Cliente" />
           <NavigationProperty Name="EstatusGenerico" Relationship="RefaccionariaModelo.FK__VentaFact__Estat__7874C3FF" FromRole="VentaFactura" ToRole="EstatusGenerico" />
           <NavigationProperty Name="VentaFacturaDetalle" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__70D3A237" FromRole="VentaFactura" ToRole="VentaFacturaDetalle" />
           <NavigationProperty Name="VentaFacturaDevolucion" Relationship="RefaccionariaModelo.FK__VentaFact__Venta__625078B6" FromRole="VentaFactura" ToRole="VentaFacturaDevolucion" />
@@ -22852,19 +22634,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__VentaFact__Reali__768C7B8D" FromRole="VentaFactura" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__VentaFact__Usuar__3B4BBA2E" FromRole="VentaFactura" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__VentaFact__Sucur__77809FC6" FromRole="VentaFactura" ToRole="Sucursal" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B" FromRole="VentaFactura" ToRole="Cliente" />
         </EntityType>
-        <Association Name="FK__VentaFact__Clien__6561EF8B">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.VentaFactura" Role="VentaFactura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="VentaFactura">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__VentaFact__Estat__7874C3FF">
           <End Type="RefaccionariaModelo.EstatusGenerico" Role="EstatusGenerico" Multiplicity="1" />
           <End Type="RefaccionariaModelo.VentaFactura" Role="VentaFactura" Multiplicity="*" />
@@ -24159,8 +23930,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="FacturaDividida" Type="Boolean" />
           <NavigationProperty Name="CascoRegistro" Relationship="RefaccionariaModelo.FK__CascoRegi__Cobro__04266DCD" FromRole="Venta" ToRole="CascoRegistro" />
           <NavigationProperty Name="CascoRegistro1" Relationship="RefaccionariaModelo.FK__CascoRegi__Venta__014A0122" FromRole="Venta" ToRole="CascoRegistro" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__Venta__ClienteID__30CE2BBB" FromRole="Venta" ToRole="Cliente" />
-          <NavigationProperty Name="Cliente1" Relationship="RefaccionariaModelo.FK__Venta__Comisioni__5DF5D7ED" FromRole="Venta" ToRole="Cliente" />
           <NavigationProperty Name="ClienteFlotilla" Relationship="RefaccionariaModelo.FK__Venta__ClienteVe__00F4FB67" FromRole="Venta" ToRole="ClienteFlotilla" />
           <NavigationProperty Name="CobranzaTicket" Relationship="RefaccionariaModelo.FK__CobranzaT__Venta__308412F8" FromRole="Venta" ToRole="CobranzaTicket" />
           <NavigationProperty Name="Cotizacion9500" Relationship="RefaccionariaModelo.FK__Cotizacio__Antic__674A37FD" FromRole="Venta" ToRole="Cotizacion9500" />
@@ -24178,6 +23947,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" FromRole="Venta" ToRole="NotaDeCredito" />
           <NavigationProperty Name="NotaDeCredito1" Relationship="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" FromRole="Venta" ToRole="NotaDeCredito" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Venta__1407CFDB" FromRole="Venta" ToRole="VentaGarantia" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__Venta__ClienteID__30CE2BBB" FromRole="Venta" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente1" Relationship="RefaccionariaModelo.FK__Venta__Comisioni__5DF5D7ED" FromRole="Venta" ToRole="Cliente" />
           </EntityType>
         <Association Name="FK__CascoRegi__Cobro__04266DCD">
           <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="0..1" />
@@ -24200,30 +23971,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="CascoRegistro">
               <PropertyRef Name="VentaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Venta__ClienteID__30CE2BBB">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="Venta">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Venta__Comisioni__5DF5D7ED">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="Venta">
-              <PropertyRef Name="ComisionistaClienteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -25241,7 +24988,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="CascoRegistro" Relationship="RefaccionariaModelo.FK__CascoRegi__Reali__051A9206" FromRole="Usuario" ToRole="CascoRegistro" />
           <NavigationProperty Name="CascoRegistro1" Relationship="RefaccionariaModelo.FK__CascoRegi__Usuar__060EB63F" FromRole="Usuario" ToRole="CascoRegistro" />
           <NavigationProperty Name="Ciudad" Relationship="RefaccionariaModelo.FK_Ciudad_Usuario" FromRole="Usuario" ToRole="Ciudad" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__Cliente__Usuario__70E8B0D0" FromRole="Usuario" ToRole="Cliente" />
           <NavigationProperty Name="ClienteCredito" Relationship="RefaccionariaModelo.FK_ClienteCredito_Usuario" FromRole="Usuario" ToRole="ClienteCredito" />
           <NavigationProperty Name="ClienteFacturacion" Relationship="RefaccionariaModelo.FK__ClienteFa__Usuar__61915EA7" FromRole="Usuario" ToRole="ClienteFacturacion" />
           <NavigationProperty Name="ClienteFlotilla" Relationship="RefaccionariaModelo.FK__ClienteFl__Usuar__170E59B8" FromRole="Usuario" ToRole="ClienteFlotilla" />
@@ -25352,8 +25098,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaPagoDetalle" Relationship="RefaccionariaModelo.FK__VentaPago__Usuar__6FBF826D" FromRole="Usuario" ToRole="VentaPagoDetalle" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__Sucursal__Gerent__129488B5" FromRole="Usuario" ToRole="Sucursal" />
           <NavigationProperty Name="Sucursal1" Relationship="RefaccionariaModelo.FK_Sucursal_Usuario" FromRole="Usuario" ToRole="Sucursal" />
-          <NavigationProperty Name="ParteEquivalente" Relationship="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9" FromRole="Usuario" ToRole="ParteEquivalente" />
-          <NavigationProperty Name="ParteEquivalente1" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Usuario" FromRole="Usuario" ToRole="ParteEquivalente" />
           <NavigationProperty Name="ParteCodigoAlterno" Relationship="RefaccionariaModelo.FK__ParteCodi__Reali__63B99E3B" FromRole="Usuario" ToRole="ParteCodigoAlterno" />
           <NavigationProperty Name="ParteCodigoAlterno1" Relationship="RefaccionariaModelo.FK_ParteCodigoAlterno_Usuario" FromRole="Usuario" ToRole="ParteCodigoAlterno" />
           <NavigationProperty Name="ParteVehiculo" Relationship="RefaccionariaModelo.FK__ParteVehi__Regis__257C74A0" FromRole="Usuario" ToRole="ParteVehiculo" />
@@ -25364,6 +25108,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Usuario" FromRole="Usuario" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Reali__19C0A931" FromRole="Usuario" ToRole="VentaGarantia" />
           <NavigationProperty Name="VentaGarantia1" Relationship="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" FromRole="Usuario" ToRole="VentaGarantia" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__Cliente__Usuario__70E8B0D0" FromRole="Usuario" ToRole="Cliente" />
+          <NavigationProperty Name="ParteEquivalente" Relationship="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9" FromRole="Usuario" ToRole="ParteEquivalente" />
+          <NavigationProperty Name="ParteEquivalente1" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Usuario" FromRole="Usuario" ToRole="ParteEquivalente" />
         </EntityType>
         <Association Name="FK__Autorizac__Autor__21E0EDE6">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -25613,18 +25360,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               <PropertyRef Name="UsuarioID" />
             </Principal>
             <Dependent Role="Ciudad">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cliente__Usuario__70E8B0D0">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="Cliente">
               <PropertyRef Name="UsuarioID" />
             </Dependent>
           </ReferentialConstraint>
@@ -27619,57 +27354,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Existencia" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="ExistenciaLocal" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
-        <EntityType Name="ParteEquivalente">
-          <Key>
-            <PropertyRef Name="ParteEquivalenteID" />
-          </Key>
-          <Property Name="ParteEquivalenteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
-          <Property Name="GrupoID" Type="Int32" Nullable="false" />
-          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Parte" FromRole="ParteEquivalente" ToRole="Parte" />
-          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9" FromRole="ParteEquivalente" ToRole="Usuario" />
-          <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Usuario" FromRole="ParteEquivalente" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_ParteEquivalente_Parte">
-          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ParteEquivalente" Role="ParteEquivalente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ParteID" />
-            </Principal>
-            <Dependent Role="ParteEquivalente">
-              <PropertyRef Name="ParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ParteEqui__Reali__61D155C9">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ParteEquivalente" Role="ParteEquivalente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="ParteEquivalente">
-              <PropertyRef Name="RealizoUsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ParteEquivalente_Usuario">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ParteEquivalente" Role="ParteEquivalente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="ParteEquivalente">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ParteCodigoAlterno">
           <Key>
             <PropertyRef Name="ParteCodigoAlternoID" />
@@ -27837,13 +27521,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="RelacionID" Type="Int32" />
           <Property Name="OrigenID" Type="Int32" />
           <Property Name="SucursalID" Type="Int32" />
-          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" FromRole="NotaDeCredito" ToRole="Cliente" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" FromRole="NotaDeCredito" ToRole="Venta" />
           <NavigationProperty Name="NotaDeCreditoOrigen" Relationship="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733" FromRole="NotaDeCredito" ToRole="NotaDeCreditoOrigen" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" FromRole="NotaDeCredito" ToRole="Sucursal" />
           <NavigationProperty Name="Venta1" Relationship="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" FromRole="NotaDeCredito" ToRole="Venta" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__NotaDeCre__Usuar__5AC46587" FromRole="NotaDeCredito" ToRole="Usuario" />
           <NavigationProperty Name="VentaPagoDetalle" Relationship="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" FromRole="NotaDeCredito" ToRole="VentaPagoDetalle" />
+          <NavigationProperty Name="Cliente" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" FromRole="NotaDeCredito" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="NotasDeCreditoView">
           <Key>
@@ -27868,18 +27552,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Origen" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="RelacionID" Type="Int32" />
         </EntityType>
-        <Association Name="FK__NotaDeCre__Clien__59D0414E">
-          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="NotaDeCredito">
-              <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__NotaDeCre__Orige__0B879873">
           <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="0..1" />
           <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
@@ -29026,6 +28698,339 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="NominaUsuarioOficial">
               <PropertyRef Name="NominaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+          </Key>
+          <Property Name="ClienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Calle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroExterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroInterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Celular" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="ListaDePrecios" Type="Int32" Nullable="false" />
+          <Property Name="TieneCredito" Type="Boolean" Nullable="false" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
+          <Property Name="DiasDeCredito" Type="Int32" />
+          <Property Name="Alias" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="EstadoID" Type="Int32" Nullable="false" />
+          <Property Name="MunicipioID" Type="Int32" Nullable="false" />
+          <Property Name="CiudadID" Type="Int32" Nullable="false" />
+          <Property Name="TipoFormaPagoID" Type="Int32" />
+          <Property Name="BancoID" Type="Int32" />
+          <Property Name="TipoClienteID" Type="Int32" />
+          <Property Name="Particular" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Nextel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CuentaBancaria" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Tolerancia" Type="Boolean" />
+          <Property Name="LimiteCredito" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EsClienteComisionista" Type="Boolean" />
+          <Property Name="EsTallerElectrico" Type="Boolean" />
+          <Property Name="EsTallerMecanico" Type="Boolean" />
+          <Property Name="EsTallerDiesel" Type="Boolean" />
+          <Property Name="ClienteComisionistaID" Type="Int32" />
+          <Property Name="Acumulado" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Vip" Type="Boolean" />
+          <Property Name="HoraDeCobro" Type="Time" Precision="7" />
+          <Property Name="DiaDeCobro" Type="Int32" />
+          <Property Name="SiempreFactura" Type="Boolean" />
+          <Property Name="SiempreVale" Type="Boolean" />
+          <Property Name="TicketPrecio1" Type="Boolean" />
+          <Property Name="LatLong" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CobroPorEnvio" Type="Boolean" />
+          <Property Name="ImporteParaCobroPorEnvio" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ImporteCobroPorEnvio" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="SiempreTicket" Type="Boolean" />
+          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__Cliente__Usuario__70E8B0D0" FromRole="Cliente" ToRole="Usuario" />
+          <NavigationProperty Name="ClienteEventoCalendario" Relationship="RefaccionariaModelo.FK__ClienteEv__Clien__7CBA562F" FromRole="Cliente" ToRole="ClienteEventoCalendario" />
+          <NavigationProperty Name="ClienteFacturacion" Relationship="RefaccionariaModelo.FK__ClienteFa__Clien__609D3A6E" FromRole="Cliente" ToRole="ClienteFacturacion" />
+          <NavigationProperty Name="ClienteFlotilla" Relationship="RefaccionariaModelo.FK__ClienteFl__Clien__15261146" FromRole="Cliente" ToRole="ClienteFlotilla" />
+          <NavigationProperty Name="CobranzaTicket" Relationship="RefaccionariaModelo.FK__CobranzaT__Clien__31783731" FromRole="Cliente" ToRole="CobranzaTicket" />
+          <NavigationProperty Name="Cotizacion9500" Relationship="RefaccionariaModelo.FK__Cotizacio__Clien__7760A435" FromRole="Cliente" ToRole="Cotizacion9500" />
+          <NavigationProperty Name="Cotizacion95001" Relationship="RefaccionariaModelo.FK__Cotizacio__Comis__41248F15" FromRole="Cliente" ToRole="Cotizacion9500" />
+          <NavigationProperty Name="NotaDeCreditoFiscal" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__53833672" FromRole="Cliente" ToRole="NotaDeCreditoFiscal" />
+          <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" FromRole="Cliente" ToRole="NotaDeCredito" />
+          <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Venta__ClienteID__30CE2BBB" FromRole="Cliente" ToRole="Venta" />
+          <NavigationProperty Name="Venta1" Relationship="RefaccionariaModelo.FK__Venta__Comisioni__5DF5D7ED" FromRole="Cliente" ToRole="Venta" />
+          <NavigationProperty Name="VentaCambio" Relationship="RefaccionariaModelo.FK__VentaCamb__Comis__172E5549" FromRole="Cliente" ToRole="VentaCambio" />
+          <NavigationProperty Name="VentaCambio1" Relationship="RefaccionariaModelo.FK__VentaCamb__Comis__18227982" FromRole="Cliente" ToRole="VentaCambio" />
+          <NavigationProperty Name="VentaFactura" Relationship="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B" FromRole="Cliente" ToRole="VentaFactura" />
+          <NavigationProperty Name="ClienteCredito" Relationship="RefaccionariaModelo.FK_ClienteCredito_Cliente" FromRole="Cliente" ToRole="ClienteCredito" />
+          <NavigationProperty Name="ClientePersonal" Relationship="RefaccionariaModelo.FK_ClientePersonal_Cliente" FromRole="Cliente" ToRole="ClientePersonal" />
+        </EntityType>
+        <Association Name="FK__Cliente__Usuario__70E8B0D0">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClienteEv__Clien__7CBA562F">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ClienteEventoCalendario" Role="ClienteEventoCalendario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ClienteEventoCalendario">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClienteFa__Clien__609D3A6E">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ClienteFacturacion" Role="ClienteFacturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ClienteFacturacion">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClienteFl__Clien__15261146">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ClienteFlotilla" Role="ClienteFlotilla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ClienteFlotilla">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CobranzaT__Clien__31783731">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.CobranzaTicket" Role="CobranzaTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="CobranzaTicket">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Clien__7760A435">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.Cotizacion9500" Role="Cotizacion9500" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Cotizacion9500">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Comis__41248F15">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.Cotizacion9500" Role="Cotizacion9500" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Cotizacion9500">
+              <PropertyRef Name="ComisionistaClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NotaDeCre__Clien__53833672">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.NotaDeCreditoFiscal" Role="NotaDeCreditoFiscal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="NotaDeCreditoFiscal">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NotaDeCre__Clien__59D0414E">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.NotaDeCredito" Role="NotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="NotaDeCredito">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Venta__ClienteID__30CE2BBB">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Venta__Comisioni__5DF5D7ED">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="ComisionistaClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Comis__172E5549">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="ComisionistaIDAntes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Comis__18227982">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="ComisionistaIDDespues" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaFact__Clien__6561EF8B">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.VentaFactura" Role="VentaFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="VentaFactura">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteCredito_Cliente">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ClienteCredito" Role="ClienteCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ClienteCredito">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientePersonal_Cliente">
+          <End Type="RefaccionariaModelo.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ClientePersonal" Role="ClientePersonal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="ClientePersonal">
+              <PropertyRef Name="ClienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClientesCreditoView">
+          <Key>
+            <PropertyRef Name="ClienteID" />
+            <PropertyRef Name="TieneCredito" />
+          </Key>
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TieneCredito" Type="Boolean" Nullable="false" />
+          <Property Name="LimiteDeCredito" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DiasDeCredito" Type="Int32" />
+          <Property Name="Tolerancia" Type="Boolean" />
+          <Property Name="DiaDeCobro" Type="Int32" />
+          <Property Name="HoraDeCobro" Type="Time" Precision="7" />
+          <Property Name="SiempreFactura" Type="Boolean" />
+          <Property Name="SiempreTicket" Type="Boolean" />
+          <Property Name="SiempreVale" Type="Boolean" />
+          <Property Name="TicketPrecio1" Type="Boolean" />
+          <Property Name="Adeudo" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="FechaPrimerAdeudo" Type="DateTime" Precision="3" />
+          <Property Name="AdeudoVencido" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="PromedioDePagoAnual" Type="Int32" />
+          <Property Name="PromedioDePago3Meses" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ParteEquivalente">
+          <Key>
+            <PropertyRef Name="ParteEquivalenteID" />
+          </Key>
+          <Property Name="ParteEquivalenteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
+          <Property Name="GrupoID" Type="Int32" Nullable="false" />
+          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Parte" FromRole="ParteEquivalente" ToRole="Parte" />
+          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9" FromRole="ParteEquivalente" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Usuario" FromRole="ParteEquivalente" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_ParteEquivalente_Parte">
+          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ParteEquivalente" Role="ParteEquivalente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteEquivalente">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteEqui__Reali__61D155C9">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ParteEquivalente" Role="ParteEquivalente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ParteEquivalente">
+              <PropertyRef Name="RealizoUsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParteEquivalente_Usuario">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ParteEquivalente" Role="ParteEquivalente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ParteEquivalente">
+              <PropertyRef Name="UsuarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -31930,28 +31935,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ClientesCreditoView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ClientesCreditoView">
-              <MappingFragment StoreEntitySet="ClientesCreditoView">
-                <ScalarProperty Name="PromedioDePago3Meses" ColumnName="PromedioDePago3Meses" />
-                <ScalarProperty Name="PromedioDePagoAnual" ColumnName="PromedioDePagoAnual" />
-                <ScalarProperty Name="AdeudoVencido" ColumnName="AdeudoVencido" />
-                <ScalarProperty Name="FechaPrimerAdeudo" ColumnName="FechaPrimerAdeudo" />
-                <ScalarProperty Name="Adeudo" ColumnName="Adeudo" />
-                <ScalarProperty Name="TicketPrecio1" ColumnName="TicketPrecio1" />
-                <ScalarProperty Name="SiempreVale" ColumnName="SiempreVale" />
-                <ScalarProperty Name="SiempreFactura" ColumnName="SiempreFactura" />
-                <ScalarProperty Name="HoraDeCobro" ColumnName="HoraDeCobro" />
-                <ScalarProperty Name="DiaDeCobro" ColumnName="DiaDeCobro" />
-                <ScalarProperty Name="Tolerancia" ColumnName="Tolerancia" />
-                <ScalarProperty Name="DiasDeCredito" ColumnName="DiasDeCredito" />
-                <ScalarProperty Name="LimiteDeCredito" ColumnName="LimiteDeCredito" />
-                <ScalarProperty Name="TieneCredito" ColumnName="TieneCredito" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ContaEgresoDetalle">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ContaEgresoDetalle">
               <MappingFragment StoreEntitySet="ContaEgresoDetalle">
@@ -32140,57 +32123,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
                 <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cliente">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.Cliente">
-              <MappingFragment StoreEntitySet="Cliente">
-                <ScalarProperty Name="ImporteCobroPorEnvio" ColumnName="ImporteCobroPorEnvio" />
-                <ScalarProperty Name="ImporteParaCobroPorEnvio" ColumnName="ImporteParaCobroPorEnvio" />
-                <ScalarProperty Name="CobroPorEnvio" ColumnName="CobroPorEnvio" />
-                <ScalarProperty Name="LatLong" ColumnName="LatLong" />
-                <ScalarProperty Name="TicketPrecio1" ColumnName="TicketPrecio1" />
-                <ScalarProperty Name="SiempreVale" ColumnName="SiempreVale" />
-                <ScalarProperty Name="SiempreFactura" ColumnName="SiempreFactura" />
-                <ScalarProperty Name="DiaDeCobro" ColumnName="DiaDeCobro" />
-                <ScalarProperty Name="HoraDeCobro" ColumnName="HoraDeCobro" />
-                <ScalarProperty Name="Vip" ColumnName="Vip" />
-                <ScalarProperty Name="Acumulado" ColumnName="Acumulado" />
-                <ScalarProperty Name="ClienteComisionistaID" ColumnName="ClienteComisionistaID" />
-                <ScalarProperty Name="EsTallerDiesel" ColumnName="EsTallerDiesel" />
-                <ScalarProperty Name="EsTallerMecanico" ColumnName="EsTallerMecanico" />
-                <ScalarProperty Name="EsTallerElectrico" ColumnName="EsTallerElectrico" />
-                <ScalarProperty Name="EsClienteComisionista" ColumnName="EsClienteComisionista" />
-                <ScalarProperty Name="LimiteCredito" ColumnName="LimiteCredito" />
-                <ScalarProperty Name="Tolerancia" ColumnName="Tolerancia" />
-                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
-                <ScalarProperty Name="Nextel" ColumnName="Nextel" />
-                <ScalarProperty Name="Particular" ColumnName="Particular" />
-                <ScalarProperty Name="TipoClienteID" ColumnName="TipoClienteID" />
-                <ScalarProperty Name="BancoID" ColumnName="BancoID" />
-                <ScalarProperty Name="TipoFormaPagoID" ColumnName="TipoFormaPagoID" />
-                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
-                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
-                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="DiasDeCredito" ColumnName="DiasDeCredito" />
-                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="TieneCredito" ColumnName="TieneCredito" />
-                <ScalarProperty Name="ListaDePrecios" ColumnName="ListaDePrecios" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
-                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
-                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -34439,19 +34371,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="ParteEquivalente">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ParteEquivalente">
-              <MappingFragment StoreEntitySet="ParteEquivalente">
-                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
-                <ScalarProperty Name="GrupoID" ColumnName="GrupoID" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="ParteEquivalenteID" ColumnName="ParteEquivalenteID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ParteCodigoAlterno">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ParteCodigoAlterno">
               <MappingFragment StoreEntitySet="ParteCodigoAlterno">
@@ -34955,6 +34874,94 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="SiempreTicket" ColumnName="SiempreTicket" />
+                <ScalarProperty Name="ImporteCobroPorEnvio" ColumnName="ImporteCobroPorEnvio" />
+                <ScalarProperty Name="ImporteParaCobroPorEnvio" ColumnName="ImporteParaCobroPorEnvio" />
+                <ScalarProperty Name="CobroPorEnvio" ColumnName="CobroPorEnvio" />
+                <ScalarProperty Name="LatLong" ColumnName="LatLong" />
+                <ScalarProperty Name="TicketPrecio1" ColumnName="TicketPrecio1" />
+                <ScalarProperty Name="SiempreVale" ColumnName="SiempreVale" />
+                <ScalarProperty Name="SiempreFactura" ColumnName="SiempreFactura" />
+                <ScalarProperty Name="DiaDeCobro" ColumnName="DiaDeCobro" />
+                <ScalarProperty Name="HoraDeCobro" ColumnName="HoraDeCobro" />
+                <ScalarProperty Name="Vip" ColumnName="Vip" />
+                <ScalarProperty Name="Acumulado" ColumnName="Acumulado" />
+                <ScalarProperty Name="ClienteComisionistaID" ColumnName="ClienteComisionistaID" />
+                <ScalarProperty Name="EsTallerDiesel" ColumnName="EsTallerDiesel" />
+                <ScalarProperty Name="EsTallerMecanico" ColumnName="EsTallerMecanico" />
+                <ScalarProperty Name="EsTallerElectrico" ColumnName="EsTallerElectrico" />
+                <ScalarProperty Name="EsClienteComisionista" ColumnName="EsClienteComisionista" />
+                <ScalarProperty Name="LimiteCredito" ColumnName="LimiteCredito" />
+                <ScalarProperty Name="Tolerancia" ColumnName="Tolerancia" />
+                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+                <ScalarProperty Name="Nextel" ColumnName="Nextel" />
+                <ScalarProperty Name="Particular" ColumnName="Particular" />
+                <ScalarProperty Name="TipoClienteID" ColumnName="TipoClienteID" />
+                <ScalarProperty Name="BancoID" ColumnName="BancoID" />
+                <ScalarProperty Name="TipoFormaPagoID" ColumnName="TipoFormaPagoID" />
+                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="DiasDeCredito" ColumnName="DiasDeCredito" />
+                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="TieneCredito" ColumnName="TieneCredito" />
+                <ScalarProperty Name="ListaDePrecios" ColumnName="ListaDePrecios" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
+                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientesCreditoView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ClientesCreditoView">
+              <MappingFragment StoreEntitySet="ClientesCreditoView">
+                <ScalarProperty Name="PromedioDePago3Meses" ColumnName="PromedioDePago3Meses" />
+                <ScalarProperty Name="PromedioDePagoAnual" ColumnName="PromedioDePagoAnual" />
+                <ScalarProperty Name="AdeudoVencido" ColumnName="AdeudoVencido" />
+                <ScalarProperty Name="FechaPrimerAdeudo" ColumnName="FechaPrimerAdeudo" />
+                <ScalarProperty Name="Adeudo" ColumnName="Adeudo" />
+                <ScalarProperty Name="TicketPrecio1" ColumnName="TicketPrecio1" />
+                <ScalarProperty Name="SiempreVale" ColumnName="SiempreVale" />
+                <ScalarProperty Name="SiempreTicket" ColumnName="SiempreTicket" />
+                <ScalarProperty Name="SiempreFactura" ColumnName="SiempreFactura" />
+                <ScalarProperty Name="HoraDeCobro" ColumnName="HoraDeCobro" />
+                <ScalarProperty Name="DiaDeCobro" ColumnName="DiaDeCobro" />
+                <ScalarProperty Name="Tolerancia" ColumnName="Tolerancia" />
+                <ScalarProperty Name="DiasDeCredito" ColumnName="DiasDeCredito" />
+                <ScalarProperty Name="LimiteDeCredito" ColumnName="LimiteDeCredito" />
+                <ScalarProperty Name="TieneCredito" ColumnName="TieneCredito" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParteEquivalente">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ParteEquivalente">
+              <MappingFragment StoreEntitySet="ParteEquivalente">
+                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
+                <ScalarProperty Name="GrupoID" ColumnName="GrupoID" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="ParteEquivalenteID" ColumnName="ParteEquivalenteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -34976,7 +34983,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="DataModel" ZoomLevel="54">
+      <Diagram Name="DataModel" ZoomLevel="40">
         <EntityTypeShape EntityType="RefaccionariaModelo.Configuracion" Width="1.5" PointX="2.75" PointY="0.75" Height="0.4" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Perfil" Width="1.5" PointX="6" PointY="69.75" Height="0.40000000000000568" IsExpanded="false" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Permiso" Width="1.5" PointX="0.75" PointY="2.75" Height="0.39999999999999858" IsExpanded="false" />
@@ -35625,7 +35632,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="21.75" PointY="35.086293945312505" />
         </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesCaracteristicasView" Width="1.5" PointX="25.375" PointY="30.75" Height="2.1725878906249818" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ClientesCreditoView" Width="1.5" PointX="27.375" PointY="20.75" Height="4.0956022135417243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaEgresoDetalle" Width="1.5" PointX="32.625" PointY="52.875" Height="3.3263964843749818" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ContaEgre__Conta__11CA81AE" >
           <ConnectorPoint PointX="9" PointY="30.220683593749982" />
@@ -35739,85 +35745,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesExistenciasMaxMinView" Width="1.5" PointX="0.75" PointY="25.75" Height="2.3648893229167243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.MovimientoInventarioTraspasosView" Width="1.5" PointX="5.375" PointY="32.75" Height="3.5186979166667243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesView" Width="1.5" PointX="31.375" PointY="12.75" Height="3.3263964843749818" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.Cliente" Width="1.5" PointX="3" PointY="102.625" Height="12.749166666666724" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ClienteFa__Clien__609D3A6E" >
-          <ConnectorPoint PointX="4.455" PointY="102.625" />
-          <ConnectorPoint PointX="4.9765625" PointY="102.1034375" />
-          <ConnectorPoint PointX="4.9765625" PointY="62.048744192307666" />
-          <ConnectorPoint PointX="4.9801369349011191" PointY="62.045169757406534" />
-          <ConnectorPoint PointX="5.1396547317655479" PointY="61.885651960542113" />
-          <ConnectorPoint PointX="5.2503066923076922" PointY="61.774999999999977" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__ClienteFl__Clien__15261146" >
-          <ConnectorPoint PointX="4.5" PointY="114.03287064294931" />
-          <ConnectorPoint PointX="12.96875" PointY="114.03287064294931" />
-          <ConnectorPoint PointX="12.96875" PointY="65.239807942708353" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__CobranzaT__Clien__31783731" >
-          <ConnectorPoint PointX="4.5" PointY="112.10091666666671" />
-          <ConnectorPoint PointX="4.9223066923077" PointY="102.25" />
-          <ConnectorPoint PointX="10.128574434901122" PointY="102.25" />
-          <ConnectorPoint PointX="10.128574434901122" PointY="61.896425565098895" />
-          <ConnectorPoint PointX="10.191074434901122" PointY="61.833925565098895" />
-          <ConnectorPoint PointX="10.308925565098877" PointY="61.716074434901131" />
-          <ConnectorPoint PointX="10.316074434901122" PointY="61.708925565098887" />
-          <ConnectorPoint PointX="10.433925565098877" PointY="61.591074434901124" />
-          <ConnectorPoint PointX="10.499999999999996" PointY="61.525" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Clien__53833672" >
-          <ConnectorPoint PointX="4.5" PointY="102.68153746153847" />
-          <ConnectorPoint PointX="4.921875" PointY="102.25966246153847" />
-          <ConnectorPoint PointX="4.921875" PointY="78.17302862024863" />
-          <ConnectorPoint PointX="4.924479166666667" PointY="78.17302862024863" />
-          <ConnectorPoint PointX="5.145833333333333" PointY="78.17302862024863" />
-          <ConnectorPoint PointX="5.25" PointY="78.17302862024863" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaCamb__Comis__172E5549" >
-          <ConnectorPoint PointX="3.7066326153846161" PointY="102.625" />
-          <ConnectorPoint PointX="3.7066326153846161" PointY="101.81679361979172" />
-          <ConnectorPoint PointX="4.799479166666667" PointY="101.81679361979172" />
-          <ConnectorPoint PointX="5.005208333333333" PointY="101.81679361979172" />
-          <ConnectorPoint PointX="5.0078125" PointY="101.81679361979172" />
-          <ConnectorPoint PointX="5.0078125" PointY="60.259095052083353" />
-          <ConnectorPoint PointX="5.010416666666667" PointY="60.259095052083353" />
-          <ConnectorPoint PointX="5.270833333333333" PointY="60.259095052083353" />
-          <ConnectorPoint PointX="6.791666666666667" PointY="60.259095052083353" />
-          <ConnectorPoint PointX="7.083333333333333" PointY="60.259095052083353" />
-          <ConnectorPoint PointX="7.125" PointY="60.259095052083353" />
-          <ConnectorPoint PointX="7.125" PointY="59.596878250000081" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="59.596878250000081" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="59.596878250000081" />
-          <ConnectorPoint PointX="7.5" PointY="59.596878250000081" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaCamb__Comis__18227982" >
-          <ConnectorPoint PointX="4.091200923076924" PointY="102.625" />
-          <ConnectorPoint PointX="4.091200923076924" PointY="101.94179361979172" />
-          <ConnectorPoint PointX="4.799479166666667" PointY="101.94179361979172" />
-          <ConnectorPoint PointX="4.966145833333333" PointY="101.94179361979172" />
-          <ConnectorPoint PointX="4.9921875" PointY="101.94179361979172" />
-          <ConnectorPoint PointX="4.9921875" PointY="60.321595052083353" />
-          <ConnectorPoint PointX="4.9973958333333339" PointY="60.321595052083353" />
-          <ConnectorPoint PointX="5.2708333333333339" PointY="60.321595052083353" />
-          <ConnectorPoint PointX="6.916666666666667" PointY="60.321595052083353" />
-          <ConnectorPoint PointX="7.145833333333333" PointY="60.321595052083353" />
-          <ConnectorPoint PointX="7.1875" PointY="60.321595052083353" />
-          <ConnectorPoint PointX="7.1875" PointY="59.45" />
-          <ConnectorPoint PointX="7.5" PointY="59.45" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK_ClienteCredito_Cliente" >
-          <ConnectorPoint PointX="4.5" PointY="102.66076823076924" />
-          <ConnectorPoint PointX="5.046875" PointY="102.11389323076924" />
-          <ConnectorPoint PointX="5.046875" PointY="66.9784316923077" />
-          <ConnectorPoint PointX="5.2503066923076913" PointY="66.775" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK_ClientePersonal_Cliente" >
-          <ConnectorPoint PointX="4.4907692307692315" PointY="102.625" />
-          <ConnectorPoint PointX="4.8828125" PointY="102.23295673076923" />
-          <ConnectorPoint PointX="4.8828125" PointY="65.1424941923077" />
-          <ConnectorPoint PointX="4.8941994349011226" PointY="65.131107257406555" />
-          <ConnectorPoint PointX="5.1396547317655443" PointY="64.885651960542148" />
-          <ConnectorPoint PointX="5.2503066923076913" PointY="64.775" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.ClientesDatosView" Width="1.5" PointX="32.375" PointY="32.75" Height="5.0571093749999818" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ParteComplementaria" Width="1.5" PointX="27.75" PointY="61" Height="3.3263964843749818" />
         <EntityTypeShape EntityType="RefaccionariaModelo.CascoImporte" Width="1.5" PointX="29" PointY="67" Height="2.3648893229167243" />
@@ -36506,40 +36433,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.CajaCambioDeTurno" Width="1.5" PointX="8.25" PointY="69.125" Height="2.9417936197917243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.MovimientoInventarioDetalleView" Width="1.5" PointX="32.375" PointY="0.75" Height="4.0956022135417243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.Cotizacion9500" Width="1.5" PointX="31.625" PointY="70" Height="6.2109179687499818" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Cotizacio__Clien__7760A435" >
-          <ConnectorPoint PointX="4.5" PointY="108.66784327537218" />
-          <ConnectorPoint PointX="4.5638417892857639" PointY="108.66784327537218" />
-          <ConnectorPoint PointX="4.73050845595243" PointY="108.66784327537218" />
-          <ConnectorPoint PointX="4.854166666666667" PointY="108.66784327537218" />
-          <ConnectorPoint PointX="5.020833333333333" PointY="108.66784327537218" />
-          <ConnectorPoint PointX="5.125" PointY="108.66784327537218" />
-          <ConnectorPoint PointX="5.125" PointY="107.625" />
-          <ConnectorPoint PointX="12.885416666666666" PointY="107.625" />
-          <ConnectorPoint PointX="13.052083333333334" PointY="107.625" />
-          <ConnectorPoint PointX="28.645830790201824" PointY="107.625" />
-          <ConnectorPoint PointX="28.812497456868488" PointY="107.625" />
-          <ConnectorPoint PointX="31.375" PointY="107.625" />
-          <ConnectorPoint PointX="31.375" PointY="79.422587890624982" />
-          <ConnectorPoint PointX="31.968747999999998" PointY="79.422587890624982" />
-          <ConnectorPoint PointX="31.968747999999998" PointY="76.210917968749982" />
-        </AssociationConnector>
-        <AssociationConnector Association="RefaccionariaModelo.FK__Cotizacio__Comis__41248F15" >
-          <ConnectorPoint PointX="4.5" PointY="110.00308501515036" />
-          <ConnectorPoint PointX="4.5066002612496012" PointY="110.00308501515036" />
-          <ConnectorPoint PointX="4.6732669279162673" PointY="110.00308501515036" />
-          <ConnectorPoint PointX="4.9375" PointY="110.00308501515036" />
-          <ConnectorPoint PointX="4.9375" PointY="107.375" />
-          <ConnectorPoint PointX="12.885416666666666" PointY="107.375" />
-          <ConnectorPoint PointX="13.052083333333334" PointY="107.375" />
-          <ConnectorPoint PointX="28.645830790201824" PointY="107.375" />
-          <ConnectorPoint PointX="28.812497456868488" PointY="107.375" />
-          <ConnectorPoint PointX="31.291666666666668" PointY="107.375" />
-          <ConnectorPoint PointX="31.458333333333332" PointY="107.375" />
-          <ConnectorPoint PointX="31.5" PointY="107.375" />
-          <ConnectorPoint PointX="31.5" PointY="79.672587890624982" />
-          <ConnectorPoint PointX="32.7812515" PointY="79.672587890624982" />
-          <ConnectorPoint PointX="32.7812515" PointY="76.210917968749982" />
-        </AssociationConnector>
         <AssociationConnector Association="RefaccionariaModelo.FK__Cotizacio__Cotiz__73901351" >
           <ConnectorPoint PointX="32.562456223144537" PointY="70" />
           <ConnectorPoint PointX="32.562456223144537" PointY="69.547587890624982" />
@@ -36595,14 +36488,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="32.062476111572266" PointY="70" />
         </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.ClienteEventoCalendario" Width="1.5" PointX="5.25" PointY="107.875" Height="2.1725878906249818" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ClienteEv__Clien__7CBA562F" >
-          <ConnectorPoint PointX="4.5" PointY="108.96129394531249" />
-          <ConnectorPoint PointX="4.5512616217773623" PointY="108.96129394531249" />
-          <ConnectorPoint PointX="4.7179282884440283" PointY="108.96129394531249" />
-          <ConnectorPoint PointX="4.854166666666667" PointY="108.96129394531249" />
-          <ConnectorPoint PointX="5.020833333333333" PointY="108.96129394531249" />
-          <ConnectorPoint PointX="5.25" PointY="108.96129394531249" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesEquivalentesMaxMinView" Width="1.5" PointX="34.375" PointY="0.75" Height="2.3648893229167243" />
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesComplementariasView" Width="1.5" PointX="32.375" PointY="29.75" Height="1.980286458333353" />
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesEquivalentesView" Width="1.5" PointX="34.375" PointY="29.75" Height="2.7494921874999818" />
@@ -37094,13 +36979,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <ConnectorPoint PointX="32.625" PointY="60.163157552083362" />
         </AssociationConnector>
         <EntityTypeShape EntityType="RefaccionariaModelo.VentaFactura" Width="1.5" PointX="34.625" PointY="67.125" Height="6.018616536458353" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B" >
-          <ConnectorPoint PointX="4.5" PointY="113.06689365480801" />
-          <ConnectorPoint PointX="12.885416666666666" PointY="113.06689365480801" />
-          <ConnectorPoint PointX="13.052083333333334" PointY="113.06689365480801" />
-          <ConnectorPoint PointX="35.375" PointY="113.06689365480801" />
-          <ConnectorPoint PointX="35.375" PointY="73.143616536458353" />
-        </AssociationConnector>
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Estat__7874C3FF" >
           <ConnectorPoint PointX="22.875" PointY="16.218064957717033" />
           <ConnectorPoint PointX="24.916666666666668" PointY="16.218064957717033" />
@@ -38010,8 +37888,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.Venta" Width="1.5" PointX="15.375" PointY="88.5" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CascoRegi__Cobro__04266DCD" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CascoRegi__Venta__014A0122" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Venta__ClienteID__30CE2BBB" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Venta__Comisioni__5DF5D7ED" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Venta__ClienteVe__00F4FB67" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CobranzaT__Venta__308412F8" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Cotizacio__Antic__674A37FD" />
@@ -38091,7 +37967,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__CascoRegi__Reali__051A9206" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CascoRegi__Usuar__060EB63F" />
         <AssociationConnector Association="RefaccionariaModelo.FK_Ciudad_Usuario" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Cliente__Usuario__70E8B0D0" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ClienteCredito_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ClienteFa__Usuar__61915EA7" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ClienteFl__Usuar__170E59B8" />
@@ -38248,10 +38123,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK_Sucursal_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_SucursalCriterioABC_Sucursal" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ContaPolizasDetalleAvanzadoView" Width="1.5" PointX="41.375" PointY="40.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ParteEquivalente" Width="1.5" PointX="26.75" PointY="110.625" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_ParteEquivalente_Parte" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_ParteEquivalente_Usuario" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ParteCodigoAlterno" Width="1.5" PointX="29.75" PointY="108.625" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ParteCodigoAlterno_Parte" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteCodi__Reali__63B99E3B" />
@@ -38265,7 +38136,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK_ParteVehiculo_TipoFuente" />
         <EntityTypeShape EntityType="RefaccionariaModelo.NotaDeCredito" Width="1.5" PointX="27.25" PointY="121.625" />
         <EntityTypeShape EntityType="RefaccionariaModelo.NotasDeCreditoView" Width="1.5" PointX="27.375" PointY="4.75" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Orige__0B879873" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Orige__1333A733" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" />
@@ -38334,6 +38204,28 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7721786A" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NominaUsu__Nomin__7DCE75F9" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.Cliente" Width="1.5" PointX="5.25" PointY="151.375" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Cliente__Usuario__70E8B0D0" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ClienteEv__Clien__7CBA562F" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ClienteFa__Clien__609D3A6E" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ClienteFl__Clien__15261146" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__CobranzaT__Clien__31783731" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Cotizacio__Clien__7760A435" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Cotizacio__Comis__41248F15" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Clien__53833672" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Clien__59D0414E" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Venta__ClienteID__30CE2BBB" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Venta__Comisioni__5DF5D7ED" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaCamb__Comis__172E5549" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaCamb__Comis__18227982" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__VentaFact__Clien__6561EF8B" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ClienteCredito_Cliente" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ClientePersonal_Cliente" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ClientesCreditoView" Width="1.5" PointX="27.375" PointY="20.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ParteEquivalente" Width="1.5" PointX="26.75" PointY="110.625" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ParteEquivalente_Parte" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ParteEqui__Reali__61D155C9" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ParteEquivalente_Usuario" />
         </Diagram>
     </Diagrams>
   </Designer>

@@ -481,10 +481,9 @@ namespace Refaccionaria.App
             if (this.HabilitarTipoDePago)
                 this.gpbTipoDePago.Enabled = oCliente.TieneCredito;
             // Si el cliente va a requerir siempre factura se checkea facturar y se deshabilita
-            this.chkFacturar.Checked = Helper.ConvertirBool(oCliente.SiempreFactura);
-            this.chkFacturar.Enabled = !this.chkFacturar.Checked;
+            this.chkFacturar.Checked = oCliente.SiempreFactura.Valor();
+            this.chkFacturar.Enabled = (!oCliente.SiempreFactura.Valor() && !oCliente.SiempreTicket.Valor());
             
-
             this.NotasDeCredito.Clear();
             this.txtNotaDeCredito.Clear();
 

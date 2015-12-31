@@ -166,6 +166,7 @@ namespace Refaccionaria.App
                        
                        //Factura
                        SiempreFactura = this.chkSiempreFactura.Checked,
+                       SiempreTicket = this.chkSiempreTicket.Checked,
                        //Vale
                        SiempreVale = this.chkSiempreVale.Checked,
                        //Ticket precio 1
@@ -268,6 +269,7 @@ namespace Refaccionaria.App
                     Cliente.DiaDeCobro = this.cbDiaCobro.SelectedIndex+1;
                     Cliente.HoraDeCobro = TimeSpan.Parse(this.dtpHoraCobro.Value.TimeOfDay.ToString());
                     Cliente.SiempreFactura = this.chkSiempreFactura.Checked;
+                    Cliente.SiempreTicket = this.chkSiempreTicket.Checked;
                     Cliente.SiempreVale = this.chkSiempreVale.Checked;
                     Cliente.TicketPrecio1 = this.chkTicket1.Checked;
                     Guardar.Generico<Cliente>(Cliente);
@@ -431,6 +433,18 @@ namespace Refaccionaria.App
             }
         }
 
+        private void chkSiempreFactura_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkSiempreFactura.Focused && this.chkSiempreTicket.Checked)
+                this.chkSiempreTicket.Checked = false;
+        }
+
+        private void chkSiempreTicket_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkSiempreTicket.Focused && this.chkSiempreFactura.Checked)
+                this.chkSiempreFactura.Checked = false;
+        }
+
         private void chkCobroPorEnvio_CheckedChanged(object sender, EventArgs e)
         {
             this.txtImporteCobroPorEnvio.Enabled = this.chkCobroPorEnvio.Checked;
@@ -565,6 +579,7 @@ namespace Refaccionaria.App
             this.chkTieneCredito.Checked = false;
             this.chkTolerancia.Checked = false;
             this.chkSiempreFactura.Checked = false;
+            this.chkSiempreTicket.Checked = false;
             this.chkSiempreVale.Checked = false;
             this.chkTicket1.Checked = false;
             this.txtComentario.Clear();
@@ -903,18 +918,12 @@ namespace Refaccionaria.App
            
             //Desea facturar?
             this.chkSiempreFactura.Checked = Helper.ConvertirBool(oClienteAd.SiempreFactura);
+            this.chkSiempreTicket.Checked = oClienteAd.SiempreTicket.Valor();
             //Desea Vale
             this.chkSiempreVale.Checked = Helper.ConvertirBool(oClienteAd.SiempreVale);
             //Ticket precio 1
             this.chkTicket1.Checked = Helper.ConvertirBool(oClienteAd.TicketPrecio1);
-
-            //Desea facturar?
-            this.chkSiempreFactura.Checked = Helper.ConvertirBool(oClienteAd.SiempreFactura);
-            //Desea Vale
-            this.chkSiempreVale.Checked = Helper.ConvertirBool(oClienteAd.SiempreVale);
-            //Ticket precio 1
-            this.chkTicket1.Checked = Helper.ConvertirBool(oClienteAd.TicketPrecio1);
-
+            
             //
             this.dgvCredito.DataSource = null;
             this.dgvCredito.DataSource = General.GetListOf<ClienteCreditoView>(c => c.ClienteID == clienteId)
@@ -1480,6 +1489,6 @@ namespace Refaccionaria.App
                 ClearFolder(diSubFolder); // Call recursively for all subfolders
             }
         }
-                
+        
     }
 }

@@ -266,8 +266,8 @@ namespace Refaccionaria.App
                 VentasProc.GenerarTicketDevolucion(iDevID);
 
                 // Se agrega al Kardex
-                var oDevV = General.GetEntity<VentasDevolucionesView>(c => c.VentaID == iVentaID);
-                var oDet = General.GetListOf<VentaDevolucionDetalle>(c => c.VentaDevolucionID == oDevV.VentaDevolucionID && c.Estatus);
+                var oDevV = General.GetEntity<VentasDevolucionesView>(c => c.VentaDevolucionID == iDevID);
+                var oDet = General.GetListOf<VentaDevolucionDetalle>(c => c.VentaDevolucionID == iDevID && c.Estatus);
                 foreach (var oReg in oDet)
                 {
                     AdmonProc.RegistrarKardex(new ParteKardex()

@@ -443,7 +443,8 @@ namespace Refaccionaria.App
             Guardar.Eliminar<ContaPoliza>(oPoliza);
         }
 
-        public static ContaPoliza CrearPoliza(ContaPoliza oPoliza, int iCuentaCargo, int iCuentaAbono, decimal mImporte, string sReferencia)
+        public static ContaPoliza CrearPoliza(ContaPoliza oPoliza, int iCuentaCargo, int iCuentaAbono, decimal mImporte, string sReferencia
+            , int iSucursalCargo, int iSucursalAbono)
         {
             if (oPoliza.Fecha == DateTime.MinValue)
                 oPoliza.Fecha = DateTime.Now;
@@ -458,7 +459,7 @@ namespace Refaccionaria.App
             {
                 ContaPolizaID = oPoliza.ContaPolizaID,
                 ContaCuentaAuxiliarID = iCuentaCargo,
-                SucursalID = oPoliza.SucursalID,
+                SucursalID = iSucursalCargo,
                 Cargo = mImporte,
                 Abono = 0,
                 Referencia = sReferencia
@@ -467,7 +468,7 @@ namespace Refaccionaria.App
             {
                 ContaPolizaID = oPoliza.ContaPolizaID,
                 ContaCuentaAuxiliarID = iCuentaAbono,
-                SucursalID = oPoliza.SucursalID,
+                SucursalID = iSucursalAbono,
                 Cargo = 0,
                 Abono = mImporte,
                 Referencia = sReferencia
@@ -478,6 +479,11 @@ namespace Refaccionaria.App
                 Guardar.Generico<ContaPolizaDetalle>(oDetAbono);
 
             return oPoliza;
+        }
+
+        public static ContaPoliza CrearPoliza(ContaPoliza oPoliza, int iCuentaCargo, int iCuentaAbono, decimal mImporte, string sReferencia)
+        {
+            return ContaProc.CrearPoliza(oPoliza, iCuentaCargo, iCuentaAbono, mImporte, sReferencia, oPoliza.SucursalID, oPoliza.SucursalID);
         }
 
         public static ContaPoliza CrearPoliza(int iTipoPolizaID, string sConcepto, int iCuentaCargo, int iCuentaAbono, decimal mImporte, string sReferencia
