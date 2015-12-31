@@ -103,7 +103,7 @@ namespace Refaccionaria.App
             var oVentaV = General.GetEntity<VentasView>(q => q.VentaID == iVentaID);
             int iValeClienteID = oVentaV.ClienteID;
             if ((oGarantia.AccionID == Cat.VentasGarantiasAcciones.ArticuloNuevo || oGarantia.AccionID == Cat.VentasGarantiasAcciones.NotaDeCredito)
-                && oVentaV.ClienteID == Cat.Clientes.Mostrador)
+                && iValeClienteID == Cat.Clientes.Mostrador)
             {
                 iValeClienteID = VentasProc.ObtenerClienteID("Selecciona el cliente para crear el Vale:", false);
                 if (iValeClienteID == 0)
@@ -167,9 +167,9 @@ namespace Refaccionaria.App
             var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oGarantia.VentaID);
 
             // Se verifica si se creará vale, para pedir el cliente en caso de que no haya
-            int iValeClienteID = 0;
+            int iValeClienteID = oVentaV.ClienteID;
             if ((this.ctlBusqueda.IdAccionPosterior == Cat.VentasGarantiasAcciones.ArticuloNuevo 
-                || this.ctlBusqueda.IdAccionPosterior == Cat.VentasGarantiasAcciones.NotaDeCredito) && oVentaV.ClienteID == Cat.Clientes.Mostrador)
+                || this.ctlBusqueda.IdAccionPosterior == Cat.VentasGarantiasAcciones.NotaDeCredito) && iValeClienteID == Cat.Clientes.Mostrador)
             {
                 iValeClienteID = VentasProc.ObtenerClienteID("Selecciona el cliente para crear el Vale:", false);
                 if (iValeClienteID == 0)

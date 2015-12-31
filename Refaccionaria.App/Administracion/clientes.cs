@@ -462,6 +462,8 @@ namespace Refaccionaria.App
 
         private void dgvDatosPersonal_KeyDown(object sender, KeyEventArgs e)
         {
+            if (this.dgvDatosPersonal.CurrentRow == null) return;
+
             if (e.KeyCode == Keys.Delete)
             {
                 if (UtilLocal.MensajePregunta("¿Estás seguro que deseas eliminar el registro de persona seleccionado?") == DialogResult.Yes)
