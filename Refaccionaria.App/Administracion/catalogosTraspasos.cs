@@ -38,6 +38,15 @@ namespace Refaccionaria.App
             InitializeComponent();
         }
 
+        #region [ Eventos ]
+
+        private void catalogosTraspasos_Load(object sender, EventArgs e)
+        {
+            this.cmbExd_Sucursal.CargarDatos("SucursalID", "NombreSucursal", General.GetListOf<Sucursal>(c => c.Estatus));
+        }
+
+        #endregion
+
         #region [ Metodos g ]
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -255,11 +264,6 @@ namespace Refaccionaria.App
         #region [ Registrar Traspaso ]
 
         #region [ Eventos ]
-
-        private void catalogosTraspasos_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void cboUbicacionDestino_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -2116,6 +2120,30 @@ namespace Refaccionaria.App
             {
                 Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
             }
+        }
+
+        #endregion
+
+        #region [ Excedente ]
+
+        private void cmbExd_Sucursal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbExd_Sucursal.Focused)
+                this.CargarExcedentes();
+        }
+
+        private void CargarExcedentes()
+        {
+            Cargando.Mostrar();
+            int iSucuralID = Helper.ConvertirEntero(this.cmbExd_Sucursal.SelectedValue);
+            var oDatos = General.GetListOf<PartesExistenciasMaxMinView>(c => c.SucursalID == iSucuralID && c.Maximo == 0 && c.Existencia > 0);
+            this.dgvExd_Excedentes.Rows.Clear();
+            foreach (var oReg in oDatos)
+            {
+                var oParteV = General.GetEntity<PartesView>(c => c.ParteID == oReg.ParteID);
+                this.dgvExd_Excedentes.Rows.Add(oParteV.NumeroDeParte, oParteV.Descripcion, oParteV.Marca, oParteV.Linea, oReg.Existencia, oParteV.Es9500);
+            }
+            Cargando.Cerrar();
         }
 
         #endregion

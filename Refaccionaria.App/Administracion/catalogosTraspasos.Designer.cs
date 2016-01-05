@@ -55,6 +55,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabTraspasos = new System.Windows.Forms.TabControl();
             this.tabTraspasoNuevo = new System.Windows.Forms.TabPage();
             this.txtNumeroDeCompra = new Refaccionaria.Negocio.TextoMod();
@@ -125,6 +129,16 @@
             this.dtpDesdeRpt = new System.Windows.Forms.DateTimePicker();
             this.lblrptSucursal = new System.Windows.Forms.Label();
             this.cboSucursalRpt = new System.Windows.Forms.ComboBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvExd_Excedentes = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbExd_Sucursal = new System.Windows.Forms.ComboBox();
+            this.exd_NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exd_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exd_Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exd_Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exd_Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exd_Es9500 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabTraspasos.SuspendLayout();
             this.tabTraspasoNuevo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTraspasos)).BeginInit();
@@ -152,6 +166,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvConflictos)).BeginInit();
             this.tabReporteVentas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReporteVentas)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvExd_Excedentes)).BeginInit();
             this.SuspendLayout();
             // 
             // tabTraspasos
@@ -162,6 +178,7 @@
             this.tabTraspasos.Controls.Add(this.tabHistorico);
             this.tabTraspasos.Controls.Add(this.tabConflictos);
             this.tabTraspasos.Controls.Add(this.tabReporteVentas);
+            this.tabTraspasos.Controls.Add(this.tabPage1);
             this.tabTraspasos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabTraspasos.Location = new System.Drawing.Point(0, 0);
             this.tabTraspasos.Name = "tabTraspasos";
@@ -1362,6 +1379,137 @@
             this.cboSucursalRpt.Size = new System.Drawing.Size(150, 21);
             this.cboSucursalRpt.TabIndex = 11;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.tabPage1.Controls.Add(this.dgvExd_Excedentes);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.cmbExd_Sucursal);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(992, 641);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "Excedente";
+            // 
+            // dgvExd_Excedentes
+            // 
+            this.dgvExd_Excedentes.AllowUserToAddRows = false;
+            this.dgvExd_Excedentes.AllowUserToDeleteRows = false;
+            this.dgvExd_Excedentes.AllowUserToOrderColumns = true;
+            this.dgvExd_Excedentes.AllowUserToResizeRows = false;
+            this.dgvExd_Excedentes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvExd_Excedentes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.dgvExd_Excedentes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvExd_Excedentes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvExd_Excedentes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            this.dgvExd_Excedentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvExd_Excedentes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.exd_NumeroDeParte,
+            this.exd_Descripcion,
+            this.exd_Marca,
+            this.exd_Linea,
+            this.exd_Existencia,
+            this.exd_Es9500});
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvExd_Excedentes.DefaultCellStyle = dataGridViewCellStyle30;
+            this.dgvExd_Excedentes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.dgvExd_Excedentes.Location = new System.Drawing.Point(3, 33);
+            this.dgvExd_Excedentes.Name = "dgvExd_Excedentes";
+            this.dgvExd_Excedentes.ReadOnly = true;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvExd_Excedentes.RowHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            this.dgvExd_Excedentes.RowHeadersVisible = false;
+            this.dgvExd_Excedentes.RowHeadersWidth = 25;
+            this.dgvExd_Excedentes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvExd_Excedentes.Size = new System.Drawing.Size(986, 605);
+            this.dgvExd_Excedentes.TabIndex = 182;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Sucursal";
+            // 
+            // cmbExd_Sucursal
+            // 
+            this.cmbExd_Sucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbExd_Sucursal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbExd_Sucursal.FormattingEnabled = true;
+            this.cmbExd_Sucursal.Location = new System.Drawing.Point(57, 6);
+            this.cmbExd_Sucursal.Name = "cmbExd_Sucursal";
+            this.cmbExd_Sucursal.Size = new System.Drawing.Size(150, 21);
+            this.cmbExd_Sucursal.TabIndex = 13;
+            this.cmbExd_Sucursal.SelectedIndexChanged += new System.EventHandler(this.cmbExd_Sucursal_SelectedIndexChanged);
+            // 
+            // exd_NumeroDeParte
+            // 
+            this.exd_NumeroDeParte.HeaderText = "No. Parte";
+            this.exd_NumeroDeParte.Name = "exd_NumeroDeParte";
+            this.exd_NumeroDeParte.ReadOnly = true;
+            // 
+            // exd_Descripcion
+            // 
+            this.exd_Descripcion.HeaderText = "Descripción";
+            this.exd_Descripcion.Name = "exd_Descripcion";
+            this.exd_Descripcion.ReadOnly = true;
+            this.exd_Descripcion.Width = 320;
+            // 
+            // exd_Marca
+            // 
+            this.exd_Marca.HeaderText = "Marca";
+            this.exd_Marca.Name = "exd_Marca";
+            this.exd_Marca.ReadOnly = true;
+            // 
+            // exd_Linea
+            // 
+            this.exd_Linea.HeaderText = "Línea";
+            this.exd_Linea.Name = "exd_Linea";
+            this.exd_Linea.ReadOnly = true;
+            // 
+            // exd_Existencia
+            // 
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle29.Format = "N2";
+            this.exd_Existencia.DefaultCellStyle = dataGridViewCellStyle29;
+            this.exd_Existencia.HeaderText = "Existencia";
+            this.exd_Existencia.Name = "exd_Existencia";
+            this.exd_Existencia.ReadOnly = true;
+            this.exd_Existencia.Width = 80;
+            // 
+            // exd_Es9500
+            // 
+            this.exd_Es9500.HeaderText = "9500";
+            this.exd_Es9500.Name = "exd_Es9500";
+            this.exd_Es9500.ReadOnly = true;
+            this.exd_Es9500.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.exd_Es9500.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.exd_Es9500.Width = 60;
+            // 
             // catalogosTraspasos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1403,6 +1551,9 @@
             this.tabReporteVentas.ResumeLayout(false);
             this.tabReporteVentas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReporteVentas)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvExd_Excedentes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1479,5 +1630,15 @@
         private Negocio.TextoMod txtNumeroDeCompra;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnMarcarEntrega;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbExd_Sucursal;
+        private System.Windows.Forms.DataGridView dgvExd_Excedentes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exd_NumeroDeParte;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exd_Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exd_Marca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exd_Linea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exd_Existencia;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn exd_Es9500;
     }
 }

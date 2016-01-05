@@ -1219,6 +1219,42 @@ namespace Refaccionaria.App
             System.Diagnostics.Process.Start(Program.NombreActualizador, string.Format(" -t img -r {0}", sRutaActImagenes));
         }
 
+        private void chkValCaracteristicas_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkValCaracteristicas.Focused && this.oParte != null)
+                this.GuardarValidacionParte(this.oParte.ParteID, "Caracteristicas", this.chkValCaracteristicas.Checked);
+        }
+
+        private void chkValEquivalentes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkValEquivalentes.Focused && this.oParte != null)
+                this.GuardarValidacionParte(this.oParte.ParteID, "Equivalentes", this.chkValEquivalentes.Checked);
+        }
+
+        private void chkValAplicaciones_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkValAplicaciones.Focused && this.oParte != null)
+                this.GuardarValidacionParte(this.oParte.ParteID, "Aplicaciones", this.chkValAplicaciones.Checked);
+        }
+
+        private void chkValAlternos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkValAlternos.Focused && this.oParte != null)
+                this.GuardarValidacionParte(this.oParte.ParteID, "Alternos", this.chkValAlternos.Checked);
+        }
+
+        private void chkValComplementarios_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkValComplementarios.Focused && this.oParte != null)
+                this.GuardarValidacionParte(this.oParte.ParteID, "Complementarios", this.chkValComplementarios.Checked);
+        }
+
+        private void chkValFotos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkValFotos.Focused && this.oParte != null)
+                this.GuardarValidacionParte(this.oParte.ParteID, "Fotos", this.chkValFotos.Checked);
+        }
+
         #endregion      
         
         #region [metodos]
@@ -1238,6 +1274,13 @@ namespace Refaccionaria.App
             this.chkComplementariosGrupo.Visible = UtilDatos.ValidarPermiso("Administracion.CatalogosPartes.Complementarias.Agregar"); ;
             this.btnAgregarComplementarios.Visible = true;// this.chkComplementariosGrupo.Visible;
             this.btnComplementariosCopiarEquiv.Visible = this.chkComplementariosGrupo.Visible;
+
+            this.chkValFotos.Visible = UtilDatos.ValidarPermiso("Administracion.CatalogosPartes.Validar"); ;
+            this.chkValEquivalentes.Visible = this.chkValFotos.Visible;
+            this.chkValAplicaciones.Visible = this.chkValFotos.Visible;
+            this.chkValAlternos.Visible = this.chkValFotos.Visible;
+            this.chkValComplementarios.Visible = this.chkValFotos.Visible;
+            this.chkValCaracteristicas.Visible = this.chkValFotos.Visible;
 
             try
             {
@@ -1404,6 +1447,7 @@ namespace Refaccionaria.App
             this.CargarAplicaciones(oParte.ParteID);
             this.CargarCodigosAlternos(oParte.ParteID);
             this.CargarComplementarios(oParte.ParteID);
+            this.CargarValidaciones(oParte.ParteID);
 
             /* this.txtAlto.Text = Parte.Alto.ToString().Equals("0") ? string.Empty : Parte.Alto.ToString();
             this.txtLargo.Text = Parte.Largo.ToString().Equals("0") ? string.Empty : Parte.Largo.ToString();
@@ -1529,6 +1573,13 @@ namespace Refaccionaria.App
             if (this.lstImagenes.Items.Count > 0)
                 this.lstImagenes.Items.Clear();
             // this.txtNumeroParte.Focus();
+
+            this.chkValCaracteristicas.Checked = false;
+            this.chkValEquivalentes.Checked = false;
+            this.chkValAplicaciones.Checked = false;
+            this.chkValAlternos.Checked = false;
+            this.chkValComplementarios.Checked = false;
+            this.chkValFotos.Checked = false;
 
             this.txtUnidadEmpaque.Text = "1";
             this.chkAGranel.Checked = false;
@@ -1786,6 +1837,18 @@ namespace Refaccionaria.App
         {
             this.dgvComplementarios.DataSource = General.GetListOf<PartesComplementariasView>(c => c.ParteID == iParteID);
             this.dgvComplementarios.OcultarColumnas("ParteComplementariaID", "ParteID", "ParteIDComplementaria", "NombreImagen");
+        }
+
+        private void CargarValidaciones(int iParteID)
+        {
+            var oParteVal = General.GetEntity<ParteCompletado>(c => c.ParteID == iParteID);
+            bool bVal = (oParteVal != null);
+            this.chkValCaracteristicas.Checked = (bVal && oParteVal.Caracteristicas);
+            this.chkValEquivalentes.Checked = (bVal && oParteVal.Equivalentes);
+            this.chkValAplicaciones.Checked = (bVal && oParteVal.Aplicaciones);
+            this.chkValAlternos.Checked = (bVal && oParteVal.Alternos);
+            this.chkValComplementarios.Checked = (bVal && oParteVal.Complementarios);
+            this.chkValFotos.Checked = (bVal && oParteVal.Fotos);
         }
 
         public void CalcularPrecios(PreciosCalculadora valores)
@@ -2321,57 +2384,65 @@ namespace Refaccionaria.App
                 / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
             this.lblAvCaracteristicas.Text = (oDatos.Count(c => c.Caracteristicas.HasValue && c.Caracteristicas.Value > 0) 
                 / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+            this.lblAvValidados.Text = (oDatos.Count(c => c.Validado == true) / oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+            this.lblAvValidadosNum.Text = oDatos.Count(c => c.Validado == true).ToString(GlobalClass.FormatoEntero);
 
             // Por Proveedor
             var oPorProv = oDatos.GroupBy(c => new { c.ProveedorID, c.Proveedor }).Select(c => new
             {
                 c.Key.ProveedorID,
                 c.Key.Proveedor,
-                Fotos = (c.Sum(s => s.Fotos) / (decimal)c.Count()),
-                Equivalentes = (c.Sum(s => s.Equivalentes) / (decimal)c.Count()),
-                Aplicaciones = (c.Sum(s => s.Aplicaciones) / (decimal)c.Count()),
-                Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()),
-                Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()),
-                Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count())
+                Fotos = (c.Sum(s => s.Fotos) / (decimal)c.Count()) * 100,
+                Equivalentes = (c.Sum(s => s.Equivalentes) / (decimal)c.Count()) * 100,
+                Aplicaciones = (c.Sum(s => s.Aplicaciones) / (decimal)c.Count()) * 100,
+                Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()) * 100,
+                Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()) * 100,
+                Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count()) * 100,
+                Validados = (c.Count(s => s.Validado == true) / c.Count()) * 100,
+                ValidadosNum = c.Count(s => s.Validado == true)
             });
             this.dgvAvProveedores.Rows.Clear();
             foreach (var oReg in oPorProv)
                 this.dgvAvProveedores.Rows.Add(oReg.ProveedorID, oReg.Proveedor, oReg.Fotos, oReg.Equivalentes, oReg.Aplicaciones
-                    , oReg.Alternos, oReg.Complementarios, oReg.Caracteristicas);
+                    , oReg.Alternos, oReg.Complementarios, oReg.Caracteristicas, oReg.Validados, oReg.ValidadosNum);
 
             // Por Marca
             var oPorMarca = oDatos.GroupBy(c => new { c.MarcaParteID, c.Marca }).Select(c => new
             {
                 c.Key.MarcaParteID,
                 c.Key.Marca,
-                Fotos = (c.Sum(s => s.Fotos) / (decimal)c.Count()),
-                Equivalentes = (c.Sum(s => s.Equivalentes) / (decimal)c.Count()),
-                Aplicaciones = (c.Sum(s => s.Aplicaciones) / (decimal)c.Count()),
-                Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()),
-                Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()),
-                Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count())
+                Fotos = (c.Sum(s => s.Fotos) / (decimal)c.Count()) * 100,
+                Equivalentes = (c.Sum(s => s.Equivalentes) / (decimal)c.Count()) * 100,
+                Aplicaciones = (c.Sum(s => s.Aplicaciones) / (decimal)c.Count()) * 100,
+                Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()) * 100,
+                Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()) * 100,
+                Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count()) * 100,
+                Validados = (c.Count(s => s.Validado == true) / c.Count()) * 100,
+                ValidadosNum = c.Count(s => s.Validado == true)
             });
             this.dgvAvMarcas.Rows.Clear();
             foreach (var oReg in oPorMarca)
                 this.dgvAvMarcas.Rows.Add(oReg.MarcaParteID, oReg.Marca, oReg.Fotos, oReg.Equivalentes, oReg.Aplicaciones, oReg.Alternos
-                    , oReg.Complementarios, oReg.Caracteristicas);
+                    , oReg.Complementarios, oReg.Caracteristicas, oReg.Validados, oReg.ValidadosNum);
 
             // Por Línea
             var oPorLinea = oDatos.GroupBy(c => new { c.LineaID, c.Linea }).Select(c => new
             {
                 c.Key.LineaID,
                 c.Key.Linea,
-                Fotos = (c.Sum(s => s.Fotos) / (decimal)c.Count()),
-                Equivalentes = (c.Sum(s => s.Equivalentes) / (decimal)c.Count()),
-                Aplicaciones = (c.Sum(s => s.Aplicaciones) / (decimal)c.Count()),
-                Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()),
-                Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()),
-                Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count())
+                Fotos = (c.Sum(s => s.Fotos) / (decimal)c.Count()) * 100,
+                Equivalentes = (c.Sum(s => s.Equivalentes) / (decimal)c.Count()) * 100,
+                Aplicaciones = (c.Sum(s => s.Aplicaciones) / (decimal)c.Count()) * 100,
+                Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()) * 100,
+                Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()) * 100,
+                Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count()) * 100,
+                Validados = (c.Count(s => s.Validado == true) / c.Count()) * 100,
+                ValidadosNum = c.Count(s => s.Validado == true)
             });
             this.dgvAvLineas.Rows.Clear();
             foreach (var oReg in oPorLinea)
                 this.dgvAvLineas.Rows.Add(oReg.LineaID, oReg.Linea, oReg.Fotos, oReg.Equivalentes, oReg.Aplicaciones, oReg.Alternos
-                    , oReg.Complementarios, oReg.Caracteristicas);
+                    , oReg.Complementarios, oReg.Caracteristicas, oReg.Validados, oReg.ValidadosNum);
 
             Cargando.Cerrar();
         }
@@ -2403,7 +2474,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             int iProveedorID = Helper.ConvertirEntero(oCelda.OwningRow.Cells["proProveedorID"].Value);
-            List<PartesAvancesView> oDatos = null;
+            List<PartesAvancesView> oDatos = new List<PartesAvancesView>();
             switch (sCol)
             {
                 case "proFotos":
@@ -2428,6 +2499,9 @@ namespace Refaccionaria.App
                 case "proCaracteristicas":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Caracteristicas.HasValue || c.Caracteristicas.Value < 1));
                     break;
+                case "proValidados":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Validado.HasValue || !c.Validado.Value));
+                    break;
             }
             
             // Se llena el grid de partes
@@ -2450,7 +2524,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             int iMarcaID = Helper.ConvertirEntero(oCelda.OwningRow.Cells["marMarcaID"].Value);
-            List<PartesAvancesView> oDatos = null;
+            List<PartesAvancesView> oDatos = new List<PartesAvancesView>();
             switch (sCol)
             {
                 case "marFotos":
@@ -2475,6 +2549,9 @@ namespace Refaccionaria.App
                 case "marCaracteristicas":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.Caracteristicas.HasValue || c.Caracteristicas.Value < 1));
                     break;
+                case "proValidados":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iMarcaID && (!c.Validado.HasValue || !c.Validado.Value));
+                    break;
             }
 
             // Se llena el grid de partes
@@ -2497,7 +2574,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             int iLineaID = Helper.ConvertirEntero(oCelda.OwningRow.Cells["linLineaID"].Value);
-            List<PartesAvancesView> oDatos = null;
+            List<PartesAvancesView> oDatos = new List<PartesAvancesView>();
             switch (sCol)
             {
                 case "linFotos":
@@ -2522,6 +2599,9 @@ namespace Refaccionaria.App
                 case "linCaracteristicas":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.Caracteristicas.HasValue || c.Caracteristicas.Value < 1));
                     break;
+                case "proValidados":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iLineaID && (!c.Validado.HasValue || !c.Validado.Value));
+                    break;
             }
 
             // Se llena el grid de partes
@@ -2533,12 +2613,25 @@ namespace Refaccionaria.App
             Cargando.Cerrar();
         }
 
-        #endregion
-
-        private void dgvKardex_RowHeadersBorderStyleChanged(object sender, EventArgs e)
+        private void GuardarValidacionParte(int iParteID, string sValidacion, bool bValidado)
         {
-
+            var oVal = General.GetEntity<ParteCompletado>(c => c.ParteID == iParteID);
+            if (oVal == null)
+                oVal = new ParteCompletado() { ParteID = iParteID, Fotos = false, Equivalentes = false, Aplicaciones = false, Alternos = false
+                    , Complementarios = false, Caracteristicas = false };
+            switch (sValidacion)
+            {
+                case "Fotos": oVal.Fotos = bValidado; break;
+                case "Equivalentes": oVal.Equivalentes = bValidado; break;
+                case "Aplicaciones": oVal.Aplicaciones = bValidado; break;
+                case "Alternos": oVal.Alternos = bValidado; break;
+                case "Complementarios": oVal.Complementarios = bValidado; break;
+                case "Caracteristicas": oVal.Caracteristicas = bValidado; break;
+            }
+            Guardar.Generico<ParteCompletado>(oVal);
         }
+
+        #endregion
                                 
         #endregion
 
