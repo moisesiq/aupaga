@@ -2374,17 +2374,24 @@ namespace Refaccionaria.App
             this.LlenarDatosDeFotos(oDatos);
 
             // Se empiezan a llenar los datos
-            this.lblAvFotos.Text = (oDatos.Count(c => c.Fotos.HasValue && c.Fotos.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
-            this.lblAvEquivalentes.Text = (oDatos.Count(c => c.Equivalentes.HasValue && c.Equivalentes.Value > 0) 
-                / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
-            this.lblAvAplicaciones.Text = (oDatos.Count(c => c.Aplicaciones.HasValue && c.Aplicaciones.Value > 0) 
-                / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
-            this.lblAvAlternos.Text = (oDatos.Count(c => c.Alternos.HasValue && c.Alternos.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
-            this.lblAvComplementarios.Text = (oDatos.Count(c => c.Complementarios.HasValue && c.Complementarios.Value > 0) 
-                / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
-            this.lblAvCaracteristicas.Text = (oDatos.Count(c => c.Caracteristicas.HasValue && c.Caracteristicas.Value > 0) 
-                / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
-            this.lblAvValidados.Text = (oDatos.Count(c => c.Validado == true) / oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+            this.lblAvFotos.Text =
+                (oDatos.Count(c => c.Fotos.HasValue && c.Fotos.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                + " / " + (oDatos.Count(c => c.FotosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+            this.lblAvEquivalentes.Text =
+                (oDatos.Count(c => c.Equivalentes.HasValue && c.Equivalentes.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                + " / " + (oDatos.Count(c => c.EquivalentesVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+            this.lblAvAplicaciones.Text =
+                (oDatos.Count(c => c.Aplicaciones.HasValue && c.Aplicaciones.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                + " / " + (oDatos.Count(c => c.AplicacionesVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje); ;
+            this.lblAvAlternos.Text =
+                (oDatos.Count(c => c.Alternos.HasValue && c.Alternos.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                + " / " + (oDatos.Count(c => c.AlternosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+            this.lblAvComplementarios.Text =
+                (oDatos.Count(c => c.Complementarios.HasValue && c.Complementarios.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                + " / " + (oDatos.Count(c => c.ComplementariosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+            this.lblAvCaracteristicas.Text =
+                (oDatos.Count(c => c.Caracteristicas.HasValue && c.Caracteristicas.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                + " / " + (oDatos.Count(c => c.CaracteristicasVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
             this.lblAvValidadosNum.Text = oDatos.Count(c => c.Validado == true).ToString(GlobalClass.FormatoEntero);
 
             // Por Proveedor
@@ -2398,13 +2405,19 @@ namespace Refaccionaria.App
                 Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()) * 100,
                 Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()) * 100,
                 Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count()) * 100,
-                Validados = (c.Count(s => s.Validado == true) / c.Count()) * 100,
+                FotosVal = (c.Count(s => s.FotosVal == true) / (decimal)c.Count()) * 100,
+                EquivalentesVal = (c.Count(s => s.EquivalentesVal == true) / (decimal)c.Count()) * 100,
+                AplicacionesVal = (c.Count(s => s.AplicacionesVal == true) / (decimal)c.Count()) * 100,
+                AlternosVal = (c.Count(s => s.AlternosVal == true) / (decimal)c.Count()) * 100,
+                ComplementariosVal = (c.Count(s => s.ComplementariosVal == true) / (decimal)c.Count()) * 100,
+                CaracteristicasVal = (c.Count(s => s.CaracteristicasVal == true) / (decimal)c.Count()) * 100,
                 ValidadosNum = c.Count(s => s.Validado == true)
             });
             this.dgvAvProveedores.Rows.Clear();
             foreach (var oReg in oPorProv)
-                this.dgvAvProveedores.Rows.Add(oReg.ProveedorID, oReg.Proveedor, oReg.Fotos, oReg.Equivalentes, oReg.Aplicaciones
-                    , oReg.Alternos, oReg.Complementarios, oReg.Caracteristicas, oReg.Validados, oReg.ValidadosNum);
+                this.dgvAvProveedores.Rows.Add(oReg.ProveedorID, oReg.Proveedor, oReg.Fotos, oReg.FotosVal, oReg.Equivalentes, oReg.EquivalentesVal
+                    , oReg.Aplicaciones, oReg.AplicacionesVal, oReg.Alternos, oReg.AlternosVal, oReg.Complementarios, oReg.ComplementariosVal
+                    , oReg.Caracteristicas, oReg.CaracteristicasVal, oReg.ValidadosNum);
 
             // Por Marca
             var oPorMarca = oDatos.GroupBy(c => new { c.MarcaParteID, c.Marca }).Select(c => new
@@ -2417,13 +2430,19 @@ namespace Refaccionaria.App
                 Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()) * 100,
                 Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()) * 100,
                 Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count()) * 100,
-                Validados = (c.Count(s => s.Validado == true) / c.Count()) * 100,
+                FotosVal = (c.Count(s => s.FotosVal == true) / (decimal)c.Count()) * 100,
+                EquivalentesVal = (c.Count(s => s.EquivalentesVal == true) / (decimal)c.Count()) * 100,
+                AplicacionesVal = (c.Count(s => s.AplicacionesVal == true) / (decimal)c.Count()) * 100,
+                AlternosVal = (c.Count(s => s.AlternosVal == true) / (decimal)c.Count()) * 100,
+                ComplementariosVal = (c.Count(s => s.ComplementariosVal == true) / (decimal)c.Count()) * 100,
+                CaracteristicasVal = (c.Count(s => s.CaracteristicasVal == true) / (decimal)c.Count()) * 100,
                 ValidadosNum = c.Count(s => s.Validado == true)
             });
             this.dgvAvMarcas.Rows.Clear();
             foreach (var oReg in oPorMarca)
-                this.dgvAvMarcas.Rows.Add(oReg.MarcaParteID, oReg.Marca, oReg.Fotos, oReg.Equivalentes, oReg.Aplicaciones, oReg.Alternos
-                    , oReg.Complementarios, oReg.Caracteristicas, oReg.Validados, oReg.ValidadosNum);
+                this.dgvAvMarcas.Rows.Add(oReg.MarcaParteID, oReg.Marca, oReg.Fotos, oReg.FotosVal, oReg.Equivalentes, oReg.EquivalentesVal
+                    , oReg.Aplicaciones, oReg.AplicacionesVal, oReg.Alternos, oReg.AlternosVal, oReg.Complementarios, oReg.ComplementariosVal
+                    , oReg.Caracteristicas, oReg.CaracteristicasVal, oReg.ValidadosNum);
 
             // Por Línea
             var oPorLinea = oDatos.GroupBy(c => new { c.LineaID, c.Linea }).Select(c => new
@@ -2436,13 +2455,19 @@ namespace Refaccionaria.App
                 Alternos = (c.Sum(s => s.Alternos) / (decimal)c.Count()) * 100,
                 Complementarios = (c.Sum(s => s.Complementarios) / (decimal)c.Count()) * 100,
                 Caracteristicas = (c.Sum(s => s.Caracteristicas) / (decimal)c.Count()) * 100,
-                Validados = (c.Count(s => s.Validado == true) / c.Count()) * 100,
+                FotosVal = (c.Count(s => s.FotosVal == true) / (decimal)c.Count()) * 100,
+                EquivalentesVal = (c.Count(s => s.EquivalentesVal == true) / (decimal)c.Count()) * 100,
+                AplicacionesVal = (c.Count(s => s.AplicacionesVal == true) / (decimal)c.Count()) * 100,
+                AlternosVal = (c.Count(s => s.AlternosVal == true) / (decimal)c.Count()) * 100,
+                ComplementariosVal = (c.Count(s => s.ComplementariosVal == true) / (decimal)c.Count()) * 100,
+                CaracteristicasVal = (c.Count(s => s.CaracteristicasVal == true) / (decimal)c.Count()) * 100,
                 ValidadosNum = c.Count(s => s.Validado == true)
             });
             this.dgvAvLineas.Rows.Clear();
             foreach (var oReg in oPorLinea)
-                this.dgvAvLineas.Rows.Add(oReg.LineaID, oReg.Linea, oReg.Fotos, oReg.Equivalentes, oReg.Aplicaciones, oReg.Alternos
-                    , oReg.Complementarios, oReg.Caracteristicas, oReg.Validados, oReg.ValidadosNum);
+                this.dgvAvLineas.Rows.Add(oReg.LineaID, oReg.Linea, oReg.Fotos, oReg.FotosVal, oReg.Equivalentes, oReg.EquivalentesVal
+                    , oReg.Aplicaciones, oReg.AplicacionesVal, oReg.Alternos, oReg.AlternosVal, oReg.Complementarios, oReg.ComplementariosVal
+                    , oReg.Caracteristicas, oReg.CaracteristicasVal, oReg.ValidadosNum);
 
             Cargando.Cerrar();
         }
@@ -2484,23 +2509,38 @@ namespace Refaccionaria.App
                     oDatos = oDatos.Where(c => !c.Fotos.HasValue || c.Fotos.Value < 1).ToList();
                     // oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Fotos.HasValue || c.Fotos.Value < 1));
                     break;
+                case "proFotosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.FotosVal.HasValue || !c.FotosVal.Value));
+                    break;
                 case "proEquivalentes":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Equivalentes.HasValue || c.Equivalentes.Value < 1));
+                    break;
+                case "proEquivalentesVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.EquivalentesVal.HasValue || !c.EquivalentesVal.Value));
                     break;
                 case "proAplicaciones":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Aplicaciones.HasValue || c.Aplicaciones.Value < 1));
                     break;
+                case "proAplicacionesVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.AplicacionesVal.HasValue || !c.AplicacionesVal.Value));
+                    break;
                 case "proAlternos":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Alternos.HasValue || c.Alternos.Value < 1));
+                    break;
+                case "proAlternosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.AlternosVal.HasValue || !c.AlternosVal.Value));
                     break;
                 case "proComplementarios":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Complementarios.HasValue || c.Complementarios.Value < 1));
                     break;
+                case "proComplementariosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.ComplementariosVal.HasValue || !c.ComplementariosVal.Value));
+                    break;
                 case "proCaracteristicas":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Caracteristicas.HasValue || c.Caracteristicas.Value < 1));
                     break;
-                case "proValidados":
-                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.Validado.HasValue || !c.Validado.Value));
+                case "proCaracteristicasVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iProveedorID && (!c.CaracteristicasVal.HasValue || !c.CaracteristicasVal.Value));
                     break;
             }
             
@@ -2534,23 +2574,38 @@ namespace Refaccionaria.App
                     oDatos = oDatos.Where(c => !c.Fotos.HasValue || c.Fotos.Value < 1).ToList();
                     // oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.Fotos.HasValue || c.Fotos.Value < 1));
                     break;
+                case "marFotosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.FotosVal.HasValue || !c.FotosVal.Value));
+                    break;
                 case "marEquivalentes":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.Equivalentes.HasValue || c.Equivalentes.Value < 1));
+                    break;
+                case "marEquivalentesVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.EquivalentesVal.HasValue || !c.EquivalentesVal.Value));
                     break;
                 case "marAplicaciones":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.Aplicaciones.HasValue || c.Aplicaciones.Value < 1));
                     break;
+                case "marAplicacionesVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.AplicacionesVal.HasValue || !c.AplicacionesVal.Value));
+                    break;
                 case "marAlternos":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.Alternos.HasValue || c.Alternos.Value < 1));
+                    break;
+                case "marAlternosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.AlternosVal.HasValue || !c.AlternosVal.Value));
                     break;
                 case "marComplementarios":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.Complementarios.HasValue || c.Complementarios.Value < 1));
                     break;
+                case "marComplementariosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.ComplementariosVal.HasValue || !c.ComplementariosVal.Value));
+                    break;
                 case "marCaracteristicas":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.Caracteristicas.HasValue || c.Caracteristicas.Value < 1));
                     break;
-                case "proValidados":
-                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iMarcaID && (!c.Validado.HasValue || !c.Validado.Value));
+                case "marCaracteristicasVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.MarcaParteID == iMarcaID && (!c.CaracteristicasVal.HasValue || !c.CaracteristicasVal.Value));
                     break;
             }
 
@@ -2584,23 +2639,38 @@ namespace Refaccionaria.App
                     oDatos = oDatos.Where(c => !c.Fotos.HasValue || c.Fotos.Value < 1).ToList();
                     // oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.Fotos.HasValue || c.Fotos.Value < 1));
                     break;
+                case "linFotosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.FotosVal.HasValue || !c.FotosVal.Value));
+                    break;
                 case "linEquivalentes":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.Equivalentes.HasValue || c.Equivalentes.Value < 1));
+                    break;
+                case "linEquivalentesVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.EquivalentesVal.HasValue || !c.EquivalentesVal.Value));
                     break;
                 case "linAplicaciones":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.Aplicaciones.HasValue || c.Aplicaciones.Value < 1));
                     break;
+                case "linAplicacionesVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.AplicacionesVal.HasValue || !c.AplicacionesVal.Value));
+                    break;
                 case "linAlternos":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.Alternos.HasValue || c.Alternos.Value < 1));
+                    break;
+                case "linAlternosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.AlternosVal.HasValue || !c.AlternosVal.Value));
                     break;
                 case "linComplementarios":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.Complementarios.HasValue || c.Complementarios.Value < 1));
                     break;
+                case "linComplementariosVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.ComplementariosVal.HasValue || !c.ComplementariosVal.Value));
+                    break;
                 case "linCaracteristicas":
                     oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.Caracteristicas.HasValue || c.Caracteristicas.Value < 1));
                     break;
-                case "proValidados":
-                    oDatos = General.GetListOf<PartesAvancesView>(c => c.ProveedorID == iLineaID && (!c.Validado.HasValue || !c.Validado.Value));
+                case "linCaracteristicasVal":
+                    oDatos = General.GetListOf<PartesAvancesView>(c => c.LineaID == iLineaID && (!c.CaracteristicasVal.HasValue || !c.CaracteristicasVal.Value));
                     break;
             }
 

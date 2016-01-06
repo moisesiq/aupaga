@@ -232,10 +232,10 @@ namespace Refaccionaria.App
             // Se manda a afectar contabilidad (AfeConta)
             foreach (int iDevID in oIdsDev)
             {
-                var oDevV = General.GetEntity<VentasDevolucionesView>(c => c.VentaID == iVentaID);
-                if (oVentaV.Facturada)
+                var oDevV = General.GetEntity<VentasDevolucionesView>(c => c.VentaDevolucionID == iDevID);
+                if (oDevV.Facturada)
                 {
-                    if (oVentaV.ACredito)
+                    if (oDevV.VentaACredito)
                     {
                         if (oDevV.FormaDePagoID == Cat.FormasDePago.Vale)
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.DevolucionVentaCreditoFacturadaVale, iDevID, oDevV.FolioDeVenta, oDevV.Observacion);
@@ -254,6 +254,17 @@ namespace Refaccionaria.App
                 {
                     if (oDevV.FormaDePagoID == Cat.FormasDePago.Vale)
                         ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.DevolucionVentaValeTicket, iDevID, oDevV.FolioDeVenta, oDevV.Observacion);
+
+                    // Si es tiecket a crédito, se hace ajuste temporal de pólizas
+                    if (oDevV.VentaACredito)
+                    {
+                        ContaProc.BorrarPolizaTemporalTicketCredito(oDevV.VentaID);
+                        if (!bCancelacion)
+                        {
+                            var oVentaVi = General.GetEntity<VentasView>(c => c.VentaID == oDevV.VentaID);
+                            ContaProc.CrearPolizaTemporalTicketCredito(oDevV.VentaID, (oVentaVi.Total - oVentaVi.Pagado));
+                        }
+                    }
                 }
             }
 

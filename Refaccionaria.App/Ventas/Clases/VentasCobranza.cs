@@ -164,6 +164,15 @@ namespace Refaccionaria.App
                 var oPagoV = General.GetEntity<VentasPagosView>(c => c.VentaPagoID == iPagoID);
                 if (oPagoV.Facturada)
                     ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoVentaCredito, iPagoID, oPagoV.Folio, oPagoV.Cliente);
+
+                // Si es tiecket a crédito, se hace ajuste de pólizas
+                if (!oPagoV.Facturada)
+                {
+                    ContaProc.BorrarPolizaTemporalTicketCredito(oPagoV.VentaID);
+                    var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oPagoV.VentaID);
+                    if (oVentaV.VentaEstatusID == Cat.VentasEstatus.Cobrada)
+                        ContaProc.CrearPolizaTemporalTicketCredito(oPagoV.VentaID, (oVentaV.Total - oVentaV.Pagado));
+                }
             }
 
             // Se guardan la autorizaciones aplicables

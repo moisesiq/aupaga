@@ -231,6 +231,7 @@ namespace Refaccionaria.App
                 // Se marcan los colores
                 switch (oReg.Caracteristica)
                 {
+                    case "VD9500":
                     case "VD": this.dgvVentas.Rows[iFila].DefaultCellStyle.ForeColor = Color.Gray; break;
                     case "D9500":
                     case "D": this.dgvVentas.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red; break;

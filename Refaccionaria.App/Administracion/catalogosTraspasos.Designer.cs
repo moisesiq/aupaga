@@ -133,8 +133,10 @@
             this.dgvExd_Excedentes = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbExd_Sucursal = new System.Windows.Forms.ComboBox();
+            this.btnExd_Imprimir = new System.Windows.Forms.Button();
             this.exd_NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exd_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exd_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exd_Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exd_Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exd_Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1382,6 +1384,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.tabPage1.Controls.Add(this.btnExd_Imprimir);
             this.tabPage1.Controls.Add(this.dgvExd_Excedentes);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.cmbExd_Sucursal);
@@ -1415,6 +1418,7 @@
             this.dgvExd_Excedentes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.exd_NumeroDeParte,
             this.exd_Descripcion,
+            this.exd_Proveedor,
             this.exd_Marca,
             this.exd_Linea,
             this.exd_Existencia,
@@ -1462,9 +1466,23 @@
             this.cmbExd_Sucursal.FormattingEnabled = true;
             this.cmbExd_Sucursal.Location = new System.Drawing.Point(57, 6);
             this.cmbExd_Sucursal.Name = "cmbExd_Sucursal";
-            this.cmbExd_Sucursal.Size = new System.Drawing.Size(150, 21);
+            this.cmbExd_Sucursal.Size = new System.Drawing.Size(100, 21);
             this.cmbExd_Sucursal.TabIndex = 13;
             this.cmbExd_Sucursal.SelectedIndexChanged += new System.EventHandler(this.cmbExd_Sucursal_SelectedIndexChanged);
+            // 
+            // btnExd_Imprimir
+            // 
+            this.btnExd_Imprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnExd_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExd_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExd_Imprimir.ForeColor = System.Drawing.Color.White;
+            this.btnExd_Imprimir.Location = new System.Drawing.Point(178, 6);
+            this.btnExd_Imprimir.Name = "btnExd_Imprimir";
+            this.btnExd_Imprimir.Size = new System.Drawing.Size(80, 21);
+            this.btnExd_Imprimir.TabIndex = 183;
+            this.btnExd_Imprimir.Text = "&Imprimir";
+            this.btnExd_Imprimir.UseVisualStyleBackColor = false;
+            this.btnExd_Imprimir.Click += new System.EventHandler(this.btnExd_Imprimir_Click);
             // 
             // exd_NumeroDeParte
             // 
@@ -1478,6 +1496,12 @@
             this.exd_Descripcion.Name = "exd_Descripcion";
             this.exd_Descripcion.ReadOnly = true;
             this.exd_Descripcion.Width = 320;
+            // 
+            // exd_Proveedor
+            // 
+            this.exd_Proveedor.HeaderText = "Proveedor";
+            this.exd_Proveedor.Name = "exd_Proveedor";
+            this.exd_Proveedor.ReadOnly = true;
             // 
             // exd_Marca
             // 
@@ -1634,8 +1658,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbExd_Sucursal;
         private System.Windows.Forms.DataGridView dgvExd_Excedentes;
+        private System.Windows.Forms.Button btnExd_Imprimir;
         private System.Windows.Forms.DataGridViewTextBoxColumn exd_NumeroDeParte;
         private System.Windows.Forms.DataGridViewTextBoxColumn exd_Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn exd_Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn exd_Marca;
         private System.Windows.Forms.DataGridViewTextBoxColumn exd_Linea;
         private System.Windows.Forms.DataGridViewTextBoxColumn exd_Existencia;

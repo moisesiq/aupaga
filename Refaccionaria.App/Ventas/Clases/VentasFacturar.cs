@@ -99,6 +99,9 @@ namespace Refaccionaria.App
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoVentaCredito, oReg.VentaPagoID, (oFactura.Serie + oFactura.Folio), oVentaV.Cliente
                                 , oReg.SucursalID);
                     }
+
+                    // Se borra la póliza temporal creada por ser ticket a crédito
+                    ContaProc.BorrarPolizaTemporalTicketCredito(iVentaID);
                 }
                 else
                 {

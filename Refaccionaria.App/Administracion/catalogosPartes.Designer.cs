@@ -61,8 +61,49 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle88 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -71,37 +112,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblEncontrados = new System.Windows.Forms.Label();
             this.lblBuscar = new System.Windows.Forms.Label();
             this.progreso = new System.Windows.Forms.ProgressBar();
@@ -214,8 +229,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cmbEsCascoPara = new System.Windows.Forms.ComboBox();
             this.pnlCaracteristicas = new System.Windows.Forms.GroupBox();
-            this.chkValCaracteristicas = new System.Windows.Forms.CheckBox();
             this.flpCaracteristicas = new System.Windows.Forms.FlowLayoutPanel();
+            this.chkValCaracteristicas = new System.Windows.Forms.CheckBox();
             this.lblNoPedidos = new System.Windows.Forms.Label();
             this.txtPrecio4 = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkEsPar = new Refaccionaria.Negocio.CheckBoxMod();
@@ -263,8 +278,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblAvValidadosNum = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.lblAvValidados = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.lblAvCaracteristicas = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.lblAvComplementarios = new System.Windows.Forms.Label();
@@ -280,38 +293,8 @@
             this.btnAvActualizar = new System.Windows.Forms.Button();
             this.btnAvQuitarFiltro = new System.Windows.Forms.Button();
             this.dgvAvLineas = new System.Windows.Forms.DataGridView();
-            this.linLineaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linFotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linEquivalentes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linAplicaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linAlternos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linComplementarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linValidados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvAvMarcas = new System.Windows.Forms.DataGridView();
-            this.marMarcaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marFotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marEquivalentes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marAplicaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marAlternos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marComplementarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marValidados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvAvProveedores = new System.Windows.Forms.DataGridView();
-            this.proProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proFotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proEquivalentes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proAplicaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proAlternos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proComplementarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proValidados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpErrores = new System.Windows.Forms.TabPage();
             this.dgvErrores = new System.Windows.Forms.DataGridView();
             this.err_ParteErrorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -333,6 +316,51 @@
             this.chkErr_MostrarTodos = new System.Windows.Forms.CheckBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.proProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proFotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proFotosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proEquivalentes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proEquivalentesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proAplicaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proAplicacionesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proAlternos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proAlternosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proComplementarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proComplementariosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proCaracteristicasVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marMarcaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marFotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marFotosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marEquivalentes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marEquivalentesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marAplicaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marAplicacionesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marAlternos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marAlternosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marComplementarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marComplementariosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marCaracteristicasVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linLineaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linFotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linFotosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linEquivalentes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linEquivalentesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linAplicaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linAplicacionesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linAlternos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linAlternosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linComplementarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linComplementariosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linCaracteristicasVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.linValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabExistencia.SuspendLayout();
             this.tabExistencias.SuspendLayout();
@@ -1981,6 +2009,14 @@
             this.pnlCaracteristicas.TabStop = false;
             this.pnlCaracteristicas.Text = "Características";
             // 
+            // flpCaracteristicas
+            // 
+            this.flpCaracteristicas.Location = new System.Drawing.Point(3, 16);
+            this.flpCaracteristicas.Name = "flpCaracteristicas";
+            this.flpCaracteristicas.Size = new System.Drawing.Size(636, 158);
+            this.flpCaracteristicas.TabIndex = 198;
+            this.flpCaracteristicas.DoubleClick += new System.EventHandler(this.flpCaracteristicas_DoubleClick);
+            // 
             // chkValCaracteristicas
             // 
             this.chkValCaracteristicas.AutoSize = true;
@@ -1997,14 +2033,6 @@
             this.chkValCaracteristicas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.chkValCaracteristicas.UseVisualStyleBackColor = false;
             this.chkValCaracteristicas.CheckedChanged += new System.EventHandler(this.chkValCaracteristicas_CheckedChanged);
-            // 
-            // flpCaracteristicas
-            // 
-            this.flpCaracteristicas.Location = new System.Drawing.Point(3, 16);
-            this.flpCaracteristicas.Name = "flpCaracteristicas";
-            this.flpCaracteristicas.Size = new System.Drawing.Size(636, 158);
-            this.flpCaracteristicas.TabIndex = 198;
-            this.flpCaracteristicas.DoubleClick += new System.EventHandler(this.flpCaracteristicas_DoubleClick);
             // 
             // lblNoPedidos
             // 
@@ -2559,8 +2587,6 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.lblAvValidadosNum);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.lblAvValidados);
-            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.lblAvCaracteristicas);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.lblAvComplementarios);
@@ -2594,37 +2620,18 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(365, 35);
+            this.label13.Location = new System.Drawing.Point(392, 35);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(72, 13);
             this.label13.TabIndex = 189;
             this.label13.Text = "No. validados";
             // 
-            // lblAvValidados
-            // 
-            this.lblAvValidados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvValidados.Location = new System.Drawing.Point(470, 16);
-            this.lblAvValidados.Name = "lblAvValidados";
-            this.lblAvValidados.Size = new System.Drawing.Size(40, 13);
-            this.lblAvValidados.TabIndex = 188;
-            this.lblAvValidados.Text = "0%";
-            this.lblAvValidados.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(365, 16);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 13);
-            this.label9.TabIndex = 187;
-            this.label9.Text = "Validados";
-            // 
             // lblAvCaracteristicas
             // 
             this.lblAvCaracteristicas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvCaracteristicas.Location = new System.Drawing.Point(291, 54);
+            this.lblAvCaracteristicas.Location = new System.Drawing.Point(282, 54);
             this.lblAvCaracteristicas.Name = "lblAvCaracteristicas";
-            this.lblAvCaracteristicas.Size = new System.Drawing.Size(40, 13);
+            this.lblAvCaracteristicas.Size = new System.Drawing.Size(100, 13);
             this.lblAvCaracteristicas.TabIndex = 186;
             this.lblAvCaracteristicas.Text = "0%";
             this.lblAvCaracteristicas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2641,9 +2648,9 @@
             // lblAvComplementarios
             // 
             this.lblAvComplementarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvComplementarios.Location = new System.Drawing.Point(291, 35);
+            this.lblAvComplementarios.Location = new System.Drawing.Point(282, 35);
             this.lblAvComplementarios.Name = "lblAvComplementarios";
-            this.lblAvComplementarios.Size = new System.Drawing.Size(40, 13);
+            this.lblAvComplementarios.Size = new System.Drawing.Size(100, 13);
             this.lblAvComplementarios.TabIndex = 184;
             this.lblAvComplementarios.Text = "0%";
             this.lblAvComplementarios.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2660,9 +2667,9 @@
             // lblAvAlternos
             // 
             this.lblAvAlternos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvAlternos.Location = new System.Drawing.Point(291, 16);
+            this.lblAvAlternos.Location = new System.Drawing.Point(282, 16);
             this.lblAvAlternos.Name = "lblAvAlternos";
-            this.lblAvAlternos.Size = new System.Drawing.Size(40, 13);
+            this.lblAvAlternos.Size = new System.Drawing.Size(100, 13);
             this.lblAvAlternos.TabIndex = 182;
             this.lblAvAlternos.Text = "0%";
             this.lblAvAlternos.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2679,9 +2686,9 @@
             // lblAvAplicaciones
             // 
             this.lblAvAplicaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvAplicaciones.Location = new System.Drawing.Point(111, 54);
+            this.lblAvAplicaciones.Location = new System.Drawing.Point(82, 54);
             this.lblAvAplicaciones.Name = "lblAvAplicaciones";
-            this.lblAvAplicaciones.Size = new System.Drawing.Size(40, 13);
+            this.lblAvAplicaciones.Size = new System.Drawing.Size(100, 13);
             this.lblAvAplicaciones.TabIndex = 180;
             this.lblAvAplicaciones.Text = "0%";
             this.lblAvAplicaciones.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2698,9 +2705,9 @@
             // lblAvEquivalentes
             // 
             this.lblAvEquivalentes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvEquivalentes.Location = new System.Drawing.Point(111, 35);
+            this.lblAvEquivalentes.Location = new System.Drawing.Point(82, 35);
             this.lblAvEquivalentes.Name = "lblAvEquivalentes";
-            this.lblAvEquivalentes.Size = new System.Drawing.Size(40, 13);
+            this.lblAvEquivalentes.Size = new System.Drawing.Size(100, 13);
             this.lblAvEquivalentes.TabIndex = 178;
             this.lblAvEquivalentes.Text = "0%";
             this.lblAvEquivalentes.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2717,9 +2724,9 @@
             // lblAvFotos
             // 
             this.lblAvFotos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvFotos.Location = new System.Drawing.Point(111, 16);
+            this.lblAvFotos.Location = new System.Drawing.Point(82, 16);
             this.lblAvFotos.Name = "lblAvFotos";
-            this.lblAvFotos.Size = new System.Drawing.Size(40, 13);
+            this.lblAvFotos.Size = new System.Drawing.Size(100, 13);
             this.lblAvFotos.TabIndex = 176;
             this.lblAvFotos.Text = "0%";
             this.lblAvFotos.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2789,132 +2796,44 @@
             this.linLineaID,
             this.linLinea,
             this.linFotos,
+            this.linFotosVal,
             this.linEquivalentes,
+            this.linEquivalentesVal,
             this.linAplicaciones,
+            this.linAplicacionesVal,
             this.linAlternos,
+            this.linAlternosVal,
             this.linComplementarios,
+            this.linComplementariosVal,
             this.linCaracteristicas,
-            this.linValidados,
+            this.linCaracteristicasVal,
             this.linValidadosNum});
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle41.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAvLineas.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle46.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAvLineas.DefaultCellStyle = dataGridViewCellStyle46;
             this.dgvAvLineas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvAvLineas.Location = new System.Drawing.Point(965, 4);
             this.dgvAvLineas.Name = "dgvAvLineas";
             this.dgvAvLineas.ReadOnly = true;
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle42.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAvLineas.RowHeadersDefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle47.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle47.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAvLineas.RowHeadersDefaultCellStyle = dataGridViewCellStyle47;
             this.dgvAvLineas.RowHeadersVisible = false;
             this.dgvAvLineas.RowHeadersWidth = 25;
             this.dgvAvLineas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvAvLineas.Size = new System.Drawing.Size(475, 470);
             this.dgvAvLineas.TabIndex = 2;
             this.dgvAvLineas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAvLineas_CellDoubleClick);
-            // 
-            // linLineaID
-            // 
-            this.linLineaID.HeaderText = "LineaID";
-            this.linLineaID.Name = "linLineaID";
-            this.linLineaID.ReadOnly = true;
-            this.linLineaID.Visible = false;
-            // 
-            // linLinea
-            // 
-            this.linLinea.HeaderText = "Línea";
-            this.linLinea.Name = "linLinea";
-            this.linLinea.ReadOnly = true;
-            this.linLinea.Width = 150;
-            // 
-            // linFotos
-            // 
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle33.Format = "N1";
-            this.linFotos.DefaultCellStyle = dataGridViewCellStyle33;
-            this.linFotos.HeaderText = "Fotos";
-            this.linFotos.Name = "linFotos";
-            this.linFotos.ReadOnly = true;
-            this.linFotos.Width = 50;
-            // 
-            // linEquivalentes
-            // 
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle34.Format = "N1";
-            this.linEquivalentes.DefaultCellStyle = dataGridViewCellStyle34;
-            this.linEquivalentes.HeaderText = "Equiv.";
-            this.linEquivalentes.Name = "linEquivalentes";
-            this.linEquivalentes.ReadOnly = true;
-            this.linEquivalentes.Width = 50;
-            // 
-            // linAplicaciones
-            // 
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle35.Format = "N1";
-            this.linAplicaciones.DefaultCellStyle = dataGridViewCellStyle35;
-            this.linAplicaciones.HeaderText = "Aplic.";
-            this.linAplicaciones.Name = "linAplicaciones";
-            this.linAplicaciones.ReadOnly = true;
-            this.linAplicaciones.Width = 50;
-            // 
-            // linAlternos
-            // 
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle36.Format = "N1";
-            this.linAlternos.DefaultCellStyle = dataGridViewCellStyle36;
-            this.linAlternos.HeaderText = "Alternos";
-            this.linAlternos.Name = "linAlternos";
-            this.linAlternos.ReadOnly = true;
-            this.linAlternos.Width = 50;
-            // 
-            // linComplementarios
-            // 
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle37.Format = "N1";
-            this.linComplementarios.DefaultCellStyle = dataGridViewCellStyle37;
-            this.linComplementarios.HeaderText = "Complem.";
-            this.linComplementarios.Name = "linComplementarios";
-            this.linComplementarios.ReadOnly = true;
-            this.linComplementarios.Width = 50;
-            // 
-            // linCaracteristicas
-            // 
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle38.Format = "N1";
-            this.linCaracteristicas.DefaultCellStyle = dataGridViewCellStyle38;
-            this.linCaracteristicas.HeaderText = "Caract.";
-            this.linCaracteristicas.Name = "linCaracteristicas";
-            this.linCaracteristicas.ReadOnly = true;
-            this.linCaracteristicas.Width = 50;
-            // 
-            // linValidados
-            // 
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle39.Format = "N1";
-            this.linValidados.DefaultCellStyle = dataGridViewCellStyle39;
-            this.linValidados.HeaderText = "Val.";
-            this.linValidados.Name = "linValidados";
-            this.linValidados.ReadOnly = true;
-            this.linValidados.Width = 50;
-            // 
-            // linValidadosNum
-            // 
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.linValidadosNum.DefaultCellStyle = dataGridViewCellStyle40;
-            this.linValidadosNum.HeaderText = "N.V.";
-            this.linValidadosNum.Name = "linValidadosNum";
-            this.linValidadosNum.ReadOnly = true;
-            this.linValidadosNum.Width = 50;
             // 
             // dgvAvMarcas
             // 
@@ -2928,145 +2847,57 @@
             this.dgvAvMarcas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvAvMarcas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvAvMarcas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle43.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle43.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle48.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle48.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle48;
             this.dgvAvMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAvMarcas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.marMarcaID,
             this.marMarca,
             this.marFotos,
+            this.marFotosVal,
             this.marEquivalentes,
+            this.marEquivalentesVal,
             this.marAplicaciones,
+            this.marAplicacionesVal,
             this.marAlternos,
+            this.marAlternosVal,
             this.marComplementarios,
+            this.marComplementariosVal,
             this.marCaracteristicas,
-            this.marValidados,
+            this.marCaracteristicasVal,
             this.marValidadosNum});
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle52.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle52.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAvMarcas.DefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle62.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle62.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle62.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle62.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle62.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAvMarcas.DefaultCellStyle = dataGridViewCellStyle62;
             this.dgvAvMarcas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvAvMarcas.Location = new System.Drawing.Point(484, 4);
             this.dgvAvMarcas.Name = "dgvAvMarcas";
             this.dgvAvMarcas.ReadOnly = true;
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle53.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle53.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle63.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle63.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle63.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle63.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle63.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle63.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle63;
             this.dgvAvMarcas.RowHeadersVisible = false;
             this.dgvAvMarcas.RowHeadersWidth = 25;
             this.dgvAvMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvAvMarcas.Size = new System.Drawing.Size(475, 470);
             this.dgvAvMarcas.TabIndex = 1;
             this.dgvAvMarcas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAvMarcas_CellDoubleClick);
-            // 
-            // marMarcaID
-            // 
-            this.marMarcaID.HeaderText = "MarcaID";
-            this.marMarcaID.Name = "marMarcaID";
-            this.marMarcaID.ReadOnly = true;
-            this.marMarcaID.Visible = false;
-            // 
-            // marMarca
-            // 
-            this.marMarca.HeaderText = "Marca";
-            this.marMarca.Name = "marMarca";
-            this.marMarca.ReadOnly = true;
-            this.marMarca.Width = 150;
-            // 
-            // marFotos
-            // 
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle44.Format = "N1";
-            this.marFotos.DefaultCellStyle = dataGridViewCellStyle44;
-            this.marFotos.HeaderText = "Fotos";
-            this.marFotos.Name = "marFotos";
-            this.marFotos.ReadOnly = true;
-            this.marFotos.Width = 50;
-            // 
-            // marEquivalentes
-            // 
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle45.Format = "N1";
-            this.marEquivalentes.DefaultCellStyle = dataGridViewCellStyle45;
-            this.marEquivalentes.HeaderText = "Equiv.";
-            this.marEquivalentes.Name = "marEquivalentes";
-            this.marEquivalentes.ReadOnly = true;
-            this.marEquivalentes.Width = 50;
-            // 
-            // marAplicaciones
-            // 
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle46.Format = "N1";
-            this.marAplicaciones.DefaultCellStyle = dataGridViewCellStyle46;
-            this.marAplicaciones.HeaderText = "Aplic.";
-            this.marAplicaciones.Name = "marAplicaciones";
-            this.marAplicaciones.ReadOnly = true;
-            this.marAplicaciones.Width = 50;
-            // 
-            // marAlternos
-            // 
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle47.Format = "N1";
-            this.marAlternos.DefaultCellStyle = dataGridViewCellStyle47;
-            this.marAlternos.HeaderText = "Alternos";
-            this.marAlternos.Name = "marAlternos";
-            this.marAlternos.ReadOnly = true;
-            this.marAlternos.Width = 50;
-            // 
-            // marComplementarios
-            // 
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle48.Format = "N1";
-            this.marComplementarios.DefaultCellStyle = dataGridViewCellStyle48;
-            this.marComplementarios.HeaderText = "Complem.";
-            this.marComplementarios.Name = "marComplementarios";
-            this.marComplementarios.ReadOnly = true;
-            this.marComplementarios.Width = 50;
-            // 
-            // marCaracteristicas
-            // 
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle49.Format = "N1";
-            this.marCaracteristicas.DefaultCellStyle = dataGridViewCellStyle49;
-            this.marCaracteristicas.HeaderText = "Caract.";
-            this.marCaracteristicas.Name = "marCaracteristicas";
-            this.marCaracteristicas.ReadOnly = true;
-            this.marCaracteristicas.Width = 50;
-            // 
-            // marValidados
-            // 
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle50.Format = "N1";
-            this.marValidados.DefaultCellStyle = dataGridViewCellStyle50;
-            this.marValidados.HeaderText = "Val.";
-            this.marValidados.Name = "marValidados";
-            this.marValidados.ReadOnly = true;
-            this.marValidados.Width = 50;
-            // 
-            // marValidadosNum
-            // 
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.marValidadosNum.DefaultCellStyle = dataGridViewCellStyle51;
-            this.marValidadosNum.HeaderText = "V.N.";
-            this.marValidadosNum.Name = "marValidadosNum";
-            this.marValidadosNum.ReadOnly = true;
-            this.marValidadosNum.Width = 50;
             // 
             // dgvAvProveedores
             // 
@@ -3080,147 +2911,57 @@
             this.dgvAvProveedores.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvAvProveedores.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvAvProveedores.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle54.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle54.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle64.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle64.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle64.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle64.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle64.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle64;
             this.dgvAvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAvProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.proProveedorID,
             this.proProveedor,
             this.proFotos,
+            this.proFotosVal,
             this.proEquivalentes,
+            this.proEquivalentesVal,
             this.proAplicaciones,
+            this.proAplicacionesVal,
             this.proAlternos,
+            this.proAlternosVal,
             this.proComplementarios,
+            this.proComplementariosVal,
             this.proCaracteristicas,
-            this.proValidados,
+            this.proCaracteristicasVal,
             this.proValidadosNum});
-            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle63.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle63.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle63.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle63.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle63.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAvProveedores.DefaultCellStyle = dataGridViewCellStyle63;
+            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle78.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle78.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle78.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle78.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle78.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAvProveedores.DefaultCellStyle = dataGridViewCellStyle78;
             this.dgvAvProveedores.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvAvProveedores.Location = new System.Drawing.Point(3, 4);
             this.dgvAvProveedores.Name = "dgvAvProveedores";
             this.dgvAvProveedores.ReadOnly = true;
-            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle64.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle64.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle64.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle64.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle64.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAvProveedores.RowHeadersDefaultCellStyle = dataGridViewCellStyle64;
+            dataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle79.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle79.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle79.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle79.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle79.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle79.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAvProveedores.RowHeadersDefaultCellStyle = dataGridViewCellStyle79;
             this.dgvAvProveedores.RowHeadersVisible = false;
             this.dgvAvProveedores.RowHeadersWidth = 25;
             this.dgvAvProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvAvProveedores.Size = new System.Drawing.Size(475, 470);
             this.dgvAvProveedores.TabIndex = 0;
             this.dgvAvProveedores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAvProveedores_CellDoubleClick);
-            // 
-            // proProveedorID
-            // 
-            this.proProveedorID.HeaderText = "ProveedorID";
-            this.proProveedorID.Name = "proProveedorID";
-            this.proProveedorID.ReadOnly = true;
-            this.proProveedorID.Visible = false;
-            this.proProveedorID.Width = 70;
-            // 
-            // proProveedor
-            // 
-            this.proProveedor.HeaderText = "Proveedor";
-            this.proProveedor.Name = "proProveedor";
-            this.proProveedor.ReadOnly = true;
-            this.proProveedor.Width = 150;
-            // 
-            // proFotos
-            // 
-            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle55.Format = "N1";
-            dataGridViewCellStyle55.NullValue = null;
-            this.proFotos.DefaultCellStyle = dataGridViewCellStyle55;
-            this.proFotos.HeaderText = "Fotos";
-            this.proFotos.Name = "proFotos";
-            this.proFotos.ReadOnly = true;
-            this.proFotos.Width = 50;
-            // 
-            // proEquivalentes
-            // 
-            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle56.Format = "N1";
-            this.proEquivalentes.DefaultCellStyle = dataGridViewCellStyle56;
-            this.proEquivalentes.HeaderText = "Equiv.";
-            this.proEquivalentes.Name = "proEquivalentes";
-            this.proEquivalentes.ReadOnly = true;
-            this.proEquivalentes.Width = 50;
-            // 
-            // proAplicaciones
-            // 
-            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle57.Format = "N1";
-            this.proAplicaciones.DefaultCellStyle = dataGridViewCellStyle57;
-            this.proAplicaciones.HeaderText = "Aplic.";
-            this.proAplicaciones.Name = "proAplicaciones";
-            this.proAplicaciones.ReadOnly = true;
-            this.proAplicaciones.Width = 50;
-            // 
-            // proAlternos
-            // 
-            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle58.Format = "N1";
-            this.proAlternos.DefaultCellStyle = dataGridViewCellStyle58;
-            this.proAlternos.HeaderText = "Alternos";
-            this.proAlternos.Name = "proAlternos";
-            this.proAlternos.ReadOnly = true;
-            this.proAlternos.Width = 50;
-            // 
-            // proComplementarios
-            // 
-            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle59.Format = "N1";
-            this.proComplementarios.DefaultCellStyle = dataGridViewCellStyle59;
-            this.proComplementarios.HeaderText = "Complem.";
-            this.proComplementarios.Name = "proComplementarios";
-            this.proComplementarios.ReadOnly = true;
-            this.proComplementarios.Width = 50;
-            // 
-            // proCaracteristicas
-            // 
-            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle60.Format = "N1";
-            this.proCaracteristicas.DefaultCellStyle = dataGridViewCellStyle60;
-            this.proCaracteristicas.HeaderText = "Caract.";
-            this.proCaracteristicas.Name = "proCaracteristicas";
-            this.proCaracteristicas.ReadOnly = true;
-            this.proCaracteristicas.Width = 50;
-            // 
-            // proValidados
-            // 
-            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle61.Format = "N1";
-            this.proValidados.DefaultCellStyle = dataGridViewCellStyle61;
-            this.proValidados.HeaderText = "Val.";
-            this.proValidados.Name = "proValidados";
-            this.proValidados.ReadOnly = true;
-            this.proValidados.Width = 50;
-            // 
-            // proValidadosNum
-            // 
-            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.proValidadosNum.DefaultCellStyle = dataGridViewCellStyle62;
-            this.proValidadosNum.HeaderText = "N.V.";
-            this.proValidadosNum.Name = "proValidadosNum";
-            this.proValidadosNum.ReadOnly = true;
-            this.proValidadosNum.Width = 50;
             // 
             // tbpErrores
             // 
@@ -3246,14 +2987,14 @@
             this.dgvErrores.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvErrores.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvErrores.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle65.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle65.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle65.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle65.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle65.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle65.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvErrores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle65;
+            dataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle80.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle80.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle80.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle80.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle80.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle80.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvErrores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle80;
             this.dgvErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.err_ParteErrorID,
@@ -3272,26 +3013,26 @@
             this.err_ComentarioSolucion,
             this.err_UsuarioError,
             this.err_UsuarioSolucion});
-            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle72.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle72.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle72.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle72.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle72.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle72.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvErrores.DefaultCellStyle = dataGridViewCellStyle72;
+            dataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle87.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle87.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle87.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle87.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle87.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle87.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvErrores.DefaultCellStyle = dataGridViewCellStyle87;
             this.dgvErrores.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvErrores.Location = new System.Drawing.Point(3, 26);
             this.dgvErrores.Name = "dgvErrores";
             this.dgvErrores.ReadOnly = true;
-            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle73.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle73.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle73.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle73.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle73.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle73.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvErrores.RowHeadersDefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle88.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle88.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle88.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle88.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle88.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle88.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvErrores.RowHeadersDefaultCellStyle = dataGridViewCellStyle88;
             this.dgvErrores.RowHeadersVisible = false;
             this.dgvErrores.RowHeadersWidth = 25;
             this.dgvErrores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -3341,10 +3082,10 @@
             // 
             // err_Foto
             // 
-            dataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle66.Format = "##0.00%";
-            dataGridViewCellStyle66.NullValue = false;
-            this.err_Foto.DefaultCellStyle = dataGridViewCellStyle66;
+            dataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle81.Format = "##0.00%";
+            dataGridViewCellStyle81.NullValue = false;
+            this.err_Foto.DefaultCellStyle = dataGridViewCellStyle81;
             this.err_Foto.HeaderText = "Foto";
             this.err_Foto.Name = "err_Foto";
             this.err_Foto.ReadOnly = true;
@@ -3354,10 +3095,10 @@
             // 
             // err_Equivalente
             // 
-            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle67.Format = "##0.00%";
-            dataGridViewCellStyle67.NullValue = false;
-            this.err_Equivalente.DefaultCellStyle = dataGridViewCellStyle67;
+            dataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle82.Format = "##0.00%";
+            dataGridViewCellStyle82.NullValue = false;
+            this.err_Equivalente.DefaultCellStyle = dataGridViewCellStyle82;
             this.err_Equivalente.HeaderText = "Equiv.";
             this.err_Equivalente.Name = "err_Equivalente";
             this.err_Equivalente.ReadOnly = true;
@@ -3367,10 +3108,10 @@
             // 
             // err_Aplicacion
             // 
-            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle68.Format = "##0.00%";
-            dataGridViewCellStyle68.NullValue = false;
-            this.err_Aplicacion.DefaultCellStyle = dataGridViewCellStyle68;
+            dataGridViewCellStyle83.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle83.Format = "##0.00%";
+            dataGridViewCellStyle83.NullValue = false;
+            this.err_Aplicacion.DefaultCellStyle = dataGridViewCellStyle83;
             this.err_Aplicacion.HeaderText = "Aplic.";
             this.err_Aplicacion.Name = "err_Aplicacion";
             this.err_Aplicacion.ReadOnly = true;
@@ -3380,10 +3121,10 @@
             // 
             // err_Alterno
             // 
-            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle69.Format = "##0.00%";
-            dataGridViewCellStyle69.NullValue = false;
-            this.err_Alterno.DefaultCellStyle = dataGridViewCellStyle69;
+            dataGridViewCellStyle84.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle84.Format = "##0.00%";
+            dataGridViewCellStyle84.NullValue = false;
+            this.err_Alterno.DefaultCellStyle = dataGridViewCellStyle84;
             this.err_Alterno.HeaderText = "Alterno";
             this.err_Alterno.Name = "err_Alterno";
             this.err_Alterno.ReadOnly = true;
@@ -3393,10 +3134,10 @@
             // 
             // err_Complementario
             // 
-            dataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle70.Format = "##0.00%";
-            dataGridViewCellStyle70.NullValue = false;
-            this.err_Complementario.DefaultCellStyle = dataGridViewCellStyle70;
+            dataGridViewCellStyle85.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle85.Format = "##0.00%";
+            dataGridViewCellStyle85.NullValue = false;
+            this.err_Complementario.DefaultCellStyle = dataGridViewCellStyle85;
             this.err_Complementario.HeaderText = "Complem.";
             this.err_Complementario.Name = "err_Complementario";
             this.err_Complementario.ReadOnly = true;
@@ -3406,10 +3147,10 @@
             // 
             // err_Otro
             // 
-            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle71.Format = "##0.00%";
-            dataGridViewCellStyle71.NullValue = false;
-            this.err_Otro.DefaultCellStyle = dataGridViewCellStyle71;
+            dataGridViewCellStyle86.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle86.Format = "##0.00%";
+            dataGridViewCellStyle86.NullValue = false;
+            this.err_Otro.DefaultCellStyle = dataGridViewCellStyle86;
             this.err_Otro.HeaderText = "Otro";
             this.err_Otro.Name = "err_Otro";
             this.err_Otro.ReadOnly = true;
@@ -3488,6 +3229,437 @@
             this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // proProveedorID
+            // 
+            this.proProveedorID.HeaderText = "ProveedorID";
+            this.proProveedorID.Name = "proProveedorID";
+            this.proProveedorID.ReadOnly = true;
+            this.proProveedorID.Visible = false;
+            this.proProveedorID.Width = 70;
+            // 
+            // proProveedor
+            // 
+            this.proProveedor.HeaderText = "Proveedor";
+            this.proProveedor.Name = "proProveedor";
+            this.proProveedor.ReadOnly = true;
+            this.proProveedor.Width = 150;
+            // 
+            // proFotos
+            // 
+            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle65.Format = "N1";
+            dataGridViewCellStyle65.NullValue = null;
+            this.proFotos.DefaultCellStyle = dataGridViewCellStyle65;
+            this.proFotos.HeaderText = "Fotos";
+            this.proFotos.Name = "proFotos";
+            this.proFotos.ReadOnly = true;
+            this.proFotos.Width = 50;
+            // 
+            // proFotosVal
+            // 
+            dataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle66.Format = "N1";
+            this.proFotosVal.DefaultCellStyle = dataGridViewCellStyle66;
+            this.proFotosVal.HeaderText = "Fotos";
+            this.proFotosVal.Name = "proFotosVal";
+            this.proFotosVal.ReadOnly = true;
+            this.proFotosVal.Width = 50;
+            // 
+            // proEquivalentes
+            // 
+            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle67.Format = "N1";
+            this.proEquivalentes.DefaultCellStyle = dataGridViewCellStyle67;
+            this.proEquivalentes.HeaderText = "Equiv.";
+            this.proEquivalentes.Name = "proEquivalentes";
+            this.proEquivalentes.ReadOnly = true;
+            this.proEquivalentes.Width = 50;
+            // 
+            // proEquivalentesVal
+            // 
+            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle68.Format = "N1";
+            this.proEquivalentesVal.DefaultCellStyle = dataGridViewCellStyle68;
+            this.proEquivalentesVal.HeaderText = "Equiv.";
+            this.proEquivalentesVal.Name = "proEquivalentesVal";
+            this.proEquivalentesVal.ReadOnly = true;
+            this.proEquivalentesVal.Width = 50;
+            // 
+            // proAplicaciones
+            // 
+            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle69.Format = "N1";
+            this.proAplicaciones.DefaultCellStyle = dataGridViewCellStyle69;
+            this.proAplicaciones.HeaderText = "Aplic.";
+            this.proAplicaciones.Name = "proAplicaciones";
+            this.proAplicaciones.ReadOnly = true;
+            this.proAplicaciones.Width = 50;
+            // 
+            // proAplicacionesVal
+            // 
+            dataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle70.Format = "N1";
+            this.proAplicacionesVal.DefaultCellStyle = dataGridViewCellStyle70;
+            this.proAplicacionesVal.HeaderText = "Aplic.";
+            this.proAplicacionesVal.Name = "proAplicacionesVal";
+            this.proAplicacionesVal.ReadOnly = true;
+            this.proAplicacionesVal.Width = 50;
+            // 
+            // proAlternos
+            // 
+            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle71.Format = "N1";
+            this.proAlternos.DefaultCellStyle = dataGridViewCellStyle71;
+            this.proAlternos.HeaderText = "Alternos";
+            this.proAlternos.Name = "proAlternos";
+            this.proAlternos.ReadOnly = true;
+            this.proAlternos.Width = 50;
+            // 
+            // proAlternosVal
+            // 
+            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle72.Format = "N1";
+            this.proAlternosVal.DefaultCellStyle = dataGridViewCellStyle72;
+            this.proAlternosVal.HeaderText = "Alternos";
+            this.proAlternosVal.Name = "proAlternosVal";
+            this.proAlternosVal.ReadOnly = true;
+            this.proAlternosVal.Width = 50;
+            // 
+            // proComplementarios
+            // 
+            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle73.Format = "N1";
+            this.proComplementarios.DefaultCellStyle = dataGridViewCellStyle73;
+            this.proComplementarios.HeaderText = "Complem.";
+            this.proComplementarios.Name = "proComplementarios";
+            this.proComplementarios.ReadOnly = true;
+            this.proComplementarios.Width = 50;
+            // 
+            // proComplementariosVal
+            // 
+            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle74.Format = "N1";
+            this.proComplementariosVal.DefaultCellStyle = dataGridViewCellStyle74;
+            this.proComplementariosVal.HeaderText = "Complem.";
+            this.proComplementariosVal.Name = "proComplementariosVal";
+            this.proComplementariosVal.ReadOnly = true;
+            this.proComplementariosVal.Width = 50;
+            // 
+            // proCaracteristicas
+            // 
+            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle75.Format = "N1";
+            this.proCaracteristicas.DefaultCellStyle = dataGridViewCellStyle75;
+            this.proCaracteristicas.HeaderText = "Caract.";
+            this.proCaracteristicas.Name = "proCaracteristicas";
+            this.proCaracteristicas.ReadOnly = true;
+            this.proCaracteristicas.Width = 50;
+            // 
+            // proCaracteristicasVal
+            // 
+            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle76.Format = "N1";
+            this.proCaracteristicasVal.DefaultCellStyle = dataGridViewCellStyle76;
+            this.proCaracteristicasVal.HeaderText = "Caract.";
+            this.proCaracteristicasVal.Name = "proCaracteristicasVal";
+            this.proCaracteristicasVal.ReadOnly = true;
+            this.proCaracteristicasVal.Width = 50;
+            // 
+            // proValidadosNum
+            // 
+            dataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.proValidadosNum.DefaultCellStyle = dataGridViewCellStyle77;
+            this.proValidadosNum.HeaderText = "N.V.";
+            this.proValidadosNum.Name = "proValidadosNum";
+            this.proValidadosNum.ReadOnly = true;
+            this.proValidadosNum.Width = 50;
+            // 
+            // marMarcaID
+            // 
+            this.marMarcaID.HeaderText = "MarcaID";
+            this.marMarcaID.Name = "marMarcaID";
+            this.marMarcaID.ReadOnly = true;
+            this.marMarcaID.Visible = false;
+            // 
+            // marMarca
+            // 
+            this.marMarca.HeaderText = "Marca";
+            this.marMarca.Name = "marMarca";
+            this.marMarca.ReadOnly = true;
+            this.marMarca.Width = 150;
+            // 
+            // marFotos
+            // 
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle49.Format = "N1";
+            this.marFotos.DefaultCellStyle = dataGridViewCellStyle49;
+            this.marFotos.HeaderText = "Fotos";
+            this.marFotos.Name = "marFotos";
+            this.marFotos.ReadOnly = true;
+            this.marFotos.Width = 50;
+            // 
+            // marFotosVal
+            // 
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle50.Format = "N1";
+            this.marFotosVal.DefaultCellStyle = dataGridViewCellStyle50;
+            this.marFotosVal.HeaderText = "Fotos";
+            this.marFotosVal.Name = "marFotosVal";
+            this.marFotosVal.ReadOnly = true;
+            this.marFotosVal.Width = 50;
+            // 
+            // marEquivalentes
+            // 
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle51.Format = "N1";
+            this.marEquivalentes.DefaultCellStyle = dataGridViewCellStyle51;
+            this.marEquivalentes.HeaderText = "Equiv.";
+            this.marEquivalentes.Name = "marEquivalentes";
+            this.marEquivalentes.ReadOnly = true;
+            this.marEquivalentes.Width = 50;
+            // 
+            // marEquivalentesVal
+            // 
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle52.Format = "N1";
+            this.marEquivalentesVal.DefaultCellStyle = dataGridViewCellStyle52;
+            this.marEquivalentesVal.HeaderText = "Equiv.";
+            this.marEquivalentesVal.Name = "marEquivalentesVal";
+            this.marEquivalentesVal.ReadOnly = true;
+            this.marEquivalentesVal.Width = 50;
+            // 
+            // marAplicaciones
+            // 
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle53.Format = "N1";
+            this.marAplicaciones.DefaultCellStyle = dataGridViewCellStyle53;
+            this.marAplicaciones.HeaderText = "Aplic.";
+            this.marAplicaciones.Name = "marAplicaciones";
+            this.marAplicaciones.ReadOnly = true;
+            this.marAplicaciones.Width = 50;
+            // 
+            // marAplicacionesVal
+            // 
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle54.Format = "N1";
+            this.marAplicacionesVal.DefaultCellStyle = dataGridViewCellStyle54;
+            this.marAplicacionesVal.HeaderText = "Aplic.";
+            this.marAplicacionesVal.Name = "marAplicacionesVal";
+            this.marAplicacionesVal.ReadOnly = true;
+            this.marAplicacionesVal.Width = 50;
+            // 
+            // marAlternos
+            // 
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle55.Format = "N1";
+            this.marAlternos.DefaultCellStyle = dataGridViewCellStyle55;
+            this.marAlternos.HeaderText = "Alternos";
+            this.marAlternos.Name = "marAlternos";
+            this.marAlternos.ReadOnly = true;
+            this.marAlternos.Width = 50;
+            // 
+            // marAlternosVal
+            // 
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle56.Format = "N1";
+            this.marAlternosVal.DefaultCellStyle = dataGridViewCellStyle56;
+            this.marAlternosVal.HeaderText = "Alternos";
+            this.marAlternosVal.Name = "marAlternosVal";
+            this.marAlternosVal.ReadOnly = true;
+            this.marAlternosVal.Width = 50;
+            // 
+            // marComplementarios
+            // 
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle57.Format = "N1";
+            this.marComplementarios.DefaultCellStyle = dataGridViewCellStyle57;
+            this.marComplementarios.HeaderText = "Complem.";
+            this.marComplementarios.Name = "marComplementarios";
+            this.marComplementarios.ReadOnly = true;
+            this.marComplementarios.Width = 50;
+            // 
+            // marComplementariosVal
+            // 
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle58.Format = "N1";
+            this.marComplementariosVal.DefaultCellStyle = dataGridViewCellStyle58;
+            this.marComplementariosVal.HeaderText = "Complem.";
+            this.marComplementariosVal.Name = "marComplementariosVal";
+            this.marComplementariosVal.ReadOnly = true;
+            this.marComplementariosVal.Width = 50;
+            // 
+            // marCaracteristicas
+            // 
+            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle59.Format = "N1";
+            this.marCaracteristicas.DefaultCellStyle = dataGridViewCellStyle59;
+            this.marCaracteristicas.HeaderText = "Caract.";
+            this.marCaracteristicas.Name = "marCaracteristicas";
+            this.marCaracteristicas.ReadOnly = true;
+            this.marCaracteristicas.Width = 50;
+            // 
+            // marCaracteristicasVal
+            // 
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle60.Format = "N1";
+            this.marCaracteristicasVal.DefaultCellStyle = dataGridViewCellStyle60;
+            this.marCaracteristicasVal.HeaderText = "Caract.";
+            this.marCaracteristicasVal.Name = "marCaracteristicasVal";
+            this.marCaracteristicasVal.ReadOnly = true;
+            this.marCaracteristicasVal.Width = 50;
+            // 
+            // marValidadosNum
+            // 
+            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.marValidadosNum.DefaultCellStyle = dataGridViewCellStyle61;
+            this.marValidadosNum.HeaderText = "V.N.";
+            this.marValidadosNum.Name = "marValidadosNum";
+            this.marValidadosNum.ReadOnly = true;
+            this.marValidadosNum.Width = 50;
+            // 
+            // linLineaID
+            // 
+            this.linLineaID.HeaderText = "LineaID";
+            this.linLineaID.Name = "linLineaID";
+            this.linLineaID.ReadOnly = true;
+            this.linLineaID.Visible = false;
+            // 
+            // linLinea
+            // 
+            this.linLinea.HeaderText = "Línea";
+            this.linLinea.Name = "linLinea";
+            this.linLinea.ReadOnly = true;
+            this.linLinea.Width = 150;
+            // 
+            // linFotos
+            // 
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle33.Format = "N1";
+            this.linFotos.DefaultCellStyle = dataGridViewCellStyle33;
+            this.linFotos.HeaderText = "Fotos";
+            this.linFotos.Name = "linFotos";
+            this.linFotos.ReadOnly = true;
+            this.linFotos.Width = 50;
+            // 
+            // linFotosVal
+            // 
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle34.Format = "N1";
+            this.linFotosVal.DefaultCellStyle = dataGridViewCellStyle34;
+            this.linFotosVal.HeaderText = "Fotos";
+            this.linFotosVal.Name = "linFotosVal";
+            this.linFotosVal.ReadOnly = true;
+            this.linFotosVal.Width = 50;
+            // 
+            // linEquivalentes
+            // 
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle35.Format = "N1";
+            this.linEquivalentes.DefaultCellStyle = dataGridViewCellStyle35;
+            this.linEquivalentes.HeaderText = "Equiv.";
+            this.linEquivalentes.Name = "linEquivalentes";
+            this.linEquivalentes.ReadOnly = true;
+            this.linEquivalentes.Width = 50;
+            // 
+            // linEquivalentesVal
+            // 
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle36.Format = "N1";
+            this.linEquivalentesVal.DefaultCellStyle = dataGridViewCellStyle36;
+            this.linEquivalentesVal.HeaderText = "Equiv.";
+            this.linEquivalentesVal.Name = "linEquivalentesVal";
+            this.linEquivalentesVal.ReadOnly = true;
+            this.linEquivalentesVal.Width = 50;
+            // 
+            // linAplicaciones
+            // 
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle37.Format = "N1";
+            this.linAplicaciones.DefaultCellStyle = dataGridViewCellStyle37;
+            this.linAplicaciones.HeaderText = "Aplic.";
+            this.linAplicaciones.Name = "linAplicaciones";
+            this.linAplicaciones.ReadOnly = true;
+            this.linAplicaciones.Width = 50;
+            // 
+            // linAplicacionesVal
+            // 
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle38.Format = "N1";
+            this.linAplicacionesVal.DefaultCellStyle = dataGridViewCellStyle38;
+            this.linAplicacionesVal.HeaderText = "Aplic.";
+            this.linAplicacionesVal.Name = "linAplicacionesVal";
+            this.linAplicacionesVal.ReadOnly = true;
+            this.linAplicacionesVal.Width = 50;
+            // 
+            // linAlternos
+            // 
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle39.Format = "N1";
+            this.linAlternos.DefaultCellStyle = dataGridViewCellStyle39;
+            this.linAlternos.HeaderText = "Alternos";
+            this.linAlternos.Name = "linAlternos";
+            this.linAlternos.ReadOnly = true;
+            this.linAlternos.Width = 50;
+            // 
+            // linAlternosVal
+            // 
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle40.Format = "N1";
+            this.linAlternosVal.DefaultCellStyle = dataGridViewCellStyle40;
+            this.linAlternosVal.HeaderText = "Alternos";
+            this.linAlternosVal.Name = "linAlternosVal";
+            this.linAlternosVal.ReadOnly = true;
+            this.linAlternosVal.Width = 50;
+            // 
+            // linComplementarios
+            // 
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle41.Format = "N1";
+            this.linComplementarios.DefaultCellStyle = dataGridViewCellStyle41;
+            this.linComplementarios.HeaderText = "Complem.";
+            this.linComplementarios.Name = "linComplementarios";
+            this.linComplementarios.ReadOnly = true;
+            this.linComplementarios.Width = 50;
+            // 
+            // linComplementariosVal
+            // 
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle42.Format = "N1";
+            this.linComplementariosVal.DefaultCellStyle = dataGridViewCellStyle42;
+            this.linComplementariosVal.HeaderText = "Complem.";
+            this.linComplementariosVal.Name = "linComplementariosVal";
+            this.linComplementariosVal.ReadOnly = true;
+            this.linComplementariosVal.Width = 50;
+            // 
+            // linCaracteristicas
+            // 
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle43.Format = "N1";
+            this.linCaracteristicas.DefaultCellStyle = dataGridViewCellStyle43;
+            this.linCaracteristicas.HeaderText = "Caract.";
+            this.linCaracteristicas.Name = "linCaracteristicas";
+            this.linCaracteristicas.ReadOnly = true;
+            this.linCaracteristicas.Width = 50;
+            // 
+            // linCaracteristicasVal
+            // 
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle44.Format = "N1";
+            this.linCaracteristicasVal.DefaultCellStyle = dataGridViewCellStyle44;
+            this.linCaracteristicasVal.HeaderText = "Caract.";
+            this.linCaracteristicasVal.Name = "linCaracteristicasVal";
+            this.linCaracteristicasVal.ReadOnly = true;
+            this.linCaracteristicasVal.Width = 50;
+            // 
+            // linValidadosNum
+            // 
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.linValidadosNum.DefaultCellStyle = dataGridViewCellStyle45;
+            this.linValidadosNum.HeaderText = "N.V.";
+            this.linValidadosNum.Name = "linValidadosNum";
+            this.linValidadosNum.ReadOnly = true;
+            this.linValidadosNum.Width = 50;
             // 
             // catalogosPartes
             // 
@@ -3750,46 +3922,59 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn err_ComentarioSolucion;
         private System.Windows.Forms.DataGridViewTextBoxColumn err_UsuarioError;
         private System.Windows.Forms.DataGridViewTextBoxColumn err_UsuarioSolucion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marMarcaID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marMarca;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marFotos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marEquivalentes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marAplicaciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marAlternos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marComplementarios;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marCaracteristicas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marValidados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marValidadosNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linLineaID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linLinea;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linFotos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linEquivalentes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linAplicaciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linAlternos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linComplementarios;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linCaracteristicas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linValidados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn linValidadosNum;
         private System.Windows.Forms.Label lblAvValidadosNum;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label lblAvValidados;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proProveedorID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proProveedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proFotos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proEquivalentes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proAplicaciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proAlternos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proComplementarios;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proValidados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proValidadosNum;
         private System.Windows.Forms.CheckBox chkValEquivalentes;
         private System.Windows.Forms.CheckBox chkValAplicaciones;
         private System.Windows.Forms.CheckBox chkValAlternos;
         private System.Windows.Forms.CheckBox chkValComplementarios;
         private System.Windows.Forms.CheckBox chkValFotos;
         private System.Windows.Forms.CheckBox chkValCaracteristicas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linLineaID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linLinea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linFotos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linFotosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linEquivalentes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linEquivalentesVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linAplicaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linAplicacionesVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linAlternos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linAlternosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linComplementarios;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linComplementariosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linCaracteristicas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linCaracteristicasVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn linValidadosNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marMarcaID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marMarca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marFotos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marFotosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marEquivalentes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marEquivalentesVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marAplicaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marAplicacionesVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marAlternos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marAlternosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marComplementarios;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marComplementariosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marCaracteristicas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marCaracteristicasVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marValidadosNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proProveedorID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proProveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proFotos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proFotosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proEquivalentes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proEquivalentesVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proAplicaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proAplicacionesVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proAlternos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proAlternosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proComplementarios;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proComplementariosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicasVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proValidadosNum;
 
     }
 }

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="01/05/2016 19:34:55" ReportInfo.CreatorVersion="2013.3.2.0">
+  <Dictionary>
+    <TableDataSource Name="Excedente" ReferenceName="Excedente" DataType="System.Int32" Enabled="true">
+      <Column Name="exd_NumeroDeParte" DataType="System.String"/>
+      <Column Name="exd_Descripcion" DataType="System.String"/>
+      <Column Name="exd_Marca" DataType="System.String"/>
+      <Column Name="exd_Linea" DataType="System.String"/>
+      <Column Name="exd_Existencia" DataType="System.String"/>
+      <Column Name="exd_Es9500" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="80" PaperHeight="279.4" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <PageHeaderBand Name="PageHeader1" Width="302.4" Height="69.93">
+      <TextObject Name="Text2" Left="-9.45" Width="94.5" Height="18.9" Text="exd_NumeroDeParte"/>
+      <TextObject Name="Text4" Left="94.5" Width="94.5" Height="18.9" Text="exd_Descripcion"/>
+      <TextObject Name="Text6" Left="198.45" Width="94.5" Height="18.9" Text="exd_Existencia"/>
+    </PageHeaderBand>
+    <DataBand Name="Data4" Top="73.93" Width="302.4" Height="69.48" DataSource="Excedente">
+      <TextObject Name="Text1" Left="-9.45" Width="94.5" Height="18.9" Text="[Excedente.exd_NumeroDeParte]"/>
+      <TextObject Name="Text3" Left="94.5" Width="94.5" Height="18.9" Text="[Excedente.exd_Descripcion]"/>
+      <TextObject Name="Text5" Left="198.45" Width="94.5" Height="18.9" Text="[Excedente.exd_Existencia]"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="147.41" Width="302.4" Height="75.6"/>
+  </ReportPage>
+</Report>

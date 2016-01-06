@@ -799,10 +799,16 @@ namespace Refaccionaria.App
                 else
                 {
                     UtilLocal.MensajeAdvertencia("Hubo un error al generar la factura.\n\n" + ResFactura.Mensaje);
-                    // return true;  // Igual se sale, porque ya se guardaron todos los datos del pago.
+                    // return true;  // Igual se sigue, porque ya se guardaron todos los datos del pago.
                 }
             }
             
+            // Si es un ticket a crédito, se genera una póliza especial de ajuste (AfeConta)
+            if (oVenta.ACredito && !oPorCobrar.ctlCobro.Facturar)
+            {
+                ContaProc.CrearPolizaTemporalTicketCredito(iVentaID, oPorCobrar.ImporteVenta);
+            }
+
             // Se genera el folio de la venta, si no se hizo factura o hubo un error al generar la factura
             if (bGenerarFolio) {
                 // Se genera el folio de venta

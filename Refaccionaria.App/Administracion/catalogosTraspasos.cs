@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using FastReport;
+
 using Refaccionaria.Negocio;
 using Refaccionaria.Modelo;
 
@@ -2132,6 +2133,15 @@ namespace Refaccionaria.App
                 this.CargarExcedentes();
         }
 
+        private void btnExd_Imprimir_Click(object sender, EventArgs e)
+        {
+            var oRep = new Report();
+            oRep.Load(UtilLocal.RutaReportes("TraspasosExcedentes.frx"));
+            var oDatos = this.dgvExd_Excedentes.ADataTable();
+            oRep.RegisterData(oDatos, "Excedente");
+            UtilLocal.EnviarReporteASalida("Reportes.Traspasos.Excedente", oRep);
+        }
+
         private void CargarExcedentes()
         {
             Cargando.Mostrar();
@@ -2141,7 +2151,7 @@ namespace Refaccionaria.App
             foreach (var oReg in oDatos)
             {
                 var oParteV = General.GetEntity<PartesView>(c => c.ParteID == oReg.ParteID);
-                this.dgvExd_Excedentes.Rows.Add(oParteV.NumeroDeParte, oParteV.Descripcion, oParteV.Marca, oParteV.Linea, oReg.Existencia, oParteV.Es9500);
+                this.dgvExd_Excedentes.Rows.Add(oParteV.NumeroDeParte, oParteV.Descripcion, oParteV.Proveedor, oParteV.Marca, oParteV.Linea, oReg.Existencia, oParteV.Es9500);
             }
             Cargando.Cerrar();
         }
