@@ -2650,6 +2650,9 @@ namespace Refaccionaria.App
 
         public static ContaPoliza CrearPolizaTemporalTicketCredito(int iVentaID, decimal mImporte)
         {
+            if (mImporte == 0)
+                return null;
+
             var oVenta = General.GetEntity<Venta>(c => c.VentaID == iVentaID && c.Estatus);
             var oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaCredito, iVentaID, oVenta.Folio, "Ticket Crédito (Temporal)");
             oPoliza.Origen = "Ticket Crédito (Temporal)";
