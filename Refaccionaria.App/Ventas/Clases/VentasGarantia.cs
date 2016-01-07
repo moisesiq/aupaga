@@ -331,10 +331,13 @@ namespace Refaccionaria.App
                     ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GarantiaVentaValeTicket, oGarantiaV.VentaGarantiaID
                         , oGarantiaV.FolioDeVenta, oGarantiaV.MotivoObservacion);
 
-                // Si es tiecket a crédito, se hace ajuste temporal de pólizas (se borra)
+                // Si es tiecket a crédito, se hace ajuste temporal de pólizas
                 if (oVentaV.ACredito)
                 {
                     ContaProc.BorrarPolizaTemporalTicketCredito(iVentaID);
+                    // Se actualizan los datos de la venta
+                    oVentaV = General.GetEntity<VentasView>(c => c.VentaID == iVentaID);
+                    ContaProc.CrearPolizaTemporalTicketCredito(iVentaID, (oVentaV.Total - oVentaV.Pagado));
                 }
             }
         }
