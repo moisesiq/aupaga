@@ -356,7 +356,13 @@ namespace Refaccionaria.App
             // Se agrega la columna de "Manual"
             this.dgvDetalle.Columns.Add("Manual", "Manual");
             //
-            this.dgvDetalle.AutoResizeColumns();
+            // this.dgvDetalle.AutoResizeColumns();
+            this.dgvDetalle.Columns["Fecha"].Width = 136;
+            this.dgvDetalle.Columns["ContaPolizaID"].Width = 50;
+            this.dgvDetalle.Columns["Referencia"].Width = 80;
+            this.dgvDetalle.Columns["Sucursal"].Width = 80;
+            this.dgvDetalle.Columns["Concepto"].Width = 280;
+            this.dgvDetalle.Columns["Manual"].Width = 50;
             this.dgvDetalle.Columns["Cargo"].FormatoMoneda();
             this.dgvDetalle.Columns["Abono"].FormatoMoneda();
             // Se marcan en rojo las que tengan error

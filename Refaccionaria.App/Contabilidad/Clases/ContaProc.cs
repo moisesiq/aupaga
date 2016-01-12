@@ -434,6 +434,17 @@ namespace Refaccionaria.App
 
         #region [ Pólizas ]
 
+        public static void ModificarImportePoliza(int iPolizaID, decimal mImporteAnterior, decimal mImporteNuevo)
+        {
+            var oDet = General.GetListOf<ContaPolizaDetalle>(c => c.ContaPolizaID == iPolizaID);
+            foreach (var oReg in oDet)
+            {
+                oReg.Cargo = ((oReg.Cargo / mImporteAnterior) * mImporteNuevo);
+                oReg.Abono = ((oReg.Abono / mImporteAnterior) * mImporteNuevo);
+                Guardar.Generico<ContaPolizaDetalle>(oReg);
+            }
+        }
+
         public static void BorrarPoliza(int iPolizaID)
         {
             var oPoliza = General.GetEntity<ContaPoliza>(c => c.ContaPolizaID == iPolizaID);
@@ -2646,7 +2657,8 @@ namespace Refaccionaria.App
 
         #endregion
 
-        #region [ Uso especial ]
+ 
+        #region [ Crear pólizas para procesos específicos ]
 
         public static ContaPoliza CrearPolizaTemporalTicketCredito(int iVentaID, decimal mImporte)
         {
@@ -2698,6 +2710,54 @@ namespace Refaccionaria.App
             var oPoliza = General.GetEntity<ContaPoliza>(c => c.RelacionTabla == Cat.Tablas.Venta && c.RelacionID == iVentaID && c.Origen == "Ticket Crédito (Temporal)");
             if (oPoliza != null)
                 ContaProc.BorrarPoliza(oPoliza.ContaPolizaID);
+        }
+
+        public static void CrearPolizasDeGastoContable(ContaEgreso oGasto)
+        {
+            ContaPoliza oPoliza = null;
+            var oCuentaAux = General.GetEntity<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == oGasto.ContaCuentaAuxiliarID);
+
+            // Se verifica lo devengado, para hacer una póliza por cada devengado
+            var oDev = General.GetListOf<ContaEgresoDevengado>(c => c.ContaEgresoID == oGasto.ContaEgresoID);
+            // Si no hay devengados, se agrega uno con el importe del gasto, para que sí se haga la póliza del gasto
+            if (oDev.Count == 0)
+                oDev.Add(new ContaEgresoDevengado() { SucursalID = oGasto.SucursalID, Importe = oGasto.Importe });
+
+            // Se comienzan a hacer las pólizas correspondientes
+            foreach (var oReg in oDev)
+            {
+                // Si el importe es cero, no se hace nada
+                if (oReg.Importe == 0)
+                    continue;
+
+                // Se crea la póliza normal del gasto, después se ajusta el importe.
+                if (oGasto.TipoDocumentoID == Cat.TiposDeDocumento.Factura)
+                {
+                    if (oGasto.TipoFormaPagoID == Cat.FormasDePago.Efectivo)
+                    {
+                        oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GastoFacturadoEfectivo, oGasto.ContaEgresoID, oGasto.FolioFactura
+                            , oGasto.Observaciones, oReg.SucursalID, oGasto.Fecha);
+                    }
+                    else
+                    {
+                        if (oGasto.BancoCuentaID == Cat.CuentasBancarias.Banamex || oGasto.BancoCuentaID == Cat.CuentasBancarias.Scotiabank)
+                            oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GastoFacturadoBanco, oGasto.ContaEgresoID, oGasto.FolioFactura
+                                , oGasto.Observaciones, oReg.SucursalID, oGasto.Fecha);
+                        else
+                            oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GastoContableFacturadoBancoCpcp, oGasto.ContaEgresoID
+                                , oGasto.FolioFactura, oGasto.Observaciones, oReg.SucursalID, oGasto.Fecha);
+                    }
+                }
+                else
+                {
+                    oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GastoNotaEfectivo, oGasto.ContaEgresoID, oGasto.FolioFactura
+                        , (oCuentaAux.CuentaAuxiliar + " / " + oGasto.Observaciones), oReg.SucursalID, oGasto.Fecha);
+                }
+
+                // Se ajusta el importe según el devengado que sea, si es diferente
+                if (oReg.Importe != oGasto.Importe)
+                    ContaProc.ModificarImportePoliza(oPoliza.ContaPolizaID, oGasto.Importe, oReg.Importe);
+            }
         }
 
         #endregion

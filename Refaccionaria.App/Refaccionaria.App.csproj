@@ -193,11 +193,11 @@
     <Compile Include="Contabilidad\CuentasPorSemana.Designer.cs">
       <DependentUpon>CuentasPorSemana.cs</DependentUpon>
     </Compile>
-    <Compile Include="Contabilidad\DepositoEfectivo.cs">
+    <Compile Include="Contabilidad\Formas\DepositoEfectivoResg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Contabilidad\DepositoEfectivo.Designer.cs">
-      <DependentUpon>DepositoEfectivo.cs</DependentUpon>
+    <Compile Include="Contabilidad\Formas\DepositoEfectivoResg.Designer.cs">
+      <DependentUpon>DepositoEfectivoResg.cs</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\MovimientoBancarioGen.cs">
       <SubType>Form</SubType>
@@ -1465,8 +1465,8 @@
     <EmbeddedResource Include="Contabilidad\CuentasPorSemana.resx">
       <DependentUpon>CuentasPorSemana.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Contabilidad\DepositoEfectivo.resx">
-      <DependentUpon>DepositoEfectivo.cs</DependentUpon>
+    <EmbeddedResource Include="Contabilidad\Formas\DepositoEfectivoResg.resx">
+      <DependentUpon>DepositoEfectivoResg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Contabilidad\MovimientoBancarioGen.resx">
       <DependentUpon>MovimientoBancarioGen.cs</DependentUpon>
@@ -2284,9 +2284,7 @@
       <Private>False</Private>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contabilidad\Formas\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

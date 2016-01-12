@@ -1086,8 +1086,8 @@ namespace Refaccionaria.App
                     // Se genera la póliza especial correspondiente (AfeConta)
                     var oPoliza = ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Diario, string.Format("TRASPASO ORIGEN {0:00} DESTINO {1:00}",
                         this.cboUbicacionOrigen.SelectedValue, this.cboUbicacionDestino.SelectedValue), Cat.ContaCuentasAuxiliares.Inventario
-                        , Cat.ContaCuentasAuxiliares.Inventario, mCostoTotal, ResU.Respuesta.NombreUsuario, Cat.Tablas.MovimientoInventario, traspaso.MovimientoInventarioID
-                        , Helper.ConvertirEntero(this.cboUbicacionOrigen.SelectedValue));
+                        , Cat.ContaCuentasAuxiliares.Inventario, mCostoTotal, traspaso.MovimientoInventarioID.ToString()
+                        , Cat.Tablas.MovimientoInventario, traspaso.MovimientoInventarioID, Helper.ConvertirEntero(this.cboUbicacionOrigen.SelectedValue));
                     var oCuentaQuitar = General.GetEntity<ContaPolizaDetalle>(c => c.ContaPolizaID == oPoliza.ContaPolizaID && c.Cargo > 0);
                     if (oCuentaQuitar != null)
                     {

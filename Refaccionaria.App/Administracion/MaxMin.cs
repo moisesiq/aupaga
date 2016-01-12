@@ -473,7 +473,8 @@ namespace Refaccionaria.App
             this.dgvDetalle.Rows.Clear();
             foreach (var oParte in oMaxMin)
             {
-                iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, true, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
+                bool bSel = (oParte.VentasTotal > 0 || oParte.Maximo > 0);
+                iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, bSel, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
                     , oParte.Existencia, oParte.UnidadEmpaque, oParte.TiempoReposicion, oParte.AbcDeNegocio, oParte.AbcDeVentas, oParte.AbcDeUtilidad
                     , oParte.VentasTotal, oParte.CantidadTotal, oParte.UtilidadTotal, oParte.Fijo, oParte.Minimo, oParte.Maximo, null, null
                     , oParte.ParteMaxMinReglaID, oParte.FechaCalculo);

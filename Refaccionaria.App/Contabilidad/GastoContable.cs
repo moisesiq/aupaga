@@ -304,36 +304,11 @@ namespace Refaccionaria.App
             // Se manda devengar automáticamente, si aplica
             ContaProc.GastoVerDevengarAutomaticamente(oGasto);
             
-            // Se crea la póliza contable correspondiente (AfeConta), sólo cuando es nuevo
+            // Se ejecutan procesos para gastos nuevos únicamente
             if (!this.EsMod)
             {
-                ContaPoliza oPoliza = null;
-                var oCuentaAux = General.GetEntity<ContaCuentaAuxiliar>(c => c.ContaCuentaAuxiliarID == oGasto.ContaCuentaAuxiliarID);
-
-                if (oGasto.TipoDocumentoID == Cat.TiposDeDocumento.Factura)
-                {
-                    if (oGasto.TipoFormaPagoID == Cat.FormasDePago.Efectivo)
-                    {
-                        oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GastoFacturadoEfectivo, oGasto.ContaEgresoID, oGasto.FolioFactura, oGasto.Observaciones);
-                    }
-                    else
-                    {
-                        if (oGasto.BancoCuentaID == Cat.CuentasBancarias.Banamex || oGasto.BancoCuentaID == Cat.CuentasBancarias.Scotiabank)
-                            oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GastoFacturadoBanco, oGasto.ContaEgresoID, oGasto.FolioFactura, oGasto.Observaciones);
-                        else
-                            oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GastoContableFacturadoBancoCpcp, oGasto.ContaEgresoID
-                                , oGasto.FolioFactura, oGasto.Observaciones);
-                    }
-                }
-                else
-                {
-                    oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.GastoNotaEfectivo, oGasto.ContaEgresoID, oGasto.FolioFactura
-                        , (oCuentaAux.CuentaAuxiliar + " / " + oGasto.Observaciones));
-                }
-
-                // Se modifica la fecha de la póliza creada, para que conincida con la fecha especificada para el gasto
-                oPoliza.Fecha = oGasto.Fecha;
-                Guardar.Generico<ContaPoliza>(oPoliza);
+                // Se crean la pólizas contable correspondientes (AfeConta),
+                ContaProc.CrearPolizasDeGastoContable(oGasto);
 
                 // Se crea el movimiento bancario correspondiente, si aplica
                 // Como se afecta la cuenta de bancos, se crea el movimiento bancario para mandarlo a conciliación y así llevar el control de todos los

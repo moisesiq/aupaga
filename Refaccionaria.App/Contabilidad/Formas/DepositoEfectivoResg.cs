@@ -1,40 +1,62 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Linq;
 using System.Data.Objects;
+using System.Linq;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
 
 namespace Refaccionaria.App
 {
-    public partial class DepositoEfectivo : MovimientoBancarioGen
+    public partial class DepositoEfectivoResg : Form
     {
-        public DepositoEfectivo(int iBancoCuentaID)
+        ControlError ctlError = new ControlError();
+        ControlError ctlAdv = new ControlError() { Icon = Properties.Resources._16_Ico_Advertencia };
+
+        public DepositoEfectivoResg(int iBancoCuentaID)
         {
             InitializeComponent();
 
             this.OrigenBancoCuentaID = iBancoCuentaID;
         }
 
+        #region [ Propiedades ]
+
+        public int OrigenBancoCuentaID { get; set; }
+
+        #endregion
+
         #region [ Eventos ]
 
-        private void DepositoEfectivo_Load(object sender, EventArgs e)
+        private void DepositoEfectivoResg_Load(object sender, EventArgs e)
         {
-            this.dtpFecha.Value = DateTime.Now.AddDays(-1);
+            this.dtpFechaSugerido.Value = DateTime.Now.AddDays(-1);
 
             // Se llena el importe total de resguardo matriz
-            var oResguardos = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.ContaCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.Resguardo
-                && c.Cargo > 0 && c.SucursalID == GlobalClass.SucursalID);
-            this.lblImporteInfo.Text = oResguardos.Sum(c => c.Cargo).ToString(GlobalClass.FormatoMoneda);
+            var oResguardos = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.ContaCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.Resguardo);
+            this.lblImporteInfo.Text = oResguardos.Sum(c => c.Cargo - c.Abono).ToString(GlobalClass.FormatoMoneda);
             // Se calcula el importe correspondiente
             this.CalcularImporteDia();
         }
 
-        private void dtpFecha_ValueChanged(object sender, EventArgs e)
+        private void dtpFechaSugerido_ValueChanged(object sender, EventArgs e)
         {
-            if (this.dtpFecha.Focused)
+            if (this.dtpFechaSugerido.Focused)
                 this.CalcularImporteDia();
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            if (this.AccionGuardar())
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         #endregion
@@ -43,27 +65,37 @@ namespace Refaccionaria.App
 
         private void CalcularImporteDia()
         {
-            DateTime dDia = this.dtpFecha.Value.Date;
+            Cargando.Mostrar();
+
+            DateTime dDia = this.dtpFechaSugerido.Value.Date;
             var oFacturasEfe = General.GetListOf<VentasPagosDetalleAvanzadoView>(c => c.SucursalID == GlobalClass.SucursalID && c.Facturada
                 && c.VentaEstatusID == Cat.VentasEstatus.Completada && c.FormaDePagoID == Cat.FormasDePago.Efectivo && EntityFunctions.TruncateTime(c.Fecha) == dDia);
-            var oTicketsBanco = General.GetListOf<VentasPagosDetalleAvanzadoView>(c => c.SucursalID == GlobalClass.SucursalID && !c.Facturada
+            var oTicketsNoEfe = General.GetListOf<VentasPagosDetalleAvanzadoView>(c => c.SucursalID == GlobalClass.SucursalID && !c.Facturada
                 && c.VentaEstatusID == Cat.VentasEstatus.Completada
-                && (c.FormaDePagoID == Cat.FormasDePago.Cheque || c.FormaDePagoID == Cat.FormasDePago.Tarjeta || c.FormaDePagoID == Cat.FormasDePago.Transferencia)
+                && (c.FormaDePagoID == Cat.FormasDePago.Cheque || c.FormaDePagoID == Cat.FormasDePago.Tarjeta || c.FormaDePagoID == Cat.FormasDePago.Transferencia
+                || c.FormaDePagoID == Cat.FormasDePago.Vale)
                 && EntityFunctions.TruncateTime(c.Fecha) == dDia);
             var oFacturaGlobal = General.GetEntity<CajaFacturaGlobal>(c => c.Dia == dDia);
+            var oDevEfe = General.GetListOf<VentasDevolucionesView>(c => c.SucursalID == GlobalClass.SucursalID && c.FormaDePagoID == Cat.FormasDePago.Efectivo
+                && EntityFunctions.TruncateTime(c.Fecha) == dDia);
+
             decimal mFacturasEfe = oFacturasEfe.Sum(c => c.Importe);
-            decimal mTicketsBanco = oTicketsBanco.Sum(c => c.Importe);
+            decimal mTicketsNoEfe = oTicketsNoEfe.Sum(c => c.Importe);
             decimal mFacturaGlobal = (oFacturaGlobal == null ? 0 : oFacturaGlobal.Facturado);
-            this.txtImporte.Text = (mFacturasEfe - mTicketsBanco + mFacturaGlobal).ToString();
+            decimal mDevEfe = oDevEfe.Sum(c => c.Total).Valor();
+            // this.txtImporte.Text = (mFacturasEfe - mTicketsNoEfe + mFacturaGlobal - mDevEfe).ToString();
+            this.lblImporteSugerido.Text = (mFacturasEfe - mTicketsNoEfe + mFacturaGlobal - mDevEfe).ToString(GlobalClass.FormatoMoneda);
 
             // Se muestra o no el ícono de advertencia
             if (oFacturaGlobal == null)
                 this.ctlAdv.PonerError(this.txtImporte, "No se encontró factura global el día especificado.");
             else
                 this.ctlAdv.QuitarError(this.txtImporte);
+
+            Cargando.Cerrar();
         }
 
-        protected override bool AccionGuardar()
+        private bool AccionGuardar()
         {
             if (!this.Validar())
                 return false;
@@ -71,7 +103,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             // Se crea el movimiento bancario
-            DateTime dFecha = DateTime.Now;  // Se toma la fecha de hoy
+            DateTime dFecha = this.dtpFechaMovimiento.Value;
             var oMovBanc = new BancoCuentaMovimiento()
             {
                 BancoCuentaID = this.OrigenBancoCuentaID,
@@ -87,9 +119,8 @@ namespace Refaccionaria.App
             ContaProc.RegistrarMovimientoBancario(oMovBanc);
 
             // Se crea la póliza correspondiente (AfeConta)
-            var oPoliza = ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.DepositoBancario, oMovBanc.BancoCuentaMovimientoID, oMovBanc.Referencia, oMovBanc.Concepto);
-            oPoliza.Fecha = oMovBanc.Fecha;
-            Guardar.Generico<ContaPoliza>(oPoliza);
+            ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.DepositoBancario, oMovBanc.BancoCuentaMovimientoID
+                , oMovBanc.Referencia, oMovBanc.Concepto, oMovBanc.Fecha);
 
             Cargando.Cerrar();
 

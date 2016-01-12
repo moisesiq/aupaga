@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblImporteSugerido = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ctlError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctlAdv)).BeginInit();
             this.SuspendLayout();
@@ -116,11 +117,22 @@
             this.textBox1.Text = "Sumatoria de las Facturas pagadas en efectivo menos los tickets pagados con tarje" +
     "ta, cheque o transferencia, más la factura global del día.";
             // 
+            // lblImporteSugerido
+            // 
+            this.lblImporteSugerido.AutoSize = true;
+            this.lblImporteSugerido.ForeColor = System.Drawing.Color.White;
+            this.lblImporteSugerido.Location = new System.Drawing.Point(227, 63);
+            this.lblImporteSugerido.Name = "lblImporteSugerido";
+            this.lblImporteSugerido.Size = new System.Drawing.Size(34, 13);
+            this.lblImporteSugerido.TabIndex = 10;
+            this.lblImporteSugerido.Text = "$0.00";
+            // 
             // DepositoEfectivo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(303, 222);
+            this.Controls.Add(this.lblImporteSugerido);
             this.Controls.Add(this.textBox1);
             this.Name = "DepositoEfectivo";
             this.Text = "Deposito efectivo";
@@ -138,6 +150,7 @@
             this.Controls.SetChildIndex(this.lblImporteInfo, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.cmbBancoCuenta, 0);
+            this.Controls.SetChildIndex(this.lblImporteSugerido, 0);
             ((System.ComponentModel.ISupportInitialize)(this.ctlError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ctlAdv)).EndInit();
             this.ResumeLayout(false);
@@ -148,5 +161,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lblImporteSugerido;
     }
 }

@@ -222,7 +222,7 @@ namespace Refaccionaria.App
 
         private void btnConDepositoEfectivo_Click(object sender, EventArgs e)
         {
-            var frmDeposito = new DepositoEfectivo(this.ConBancoCuentaID);
+            var frmDeposito = new DepositoEfectivoResg(this.ConBancoCuentaID);
             if (frmDeposito.ShowDialog(Principal.Instance) == DialogResult.OK)
                 this.LlenarConciliaciones();
             frmDeposito.Dispose();
