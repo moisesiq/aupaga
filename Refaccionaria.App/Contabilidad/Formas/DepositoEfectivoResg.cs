@@ -32,8 +32,10 @@ namespace Refaccionaria.App
         {
             this.dtpFechaSugerido.Value = DateTime.Now.AddDays(-1);
 
-            // Se llena el importe total de resguardo matriz
-            var oResguardos = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.ContaCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.Resguardo);
+            // Se llena el importe total de resguardo
+            DateTime dInicioAnio = new DateTime(DateTime.Now.Year, 1, 1);
+            var oResguardos = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.ContaCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.Resguardo
+                && c.FechaPoliza >= dInicioAnio);
             this.lblImporteInfo.Text = oResguardos.Sum(c => c.Cargo - c.Abono).ToString(GlobalClass.FormatoMoneda);
             // Se calcula el importe correspondiente
             this.CalcularImporteDia();
