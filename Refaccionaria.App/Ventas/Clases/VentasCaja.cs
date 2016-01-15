@@ -1265,7 +1265,7 @@ namespace Refaccionaria.App
             decimal mFacturarVales = 0, mCostoVales = 0;
             string sCancelaciones = "", sDevoluciones = "";
             decimal mCostoTotal = 0;
-            // var oVentasProc = new List<int>();
+            var oVentasProc = new List<int>();
             var oPagosProc = new List<int>();
             foreach (var oReg in oPagosDet)
             {
@@ -1292,20 +1292,25 @@ namespace Refaccionaria.App
                     // Se suma el costo, si es venta a crédito, se calcula un proporcional
                     if (!oPagosProc.Contains(oReg.VentaPagoID.Valor()))
                     {
-                        var oVentaDet = General.GetListOf<VentaDetalle>(c => c.VentaID == oReg.VentaID && c.Estatus);
-                        decimal mCosto = oVentaDet.Sum(c => c.Costo * c.Cantidad);
-                        decimal mPrecio = oVentaDet.Sum(c => (c.PrecioUnitario + c.Iva) * c.Cantidad);
-                        // Si la venta no está pagada, se calcula un proporcional
-                        if (oReg.VentaEstatusID != Cat.VentasEstatus.Completada && mPrecio > 0)
-                            mCosto = ((oReg.ImportePago.Valor() / mPrecio) * mCosto);
-                        mCostoTotal += mCosto;
-                        oPagosProc.Add(oReg.VentaPagoID.Valor());
+                        if (!oVentasProc.Contains(oReg.VentaID.Valor()))
+                        {
+                            var oVentaDet = General.GetListOf<VentaDetalle>(c => c.VentaID == oReg.VentaID && c.Estatus);
+                            decimal mCosto = oVentaDet.Sum(c => c.Costo * c.Cantidad);
+                            decimal mPrecio = oVentaDet.Sum(c => (c.PrecioUnitario + c.Iva) * c.Cantidad);
+                            // Si la venta no está pagada, se calcula un proporcional
+                            if (oReg.VentaEstatusID != Cat.VentasEstatus.Completada && mPrecio > 0)
+                                mCosto = ((oReg.ImportePago.Valor() / mPrecio) * mCosto);
+                            mCostoTotal += mCosto;
+                            oVentasProc.Add(oReg.VentaID.Valor());
+                        }
 
                         // Para diferenciar vales
                         var oPagoVales = General.GetListOf<VentaPagoDetalle>(c => c.VentaPagoID == oReg.VentaPagoID && c.Importe > 0
                             && c.TipoFormaPagoID == Cat.FormasDePago.Vale && c.Estatus);
                         if (oPagoVales.Count > 0)
                             mCostoVales += oPagoVales.Sum(c => c.Importe);
+
+                        oPagosProc.Add(oReg.VentaPagoID.Valor());
                     }
                 }
                 else
