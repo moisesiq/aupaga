@@ -8,6 +8,7 @@ using System.Net;
 using System.Xml;
 using System.Threading;
 using FastReport;
+using AdvancedDataGridView;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -328,7 +329,7 @@ namespace Refaccionaria.App
             oGrafico.Invalidate();
             oGrafico.Update();
         }
-
+        
         #endregion
                 
         #region [ Reportes ]

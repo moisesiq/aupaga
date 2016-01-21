@@ -1349,6 +1349,9 @@ namespace Refaccionaria.App
                 case Cat.ContaAfectaciones.GarantiaVentaValeFactura:
                     ContaProc.AfectarConPrecioSinIvaGarantia(ref oDetalle, iId);
                     break;
+                case Cat.ContaAfectaciones.ValeDirecto:
+                    ContaProc.AfectarConSubtotalVale(ref oDetalle, iId);
+                    break;
             }
             return oDetalle;
         }

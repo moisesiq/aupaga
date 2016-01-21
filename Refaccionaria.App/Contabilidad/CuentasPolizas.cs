@@ -18,8 +18,15 @@ namespace Refaccionaria.App
         class ColumnasArbol
         {
             public const int Id = 0;
+            public const int Cuenta = 2;
+            public const int Total = 3;
+        }
+        class NivelesArbol
+        {
             public const int Cuenta = 1;
-            public const int Total = 1;
+            public const int Subcuenta = 2;
+            public const int CuentaDeMayor = 3;
+            public const int CuentaAuxiliar = 4;
         }
 
         public CuentasPolizas()
@@ -135,6 +142,25 @@ namespace Refaccionaria.App
         private void btnRecibirResguardo_Click(object sender, EventArgs e)
         {
             this.RecibirResguardo();
+        }
+
+        private void tgvCuentas_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            
+        }
+
+        private void tgvCuentas_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var oFila = this.tgvCuentas.Rows[e.RowIndex];
+                if (oFila != null)
+                {
+                    if (this.tgvCuentas.GetNodeForRow(e.RowIndex).Level == 3 &&
+                        Helper.ConvertirEntero(oFila.Cells["Cuentas_Id"].Value) == Cat.ContaCuentasDeMayor.Clientes)
+                        this.cmsCuentas.Show(Cursor.Position);
+                }
+            }
         }
 
         private void tgvCuentas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -263,6 +289,11 @@ namespace Refaccionaria.App
         private void btnPolizasCambiarFecha_Click(object sender, EventArgs e)
         {
             this.PolizasCambiarFecha();
+        }
+
+        private void smiValidarClientes_Click(object sender, EventArgs e)
+        {
+            this.ValidarSaldoClientes();
         }
 
         #endregion
@@ -554,6 +585,37 @@ namespace Refaccionaria.App
             frmValor.Dispose();
         }
 
+        private void ValidarSaldoClientes()
+        {
+            // Se busca el nodo de Clientes
+            TreeGridNode oNodoCli = null;
+            foreach (DataGridViewRow oFila in this.tgvCuentas.Rows)
+            {
+                if (Helper.ConvertirEntero(oFila.Cells["Cuentas_Tipo"].Value) == NivelesArbol.CuentaDeMayor
+                && Helper.ConvertirEntero(oFila.Cells["Cuentas_Id"].Value) == Cat.ContaCuentasDeMayor.Clientes)
+                    oNodoCli = this.tgvCuentas.GetNodeForRow(oFila.Index);
+            }
+            if (oNodoCli == null)
+                return;
+
+            Cargando.Mostrar();
+
+            var oCuentasCli = General.GetListOf<ContaCuentaAuxiliar>(c => c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.Clientes);
+            var oAdeudos = General.GetListOf<ClientesCreditoView>(c => c.Adeudo > 0);
+            foreach (var oNodo in oNodoCli.Nodes)
+            {
+                int iCuentaID = Helper.ConvertirEntero(oNodo.Cells[ColumnasArbol.Id].Value);
+                var oCuentaAux = oCuentasCli.FirstOrDefault(c => c.ContaCuentaAuxiliarID == iCuentaID);
+                int iClienteID = (oCuentaAux == null ? 0 : oCuentaAux.RelacionID.Valor());
+                decimal mSaldo = Helper.ConvertirDecimal(oNodo.Cells[ColumnasArbol.Total].Value);
+                var oClienteAd = oAdeudos.FirstOrDefault(c => c.ClienteID == iClienteID);
+                decimal mAdeudo = (oClienteAd == null ? 0 : oClienteAd.Adeudo.Valor());
+                oNodo.DefaultCellStyle.ForeColor = (mSaldo == mAdeudo ? Color.Black : Color.Red);
+            }
+
+            Cargando.Cerrar();
+        }
+
         #endregion
 
         #region [ Públicos ]
@@ -594,7 +656,7 @@ namespace Refaccionaria.App
                 if (oCuenta.Cuenta != sCuenta)
                 {
                     sCuenta = oCuenta.Cuenta;
-                    oNodoCuenta = this.tgvCuentas.Nodes.Add(oCuenta.ContaCuentaID, sCuenta);
+                    oNodoCuenta = this.tgvCuentas.Nodes.Add(oCuenta.ContaCuentaID, NivelesArbol.Cuenta, sCuenta);
                     oNodoCuenta.DefaultCellStyle.Font = new Font(this.tgvCuentas.Font.FontFamily, 10);
                     this.oIndiceCuentas.Add(new ContaModelos.IndiceCuentasContables() { Cuenta = sCuenta.ToLower(), Nivel = 1, IndiceCuenta = oNodoCuenta.Index });
                     sSubcuenta = "";
@@ -605,7 +667,7 @@ namespace Refaccionaria.App
                 else if (oCuenta.Subcuenta != sSubcuenta)
                 {
                     sSubcuenta = oCuenta.Subcuenta;
-                    oNodoSubcuenta = oNodoCuenta.Nodes.Add(oCuenta.ContaSubcuentaID, sSubcuenta);
+                    oNodoSubcuenta = oNodoCuenta.Nodes.Add(oCuenta.ContaSubcuentaID, NivelesArbol.Subcuenta, sSubcuenta);
                     oNodoSubcuenta.DefaultCellStyle.Font = new Font(this.tgvCuentas.Font.FontFamily, 9);
                     this.oIndiceCuentas.Add(new ContaModelos.IndiceCuentasContables() { Cuenta = sSubcuenta.ToLower(), Nivel = 2
                         , IndiceCuenta = oNodoCuenta.Index, IndiceSubcuenta = oNodoSubcuenta.Index });
@@ -618,7 +680,7 @@ namespace Refaccionaria.App
                     if (oCuenta.CuentaDeMayor != sCuentaDeMayor)
                     {
                         sCuentaDeMayor = oCuenta.CuentaDeMayor;
-                        oNodoCuentaDeMayor = oNodoSubcuenta.Nodes.Add(oCuenta.ContaCuentaDeMayorID, sCuentaDeMayor);
+                        oNodoCuentaDeMayor = oNodoSubcuenta.Nodes.Add(oCuenta.ContaCuentaDeMayorID, NivelesArbol.CuentaDeMayor, sCuentaDeMayor);
                         oNodoCuentaDeMayor.DefaultCellStyle.Font = new Font(this.tgvCuentas.Font, FontStyle.Bold);
                         this.oIndiceCuentas.Add(new ContaModelos.IndiceCuentasContables() { Cuenta = sCuentaDeMayor.ToLower(), Nivel = 3
                             , IndiceCuenta = oNodoCuenta.Index, IndiceSubcuenta = oNodoSubcuenta.Index, IndiceCuentaDeMayor = oNodoCuentaDeMayor.Index });
@@ -631,6 +693,7 @@ namespace Refaccionaria.App
                     continue;
                 var oNodoCuentaAux = oNodoCuentaDeMayor.Nodes.Add(
                     oCuenta.ContaCuentaAuxiliarID,
+                    NivelesArbol.CuentaAuxiliar,
                     oCuenta.CuentaAuxiliar,
                     oCuenta.Total,
                     oCuenta.Matriz,
@@ -647,14 +710,14 @@ namespace Refaccionaria.App
 
                 // Se agregan totales para los niveles superiores
                 decimal mImporte = 0;
-                for (int iCol = 2; iCol < this.tgvCuentas.Columns.Count; iCol++)
+                for (int iCol = ColumnasArbol.Total; iCol < this.tgvCuentas.Columns.Count; iCol++)
                 {
                     switch (iCol)
                     {
-                        case 2: mImporte = oCuenta.Total.Valor(); break;
-                        case 3: mImporte = oCuenta.Matriz.Valor(); break;
-                        case 4: mImporte = oCuenta.Suc02.Valor(); break;
-                        case 5: mImporte = oCuenta.Suc03.Valor(); break;
+                        case 3: mImporte = oCuenta.Total.Valor(); break;
+                        case 4: mImporte = oCuenta.Matriz.Valor(); break;
+                        case 5: mImporte = oCuenta.Suc02.Valor(); break;
+                        case 6: mImporte = oCuenta.Suc03.Valor(); break;
                     }
                     oNodoCuentaDeMayor.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoCuentaDeMayor.Cells[iCol].Value) + mImporte);
                     oNodoSubcuenta.Cells[iCol].Value = (Helper.ConvertirDecimal(oNodoSubcuenta.Cells[iCol].Value) + mImporte);
