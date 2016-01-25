@@ -2120,21 +2120,21 @@ namespace Refaccionaria.App
             foreach (var oReg in oLineaCarV)
             {
                 // Se agrega un contenedor para la etiqueta y el control
-                var oPanel = new Panel() { Width = 211, Height = 20 };
+                var oPanel = new Panel() { Width = 201, Height = 20 };
                 this.flpCaracteristicas.Controls.Add(oPanel);
                 // Se agrega la etiqueta
                 oPanel.Controls.Add(new Label() { Text = oReg.Caracteristica, TextAlign = ContentAlignment.MiddleLeft, Width = 60 });
                 // Se agrega el control
                 if (oReg.Multiple.Valor())
                 {
-                    var oCombo = new ComboMultiSel() { Left = 61, Width = 150 };
+                    var oCombo = new ComboMultiSel() { Left = 61, Width = 140 };
                     oCombo.Items.AddRange(oReg.MultipleOpciones.Split(','));
                     oPanel.Controls.Add(oCombo);
                     // oCombo.Width = 140;
                 }
                 else
                 {
-                    oPanel.Controls.Add(new TextBox() { Left = 61, Width = 150 });
+                    oPanel.Controls.Add(new TextBox() { Left = 61, Width = 140 });
                 }
                 // Se llena el control
                 var oParteCar = oParteCars.FirstOrDefault(c => c.CaracteristicaID == oReg.CaracteristicaID);
@@ -2146,14 +2146,18 @@ namespace Refaccionaria.App
 
         private void GuardarCaracteristicas()
         {
-            foreach (Control oControl in this.flpCaracteristicas.Controls)
+            foreach (Control oCaract in this.flpCaracteristicas.Controls)
             {
+                var oControl = oCaract.Controls[1];
                 if (oControl.Tag == null) continue;
                 int iCaracteristicaID = Helper.ConvertirEntero(oControl.Tag);
                 var oParteCar = General.GetEntity<ParteCaracteristica>(c => c.ParteID == this.oParte.ParteID && c.CaracteristicaID == iCaracteristicaID);
                 if (oParteCar == null)
                     oParteCar = new ParteCaracteristica() { ParteID = this.oParte.ParteID, CaracteristicaID = iCaracteristicaID };
-                oParteCar.Valor = oControl.Text;
+                if (oControl is ComboMultiSel)
+                    oParteCar.Valor = string.Join(",", (oControl as ComboMultiSel).CheckedItems);
+                else
+                    oParteCar.Valor = oControl.Text;
                 Guardar.Generico<ParteCaracteristica>(oParteCar);
             }
         }
