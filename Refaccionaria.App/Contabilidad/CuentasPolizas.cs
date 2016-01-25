@@ -611,6 +611,7 @@ namespace Refaccionaria.App
                 var oClienteAd = oAdeudos.FirstOrDefault(c => c.ClienteID == iClienteID);
                 decimal mAdeudo = (oClienteAd == null ? 0 : oClienteAd.Adeudo.Valor());
                 oNodo.DefaultCellStyle.ForeColor = (mSaldo == mAdeudo ? Color.Black : Color.Red);
+                oNodo.DefaultCellStyle.Font = (mSaldo == mAdeudo ? this.tgvCuentas.DefaultCellStyle.Font : new Font(this.tgvCuentas.DefaultCellStyle.Font, FontStyle.Bold));
             }
 
             Cargando.Cerrar();
