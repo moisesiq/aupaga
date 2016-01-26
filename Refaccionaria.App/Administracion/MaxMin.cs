@@ -474,7 +474,7 @@ namespace Refaccionaria.App
             var oMaxMin = General.ExecuteProcedure<pauPartesMaxMin_Res>("pauPartesMaxMin", oParams);
             DateTime dFechaDeCalc = this.dtpFechaDeCalculo.Value.Date;
             if (dFechaDeCalc < DateTime.Now)
-                oMaxMin = oMaxMin.Where(c => c.FechaCalculo.Value.Date < dFechaDeCalc).ToList();
+                oMaxMin = oMaxMin.Where(c => c.FechaCalculo.Valor() < dFechaDeCalc).ToList();
 
             int iFila;
             this.dgvDetalle.Rows.Clear();
@@ -733,9 +733,6 @@ namespace Refaccionaria.App
             Cargando.Cerrar();
             // Se mandan a procesar los fijos
             this.btnProcesar_Click(this, null);
-            // Se vuelve a poner el dato de fijo
-            foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
-                oFila.Cells["Fijo"].Value = true;
         }
 
         private void GuardarMaxMin()

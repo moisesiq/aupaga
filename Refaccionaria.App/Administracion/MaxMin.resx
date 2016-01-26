@@ -358,7 +358,7 @@
     <value>3, 3</value>
   </data>
   <data name="dgvDetalle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 262</value>
+    <value>1477, 283</value>
   </data>
   <data name="dgvDetalle.TabIndex" type="System.Int32, mscorlib">
     <value>160</value>
@@ -382,7 +382,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpDetalle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 268</value>
+    <value>1483, 289</value>
   </data>
   <data name="tbpDetalle.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -415,7 +415,7 @@
     <value>0, 0</value>
   </data>
   <data name="trvPartesCalcular.Size" type="System.Drawing.Size, System.Drawing">
-    <value>640, 285</value>
+    <value>640, 262</value>
   </data>
   <data name="trvPartesCalcular.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -451,7 +451,7 @@
     <value>0, 0</value>
   </data>
   <data name="trvVentasGlobales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>636, 285</value>
+    <value>636, 262</value>
   </data>
   <data name="trvVentasGlobales.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -481,7 +481,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 285</value>
+    <value>1280, 262</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>640</value>
@@ -508,7 +508,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpCriteriosGenerales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 291</value>
+    <value>1286, 268</value>
   </data>
   <data name="tbpCriteriosGenerales.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -817,7 +817,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpReglas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 291</value>
+    <value>1286, 268</value>
   </data>
   <data name="tbpReglas.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1057,7 +1057,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpEquivalentes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 291</value>
+    <value>1286, 268</value>
   </data>
   <data name="tbpEquivalentes.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1135,7 +1135,7 @@
     <value>3, 3</value>
   </data>
   <data name="dgvSinMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 285</value>
+    <value>1280, 262</value>
   </data>
   <data name="dgvSinMaxMin.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -1159,7 +1159,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpSinMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 291</value>
+    <value>1286, 268</value>
   </data>
   <data name="tbpSinMaxMin.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1180,10 +1180,10 @@
     <value>4</value>
   </data>
   <data name="tabMaxMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
+    <value>3, 34</value>
   </data>
   <data name="tabMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1294, 297</value>
+    <value>1491, 318</value>
   </data>
   <data name="tabMaxMin.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1246,7 +1246,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1212, 403</value>
+    <value>1409, 403</value>
   </data>
   <data name="lblSem12.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1282,7 +1282,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1212, 428</value>
+    <value>1409, 428</value>
   </data>
   <data name="lblSem25.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1318,7 +1318,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem05.Location" type="System.Drawing.Point, System.Drawing">
-    <value>946, 403</value>
+    <value>1143, 403</value>
   </data>
   <data name="lblSem05.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1354,7 +1354,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>946, 428</value>
+    <value>1143, 428</value>
   </data>
   <data name="lblSem18.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1390,7 +1390,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem09.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1098, 403</value>
+    <value>1295, 403</value>
   </data>
   <data name="lblSem09.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1426,7 +1426,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1098, 428</value>
+    <value>1295, 428</value>
   </data>
   <data name="lblSem22.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1462,7 +1462,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem02.Location" type="System.Drawing.Point, System.Drawing">
-    <value>832, 403</value>
+    <value>1029, 403</value>
   </data>
   <data name="lblSem02.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1498,7 +1498,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>832, 428</value>
+    <value>1029, 428</value>
   </data>
   <data name="lblSem15.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1570,7 +1570,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem07.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1022, 403</value>
+    <value>1219, 403</value>
   </data>
   <data name="lblSem07.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1606,7 +1606,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1022, 428</value>
+    <value>1219, 428</value>
   </data>
   <data name="lblSem20.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1678,7 +1678,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1174, 403</value>
+    <value>1371, 403</value>
   </data>
   <data name="lblSem11.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1714,7 +1714,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1174, 428</value>
+    <value>1371, 428</value>
   </data>
   <data name="lblSem24.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1750,7 +1750,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem04.Location" type="System.Drawing.Point, System.Drawing">
-    <value>908, 403</value>
+    <value>1105, 403</value>
   </data>
   <data name="lblSem04.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1786,7 +1786,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>908, 428</value>
+    <value>1105, 428</value>
   </data>
   <data name="lblSem17.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -1969,7 +1969,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1250, 403</value>
+    <value>1447, 403</value>
   </data>
   <data name="lblSem13.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2005,7 +2005,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem06.Location" type="System.Drawing.Point, System.Drawing">
-    <value>984, 403</value>
+    <value>1181, 403</value>
   </data>
   <data name="lblSem06.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2041,7 +2041,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1250, 428</value>
+    <value>1447, 428</value>
   </data>
   <data name="lblSem26.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2077,7 +2077,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>984, 428</value>
+    <value>1181, 428</value>
   </data>
   <data name="lblSem19.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2113,7 +2113,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1136, 403</value>
+    <value>1333, 403</value>
   </data>
   <data name="lblSem10.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2149,7 +2149,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem08.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1060, 403</value>
+    <value>1257, 403</value>
   </data>
   <data name="lblSem08.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2185,7 +2185,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1060, 428</value>
+    <value>1257, 428</value>
   </data>
   <data name="lblSem21.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2221,7 +2221,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem01.Location" type="System.Drawing.Point, System.Drawing">
-    <value>794, 403</value>
+    <value>991, 403</value>
   </data>
   <data name="lblSem01.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2257,7 +2257,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1136, 428</value>
+    <value>1333, 428</value>
   </data>
   <data name="lblSem23.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2293,7 +2293,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem03.Location" type="System.Drawing.Point, System.Drawing">
-    <value>870, 403</value>
+    <value>1067, 403</value>
   </data>
   <data name="lblSem03.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2329,7 +2329,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>794, 428</value>
+    <value>991, 428</value>
   </data>
   <data name="lblSem14.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -2518,7 +2518,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSem16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>870, 428</value>
+    <value>1067, 428</value>
   </data>
   <data name="lblSem16.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
@@ -3802,7 +3802,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnExportar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1117, 355</value>
+    <value>1314, 355</value>
   </data>
   <data name="btnExportar.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 23</value>
@@ -3877,7 +3877,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnProcesar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1208, 3</value>
+    <value>1405, 3</value>
   </data>
   <data name="btnProcesar.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 23</value>
@@ -3936,6 +3936,9 @@
   <data name="&gt;&gt;lblMarca.ZOrder" xml:space="preserve">
     <value>107</value>
   </data>
+  <data name="cmbSucursal.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <data name="cmbSucursal.Location" type="System.Drawing.Point, System.Drawing">
     <value>49, 5</value>
   </data>
@@ -3970,7 +3973,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnGuardar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1208, 355</value>
+    <value>1405, 355</value>
   </data>
   <data name="btnGuardar.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 23</value>
@@ -4009,7 +4012,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnMostrar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1117, 3</value>
+    <value>1314, 3</value>
   </data>
   <data name="btnMostrar.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 23</value>
@@ -4783,7 +4786,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>725, 405</value>
+    <value>922, 405</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 44</value>
@@ -4912,7 +4915,7 @@
     <value>True</value>
   </data>
   <data name="txtDescripcionMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>490, 38</value>
+    <value>687, 38</value>
   </data>
   <data name="txtDescripcionMaxMin.TabIndex" type="System.Int32, mscorlib">
     <value>316</value>
@@ -4932,11 +4935,14 @@
   <data name="chkMostrarSinVentas.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chkMostrarSinVentas.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
   <data name="chkMostrarSinVentas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 32</value>
+    <value>1073, 9</value>
   </data>
   <data name="chkMostrarSinVentas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 17</value>
+    <value>74, 17</value>
   </data>
   <data name="chkMostrarSinVentas.TabIndex" type="System.Int32, mscorlib">
     <value>317</value>
@@ -4956,9 +4962,6 @@
   <data name="&gt;&gt;chkMostrarSinVentas.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4969,16 +4972,16 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 33</value>
+    <value>1153, 12</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+    <value>83, 13</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>318</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Fecha de cálculo</value>
+    <value>Cálculo menor a</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -4993,7 +4996,7 @@
     <value>1</value>
   </data>
   <data name="dtpFechaDeCalculo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>181, 29</value>
+    <value>1241, 8</value>
   </data>
   <data name="dtpFechaDeCalculo.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -5020,7 +5023,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1300, 454</value>
+    <value>1497, 454</value>
   </data>
   <data name="&gt;&gt;ParteID.Name" xml:space="preserve">
     <value>ParteID</value>

@@ -1536,8 +1536,8 @@
             // cmbSucursal
             // 
             this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSucursal.FormattingEnabled = true;
             resources.ApplyResources(this.cmbSucursal, "cmbSucursal");
+            this.cmbSucursal.FormattingEnabled = true;
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbSucursal_SelectedIndexChanged);
             // 
