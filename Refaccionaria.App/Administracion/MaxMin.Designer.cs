@@ -42,6 +42,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -52,10 +56,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.tabMaxMin = new System.Windows.Forms.TabControl();
             this.tbpDetalle = new System.Windows.Forms.TabPage();
@@ -95,6 +95,14 @@
             this.btnReglasQuitar = new System.Windows.Forms.Button();
             this.btnReglasAgregar = new System.Windows.Forms.Button();
             this.dgvReglas = new System.Windows.Forms.DataGridView();
+            this.ParteMaxMinReglaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Cambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Regla = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reglas_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpEquivalentes = new System.Windows.Forms.TabPage();
             this.btnEquCopiarDe = new System.Windows.Forms.Button();
             this.dgvEquivalentes = new System.Windows.Forms.DataGridView();
@@ -230,14 +238,9 @@
             this.ctlProveedores = new Refaccionaria.Negocio.ComboMultiSel();
             this.cmbCambios = new Refaccionaria.Negocio.ComboEtiqueta();
             this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
-            this.ParteMaxMinReglaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Cambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Regla = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reglas_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkMostrarSinVentas = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpFechaDeCalculo = new System.Windows.Forms.DateTimePicker();
             this.tabMaxMin.SuspendLayout();
             this.tbpDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -622,6 +625,58 @@
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvReglas.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvReglas.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReglas_CellValueChanged);
+            // 
+            // ParteMaxMinReglaID
+            // 
+            resources.ApplyResources(this.ParteMaxMinReglaID, "ParteMaxMinReglaID");
+            this.ParteMaxMinReglaID.Name = "ParteMaxMinReglaID";
+            this.ParteMaxMinReglaID.ReadOnly = true;
+            // 
+            // Reglas_Cambio
+            // 
+            resources.ApplyResources(this.Reglas_Cambio, "Reglas_Cambio");
+            this.Reglas_Cambio.Name = "Reglas_Cambio";
+            this.Reglas_Cambio.ReadOnly = true;
+            this.Reglas_Cambio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Reglas_Orden
+            // 
+            resources.ApplyResources(this.Reglas_Orden, "Reglas_Orden");
+            this.Reglas_Orden.Name = "Reglas_Orden";
+            this.Reglas_Orden.ReadOnly = true;
+            // 
+            // Reglas_Regla
+            // 
+            resources.ApplyResources(this.Reglas_Regla, "Reglas_Regla");
+            this.Reglas_Regla.Name = "Reglas_Regla";
+            // 
+            // Reglas_Condicion
+            // 
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Condicion.DefaultCellStyle = dataGridViewCellStyle13;
+            resources.ApplyResources(this.Reglas_Condicion, "Reglas_Condicion");
+            this.Reglas_Condicion.Name = "Reglas_Condicion";
+            // 
+            // Reglas_Maximo
+            // 
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Maximo.DefaultCellStyle = dataGridViewCellStyle14;
+            resources.ApplyResources(this.Reglas_Maximo, "Reglas_Maximo");
+            this.Reglas_Maximo.Name = "Reglas_Maximo";
+            // 
+            // Reglas_Minimo
+            // 
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Minimo.DefaultCellStyle = dataGridViewCellStyle15;
+            resources.ApplyResources(this.Reglas_Minimo, "Reglas_Minimo");
+            this.Reglas_Minimo.Name = "Reglas_Minimo";
+            // 
+            // Reglas_Descripcion
+            // 
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Reglas_Descripcion.DefaultCellStyle = dataGridViewCellStyle16;
+            resources.ApplyResources(this.Reglas_Descripcion, "Reglas_Descripcion");
+            this.Reglas_Descripcion.Name = "Reglas_Descripcion";
             // 
             // tbpEquivalentes
             // 
@@ -1718,63 +1773,34 @@
             this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
             this.txtDescripcionMaxMin.ReadOnly = true;
             // 
-            // ParteMaxMinReglaID
+            // chkMostrarSinVentas
             // 
-            resources.ApplyResources(this.ParteMaxMinReglaID, "ParteMaxMinReglaID");
-            this.ParteMaxMinReglaID.Name = "ParteMaxMinReglaID";
-            this.ParteMaxMinReglaID.ReadOnly = true;
+            resources.ApplyResources(this.chkMostrarSinVentas, "chkMostrarSinVentas");
+            this.chkMostrarSinVentas.ForeColor = System.Drawing.Color.White;
+            this.chkMostrarSinVentas.Name = "chkMostrarSinVentas";
+            this.chkMostrarSinVentas.UseVisualStyleBackColor = true;
             // 
-            // Reglas_Cambio
+            // label3
             // 
-            resources.ApplyResources(this.Reglas_Cambio, "Reglas_Cambio");
-            this.Reglas_Cambio.Name = "Reglas_Cambio";
-            this.Reglas_Cambio.ReadOnly = true;
-            this.Reglas_Cambio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Name = "label3";
             // 
-            // Reglas_Orden
+            // dtpFechaDeCalculo
             // 
-            resources.ApplyResources(this.Reglas_Orden, "Reglas_Orden");
-            this.Reglas_Orden.Name = "Reglas_Orden";
-            this.Reglas_Orden.ReadOnly = true;
-            // 
-            // Reglas_Regla
-            // 
-            resources.ApplyResources(this.Reglas_Regla, "Reglas_Regla");
-            this.Reglas_Regla.Name = "Reglas_Regla";
-            // 
-            // Reglas_Condicion
-            // 
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Condicion.DefaultCellStyle = dataGridViewCellStyle13;
-            resources.ApplyResources(this.Reglas_Condicion, "Reglas_Condicion");
-            this.Reglas_Condicion.Name = "Reglas_Condicion";
-            // 
-            // Reglas_Maximo
-            // 
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Maximo.DefaultCellStyle = dataGridViewCellStyle14;
-            resources.ApplyResources(this.Reglas_Maximo, "Reglas_Maximo");
-            this.Reglas_Maximo.Name = "Reglas_Maximo";
-            // 
-            // Reglas_Minimo
-            // 
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Minimo.DefaultCellStyle = dataGridViewCellStyle15;
-            resources.ApplyResources(this.Reglas_Minimo, "Reglas_Minimo");
-            this.Reglas_Minimo.Name = "Reglas_Minimo";
-            // 
-            // Reglas_Descripcion
-            // 
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Reglas_Descripcion.DefaultCellStyle = dataGridViewCellStyle16;
-            resources.ApplyResources(this.Reglas_Descripcion, "Reglas_Descripcion");
-            this.Reglas_Descripcion.Name = "Reglas_Descripcion";
+            this.dtpFechaDeCalculo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpFechaDeCalculo, "dtpFechaDeCalculo");
+            this.dtpFechaDeCalculo.Name = "dtpFechaDeCalculo";
             // 
             // MaxMin
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.Controls.Add(this.dtpFechaDeCalculo);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.chkMostrarSinVentas);
             this.Controls.Add(this.txtDescripcionMaxMin);
             this.Controls.Add(this.ctlLineas);
             this.Controls.Add(this.ctlMarcas);
@@ -2089,5 +2115,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Maximo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Minimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Descripcion;
+        private System.Windows.Forms.CheckBox chkMostrarSinVentas;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtpFechaDeCalculo;
     }
 }

@@ -49,7 +49,7 @@ namespace Refaccionaria.App
             foreach (var oReg in oLineas)
                 this.ctlLineas.AgregarElemento(oReg.LineaID, oReg.NombreLinea);
             //
-            this.cmbCambios.Items.AddRange(new object[] { "0 a > 0", "> 0 a > Actual", "Actual baja a > 0 ", "Max a 0", "Max igual" });
+            this.cmbCambios.Items.AddRange(new object[] { "0 a > 0", "> 0 a > Actual", "Actual baja a > 0 ", "Max a 0", "Max igual", "Fijos" });
 
             // Se configura el grid de detalle
             this.dgvDetalle.Columns["NumeroDeParte"].ValueType = typeof(string);
@@ -95,7 +95,12 @@ namespace Refaccionaria.App
         private void cmbCambios_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.cmbCambios.Focused)
-                this.FiltroDeCambios();
+            {
+                if (this.cmbCambios.Text == "Fijos")
+                    this.ProcesarFijos();
+                else
+                    this.FiltroDeCambios();
+            }
         }
 
         private void btnMostrar_Click(object sender, EventArgs e)
@@ -467,13 +472,18 @@ namespace Refaccionaria.App
             }
             //
             var oMaxMin = General.ExecuteProcedure<pauPartesMaxMin_Res>("pauPartesMaxMin", oParams);
-
+            DateTime dFechaDeCalc = this.dtpFechaDeCalculo.Value.Date;
+            if (dFechaDeCalc < DateTime.Now)
+                oMaxMin = oMaxMin.Where(c => c.FechaCalculo.Value.Date < dFechaDeCalc).ToList();
 
             int iFila;
             this.dgvDetalle.Rows.Clear();
             foreach (var oParte in oMaxMin)
             {
                 bool bSel = (oParte.VentasTotal > 0 || oParte.Maximo > 0);
+                // Se saltan las partes que no tengan ventas o MaxMin, si aplica
+                if (!this.chkMostrarSinVentas.Checked && !bSel) continue;
+
                 iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, bSel, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
                     , oParte.Existencia, oParte.UnidadEmpaque, oParte.TiempoReposicion, oParte.AbcDeNegocio, oParte.AbcDeVentas, oParte.AbcDeUtilidad
                     , oParte.VentasTotal, oParte.CantidadTotal, oParte.UtilidadTotal, oParte.Fijo, oParte.Minimo, oParte.Maximo, null, null
@@ -688,21 +698,44 @@ namespace Refaccionaria.App
         {
             decimal mMaximo = Helper.ConvertirDecimal(oFila.Cells["MaximoActual"].Value);
             decimal mMaximoNuevo = Helper.ConvertirDecimal(oFila.Cells["Maximo"].Value);
+            bool bFijo = Helper.ConvertirBool(oFila.Cells["Fijo"].Value);
+            // this.cmbCambios.Items.AddRange(new object[] { , , , , ,  });
             switch (this.cmbCambios.SelectedIndex)
             {
-                case 0:
+                case 0:  // "0 a > 0"
                     return (mMaximo == 0 && mMaximoNuevo > 0);
-                case 1:
+                case 1:  // "> 0 a > Actual"
                     return (mMaximo > 0 && mMaximoNuevo > mMaximo);
-                case 2:
+                case 2:  // "Actual baja a > 0 "
                     return (mMaximoNuevo < mMaximo && mMaximoNuevo > 0);
-                case 3:
-                    return (mMaximoNuevo != mMaximo && mMaximoNuevo == 0);
-                case 4:
-                    return (mMaximoNuevo == mMaximo);
+                case 3:  // "Max a 0"
+                    return (!bFijo && mMaximoNuevo != mMaximo && mMaximoNuevo == 0);
+                case 4:  // "Max igual"
+                    return (!bFijo && mMaximoNuevo == mMaximo);
+                case 5: // "Fijos"
+                    return true;
                 default:
                     return true;
             }
+        }
+
+        private void ProcesarFijos()
+        {
+            // Se filtran sólo los fijos
+            Cargando.Mostrar();
+            for (int iFila = 0; iFila < this.dgvDetalle.Rows.Count; iFila++)
+            {
+                if (Helper.ConvertirBool(this.dgvDetalle["Fijo", iFila].Value))
+                    this.dgvDetalle["Fijo", iFila].Value = false;
+                else
+                    this.dgvDetalle.Rows.RemoveAt(iFila--);
+            }
+            Cargando.Cerrar();
+            // Se mandan a procesar los fijos
+            this.btnProcesar_Click(this, null);
+            // Se vuelve a poner el dato de fijo
+            foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
+                oFila.Cells["Fijo"].Value = true;
         }
 
         private void GuardarMaxMin()
