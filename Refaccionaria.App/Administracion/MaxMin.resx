@@ -415,7 +415,7 @@
     <value>0, 0</value>
   </data>
   <data name="trvPartesCalcular.Size" type="System.Drawing.Size, System.Drawing">
-    <value>640, 262</value>
+    <value>738, 283</value>
   </data>
   <data name="trvPartesCalcular.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -451,7 +451,7 @@
     <value>0, 0</value>
   </data>
   <data name="trvVentasGlobales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>636, 262</value>
+    <value>735, 283</value>
   </data>
   <data name="trvVentasGlobales.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -481,10 +481,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 262</value>
+    <value>1477, 283</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>640</value>
+    <value>738</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -508,7 +508,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpCriteriosGenerales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 268</value>
+    <value>1483, 289</value>
   </data>
   <data name="tbpCriteriosGenerales.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -529,13 +529,13 @@
     <value>1</value>
   </data>
   <data name="btnReglasCopiar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Right</value>
   </data>
   <data name="btnReglasCopiar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnReglasCopiar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1135, 215</value>
+    <value>1440, 215</value>
   </data>
   <data name="btnReglasCopiar.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -559,13 +559,13 @@
     <value>0</value>
   </data>
   <data name="btnReglasAyuda.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Right</value>
   </data>
   <data name="btnReglasAyuda.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnReglasAyuda.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1135, 253</value>
+    <value>1440, 253</value>
   </data>
   <data name="btnReglasAyuda.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -589,13 +589,13 @@
     <value>1</value>
   </data>
   <data name="btnReglasAbajo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="btnReglasAbajo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnReglasAbajo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1135, 120</value>
+    <value>1440, 120</value>
   </data>
   <data name="btnReglasAbajo.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -619,13 +619,13 @@
     <value>2</value>
   </data>
   <data name="btnReglasArriba.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="btnReglasArriba.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnReglasArriba.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1135, 82</value>
+    <value>1440, 82</value>
   </data>
   <data name="btnReglasArriba.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -649,13 +649,13 @@
     <value>3</value>
   </data>
   <data name="btnReglasQuitar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="btnReglasQuitar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnReglasQuitar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1135, 44</value>
+    <value>1440, 44</value>
   </data>
   <data name="btnReglasQuitar.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -679,13 +679,13 @@
     <value>4</value>
   </data>
   <data name="btnReglasAgregar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+    <value>Right</value>
   </data>
   <data name="btnReglasAgregar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnReglasAgregar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1135, 6</value>
+    <value>1440, 6</value>
   </data>
   <data name="btnReglasAgregar.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -793,7 +793,7 @@
     <value>40</value>
   </data>
   <data name="dgvReglas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1126, 285</value>
+    <value>1349, 280</value>
   </data>
   <data name="dgvReglas.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -817,7 +817,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpReglas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 268</value>
+    <value>1483, 289</value>
   </data>
   <data name="tbpReglas.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1057,7 +1057,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpEquivalentes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 268</value>
+    <value>1483, 289</value>
   </data>
   <data name="tbpEquivalentes.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1135,7 +1135,7 @@
     <value>3, 3</value>
   </data>
   <data name="dgvSinMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 262</value>
+    <value>1477, 283</value>
   </data>
   <data name="dgvSinMaxMin.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -1159,7 +1159,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpSinMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 268</value>
+    <value>1483, 289</value>
   </data>
   <data name="tbpSinMaxMin.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

@@ -541,7 +541,7 @@ namespace Refaccionaria.App
             while (iFilaActual < iTotalFilas)
             {
                 if ((iFilaActual + iIncremento) > iTotalFilas)
-                    iIncremento = (iTotalFilas - 1);
+                    iIncremento = (iTotalFilas - iFilaActual - 1);
                 UtilLocal.MostrarNotificacion(string.Format("Procesando filas de la {0} a la {1}..", iFilaActual, iIncremento));
                 Application.DoEvents();
                 this.CalcularMaxMinFilas(iSucursalID, oDin, oReglas, iFilaActual, iIncremento);
@@ -573,10 +573,11 @@ namespace Refaccionaria.App
             Cargando.Cerrar();
         }
 
-        private void CalcularMaxMinFilas(int iSucursalID, CodigoDinamico oDin, IEnumerable<ParteMaxMinRegla> oReglas, int iFilaDesde, int iFilaHasta)
+        private void CalcularMaxMinFilas(int iSucursalID, CodigoDinamico oDin, IEnumerable<ParteMaxMinRegla> oReglas, int iFilaDesde, int iIncremento)
         {
             pauPartesMaxMin_Res oParte;
             DataGridViewRow oFila;
+            int iFilaHasta = (iFilaDesde + iIncremento);
             for (int iFila = iFilaDesde; iFila <= iFilaHasta; iFila++)
             {
                 oFila = this.dgvDetalle.Rows[iFila];

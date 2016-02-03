@@ -139,7 +139,8 @@ namespace Refaccionaria.App
 
             // Se obtienen datos para varios grupos
             DateTime dHastaMas1 = dHasta.AddDays(1);
-            var oReinversiones = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.FechaPoliza >= dDesde && c.FechaPoliza < dHastaMas1
+            DateTime dDesdeMas1 = dDesde.AddDays(1);
+            var oReinversiones = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.FechaPoliza >= dDesdeMas1 && c.FechaPoliza < dHastaMas1
                 && (
                     c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.CuentasPorPagarLargoPlazo
                     || (c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.CuentasPorPagarCortoPlazo && c.ContaCuentaAuxiliarID != Cat.ContaCuentasAuxiliares.TarjetaDeCredito)
