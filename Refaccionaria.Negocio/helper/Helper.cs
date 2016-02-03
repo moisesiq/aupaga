@@ -1114,6 +1114,11 @@ namespace Refaccionaria.Negocio
             return (sCadena.Substring(0, (iCaracteres > sCadena.Length ? sCadena.Length : iCaracteres)));
         }
 
+        public static string PrimeraMayus(this string sCadena)
+        {
+            return (sCadena.Substring(0, 1).ToUpper() + sCadena.Substring(1).ToLower());
+        }
+
         #endregion
         
         #region [ Extensiones DateTime ]

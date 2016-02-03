@@ -636,6 +636,12 @@
     <Compile Include="Formas\DetalleBusquedaDeClientes.Designer.cs">
       <DependentUpon>DetalleBusquedaDeClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formas\Gen\Navegador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formas\Gen\Navegador.Designer.cs">
+      <DependentUpon>Navegador.cs</DependentUpon>
+    </Compile>
     <Compile Include="Validaciones\Autorizaciones.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1760,6 +1766,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formas\DetalleBusquedaDeClientes.resx">
       <DependentUpon>DetalleBusquedaDeClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formas\Gen\Navegador.resx">
+      <DependentUpon>Navegador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Validaciones\Autorizaciones.resx">
       <DependentUpon>Autorizaciones.cs</DependentUpon>

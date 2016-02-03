@@ -99,6 +99,28 @@ namespace Refaccionaria.App
             return d.Date;
         }
 
+        public static int ObtenerTrimestre(DateTime dFecha)
+        {
+            int iAnio = dFecha.Year;
+            DateTime dTri2 = new DateTime(iAnio, 3, 1);
+            DateTime dTri3 = dTri2.AddMonths(3);
+            DateTime dTri4 = dTri3.AddMonths(3);
+            if (dFecha < dTri2)
+                return 1;
+            else if (dFecha < dTri3)
+                return 4;
+            else if (dFecha < dTri4)
+                return 7;
+            else
+                return 10;
+        }
+
+        public static int ObtenerSemestre(DateTime dFecha)
+        {
+            DateTime dSem2 = new DateTime(dFecha.Year, 6, 1);
+            return (dFecha < dSem2 ? 1 : 7);
+        }
+
         public static decimal GastoCalcularImporteDiario(DateTime dFecha, decimal mImporte, int iPeriodicidadMes)
         {
             DateTime dInicioPer = dFecha.DiaPrimero().Date;

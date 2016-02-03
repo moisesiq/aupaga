@@ -54,6 +54,8 @@
             this.rdbSemanalizar = new System.Windows.Forms.RadioButton();
             this.rdbFecha = new System.Windows.Forms.RadioButton();
             this.chrPorSemana = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.cmbTipo = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chrPorSemana)).BeginInit();
@@ -88,7 +90,7 @@
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(824, 233);
-            this.dgvDatos.TabIndex = 4;
+            this.dgvDatos.TabIndex = 7;
             // 
             // Concepto
             // 
@@ -125,16 +127,16 @@
             this.cmbSucursal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbSucursal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSucursal.FormattingEnabled = true;
-            this.cmbSucursal.Location = new System.Drawing.Point(155, 3);
+            this.cmbSucursal.Location = new System.Drawing.Point(273, 4);
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(121, 21);
-            this.cmbSucursal.TabIndex = 1;
+            this.cmbSucursal.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(101, 8);
+            this.label3.Location = new System.Drawing.Point(219, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 27;
@@ -145,10 +147,10 @@
             this.btnMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMostrar.ForeColor = System.Drawing.Color.White;
-            this.btnMostrar.Location = new System.Drawing.Point(549, 4);
+            this.btnMostrar.Location = new System.Drawing.Point(667, 5);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(67, 22);
-            this.btnMostrar.TabIndex = 3;
+            this.btnMostrar.TabIndex = 6;
             this.btnMostrar.Text = "&Mostrar";
             this.btnMostrar.UseVisualStyleBackColor = false;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
@@ -158,16 +160,16 @@
             this.cmbAnio.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbAnio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbAnio.FormattingEnabled = true;
-            this.cmbAnio.Location = new System.Drawing.Point(35, 3);
+            this.cmbAnio.Location = new System.Drawing.Point(153, 4);
             this.cmbAnio.Name = "cmbAnio";
             this.cmbAnio.Size = new System.Drawing.Size(60, 21);
-            this.cmbAnio.TabIndex = 0;
+            this.cmbAnio.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Location = new System.Drawing.Point(121, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 29;
@@ -175,7 +177,7 @@
             // 
             // nudDecimales
             // 
-            this.nudDecimales.Location = new System.Drawing.Point(493, 5);
+            this.nudDecimales.Location = new System.Drawing.Point(611, 6);
             this.nudDecimales.Maximum = new decimal(new int[] {
             2,
             0,
@@ -183,14 +185,14 @@
             0});
             this.nudDecimales.Name = "nudDecimales";
             this.nudDecimales.Size = new System.Drawing.Size(40, 20);
-            this.nudDecimales.TabIndex = 2;
+            this.nudDecimales.TabIndex = 5;
             this.nudDecimales.ValueChanged += new System.EventHandler(this.nudDecimales_ValueChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(431, 7);
+            this.label9.Location = new System.Drawing.Point(549, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(56, 13);
             this.label9.TabIndex = 184;
@@ -201,10 +203,10 @@
             this.rdbSemanalizar.AutoSize = true;
             this.rdbSemanalizar.Checked = true;
             this.rdbSemanalizar.ForeColor = System.Drawing.Color.White;
-            this.rdbSemanalizar.Location = new System.Drawing.Point(282, 5);
+            this.rdbSemanalizar.Location = new System.Drawing.Point(400, 6);
             this.rdbSemanalizar.Name = "rdbSemanalizar";
             this.rdbSemanalizar.Size = new System.Drawing.Size(82, 17);
-            this.rdbSemanalizar.TabIndex = 185;
+            this.rdbSemanalizar.TabIndex = 3;
             this.rdbSemanalizar.TabStop = true;
             this.rdbSemanalizar.Text = "Semanalizar";
             this.rdbSemanalizar.UseVisualStyleBackColor = true;
@@ -213,10 +215,10 @@
             // 
             this.rdbFecha.AutoSize = true;
             this.rdbFecha.ForeColor = System.Drawing.Color.White;
-            this.rdbFecha.Location = new System.Drawing.Point(370, 5);
+            this.rdbFecha.Location = new System.Drawing.Point(488, 6);
             this.rdbFecha.Name = "rdbFecha";
             this.rdbFecha.Size = new System.Drawing.Size(55, 17);
-            this.rdbFecha.TabIndex = 186;
+            this.rdbFecha.TabIndex = 4;
             this.rdbFecha.TabStop = true;
             this.rdbFecha.Text = "Fecha";
             this.rdbFecha.UseVisualStyleBackColor = true;
@@ -281,7 +283,7 @@
             this.chrPorSemana.Series.Add(series6);
             this.chrPorSemana.Series.Add(series7);
             this.chrPorSemana.Size = new System.Drawing.Size(824, 200);
-            this.chrPorSemana.TabIndex = 187;
+            this.chrPorSemana.TabIndex = 8;
             this.chrPorSemana.Text = "chart1";
             title1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
@@ -292,11 +294,33 @@
             title1.Text = "Gráfica semanal";
             this.chrPorSemana.Titles.Add(title1);
             // 
+            // cmbTipo
+            // 
+            this.cmbTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbTipo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbTipo.FormattingEnabled = true;
+            this.cmbTipo.Location = new System.Drawing.Point(35, 4);
+            this.cmbTipo.Name = "cmbTipo";
+            this.cmbTipo.Size = new System.Drawing.Size(80, 21);
+            this.cmbTipo.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 13);
+            this.label2.TabIndex = 189;
+            this.label2.Text = "Tipo";
+            // 
             // ContaEstadoDeResultados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.cmbTipo);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.chrPorSemana);
             this.Controls.Add(this.rdbFecha);
             this.Controls.Add(this.rdbSemanalizar);
@@ -335,5 +359,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn Promedio;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrPorSemana;
+        private System.Windows.Forms.ComboBox cmbTipo;
+        private System.Windows.Forms.Label label2;
     }
 }
