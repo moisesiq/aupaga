@@ -727,6 +727,20 @@ namespace Refaccionaria.App
             }
         }
 
+        private void btnFactuas_Click(object sender, EventArgs e)
+        {
+            var oProcXml = new System.Threading.Thread((o) =>
+            {
+                var frmFacturas = new FacturacionElectronica.FacturasSat();
+                frmFacturas.Rfc = Config.Valor("Facturacion.Rfc");;
+                frmFacturas.ClaveCiec = Config.Valor("Facturacion.ClaveCiec"); ;
+                frmFacturas.RutaGuardar = Config.Valor("Facturacion.RutaDescargaXmls");
+                frmFacturas.ShowDialog();
+            });
+            oProcXml.SetApartmentState(System.Threading.ApartmentState.STA);
+            oProcXml.Start();
+        }
+
         private void tabProveedorMarca_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabMarcasOneTime)

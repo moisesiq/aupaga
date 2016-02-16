@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(catalogosProveedores));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -63,6 +62,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -107,10 +110,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(catalogosProveedores));
             this.dtpFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpInicial = new System.Windows.Forms.DateTimePicker();
             this.cboFiltro = new System.Windows.Forms.ComboBox();
@@ -124,6 +124,7 @@
             this.dtpHoraMaxima = new System.Windows.Forms.DateTimePicker();
             this.lblHoraMaxima = new System.Windows.Forms.Label();
             this.lblMontoPaqueteria = new System.Windows.Forms.Label();
+            this.txtMontoPaqueteria = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkUsarDescuentosItemFactura = new System.Windows.Forms.CheckBox();
             this.chkAceptaDevolucion = new System.Windows.Forms.CheckBox();
             this.txtBeneficiario = new System.Windows.Forms.TextBox();
@@ -141,6 +142,7 @@
             this.chkLunes = new System.Windows.Forms.CheckBox();
             this.nudCalendarioPedido = new System.Windows.Forms.NumericUpDown();
             this.lblSeguro = new System.Windows.Forms.Label();
+            this.txtSeguro = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkCobraSeguro = new System.Windows.Forms.CheckBox();
             this.dtpHoraTope = new System.Windows.Forms.DateTimePicker();
             this.cboEstatusProveedor = new System.Windows.Forms.ComboBox();
@@ -149,22 +151,29 @@
             this.lblDireccion = new System.Windows.Forms.Label();
             this.tabProveedorMarca = new System.Windows.Forms.TabControl();
             this.tabMarcasAsignadas = new System.Windows.Forms.TabPage();
-            this.btnAgregarMarca = new System.Windows.Forms.Button();
             this.dgvMarcas = new System.Windows.Forms.DataGridView();
             this.tabProntoPago = new System.Windows.Forms.TabPage();
-            this.btnAgregarProntoPago = new System.Windows.Forms.Button();
             this.dgvProntoPago = new System.Windows.Forms.DataGridView();
             this.tabGanancias = new System.Windows.Forms.TabPage();
             this.btnSeleccionarTodos = new System.Windows.Forms.Button();
             this.btnGuardarGanancias = new System.Windows.Forms.Button();
             this.dgvGanancias = new System.Windows.Forms.DataGridView();
-            this.btnAgregarGanancia = new System.Windows.Forms.Button();
             this.lblHoraPedido = new System.Windows.Forms.Label();
             this.lblPuntoPedido = new System.Windows.Forms.Label();
             this.cboPaqueteria = new System.Windows.Forms.ComboBox();
             this.lblPaqueteria = new System.Windows.Forms.Label();
             this.gpoDescuentosFacturas = new System.Windows.Forms.GroupBox();
+            this.txtDescuentoFacturaCinco = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaCuatro = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaTres = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaDos = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaUno = new Refaccionaria.App.textBoxOnlyDouble();
             this.gpoDescuentosItems = new System.Windows.Forms.GroupBox();
+            this.txtDescuentoItemCinco = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemCuatro = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemTres = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemDos = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemUno = new Refaccionaria.App.textBoxOnlyDouble();
             this.lblPlazo = new System.Windows.Forms.Label();
             this.npdDiasPlazo = new System.Windows.Forms.NumericUpDown();
             this.txtPaginaWeb = new System.Windows.Forms.TextBox();
@@ -184,13 +193,11 @@
             this.lblRFC = new System.Windows.Forms.Label();
             this.txtNombreProveedor = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.tabContactos = new System.Windows.Forms.TabPage();
             this.panelProveedorContactos = new System.Windows.Forms.Panel();
             this.tabObservaciones = new System.Windows.Forms.TabPage();
             this.panelProveedorObservaciones = new System.Windows.Forms.Panel();
             this.tabDoctosDepsDevs = new System.Windows.Forms.TabPage();
-            this.btnAplicarDevolucion = new System.Windows.Forms.Button();
             this.gpoDevolucionesAplicar = new System.Windows.Forms.GroupBox();
             this.txtNdcObservacion = new System.Windows.Forms.TextBox();
             this.dgvNotasDeCredito = new System.Windows.Forms.DataGridView();
@@ -227,7 +234,16 @@
             this.pet_Pagado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pet_Saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvMovimientosNoPagados = new System.Windows.Forms.DataGridView();
-            this.btnAgregarPoliza = new System.Windows.Forms.Button();
+            this.pen_MovimientoInventarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pen_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.pen_Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pen_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pen_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pen_Pagado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pen_Saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pen_Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pen_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pen_EsAgrupador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabKardex = new System.Windows.Forms.TabPage();
             this.gpoDepositosOperaciones = new System.Windows.Forms.GroupBox();
             this.dgvAbonosKardex = new System.Windows.Forms.DataGridView();
@@ -333,30 +349,15 @@
             this.lblModo = new System.Windows.Forms.Label();
             this.cmsAbonos = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.smiCambiarFolio = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnFactuas = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.txtMontoPaqueteria = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtSeguro = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaCinco = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaCuatro = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaTres = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaDos = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaUno = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemCinco = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemCuatro = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemTres = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemDos = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemUno = new Refaccionaria.App.textBoxOnlyDouble();
-            this.pen_MovimientoInventarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pen_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.pen_Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pen_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pen_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pen_Pagado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pen_Saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pen_Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pen_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pen_EsAgrupador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAgregarMarca = new System.Windows.Forms.Button();
+            this.btnAgregarProntoPago = new System.Windows.Forms.Button();
+            this.btnAgregarGanancia = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnAplicarDevolucion = new System.Windows.Forms.Button();
+            this.btnAgregarPoliza = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabDatosProveedores.SuspendLayout();
             this.tabDatosGenerales.SuspendLayout();
@@ -643,6 +644,15 @@
             this.lblMontoPaqueteria.TabIndex = 67;
             this.lblMontoPaqueteria.Text = "Monto Paqueteria";
             // 
+            // txtMontoPaqueteria
+            // 
+            this.txtMontoPaqueteria.Enabled = false;
+            this.txtMontoPaqueteria.Location = new System.Drawing.Point(348, 165);
+            this.txtMontoPaqueteria.Name = "txtMontoPaqueteria";
+            this.txtMontoPaqueteria.Size = new System.Drawing.Size(71, 20);
+            this.txtMontoPaqueteria.TabIndex = 66;
+            this.txtMontoPaqueteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // chkUsarDescuentosItemFactura
             // 
             this.chkUsarDescuentosItemFactura.AutoSize = true;
@@ -826,6 +836,15 @@
             this.lblSeguro.TabIndex = 54;
             this.lblSeguro.Text = "Seguro";
             // 
+            // txtSeguro
+            // 
+            this.txtSeguro.Enabled = false;
+            this.txtSeguro.Location = new System.Drawing.Point(175, 348);
+            this.txtSeguro.Name = "txtSeguro";
+            this.txtSeguro.Size = new System.Drawing.Size(70, 20);
+            this.txtSeguro.TabIndex = 53;
+            this.txtSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // chkCobraSeguro
             // 
             this.chkCobraSeguro.AutoSize = true;
@@ -913,20 +932,6 @@
             this.tabMarcasAsignadas.TabIndex = 0;
             this.tabMarcasAsignadas.Text = "Marcas Asignadas";
             // 
-            // btnAgregarMarca
-            // 
-            this.btnAgregarMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregarMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarMarca.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarMarca.Image")));
-            this.btnAgregarMarca.Location = new System.Drawing.Point(5, 6);
-            this.btnAgregarMarca.Name = "btnAgregarMarca";
-            this.btnAgregarMarca.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarMarca.TabIndex = 0;
-            this.btnAgregarMarca.Text = "&Agregar";
-            this.btnAgregarMarca.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarMarca.UseVisualStyleBackColor = false;
-            this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
-            // 
             // dgvMarcas
             // 
             this.dgvMarcas.AllowUserToAddRows = false;
@@ -971,20 +976,6 @@
             this.tabProntoPago.Size = new System.Drawing.Size(1140, 221);
             this.tabProntoPago.TabIndex = 1;
             this.tabProntoPago.Text = "Datos Pronto Pago";
-            // 
-            // btnAgregarProntoPago
-            // 
-            this.btnAgregarProntoPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregarProntoPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarProntoPago.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarProntoPago.Image")));
-            this.btnAgregarProntoPago.Location = new System.Drawing.Point(5, 6);
-            this.btnAgregarProntoPago.Name = "btnAgregarProntoPago";
-            this.btnAgregarProntoPago.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarProntoPago.TabIndex = 2;
-            this.btnAgregarProntoPago.Text = "&Agregar";
-            this.btnAgregarProntoPago.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarProntoPago.UseVisualStyleBackColor = false;
-            this.btnAgregarProntoPago.Click += new System.EventHandler(this.btnAgregarProntoPago_Click);
             // 
             // dgvProntoPago
             // 
@@ -1088,20 +1079,6 @@
             this.dgvGanancias.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvGanancias_CurrentCellDirtyStateChanged);
             this.dgvGanancias.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvGanancias_KeyDown);
             // 
-            // btnAgregarGanancia
-            // 
-            this.btnAgregarGanancia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregarGanancia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarGanancia.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarGanancia.Image")));
-            this.btnAgregarGanancia.Location = new System.Drawing.Point(5, 6);
-            this.btnAgregarGanancia.Name = "btnAgregarGanancia";
-            this.btnAgregarGanancia.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarGanancia.TabIndex = 2;
-            this.btnAgregarGanancia.Text = "&Agregar";
-            this.btnAgregarGanancia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarGanancia.UseVisualStyleBackColor = false;
-            this.btnAgregarGanancia.Click += new System.EventHandler(this.btnAgregarGanancia_Click);
-            // 
             // lblHoraPedido
             // 
             this.lblHoraPedido.AutoSize = true;
@@ -1151,6 +1128,46 @@
             this.gpoDescuentosFacturas.TabStop = false;
             this.gpoDescuentosFacturas.Text = "Descuentos a Facturas";
             // 
+            // txtDescuentoFacturaCinco
+            // 
+            this.txtDescuentoFacturaCinco.Location = new System.Drawing.Point(194, 18);
+            this.txtDescuentoFacturaCinco.Name = "txtDescuentoFacturaCinco";
+            this.txtDescuentoFacturaCinco.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaCinco.TabIndex = 4;
+            this.txtDescuentoFacturaCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaCuatro
+            // 
+            this.txtDescuentoFacturaCuatro.Location = new System.Drawing.Point(147, 18);
+            this.txtDescuentoFacturaCuatro.Name = "txtDescuentoFacturaCuatro";
+            this.txtDescuentoFacturaCuatro.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaCuatro.TabIndex = 3;
+            this.txtDescuentoFacturaCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaTres
+            // 
+            this.txtDescuentoFacturaTres.Location = new System.Drawing.Point(100, 18);
+            this.txtDescuentoFacturaTres.Name = "txtDescuentoFacturaTres";
+            this.txtDescuentoFacturaTres.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaTres.TabIndex = 2;
+            this.txtDescuentoFacturaTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaDos
+            // 
+            this.txtDescuentoFacturaDos.Location = new System.Drawing.Point(53, 18);
+            this.txtDescuentoFacturaDos.Name = "txtDescuentoFacturaDos";
+            this.txtDescuentoFacturaDos.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaDos.TabIndex = 1;
+            this.txtDescuentoFacturaDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaUno
+            // 
+            this.txtDescuentoFacturaUno.Location = new System.Drawing.Point(6, 18);
+            this.txtDescuentoFacturaUno.Name = "txtDescuentoFacturaUno";
+            this.txtDescuentoFacturaUno.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaUno.TabIndex = 0;
+            this.txtDescuentoFacturaUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // gpoDescuentosItems
             // 
             this.gpoDescuentosItems.Controls.Add(this.txtDescuentoItemCinco);
@@ -1164,6 +1181,46 @@
             this.gpoDescuentosItems.TabIndex = 18;
             this.gpoDescuentosItems.TabStop = false;
             this.gpoDescuentosItems.Text = "Descuentos a items";
+            // 
+            // txtDescuentoItemCinco
+            // 
+            this.txtDescuentoItemCinco.Location = new System.Drawing.Point(194, 18);
+            this.txtDescuentoItemCinco.Name = "txtDescuentoItemCinco";
+            this.txtDescuentoItemCinco.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemCinco.TabIndex = 4;
+            this.txtDescuentoItemCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemCuatro
+            // 
+            this.txtDescuentoItemCuatro.Location = new System.Drawing.Point(147, 18);
+            this.txtDescuentoItemCuatro.Name = "txtDescuentoItemCuatro";
+            this.txtDescuentoItemCuatro.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemCuatro.TabIndex = 3;
+            this.txtDescuentoItemCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemTres
+            // 
+            this.txtDescuentoItemTres.Location = new System.Drawing.Point(100, 18);
+            this.txtDescuentoItemTres.Name = "txtDescuentoItemTres";
+            this.txtDescuentoItemTres.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemTres.TabIndex = 2;
+            this.txtDescuentoItemTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemDos
+            // 
+            this.txtDescuentoItemDos.Location = new System.Drawing.Point(53, 18);
+            this.txtDescuentoItemDos.Name = "txtDescuentoItemDos";
+            this.txtDescuentoItemDos.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemDos.TabIndex = 1;
+            this.txtDescuentoItemDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemUno
+            // 
+            this.txtDescuentoItemUno.Location = new System.Drawing.Point(6, 18);
+            this.txtDescuentoItemUno.Name = "txtDescuentoItemUno";
+            this.txtDescuentoItemUno.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemUno.TabIndex = 0;
+            this.txtDescuentoItemUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblPlazo
             // 
@@ -1334,21 +1391,6 @@
             this.lblNombre.TabIndex = 18;
             this.lblNombre.Text = "Nombre";
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(1067, 6);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(87, 23);
-            this.btnGuardar.TabIndex = 18;
-            this.btnGuardar.Text = "&Guardar";
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
             // tabContactos
             // 
             this.tabContactos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
@@ -1403,23 +1445,6 @@
             this.tabDoctosDepsDevs.Size = new System.Drawing.Size(1174, 663);
             this.tabDoctosDepsDevs.TabIndex = 1;
             this.tabDoctosDepsDevs.Text = "Pagos";
-            // 
-            // btnAplicarDevolucion
-            // 
-            this.btnAplicarDevolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAplicarDevolucion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAplicarDevolucion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAplicarDevolucion.Image = ((System.Drawing.Image)(resources.GetObject("btnAplicarDevolucion.Image")));
-            this.btnAplicarDevolucion.Location = new System.Drawing.Point(148, 616);
-            this.btnAplicarDevolucion.Name = "btnAplicarDevolucion";
-            this.btnAplicarDevolucion.Size = new System.Drawing.Size(93, 41);
-            this.btnAplicarDevolucion.TabIndex = 22;
-            this.btnAplicarDevolucion.Text = "&Aplicar Devolución";
-            this.btnAplicarDevolucion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAplicarDevolucion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAplicarDevolucion.UseVisualStyleBackColor = false;
-            this.btnAplicarDevolucion.Visible = false;
-            this.btnAplicarDevolucion.Click += new System.EventHandler(this.btnAplicarDevolucion_Click);
             // 
             // gpoDevolucionesAplicar
             // 
@@ -1949,21 +1974,86 @@
             this.dgvMovimientosNoPagados.CurrentCellChanged += new System.EventHandler(this.dgvMovimientosNoPagados_CurrentCellChanged);
             this.dgvMovimientosNoPagados.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvMovimientosNoPagados_KeyDown);
             // 
-            // btnAgregarPoliza
+            // pen_MovimientoInventarioID
             // 
-            this.btnAgregarPoliza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAgregarPoliza.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregarPoliza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarPoliza.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarPoliza.Image")));
-            this.btnAgregarPoliza.Location = new System.Drawing.Point(473, 629);
-            this.btnAgregarPoliza.Name = "btnAgregarPoliza";
-            this.btnAgregarPoliza.Size = new System.Drawing.Size(113, 28);
-            this.btnAgregarPoliza.TabIndex = 19;
-            this.btnAgregarPoliza.Text = "&Agregar Pago";
-            this.btnAgregarPoliza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarPoliza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarPoliza.UseVisualStyleBackColor = false;
-            this.btnAgregarPoliza.Click += new System.EventHandler(this.btnAgregarPoliza_Click);
+            this.pen_MovimientoInventarioID.HeaderText = "MovimientoInventarioID";
+            this.pen_MovimientoInventarioID.Name = "pen_MovimientoInventarioID";
+            this.pen_MovimientoInventarioID.ReadOnly = true;
+            this.pen_MovimientoInventarioID.Visible = false;
+            // 
+            // pen_Sel
+            // 
+            this.pen_Sel.HeaderText = "Sel";
+            this.pen_Sel.Name = "pen_Sel";
+            this.pen_Sel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.pen_Sel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.pen_Sel.Width = 30;
+            // 
+            // pen_Factura
+            // 
+            this.pen_Factura.HeaderText = "Factura";
+            this.pen_Factura.Name = "pen_Factura";
+            this.pen_Factura.ReadOnly = true;
+            this.pen_Factura.Width = 80;
+            // 
+            // pen_Fecha
+            // 
+            this.pen_Fecha.HeaderText = "Fecha";
+            this.pen_Fecha.Name = "pen_Fecha";
+            this.pen_Fecha.ReadOnly = true;
+            this.pen_Fecha.Width = 136;
+            // 
+            // pen_Importe
+            // 
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle32.Format = "C2";
+            this.pen_Importe.DefaultCellStyle = dataGridViewCellStyle32;
+            this.pen_Importe.HeaderText = "Importe";
+            this.pen_Importe.Name = "pen_Importe";
+            this.pen_Importe.ReadOnly = true;
+            this.pen_Importe.Width = 70;
+            // 
+            // pen_Pagado
+            // 
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle33.Format = "C2";
+            this.pen_Pagado.DefaultCellStyle = dataGridViewCellStyle33;
+            this.pen_Pagado.HeaderText = "Pagado";
+            this.pen_Pagado.Name = "pen_Pagado";
+            this.pen_Pagado.ReadOnly = true;
+            this.pen_Pagado.Width = 70;
+            // 
+            // pen_Saldo
+            // 
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle34.Format = "C2";
+            this.pen_Saldo.DefaultCellStyle = dataGridViewCellStyle34;
+            this.pen_Saldo.HeaderText = "Saldo";
+            this.pen_Saldo.Name = "pen_Saldo";
+            this.pen_Saldo.ReadOnly = true;
+            this.pen_Saldo.Width = 80;
+            // 
+            // pen_Vencimiento
+            // 
+            dataGridViewCellStyle35.Format = "dd-MMM";
+            this.pen_Vencimiento.DefaultCellStyle = dataGridViewCellStyle35;
+            this.pen_Vencimiento.HeaderText = "Fecha pago";
+            this.pen_Vencimiento.Name = "pen_Vencimiento";
+            this.pen_Vencimiento.Width = 50;
+            // 
+            // pen_Usuario
+            // 
+            this.pen_Usuario.HeaderText = "Usuario";
+            this.pen_Usuario.Name = "pen_Usuario";
+            this.pen_Usuario.ReadOnly = true;
+            this.pen_Usuario.Width = 60;
+            // 
+            // pen_EsAgrupador
+            // 
+            this.pen_EsAgrupador.HeaderText = "Agrupador";
+            this.pen_EsAgrupador.Name = "pen_EsAgrupador";
+            this.pen_EsAgrupador.Visible = false;
             // 
             // tabKardex
             // 
@@ -3359,6 +3449,20 @@
             this.smiCambiarFolio.Text = "&Cambiar folio";
             this.smiCambiarFolio.Click += new System.EventHandler(this.smiCambiarFolio_Click);
             // 
+            // btnFactuas
+            // 
+            this.btnFactuas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnFactuas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnFactuas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFactuas.ForeColor = System.Drawing.Color.White;
+            this.btnFactuas.Location = new System.Drawing.Point(150, 657);
+            this.btnFactuas.Name = "btnFactuas";
+            this.btnFactuas.Size = new System.Drawing.Size(48, 37);
+            this.btnFactuas.TabIndex = 70;
+            this.btnFactuas.Text = "Facturas";
+            this.btnFactuas.UseVisualStyleBackColor = false;
+            this.btnFactuas.Click += new System.EventHandler(this.btnFactuas_Click);
+            // 
             // btnModificar
             // 
             this.btnModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -3391,190 +3495,102 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // txtMontoPaqueteria
+            // btnAgregarMarca
             // 
-            this.txtMontoPaqueteria.Enabled = false;
-            this.txtMontoPaqueteria.Location = new System.Drawing.Point(348, 165);
-            this.txtMontoPaqueteria.Name = "txtMontoPaqueteria";
-            this.txtMontoPaqueteria.Size = new System.Drawing.Size(71, 20);
-            this.txtMontoPaqueteria.TabIndex = 66;
-            this.txtMontoPaqueteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnAgregarMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregarMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarMarca.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarMarca.Image")));
+            this.btnAgregarMarca.Location = new System.Drawing.Point(5, 6);
+            this.btnAgregarMarca.Name = "btnAgregarMarca";
+            this.btnAgregarMarca.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarMarca.TabIndex = 0;
+            this.btnAgregarMarca.Text = "&Agregar";
+            this.btnAgregarMarca.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarMarca.UseVisualStyleBackColor = false;
+            this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
             // 
-            // txtSeguro
+            // btnAgregarProntoPago
             // 
-            this.txtSeguro.Enabled = false;
-            this.txtSeguro.Location = new System.Drawing.Point(175, 348);
-            this.txtSeguro.Name = "txtSeguro";
-            this.txtSeguro.Size = new System.Drawing.Size(70, 20);
-            this.txtSeguro.TabIndex = 53;
-            this.txtSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnAgregarProntoPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregarProntoPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarProntoPago.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarProntoPago.Image")));
+            this.btnAgregarProntoPago.Location = new System.Drawing.Point(5, 6);
+            this.btnAgregarProntoPago.Name = "btnAgregarProntoPago";
+            this.btnAgregarProntoPago.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarProntoPago.TabIndex = 2;
+            this.btnAgregarProntoPago.Text = "&Agregar";
+            this.btnAgregarProntoPago.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarProntoPago.UseVisualStyleBackColor = false;
+            this.btnAgregarProntoPago.Click += new System.EventHandler(this.btnAgregarProntoPago_Click);
             // 
-            // txtDescuentoFacturaCinco
+            // btnAgregarGanancia
             // 
-            this.txtDescuentoFacturaCinco.Location = new System.Drawing.Point(194, 18);
-            this.txtDescuentoFacturaCinco.Name = "txtDescuentoFacturaCinco";
-            this.txtDescuentoFacturaCinco.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaCinco.TabIndex = 4;
-            this.txtDescuentoFacturaCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnAgregarGanancia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregarGanancia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarGanancia.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarGanancia.Image")));
+            this.btnAgregarGanancia.Location = new System.Drawing.Point(5, 6);
+            this.btnAgregarGanancia.Name = "btnAgregarGanancia";
+            this.btnAgregarGanancia.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarGanancia.TabIndex = 2;
+            this.btnAgregarGanancia.Text = "&Agregar";
+            this.btnAgregarGanancia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarGanancia.UseVisualStyleBackColor = false;
+            this.btnAgregarGanancia.Click += new System.EventHandler(this.btnAgregarGanancia_Click);
             // 
-            // txtDescuentoFacturaCuatro
+            // btnGuardar
             // 
-            this.txtDescuentoFacturaCuatro.Location = new System.Drawing.Point(147, 18);
-            this.txtDescuentoFacturaCuatro.Name = "txtDescuentoFacturaCuatro";
-            this.txtDescuentoFacturaCuatro.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaCuatro.TabIndex = 3;
-            this.txtDescuentoFacturaCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.Location = new System.Drawing.Point(1067, 6);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(87, 23);
+            this.btnGuardar.TabIndex = 18;
+            this.btnGuardar.Text = "&Guardar";
+            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // txtDescuentoFacturaTres
+            // btnAplicarDevolucion
             // 
-            this.txtDescuentoFacturaTres.Location = new System.Drawing.Point(100, 18);
-            this.txtDescuentoFacturaTres.Name = "txtDescuentoFacturaTres";
-            this.txtDescuentoFacturaTres.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaTres.TabIndex = 2;
-            this.txtDescuentoFacturaTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnAplicarDevolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAplicarDevolucion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAplicarDevolucion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicarDevolucion.Image = ((System.Drawing.Image)(resources.GetObject("btnAplicarDevolucion.Image")));
+            this.btnAplicarDevolucion.Location = new System.Drawing.Point(148, 616);
+            this.btnAplicarDevolucion.Name = "btnAplicarDevolucion";
+            this.btnAplicarDevolucion.Size = new System.Drawing.Size(93, 41);
+            this.btnAplicarDevolucion.TabIndex = 22;
+            this.btnAplicarDevolucion.Text = "&Aplicar Devolución";
+            this.btnAplicarDevolucion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAplicarDevolucion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAplicarDevolucion.UseVisualStyleBackColor = false;
+            this.btnAplicarDevolucion.Visible = false;
+            this.btnAplicarDevolucion.Click += new System.EventHandler(this.btnAplicarDevolucion_Click);
             // 
-            // txtDescuentoFacturaDos
+            // btnAgregarPoliza
             // 
-            this.txtDescuentoFacturaDos.Location = new System.Drawing.Point(53, 18);
-            this.txtDescuentoFacturaDos.Name = "txtDescuentoFacturaDos";
-            this.txtDescuentoFacturaDos.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaDos.TabIndex = 1;
-            this.txtDescuentoFacturaDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaUno
-            // 
-            this.txtDescuentoFacturaUno.Location = new System.Drawing.Point(6, 18);
-            this.txtDescuentoFacturaUno.Name = "txtDescuentoFacturaUno";
-            this.txtDescuentoFacturaUno.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaUno.TabIndex = 0;
-            this.txtDescuentoFacturaUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemCinco
-            // 
-            this.txtDescuentoItemCinco.Location = new System.Drawing.Point(194, 18);
-            this.txtDescuentoItemCinco.Name = "txtDescuentoItemCinco";
-            this.txtDescuentoItemCinco.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemCinco.TabIndex = 4;
-            this.txtDescuentoItemCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemCuatro
-            // 
-            this.txtDescuentoItemCuatro.Location = new System.Drawing.Point(147, 18);
-            this.txtDescuentoItemCuatro.Name = "txtDescuentoItemCuatro";
-            this.txtDescuentoItemCuatro.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemCuatro.TabIndex = 3;
-            this.txtDescuentoItemCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemTres
-            // 
-            this.txtDescuentoItemTres.Location = new System.Drawing.Point(100, 18);
-            this.txtDescuentoItemTres.Name = "txtDescuentoItemTres";
-            this.txtDescuentoItemTres.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemTres.TabIndex = 2;
-            this.txtDescuentoItemTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemDos
-            // 
-            this.txtDescuentoItemDos.Location = new System.Drawing.Point(53, 18);
-            this.txtDescuentoItemDos.Name = "txtDescuentoItemDos";
-            this.txtDescuentoItemDos.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemDos.TabIndex = 1;
-            this.txtDescuentoItemDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemUno
-            // 
-            this.txtDescuentoItemUno.Location = new System.Drawing.Point(6, 18);
-            this.txtDescuentoItemUno.Name = "txtDescuentoItemUno";
-            this.txtDescuentoItemUno.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemUno.TabIndex = 0;
-            this.txtDescuentoItemUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // pen_MovimientoInventarioID
-            // 
-            this.pen_MovimientoInventarioID.HeaderText = "MovimientoInventarioID";
-            this.pen_MovimientoInventarioID.Name = "pen_MovimientoInventarioID";
-            this.pen_MovimientoInventarioID.ReadOnly = true;
-            this.pen_MovimientoInventarioID.Visible = false;
-            // 
-            // pen_Sel
-            // 
-            this.pen_Sel.HeaderText = "Sel";
-            this.pen_Sel.Name = "pen_Sel";
-            this.pen_Sel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.pen_Sel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.pen_Sel.Width = 30;
-            // 
-            // pen_Factura
-            // 
-            this.pen_Factura.HeaderText = "Factura";
-            this.pen_Factura.Name = "pen_Factura";
-            this.pen_Factura.ReadOnly = true;
-            this.pen_Factura.Width = 80;
-            // 
-            // pen_Fecha
-            // 
-            this.pen_Fecha.HeaderText = "Fecha";
-            this.pen_Fecha.Name = "pen_Fecha";
-            this.pen_Fecha.ReadOnly = true;
-            this.pen_Fecha.Width = 136;
-            // 
-            // pen_Importe
-            // 
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle32.Format = "C2";
-            this.pen_Importe.DefaultCellStyle = dataGridViewCellStyle32;
-            this.pen_Importe.HeaderText = "Importe";
-            this.pen_Importe.Name = "pen_Importe";
-            this.pen_Importe.ReadOnly = true;
-            this.pen_Importe.Width = 70;
-            // 
-            // pen_Pagado
-            // 
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle33.Format = "C2";
-            this.pen_Pagado.DefaultCellStyle = dataGridViewCellStyle33;
-            this.pen_Pagado.HeaderText = "Pagado";
-            this.pen_Pagado.Name = "pen_Pagado";
-            this.pen_Pagado.ReadOnly = true;
-            this.pen_Pagado.Width = 70;
-            // 
-            // pen_Saldo
-            // 
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle34.Format = "C2";
-            this.pen_Saldo.DefaultCellStyle = dataGridViewCellStyle34;
-            this.pen_Saldo.HeaderText = "Saldo";
-            this.pen_Saldo.Name = "pen_Saldo";
-            this.pen_Saldo.ReadOnly = true;
-            this.pen_Saldo.Width = 80;
-            // 
-            // pen_Vencimiento
-            // 
-            dataGridViewCellStyle35.Format = "dd-MMM";
-            this.pen_Vencimiento.DefaultCellStyle = dataGridViewCellStyle35;
-            this.pen_Vencimiento.HeaderText = "Fecha pago";
-            this.pen_Vencimiento.Name = "pen_Vencimiento";
-            this.pen_Vencimiento.Width = 50;
-            // 
-            // pen_Usuario
-            // 
-            this.pen_Usuario.HeaderText = "Usuario";
-            this.pen_Usuario.Name = "pen_Usuario";
-            this.pen_Usuario.ReadOnly = true;
-            this.pen_Usuario.Width = 60;
-            // 
-            // pen_EsAgrupador
-            // 
-            this.pen_EsAgrupador.HeaderText = "Agrupador";
-            this.pen_EsAgrupador.Name = "pen_EsAgrupador";
-            this.pen_EsAgrupador.Visible = false;
+            this.btnAgregarPoliza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAgregarPoliza.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregarPoliza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarPoliza.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarPoliza.Image")));
+            this.btnAgregarPoliza.Location = new System.Drawing.Point(473, 629);
+            this.btnAgregarPoliza.Name = "btnAgregarPoliza";
+            this.btnAgregarPoliza.Size = new System.Drawing.Size(113, 28);
+            this.btnAgregarPoliza.TabIndex = 19;
+            this.btnAgregarPoliza.Text = "&Agregar Pago";
+            this.btnAgregarPoliza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregarPoliza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarPoliza.UseVisualStyleBackColor = false;
+            this.btnAgregarPoliza.Click += new System.EventHandler(this.btnAgregarPoliza_Click);
             // 
             // catalogosProveedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.Controls.Add(this.btnFactuas);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dtpFinal);
@@ -3907,5 +3923,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pen_Vencimiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn pen_Usuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn pen_EsAgrupador;
+        private System.Windows.Forms.Button btnFactuas;
     }
 }

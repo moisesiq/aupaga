@@ -46,6 +46,7 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,10 +62,18 @@
     <Compile Include="Clases\AccesoZip.cs" />
     <Compile Include="Clases\ResAcc.cs" />
     <Compile Include="Clases\StringWriterMod.cs" />
+    <Compile Include="Clases\UtilFe.cs" />
+    <Compile Include="ConSat.cs" />
     <Compile Include="FacturaElectronica.cs" />
     <Compile Include="FacturaPac.cs" />
     <Compile Include="FacturaProc.cs" />
     <Compile Include="FacturaSeguridad.cs" />
+    <Compile Include="FacturasSat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FacturasSat.Designer.cs">
+      <DependentUpon>FacturasSat.cs</DependentUpon>
+    </Compile>
     <Compile Include="FacturaXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
@@ -72,6 +81,7 @@
     <Compile Include="Web References\Edicom\Reference.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ConSat.js" />
     <Content Include="Resources\cadenaoriginal_3_2.xslt" />
     <Content Include="Resources\Cfdi3.2.xsl" />
   </ItemGroup>
@@ -86,10 +96,19 @@
     <None Include="Web References\Edicom\Reference.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FacturasSat.resx">
+      <DependentUpon>FacturasSat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proyectos\Util\LibUtil.csproj">
+      <Project>{3e90dfbe-e97e-473c-9325-cdfa1568a07f}</Project>
+      <Name>LibUtil</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -116,6 +116,12 @@ namespace LibUtil
 
         #endregion
 
+        #region [ Fecha ]
+
+        
+
+        #endregion
+
         #region [ Reflexion ]
 
         public static string JsonSimple(object oObjeto)
