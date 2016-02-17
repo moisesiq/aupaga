@@ -624,6 +624,7 @@
             dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvReglas.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            this.dgvReglas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvReglas.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReglas_CellValueChanged);
             // 
             // ParteMaxMinReglaID

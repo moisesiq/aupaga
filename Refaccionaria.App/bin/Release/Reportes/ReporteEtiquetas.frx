@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/07/2013 12:00:26" ReportInfo.Modified="03/18/2014 10:24:29" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="\\Administrativo\Label" PrintSettings.SavePrinterWithReport="true">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/07/2013 12:00:26" ReportInfo.Modified="03/18/2014 10:24:29" ReportInfo.CreatorVersion="2013.3.2.0">
   <Dictionary>
     <BusinessObjectDataSource Name="etiquetas" ReferenceName="etiquetas" DataType="null" Enabled="true">
       <Column Name="MovimientoInventarioEtiquetaID" DataType="System.Int32"/>

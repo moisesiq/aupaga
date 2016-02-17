@@ -694,6 +694,9 @@
             this.dgvVendedorSem.AllowUserToAddRows = false;
             this.dgvVendedorSem.AllowUserToDeleteRows = false;
             this.dgvVendedorSem.AllowUserToResizeRows = false;
+            this.dgvVendedorSem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvVendedorSem.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvVendedorSem.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvVendedorSem.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
