@@ -53,29 +53,33 @@ function BuscarEmitidasPorFecha(sFechaIni, sFechaFin) {
 function BuscarRecibidasPorFecha(iAnio, iMes, iDia) {
     j('#ctl00_MainContent_RdoFechas').click();
     // j('#ctl00_MainContent_TxtUUID').val('');
-    j('#DdlAnio').val(iAnio);
-    j('#ctl00_MainContent_CldFecha_DdlMes').val(iMes);
-    j('#ctl00_MainContent_CldFecha_DdlDia').val(iDia ? iDia : '');
-    j('#ctl00_MainContent_CldFecha_DdlHora').val('0');
-    j('#ctl00_MainContent_CldFecha_DdlMinuto').val('0');
-    j('#ctl00_MainContent_CldFecha_DdlSegundo').val('0');
-    j('#ctl00_MainContent_CldFecha_DdlHoraFin').val('23');
-    j('#ctl00_MainContent_CldFecha_DdlMinutoFin').val('59');
-    j('#ctl00_MainContent_CldFecha_DdlSegundoFin').val('59');
-    // j('#ctl00_MainContent_TxtRfcReceptor').val(''); ""
-    // j('#ctl00_MainContent_DdlEstadoComprobante').val('-1');
-    // j('#ddlComplementos').val('-1');
 
-    // Se manda hacer la petición de búsqueda
     window.setTimeout(function () {
-        j('#ctl00_MainContent_BtnBusqueda').click();
-    }, 400);
+        j('#DdlAnio').val(iAnio);
+        j('#ctl00_MainContent_CldFecha_DdlMes').val(iMes);
+        j('#ctl00_MainContent_CldFecha_DdlDia').val(iDia ? iDia : '');
+        j('#ctl00_MainContent_CldFecha_DdlHora').val('0');
+        j('#ctl00_MainContent_CldFecha_DdlMinuto').val('0');
+        j('#ctl00_MainContent_CldFecha_DdlSegundo').val('0');
+        j('#ctl00_MainContent_CldFecha_DdlHoraFin').val('23');
+        j('#ctl00_MainContent_CldFecha_DdlMinutoFin').val('59');
+        j('#ctl00_MainContent_CldFecha_DdlSegundoFin').val('59');
+        // j('#ctl00_MainContent_TxtRfcReceptor').val(''); ""
+        // j('#ctl00_MainContent_DdlEstadoComprobante').val('-1');
+        // j('#ddlComplementos').val('-1');
 
-    // Se manda notificar la búsqueda
-    window.setTimeout(function () {
-        document.title = "b";
-        window.open(("about:blank?paso=" + document.title), "_blank", "width=64,height=64");
-    }, 2000);
+        // Se manda hacer la petición de búsqueda
+        window.setTimeout(function () {
+            j('#ctl00_MainContent_BtnBusqueda').click();
+        }, 1000);
+
+        // Se manda notificar la búsqueda
+        window.setTimeout(function () {
+            document.title = "b";
+            window.open(("about:blank?paso=" + document.title), "_blank", "width=64,height=64");
+        }, 2000);
+
+    }, 500);
 }
 
 function ObtenerXmls() {

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(catalogosProveedores));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -110,7 +111,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(catalogosProveedores));
             this.dtpFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpInicial = new System.Windows.Forms.DateTimePicker();
             this.cboFiltro = new System.Windows.Forms.ComboBox();
@@ -151,13 +151,16 @@
             this.lblDireccion = new System.Windows.Forms.Label();
             this.tabProveedorMarca = new System.Windows.Forms.TabControl();
             this.tabMarcasAsignadas = new System.Windows.Forms.TabPage();
+            this.btnAgregarMarca = new System.Windows.Forms.Button();
             this.dgvMarcas = new System.Windows.Forms.DataGridView();
             this.tabProntoPago = new System.Windows.Forms.TabPage();
+            this.btnAgregarProntoPago = new System.Windows.Forms.Button();
             this.dgvProntoPago = new System.Windows.Forms.DataGridView();
             this.tabGanancias = new System.Windows.Forms.TabPage();
             this.btnSeleccionarTodos = new System.Windows.Forms.Button();
             this.btnGuardarGanancias = new System.Windows.Forms.Button();
             this.dgvGanancias = new System.Windows.Forms.DataGridView();
+            this.btnAgregarGanancia = new System.Windows.Forms.Button();
             this.lblHoraPedido = new System.Windows.Forms.Label();
             this.lblPuntoPedido = new System.Windows.Forms.Label();
             this.cboPaqueteria = new System.Windows.Forms.ComboBox();
@@ -193,11 +196,13 @@
             this.lblRFC = new System.Windows.Forms.Label();
             this.txtNombreProveedor = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.tabContactos = new System.Windows.Forms.TabPage();
             this.panelProveedorContactos = new System.Windows.Forms.Panel();
             this.tabObservaciones = new System.Windows.Forms.TabPage();
             this.panelProveedorObservaciones = new System.Windows.Forms.Panel();
             this.tabDoctosDepsDevs = new System.Windows.Forms.TabPage();
+            this.btnAplicarDevolucion = new System.Windows.Forms.Button();
             this.gpoDevolucionesAplicar = new System.Windows.Forms.GroupBox();
             this.txtNdcObservacion = new System.Windows.Forms.TextBox();
             this.dgvNotasDeCredito = new System.Windows.Forms.DataGridView();
@@ -244,6 +249,7 @@
             this.pen_Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pen_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pen_EsAgrupador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAgregarPoliza = new System.Windows.Forms.Button();
             this.tabKardex = new System.Windows.Forms.TabPage();
             this.gpoDepositosOperaciones = new System.Windows.Forms.GroupBox();
             this.dgvAbonosKardex = new System.Windows.Forms.DataGridView();
@@ -352,12 +358,6 @@
             this.btnFactuas = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnAgregarMarca = new System.Windows.Forms.Button();
-            this.btnAgregarProntoPago = new System.Windows.Forms.Button();
-            this.btnAgregarGanancia = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnAplicarDevolucion = new System.Windows.Forms.Button();
-            this.btnAgregarPoliza = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabDatosProveedores.SuspendLayout();
             this.tabDatosGenerales.SuspendLayout();
@@ -932,6 +932,20 @@
             this.tabMarcasAsignadas.TabIndex = 0;
             this.tabMarcasAsignadas.Text = "Marcas Asignadas";
             // 
+            // btnAgregarMarca
+            // 
+            this.btnAgregarMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregarMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarMarca.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarMarca.Image")));
+            this.btnAgregarMarca.Location = new System.Drawing.Point(5, 6);
+            this.btnAgregarMarca.Name = "btnAgregarMarca";
+            this.btnAgregarMarca.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarMarca.TabIndex = 0;
+            this.btnAgregarMarca.Text = "&Agregar";
+            this.btnAgregarMarca.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarMarca.UseVisualStyleBackColor = false;
+            this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
+            // 
             // dgvMarcas
             // 
             this.dgvMarcas.AllowUserToAddRows = false;
@@ -976,6 +990,20 @@
             this.tabProntoPago.Size = new System.Drawing.Size(1140, 221);
             this.tabProntoPago.TabIndex = 1;
             this.tabProntoPago.Text = "Datos Pronto Pago";
+            // 
+            // btnAgregarProntoPago
+            // 
+            this.btnAgregarProntoPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregarProntoPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarProntoPago.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarProntoPago.Image")));
+            this.btnAgregarProntoPago.Location = new System.Drawing.Point(5, 6);
+            this.btnAgregarProntoPago.Name = "btnAgregarProntoPago";
+            this.btnAgregarProntoPago.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarProntoPago.TabIndex = 2;
+            this.btnAgregarProntoPago.Text = "&Agregar";
+            this.btnAgregarProntoPago.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarProntoPago.UseVisualStyleBackColor = false;
+            this.btnAgregarProntoPago.Click += new System.EventHandler(this.btnAgregarProntoPago_Click);
             // 
             // dgvProntoPago
             // 
@@ -1078,6 +1106,20 @@
             this.dgvGanancias.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvGanancias_ColumnHeaderMouseClick);
             this.dgvGanancias.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvGanancias_CurrentCellDirtyStateChanged);
             this.dgvGanancias.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvGanancias_KeyDown);
+            // 
+            // btnAgregarGanancia
+            // 
+            this.btnAgregarGanancia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregarGanancia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarGanancia.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarGanancia.Image")));
+            this.btnAgregarGanancia.Location = new System.Drawing.Point(5, 6);
+            this.btnAgregarGanancia.Name = "btnAgregarGanancia";
+            this.btnAgregarGanancia.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarGanancia.TabIndex = 2;
+            this.btnAgregarGanancia.Text = "&Agregar";
+            this.btnAgregarGanancia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarGanancia.UseVisualStyleBackColor = false;
+            this.btnAgregarGanancia.Click += new System.EventHandler(this.btnAgregarGanancia_Click);
             // 
             // lblHoraPedido
             // 
@@ -1391,6 +1433,21 @@
             this.lblNombre.TabIndex = 18;
             this.lblNombre.Text = "Nombre";
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.Location = new System.Drawing.Point(1067, 6);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(87, 23);
+            this.btnGuardar.TabIndex = 18;
+            this.btnGuardar.Text = "&Guardar";
+            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // tabContactos
             // 
             this.tabContactos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
@@ -1445,6 +1502,23 @@
             this.tabDoctosDepsDevs.Size = new System.Drawing.Size(1174, 663);
             this.tabDoctosDepsDevs.TabIndex = 1;
             this.tabDoctosDepsDevs.Text = "Pagos";
+            // 
+            // btnAplicarDevolucion
+            // 
+            this.btnAplicarDevolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAplicarDevolucion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAplicarDevolucion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicarDevolucion.Image = ((System.Drawing.Image)(resources.GetObject("btnAplicarDevolucion.Image")));
+            this.btnAplicarDevolucion.Location = new System.Drawing.Point(148, 616);
+            this.btnAplicarDevolucion.Name = "btnAplicarDevolucion";
+            this.btnAplicarDevolucion.Size = new System.Drawing.Size(93, 41);
+            this.btnAplicarDevolucion.TabIndex = 22;
+            this.btnAplicarDevolucion.Text = "&Aplicar Devolución";
+            this.btnAplicarDevolucion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAplicarDevolucion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAplicarDevolucion.UseVisualStyleBackColor = false;
+            this.btnAplicarDevolucion.Visible = false;
+            this.btnAplicarDevolucion.Click += new System.EventHandler(this.btnAplicarDevolucion_Click);
             // 
             // gpoDevolucionesAplicar
             // 
@@ -2054,6 +2128,22 @@
             this.pen_EsAgrupador.HeaderText = "Agrupador";
             this.pen_EsAgrupador.Name = "pen_EsAgrupador";
             this.pen_EsAgrupador.Visible = false;
+            // 
+            // btnAgregarPoliza
+            // 
+            this.btnAgregarPoliza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAgregarPoliza.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAgregarPoliza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarPoliza.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarPoliza.Image")));
+            this.btnAgregarPoliza.Location = new System.Drawing.Point(473, 629);
+            this.btnAgregarPoliza.Name = "btnAgregarPoliza";
+            this.btnAgregarPoliza.Size = new System.Drawing.Size(113, 28);
+            this.btnAgregarPoliza.TabIndex = 19;
+            this.btnAgregarPoliza.Text = "&Agregar Pago";
+            this.btnAgregarPoliza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregarPoliza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAgregarPoliza.UseVisualStyleBackColor = false;
+            this.btnAgregarPoliza.Click += new System.EventHandler(this.btnAgregarPoliza_Click);
             // 
             // tabKardex
             // 
@@ -3455,9 +3545,9 @@
             this.btnFactuas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnFactuas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFactuas.ForeColor = System.Drawing.Color.White;
-            this.btnFactuas.Location = new System.Drawing.Point(150, 657);
+            this.btnFactuas.Location = new System.Drawing.Point(136, 678);
             this.btnFactuas.Name = "btnFactuas";
-            this.btnFactuas.Size = new System.Drawing.Size(48, 37);
+            this.btnFactuas.Size = new System.Drawing.Size(62, 23);
             this.btnFactuas.TabIndex = 70;
             this.btnFactuas.Text = "Facturas";
             this.btnFactuas.UseVisualStyleBackColor = false;
@@ -3494,96 +3584,6 @@
             this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnAgregarMarca
-            // 
-            this.btnAgregarMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregarMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarMarca.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarMarca.Image")));
-            this.btnAgregarMarca.Location = new System.Drawing.Point(5, 6);
-            this.btnAgregarMarca.Name = "btnAgregarMarca";
-            this.btnAgregarMarca.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarMarca.TabIndex = 0;
-            this.btnAgregarMarca.Text = "&Agregar";
-            this.btnAgregarMarca.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarMarca.UseVisualStyleBackColor = false;
-            this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
-            // 
-            // btnAgregarProntoPago
-            // 
-            this.btnAgregarProntoPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregarProntoPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarProntoPago.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarProntoPago.Image")));
-            this.btnAgregarProntoPago.Location = new System.Drawing.Point(5, 6);
-            this.btnAgregarProntoPago.Name = "btnAgregarProntoPago";
-            this.btnAgregarProntoPago.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarProntoPago.TabIndex = 2;
-            this.btnAgregarProntoPago.Text = "&Agregar";
-            this.btnAgregarProntoPago.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarProntoPago.UseVisualStyleBackColor = false;
-            this.btnAgregarProntoPago.Click += new System.EventHandler(this.btnAgregarProntoPago_Click);
-            // 
-            // btnAgregarGanancia
-            // 
-            this.btnAgregarGanancia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregarGanancia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarGanancia.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarGanancia.Image")));
-            this.btnAgregarGanancia.Location = new System.Drawing.Point(5, 6);
-            this.btnAgregarGanancia.Name = "btnAgregarGanancia";
-            this.btnAgregarGanancia.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarGanancia.TabIndex = 2;
-            this.btnAgregarGanancia.Text = "&Agregar";
-            this.btnAgregarGanancia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarGanancia.UseVisualStyleBackColor = false;
-            this.btnAgregarGanancia.Click += new System.EventHandler(this.btnAgregarGanancia_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(1067, 6);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(87, 23);
-            this.btnGuardar.TabIndex = 18;
-            this.btnGuardar.Text = "&Guardar";
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnAplicarDevolucion
-            // 
-            this.btnAplicarDevolucion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAplicarDevolucion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAplicarDevolucion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAplicarDevolucion.Image = ((System.Drawing.Image)(resources.GetObject("btnAplicarDevolucion.Image")));
-            this.btnAplicarDevolucion.Location = new System.Drawing.Point(148, 616);
-            this.btnAplicarDevolucion.Name = "btnAplicarDevolucion";
-            this.btnAplicarDevolucion.Size = new System.Drawing.Size(93, 41);
-            this.btnAplicarDevolucion.TabIndex = 22;
-            this.btnAplicarDevolucion.Text = "&Aplicar Devolución";
-            this.btnAplicarDevolucion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAplicarDevolucion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAplicarDevolucion.UseVisualStyleBackColor = false;
-            this.btnAplicarDevolucion.Visible = false;
-            this.btnAplicarDevolucion.Click += new System.EventHandler(this.btnAplicarDevolucion_Click);
-            // 
-            // btnAgregarPoliza
-            // 
-            this.btnAgregarPoliza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAgregarPoliza.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnAgregarPoliza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarPoliza.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarPoliza.Image")));
-            this.btnAgregarPoliza.Location = new System.Drawing.Point(473, 629);
-            this.btnAgregarPoliza.Name = "btnAgregarPoliza";
-            this.btnAgregarPoliza.Size = new System.Drawing.Size(113, 28);
-            this.btnAgregarPoliza.TabIndex = 19;
-            this.btnAgregarPoliza.Text = "&Agregar Pago";
-            this.btnAgregarPoliza.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarPoliza.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAgregarPoliza.UseVisualStyleBackColor = false;
-            this.btnAgregarPoliza.Click += new System.EventHandler(this.btnAgregarPoliza_Click);
             // 
             // catalogosProveedores
             // 

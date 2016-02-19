@@ -28,9 +28,6 @@ namespace FacturacionElectronica
         WebBrowser webSat;
         DateTime dDesde;
         DateTime dHasta;
-        int iAnio;
-        int iMes;
-        int? iDia;
         Thread oHiloSat;
         bool bDescargando;
         int iXmlProc;
@@ -89,6 +86,9 @@ namespace FacturacionElectronica
         public string Rfc { get; set; }
         public string ClaveCiec { get; set; }
         public string[] Xmls { get; set; }
+        public int Anio { get; set; }
+        public int Mes { get; set; }
+        public int? Dia { get; set; }
 
         public enum ConSatPaso { IniciandoSesion, SesionIniciada, BuscandoEmitidas, BuscandoRecibidas, BusquedaCompletada
             , ObteniendoXmls, IniciandoDescarga, XmlDescargado, DescargaCompletada };
@@ -163,7 +163,7 @@ namespace FacturacionElectronica
                     break;
                 case ConSat.UrlRecibidas:
                     string sJs3 = File.ReadAllText(this.RutaScriptConSat());
-                    sJs3 += string.Format("\n\nwindow.BuscarRecibidasPorFecha({0}, {1}, {2});", this.iAnio, this.iMes, (this.iDia.HasValue ? this.iDia.ToString() : "null"));
+                    sJs3 += string.Format("\n\nwindow.BuscarRecibidasPorFecha({0}, {1}, {2});", this.Anio, this.Mes, (this.Dia.HasValue ? this.Dia.ToString() : "null"));
                     this.InsertarScript(sJs3);
                     this.ReportarPaso(ConSat.ConSatPaso.BuscandoRecibidas);
                     break;
@@ -311,9 +311,9 @@ namespace FacturacionElectronica
 
         public void IniciarFacturasRecibidas(int iAnio, int iMes, int? iDia)
         {
-            this.iAnio = iAnio;
-            this.iMes = iMes;
-            this.iDia = iDia;
+            this.Anio = iAnio;
+            this.Mes = iMes;
+            this.Dia = iDia;
             this.eTipoDeConsulta = ConSat.TipoDeConsulta.Recibidas;
             this.webSat.Navigate(ConSat.UrlInicio);
         }
