@@ -124,14 +124,19 @@ window.contenido = {
 				</div> \
 			';
 			jAcceso = $(sHtml).appendTo("body");
-			jAcceso.popup();
+			jAcceso.popup({
+				afterclose: function(e, u) {
+					jAcceso.remove();
+				}
+			});
 			//
-			jAcceso.find("input.Cancelar").click(function() {
+			/* jAcceso.find("input.Cancelar").click(function() {
 				jAcceso.popup("close");
 			});
 			jAcceso.find("input.Aceptar").click(function() {
 				jAcceso.find("form").submit();
 			});
+			*/
 		}
 
 		jAcceso.find("form").submit(function() {

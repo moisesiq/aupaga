@@ -421,6 +421,8 @@ namespace Refaccionaria.App
             this.dgvProntoPago.DataSource = null;
             this.dgvGanancias.DataSource = null;
             this.dgvMovimientosNoPagados.DataSource = null;
+            
+            this.tabCuentasPorPagar.SelectedTab = this.tbpLista;
         }
 
         public void ActualizarListado()
@@ -2112,7 +2114,8 @@ namespace Refaccionaria.App
                 case "tbpLista":
                     if (this.dtpCppListaInicio.Tag == null)
                     {
-                        this.dtpCppListaInicio.Value = this.ObtenerFechaAdeudoMasViejo(this.Proveedor.ProveedorID);
+                        // this.dtpCppListaInicio.Value = this.ObtenerFechaAdeudoMasViejo(this.Proveedor.ProveedorID);
+                        this.dtpCppListaInicio.Value = DateTime.Now.DiaPrimero();
                         this.dtpCppListaInicio.Tag = true;
                         this.CargarListaVencimientos(this.Proveedor.ProveedorID);
                     }
@@ -2139,6 +2142,11 @@ namespace Refaccionaria.App
 
             DateTime dInicio = this.dtpCppListaInicio.Value.Date;
             DateTime dFinMas1 = dInicio.AddMonths(1).DiaUltimo().AddDays(1);
+            DateTime dFinalMax = DateTime.Now.DiaUltimo().AddMonths(1);
+            // La fecha final es máximo 2 meses del día actual
+            if (dFinMas1 < dFinalMax)
+                dFinMas1 = dFinalMax;
+            //
             var oCompras = General.GetListOf<ProveedoresComprasView>(c => c.Saldo > 0 && !c.MovimientoAgrupadorID.HasValue && c.Fecha < dFinMas1);
             var oComprasA = oCompras
                 .Where(c => c.Fecha.Value.AddDays(c.DiasPlazo.Valor()) >= dInicio && c.Fecha.Value.AddDays(c.DiasPlazo.Valor()) < dFinMas1)
