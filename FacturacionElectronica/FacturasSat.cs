@@ -55,6 +55,12 @@ namespace FacturacionElectronica
 
             this.lblProceso.Text = "";
             this.lblAvance.Text = "";
+
+            // Se inicializa el control navegador
+            this.oSat = new FacturacionElectronica.ConSat(this.Rfc, this.ClaveCiec);
+            this.oSat.PasoCompletado += oSat_PasoCompletado;
+            this.oSat.RutaGuardar = this.RutaGuardar;
+            this.oSat.InicializarNavegador(this.webSat);
         }
 
         private void cmbAnio_SelectedIndexChanged(object sender, EventArgs e)
@@ -92,8 +98,11 @@ namespace FacturacionElectronica
                 case ConSat.ConSatPaso.IniciandoSesion:
                 case ConSat.ConSatPaso.SesionIniciada:
                 case ConSat.ConSatPaso.BuscandoRecibidas:
+                    this.pgbProceso.PerformStep();
+                    break;
                 case ConSat.ConSatPaso.BusquedaCompletada:
                     this.pgbProceso.PerformStep();
+                    this.pgbProceso.Value = this.pgbProceso.Maximum;
                     break;
                 case ConSat.ConSatPaso.IniciandoDescarga:
                     if (this.oSat.Xmls == null)
@@ -152,10 +161,11 @@ namespace FacturacionElectronica
             if (iAnio == 0 || iMes == 0)
                 return;
 
-            this.oSat = new FacturacionElectronica.ConSat(this.Rfc, this.ClaveCiec);
-            this.oSat.PasoCompletado += oSat_PasoCompletado;
-            this.oSat.RutaGuardar = this.RutaGuardar;
-            this.oSat.InicializarNavegador(this.webSat);
+            // Se limpia el navegador, si aplica
+            if (this.oSat != null)
+                this.oSat.CerrarSesion();
+
+            // 
             this.oSat.IniciarFacturasRecibidas(iAnio, iMes, iDia);
         }
 

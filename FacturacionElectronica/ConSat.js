@@ -16,9 +16,10 @@ function IniciarSesion(sRfc, sClaveCiec) {
 
 function CerrarSesion() {
     j("#ctl100_LnkBtnCierraSesion").click();
-    window.setTimeout(function () {
+    /* window.setTimeout(function () {
         window.location.href = "about:blank";
-    }, 400);
+    }, 1000);
+    */
 }
 
 function BuscarEmitidasPorFecha(sFechaIni, sFechaFin) {
@@ -53,11 +54,11 @@ function BuscarEmitidasPorFecha(sFechaIni, sFechaFin) {
 function BuscarRecibidasPorFecha(iAnio, iMes, iDia) {
     j('#ctl00_MainContent_RdoFechas').click();
     // j('#ctl00_MainContent_TxtUUID').val('');
-
+        
     window.setTimeout(function () {
         j('#DdlAnio').val(iAnio);
         j('#ctl00_MainContent_CldFecha_DdlMes').val(iMes);
-        j('#ctl00_MainContent_CldFecha_DdlDia').val(iDia ? iDia : '');
+        j('#ctl00_MainContent_CldFecha_DdlDia').val(iDia ? ('00' + iDia).slice(-2) : '');
         j('#ctl00_MainContent_CldFecha_DdlHora').val('0');
         j('#ctl00_MainContent_CldFecha_DdlMinuto').val('0');
         j('#ctl00_MainContent_CldFecha_DdlSegundo').val('0');
@@ -67,6 +68,9 @@ function BuscarRecibidasPorFecha(iAnio, iMes, iDia) {
         // j('#ctl00_MainContent_TxtRfcReceptor').val(''); ""
         // j('#ctl00_MainContent_DdlEstadoComprobante').val('-1');
         // j('#ddlComplementos').val('-1');
+
+        // j("body").append("<pre>" + JSON.stringify(j("#aspnetForm").serializeArray(), null, 4) + "</pre>");
+        // window.alert(j('#ctl00_MainContent_CldFecha_DdlDia').val());
 
         // Se manda hacer la petición de búsqueda
         window.setTimeout(function () {

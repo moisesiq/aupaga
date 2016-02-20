@@ -207,6 +207,9 @@ namespace FacturacionElectronica
 
         private void InsertarScript(string sScript)
         {
+            if (this.webSat.Document == null)
+                return;
+
             var oJs = this.webSat.Document.CreateElement("script");
             oJs.SetAttribute("type", "text/javascript");
             oJs.SetAttribute("text", sScript);
@@ -340,6 +343,12 @@ namespace FacturacionElectronica
         {
             this.InsertarScript("window.ObtenerXmls();");
             this.ReportarPaso(ConSat.ConSatPaso.ObteniendoXmls);
+        }
+
+        public void CerrarSesion()
+        {
+            this.InsertarScript("if (window.CerrarSesion) window.CerrarSesion();");
+            Thread.Sleep(1000);
         }
 
         #endregion
