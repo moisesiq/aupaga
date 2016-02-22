@@ -83,12 +83,15 @@
             // 
             // btnDescargar
             // 
-            this.btnDescargar.Location = new System.Drawing.Point(454, 4);
+            this.btnDescargar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnDescargar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDescargar.ForeColor = System.Drawing.Color.White;
+            this.btnDescargar.Location = new System.Drawing.Point(1033, 6);
             this.btnDescargar.Name = "btnDescargar";
             this.btnDescargar.Size = new System.Drawing.Size(75, 23);
             this.btnDescargar.TabIndex = 4;
             this.btnDescargar.Text = "&Descargar";
-            this.btnDescargar.UseVisualStyleBackColor = true;
+            this.btnDescargar.UseVisualStyleBackColor = false;
             this.btnDescargar.Click += new System.EventHandler(this.btnDescargar_Click);
             // 
             // cmbAnio
@@ -112,9 +115,9 @@
             // 
             this.pgbProceso.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pgbProceso.Location = new System.Drawing.Point(12, 51);
+            this.pgbProceso.Location = new System.Drawing.Point(143, 35);
             this.pgbProceso.Name = "pgbProceso";
-            this.pgbProceso.Size = new System.Drawing.Size(560, 23);
+            this.pgbProceso.Size = new System.Drawing.Size(965, 23);
             this.pgbProceso.Step = 1;
             this.pgbProceso.TabIndex = 13;
             // 
@@ -122,7 +125,7 @@
             // 
             this.lblProceso.AutoSize = true;
             this.lblProceso.ForeColor = System.Drawing.Color.White;
-            this.lblProceso.Location = new System.Drawing.Point(12, 35);
+            this.lblProceso.Location = new System.Drawing.Point(12, 44);
             this.lblProceso.Name = "lblProceso";
             this.lblProceso.Size = new System.Drawing.Size(46, 13);
             this.lblProceso.TabIndex = 14;
@@ -132,7 +135,7 @@
             // 
             this.lblAvance.AutoSize = true;
             this.lblAvance.ForeColor = System.Drawing.Color.White;
-            this.lblAvance.Location = new System.Drawing.Point(140, 35);
+            this.lblAvance.Location = new System.Drawing.Point(88, 44);
             this.lblAvance.Name = "lblAvance";
             this.lblAvance.Size = new System.Drawing.Size(49, 13);
             this.lblAvance.TabIndex = 15;
@@ -143,20 +146,23 @@
             this.webSat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webSat.Location = new System.Drawing.Point(12, 80);
+            this.webSat.Location = new System.Drawing.Point(12, 64);
             this.webSat.MinimumSize = new System.Drawing.Size(20, 20);
             this.webSat.Name = "webSat";
-            this.webSat.Size = new System.Drawing.Size(560, 270);
+            this.webSat.Size = new System.Drawing.Size(1096, 551);
             this.webSat.TabIndex = 5;
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(373, 4);
+            this.btnConsultar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultar.ForeColor = System.Drawing.Color.White;
+            this.btnConsultar.Location = new System.Drawing.Point(952, 6);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(75, 23);
             this.btnConsultar.TabIndex = 3;
             this.btnConsultar.Text = "&Consultar";
-            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.UseVisualStyleBackColor = false;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // FacturasSat
@@ -164,7 +170,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
-            this.ClientSize = new System.Drawing.Size(584, 362);
+            this.ClientSize = new System.Drawing.Size(1120, 627);
             this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.webSat);
             this.Controls.Add(this.lblAvance);

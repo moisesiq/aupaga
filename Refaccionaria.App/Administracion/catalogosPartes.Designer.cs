@@ -221,7 +221,6 @@
             this.tabPartes = new System.Windows.Forms.TabControl();
             this.tbpParte = new System.Windows.Forms.TabPage();
             this.chkValFotos = new System.Windows.Forms.CheckBox();
-            this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
             this.btnActualizadorDeImagenes = new System.Windows.Forms.Button();
             this.txtRequiereDepositoDe = new System.Windows.Forms.TextBox();
             this.cmbRequiereCascoDe = new System.Windows.Forms.ComboBox();
@@ -232,23 +231,10 @@
             this.flpCaracteristicas = new System.Windows.Forms.FlowLayoutPanel();
             this.chkValCaracteristicas = new System.Windows.Forms.CheckBox();
             this.lblNoPedidos = new System.Windows.Forms.Label();
-            this.txtPrecio4 = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkEsPar = new Refaccionaria.Negocio.CheckBoxMod();
-            this.txtUnidadEmpaque = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtPorcentaje2 = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkAGranel = new Refaccionaria.Negocio.CheckBoxMod();
-            this.txtPrecio3 = new Refaccionaria.App.textBoxOnlyDouble();
             this.picBoxImagen = new System.Windows.Forms.PictureBox();
-            this.txtTiempoReposicion = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtPorcentaje3 = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtPrecio2 = new Refaccionaria.App.textBoxOnlyDouble();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.txtPorcentaje4 = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtPrecio1 = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtPorcentaje1 = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtPrecio5 = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtPorcentaje5 = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtCosto = new Refaccionaria.App.textBoxOnlyDouble();
             this.tbpKardex = new System.Windows.Forms.TabPage();
             this.btnDiferenciasExistencia = new System.Windows.Forms.Button();
             this.dgvKardex = new System.Windows.Forms.DataGridView();
@@ -273,7 +259,6 @@
             this.dtpKardexDesde = new System.Windows.Forms.DateTimePicker();
             this.lblUbicacionOrigen = new System.Windows.Forms.Label();
             this.cmbKardexSucursal = new System.Windows.Forms.ComboBox();
-            this.ctlExistencias = new Refaccionaria.App.GridExsitencias();
             this.tbpAvance = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblAvValidadosNum = new System.Windows.Forms.Label();
@@ -361,6 +346,22 @@
             this.chkErr_MostrarTodos = new System.Windows.Forms.CheckBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
+            this.txtPrecio4 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtUnidadEmpaque = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPorcentaje2 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPrecio3 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtTiempoReposicion = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPorcentaje3 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPrecio2 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPorcentaje4 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPrecio1 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPorcentaje1 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPrecio5 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtPorcentaje5 = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtCosto = new Refaccionaria.App.textBoxOnlyDouble();
+            this.ctlExistencias = new Refaccionaria.App.GridExsitencias();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabExistencia.SuspendLayout();
             this.tabExistencias.SuspendLayout();
@@ -843,6 +844,7 @@
             // tabExistencias
             // 
             this.tabExistencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.tabExistencias.Controls.Add(this.label7);
             this.tabExistencias.Controls.Add(this.txtDescripcionMaxMin);
             this.tabExistencias.Controls.Add(this.dgvExistencias);
             this.tabExistencias.ForeColor = System.Drawing.Color.Black;
@@ -861,11 +863,11 @@
             this.txtDescripcionMaxMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.txtDescripcionMaxMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDescripcionMaxMin.ForeColor = System.Drawing.Color.White;
-            this.txtDescripcionMaxMin.Location = new System.Drawing.Point(6, 95);
+            this.txtDescripcionMaxMin.Location = new System.Drawing.Point(6, 109);
             this.txtDescripcionMaxMin.Multiline = true;
             this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
             this.txtDescripcionMaxMin.ReadOnly = true;
-            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(280, 106);
+            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(280, 92);
             this.txtDescripcionMaxMin.TabIndex = 14;
             // 
             // dgvExistencias
@@ -1917,14 +1919,6 @@
             this.chkValFotos.UseVisualStyleBackColor = false;
             this.chkValFotos.CheckedChanged += new System.EventHandler(this.chkValFotos_CheckedChanged);
             // 
-            // ctlVentasPorMes
-            // 
-            this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ctlVentasPorMes.Location = new System.Drawing.Point(3, 466);
-            this.ctlVentasPorMes.Name = "ctlVentasPorMes";
-            this.ctlVentasPorMes.Size = new System.Drawing.Size(686, 92);
-            this.ctlVentasPorMes.TabIndex = 315;
-            // 
             // btnActualizadorDeImagenes
             // 
             this.btnActualizadorDeImagenes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
@@ -2048,17 +2042,6 @@
             this.lblNoPedidos.Text = "* No pedida por Equivalentes";
             this.lblNoPedidos.Visible = false;
             // 
-            // txtPrecio4
-            // 
-            this.txtPrecio4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio4.Location = new System.Drawing.Point(424, 145);
-            this.txtPrecio4.MaxLength = 10;
-            this.txtPrecio4.Name = "txtPrecio4";
-            this.txtPrecio4.Size = new System.Drawing.Size(69, 20);
-            this.txtPrecio4.TabIndex = 9;
-            this.txtPrecio4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPrecio4.Leave += new System.EventHandler(this.txtPrecio4_Leave);
-            // 
             // chkEsPar
             // 
             this.chkEsPar.AutoSize = true;
@@ -2070,28 +2053,6 @@
             this.chkEsPar.TabIndex = 164;
             this.chkEsPar.Text = "Es par";
             this.chkEsPar.UseVisualStyleBackColor = true;
-            // 
-            // txtUnidadEmpaque
-            // 
-            this.txtUnidadEmpaque.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUnidadEmpaque.Location = new System.Drawing.Point(1287, 101);
-            this.txtUnidadEmpaque.MaxLength = 10;
-            this.txtUnidadEmpaque.Name = "txtUnidadEmpaque";
-            this.txtUnidadEmpaque.Size = new System.Drawing.Size(53, 20);
-            this.txtUnidadEmpaque.TabIndex = 162;
-            this.txtUnidadEmpaque.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtPorcentaje2
-            // 
-            this.txtPorcentaje2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPorcentaje2.Location = new System.Drawing.Point(368, 95);
-            this.txtPorcentaje2.MaxLength = 10;
-            this.txtPorcentaje2.Name = "txtPorcentaje2";
-            this.txtPorcentaje2.Size = new System.Drawing.Size(40, 20);
-            this.txtPorcentaje2.TabIndex = 13;
-            this.txtPorcentaje2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPorcentaje2.Enter += new System.EventHandler(this.txtPorcentaje2_Enter);
-            this.txtPorcentaje2.Leave += new System.EventHandler(this.txtPorcentaje2_Leave);
             // 
             // chkAGranel
             // 
@@ -2105,17 +2066,6 @@
             this.chkAGranel.Text = "A granel";
             this.chkAGranel.UseVisualStyleBackColor = true;
             // 
-            // txtPrecio3
-            // 
-            this.txtPrecio3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio3.Location = new System.Drawing.Point(424, 120);
-            this.txtPrecio3.MaxLength = 10;
-            this.txtPrecio3.Name = "txtPrecio3";
-            this.txtPrecio3.Size = new System.Drawing.Size(69, 20);
-            this.txtPrecio3.TabIndex = 8;
-            this.txtPrecio3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPrecio3.Leave += new System.EventHandler(this.txtPrecio3_Leave);
-            // 
             // picBoxImagen
             // 
             this.picBoxImagen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
@@ -2126,39 +2076,6 @@
             this.picBoxImagen.TabIndex = 0;
             this.picBoxImagen.TabStop = false;
             this.picBoxImagen.Click += new System.EventHandler(this.picBoxImagen_Click);
-            // 
-            // txtTiempoReposicion
-            // 
-            this.txtTiempoReposicion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTiempoReposicion.Location = new System.Drawing.Point(1287, 75);
-            this.txtTiempoReposicion.MaxLength = 10;
-            this.txtTiempoReposicion.Name = "txtTiempoReposicion";
-            this.txtTiempoReposicion.Size = new System.Drawing.Size(53, 20);
-            this.txtTiempoReposicion.TabIndex = 161;
-            this.txtTiempoReposicion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtPorcentaje3
-            // 
-            this.txtPorcentaje3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPorcentaje3.Location = new System.Drawing.Point(368, 120);
-            this.txtPorcentaje3.MaxLength = 10;
-            this.txtPorcentaje3.Name = "txtPorcentaje3";
-            this.txtPorcentaje3.Size = new System.Drawing.Size(40, 20);
-            this.txtPorcentaje3.TabIndex = 14;
-            this.txtPorcentaje3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPorcentaje3.Enter += new System.EventHandler(this.txtPorcentaje3_Enter);
-            this.txtPorcentaje3.Leave += new System.EventHandler(this.txtPorcentaje3_Leave);
-            // 
-            // txtPrecio2
-            // 
-            this.txtPrecio2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio2.Location = new System.Drawing.Point(424, 95);
-            this.txtPrecio2.MaxLength = 10;
-            this.txtPrecio2.Name = "txtPrecio2";
-            this.txtPrecio2.Size = new System.Drawing.Size(69, 20);
-            this.txtPrecio2.TabIndex = 7;
-            this.txtPrecio2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPrecio2.Leave += new System.EventHandler(this.txtPrecio2_Leave);
             // 
             // btnGuardar
             // 
@@ -2176,76 +2093,6 @@
             this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // txtPorcentaje4
-            // 
-            this.txtPorcentaje4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPorcentaje4.Location = new System.Drawing.Point(368, 145);
-            this.txtPorcentaje4.MaxLength = 10;
-            this.txtPorcentaje4.Name = "txtPorcentaje4";
-            this.txtPorcentaje4.Size = new System.Drawing.Size(40, 20);
-            this.txtPorcentaje4.TabIndex = 15;
-            this.txtPorcentaje4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPorcentaje4.Enter += new System.EventHandler(this.txtPorcentaje4_Enter);
-            this.txtPorcentaje4.Leave += new System.EventHandler(this.txtPorcentaje4_Leave);
-            // 
-            // txtPrecio1
-            // 
-            this.txtPrecio1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio1.Location = new System.Drawing.Point(424, 70);
-            this.txtPrecio1.MaxLength = 10;
-            this.txtPrecio1.Name = "txtPrecio1";
-            this.txtPrecio1.Size = new System.Drawing.Size(69, 20);
-            this.txtPrecio1.TabIndex = 6;
-            this.txtPrecio1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPrecio1.Leave += new System.EventHandler(this.txtPrecio1_Leave);
-            // 
-            // txtPorcentaje1
-            // 
-            this.txtPorcentaje1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPorcentaje1.Location = new System.Drawing.Point(368, 70);
-            this.txtPorcentaje1.MaxLength = 10;
-            this.txtPorcentaje1.Name = "txtPorcentaje1";
-            this.txtPorcentaje1.Size = new System.Drawing.Size(40, 20);
-            this.txtPorcentaje1.TabIndex = 12;
-            this.txtPorcentaje1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPorcentaje1.Enter += new System.EventHandler(this.txtPorcentaje1_Enter);
-            this.txtPorcentaje1.Leave += new System.EventHandler(this.txtPorcentaje1_Leave);
-            // 
-            // txtPrecio5
-            // 
-            this.txtPrecio5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio5.Location = new System.Drawing.Point(424, 170);
-            this.txtPrecio5.MaxLength = 10;
-            this.txtPrecio5.Name = "txtPrecio5";
-            this.txtPrecio5.Size = new System.Drawing.Size(69, 20);
-            this.txtPrecio5.TabIndex = 10;
-            this.txtPrecio5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPrecio5.Leave += new System.EventHandler(this.txtPrecio5_Leave);
-            // 
-            // txtPorcentaje5
-            // 
-            this.txtPorcentaje5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPorcentaje5.Location = new System.Drawing.Point(368, 170);
-            this.txtPorcentaje5.MaxLength = 10;
-            this.txtPorcentaje5.Name = "txtPorcentaje5";
-            this.txtPorcentaje5.Size = new System.Drawing.Size(40, 20);
-            this.txtPorcentaje5.TabIndex = 16;
-            this.txtPorcentaje5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPorcentaje5.Enter += new System.EventHandler(this.txtPorcentaje5_Enter);
-            this.txtPorcentaje5.Leave += new System.EventHandler(this.txtPorcentaje5_Leave);
-            // 
-            // txtCosto
-            // 
-            this.txtCosto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCosto.Location = new System.Drawing.Point(368, 43);
-            this.txtCosto.MaxLength = 10;
-            this.txtCosto.Name = "txtCosto";
-            this.txtCosto.Size = new System.Drawing.Size(63, 20);
-            this.txtCosto.TabIndex = 5;
-            this.txtCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCosto.Enter += new System.EventHandler(this.txtCosto_Enter);
-            this.txtCosto.Leave += new System.EventHandler(this.txtCosto_Leave);
             // 
             // tbpKardex
             // 
@@ -2558,15 +2405,6 @@
             this.cmbKardexSucursal.Size = new System.Drawing.Size(97, 21);
             this.cmbKardexSucursal.TabIndex = 0;
             this.cmbKardexSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbKardexSucursal_SelectedIndexChanged);
-            // 
-            // ctlExistencias
-            // 
-            this.ctlExistencias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ctlExistencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
-            this.ctlExistencias.Location = new System.Drawing.Point(6, 338);
-            this.ctlExistencias.Name = "ctlExistencias";
-            this.ctlExistencias.Size = new System.Drawing.Size(252, 100);
-            this.ctlExistencias.TabIndex = 22;
             // 
             // tbpAvance
             // 
@@ -3680,6 +3518,182 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(3, 96);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(261, 13);
+            this.label7.TabIndex = 101;
+            this.label7.Text = "Descripción por tienda del Máximo y Mínimo:";
+            // 
+            // ctlVentasPorMes
+            // 
+            this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ctlVentasPorMes.Location = new System.Drawing.Point(3, 466);
+            this.ctlVentasPorMes.Name = "ctlVentasPorMes";
+            this.ctlVentasPorMes.Size = new System.Drawing.Size(686, 92);
+            this.ctlVentasPorMes.TabIndex = 315;
+            // 
+            // txtPrecio4
+            // 
+            this.txtPrecio4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecio4.Location = new System.Drawing.Point(424, 145);
+            this.txtPrecio4.MaxLength = 10;
+            this.txtPrecio4.Name = "txtPrecio4";
+            this.txtPrecio4.Size = new System.Drawing.Size(69, 20);
+            this.txtPrecio4.TabIndex = 9;
+            this.txtPrecio4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPrecio4.Leave += new System.EventHandler(this.txtPrecio4_Leave);
+            // 
+            // txtUnidadEmpaque
+            // 
+            this.txtUnidadEmpaque.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUnidadEmpaque.Location = new System.Drawing.Point(1287, 101);
+            this.txtUnidadEmpaque.MaxLength = 10;
+            this.txtUnidadEmpaque.Name = "txtUnidadEmpaque";
+            this.txtUnidadEmpaque.Size = new System.Drawing.Size(53, 20);
+            this.txtUnidadEmpaque.TabIndex = 162;
+            this.txtUnidadEmpaque.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtPorcentaje2
+            // 
+            this.txtPorcentaje2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPorcentaje2.Location = new System.Drawing.Point(368, 95);
+            this.txtPorcentaje2.MaxLength = 10;
+            this.txtPorcentaje2.Name = "txtPorcentaje2";
+            this.txtPorcentaje2.Size = new System.Drawing.Size(40, 20);
+            this.txtPorcentaje2.TabIndex = 13;
+            this.txtPorcentaje2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPorcentaje2.Enter += new System.EventHandler(this.txtPorcentaje2_Enter);
+            this.txtPorcentaje2.Leave += new System.EventHandler(this.txtPorcentaje2_Leave);
+            // 
+            // txtPrecio3
+            // 
+            this.txtPrecio3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecio3.Location = new System.Drawing.Point(424, 120);
+            this.txtPrecio3.MaxLength = 10;
+            this.txtPrecio3.Name = "txtPrecio3";
+            this.txtPrecio3.Size = new System.Drawing.Size(69, 20);
+            this.txtPrecio3.TabIndex = 8;
+            this.txtPrecio3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPrecio3.Leave += new System.EventHandler(this.txtPrecio3_Leave);
+            // 
+            // txtTiempoReposicion
+            // 
+            this.txtTiempoReposicion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTiempoReposicion.Location = new System.Drawing.Point(1287, 75);
+            this.txtTiempoReposicion.MaxLength = 10;
+            this.txtTiempoReposicion.Name = "txtTiempoReposicion";
+            this.txtTiempoReposicion.Size = new System.Drawing.Size(53, 20);
+            this.txtTiempoReposicion.TabIndex = 161;
+            this.txtTiempoReposicion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtPorcentaje3
+            // 
+            this.txtPorcentaje3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPorcentaje3.Location = new System.Drawing.Point(368, 120);
+            this.txtPorcentaje3.MaxLength = 10;
+            this.txtPorcentaje3.Name = "txtPorcentaje3";
+            this.txtPorcentaje3.Size = new System.Drawing.Size(40, 20);
+            this.txtPorcentaje3.TabIndex = 14;
+            this.txtPorcentaje3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPorcentaje3.Enter += new System.EventHandler(this.txtPorcentaje3_Enter);
+            this.txtPorcentaje3.Leave += new System.EventHandler(this.txtPorcentaje3_Leave);
+            // 
+            // txtPrecio2
+            // 
+            this.txtPrecio2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecio2.Location = new System.Drawing.Point(424, 95);
+            this.txtPrecio2.MaxLength = 10;
+            this.txtPrecio2.Name = "txtPrecio2";
+            this.txtPrecio2.Size = new System.Drawing.Size(69, 20);
+            this.txtPrecio2.TabIndex = 7;
+            this.txtPrecio2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPrecio2.Leave += new System.EventHandler(this.txtPrecio2_Leave);
+            // 
+            // txtPorcentaje4
+            // 
+            this.txtPorcentaje4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPorcentaje4.Location = new System.Drawing.Point(368, 145);
+            this.txtPorcentaje4.MaxLength = 10;
+            this.txtPorcentaje4.Name = "txtPorcentaje4";
+            this.txtPorcentaje4.Size = new System.Drawing.Size(40, 20);
+            this.txtPorcentaje4.TabIndex = 15;
+            this.txtPorcentaje4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPorcentaje4.Enter += new System.EventHandler(this.txtPorcentaje4_Enter);
+            this.txtPorcentaje4.Leave += new System.EventHandler(this.txtPorcentaje4_Leave);
+            // 
+            // txtPrecio1
+            // 
+            this.txtPrecio1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecio1.Location = new System.Drawing.Point(424, 70);
+            this.txtPrecio1.MaxLength = 10;
+            this.txtPrecio1.Name = "txtPrecio1";
+            this.txtPrecio1.Size = new System.Drawing.Size(69, 20);
+            this.txtPrecio1.TabIndex = 6;
+            this.txtPrecio1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPrecio1.Leave += new System.EventHandler(this.txtPrecio1_Leave);
+            // 
+            // txtPorcentaje1
+            // 
+            this.txtPorcentaje1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPorcentaje1.Location = new System.Drawing.Point(368, 70);
+            this.txtPorcentaje1.MaxLength = 10;
+            this.txtPorcentaje1.Name = "txtPorcentaje1";
+            this.txtPorcentaje1.Size = new System.Drawing.Size(40, 20);
+            this.txtPorcentaje1.TabIndex = 12;
+            this.txtPorcentaje1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPorcentaje1.Enter += new System.EventHandler(this.txtPorcentaje1_Enter);
+            this.txtPorcentaje1.Leave += new System.EventHandler(this.txtPorcentaje1_Leave);
+            // 
+            // txtPrecio5
+            // 
+            this.txtPrecio5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecio5.Location = new System.Drawing.Point(424, 170);
+            this.txtPrecio5.MaxLength = 10;
+            this.txtPrecio5.Name = "txtPrecio5";
+            this.txtPrecio5.Size = new System.Drawing.Size(69, 20);
+            this.txtPrecio5.TabIndex = 10;
+            this.txtPrecio5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPrecio5.Leave += new System.EventHandler(this.txtPrecio5_Leave);
+            // 
+            // txtPorcentaje5
+            // 
+            this.txtPorcentaje5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPorcentaje5.Location = new System.Drawing.Point(368, 170);
+            this.txtPorcentaje5.MaxLength = 10;
+            this.txtPorcentaje5.Name = "txtPorcentaje5";
+            this.txtPorcentaje5.Size = new System.Drawing.Size(40, 20);
+            this.txtPorcentaje5.TabIndex = 16;
+            this.txtPorcentaje5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPorcentaje5.Enter += new System.EventHandler(this.txtPorcentaje5_Enter);
+            this.txtPorcentaje5.Leave += new System.EventHandler(this.txtPorcentaje5_Leave);
+            // 
+            // txtCosto
+            // 
+            this.txtCosto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCosto.Location = new System.Drawing.Point(368, 43);
+            this.txtCosto.MaxLength = 10;
+            this.txtCosto.Name = "txtCosto";
+            this.txtCosto.Size = new System.Drawing.Size(63, 20);
+            this.txtCosto.TabIndex = 5;
+            this.txtCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCosto.Enter += new System.EventHandler(this.txtCosto_Enter);
+            this.txtCosto.Leave += new System.EventHandler(this.txtCosto_Leave);
+            // 
+            // ctlExistencias
+            // 
+            this.ctlExistencias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ctlExistencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.ctlExistencias.Location = new System.Drawing.Point(6, 338);
+            this.ctlExistencias.Name = "ctlExistencias";
+            this.ctlExistencias.Size = new System.Drawing.Size(252, 100);
+            this.ctlExistencias.TabIndex = 22;
+            // 
             // catalogosPartes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3994,6 +4008,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicas;
         private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicasVal;
         private System.Windows.Forms.DataGridViewTextBoxColumn proValidadosNum;
+        private System.Windows.Forms.Label label7;
 
     }
 }
