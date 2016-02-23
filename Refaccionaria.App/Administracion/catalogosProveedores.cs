@@ -423,6 +423,7 @@ namespace Refaccionaria.App
             this.dgvMovimientosNoPagados.DataSource = null;
             
             this.tabCuentasPorPagar.SelectedTab = this.tbpLista;
+            this.tabCuentasPorPagar_SelectedIndexChanged(this, null);
         }
 
         public void ActualizarListado()

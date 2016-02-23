@@ -2495,8 +2495,8 @@
             this.tabCuentasPorPagar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabCuentasPorPagar.Controls.Add(this.tbpVencimiento);
             this.tabCuentasPorPagar.Controls.Add(this.tbpLista);
+            this.tabCuentasPorPagar.Controls.Add(this.tbpVencimiento);
             this.tabCuentasPorPagar.Location = new System.Drawing.Point(3, 3);
             this.tabCuentasPorPagar.Name = "tabCuentasPorPagar";
             this.tabCuentasPorPagar.SelectedIndex = 0;
@@ -2513,7 +2513,7 @@
             this.tbpVencimiento.Padding = new System.Windows.Forms.Padding(3);
             this.tbpVencimiento.Size = new System.Drawing.Size(1160, 631);
             this.tbpVencimiento.TabIndex = 0;
-            this.tbpVencimiento.Text = "Vencimiento";
+            this.tbpVencimiento.Text = "Calendario";
             this.tbpVencimiento.UseVisualStyleBackColor = true;
             // 
             // mvCalendarioProveedor
