@@ -104,18 +104,6 @@ namespace Refaccionaria.App
             //    }
             //}
             
-            Application.DoEvents();
-            
-            // Se cargan parámetros de configuración
-            if (!loadConfiguraciones())
-            {
-                Cargando.Cerrar();
-                Helper.MensajeError("No se pudo cargar la configuración inicial.", GlobalClass.NombreApp);
-                // SplashScreen.Close();
-                this.Close();
-                return;
-            }
-
             // Se obtiene el usuario, pidiendo la contraseña
             bool bInicio = this.MostrarInicioDeSesion();
             if (!bInicio)
@@ -232,43 +220,6 @@ namespace Refaccionaria.App
         #endregion
 
         #region [ Metodos ]
-
-        private bool loadConfiguraciones()
-        {
-            try
-            {
-                var configuraciones = Negocio.General.GetListOf<Configuracion>(c => c.ConfiguracionID > 0);
-                foreach (var configuracion in configuraciones)
-                {
-                    switch (configuracion.Nombre)
-                    {
-                        case "IVA":
-                            GlobalClass.ConfiguracionGlobal.IVA = Negocio.Helper.ConvertirDecimal(configuracion.Valor);
-                            break;
-
-                        case "pathImagenes":
-                            GlobalClass.ConfiguracionGlobal.pathImagenes = Properties.Settings.Default.RutaImagenes.ToString();
-                            break;
-
-                        case "pathImagenesMovimientos":
-                            // Este parámetro ya no se usará. Moi 07/05/2015
-                            // GlobalClass.ConfiguracionGlobal.pathImagenesMovimientos = Properties.Settings.Default.RutaImagenesMovimientos.ToString();
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-
-                GlobalClass.ConfiguracionGlobal.pathReportes = string.Format("{0}{1}", System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "\\Reportes\\");
-            }
-            catch (Exception ex)
-            {
-                Negocio.Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
-                return false;
-            }
-            return true;
-        }
 
         public void TryImproveEntity()
         {

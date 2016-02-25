@@ -1484,6 +1484,21 @@ namespace Refaccionaria.App
             // var log = new Log();
             try
             {
+                var movimientoId = Helper.ConvertirEntero(this.dgvRecibir.Rows[this.dgvRecibir.SelectedRows[0].Index].Cells["MovimientoInventarioID"].Value);
+                if (movimientoId <= 0)
+                {
+                    Helper.MensajeError("Ocurrio un error al intentar recibir el traspaso.", GlobalClass.NombreApp);
+                    return;
+                }
+
+                // Se valida que no se haya procesado ya el traspaso en cuestión
+                if (General.Exists<MovimientoInventario>(c => c.MovimientoInventarioID == movimientoId && c.FechaRecepcion.HasValue))
+                {
+                    UtilLocal.MensajeAdvertencia("El traspaso seleccionado ya fue procesado. Actualiza el listado para ver sólo los traspasos pendientes.");
+                    return;
+                }
+                //
+
                 int iAutorizoID = 0;
                 var ResU = UtilDatos.ValidarObtenerUsuario(null, "Autorización");
                 if (ResU.Exito)
@@ -1542,12 +1557,6 @@ namespace Refaccionaria.App
                 if (!this.ValidacionesAlRecibir(existeContingencia))
                     return;
 
-                var movimientoId = Helper.ConvertirEntero(this.dgvRecibir.Rows[this.dgvRecibir.SelectedRows[0].Index].Cells["MovimientoInventarioID"].Value);
-                if (movimientoId <= 0)
-                {
-                    Helper.MensajeError("Ocurrio un error al intentar recibir el traspaso.", GlobalClass.NombreApp);
-                    return;
-                }
                 Cargando.Mostrar();
                 this.Cursor = Cursors.WaitCursor;
                 this.btnProcesarRecibir.Enabled = false;

@@ -20,7 +20,7 @@ namespace Refaccionaria.App
 
         #region [ Aplicación ]
 
-        public static void InicializarAplicacion()
+        public static bool InicializarAplicacion()
         {
             // Se llena la cadena de conexión
             string sCadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings[GlobalClass.Modo].ConnectionString;
@@ -31,6 +31,16 @@ namespace Refaccionaria.App
             if (sContrasenia.Length > 0)
                 sCadenaDeConexion = sCadenaDeConexion.Replace(sContrasenia, Helper.Desencriptar(sContrasenia));
             ModelHelper.CadenaDeConexion = sCadenaDeConexion;
+
+            // Se cargan parámetros de configuración iniciales
+            if (!Proc.loadConfiguraciones())
+            {
+                Cargando.Cerrar();
+                Helper.MensajeError("No se pudo cargar la configuración inicial.", GlobalClass.NombreApp);
+                return false;
+            }
+
+            return true;
         }
 
         public static void FinalizarAplicacion()
@@ -47,6 +57,47 @@ namespace Refaccionaria.App
 
             // Se manda cerrar la ventana de cargando, por si quedara alguna abierta
             Cargando.Cerrar();
+        }
+
+        #endregion
+
+        #region [ Uso interno ]
+
+        private static bool loadConfiguraciones()
+        {
+            try
+            {
+                var configuraciones = Negocio.General.GetListOf<Configuracion>(c => c.ConfiguracionID > 0);
+                foreach (var configuracion in configuraciones)
+                {
+                    switch (configuracion.Nombre)
+                    {
+                        case "IVA":
+                            GlobalClass.ConfiguracionGlobal.IVA = Negocio.Helper.ConvertirDecimal(configuracion.Valor);
+                            break;
+
+                        case "pathImagenes":
+                            GlobalClass.ConfiguracionGlobal.pathImagenes = Properties.Settings.Default.RutaImagenes.ToString();
+                            break;
+
+                        case "pathImagenesMovimientos":
+                            // Este parámetro ya no se usará. Moi 07/05/2015
+                            // GlobalClass.ConfiguracionGlobal.pathImagenesMovimientos = Properties.Settings.Default.RutaImagenesMovimientos.ToString();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                GlobalClass.ConfiguracionGlobal.pathReportes = string.Format("{0}{1}", System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "\\Reportes\\");
+            }
+            catch (Exception ex)
+            {
+                Negocio.Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
+                return false;
+            }
+            return true;
         }
 
         #endregion

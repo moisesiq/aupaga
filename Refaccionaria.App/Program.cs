@@ -29,20 +29,23 @@ namespace Refaccionaria.App
             //
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            // Se inicializan parámetros de la aplicación
-            Proc.InicializarAplicacion();
 
             // Se muestra la pantalla de iniciando..
             var frmIniciando = new Iniciando();
             frmIniciando.Show();
             Application.DoEvents();
+            
+            // Se inicializan parámetros de la aplicación
+            Proc.InicializarAplicacion();
 
             // Se verifica si hay una actualización
-            if (Proc.VerNuevaVersion())
+            if (Helper.ConvertirBool(System.Configuration.ConfigurationManager.AppSettings["VerNuevaVersion"]))
             {
-                frmIniciando.Close();
-                return;
+                if (Proc.VerNuevaVersion())
+                {
+                    frmIniciando.Close();
+                    return;
+                }
             }
 
             // Se abre el formulario principal

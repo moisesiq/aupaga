@@ -231,6 +231,15 @@ namespace Refaccionaria.App
                         tabProductosOneTime = false;
                     }
                     break;
+                case "tabCalendario":
+                    if (this.dtpCppListaInicio.Tag == null)
+                    {
+                        // this.dtpCppListaInicio.Value = this.ObtenerFechaAdeudoMasViejo(this.Proveedor.ProveedorID);
+                        this.dtpCppListaInicio.Value = DateTime.Now.DiaPrimero();
+                        this.dtpCppListaInicio.Tag = true;
+                        this.CargarListaVencimientos(this.Proveedor.ProveedorID);
+                    }
+                    break;
                 case "tabControl":
                     if (tabControlOneTime)
                     {
@@ -421,9 +430,6 @@ namespace Refaccionaria.App
             this.dgvProntoPago.DataSource = null;
             this.dgvGanancias.DataSource = null;
             this.dgvMovimientosNoPagados.DataSource = null;
-            
-            this.tabCuentasPorPagar.SelectedTab = this.tbpLista;
-            this.tabCuentasPorPagar_SelectedIndexChanged(this, null);
         }
 
         public void ActualizarListado()
@@ -2110,18 +2116,7 @@ namespace Refaccionaria.App
 
         private void tabCuentasPorPagar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (this.tabCuentasPorPagar.SelectedTab.Name)
-            {
-                case "tbpLista":
-                    if (this.dtpCppListaInicio.Tag == null)
-                    {
-                        // this.dtpCppListaInicio.Value = this.ObtenerFechaAdeudoMasViejo(this.Proveedor.ProveedorID);
-                        this.dtpCppListaInicio.Value = DateTime.Now.DiaPrimero();
-                        this.dtpCppListaInicio.Tag = true;
-                        this.CargarListaVencimientos(this.Proveedor.ProveedorID);
-                    }
-                    break;
-            }
+            
         }
 
         private void dtpCppListaInicio_ValueChanged(object sender, EventArgs e)
