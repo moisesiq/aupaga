@@ -470,6 +470,19 @@ namespace Refaccionaria.App
             }
         }
 
+        private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvProductos.CurrentRow == null) return;
+
+            var Producto = (this.dgvProductos.CurrentRow.DataBoundItem as ProductoVenta);
+            if (Producto.ParteID != this.ParteIDSel)
+            {
+                this.MostrarEquivalentes(Producto.ParteID);
+                // Se actualizan los datos adicionales
+                this.MostrarDatosParteSeleccionada(Producto.ParteID);
+            }
+        }
+
         private void dgvProductos_KeyDown(object sender, KeyEventArgs e)
         {
             if (this.dgvProductos.CurrentRow == null) return;
@@ -506,21 +519,23 @@ namespace Refaccionaria.App
 
         private void dgvProductos_CurrentCellChanged(object sender, EventArgs e)
         {
-            if (this.dgvProductos.CurrentRow == null) return;
+            /* if (this.dgvProductos.CurrentRow == null) return;
 
             var Producto = (this.dgvProductos.CurrentRow.DataBoundItem as ProductoVenta);
             this.MostrarEquivalentes(Producto.ParteID);
             // Se actualizan los datos adicionales
             this.MostrarDatosParteSeleccionada(Producto.ParteID);
+            */
         }
 
         private void dgvProductos_Enter(object sender, EventArgs e)
         {
-            if (this.dgvProductos.CurrentRow == null) return;
+            /* if (this.dgvProductos.CurrentRow == null) return;
             
             var Producto = (this.dgvProductos.CurrentRow.DataBoundItem as ProductoVenta);
             if (Producto.ParteID != this.ParteIDSel)
                 this.dgvProductos_CurrentCellChanged(sender, e);
+            */
         }
                 
         private void lblTotal_DoubleClick(object sender, EventArgs e)
@@ -657,8 +672,9 @@ namespace Refaccionaria.App
 
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
-            if (this.txtCodigo.Focused)
+            /* if (this.txtCodigo.Focused)
                 this.BusquedaAvanzada();
+            */
         }
                 
         private void txtDescripcion_TextChanged(object sender, EventArgs e)

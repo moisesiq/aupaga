@@ -4932,36 +4932,6 @@
   <data name="&gt;&gt;txtDescripcionMaxMin.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="chkMostrarSinVentas.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkMostrarSinVentas.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkMostrarSinVentas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1073, 9</value>
-  </data>
-  <data name="chkMostrarSinVentas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
-  </data>
-  <data name="chkMostrarSinVentas.TabIndex" type="System.Int32, mscorlib">
-    <value>317</value>
-  </data>
-  <data name="chkMostrarSinVentas.Text" xml:space="preserve">
-    <value>Sin Ventas</value>
-  </data>
-  <data name="&gt;&gt;chkMostrarSinVentas.Name" xml:space="preserve">
-    <value>chkMostrarSinVentas</value>
-  </data>
-  <data name="&gt;&gt;chkMostrarSinVentas.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkMostrarSinVentas.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;chkMostrarSinVentas.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4993,7 +4963,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="dtpFechaDeCalculo.Location" type="System.Drawing.Point, System.Drawing">
     <value>1241, 8</value>
@@ -5014,6 +4984,27 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dtpFechaDeCalculo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmbFiltroDeVentas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1073, 5</value>
+  </data>
+  <data name="cmbFiltroDeVentas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 21</value>
+  </data>
+  <data name="cmbFiltroDeVentas.TabIndex" type="System.Int32, mscorlib">
+    <value>320</value>
+  </data>
+  <data name="&gt;&gt;cmbFiltroDeVentas.Name" xml:space="preserve">
+    <value>cmbFiltroDeVentas</value>
+  </data>
+  <data name="&gt;&gt;cmbFiltroDeVentas.Type" xml:space="preserve">
+    <value>Refaccionaria.Negocio.ComboEtiqueta, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cmbFiltroDeVentas.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmbFiltroDeVentas.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

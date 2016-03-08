@@ -19480,6 +19480,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="CantidadMaxDia" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="CantidadMaxSem" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="CantidadMaxMes" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="VentasAnt1" Nullable="false" />
+          <Property Type="Int32" Name="VentasAnt2" Nullable="false" />
+          <Property Type="Int32" Name="VentasAnt3" Nullable="false" />
         </ComplexType>
         <EntityType Name="ParteAbcRango">
           <Key>
@@ -27732,6 +27735,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="CantidadMaxMes" Nullable="false" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="UtilidadTotal" Nullable="false" Precision="38" Scale="4" />
           <Property Type="Boolean" Name="VentasGlobales" Nullable="false" />
+          <Property Type="Int32" Name="VentasAnt1" Nullable="false" />
+          <Property Type="Int32" Name="VentasAnt2" Nullable="false" />
+          <Property Type="Int32" Name="VentasAnt3" Nullable="false" />
         </ComplexType>
         <EntityType Name="ExistenciasView">
           <Key>

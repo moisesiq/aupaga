@@ -98,10 +98,12 @@ namespace Refaccionaria.App
             var oAplicaciones = General.GetListOf<ParteVehiculo>(c => c.ParteID == iParteID);
             foreach (var oParteEq in oPartesEq)
             {
+                var oAplisEq = General.GetListOf<ParteVehiculo>(c => c.ParteID == oParteEq.ParteIDEquivalente);
                 foreach (var oAplicacion in oAplicaciones)
                 {
-                    if (General.Exists<ParteVehiculo>(c => c.ParteID == oParteEq.ParteIDEquivalente && c.ModeloID == oAplicacion.ModeloID
-                        && c.MotorID == oAplicacion.MotorID && c.Anio == oAplicacion.Anio))
+                    if (oAplisEq.Any(c => c.ModeloID == oAplicacion.ModeloID
+                        && ((!c.Anio.HasValue && !oAplicacion.Anio.HasValue) || c.Anio == oAplicacion.Anio)
+                        && ((!c.MotorID.HasValue && !oAplicacion.MotorID.HasValue) || c.MotorID == oAplicacion.MotorID)))
                         continue;
                     var oAplicacionNueva = new ParteVehiculo()
                     {

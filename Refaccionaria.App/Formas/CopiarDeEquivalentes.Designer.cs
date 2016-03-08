@@ -34,10 +34,11 @@
             this.chkCodigosAlternos = new System.Windows.Forms.CheckBox();
             this.chkPartesComplementarias = new System.Windows.Forms.CheckBox();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.pgvAvance = new Refaccionaria.Negocio.Progreso();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,9 +107,9 @@
             this.dgvPartes.AllowUserToAddRows = false;
             this.dgvPartes.AllowUserToDeleteRows = false;
             this.dgvPartes.AllowUserToResizeRows = false;
-            this.dgvPartes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPartes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPartes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvPartes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPartes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -127,23 +128,6 @@
             this.dgvPartes.Size = new System.Drawing.Size(578, 275);
             this.dgvPartes.StandardTab = true;
             this.dgvPartes.TabIndex = 20;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Image = global::Refaccionaria.App.Properties.Resources._16_Guardar;
-            this.btnGuardar.Location = new System.Drawing.Point(496, 333);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(85, 23);
-            this.btnGuardar.TabIndex = 21;
-            this.btnGuardar.Text = "&Guardar";
-            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // ParteID
             // 
@@ -167,12 +151,39 @@
             this.Descripcion.ReadOnly = true;
             this.Descripcion.Width = 400;
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnGuardar.Image = global::Refaccionaria.App.Properties.Resources._16_Guardar;
+            this.btnGuardar.Location = new System.Drawing.Point(496, 333);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(85, 23);
+            this.btnGuardar.TabIndex = 21;
+            this.btnGuardar.Text = "&Guardar";
+            this.btnGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // pgvAvance
+            // 
+            this.pgvAvance.ColorDeTexto = System.Drawing.Color.White;
+            this.pgvAvance.Location = new System.Drawing.Point(3, 333);
+            this.pgvAvance.Name = "pgvAvance";
+            this.pgvAvance.PosicionTexto = Refaccionaria.Negocio.Progreso.PosTexto.Izquierda;
+            this.pgvAvance.Size = new System.Drawing.Size(487, 20);
+            this.pgvAvance.TabIndex = 22;
+            // 
             // CopiarDeEquivalentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.ClientSize = new System.Drawing.Size(584, 362);
+            this.Controls.Add(this.pgvAvance);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.dgvPartes);
             this.Controls.Add(this.chkPartesComplementarias);
@@ -206,5 +217,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ParteID;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroDeParte;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private Negocio.Progreso pgvAvance;
     }
 }

@@ -238,9 +238,9 @@
             this.ctlProveedores = new Refaccionaria.Negocio.ComboMultiSel();
             this.cmbCambios = new Refaccionaria.Negocio.ComboEtiqueta();
             this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
-            this.chkMostrarSinVentas = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dtpFechaDeCalculo = new System.Windows.Forms.DateTimePicker();
+            this.cmbFiltroDeVentas = new Refaccionaria.Negocio.ComboEtiqueta();
             this.tabMaxMin.SuspendLayout();
             this.tbpDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -1774,13 +1774,6 @@
             this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
             this.txtDescripcionMaxMin.ReadOnly = true;
             // 
-            // chkMostrarSinVentas
-            // 
-            resources.ApplyResources(this.chkMostrarSinVentas, "chkMostrarSinVentas");
-            this.chkMostrarSinVentas.ForeColor = System.Drawing.Color.White;
-            this.chkMostrarSinVentas.Name = "chkMostrarSinVentas";
-            this.chkMostrarSinVentas.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
@@ -1794,14 +1787,32 @@
             resources.ApplyResources(this.dtpFechaDeCalculo, "dtpFechaDeCalculo");
             this.dtpFechaDeCalculo.Name = "dtpFechaDeCalculo";
             // 
+            // cmbFiltroDeVentas
+            // 
+            this.cmbFiltroDeVentas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.cmbFiltroDeVentas.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.cmbFiltroDeVentas.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.cmbFiltroDeVentas.DataSource = null;
+            this.cmbFiltroDeVentas.DisplayMember = "";
+            this.cmbFiltroDeVentas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbFiltroDeVentas.Etiqueta = "Ventas";
+            this.cmbFiltroDeVentas.EtiquetaColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.cmbFiltroDeVentas, "cmbFiltroDeVentas");
+            this.cmbFiltroDeVentas.Name = "cmbFiltroDeVentas";
+            this.cmbFiltroDeVentas.SelectedIndex = -1;
+            this.cmbFiltroDeVentas.SelectedItem = null;
+            this.cmbFiltroDeVentas.SelectedText = "";
+            this.cmbFiltroDeVentas.SelectedValue = null;
+            this.cmbFiltroDeVentas.ValueMember = "";
+            // 
             // MaxMin
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.Controls.Add(this.cmbFiltroDeVentas);
             this.Controls.Add(this.dtpFechaDeCalculo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.chkMostrarSinVentas);
             this.Controls.Add(this.txtDescripcionMaxMin);
             this.Controls.Add(this.ctlLineas);
             this.Controls.Add(this.ctlMarcas);
@@ -2116,8 +2127,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Maximo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Minimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reglas_Descripcion;
-        private System.Windows.Forms.CheckBox chkMostrarSinVentas;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtpFechaDeCalculo;
+        private Negocio.ComboEtiqueta cmbFiltroDeVentas;
     }
 }

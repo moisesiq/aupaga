@@ -53,7 +53,8 @@ namespace Refaccionaria.App
 
         private bool AccionGuardar()
         {
-            Cargando.Mostrar();
+            // Se inicializa la barra de progreso
+            this.pgvAvance.Inicializar(this.dgvPartes.Rows.Count, 1);
 
             foreach (DataGridViewRow oFila in this.dgvPartes.Rows)
             {
@@ -65,9 +66,11 @@ namespace Refaccionaria.App
                     AdmonProc.CopiarCodigosAlternosDeEquivalentes(iParteID);
                 if (this.chkPartesComplementarias.Checked)
                     AdmonProc.CopiarPartesComplementariasDeEquivalentes(iParteID);
+
+                this.pgvAvance.EjecutarPaso(true);
             }
 
-            Cargando.Cerrar();
+            this.pgvAvance.Finalizar();
 
             return true;
         }

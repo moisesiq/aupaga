@@ -50,6 +50,8 @@ namespace Refaccionaria.App
                 this.ctlLineas.AgregarElemento(oReg.LineaID, oReg.NombreLinea);
             //
             this.cmbCambios.Items.AddRange(new object[] { "0 a > 0", "> 0 a > Actual", "Actual baja a > 0 ", "Max a 0", "Max igual", "Fijos" });
+            this.cmbFiltroDeVentas.Items.AddRange(new object[] { "Todas", "12 meses", "Año ant. 1", "Año ant. 2", "Año ant. 3" });
+            this.cmbFiltroDeVentas.Text = "12 Meses";
 
             // Se configura el grid de detalle
             this.dgvDetalle.Columns["NumeroDeParte"].ValueType = typeof(string);
@@ -315,6 +317,9 @@ namespace Refaccionaria.App
                 + "\n\tAbcDeNegocio           : Cálculo del Abc de Negocio."
                 + "\n\tAbcDeProveedor         : Cálculo del Abc de Proveedor."
                 + "\n\tAbcDeLinea             : Cálculo del Abc de Linea."
+                + "\n\tVentasAnioAnt1         : Número total de ventas que tuvo el producto el año anterior al actual."
+                + "\n\tVentasAnioAnt2         : Número total de ventas que tuvo el producto el año dos antes del actual."
+                + "\n\tVentasAnioAnt3         : Número total de ventas que tuvo el producto el año tres antes del actual."
                 + "\n\nFunciones"
                 + "\n\tRedondear(n1, n2)      : Función que devulve el número \"n1\" redondeado a las posiciones decimales indicadas por \"n2\"."
                 + "\n\tMultiploSup(n1, n2)    : Función que devulve el número \"n1\" redondeado al múltiplo superior de \"n2\"."
@@ -481,8 +486,24 @@ namespace Refaccionaria.App
             foreach (var oParte in oMaxMin)
             {
                 bool bSel = (oParte.VentasTotal > 0 || oParte.Maximo > 0);
+                // Se filtran las partes según sus ventas
+                switch (this.cmbFiltroDeVentas.Text)
+                {
+                    case "12 meses":
+                        bSel = (oParte.VentasTotal > 0 || oParte.Maximo > 0);
+                        break;
+                    case "Año ant. 1":
+                        bSel = (oParte.VentasAnt1 > 0 || oParte.Maximo > 0);
+                        break;
+                    case "Año ant. 2":
+                        bSel = (oParte.VentasAnt2 > 0 || oParte.Maximo > 0);
+                        break;
+                    case "Año ant. 3":
+                        bSel = (oParte.VentasAnt3 > 0 || oParte.Maximo > 0);
+                        break;
+                }
                 // Se saltan las partes que no tengan ventas o MaxMin, si aplica
-                if (!this.chkMostrarSinVentas.Checked && !bSel) continue;
+                if (!bSel) continue;
 
                 iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, bSel, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
                     , oParte.Existencia, oParte.UnidadEmpaque, oParte.TiempoReposicion, oParte.AbcDeNegocio, oParte.AbcDeVentas, oParte.AbcDeUtilidad
@@ -509,6 +530,7 @@ namespace Refaccionaria.App
                 + ", decimal CantidadMaxDia, decimal CantidadMaxSem, decimal CantidadMaxMes, decimal Maximo, decimal Minimo"
                 + ", bool EsPar"
                 + ", string AbcDeVentas, string AbcDeUtilidad, string AbcDeNegocio, string AbcDeProveedor, string AbcDeLinea"
+                + ", int VentasAnioAnt1, int VentasAnioAnt2, int VentasAnioAnt3"
             );
 
             // Se genera el código dinámico
@@ -599,6 +621,7 @@ namespace Refaccionaria.App
                     , oParte.CantidadMaxDia, oParte.CantidadMaxSem, oParte.CantidadMaxMes, oParte.Maximo, oParte.Minimo
                     , oParte.EsPar
                     , oParte.AbcDeVentas, oParte.AbcDeUtilidad, oParte.AbcDeNegocio, oParte.AbcDeProveedor, oParte.AbcDeLinea
+                    , oParte.VentasAnt1, oParte.VentasAnt2, oParte.VentasAnt3
                 };
                 // Se establece el Max y el Min con cero
                 oParte.Maximo = 0;
@@ -612,7 +635,7 @@ namespace Refaccionaria.App
                 // Si Maximo es cero, se vuelven a correr las reglas con las ventas globales, si aplica
                 if (oParte.VentasGlobales && oParte.Maximo.Valor() == 0 && iSucursalID == Cat.Sucursales.Matriz)
                 {
-                    // Se tran los datos globales
+                    // Se traen los datos globales
                     var oParamsProc = new Dictionary<string, object>();
                     oParamsProc.Add("ParteID", oParte.ParteID);
                     oParamsProc.Add("Desde", this.Desde);
@@ -624,6 +647,7 @@ namespace Refaccionaria.App
                         , oParteGlobal.CantidadMaxDia, oParteGlobal.CantidadMaxSem, oParteGlobal.CantidadMaxMes, oParte.Maximo, oParte.Minimo
                         , oParte.EsPar
                         , oParte.AbcDeVentas, oParte.AbcDeUtilidad, oParte.AbcDeNegocio, oParte.AbcDeProveedor, oParte.AbcDeLinea
+                        , oParte.VentasAnt1, oParte.VentasAnt2, oParte.VentasAnt3
                     };
                     MaxMinFunciones.Inicializar(oParte.ParteID, null);
                     // Se procesan las reglas

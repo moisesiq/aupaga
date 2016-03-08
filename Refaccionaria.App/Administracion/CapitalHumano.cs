@@ -768,7 +768,7 @@ namespace Refaccionaria.App
                 Egreso = c.Where(s => !s.Suma).Sum(s => s.Importe)
             });
             var oRep = new Report();
-            oRep.Load(UtilLocal.RutaReportes() + "Nomina.frx");
+            oRep.Load(UtilLocal.RutaReportes("Nomina.frx"));
             oRep.RegisterData(new List<Nomina>() { oNomina }, "Nomina");
             oRep.RegisterData(oNominaUsuariosV, "Usuarios");
             oRep.RegisterData(oNominaUsuariosOfV, "UsuariosOficial");
@@ -783,6 +783,8 @@ namespace Refaccionaria.App
 
         private bool GuardarDomingo()
         {
+            Cargando.Mostrar();
+
             // Se guarda la nómina
             int iBancoCuentaID = Helper.ConvertirEntero(this.cmbCuentaBancaria.SelectedValue);
             string sDia = DateTime.Now.ToString("yyMMdd");
@@ -899,7 +901,17 @@ namespace Refaccionaria.App
                     }
                 }
             }
-            
+
+            // Se manda a imprimir la nómina de cada usuario
+            var oRep = new Report();
+            oRep.Load(UtilLocal.RutaReportes("NominaDomingo.frx"));
+            oRep.RegisterData(new List<Nomina>() { oNomina }, "Nomina");
+            oRep.RegisterData(oNominaUsuariosV, "Usuarios");
+
+            Cargando.Cerrar();
+            UtilLocal.EnviarReporteASalida("Reportes.NominaDomingo.Salida", oRep);
+
+
             UtilLocal.MostrarNotificacion("Proceso completado.");
             this.btnDomingo_Click(this, null);
 

@@ -7,6 +7,7 @@ namespace Refaccionaria.Negocio
     public partial class Progreso : UserControl
     {
         public const string Formato = "#,###,###";
+        public enum PosTexto { Derecha, Izquierda, NoMostrar };
 
         public Progreso()
         {
@@ -23,9 +24,36 @@ namespace Refaccionaria.Negocio
             set
             {
                 this._ColorDeTexto = value;
-                this.lblProgreso.ForeColor = value;
-                this.lblTextoDe.ForeColor = value;
-                this.lblTotal.ForeColor = value;
+                this.pnlTextoAv.ForeColor = value;
+            }
+        }
+
+        private Progreso.PosTexto _PosicionTexto = PosTexto.Derecha;
+        public Progreso.PosTexto PosicionTexto
+        {
+            get { return this._PosicionTexto; }
+            set {
+                this._PosicionTexto = value;
+                switch (value)
+                {
+                    case PosTexto.Derecha:
+                        this.pgbProgreso.Left = 0;
+                        this.pnlTextoAv.Left = (this.pgbProgreso.Left + this.pgbProgreso.Width + 6);
+                        this.pnlTextoAv.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right);
+                        this.pnlTextoAv.Visible = true;
+                        break;
+                    case PosTexto.Izquierda:
+                        this.pnlTextoAv.Left = 0;
+                        this.pgbProgreso.Left = (this.pnlTextoAv.Left + this.pnlTextoAv.Width + 6);
+                        this.pnlTextoAv.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left);
+                        this.pnlTextoAv.Visible = true;
+                        break;
+                    case PosTexto.NoMostrar:
+                        this.pgbProgreso.Left = 0;
+                        this.pgbProgreso.Width = this.Width;
+                        this.pnlTextoAv.Visible = false;
+                        break;
+                }
             }
         }
 
