@@ -672,9 +672,8 @@ namespace Refaccionaria.App
 
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
-            /* if (this.txtCodigo.Focused)
+            if (this.txtCodigo.Focused)
                 this.BusquedaAvanzada();
-            */
         }
                 
         private void txtDescripcion_TextChanged(object sender, EventArgs e)

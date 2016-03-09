@@ -71,6 +71,7 @@
             // cmbTipo
             // 
             this.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbTipo.FormattingEnabled = true;
             this.cmbTipo.Location = new System.Drawing.Point(1235, 27);
             this.cmbTipo.Name = "cmbTipo";
@@ -81,6 +82,7 @@
             // cmbMostrar
             // 
             this.cmbMostrar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMostrar.FormattingEnabled = true;
             this.cmbMostrar.Location = new System.Drawing.Point(1074, 27);
             this.cmbMostrar.Name = "cmbMostrar";
@@ -92,10 +94,11 @@
             // 
             this.chkTodos.AutoSize = true;
             this.chkTodos.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkTodos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkTodos.ForeColor = System.Drawing.Color.White;
             this.chkTodos.Location = new System.Drawing.Point(964, 29);
             this.chkTodos.Name = "chkTodos";
-            this.chkTodos.Size = new System.Drawing.Size(56, 17);
+            this.chkTodos.Size = new System.Drawing.Size(53, 17);
             this.chkTodos.TabIndex = 176;
             this.chkTodos.Text = "Todos";
             this.chkTodos.UseVisualStyleBackColor = true;
@@ -291,6 +294,9 @@
             this.Controls.Add(this.cmbTipo);
             this.Name = "CuadroCancelaciones";
             this.Load += new System.EventHandler(this.CuadroCancelaciones_Load);
+            this.Controls.SetChildIndex(this.txtBusqueda, 0);
+            this.Controls.SetChildIndex(this.lblCalculo, 0);
+            this.Controls.SetChildIndex(this.cmbCalculo, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.chkOmitirDomingos, 0);
             this.Controls.SetChildIndex(this.chkCostoConDescuento, 0);

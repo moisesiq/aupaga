@@ -191,12 +191,15 @@
             // 
             // btnActualizar
             // 
+            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizar.ForeColor = System.Drawing.Color.White;
             this.btnActualizar.Location = new System.Drawing.Point(1041, 5);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(75, 23);
             this.btnActualizar.TabIndex = 7;
             this.btnActualizar.Text = "&Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.UseVisualStyleBackColor = false;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // label1
@@ -306,10 +309,11 @@
             // chkCostoConDescuento
             // 
             this.chkCostoConDescuento.AutoSize = true;
+            this.chkCostoConDescuento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkCostoConDescuento.ForeColor = System.Drawing.Color.White;
             this.chkCostoConDescuento.Location = new System.Drawing.Point(828, 9);
             this.chkCostoConDescuento.Name = "chkCostoConDescuento";
-            this.chkCostoConDescuento.Size = new System.Drawing.Size(105, 17);
+            this.chkCostoConDescuento.Size = new System.Drawing.Size(102, 17);
             this.chkCostoConDescuento.TabIndex = 5;
             this.chkCostoConDescuento.Text = "Costo con Desc.";
             this.chkCostoConDescuento.UseVisualStyleBackColor = true;
@@ -337,22 +341,26 @@
             // chkSoloConExistencia
             // 
             this.chkSoloConExistencia.AutoSize = true;
+            this.chkSoloConExistencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSoloConExistencia.ForeColor = System.Drawing.Color.White;
             this.chkSoloConExistencia.Location = new System.Drawing.Point(939, 9);
             this.chkSoloConExistencia.Name = "chkSoloConExistencia";
-            this.chkSoloConExistencia.Size = new System.Drawing.Size(96, 17);
+            this.chkSoloConExistencia.Size = new System.Drawing.Size(93, 17);
             this.chkSoloConExistencia.TabIndex = 6;
             this.chkSoloConExistencia.Text = "Sólo con Exist.";
             this.chkSoloConExistencia.UseVisualStyleBackColor = true;
             // 
             // btnExcel
             // 
+            this.btnExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcel.ForeColor = System.Drawing.Color.White;
             this.btnExcel.Location = new System.Drawing.Point(1122, 5);
             this.btnExcel.Name = "btnExcel";
             this.btnExcel.Size = new System.Drawing.Size(75, 23);
             this.btnExcel.TabIndex = 8;
             this.btnExcel.Text = "&Excel";
-            this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.UseVisualStyleBackColor = false;
             this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // vmsExistencia

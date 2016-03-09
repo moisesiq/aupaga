@@ -191,10 +191,11 @@
             // chkCobradas
             // 
             this.chkCobradas.AutoSize = true;
+            this.chkCobradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkCobradas.ForeColor = System.Drawing.Color.White;
             this.chkCobradas.Location = new System.Drawing.Point(281, 28);
             this.chkCobradas.Name = "chkCobradas";
-            this.chkCobradas.Size = new System.Drawing.Size(71, 17);
+            this.chkCobradas.Size = new System.Drawing.Size(68, 17);
             this.chkCobradas.TabIndex = 3;
             this.chkCobradas.Text = "Cobradas";
             this.chkCobradas.UseVisualStyleBackColor = true;
@@ -203,10 +204,11 @@
             // chkPagadas
             // 
             this.chkPagadas.AutoSize = true;
+            this.chkPagadas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkPagadas.ForeColor = System.Drawing.Color.White;
             this.chkPagadas.Location = new System.Drawing.Point(207, 28);
             this.chkPagadas.Name = "chkPagadas";
-            this.chkPagadas.Size = new System.Drawing.Size(68, 17);
+            this.chkPagadas.Size = new System.Drawing.Size(65, 17);
             this.chkPagadas.TabIndex = 2;
             this.chkPagadas.Text = "Pagadas";
             this.chkPagadas.UseVisualStyleBackColor = true;
@@ -215,6 +217,7 @@
             // cmbSucursal
             // 
             this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSucursal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSucursal.FormattingEnabled = true;
             this.cmbSucursal.Location = new System.Drawing.Point(51, 26);
             this.cmbSucursal.Name = "cmbSucursal";
@@ -235,10 +238,11 @@
             // chk9500
             // 
             this.chk9500.AutoSize = true;
+            this.chk9500.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chk9500.ForeColor = System.Drawing.Color.White;
             this.chk9500.Location = new System.Drawing.Point(358, 28);
             this.chk9500.Name = "chk9500";
-            this.chk9500.Size = new System.Drawing.Size(74, 17);
+            this.chk9500.Size = new System.Drawing.Size(71, 17);
             this.chk9500.TabIndex = 4;
             this.chk9500.Text = "Sólo 9500";
             this.chk9500.UseVisualStyleBackColor = true;
@@ -1162,10 +1166,11 @@
             // chkCostoConDescuento
             // 
             this.chkCostoConDescuento.AutoSize = true;
+            this.chkCostoConDescuento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkCostoConDescuento.ForeColor = System.Drawing.Color.White;
             this.chkCostoConDescuento.Location = new System.Drawing.Point(546, 28);
             this.chkCostoConDescuento.Name = "chkCostoConDescuento";
-            this.chkCostoConDescuento.Size = new System.Drawing.Size(127, 17);
+            this.chkCostoConDescuento.Size = new System.Drawing.Size(124, 17);
             this.chkCostoConDescuento.TabIndex = 6;
             this.chkCostoConDescuento.Text = "Costo con descuento";
             this.chkCostoConDescuento.UseVisualStyleBackColor = true;
@@ -1175,10 +1180,11 @@
             // chkOmitirDomingos
             // 
             this.chkOmitirDomingos.AutoSize = true;
+            this.chkOmitirDomingos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOmitirDomingos.ForeColor = System.Drawing.Color.White;
             this.chkOmitirDomingos.Location = new System.Drawing.Point(438, 28);
             this.chkOmitirDomingos.Name = "chkOmitirDomingos";
-            this.chkOmitirDomingos.Size = new System.Drawing.Size(102, 17);
+            this.chkOmitirDomingos.Size = new System.Drawing.Size(99, 17);
             this.chkOmitirDomingos.TabIndex = 5;
             this.chkOmitirDomingos.Text = "Omitir Domingos";
             this.chkOmitirDomingos.UseVisualStyleBackColor = true;
@@ -1209,17 +1215,21 @@
             // 
             // btnMostrar
             // 
+            this.btnMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrar.ForeColor = System.Drawing.Color.White;
             this.btnMostrar.Location = new System.Drawing.Point(854, 3);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(75, 23);
             this.btnMostrar.TabIndex = 9;
             this.btnMostrar.Text = "Mostrar";
-            this.btnMostrar.UseVisualStyleBackColor = true;
+            this.btnMostrar.UseVisualStyleBackColor = false;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
             // cmbCalculo
             // 
             this.cmbCalculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCalculo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbCalculo.FormattingEnabled = true;
             this.cmbCalculo.Location = new System.Drawing.Point(51, 3);
             this.cmbCalculo.Name = "cmbCalculo";

@@ -132,7 +132,6 @@
             this.SinMaxMin_Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SinMaxMin_Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ventas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblMes08 = new System.Windows.Forms.Label();
             this.lblSem12 = new System.Windows.Forms.Label();
             this.lblSem25 = new System.Windows.Forms.Label();
             this.lblSem05 = new System.Windows.Forms.Label();
@@ -141,18 +140,12 @@
             this.lblSem22 = new System.Windows.Forms.Label();
             this.lblSem02 = new System.Windows.Forms.Label();
             this.lblSem15 = new System.Windows.Forms.Label();
-            this.lblMes10 = new System.Windows.Forms.Label();
             this.lblSem07 = new System.Windows.Forms.Label();
             this.lblSem20 = new System.Windows.Forms.Label();
-            this.lblMes04 = new System.Windows.Forms.Label();
             this.lblSem11 = new System.Windows.Forms.Label();
             this.lblSem24 = new System.Windows.Forms.Label();
             this.lblSem04 = new System.Windows.Forms.Label();
             this.lblSem17 = new System.Windows.Forms.Label();
-            this.lblMes12 = new System.Windows.Forms.Label();
-            this.lblMes06 = new System.Windows.Forms.Label();
-            this.lblMes02 = new System.Windows.Forms.Label();
-            this.lblMes07 = new System.Windows.Forms.Label();
             this.lblSem13 = new System.Windows.Forms.Label();
             this.lblSem06 = new System.Windows.Forms.Label();
             this.lblSem26 = new System.Windows.Forms.Label();
@@ -164,42 +157,13 @@
             this.lblSem23 = new System.Windows.Forms.Label();
             this.lblSem03 = new System.Windows.Forms.Label();
             this.lblSem14 = new System.Windows.Forms.Label();
-            this.lblMes03 = new System.Windows.Forms.Label();
             this.lblProveedor = new System.Windows.Forms.Label();
             this.cmbLinea = new System.Windows.Forms.ComboBox();
             this.lblLinea = new System.Windows.Forms.Label();
             this.cmbProveedor = new System.Windows.Forms.ComboBox();
             this.lblSem16 = new System.Windows.Forms.Label();
-            this.lblMes09 = new System.Windows.Forms.Label();
-            this.lblMes11 = new System.Windows.Forms.Label();
-            this.lblMes05 = new System.Windows.Forms.Label();
-            this.lblMes01 = new System.Windows.Forms.Label();
-            this.lblInMes10 = new System.Windows.Forms.Label();
-            this.lblEtMes10 = new System.Windows.Forms.Label();
-            this.lblInMes08 = new System.Windows.Forms.Label();
-            this.lblEtMes08 = new System.Windows.Forms.Label();
-            this.lblInMes04 = new System.Windows.Forms.Label();
-            this.lblEtMes04 = new System.Windows.Forms.Label();
-            this.lblInMes09 = new System.Windows.Forms.Label();
-            this.lblInMes07 = new System.Windows.Forms.Label();
-            this.lblEtMes09 = new System.Windows.Forms.Label();
-            this.lblInMes12 = new System.Windows.Forms.Label();
-            this.lblEtMes07 = new System.Windows.Forms.Label();
-            this.lblEtMes12 = new System.Windows.Forms.Label();
-            this.lblInMes06 = new System.Windows.Forms.Label();
-            this.lblInMes03 = new System.Windows.Forms.Label();
-            this.lblEtMes03 = new System.Windows.Forms.Label();
-            this.lblEtMes06 = new System.Windows.Forms.Label();
-            this.lblInMes11 = new System.Windows.Forms.Label();
-            this.lblInMes02 = new System.Windows.Forms.Label();
-            this.lblEtMes11 = new System.Windows.Forms.Label();
-            this.lblEtMes02 = new System.Windows.Forms.Label();
-            this.lblInMes05 = new System.Windows.Forms.Label();
-            this.lblInMes01 = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
-            this.lblEtMes05 = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
-            this.lblEtMes01 = new System.Windows.Forms.Label();
             this.label67 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
@@ -231,7 +195,6 @@
             this.lblMesG11 = new System.Windows.Forms.Label();
             this.lblMesG05 = new System.Windows.Forms.Label();
             this.lblMesG01 = new System.Windows.Forms.Label();
-            this.lblVentasLocales = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.ctlLineas = new Refaccionaria.Negocio.ComboMultiSel();
             this.ctlMarcas = new Refaccionaria.Negocio.ComboMultiSel();
@@ -241,6 +204,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dtpFechaDeCalculo = new System.Windows.Forms.DateTimePicker();
             this.cmbFiltroDeVentas = new Refaccionaria.Negocio.ComboEtiqueta();
+            this.ctlVentasMes = new Refaccionaria.App.GridVentasMes();
             this.tabMaxMin.SuspendLayout();
             this.tbpDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -950,14 +914,6 @@
             this.Ventas.Name = "Ventas";
             this.Ventas.ReadOnly = true;
             // 
-            // lblMes08
-            // 
-            resources.ApplyResources(this.lblMes08, "lblMes08");
-            this.lblMes08.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes08.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes08.ForeColor = System.Drawing.Color.White;
-            this.lblMes08.Name = "lblMes08";
-            // 
             // lblSem12
             // 
             resources.ApplyResources(this.lblSem12, "lblSem12");
@@ -1022,14 +978,6 @@
             this.lblSem15.ForeColor = System.Drawing.Color.White;
             this.lblSem15.Name = "lblSem15";
             // 
-            // lblMes10
-            // 
-            resources.ApplyResources(this.lblMes10, "lblMes10");
-            this.lblMes10.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes10.ForeColor = System.Drawing.Color.White;
-            this.lblMes10.Name = "lblMes10";
-            // 
             // lblSem07
             // 
             resources.ApplyResources(this.lblSem07, "lblSem07");
@@ -1045,14 +993,6 @@
             this.lblSem20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblSem20.ForeColor = System.Drawing.Color.White;
             this.lblSem20.Name = "lblSem20";
-            // 
-            // lblMes04
-            // 
-            resources.ApplyResources(this.lblMes04, "lblMes04");
-            this.lblMes04.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes04.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes04.ForeColor = System.Drawing.Color.White;
-            this.lblMes04.Name = "lblMes04";
             // 
             // lblSem11
             // 
@@ -1085,38 +1025,6 @@
             this.lblSem17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblSem17.ForeColor = System.Drawing.Color.White;
             this.lblSem17.Name = "lblSem17";
-            // 
-            // lblMes12
-            // 
-            resources.ApplyResources(this.lblMes12, "lblMes12");
-            this.lblMes12.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes12.ForeColor = System.Drawing.Color.White;
-            this.lblMes12.Name = "lblMes12";
-            // 
-            // lblMes06
-            // 
-            resources.ApplyResources(this.lblMes06, "lblMes06");
-            this.lblMes06.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes06.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes06.ForeColor = System.Drawing.Color.White;
-            this.lblMes06.Name = "lblMes06";
-            // 
-            // lblMes02
-            // 
-            resources.ApplyResources(this.lblMes02, "lblMes02");
-            this.lblMes02.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes02.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes02.ForeColor = System.Drawing.Color.White;
-            this.lblMes02.Name = "lblMes02";
-            // 
-            // lblMes07
-            // 
-            resources.ApplyResources(this.lblMes07, "lblMes07");
-            this.lblMes07.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes07.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes07.ForeColor = System.Drawing.Color.White;
-            this.lblMes07.Name = "lblMes07";
             // 
             // lblSem13
             // 
@@ -1206,14 +1114,6 @@
             this.lblSem14.ForeColor = System.Drawing.Color.White;
             this.lblSem14.Name = "lblSem14";
             // 
-            // lblMes03
-            // 
-            resources.ApplyResources(this.lblMes03, "lblMes03");
-            this.lblMes03.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes03.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes03.ForeColor = System.Drawing.Color.White;
-            this.lblMes03.Name = "lblMes03";
-            // 
             // lblProveedor
             // 
             resources.ApplyResources(this.lblProveedor, "lblProveedor");
@@ -1252,192 +1152,6 @@
             this.lblSem16.ForeColor = System.Drawing.Color.White;
             this.lblSem16.Name = "lblSem16";
             // 
-            // lblMes09
-            // 
-            resources.ApplyResources(this.lblMes09, "lblMes09");
-            this.lblMes09.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes09.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes09.ForeColor = System.Drawing.Color.White;
-            this.lblMes09.Name = "lblMes09";
-            // 
-            // lblMes11
-            // 
-            resources.ApplyResources(this.lblMes11, "lblMes11");
-            this.lblMes11.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes11.ForeColor = System.Drawing.Color.White;
-            this.lblMes11.Name = "lblMes11";
-            // 
-            // lblMes05
-            // 
-            resources.ApplyResources(this.lblMes05, "lblMes05");
-            this.lblMes05.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes05.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes05.ForeColor = System.Drawing.Color.White;
-            this.lblMes05.Name = "lblMes05";
-            // 
-            // lblMes01
-            // 
-            resources.ApplyResources(this.lblMes01, "lblMes01");
-            this.lblMes01.BackColor = System.Drawing.Color.Transparent;
-            this.lblMes01.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMes01.ForeColor = System.Drawing.Color.White;
-            this.lblMes01.Name = "lblMes01";
-            // 
-            // lblInMes10
-            // 
-            resources.ApplyResources(this.lblInMes10, "lblInMes10");
-            this.lblInMes10.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes10.ForeColor = System.Drawing.Color.Olive;
-            this.lblInMes10.Name = "lblInMes10";
-            // 
-            // lblEtMes10
-            // 
-            resources.ApplyResources(this.lblEtMes10, "lblEtMes10");
-            this.lblEtMes10.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes10.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes10.Name = "lblEtMes10";
-            // 
-            // lblInMes08
-            // 
-            resources.ApplyResources(this.lblInMes08, "lblInMes08");
-            this.lblInMes08.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes08.ForeColor = System.Drawing.Color.Olive;
-            this.lblInMes08.Name = "lblInMes08";
-            // 
-            // lblEtMes08
-            // 
-            resources.ApplyResources(this.lblEtMes08, "lblEtMes08");
-            this.lblEtMes08.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes08.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes08.Name = "lblEtMes08";
-            // 
-            // lblInMes04
-            // 
-            resources.ApplyResources(this.lblInMes04, "lblInMes04");
-            this.lblInMes04.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes04.ForeColor = System.Drawing.Color.Olive;
-            this.lblInMes04.Name = "lblInMes04";
-            // 
-            // lblEtMes04
-            // 
-            resources.ApplyResources(this.lblEtMes04, "lblEtMes04");
-            this.lblEtMes04.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes04.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes04.Name = "lblEtMes04";
-            // 
-            // lblInMes09
-            // 
-            resources.ApplyResources(this.lblInMes09, "lblInMes09");
-            this.lblInMes09.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes09.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblInMes09.Name = "lblInMes09";
-            // 
-            // lblInMes07
-            // 
-            resources.ApplyResources(this.lblInMes07, "lblInMes07");
-            this.lblInMes07.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes07.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblInMes07.Name = "lblInMes07";
-            // 
-            // lblEtMes09
-            // 
-            resources.ApplyResources(this.lblEtMes09, "lblEtMes09");
-            this.lblEtMes09.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes09.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes09.Name = "lblEtMes09";
-            // 
-            // lblInMes12
-            // 
-            resources.ApplyResources(this.lblInMes12, "lblInMes12");
-            this.lblInMes12.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes12.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblInMes12.Name = "lblInMes12";
-            // 
-            // lblEtMes07
-            // 
-            resources.ApplyResources(this.lblEtMes07, "lblEtMes07");
-            this.lblEtMes07.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes07.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes07.Name = "lblEtMes07";
-            // 
-            // lblEtMes12
-            // 
-            resources.ApplyResources(this.lblEtMes12, "lblEtMes12");
-            this.lblEtMes12.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes12.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes12.Name = "lblEtMes12";
-            // 
-            // lblInMes06
-            // 
-            resources.ApplyResources(this.lblInMes06, "lblInMes06");
-            this.lblInMes06.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes06.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblInMes06.Name = "lblInMes06";
-            // 
-            // lblInMes03
-            // 
-            resources.ApplyResources(this.lblInMes03, "lblInMes03");
-            this.lblInMes03.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes03.ForeColor = System.Drawing.Color.Olive;
-            this.lblInMes03.Name = "lblInMes03";
-            // 
-            // lblEtMes03
-            // 
-            resources.ApplyResources(this.lblEtMes03, "lblEtMes03");
-            this.lblEtMes03.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes03.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes03.Name = "lblEtMes03";
-            // 
-            // lblEtMes06
-            // 
-            resources.ApplyResources(this.lblEtMes06, "lblEtMes06");
-            this.lblEtMes06.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes06.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes06.Name = "lblEtMes06";
-            // 
-            // lblInMes11
-            // 
-            resources.ApplyResources(this.lblInMes11, "lblInMes11");
-            this.lblInMes11.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes11.ForeColor = System.Drawing.Color.Olive;
-            this.lblInMes11.Name = "lblInMes11";
-            // 
-            // lblInMes02
-            // 
-            resources.ApplyResources(this.lblInMes02, "lblInMes02");
-            this.lblInMes02.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes02.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblInMes02.Name = "lblInMes02";
-            // 
-            // lblEtMes11
-            // 
-            resources.ApplyResources(this.lblEtMes11, "lblEtMes11");
-            this.lblEtMes11.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes11.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes11.Name = "lblEtMes11";
-            // 
-            // lblEtMes02
-            // 
-            resources.ApplyResources(this.lblEtMes02, "lblEtMes02");
-            this.lblEtMes02.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes02.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes02.Name = "lblEtMes02";
-            // 
-            // lblInMes05
-            // 
-            resources.ApplyResources(this.lblInMes05, "lblInMes05");
-            this.lblInMes05.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes05.ForeColor = System.Drawing.Color.Olive;
-            this.lblInMes05.Name = "lblInMes05";
-            // 
-            // lblInMes01
-            // 
-            resources.ApplyResources(this.lblInMes01, "lblInMes01");
-            this.lblInMes01.BackColor = System.Drawing.Color.Transparent;
-            this.lblInMes01.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblInMes01.Name = "lblInMes01";
-            // 
             // label69
             // 
             resources.ApplyResources(this.label69, "label69");
@@ -1445,26 +1159,12 @@
             this.label69.ForeColor = System.Drawing.Color.White;
             this.label69.Name = "label69";
             // 
-            // lblEtMes05
-            // 
-            resources.ApplyResources(this.lblEtMes05, "lblEtMes05");
-            this.lblEtMes05.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes05.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes05.Name = "lblEtMes05";
-            // 
             // label68
             // 
             resources.ApplyResources(this.label68, "label68");
             this.label68.BackColor = System.Drawing.Color.Transparent;
             this.label68.ForeColor = System.Drawing.Color.White;
             this.label68.Name = "label68";
-            // 
-            // lblEtMes01
-            // 
-            resources.ApplyResources(this.lblEtMes01, "lblEtMes01");
-            this.lblEtMes01.BackColor = System.Drawing.Color.Transparent;
-            this.lblEtMes01.ForeColor = System.Drawing.Color.White;
-            this.lblEtMes01.Name = "lblEtMes01";
             // 
             // label67
             // 
@@ -1711,13 +1411,6 @@
             this.lblMesG01.ForeColor = System.Drawing.Color.White;
             this.lblMesG01.Name = "lblMesG01";
             // 
-            // lblVentasLocales
-            // 
-            resources.ApplyResources(this.lblVentasLocales, "lblVentasLocales");
-            this.lblVentasLocales.BackColor = System.Drawing.Color.Transparent;
-            this.lblVentasLocales.ForeColor = System.Drawing.Color.White;
-            this.lblVentasLocales.Name = "lblVentasLocales";
-            // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
@@ -1805,11 +1498,17 @@
             this.cmbFiltroDeVentas.SelectedValue = null;
             this.cmbFiltroDeVentas.ValueMember = "";
             // 
+            // ctlVentasMes
+            // 
+            resources.ApplyResources(this.ctlVentasMes, "ctlVentasMes");
+            this.ctlVentasMes.Name = "ctlVentasMes";
+            // 
             // MaxMin
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.Controls.Add(this.ctlVentasMes);
             this.Controls.Add(this.cmbFiltroDeVentas);
             this.Controls.Add(this.dtpFechaDeCalculo);
             this.Controls.Add(this.label3);
@@ -1839,7 +1538,6 @@
             this.Controls.Add(this.lblVentaMayorDia);
             this.Controls.Add(this.maskedTextBox2);
             this.Controls.Add(this.tabMaxMin);
-            this.Controls.Add(this.lblMes08);
             this.Controls.Add(this.lblSem12);
             this.Controls.Add(this.lblSem25);
             this.Controls.Add(this.lblSem05);
@@ -1848,18 +1546,12 @@
             this.Controls.Add(this.lblSem22);
             this.Controls.Add(this.lblSem02);
             this.Controls.Add(this.lblSem15);
-            this.Controls.Add(this.lblMes10);
             this.Controls.Add(this.lblSem07);
             this.Controls.Add(this.lblSem20);
-            this.Controls.Add(this.lblMes04);
             this.Controls.Add(this.lblSem11);
             this.Controls.Add(this.lblSem24);
             this.Controls.Add(this.lblSem04);
             this.Controls.Add(this.lblSem17);
-            this.Controls.Add(this.lblMes12);
-            this.Controls.Add(this.lblMes06);
-            this.Controls.Add(this.lblMes02);
-            this.Controls.Add(this.lblMes07);
             this.Controls.Add(this.lblSem13);
             this.Controls.Add(this.lblSem06);
             this.Controls.Add(this.lblSem26);
@@ -1871,44 +1563,14 @@
             this.Controls.Add(this.lblSem23);
             this.Controls.Add(this.lblSem03);
             this.Controls.Add(this.lblSem14);
-            this.Controls.Add(this.lblMes03);
             this.Controls.Add(this.lblProveedor);
             this.Controls.Add(this.cmbLinea);
             this.Controls.Add(this.lblLinea);
             this.Controls.Add(this.cmbProveedor);
             this.Controls.Add(this.lblSem16);
-            this.Controls.Add(this.lblMes09);
-            this.Controls.Add(this.lblMes11);
-            this.Controls.Add(this.lblMes05);
-            this.Controls.Add(this.lblMes01);
-            this.Controls.Add(this.lblInMes10);
-            this.Controls.Add(this.lblEtMes10);
-            this.Controls.Add(this.lblInMes08);
-            this.Controls.Add(this.lblEtMes08);
-            this.Controls.Add(this.lblInMes04);
-            this.Controls.Add(this.lblEtMes04);
-            this.Controls.Add(this.lblInMes09);
-            this.Controls.Add(this.lblInMes07);
-            this.Controls.Add(this.lblEtMes09);
-            this.Controls.Add(this.lblInMes12);
-            this.Controls.Add(this.lblEtMes07);
-            this.Controls.Add(this.lblEtMes12);
-            this.Controls.Add(this.lblInMes06);
-            this.Controls.Add(this.lblInMes03);
-            this.Controls.Add(this.lblEtMes03);
-            this.Controls.Add(this.lblEtMes06);
-            this.Controls.Add(this.lblInMes11);
-            this.Controls.Add(this.lblInMes02);
-            this.Controls.Add(this.lblEtMes11);
-            this.Controls.Add(this.lblEtMes02);
-            this.Controls.Add(this.lblInMes05);
-            this.Controls.Add(this.lblInMes01);
             this.Controls.Add(this.label69);
-            this.Controls.Add(this.lblEtMes05);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblVentasLocales);
             this.Controls.Add(this.label68);
-            this.Controls.Add(this.lblEtMes01);
             this.Controls.Add(this.label67);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label40);
@@ -1953,7 +1615,6 @@
         private System.Windows.Forms.TabPage tbpReglas;
         private System.Windows.Forms.DataGridView dgvReglas;
         private System.Windows.Forms.TabPage tbpSinMaxMin;
-        private System.Windows.Forms.Label lblMes08;
         private System.Windows.Forms.Label lblSem12;
         private System.Windows.Forms.Label lblSem25;
         private System.Windows.Forms.Label lblSem05;
@@ -1962,18 +1623,12 @@
         private System.Windows.Forms.Label lblSem22;
         private System.Windows.Forms.Label lblSem02;
         private System.Windows.Forms.Label lblSem15;
-        private System.Windows.Forms.Label lblMes10;
         private System.Windows.Forms.Label lblSem07;
         private System.Windows.Forms.Label lblSem20;
-        private System.Windows.Forms.Label lblMes04;
         private System.Windows.Forms.Label lblSem11;
         private System.Windows.Forms.Label lblSem24;
         private System.Windows.Forms.Label lblSem04;
         private System.Windows.Forms.Label lblSem17;
-        private System.Windows.Forms.Label lblMes12;
-        private System.Windows.Forms.Label lblMes06;
-        private System.Windows.Forms.Label lblMes02;
-        private System.Windows.Forms.Label lblMes07;
         private System.Windows.Forms.Label lblSem13;
         private System.Windows.Forms.Label lblSem06;
         private System.Windows.Forms.Label lblSem26;
@@ -1985,42 +1640,13 @@
         private System.Windows.Forms.Label lblSem23;
         private System.Windows.Forms.Label lblSem03;
         private System.Windows.Forms.Label lblSem14;
-        private System.Windows.Forms.Label lblMes03;
         private System.Windows.Forms.Label lblProveedor;
         private System.Windows.Forms.ComboBox cmbLinea;
         private System.Windows.Forms.Label lblLinea;
         private System.Windows.Forms.ComboBox cmbProveedor;
         private System.Windows.Forms.Label lblSem16;
-        private System.Windows.Forms.Label lblMes09;
-        private System.Windows.Forms.Label lblMes11;
-        private System.Windows.Forms.Label lblMes05;
-        private System.Windows.Forms.Label lblMes01;
-        private System.Windows.Forms.Label lblInMes10;
-        private System.Windows.Forms.Label lblEtMes10;
-        private System.Windows.Forms.Label lblInMes08;
-        private System.Windows.Forms.Label lblEtMes08;
-        private System.Windows.Forms.Label lblInMes04;
-        private System.Windows.Forms.Label lblEtMes04;
-        private System.Windows.Forms.Label lblInMes09;
-        private System.Windows.Forms.Label lblInMes07;
-        private System.Windows.Forms.Label lblEtMes09;
-        private System.Windows.Forms.Label lblInMes12;
-        private System.Windows.Forms.Label lblEtMes07;
-        private System.Windows.Forms.Label lblEtMes12;
-        private System.Windows.Forms.Label lblInMes06;
-        private System.Windows.Forms.Label lblInMes03;
-        private System.Windows.Forms.Label lblEtMes03;
-        private System.Windows.Forms.Label lblEtMes06;
-        private System.Windows.Forms.Label lblInMes11;
-        private System.Windows.Forms.Label lblInMes02;
-        private System.Windows.Forms.Label lblEtMes11;
-        private System.Windows.Forms.Label lblEtMes02;
-        private System.Windows.Forms.Label lblInMes05;
-        private System.Windows.Forms.Label lblInMes01;
         private System.Windows.Forms.Label label69;
-        private System.Windows.Forms.Label lblEtMes05;
         private System.Windows.Forms.Label label68;
-        private System.Windows.Forms.Label lblEtMes01;
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label40;
@@ -2072,7 +1698,6 @@
         private System.Windows.Forms.Label lblMesG05;
         private System.Windows.Forms.Label lblMesG01;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label lblVentasLocales;
         private System.Windows.Forms.Label label2;
         private Negocio.ComboEtiqueta cmbCambios;
         private Negocio.TextoMod txtEquBuscar;
@@ -2130,5 +1755,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtpFechaDeCalculo;
         private Negocio.ComboEtiqueta cmbFiltroDeVentas;
+        private GridVentasMes ctlVentasMes;
     }
 }

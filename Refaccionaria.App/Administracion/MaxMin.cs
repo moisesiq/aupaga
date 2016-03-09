@@ -173,6 +173,7 @@ namespace Refaccionaria.App
             int iParteID = Helper.ConvertirEntero(this.dgvDetalle.CurrentRow.Cells["ParteID"].Value);
             this.LlenarDatosExtra(iParteID);
             this.LlenarDescripcionMaxMin(this.dgvDetalle.CurrentRow);
+            this.ctlVentasMes.LlenarDatos(iParteID);
         }
 
         private void dgvDetalle_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -851,7 +852,7 @@ namespace Refaccionaria.App
                 // Fin - Coloración
 
                 // Se llenan los meses
-                foreach (var oDato in oDatos)
+                /* foreach (var oDato in oDatos)
                 {
                     if (oDato.Grupo == 4)
                     {
@@ -860,8 +861,9 @@ namespace Refaccionaria.App
                             this.DatosExtraColoracion(oDato.Cantidad, oDato.Negadas);
                     }
                 }
+                */
                 // Se llenan los indicadores de los meses
-                var oMeses = oDatos.Where(q => q.Grupo == 4).OrderByDescending(q => q.Cantidad);
+                /* var oMeses = oDatos.Where(q => q.Grupo == 4).OrderByDescending(q => q.Cantidad);
                 int iCuentaMes = 1;
                 foreach (var oMes in oMeses)
                 {
@@ -870,6 +872,7 @@ namespace Refaccionaria.App
                     this.Controls[sEtiqueta].ForeColor = (iCuentaMes > 6 ? Color.Olive : Color.DarkRed);
                     iCuentaMes++;
                 }
+                */
 
                 // Se llenan las semanas
                 var oSemanas = oDatos.Where(q => q.Grupo == 3).OrderByDescending(q => q.Cantidad).ToList();

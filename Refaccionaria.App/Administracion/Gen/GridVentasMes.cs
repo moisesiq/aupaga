@@ -51,8 +51,8 @@ namespace Refaccionaria.App
                 int sumaYear = int.Parse(sYear)+1;
                 sYear = Convert.ToString(sumaYear);
             }
-            DateTime dMes = dDesde;
-            
+
+            DateTime dMes = DateTime.Now.AddMonths(-12).DiaPrimero();;
             for (int iCol = 4; iCol <= 15; iCol++)
             {
                 this.dgvDatos.Columns[iCol].Name = (dMes.Year.ToString() + dMes.Month.ToString());

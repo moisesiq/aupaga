@@ -274,10 +274,6 @@
             this.dgvProductosComprados = new System.Windows.Forms.DataGridView();
             this.tabCalendario = new System.Windows.Forms.TabPage();
             this.tabCuentasPorPagar = new System.Windows.Forms.TabControl();
-            this.tbpVencimiento = new System.Windows.Forms.TabPage();
-            this.mvCalendarioProveedor = new System.Windows.Forms.Calendar.MonthView();
-            this.chkCppSoloProveedorSel = new System.Windows.Forms.CheckBox();
-            this.calProveedor = new System.Windows.Forms.Calendar.Calendar();
             this.tbpLista = new System.Windows.Forms.TabPage();
             this.tgvCuentasPorPagar = new AdvancedDataGridView.TreeGridView();
             this.cpp_Dia = new AdvancedDataGridView.TreeGridColumn();
@@ -285,6 +281,10 @@
             this.cpp_Acumulado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpCppListaInicio = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbpVencimiento = new System.Windows.Forms.TabPage();
+            this.mvCalendarioProveedor = new System.Windows.Forms.Calendar.MonthView();
+            this.chkCppSoloProveedorSel = new System.Windows.Forms.CheckBox();
+            this.calProveedor = new System.Windows.Forms.Calendar.Calendar();
             this.tabControl = new System.Windows.Forms.TabPage();
             this.tbpGarantias = new System.Windows.Forms.TabPage();
             this.dgvGarantiasNota = new System.Windows.Forms.DataGridView();
@@ -400,10 +400,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosComprados)).BeginInit();
             this.tabCalendario.SuspendLayout();
             this.tabCuentasPorPagar.SuspendLayout();
-            this.tbpVencimiento.SuspendLayout();
-            this.mvCalendarioProveedor.SuspendLayout();
             this.tbpLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tgvCuentasPorPagar)).BeginInit();
+            this.tbpVencimiento.SuspendLayout();
+            this.mvCalendarioProveedor.SuspendLayout();
             this.tbpGarantias.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGarantiasNota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGarantiasDet)).BeginInit();
@@ -2504,75 +2504,6 @@
             this.tabCuentasPorPagar.TabIndex = 0;
             this.tabCuentasPorPagar.SelectedIndexChanged += new System.EventHandler(this.tabCuentasPorPagar_SelectedIndexChanged);
             // 
-            // tbpVencimiento
-            // 
-            this.tbpVencimiento.Controls.Add(this.mvCalendarioProveedor);
-            this.tbpVencimiento.Controls.Add(this.calProveedor);
-            this.tbpVencimiento.Location = new System.Drawing.Point(4, 22);
-            this.tbpVencimiento.Name = "tbpVencimiento";
-            this.tbpVencimiento.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpVencimiento.Size = new System.Drawing.Size(1160, 631);
-            this.tbpVencimiento.TabIndex = 0;
-            this.tbpVencimiento.Text = "Calendario";
-            this.tbpVencimiento.UseVisualStyleBackColor = true;
-            // 
-            // mvCalendarioProveedor
-            // 
-            this.mvCalendarioProveedor.ArrowsColor = System.Drawing.SystemColors.Window;
-            this.mvCalendarioProveedor.ArrowsSelectedColor = System.Drawing.Color.Gold;
-            this.mvCalendarioProveedor.Controls.Add(this.chkCppSoloProveedorSel);
-            this.mvCalendarioProveedor.DayBackgroundColor = System.Drawing.Color.Empty;
-            this.mvCalendarioProveedor.DayGrayedText = System.Drawing.SystemColors.GrayText;
-            this.mvCalendarioProveedor.DaySelectedBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.mvCalendarioProveedor.DaySelectedColor = System.Drawing.SystemColors.WindowText;
-            this.mvCalendarioProveedor.DaySelectedTextColor = System.Drawing.SystemColors.HighlightText;
-            this.mvCalendarioProveedor.ItemPadding = new System.Windows.Forms.Padding(2);
-            this.mvCalendarioProveedor.Location = new System.Drawing.Point(3, 3);
-            this.mvCalendarioProveedor.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
-            this.mvCalendarioProveedor.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
-            this.mvCalendarioProveedor.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.mvCalendarioProveedor.MonthTitleTextColorInactive = System.Drawing.SystemColors.InactiveCaptionText;
-            this.mvCalendarioProveedor.Name = "mvCalendarioProveedor";
-            this.mvCalendarioProveedor.Size = new System.Drawing.Size(194, 622);
-            this.mvCalendarioProveedor.TabIndex = 3;
-            this.mvCalendarioProveedor.TodayBorderColor = System.Drawing.Color.Maroon;
-            this.mvCalendarioProveedor.WorkWeekStart = System.DayOfWeek.Saturday;
-            this.mvCalendarioProveedor.SelectionChanged += new System.EventHandler(this.mvCalendarioProveedor_SelectionChanged);
-            // 
-            // chkCppSoloProveedorSel
-            // 
-            this.chkCppSoloProveedorSel.AutoSize = true;
-            this.chkCppSoloProveedorSel.BackColor = System.Drawing.Color.White;
-            this.chkCppSoloProveedorSel.Location = new System.Drawing.Point(3, 3);
-            this.chkCppSoloProveedorSel.Name = "chkCppSoloProveedorSel";
-            this.chkCppSoloProveedorSel.Size = new System.Drawing.Size(165, 17);
-            this.chkCppSoloProveedorSel.TabIndex = 0;
-            this.chkCppSoloProveedorSel.Text = "Sólo Proveedor seleccionado";
-            this.chkCppSoloProveedorSel.UseVisualStyleBackColor = false;
-            this.chkCppSoloProveedorSel.CheckedChanged += new System.EventHandler(this.chkCppSoloProveedorSel_CheckedChanged);
-            // 
-            // calProveedor
-            // 
-            this.calProveedor.AllowItemEdit = false;
-            this.calProveedor.AllowItemResize = false;
-            this.calProveedor.AllowNew = false;
-            this.calProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.calProveedor.FirstDayOfWeek = System.DayOfWeek.Monday;
-            this.calProveedor.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.calProveedor.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[0];
-            this.calProveedor.ItemsTimeFormat = "HH:mm";
-            this.calProveedor.Location = new System.Drawing.Point(213, 7);
-            this.calProveedor.MaximumViewDays = 126;
-            this.calProveedor.Name = "calProveedor";
-            this.calProveedor.Size = new System.Drawing.Size(1331, 625);
-            this.calProveedor.TabIndex = 2;
-            this.calProveedor.Text = "Calendario";
-            this.calProveedor.ItemCreating += new System.Windows.Forms.Calendar.Calendar.CalendarItemCancelEventHandler(this.calProveedor_ItemCreating);
-            this.calProveedor.ItemSelected += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calProveedor_ItemSelected);
-            this.calProveedor.DoubleClick += new System.EventHandler(this.calProveedor_DoubleClick);
-            // 
             // tbpLista
             // 
             this.tbpLista.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
@@ -2670,6 +2601,75 @@
             this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 19;
             this.label1.Text = "Fecha inicial";
+            // 
+            // tbpVencimiento
+            // 
+            this.tbpVencimiento.Controls.Add(this.mvCalendarioProveedor);
+            this.tbpVencimiento.Controls.Add(this.calProveedor);
+            this.tbpVencimiento.Location = new System.Drawing.Point(4, 22);
+            this.tbpVencimiento.Name = "tbpVencimiento";
+            this.tbpVencimiento.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpVencimiento.Size = new System.Drawing.Size(1160, 631);
+            this.tbpVencimiento.TabIndex = 0;
+            this.tbpVencimiento.Text = "Calendario";
+            this.tbpVencimiento.UseVisualStyleBackColor = true;
+            // 
+            // mvCalendarioProveedor
+            // 
+            this.mvCalendarioProveedor.ArrowsColor = System.Drawing.SystemColors.Window;
+            this.mvCalendarioProveedor.ArrowsSelectedColor = System.Drawing.Color.Gold;
+            this.mvCalendarioProveedor.Controls.Add(this.chkCppSoloProveedorSel);
+            this.mvCalendarioProveedor.DayBackgroundColor = System.Drawing.Color.Empty;
+            this.mvCalendarioProveedor.DayGrayedText = System.Drawing.SystemColors.GrayText;
+            this.mvCalendarioProveedor.DaySelectedBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.mvCalendarioProveedor.DaySelectedColor = System.Drawing.SystemColors.WindowText;
+            this.mvCalendarioProveedor.DaySelectedTextColor = System.Drawing.SystemColors.HighlightText;
+            this.mvCalendarioProveedor.ItemPadding = new System.Windows.Forms.Padding(2);
+            this.mvCalendarioProveedor.Location = new System.Drawing.Point(3, 3);
+            this.mvCalendarioProveedor.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
+            this.mvCalendarioProveedor.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
+            this.mvCalendarioProveedor.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.mvCalendarioProveedor.MonthTitleTextColorInactive = System.Drawing.SystemColors.InactiveCaptionText;
+            this.mvCalendarioProveedor.Name = "mvCalendarioProveedor";
+            this.mvCalendarioProveedor.Size = new System.Drawing.Size(194, 622);
+            this.mvCalendarioProveedor.TabIndex = 3;
+            this.mvCalendarioProveedor.TodayBorderColor = System.Drawing.Color.Maroon;
+            this.mvCalendarioProveedor.WorkWeekStart = System.DayOfWeek.Saturday;
+            this.mvCalendarioProveedor.SelectionChanged += new System.EventHandler(this.mvCalendarioProveedor_SelectionChanged);
+            // 
+            // chkCppSoloProveedorSel
+            // 
+            this.chkCppSoloProveedorSel.AutoSize = true;
+            this.chkCppSoloProveedorSel.BackColor = System.Drawing.Color.White;
+            this.chkCppSoloProveedorSel.Location = new System.Drawing.Point(3, 3);
+            this.chkCppSoloProveedorSel.Name = "chkCppSoloProveedorSel";
+            this.chkCppSoloProveedorSel.Size = new System.Drawing.Size(165, 17);
+            this.chkCppSoloProveedorSel.TabIndex = 0;
+            this.chkCppSoloProveedorSel.Text = "Sólo Proveedor seleccionado";
+            this.chkCppSoloProveedorSel.UseVisualStyleBackColor = false;
+            this.chkCppSoloProveedorSel.CheckedChanged += new System.EventHandler(this.chkCppSoloProveedorSel_CheckedChanged);
+            // 
+            // calProveedor
+            // 
+            this.calProveedor.AllowItemEdit = false;
+            this.calProveedor.AllowItemResize = false;
+            this.calProveedor.AllowNew = false;
+            this.calProveedor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.calProveedor.FirstDayOfWeek = System.DayOfWeek.Monday;
+            this.calProveedor.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.calProveedor.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[0];
+            this.calProveedor.ItemsTimeFormat = "HH:mm";
+            this.calProveedor.Location = new System.Drawing.Point(213, 7);
+            this.calProveedor.MaximumViewDays = 126;
+            this.calProveedor.Name = "calProveedor";
+            this.calProveedor.Size = new System.Drawing.Size(1331, 625);
+            this.calProveedor.TabIndex = 2;
+            this.calProveedor.Text = "Calendario";
+            this.calProveedor.ItemCreating += new System.Windows.Forms.Calendar.Calendar.CalendarItemCancelEventHandler(this.calProveedor_ItemCreating);
+            this.calProveedor.ItemSelected += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calProveedor_ItemSelected);
+            this.calProveedor.DoubleClick += new System.EventHandler(this.calProveedor_DoubleClick);
             // 
             // tabControl
             // 
@@ -3307,12 +3307,15 @@
             // btnDescGanGuardar
             // 
             this.btnDescGanGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDescGanGuardar.Location = new System.Drawing.Point(1096, 622);
+            this.btnDescGanGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnDescGanGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDescGanGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnDescGanGuardar.Location = new System.Drawing.Point(1096, 610);
             this.btnDescGanGuardar.Name = "btnDescGanGuardar";
             this.btnDescGanGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnDescGanGuardar.TabIndex = 2;
             this.btnDescGanGuardar.Text = "&Guardar";
-            this.btnDescGanGuardar.UseVisualStyleBackColor = true;
+            this.btnDescGanGuardar.UseVisualStyleBackColor = false;
             this.btnDescGanGuardar.Click += new System.EventHandler(this.btnDescGanGuardar_Click);
             // 
             // tgvDescGan
@@ -3651,12 +3654,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosComprados)).EndInit();
             this.tabCalendario.ResumeLayout(false);
             this.tabCuentasPorPagar.ResumeLayout(false);
-            this.tbpVencimiento.ResumeLayout(false);
-            this.mvCalendarioProveedor.ResumeLayout(false);
-            this.mvCalendarioProveedor.PerformLayout();
             this.tbpLista.ResumeLayout(false);
             this.tbpLista.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tgvCuentasPorPagar)).EndInit();
+            this.tbpVencimiento.ResumeLayout(false);
+            this.mvCalendarioProveedor.ResumeLayout(false);
+            this.mvCalendarioProveedor.PerformLayout();
             this.tbpGarantias.ResumeLayout(false);
             this.tbpGarantias.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGarantiasNota)).EndInit();
