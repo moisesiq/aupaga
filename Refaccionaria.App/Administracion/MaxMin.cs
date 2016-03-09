@@ -65,7 +65,7 @@ namespace Refaccionaria.App
             // Se limpian los datos extra
             this.LimpiarDatosExtra();
             // Se llenan las etiquetas de los meses
-            for (int iCont = 0; iCont < 12; iCont++)
+            /* for (int iCont = 0; iCont < 12; iCont++)
             {
                 DateTime dMes = this.Hasta.AddMonths(iCont * -1);
                 string sEtiqueta = string.Format("lblEtMes{0:00}", (12 - iCont));
@@ -74,6 +74,7 @@ namespace Refaccionaria.App
                     + dMes.Year.ToString().Derecha(2);
                 this.MesesEtiquetas[dMes.Month] = (12 - iCont);
             }
+            */
 
             this.trvVentasGlobales.AfterCheck += new TreeViewEventHandler(this.trvPartesCalcular_AfterCheck);
         }
