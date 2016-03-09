@@ -1462,7 +1462,7 @@
             // 
             resources.ApplyResources(this.txtDescripcionMaxMin, "txtDescripcionMaxMin");
             this.txtDescripcionMaxMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
-            this.txtDescripcionMaxMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDescripcionMaxMin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcionMaxMin.ForeColor = System.Drawing.Color.White;
             this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
             this.txtDescripcionMaxMin.ReadOnly = true;

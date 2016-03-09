@@ -2479,7 +2479,7 @@
     <value>NoControl</value>
   </data>
   <data name="label69.Location" type="System.Drawing.Point, System.Drawing">
-    <value>515, 359</value>
+    <value>102, 402</value>
   </data>
   <data name="label69.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -2515,7 +2515,7 @@
     <value>NoControl</value>
   </data>
   <data name="label68.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 359</value>
+    <value>102, 381</value>
   </data>
   <data name="label68.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2527,7 +2527,7 @@
     <value>Venta &lt;</value>
   </data>
   <data name="label68.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;label68.Name" xml:space="preserve">
     <value>label68</value>
@@ -2551,7 +2551,7 @@
     <value>NoControl</value>
   </data>
   <data name="label67.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 359</value>
+    <value>102, 359</value>
   </data>
   <data name="label67.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2563,7 +2563,7 @@
     <value>Venta &gt;</value>
   </data>
   <data name="label67.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;label67.Name" xml:space="preserve">
     <value>label67</value>
@@ -2620,7 +2620,7 @@
     <value>NoControl</value>
   </data>
   <data name="label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 359</value>
+    <value>4, 402</value>
   </data>
   <data name="label40.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2632,7 +2632,7 @@
     <value>Costo</value>
   </data>
   <data name="label40.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;label40.Name" xml:space="preserve">
     <value>label40</value>
@@ -2680,7 +2680,7 @@
     <value>NoControl</value>
   </data>
   <data name="label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 359</value>
+    <value>4, 381</value>
   </data>
   <data name="label39.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2692,7 +2692,7 @@
     <value>ABC Línea</value>
   </data>
   <data name="label39.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;label39.Name" xml:space="preserve">
     <value>label39</value>
@@ -2719,7 +2719,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnExportar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1314, 355</value>
+    <value>7, 427</value>
   </data>
   <data name="btnExportar.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 23</value>
@@ -2755,7 +2755,7 @@
     <value>NoControl</value>
   </data>
   <data name="label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 359</value>
+    <value>4, 359</value>
   </data>
   <data name="label38.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2767,7 +2767,7 @@
     <value>ABC Prov</value>
   </data>
   <data name="label38.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;label38.Name" xml:space="preserve">
     <value>label38</value>
@@ -2965,7 +2965,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVentaMayorDia.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 355</value>
+    <value>158, 355</value>
   </data>
   <data name="lblVentaMayorDia.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3001,7 +3001,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCosto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 355</value>
+    <value>39, 398</value>
   </data>
   <data name="lblCosto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3037,7 +3037,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAbcLinea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 355</value>
+    <value>66, 377</value>
   </data>
   <data name="lblAbcLinea.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3076,7 +3076,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVentaMenorDia.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 355</value>
+    <value>158, 377</value>
   </data>
   <data name="lblVentaMenorDia.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3112,7 +3112,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAbcProveedor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>64, 355</value>
+    <value>66, 355</value>
   </data>
   <data name="lblAbcProveedor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3151,13 +3151,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblSemanasConVenta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>569, 355</value>
+    <value>158, 398</value>
   </data>
   <data name="lblSemanasConVenta.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="lblSemanasConVenta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
+    <value>43, 20</value>
   </data>
   <data name="lblSemanasConVenta.TabIndex" type="System.Int32, mscorlib">
     <value>256</value>
@@ -3193,7 +3193,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVentasGlobales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>618, 420</value>
+    <value>310, 437</value>
   </data>
   <data name="lblVentasGlobales.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
@@ -3226,16 +3226,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG08.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG08.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG08.Location" type="System.Drawing.Point, System.Drawing">
-    <value>361, 416</value>
+    <value>708, 434</value>
   </data>
   <data name="lblMesG08.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG08.TabIndex" type="System.Int32, mscorlib">
     <value>265</value>
@@ -3262,16 +3262,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG10.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 416</value>
+    <value>796, 434</value>
   </data>
   <data name="lblMesG10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG10.TabIndex" type="System.Int32, mscorlib">
     <value>267</value>
@@ -3298,16 +3298,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG04.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG04.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG04.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 416</value>
+    <value>532, 434</value>
   </data>
   <data name="lblMesG04.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG04.TabIndex" type="System.Int32, mscorlib">
     <value>261</value>
@@ -3334,19 +3334,19 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG12.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>565, 416</value>
+    <value>881, 434</value>
   </data>
   <data name="lblMesG12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="lblMesG12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>50, 18</value>
   </data>
   <data name="lblMesG12.TabIndex" type="System.Int32, mscorlib">
     <value>269</value>
@@ -3373,16 +3373,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG06.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG06.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG06.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 416</value>
+    <value>620, 434</value>
   </data>
   <data name="lblMesG06.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG06.TabIndex" type="System.Int32, mscorlib">
     <value>263</value>
@@ -3409,16 +3409,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG02.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG02.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG02.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 416</value>
+    <value>444, 434</value>
   </data>
   <data name="lblMesG02.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG02.TabIndex" type="System.Int32, mscorlib">
     <value>259</value>
@@ -3445,16 +3445,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG07.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG07.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG07.Location" type="System.Drawing.Point, System.Drawing">
-    <value>310, 416</value>
+    <value>664, 434</value>
   </data>
   <data name="lblMesG07.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG07.TabIndex" type="System.Int32, mscorlib">
     <value>264</value>
@@ -3481,16 +3481,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG03.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG03.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG03.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 416</value>
+    <value>488, 434</value>
   </data>
   <data name="lblMesG03.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG03.TabIndex" type="System.Int32, mscorlib">
     <value>260</value>
@@ -3517,16 +3517,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG09.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG09.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG09.Location" type="System.Drawing.Point, System.Drawing">
-    <value>412, 416</value>
+    <value>752, 434</value>
   </data>
   <data name="lblMesG09.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG09.TabIndex" type="System.Int32, mscorlib">
     <value>266</value>
@@ -3553,16 +3553,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG11.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 416</value>
+    <value>840, 434</value>
   </data>
   <data name="lblMesG11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG11.TabIndex" type="System.Int32, mscorlib">
     <value>268</value>
@@ -3589,16 +3589,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG05.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG05.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG05.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 416</value>
+    <value>576, 434</value>
   </data>
   <data name="lblMesG05.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG05.TabIndex" type="System.Int32, mscorlib">
     <value>262</value>
@@ -3625,16 +3625,16 @@
     <value>Bottom, Left</value>
   </data>
   <data name="lblMesG01.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="lblMesG01.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMesG01.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 416</value>
+    <value>400, 434</value>
   </data>
   <data name="lblMesG01.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>40, 18</value>
   </data>
   <data name="lblMesG01.TabIndex" type="System.Int32, mscorlib">
     <value>258</value>
@@ -3790,13 +3790,13 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="txtDescripcionMaxMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>621, 355</value>
+    <value>946, 355</value>
   </data>
   <data name="txtDescripcionMaxMin.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="txtDescripcionMaxMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 38</value>
+    <value>453, 47</value>
   </data>
   <data name="txtDescripcionMaxMin.TabIndex" type="System.Int32, mscorlib">
     <value>316</value>
@@ -3892,10 +3892,10 @@
     <value>Bottom, Left</value>
   </data>
   <data name="ctlVentasMes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>634, 377</value>
+    <value>207, 354</value>
   </data>
   <data name="ctlVentasMes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>513, 59</value>
+    <value>733, 77</value>
   </data>
   <data name="ctlVentasMes.TabIndex" type="System.Int32, mscorlib">
     <value>321</value>
