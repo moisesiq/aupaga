@@ -273,8 +273,8 @@ namespace FacturacionElectronica
             sGuardar = sGuardar.Replace("{_RfcReceptor}", sRfcReceptor);
             sGuardar = sGuardar.Replace("{_Receptor}", sReceptor);
             sGuardar = sGuardar.Replace("{_Anio}", dFecha.Year.ToString());
-            sGuardar = sGuardar.Replace("{_Mes}", dFecha.Month.ToString());
-            sGuardar = sGuardar.Replace("{_Dia}", dFecha.Day.ToString());
+            sGuardar = sGuardar.Replace("{_Mes}", dFecha.Month.ToString("00"));
+            sGuardar = sGuardar.Replace("{_Dia}", dFecha.Day.ToString("00"));
             sGuardar = sGuardar.Replace("{_Serie}", sSerie);
             sGuardar = sGuardar.Replace("{_Folio}", sFolio);
             sGuardar = sGuardar.Replace("{_Uuid}", sUuid);
