@@ -828,8 +828,8 @@ namespace Refaccionaria.App
             var oPartePrecio = General.GetEntity<PartePrecio>(q => q.ParteID == iParteID && q.Estatus);
             this.lblCosto.Text = oPartePrecio.Costo.Valor().ToString(GlobalClass.FormatoMoneda);
             // Se obtiene el dato de si es ventas globales o no
-            var oParteMaxMin = General.GetEntity<ParteMaxMin>(q => q.SucursalID == iSucursalID && q.ParteID == iParteID);
-            this.lblVentasGlobales.Visible = oParteMaxMin.VentasGlobales.Valor();
+            // var oParteMaxMin = General.GetEntity<ParteMaxMin>(q => q.SucursalID == iSucursalID && q.ParteID == iParteID);
+            // this.lblVentasGlobales.Visible = oParteMaxMin.VentasGlobales.Valor();
 
             // Se llenan los datos calculados
             var oParams = new Dictionary<string, object>();
@@ -885,7 +885,7 @@ namespace Refaccionaria.App
             }
 
             // Se llenan los datos globales, si aplica
-            if (oParteMaxMin.VentasGlobales.Valor())
+            /* if (oParteMaxMin.VentasGlobales.Valor())
             {
                 oParams.Remove("SucursalID");
                 oDatos = General.ExecuteProcedure<pauParteMaxMinDatosExtra_Result>("pauParteMaxMinDatosExtra", oParams);
@@ -899,6 +899,7 @@ namespace Refaccionaria.App
                     }
                 }
             }
+            */
         }
 
         private Color DatosExtraColoracion(decimal? mCantidad, decimal? mNegadas)
@@ -921,7 +922,7 @@ namespace Refaccionaria.App
             this.lblVentaMayorDia.Text = "";
             this.lblVentaMenorDia.Text = "";
             this.lblSemanasConVenta.Text = "";
-            this.lblVentasGlobales.Visible = false;
+            // this.lblVentasGlobales.Visible = false;
 
             foreach (Control oControl in this.Controls)
             {

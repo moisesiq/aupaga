@@ -584,7 +584,7 @@ namespace Refaccionaria.App
         public static void GenerarTicketDeCotizacion(VentasView oVenta, List<VentasDetalleView> oVentaDetalle)
         {
             var oRep = new Report();
-            oRep.Load(GlobalClass.ConfiguracionGlobal.pathReportes + "VentaTicket.frx");
+            oRep.Load(GlobalClass.ConfiguracionGlobal.pathReportes + "CotizacionTicket.frx");
             VentasProc.TicketAgregarLeyendas(ref oRep);
 
             oRep.RegisterData(new List<VentasView>() { oVenta }, "Venta");
