@@ -710,7 +710,7 @@ namespace Refaccionaria.App
             // Para la impresión del ticket o factura
             var oAdicionales = new Dictionary<string, object>();
             oAdicionales.Add("EfectivoRecibido", mEfectivoRecibido);
-            oAdicionales.Add("Cambio", (mEfectivoRecibido - oPorCobrar.ImporteVenta));
+            oAdicionales.Add("Cambio", (mEfectivoRecibido - oPorCobrar.ImporteVenta) ?? 0);
 
             // Se realiza la facturación, si aplica
             ResAcc<int> ResFactura = null;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="03/04/2016 13:17:22" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="BIXOLON SRP-F310" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="03/10/2016 19:20:35" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="BIXOLON SRP-F310" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -97,7 +97,7 @@ namespace FastReport
       <TextObject Name="Text25" Left="113.4" Top="154.65" Width="160.65" Height="11.34" Text="[FormaDePago]" HorzAlign="Right" Font="Arial, 8pt"/>
       <TextObject Name="Text26" Top="90.05" Width="94.5" Height="18.9" Text="[IIf([Precio1], &quot;----------------------------&quot;, &quot;&quot;)]"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="186" Width="302.4" Height="37.8" DataSource="VentaDetalle">
+    <DataBand Name="Data1" Top="184.7" Width="302.4" Height="37.8" DataSource="VentaDetalle">
       <ShapeObject Name="Shape2" Left="6.29" Top="14.23" Width="13.23" Height="13.23" Fill.Color="Black" Shape="RoundRectangle"/>
       <TextObject Name="Text6" Left="28.35" Width="198.45" Height="28.35" Text="[VentaDetalle.NombreParte]" Font="Arial, 8pt, style=Bold"/>
       <TextObject Name="Text7" Width="37.8" Height="18.9" Text="[VentaDetalle.Cantidad]" Font="Arial, 8pt"/>
@@ -105,7 +105,7 @@ namespace FastReport
       <TextObject Name="Text8" Left="217.35" Width="56.7" Height="13.56" Fill.Color="White" Text="[([VentaDetalle.PrecioUnitario] + [VentaDetalle.Iva]) * [VentaDetalle.Cantidad]]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
       <ShapeObject Name="Shape1" Left="5.45" Top="13.23" Width="13.23" Height="13.23" Fill.Color="White" Shape="RoundRectangle"/>
     </DataBand>
-    <DataBand Name="Data2" Top="227.8" Width="302.4" Height="122.2">
+    <DataBand Name="Data2" Top="225.21" Width="302.4" Height="122.2">
       <TextObject Name="Text9" Left="207.9" Width="66.15" Height="12.9" Text="[Venta.Total]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt, style=Bold" Trimming="EllipsisCharacter"/>
       <TextObject Name="Text23" Left="113.4" Width="94.5" Height="12.9" Text="Total:" HorzAlign="Right" Font="Arial, 8pt"/>
       <TextObject Name="Text16" Top="51.25" Width="274.05" Height="22.68" Text="[TotalConLetra]" Font="Arial, 8pt"/>
@@ -118,6 +118,6 @@ namespace FastReport
       <TextObject Name="Text31" Left="113.4" Top="35.35" Width="94.5" Height="12.9" Text="Cambio:" HorzAlign="Right" Font="Arial, 8pt, style=Italic"/>
       <TextObject Name="Text32" Left="207.9" Top="35.4" Width="66.15" Height="12.85" Text="[IIf(ToDecimal([Cambio]) &lt; 0, 0, [Cambio])]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 8pt, style=Italic"/>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="354" Width="302.4" Height="94.5"/>
+    <PageFooterBand Name="PageFooter1" Top="350.11" Width="302.4" Height="94.5"/>
   </ReportPage>
 </Report>
