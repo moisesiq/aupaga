@@ -838,7 +838,7 @@
             this.tabExistencia.Location = new System.Drawing.Point(695, 227);
             this.tabExistencia.Name = "tabExistencia";
             this.tabExistencia.SelectedIndex = 0;
-            this.tabExistencia.Size = new System.Drawing.Size(297, 233);
+            this.tabExistencia.Size = new System.Drawing.Size(297, 239);
             this.tabExistencia.TabIndex = 38;
             // 
             // tabExistencias
@@ -851,7 +851,7 @@
             this.tabExistencias.Location = new System.Drawing.Point(4, 25);
             this.tabExistencias.Name = "tabExistencias";
             this.tabExistencias.Padding = new System.Windows.Forms.Padding(3);
-            this.tabExistencias.Size = new System.Drawing.Size(289, 204);
+            this.tabExistencias.Size = new System.Drawing.Size(289, 210);
             this.tabExistencias.TabIndex = 1;
             this.tabExistencias.Text = "Existencias";
             // 
@@ -879,7 +879,7 @@
             this.txtDescripcionMaxMin.Multiline = true;
             this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
             this.txtDescripcionMaxMin.ReadOnly = true;
-            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(280, 92);
+            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(280, 98);
             this.txtDescripcionMaxMin.TabIndex = 14;
             // 
             // dgvExistencias
@@ -943,7 +943,7 @@
             this.tabAplicaciones.Location = new System.Drawing.Point(3, 227);
             this.tabAplicaciones.Name = "tabAplicaciones";
             this.tabAplicaciones.SelectedIndex = 0;
-            this.tabAplicaciones.Size = new System.Drawing.Size(686, 233);
+            this.tabAplicaciones.Size = new System.Drawing.Size(686, 239);
             this.tabAplicaciones.TabIndex = 37;
             // 
             // tabPage2
@@ -959,7 +959,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(678, 204);
+            this.tabPage2.Size = new System.Drawing.Size(678, 210);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Equivalentes";
             // 
@@ -1081,7 +1081,7 @@
             this.dgvEquivalentes.RowHeadersVisible = false;
             this.dgvEquivalentes.RowHeadersWidth = 25;
             this.dgvEquivalentes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEquivalentes.Size = new System.Drawing.Size(588, 195);
+            this.dgvEquivalentes.Size = new System.Drawing.Size(588, 201);
             this.dgvEquivalentes.TabIndex = 0;
             this.dgvEquivalentes.CurrentCellChanged += new System.EventHandler(this.dgvEquivalentes_CurrentCellChanged);
             this.dgvEquivalentes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvEquivalentes_KeyDown);
@@ -1162,7 +1162,7 @@
             this.tabPage1.Controls.Add(this.btnAgregarAplicacion);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(678, 204);
+            this.tabPage1.Size = new System.Drawing.Size(678, 210);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Aplicaciones";
             // 
@@ -1245,7 +1245,7 @@
             this.dgvAplicaciones.RowHeadersVisible = false;
             this.dgvAplicaciones.RowHeadersWidth = 25;
             this.dgvAplicaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAplicaciones.Size = new System.Drawing.Size(591, 195);
+            this.dgvAplicaciones.Size = new System.Drawing.Size(591, 201);
             this.dgvAplicaciones.TabIndex = 0;
             this.dgvAplicaciones.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvAplicaciones_KeyDown);
             // 
@@ -1275,7 +1275,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(678, 204);
+            this.tabPage3.Size = new System.Drawing.Size(678, 210);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Codigos Alternos";
             // 
@@ -1358,7 +1358,7 @@
             this.dgvCodigosAlternos.RowHeadersVisible = false;
             this.dgvCodigosAlternos.RowHeadersWidth = 25;
             this.dgvCodigosAlternos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCodigosAlternos.Size = new System.Drawing.Size(588, 195);
+            this.dgvCodigosAlternos.Size = new System.Drawing.Size(588, 201);
             this.dgvCodigosAlternos.TabIndex = 0;
             this.dgvCodigosAlternos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCodigosAlternos_KeyDown);
             // 
@@ -1387,7 +1387,7 @@
             this.tbpComplementarios.Controls.Add(this.chkComplementariosGrupo);
             this.tbpComplementarios.Location = new System.Drawing.Point(4, 25);
             this.tbpComplementarios.Name = "tbpComplementarios";
-            this.tbpComplementarios.Size = new System.Drawing.Size(678, 204);
+            this.tbpComplementarios.Size = new System.Drawing.Size(678, 210);
             this.tbpComplementarios.TabIndex = 4;
             this.tbpComplementarios.Text = "Complementarios";
             // 
@@ -1458,7 +1458,7 @@
             this.dgvComplementarios.RowHeadersVisible = false;
             this.dgvComplementarios.RowHeadersWidth = 25;
             this.dgvComplementarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvComplementarios.Size = new System.Drawing.Size(591, 195);
+            this.dgvComplementarios.Size = new System.Drawing.Size(591, 201);
             this.dgvComplementarios.TabIndex = 0;
             this.dgvComplementarios.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvComplementarios_KeyDown);
             // 
@@ -1934,9 +1934,9 @@
             // ctlVentasPorMes
             // 
             this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ctlVentasPorMes.Location = new System.Drawing.Point(3, 466);
+            this.ctlVentasPorMes.Location = new System.Drawing.Point(3, 469);
             this.ctlVentasPorMes.Name = "ctlVentasPorMes";
-            this.ctlVentasPorMes.Size = new System.Drawing.Size(745, 92);
+            this.ctlVentasPorMes.Size = new System.Drawing.Size(745, 89);
             this.ctlVentasPorMes.TabIndex = 315;
             // 
             // btnActualizadorDeImagenes

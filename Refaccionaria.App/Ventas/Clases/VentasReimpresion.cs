@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -53,7 +54,9 @@ namespace Refaccionaria.App
             else
             {
                 // Se manda a re-imprimir la venta seleccionada
-                VentasProc.GenerarTicketDeVenta(oVenta.VentaID);
+                var oAdicionales = new Dictionary<string, object>();
+                oAdicionales.Add("Cambio", 0);
+                VentasProc.GenerarTicketDeVenta(oVenta.VentaID, null, oAdicionales);
             }
 
             // Se muestra una notifiación con el resultado
