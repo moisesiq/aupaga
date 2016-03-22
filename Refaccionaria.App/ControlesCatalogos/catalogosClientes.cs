@@ -179,7 +179,7 @@ namespace Refaccionaria.App
             {
                 //SplashScreen.Show(new Splash());
                 this.datosClientes = new BindingSource();
-                this.datosClientes.DataSource = General.GetListOf<ClientesDatosView>(c => c.Nombre.Length > 2).ToList();
+                this.datosClientes.DataSource = General.GetListOf<ClientesDatosView>(c => c.Nombre.Length > 2).OrderBy(c => c.Nombre).ToList();
             }
             catch (Exception ex)
             {
@@ -206,17 +206,12 @@ namespace Refaccionaria.App
             try
             {
                 this.cboCliente.DataSource = null;
-                var listaClientes = (List<ClientesDatosView>)datosClientes.DataSource;
-                listaClientes.Sort((x, y) => x.Nombre.CompareTo(y.Nombre));
+                // var listaClientes = (List<ClientesDatosView>)datosClientes.DataSource;
+                // listaClientes.Sort((x, y) => x.Nombre.CompareTo(y.Nombre));
                 this.cboCliente.DisplayMember = "Nombre";
-                this.cboCliente.DataSource = listaClientes;
+                this.cboCliente.DataSource = this.datosClientes.DataSource;
                 this.cboCliente.ValueMember = "ClienteID";
-                AutoCompleteStringCollection autCliente = new AutoCompleteStringCollection();
-                foreach (var cliente in listaClientes) autCliente.Add(cliente.Nombre);
-                this.cboCliente.AutoCompleteMode = AutoCompleteMode.Suggest;
-                this.cboCliente.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                this.cboCliente.AutoCompleteCustomSource = autCliente;
-                this.cboCliente.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
+                // this.cboCliente.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
                 this.LimpiarFormulario();
                 //SplashScreen.Close();
             }

@@ -2156,14 +2156,15 @@ namespace Refaccionaria.App
             decimal mSaldoAcum = mSaldoIni;
 
             // Se empiezan a llenar los datos
-            DateTime dFecha = DateTime.MinValue;
+            DateTime dFechaReg, dFecha = DateTime.MinValue;
             TreeGridNode oNodoDia = null;
             this.tgvCuentasPorPagar.Nodes.Clear();
             foreach (var oReg in oComprasA)
             {
-                if (oReg.Dia != dFecha)
+                dFechaReg = AdmonProc.SugerirVencimientoCompra(oReg.Dia, 0);
+                if (dFechaReg != dFecha)
                 {
-                    dFecha = oReg.Dia;
+                    dFecha = dFechaReg;
                     oNodoDia = this.tgvCuentasPorPagar.Nodes.Add(dFecha.ToString("dd-MMM").ToUpper(), 0, 0);
                 }
                 mSaldoAcum += oReg.Saldo.Valor();

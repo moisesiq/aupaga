@@ -15,33 +15,41 @@ namespace Refaccionaria.App
 {
     public partial class Maps : Form
     {
+        bool bEsDireccion;
+        string sDireccion;
+
         public string latlong;
         
        public Maps()
         {
             InitializeComponent();
         }
+
         public Maps(string address,bool esDireccion)//esDirección true: usa los campos de dirección del cliente, false: usa la latitud y longitud en la bd.
         {
             InitializeComponent();
-            
+            this.bEsDireccion = esDireccion;
+            this.sDireccion = address;
+        }
+
+        private void Maps_Shown(object sender, EventArgs e)
+        {
             MapPoint point;
             latlong = "";
-            if (esDireccion)
+            if (this.bEsDireccion)
             {
                 var locationservice = new GoogleLocationService();
-                point = locationservice.GetLatLongFromAddress(address);
+                point = locationservice.GetLatLongFromAddress(this.sDireccion);
                 if (point == null)
                     point = locationservice.GetLatLongFromAddress("Ciudad Guzman");
                 latlong = point.Latitude + "," + point.Longitude;
             }
             else
             {
-                latlong = address;
+                latlong = this.sDireccion;
             }
-            string uri = (@"file:///" + UtilLocal.RutaRecursos() + "maps.html");
+            string uri = (@"file:///" + UtilLocal.RutaRecursos("maps.html"));
             wkbMapa.Navigate(uri);
-
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -58,10 +66,11 @@ namespace Refaccionaria.App
             this.DialogResult = DialogResult.OK;            
             this.Close();
         }
-
-
+        
         private void wkbMapa_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            if (this.latlong == null) return;
+            
             string[] param = latlong.Split(',');
             WebKit.DOM.Element elm = wkbMapa.Document.GetElementById("lat");
             elm.SetAttribute("value", param[0]);
@@ -70,9 +79,6 @@ namespace Refaccionaria.App
             wkbMapa.Document.InvokeScriptMethod("setCoords",new object[]{"1","1"});
             
         }
-
-        
-        
 
     }
 }

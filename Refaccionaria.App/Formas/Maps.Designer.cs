@@ -30,34 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.gbMapa = new System.Windows.Forms.GroupBox();
             this.wkbMapa = new WebKit.WebKitBrowser();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.toolTipGuardar = new System.Windows.Forms.ToolTip(this.components);
-            this.gbMapa.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // gbMapa
-            // 
-            this.gbMapa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbMapa.BackColor = System.Drawing.Color.Transparent;
-            this.gbMapa.Controls.Add(this.wkbMapa);
-            this.gbMapa.Location = new System.Drawing.Point(12, 23);
-            this.gbMapa.Name = "gbMapa";
-            this.gbMapa.Size = new System.Drawing.Size(1208, 482);
-            this.gbMapa.TabIndex = 0;
-            this.gbMapa.TabStop = false;
             // 
             // wkbMapa
             // 
+            this.wkbMapa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.wkbMapa.BackColor = System.Drawing.Color.White;
-            this.wkbMapa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wkbMapa.Location = new System.Drawing.Point(3, 16);
+            this.wkbMapa.Location = new System.Drawing.Point(12, 12);
             this.wkbMapa.Name = "wkbMapa";
-            this.wkbMapa.Size = new System.Drawing.Size(1202, 463);
+            this.wkbMapa.Size = new System.Drawing.Size(1208, 499);
             this.wkbMapa.TabIndex = 0;
             this.wkbMapa.Url = null;
             this.wkbMapa.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wkbMapa_DocumentCompleted);
@@ -97,15 +84,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.ClientSize = new System.Drawing.Size(1232, 552);
+            this.Controls.Add(this.wkbMapa);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.gbMapa);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Maps";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Google Maps";
-            this.gbMapa.ResumeLayout(false);
+            this.Shown += new System.EventHandler(this.Maps_Shown);
             this.ResumeLayout(false);
 
         }
@@ -113,7 +100,6 @@
         #endregion
 
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.GroupBox gbMapa;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.ToolTip toolTipGuardar;

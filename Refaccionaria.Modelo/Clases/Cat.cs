@@ -503,5 +503,10 @@ namespace Refaccionaria.Modelo
         {
             public const int ActivoFijo = 2;
         }
+
+        public class TiposDeCliente
+        {
+            public const int Particular = 3;
+        }
     }
 }

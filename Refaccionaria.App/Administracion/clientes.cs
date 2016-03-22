@@ -43,7 +43,7 @@ namespace Refaccionaria.App
             }
         }
         //
-                
+
         public clientes()
         {
             InitializeComponent();
@@ -75,11 +75,6 @@ namespace Refaccionaria.App
             // Para el grid de los vehículos
             this.dgvVehiculos.Inicializar();
             this.dgvVehiculos.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.MarcaID.CargarDatos("MarcaID", "NombreMarca", General.GetListOf<Marca>(c => c.Estatus).OrderBy(o => o.NombreMarca).ToList());
-            this.ModeloID.CargarDatos("ModeloID", "NombreModelo", General.GetListOf<Modelo.Modelo>(c => c.Estatus).OrderBy(o => o.NombreModelo).ToList());
-            this.Anio.CargarDatos("Anio", "Anio", General.GetListOf<MotorAnio>(c => c.Estatus).Select(c => new { Anio = c.Anio }).Distinct().ToList());
-            this.MotorID.CargarDatos("MotorID", "NombreMotor", General.GetListOf<Motor>(c => c.Estatus).OrderBy(o => o.NombreMotor).ToList());
-            this.TipoID.CargarDatos("VehiculoTipoID", "Tipo", General.GetListOf<VehiculoTipo>().OrderBy(o => o.Tipo).ToList());
         }
 
         private void tabClientes_SelectedIndexChanged(object sender, EventArgs e)
@@ -528,7 +523,8 @@ namespace Refaccionaria.App
             //Validar permiso exportar catalogo clientes
             //if (LogIn.VerPermiso("Administracion.Clientes.ExportarListado", false))
 
-            tabControl.Show();
+            // No sé para qué estaba esta línea, se quitó. Moi 2016-03-15
+            // tabControl.Show();
 
             if(!UtilDatos.ValidarPermiso("Administracion.Clientes.ExportarListado"))
                 this.btnExportar.Visible = false;
@@ -610,7 +606,8 @@ namespace Refaccionaria.App
             this.dgvDatos.DataSource = null;
             this.dgvDetalle.DataSource = null;
 
-
+            this.LlenarUbicacionPredeterminada();
+            this.cboTipoCliente.SelectedValue = Cat.TiposDeCliente.Particular;
         }
 
         public void ActualizarListados(object o, DoWorkEventArgs e)
@@ -633,6 +630,13 @@ namespace Refaccionaria.App
                 var bancos = General.GetListOf<Banco>().ToList();
                 bancos.Insert(0, new Banco() { BancoID = 0, NombreBanco = "" });
                 this.bancos.DataSource = bancos;
+
+                // Se llenan los combos del grid de vehículos
+                this.MarcaID.CargarDatos("MarcaID", "NombreMarca", General.GetListOf<Marca>(c => c.Estatus).OrderBy(c => c.NombreMarca).ToList());
+                this.ModeloID.CargarDatos("ModeloID", "NombreModelo", General.GetListOf<Modelo.Modelo>(c => c.Estatus).OrderBy(c => c.NombreModelo).ToList());
+                this.Anio.CargarDatos("Anio", "Anio", General.GetListOf<MotorAnio>(c => c.Estatus).Select(c => new { Anio = c.Anio }).Distinct().ToList());
+                this.MotorID.CargarDatos("MotorID", "NombreMotor", General.GetListOf<Motor>(c => c.Estatus).OrderBy(c => c.NombreMotor).ToList());
+                this.TipoID.CargarDatos("VehiculoTipoID", "Tipo", General.GetListOf<VehiculoTipo>().OrderBy(c => c.Tipo).ToList());
             }
             catch (Exception ex)
             {
@@ -648,12 +652,7 @@ namespace Refaccionaria.App
                 this.cboBanco.DisplayMember = "NombreBanco";
                 this.cboBanco.DataSource = listaBancos;
                 this.cboBanco.ValueMember = "BancoID";
-                AutoCompleteStringCollection autBanco = new AutoCompleteStringCollection();
-                foreach (var banco in listaBancos) autBanco.Add(banco.NombreBanco);
-                this.cboBanco.AutoCompleteMode = AutoCompleteMode.Suggest;
-                this.cboBanco.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                this.cboBanco.AutoCompleteCustomSource = autBanco;
-                this.cboBanco.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
+                // this.cboBanco.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
 
                 this.cboMetodoPago.DisplayMember = "NombreTipoFormaPago";
                 this.cboMetodoPago.DataSource = (List<TipoFormaPago>)tipoPagos.DataSource;
@@ -663,12 +662,7 @@ namespace Refaccionaria.App
                 this.cboEstado.DisplayMember = "NombreEstado";
                 this.cboEstado.DataSource = listaEstados;
                 this.cboEstado.ValueMember = "EstadoID";
-                AutoCompleteStringCollection autEstado = new AutoCompleteStringCollection();
-                foreach (var estado in listaEstados) autEstado.Add(estado.NombreEstado);
-                this.cboEstado.AutoCompleteMode = AutoCompleteMode.Suggest;
-                this.cboEstado.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                this.cboEstado.AutoCompleteCustomSource = autEstado;
-                this.cboEstado.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
+                // this.cboEstado.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
 
                 var listadoTipoCliente = (List<TipoCliente>)tipoClientes.DataSource;
                 this.cboTipoCliente.DisplayMember = "NombreTipoCliente";
@@ -680,16 +674,17 @@ namespace Refaccionaria.App
                 this.cboClienteComisionista.DisplayMember = "Nombre";
                 this.cboClienteComisionista.DataSource = listadoComisionistas;
                 this.cboClienteComisionista.ValueMember = "ClienteID";
-                AutoCompleteStringCollection autComisionista = new AutoCompleteStringCollection();
-                foreach (var cliente in listadoComisionistas) autComisionista.Add(cliente.Nombre);
-                this.cboClienteComisionista.AutoCompleteMode = AutoCompleteMode.Suggest;
-                this.cboClienteComisionista.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                this.cboClienteComisionista.AutoCompleteCustomSource = autComisionista;
-                this.cboClienteComisionista.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
+                // this.cboClienteComisionista.TextUpdate += new EventHandler(Helper.cboCharacterCasingUpper);
 
                 // Se quita esta línea porque si se queda, como es una llamada asíncrona, al cargar datos de un cliente y mostrar se alcanza a ejecutar este
                 // código y eso ocasionaba que se mostrará el formulario sin datos, cuando se abre para editar desde ventas. - Moi 2015/10/16
                 // this.LimpiarFormulario();
+
+                if (this.EsNuevo)
+                {
+                    this.LlenarUbicacionPredeterminada();
+                    this.cboTipoCliente.SelectedValue = Cat.TiposDeCliente.Particular;
+                }
             }
             catch (Exception ex)
             {
@@ -762,8 +757,7 @@ namespace Refaccionaria.App
                 if (clienteId <= 0)
                 {
                     EsNuevo = true;
-                    this.LimpiarFormulario();
-                    this.LlenarUbicacionPredeterminada();
+                    // this.LimpiarFormulario()
                     this.modificoCredito = false;
                     this.gpoDatosUsuarios.Enabled = false;
                     return;

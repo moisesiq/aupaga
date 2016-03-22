@@ -156,9 +156,14 @@ namespace Refaccionaria.App
             return (UtilLocal.RutaImagenes() + "Lineas\\");
         }
 
+        public static string RutaRecursos(string sArchivo)
+        {
+            return (UtilLocal.RutaAplicacion() + "Recursos\\" + sArchivo);
+        }
+
         public static string RutaRecursos()
         {
-            return (UtilLocal.RutaAplicacion() + "Recursos\\");
+            return UtilLocal.RutaRecursos("");
         }
 
         public static string RutaReportes(string sArchivo)

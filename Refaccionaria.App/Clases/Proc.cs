@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Linq;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -243,15 +244,23 @@ namespace Refaccionaria.App
             if (oUsuario.AlertaCalendarioClientes.Valor())
             {
                 DateTime dManiana = DateTime.Now.Date.AddDays(1);
-                var oAlertas = General.GetListOf<ClienteEventoCalendario>(c => c.Fecha < dManiana && !c.Revisado);
+                var oAlertas = General.GetListOf<ClientesEventosCalendarioView>(c => c.Fecha < dManiana && !c.Revisado).OrderBy(c => c.Fecha);
+
                 foreach (var oReg in oAlertas)
                 {
-                    if (oReg.Fecha < DateTime.Now)
+                    /* if (oReg.Fecha < DateTime.Now)
                         AdmonProc.MostrarRecordatorioClientes(oReg.ClienteEventoCalendarioID);
                     else
                         Program.oTimers.Add("AlertaPedido" + Program.oTimers.Count.ToString(), new System.Threading.Timer(new TimerCallback(AdmonProc.MostrarRecordatorioClientes)
                             , oReg.ClienteEventoCalendarioID, (int)(oReg.Fecha - DateTime.Now).TotalMilliseconds, Timeout.Infinite));
+                    */
+
+                    Eventos.Instance.AgregarEvento(oReg.ClienteEventoCalendarioID, oReg.Fecha, oReg.Cliente, oReg.Evento);
                 }
+
+                // Se muestra el formulario de eventos
+                if (oAlertas.Count() > 0)
+                    Eventos.Instance.Show();
             }
 
 

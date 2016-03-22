@@ -563,7 +563,8 @@ namespace Refaccionaria.App
 
         private void btnReporteDeFaltante_Click(object sender, EventArgs e)
         {
-            this.ReporteDeFaltante(this.ParteIDSel);
+            // this.ReporteDeFaltante(this.ParteIDSel);
+            this.VOp.Activar(VentasOpciones.eOpcion.Cotizaciones);
         }
 
         private void btnReimpresion_Click(object sender, EventArgs e)

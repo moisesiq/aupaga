@@ -636,6 +636,12 @@
     <Compile Include="Formas\DetalleBusquedaDeClientes.Designer.cs">
       <DependentUpon>DetalleBusquedaDeClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formas\Eventos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formas\Eventos.Designer.cs">
+      <DependentUpon>Eventos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formas\Gen\Navegador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -726,6 +732,13 @@
     </Compile>
     <Compile Include="Validaciones\ValCortes.Designer.cs">
       <DependentUpon>ValCortes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\Clases\VentasCotizaciones.cs" />
+    <Compile Include="Ventas\CotizacionesVentas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ventas\CotizacionesVentas.Designer.cs">
+      <DependentUpon>CotizacionesVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventas\Formas\Duck.cs">
       <SubType>Form</SubType>
@@ -1767,6 +1780,9 @@
     <EmbeddedResource Include="Formas\DetalleBusquedaDeClientes.resx">
       <DependentUpon>DetalleBusquedaDeClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formas\Eventos.resx">
+      <DependentUpon>Eventos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formas\Gen\Navegador.resx">
       <DependentUpon>Navegador.cs</DependentUpon>
     </EmbeddedResource>
@@ -1808,6 +1824,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Validaciones\ValCortes.resx">
       <DependentUpon>ValCortes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\CotizacionesVentas.resx">
+      <DependentUpon>CotizacionesVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\Formas\Duck.resx">
       <DependentUpon>Duck.cs</DependentUpon>
@@ -2108,6 +2127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AG.ico" />
+    <None Include="Resources\ok.png" />
     <None Include="Resources\Info.ico" />
     <None Include="Resources\Hotmail.png" />
     <None Include="Resources\HotmailClic.png" />

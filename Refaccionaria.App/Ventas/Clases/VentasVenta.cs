@@ -186,16 +186,41 @@ namespace Refaccionaria.App
 
         public void GenerarCotizacion()
         {
+            // Se guarda la cotización en la base de datos
+            var dAhora = DateTime.Now;
+            var oCot = new VentaCotizacion()
+            {
+                Fecha = dAhora,
+                SucursalID = GlobalClass.SucursalID,
+                ClienteID = this.oControlVentas.Cliente.ClienteID,
+                VendedorID = this.oControlVentas.ctlCobro.VendodorID
+            };
+            Guardar.Generico<VentaCotizacion>(oCot);
+            // Detalle
+            var oVentaDetalle = this.oControlVentas.GenerarVentaDetalle();
+            foreach (var oReg in oVentaDetalle)
+            {
+                var oParteCot = new VentaCotizacionDetalle()
+                {
+                    VentaCotizacionID = oCot.VentaCotizacionID,
+                    ParteID = oReg.ParteID,
+                    Cantidad = oReg.Cantidad,
+                    PrecioUnitario = oReg.PrecioUnitario,
+                    Iva = oReg.Iva
+                };
+                Guardar.Generico<VentaCotizacionDetalle>(oParteCot);
+            }
+
+            // Para generar el ticket de la cotización
             var oVendedor = General.GetEntity<Usuario>(q => q.UsuarioID == this.oControlVentas.ctlCobro.VendodorID && q.Estatus);
             var oVentaV = new VentasView()
             {
-                Fecha = DateTime.Now,
+                Fecha = dAhora,
                 Cliente = this.oControlVentas.Cliente.Nombre,
                 Vendedor = oVendedor.NombrePersona,
                 Total = this.oControlVentas.Total,
                 SucursalID = GlobalClass.SucursalID
             };
-            var oVentaDetalle = this.oControlVentas.GenerarVentaDetalle();
             List<VentasDetalleView> oVentaDetalleV = new List<VentasDetalleView>();
             Parte oParte;
             foreach (var oDet in oVentaDetalle)
@@ -210,7 +235,6 @@ namespace Refaccionaria.App
                     Iva = oDet.Iva
                 });
             }
-
             VentasProc.GenerarTicketDeCotizacion(oVentaV, oVentaDetalleV);
         }
     }
