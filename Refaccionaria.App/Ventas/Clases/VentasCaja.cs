@@ -1509,7 +1509,7 @@ namespace Refaccionaria.App
                 if (oResFactura.Error)
                 {
                     UtilLocal.MensajeAdvertencia("Hubo un error al generar la factura.\n\n" + oResFactura.Mensaje);
-                    return false;
+                    // return false;
                 }
                 iFacturaID = oResFactura.Respuesta;
             }

@@ -2445,7 +2445,7 @@
             this.dgvKardexMovs.AllowUserToResizeRows = false;
             this.dgvKardexMovs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgvKardexMovs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.dgvKardexMovs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.dgvKardexMovs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvKardexMovs.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -2577,7 +2577,7 @@
             // 
             this.ctlExistencias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ctlExistencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
-            this.ctlExistencias.Location = new System.Drawing.Point(6, 338);
+            this.ctlExistencias.Location = new System.Drawing.Point(6, 455);
             this.ctlExistencias.Name = "ctlExistencias";
             this.ctlExistencias.Size = new System.Drawing.Size(252, 100);
             this.ctlExistencias.TabIndex = 22;
