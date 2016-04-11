@@ -1029,7 +1029,25 @@ namespace Refaccionaria.App
                             };
                             General.SaveOrUpdate<MovimientoInventarioDetalle>(detalleTraspaso, detalleTraspaso);
 
+                            // Se actualiza la existencia y el kardex
+                            var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
+                            AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.SalidaTraspaso, traspaso.MovimientoInventarioID.ToString()
+                                , iAutorizoID, this.cboProveedor.Text, this.cboUbicacionOrigen.Text, this.cboUbicacionDestino.Text, (cantidad * -1)
+                                , oPartePrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, traspaso.MovimientoInventarioID);
+
+                            var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == sucursalId && c.Estatus);
+                            var historial = new MovimientoInventarioHistorial()
+                            {
+                                MovmientoInventarioID = traspaso.MovimientoInventarioID,
+                                ParteID = parteId,
+                                ExistenciaInicial = Helper.ConvertirDecimal(oExistencia.Existencia + cantidad),
+                                ExistenciaFinal = Helper.ConvertirDecimal(oExistencia.Existencia),
+                                SucursalID = sucursalId
+                            };
+                            Guardar.Generico<MovimientoInventarioHistorial>(historial);
+
                             //Descontar la existencia actual de la sucursal origen
+                            /*
                             var oParte = General.GetEntity<Parte>(c => c.ParteID == parteId && c.Estatus);
                             if (!oParte.EsServicio.Valor())
                             {
@@ -1077,6 +1095,7 @@ namespace Refaccionaria.App
                                 RelacionTabla = Cat.Tablas.MovimientoInventario,
                                 RelacionID = traspaso.MovimientoInventarioID
                             });
+                            */
 
                             // Se suma el importe de cada parte, para crear la póliza
                             mCostoTotal += (oPartePrecio.Costo.Valor() * cantidad);
@@ -1595,7 +1614,25 @@ namespace Refaccionaria.App
                         General.SaveOrUpdate<MovimientoInventarioTraspasoContingencia>(contingencia, contingencia);
                     }
 
+                    // Se actualiza la existencia y el kardex
+                    int iSucursalID = GlobalClass.SucursalID;
+                    var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
+                    AdmonProc.AfectarExistenciaYKardex(parteId, iSucursalID, Cat.OperacionesKardex.EntradaTraspaso, movimientoId.ToString(), iAutorizoID
+                        , this.cboProveedor.Text, sOrigen, sDestino, recibido, oPartePrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoId);
+
+                    var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == iSucursalID && c.Estatus);
+                    var historial = new MovimientoInventarioHistorial()
+                    {
+                        MovmientoInventarioID = movimientoId,
+                        ParteID = parteId,
+                        ExistenciaInicial = Helper.ConvertirDecimal(oExistencia.Existencia - recibido),
+                        ExistenciaFinal = Helper.ConvertirDecimal(oExistencia.Existencia),
+                        SucursalID = GlobalClass.SucursalID
+                    };
+                    Guardar.Generico<MovimientoInventarioHistorial>(historial);
+
                     //Aumentar la existencia actual de la sucursal destino
+                    /*
                     var oParte = General.GetEntity<Parte>(c => c.ParteID == parteId && c.Estatus);
                     if (!oParte.EsServicio.Valor())
                     {
@@ -1645,6 +1682,7 @@ namespace Refaccionaria.App
                         RelacionTabla = Cat.Tablas.MovimientoInventario,
                         RelacionID = movimientoId
                     });
+                    */
 
                     // Se suma el importe de cada parte, para crear la póliza
                     mCostoTotal += (oPartePrecio.Costo.Valor() * recibido);

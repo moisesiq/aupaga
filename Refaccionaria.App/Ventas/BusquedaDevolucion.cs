@@ -19,6 +19,12 @@ namespace Refaccionaria.App
             this.pnlDatosDePago.Left += 183;
         }
 
+        #region [ Propiedades ]
+
+        public bool CancelarTodaLaFactura { get { return this.chkCancelarFactura.Checked; } }
+
+        #endregion
+
         #region [ Eventos ]
 
         private void BusquedaDevoluciones_Load(object sender, System.EventArgs e)
@@ -170,6 +176,10 @@ namespace Refaccionaria.App
 
             // Para mostrar el detalle de la venta
             this.oDevolucion.ctlDetalle.LlenarDetalle(iVentaID);
+
+            // Se verifica si es factura múltiple, para mostrar el check de cancelar todas
+            this.chkCancelarFactura.Visible = VentasProc.EsFacturaMultiple(iVentaID);
+
         }
 
         #endregion

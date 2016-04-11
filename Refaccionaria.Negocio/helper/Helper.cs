@@ -284,6 +284,12 @@ namespace Refaccionaria.Negocio
                 oFila.Visible = bCoincide;
             }
         }
+
+        public static void QuitarFiltro(this DataGridView oGrid)
+        {
+            foreach (DataGridViewRow oFila in oGrid.Rows)
+                oFila.Visible = true;
+        }
         
         public static void EncontrarContiene(this DataGridView oGrid, string sBusqueda, params string[] oColumnas)
         {

@@ -378,7 +378,7 @@ namespace Refaccionaria.App
                     }
                     var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == GlobalClass.SucursalID && c.Estatus);
                     AdmonProc.AfectarExistenciaYKardex(iCascoParteID, GlobalClass.SucursalID, Cat.OperacionesKardex.SalidaInventario, oMov.CajaEgresoID.ToString()
-                        , iRealizoUsuarioID, "----", "Gasto por Casco", oSucursal.NombreSucursal, 1, oMov.Importe, Cat.Tablas.CajaEgreso, oMov.CajaEgresoID);
+                        , iRealizoUsuarioID, "----", "Gasto por Casco", oSucursal.NombreSucursal, -1, oMov.Importe, Cat.Tablas.CajaEgreso, oMov.CajaEgresoID);
                 }
                 // Se genera la autorización
                 VentasProc.GenerarAutorizacion(Cat.AutorizacionesProcesos.GastosBorrar, Cat.Tablas.CajaEgreso, oMov.CajaEgresoID, iAutorizoID);
@@ -803,12 +803,6 @@ namespace Refaccionaria.App
                 }
             }
             
-            // Si es un ticket a crédito, se genera una póliza especial de ajuste (AfeConta)
-            if (oVenta.ACredito && !oPorCobrar.ctlCobro.Facturar)
-            {
-                ContaProc.CrearPolizaTemporalTicketCredito(iVentaID, oPorCobrar.ImporteVenta);
-            }
-
             // Se genera el folio de la venta, si no se hizo factura o hubo un error al generar la factura
             if (bGenerarFolio) {
                 // Se genera el folio de venta
@@ -834,6 +828,12 @@ namespace Refaccionaria.App
             // Se obtiene la vista de la venta actualizada, por el cambio de folio y otros cambios que pudo haber tenido
             var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oVenta.VentaID);
 
+            // Si es un ticket a crédito, se genera una póliza especial de ajuste (AfeConta)
+            if (oVenta.ACredito && !oPorCobrar.ctlCobro.Facturar)
+            {
+                ContaProc.CrearPolizaTemporalTicketCredito(iVentaID, oPorCobrar.ImporteVenta);
+            }
+
             // Se verifica si se crearon movimientos bancarios (por pagos de banco), en cuyo caso, se completan con el folio de venta asignado
             var oPagoDet = General.GetListOf<VentaPagoDetalle>(c => c.VentaPagoID == iVentaPagoID && c.Estatus);
             foreach (var oReg in oPagoDet)
@@ -852,26 +852,20 @@ namespace Refaccionaria.App
             // if (oPagoDet.Any(c => c.FormaDePagoID == Cat.FormasDePago.Vale))
             //     ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaContadoVale, iVentaID, oVentaV.Folio, oCliente.Nombre);
 
-            // Se agrega al Kardex
+            // Se modifica el registro de kardex correspondiente, para completar los datos faltantes
             var oVentaDet = General.GetListOf<VentaDetalle>(c => c.VentaID == iVentaID && c.Estatus);
+            var oPartesKardex = General.GetListOf<ParteKardex>(c => c.OperacionID == Cat.OperacionesKardex.Venta && c.RelacionTabla == Cat.Tablas.Venta
+                && c.RelacionID == iVentaID);
             foreach (var oReg in oVentaDet)
             {
-                AdmonProc.RegistrarKardex(new ParteKardex()
-                {
-                    ParteID = oReg.ParteID,
-                    OperacionID = Cat.OperacionesKardex.Venta,
-                    SucursalID = oVentaV.SucursalID,
-                    Folio = oVentaV.Folio,
-                    Fecha = DateTime.Now,
-                    RealizoUsuarioID = oVenta.RealizoUsuarioID,
-                    Entidad = oVentaV.Cliente,
-                    Origen = oVentaV.Sucursal,
-                    Destino = oVentaV.Cliente,
-                    Cantidad = oReg.Cantidad,
-                    Importe = (oReg.PrecioUnitario + oReg.Iva),
-                    RelacionTabla = Cat.Tablas.Venta,
-                    RelacionID = iVentaID
-                });
+                var oKardex = oPartesKardex.FirstOrDefault(c => c.ParteID == oReg.ParteID);
+                if (oKardex == null) continue;
+                oKardex.Folio = oVentaV.Folio;
+                oKardex.Entidad = oVentaV.Cliente;
+                oKardex.Origen = oVentaV.Sucursal;
+                oKardex.Destino = oVentaV.Cliente;
+                oKardex.Importe = (oReg.PrecioUnitario + oReg.Iva);
+                Guardar.Generico<ParteKardex>(oKardex);
             }
 
             // Si se pagó con vale, se verifica si se crearon nuevos vales por importes restantes. Y se mandan a imprimir
@@ -1420,14 +1414,30 @@ namespace Refaccionaria.App
                 }
             }
 
+            // Se obtiene lo pendinete por restar de facturado días anteriores de otras sucursales cuando no se abrió alguna tienda o no se hizo, si hubiera
+            decimal mFacturadoDiasAnt = 0;
+            var oPendientePorFacturar = General.GetListOf<FacturaGlobalPendientePorDescontar>(c => c.SucursalID == GlobalClass.SucursalID && c.Fecha < dHoy);
+            foreach (var oReg in oPendientePorFacturar)
+            {
+                mFacturadoDiasAnt += oReg.Importe;
+                // Se resta el costo, proporcional a lo abonado en días anteriores
+                var oVentaDet = General.GetListOf<VentaDetalle>(c => c.VentaID == oReg.VentaID && c.Estatus);
+                decimal mCosto = oVentaDet.Sum(c => c.Costo * c.Cantidad);
+                decimal mPrecio = oVentaDet.Sum(c => (c.PrecioUnitario + c.Iva) * c.Cantidad);
+                if (mPrecio == 0)
+                    continue;  // No estoy seguro por qué el precio podría ser cero, sería bueno analizar con más calma :D
+                mCosto = ((oReg.Importe / mPrecio) * mCosto);
+                mCostoTotal -= mCosto;
+            }
+
             // Se obtiene el total de los tickets de días anteriores facturados el día de hoy
             var oDatos = General.GetListOf<VentasFacturasDetalleAvanzadoView>(c => EntityFunctions.TruncateTime(c.Fecha) == dHoy
                 && c.FechaVenta < dHoy && c.EstatusGenericoID == Cat.EstatusGenericos.Completada)
                 .Select(c => new { c.VentaID }).Distinct();
-            decimal mFacturadoDiasAnt = 0;
             foreach (var oReg in oDatos)
             {
                 // Se verifica si el pago es de la sucursal actual, si no, no se cuenta
+                // No se pude dar que se abone en múltiples sucursales pues hay un candado que donde se hace el primer abono de la venta, sólo ahí se puede abonar.
                 if (General.Exists<VentasPagosView>(c => c.VentaID == oReg.VentaID && c.Importe > 0 && c.SucursalID != GlobalClass.SucursalID))
                     continue;
                 
@@ -1497,6 +1507,25 @@ namespace Refaccionaria.App
             new MensajeTexto("Factura Global del Día", oTexto.ToString()).ShowDialog(Principal.Instance);
             */
 
+            // Se calcula el importe de la reserva, con múltiplos de 50
+            decimal mReserva = 0;
+            decimal mPreFacturar = mFacturar;
+            if (mOficial != mFacturar)
+            {
+                mReserva = (mOficial - mFacturar);
+                if (mReserva > 0)
+                {
+                    int iMultipo = (int)Math.Floor(mReserva / 50);
+                    decimal mDiferencia = (mReserva - (50 * iMultipo));
+                    mFacturar += mDiferencia;
+                    mReserva -= mDiferencia;
+                }
+                else
+                {
+                    mReserva = 0;
+                }
+            }
+
             // Se manda hacer la factura
             int iFacturaID = 0;
             if (mFacturar > 0)
@@ -1509,7 +1538,7 @@ namespace Refaccionaria.App
                 if (oResFactura.Error)
                 {
                     UtilLocal.MensajeAdvertencia("Hubo un error al generar la factura.\n\n" + oResFactura.Mensaje);
-                    // return false;
+                    return false;
                 }
                 iFacturaID = oResFactura.Respuesta;
             }
@@ -1521,7 +1550,6 @@ namespace Refaccionaria.App
                     mRestante *= -1;
             }
             
-
             // Se guardan los datos de la factura global
             var oFacturaGlobal = new CajaFacturaGlobal()
             {
@@ -1539,11 +1567,17 @@ namespace Refaccionaria.App
                 CostoMinimo = mCostoMinimo,
                 Restante = mRestante,
                 SaldoRestante = (oFacturaGlobalAnt.SaldoRestante + mRestante),
+                PreFacturar = mPreFacturar,
                 Facturado = mFacturar,
                 FacturadoVales = mFacturarVales,
                 VentaFacturaID = (iFacturaID > 0 ? (int?)iFacturaID : null)
             };
             Guardar.Generico<CajaFacturaGlobal>(oFacturaGlobal);
+
+            // Se borran los datos de importes pendientes por descontar, por tickets convertidos a factura de otras sucursales
+            oPendientePorFacturar = General.GetListOf<FacturaGlobalPendientePorDescontar>(c => c.SucursalID == GlobalClass.SucursalID);
+            foreach (var oReg in oPendientePorFacturar)
+                Guardar.Eliminar<FacturaGlobalPendientePorDescontar>(oReg);
 
             // Se crea la Poliza correspondiente (AfeConta)
             if (iFacturaID > 0)
@@ -1554,8 +1588,6 @@ namespace Refaccionaria.App
                 // Se hace una póliza sencilla por la diferencia de, si hay
                 if (mOficial != mFacturar)
                 {
-                    decimal mReserva = (mOficial - mFacturar);
-                    mReserva = (mReserva > 0 ? mReserva : 0);
                     var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == GlobalClass.SucursalID && c.Estatus);
                     ContaProc.CrearPoliza(Cat.ContaTiposDePoliza.Diario, "RESERVA NÓMINA", Cat.ContaCuentasAuxiliares.ReservaNomina, Cat.ContaCuentasAuxiliares.Resguardo
                         , mReserva, oSucursal.NombreSucursal, Cat.Tablas.CajaFacturaGlobal, oFacturaGlobal.CajaFacturaGlobalID);

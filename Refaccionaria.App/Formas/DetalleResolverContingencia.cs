@@ -123,6 +123,11 @@ namespace Refaccionaria.App
                     Contingencia.FechaModificacion = DateTime.Now;
                     General.SaveOrUpdate<MovimientoInventarioTraspasoContingencia>(Contingencia, Contingencia);
 
+                    int iSucursalID = ContingenciaCompleta.SucursalOrigenID.Valor();
+                    string sOrigen = UtilDatos.NombreDeSucursal(ContingenciaCompleta.SucursalOrigenID.Valor());
+                    string sDestino = UtilDatos.NombreDeSucursal(ContingenciaCompleta.SucursalDestinoID.Valor());
+                    var oPrecio = General.GetEntity<PartePrecio>(c => c.ParteID == ContingenciaCompleta.ParteID && c.Estatus);
+
                     switch (Helper.ConvertirEntero(cboTipoOperacion.SelectedValue))
                     {
                         case 2:
@@ -174,17 +179,23 @@ namespace Refaccionaria.App
                             General.SaveOrUpdate<MovimientoInventarioDetalle>(detalleMovimiento, detalleMovimiento);
 
                             //Actualizar ParteExistencia
-                            var sucursalId = ContingenciaCompleta.SucursalOrigenID;
-                            /* var existencia = General.GetEntity<ParteExistencia>(p => p.ParteID == ContingenciaCompleta.ParteID && p.SucursalID == sucursalId);
+                            /* var sucursalId = ContingenciaCompleta.SucursalOrigenID;
+                            var existencia = General.GetEntity<ParteExistencia>(p => p.ParteID == ContingenciaCompleta.ParteID && p.SucursalID == sucursalId);
                             if (existencia != null)
                             {
                                 existencia.Existencia += Helper.ConvertirDecimal(ContingenciaCompleta.Diferencia);
                                 Guardar.Generico<ParteExistencia>(existencia);//dmod
                             }
                             */
-                            AdmonProc.AgregarExistencia(ContingenciaCompleta.ParteID, sucursalId.Valor(), ContingenciaCompleta.Diferencia.Valor()
-                                , Cat.Tablas.MovimientoInventario, movimientoEntradaI.MovimientoInventarioID);
-
+                            // AdmonProc.AgregarExistencia(ContingenciaCompleta.ParteID, sucursalId.Valor(), ContingenciaCompleta.Diferencia.Valor()
+                            //     , Cat.Tablas.MovimientoInventario, movimientoEntradaI.MovimientoInventarioID);
+                            
+                            // Se modifica la existencia y el kardex
+                            AdmonProc.AfectarExistenciaYKardex(ContingenciaCompleta.ParteID, iSucursalID, Cat.OperacionesKardex.EntradaTraspaso
+                                , Contingencia.MovimientoInventarioID.ToString(), Contingencia.UsuarioSolucionoID.Valor(), "Conflicto Resuelto Entrada"
+                                , sOrigen, sDestino, ContingenciaCompleta.Diferencia.Valor()
+                                , oPrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoEntradaI.MovimientoInventarioID);
+                            
                             #endregion
 
                             break;
@@ -238,6 +249,18 @@ namespace Refaccionaria.App
                             General.SaveOrUpdate<MovimientoInventarioDetalle>(detalleMovimientoS, detalleMovimientoS);
 
                             //No se descuenta por que ya se habia descontado en el traspaso anterior
+                            // Ahora sí se generan dos registros en kardex, uno de entrada y luego uno de salida, para que al final quede igual
+                            // Se hace así para mantener un registro de la operación
+                            // Se hace primero la entrada
+                            AdmonProc.AfectarExistenciaYKardex(ContingenciaCompleta.ParteID, iSucursalID, Cat.OperacionesKardex.EntradaTraspaso
+                                , Contingencia.MovimientoInventarioID.ToString(), Contingencia.UsuarioSolucionoID.Valor(), "Conflicto Resuelto Salida"
+                                , sOrigen, sDestino, ContingenciaCompleta.Diferencia.Valor()
+                                , oPrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoSalida.MovimientoInventarioID);
+                            // Luego la salida
+                            AdmonProc.AfectarExistenciaYKardex(ContingenciaCompleta.ParteID, iSucursalID, Cat.OperacionesKardex.SalidaTraspaso
+                                , Contingencia.MovimientoInventarioID.ToString(), Contingencia.UsuarioSolucionoID.Valor(), "Conflicto Resuelto Salida"
+                                , sOrigen, sDestino, (ContingenciaCompleta.Diferencia.Valor() * -1)
+                                , oPrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoSalida.MovimientoInventarioID);
                             
                             #endregion
 

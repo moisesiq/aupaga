@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="03/06/2015 12:06:20" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Copies="2">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="03/31/2016 19:40:39" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
   <Dictionary>
     <BusinessObjectDataSource Name="ControlDeCasco" ReferenceName="ControlDeCasco" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.CascosRegistrosView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="CascoRegistroID" DataType="System.Int32"/>
@@ -20,6 +20,7 @@
       <Column Name="FolioDeCobro" DataType="System.String"/>
       <Column Name="CascoImporte" DataType="System.String"/>
       <Column Name="DescripcionRecibido" DataType="System.String"/>
+      <Column Name="CobroVentaID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
     </BusinessObjectDataSource>
     <Parameter Name="Leyenda1" DataType="System.String"/>
     <Parameter Name="Leyenda2" DataType="System.String"/>
@@ -57,7 +58,7 @@
       <TextObject Name="Text28" Top="88.05" Width="274.05" Height="32.84" Text="Cascos" HorzAlign="Center" VertAlign="Center" Font="Arial Narrow, 26pt, style=Bold" TextFill.Color="DimGray"/>
       <TextObject Name="Text29" Top="167.65" Width="274.05" Height="63.32" Border.Lines="Top, Bottom" Border.Style="Double" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
     </PageHeaderBand>
-    <DataBand Name="Data4" Top="384.62" Width="302.4" Height="22.23"/>
+    <DataBand Name="Data4" Top="384.62" Width="302.4" Height="22.23" DataSource=""/>
     <PageFooterBand Name="PageFooter1" Top="409.68" Width="302.4" Height="75.6"/>
   </ReportPage>
 </Report>

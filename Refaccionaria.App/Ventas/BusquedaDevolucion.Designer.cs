@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rdbDevolucionTransferencia = new System.Windows.Forms.RadioButton();
             this.rdbDevolucionTarjeta = new System.Windows.Forms.RadioButton();
             this.rdbDevolucionCheque = new System.Windows.Forms.RadioButton();
             this.rdbDevolucionEfectivo = new System.Windows.Forms.RadioButton();
@@ -48,11 +49,12 @@
             this.tbpFacturasPorCancelar = new System.Windows.Forms.TabPage();
             this.btnCancelarFacPen = new System.Windows.Forms.Button();
             this.dgvFacturasPorCancelar = new System.Windows.Forms.DataGridView();
-            this.rdbDevolucionTransferencia = new System.Windows.Forms.RadioButton();
+            this.chkCancelarFactura = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ctlError)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.gpbMotivo.SuspendLayout();
             this.tabCancelaciones.SuspendLayout();
+            this.tbpCancelaciones.SuspendLayout();
             this.tbpFacturasPorCancelar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFacturasPorCancelar)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +74,17 @@
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Acción a Tomar";
+            // 
+            // rdbDevolucionTransferencia
+            // 
+            this.rdbDevolucionTransferencia.AutoSize = true;
+            this.rdbDevolucionTransferencia.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rdbDevolucionTransferencia.Location = new System.Drawing.Point(227, 14);
+            this.rdbDevolucionTransferencia.Name = "rdbDevolucionTransferencia";
+            this.rdbDevolucionTransferencia.Size = new System.Drawing.Size(81, 17);
+            this.rdbDevolucionTransferencia.TabIndex = 4;
+            this.rdbDevolucionTransferencia.Text = "Dev. Trans.";
+            this.rdbDevolucionTransferencia.UseVisualStyleBackColor = true;
             // 
             // rdbDevolucionTarjeta
             // 
@@ -206,9 +219,9 @@
             // tabCancelaciones
             // 
             this.tabCancelaciones.Alignment = System.Windows.Forms.TabAlignment.Right;
-            this.tabCancelaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabCancelaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabCancelaciones.Controls.Add(this.tbpCancelaciones);
             this.tabCancelaciones.Controls.Add(this.tbpFacturasPorCancelar);
             this.tabCancelaciones.Location = new System.Drawing.Point(0, 0);
@@ -222,6 +235,7 @@
             // tbpCancelaciones
             // 
             this.tbpCancelaciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.tbpCancelaciones.Controls.Add(this.chkCancelarFactura);
             this.tbpCancelaciones.Location = new System.Drawing.Point(4, 4);
             this.tbpCancelaciones.Name = "tbpCancelaciones";
             this.tbpCancelaciones.Padding = new System.Windows.Forms.Padding(3);
@@ -257,45 +271,46 @@
             // 
             this.dgvFacturasPorCancelar.AllowUserToAddRows = false;
             this.dgvFacturasPorCancelar.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SkyBlue;
-            this.dgvFacturasPorCancelar.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvFacturasPorCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.SkyBlue;
+            this.dgvFacturasPorCancelar.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvFacturasPorCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvFacturasPorCancelar.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvFacturasPorCancelar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvFacturasPorCancelar.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             this.dgvFacturasPorCancelar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFacturasPorCancelar.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFacturasPorCancelar.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvFacturasPorCancelar.GridColor = System.Drawing.Color.SkyBlue;
             this.dgvFacturasPorCancelar.Location = new System.Drawing.Point(6, 6);
             this.dgvFacturasPorCancelar.Name = "dgvFacturasPorCancelar";
             this.dgvFacturasPorCancelar.ReadOnly = true;
             this.dgvFacturasPorCancelar.RowHeadersWidth = 24;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            this.dgvFacturasPorCancelar.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            this.dgvFacturasPorCancelar.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvFacturasPorCancelar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFacturasPorCancelar.Size = new System.Drawing.Size(761, 325);
             this.dgvFacturasPorCancelar.StandardTab = true;
             this.dgvFacturasPorCancelar.TabIndex = 9;
             // 
-            // rdbDevolucionTransferencia
+            // chkCancelarFactura
             // 
-            this.rdbDevolucionTransferencia.AutoSize = true;
-            this.rdbDevolucionTransferencia.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.rdbDevolucionTransferencia.Location = new System.Drawing.Point(227, 14);
-            this.rdbDevolucionTransferencia.Name = "rdbDevolucionTransferencia";
-            this.rdbDevolucionTransferencia.Size = new System.Drawing.Size(81, 17);
-            this.rdbDevolucionTransferencia.TabIndex = 4;
-            this.rdbDevolucionTransferencia.Text = "Dev. Trans.";
-            this.rdbDevolucionTransferencia.UseVisualStyleBackColor = true;
+            this.chkCancelarFactura.AutoSize = true;
+            this.chkCancelarFactura.ForeColor = System.Drawing.Color.Black;
+            this.chkCancelarFactura.Location = new System.Drawing.Point(147, 30);
+            this.chkCancelarFactura.Name = "chkCancelarFactura";
+            this.chkCancelarFactura.Size = new System.Drawing.Size(139, 17);
+            this.chkCancelarFactura.TabIndex = 0;
+            this.chkCancelarFactura.Text = "Cancelar toda la factura";
+            this.chkCancelarFactura.UseVisualStyleBackColor = true;
+            this.chkCancelarFactura.Visible = false;
             // 
             // BusquedaDevolucion
             // 
@@ -326,6 +341,8 @@
             this.gpbMotivo.ResumeLayout(false);
             this.gpbMotivo.PerformLayout();
             this.tabCancelaciones.ResumeLayout(false);
+            this.tbpCancelaciones.ResumeLayout(false);
+            this.tbpCancelaciones.PerformLayout();
             this.tbpFacturasPorCancelar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFacturasPorCancelar)).EndInit();
             this.ResumeLayout(false);
@@ -353,5 +370,6 @@
         protected System.Windows.Forms.DataGridView dgvFacturasPorCancelar;
         private System.Windows.Forms.Button btnCancelarFacPen;
         private System.Windows.Forms.RadioButton rdbDevolucionTransferencia;
+        private System.Windows.Forms.CheckBox chkCancelarFactura;
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -67,10 +69,18 @@ namespace Refaccionaria.App
 
             // Se muestra la ventana de "Cargando.."
             Cargando.Mostrar();
+            
+            // 
+            DateTime dAhora = DateTime.Now;
+
+            // Se obtienen los datos de los productos, por si se cambió la descripción
+            List<ProductoVenta> oPartes = null;
+            if (this.ctlFacturar.MostrarTodasLasPartes)
+                oPartes = this.ctlDetalle.ObtenerListaVenta();
 
             // Se procede a generar la factura
             var oVentasAF = this.ctlFacturar.GenerarListaDeVentas();
-            var ResFe = VentasProc.GenerarFacturaElectronica(oVentasAF, iAFClienteID, this.ctlFacturar.Observacion);
+            var ResFe = VentasProc.GenerarFacturaElectronica(oVentasAF, iAFClienteID, oPartes, null, this.ctlFacturar.Observacion, null);
             if (ResFe.Error)
             {
                 UtilLocal.MensajeAdvertencia(ResFe.Mensaje);
@@ -96,8 +106,9 @@ namespace Refaccionaria.App
                     {
                         var oPagos = General.GetListOf<VentaPago>(c => c.VentaID == iVentaID && c.Estatus);
                         foreach (var oReg in oPagos)
-                            ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoVentaCredito, oReg.VentaPagoID, (oFactura.Serie + oFactura.Folio), oVentaV.Cliente
-                                , oReg.SucursalID);
+                            ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoVentaCredito, oReg.VentaPagoID
+                                , ((oFactura.Serie + oFactura.Folio) + " / " + UtilDatos.VentaPagoFormasDePago(oReg.VentaPagoID))
+                                , oVentaV.Cliente, oReg.SucursalID);
                     }
 
                     // Se borra la póliza temporal creada por ser ticket a crédito
@@ -107,6 +118,29 @@ namespace Refaccionaria.App
                 {
                     ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.VentaContadoFacturaConvertida, iVentaID
                         , (oFactura.Serie + oFactura.Folio), oVentaV.Cliente, oVentaV.SucursalID);
+                }
+            }
+
+            // Se guarda el dato de pendiente por descontar en la factura global, si aplica
+            // Se guardan datos cuando se están facturando tickets abonados en otras sucursales
+            foreach (int iVentaID in oVentasAF)
+            {
+                // Se obtienen los abonos de otras sucursales
+                var oAbonos = General.GetListOf<VentasPagosView>(c => c.VentaID == iVentaID && c.SucursalID != GlobalClass.SucursalID)
+                    .GroupBy(c => new { c.VentaID, c.SucursalID }).Select(c => new { c.Key.VentaID, c.Key.SucursalID, Abonado = c.Sum(s => s.Importe) });
+                if (oAbonos != null && oAbonos.Count() > 0)
+                {
+                    foreach (var oReg in oAbonos)
+                    {
+                        var oPendiente = new FacturaGlobalPendientePorDescontar()
+                        {
+                            VentaID = oReg.VentaID,
+                            Fecha = dAhora,
+                            SucursalID = oReg.SucursalID,
+                            Importe = oReg.Abonado
+                        };
+                        Guardar.Generico<FacturaGlobalPendientePorDescontar>(oPendiente);
+                    }
                 }
             }
 

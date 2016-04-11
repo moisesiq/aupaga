@@ -520,7 +520,8 @@ namespace Refaccionaria.App
 
         private void CargarEquivalentes(int parteId)
         {
-            var equivalentes = General.GetListOf<PartesEquivalentesView>(pe => pe.ParteID == parteId);
+            var equivalentes = General.GetListOf<PartesEquivalentesView>(pe => pe.ParteID == parteId)
+                .OrderByDescending(c => c.Matriz).ThenByDescending(c => c.Suc02).ThenByDescending(c => c.Suc03).ThenBy(c => c.CostoConDescuento);
             this.dgvEquivalente.Rows.Clear();   
             foreach (var equivalente in equivalentes)
             {

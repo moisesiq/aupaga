@@ -172,7 +172,7 @@
     <value>Num Parte</value>
   </data>
   <data name="NumeroDeParte.Width" type="System.Int32, mscorlib">
-    <value>82</value>
+    <value>76</value>
   </data>
   <metadata name="Descripcion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1178,6 +1178,210 @@
   </data>
   <data name="&gt;&gt;tbpSinMaxMin.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="btnImanImprimir.Location" type="System.Drawing.Point, System.Drawing">
+    <value>495, 3</value>
+  </data>
+  <data name="btnImanImprimir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnImanImprimir.TabIndex" type="System.Int32, mscorlib">
+    <value>168</value>
+  </data>
+  <data name="btnImanImprimir.Text" xml:space="preserve">
+    <value>&amp;Imprimir</value>
+  </data>
+  <data name="&gt;&gt;btnImanImprimir.Name" xml:space="preserve">
+    <value>btnImanImprimir</value>
+  </data>
+  <data name="&gt;&gt;btnImanImprimir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnImanImprimir.Parent" xml:space="preserve">
+    <value>tbpIman</value>
+  </data>
+  <data name="&gt;&gt;btnImanImprimir.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtImanDescripcion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 3</value>
+  </data>
+  <data name="txtImanDescripcion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>320, 20</value>
+  </data>
+  <data name="txtImanDescripcion.TabIndex" type="System.Int32, mscorlib">
+    <value>167</value>
+  </data>
+  <data name="&gt;&gt;txtImanDescripcion.Name" xml:space="preserve">
+    <value>txtImanDescripcion</value>
+  </data>
+  <data name="&gt;&gt;txtImanDescripcion.Type" xml:space="preserve">
+    <value>Refaccionaria.Negocio.TextoMod, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtImanDescripcion.Parent" xml:space="preserve">
+    <value>tbpIman</value>
+  </data>
+  <data name="&gt;&gt;txtImanDescripcion.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtImanNumeroDeParte.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="txtImanNumeroDeParte.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 20</value>
+  </data>
+  <data name="txtImanNumeroDeParte.TabIndex" type="System.Int32, mscorlib">
+    <value>166</value>
+  </data>
+  <data name="&gt;&gt;txtImanNumeroDeParte.Name" xml:space="preserve">
+    <value>txtImanNumeroDeParte</value>
+  </data>
+  <data name="&gt;&gt;txtImanNumeroDeParte.Type" xml:space="preserve">
+    <value>Refaccionaria.Negocio.TextoMod, Refaccionaria.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtImanNumeroDeParte.Parent" xml:space="preserve">
+    <value>tbpIman</value>
+  </data>
+  <data name="&gt;&gt;txtImanNumeroDeParte.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="dgvIman.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="ima_ParteID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_ParteID.HeaderText" xml:space="preserve">
+    <value>ParteID</value>
+  </data>
+  <data name="ima_ParteID.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="ima_Sel.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_Sel.HeaderText" xml:space="preserve">
+    <value>Sel.</value>
+  </data>
+  <data name="ima_Sel.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <metadata name="ima_NumeroDeParte.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_NumeroDeParte.HeaderText" xml:space="preserve">
+    <value>Número de Parte</value>
+  </data>
+  <data name="ima_NumeroDeParte.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <metadata name="ima_Descripcion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_Descripcion.HeaderText" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="ima_Descripcion.Width" type="System.Int32, mscorlib">
+    <value>340</value>
+  </data>
+  <metadata name="ima_Proveedor.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_Proveedor.HeaderText" xml:space="preserve">
+    <value>Proveedor</value>
+  </data>
+  <data name="ima_Proveedor.Width" type="System.Int32, mscorlib">
+    <value>140</value>
+  </data>
+  <metadata name="ima_Marca.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_Marca.HeaderText" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="ima_Marca.Width" type="System.Int32, mscorlib">
+    <value>140</value>
+  </data>
+  <metadata name="ima_Linea.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_Linea.HeaderText" xml:space="preserve">
+    <value>Línea</value>
+  </data>
+  <data name="ima_Linea.Width" type="System.Int32, mscorlib">
+    <value>140</value>
+  </data>
+  <metadata name="ima_Maximo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_Maximo.HeaderText" xml:space="preserve">
+    <value>Máximo</value>
+  </data>
+  <data name="ima_Maximo.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <metadata name="ima_Minimo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_Minimo.HeaderText" xml:space="preserve">
+    <value>Mínimo</value>
+  </data>
+  <data name="ima_Minimo.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <metadata name="ima_Modificado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ima_Modificado.HeaderText" xml:space="preserve">
+    <value>Modificado</value>
+  </data>
+  <data name="ima_Modificado.Width" type="System.Int32, mscorlib">
+    <value>136</value>
+  </data>
+  <data name="dgvIman.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 29</value>
+  </data>
+  <data name="dgvIman.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1477, 243</value>
+  </data>
+  <data name="dgvIman.TabIndex" type="System.Int32, mscorlib">
+    <value>165</value>
+  </data>
+  <data name="&gt;&gt;dgvIman.Name" xml:space="preserve">
+    <value>dgvIman</value>
+  </data>
+  <data name="&gt;&gt;dgvIman.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvIman.Parent" xml:space="preserve">
+    <value>tbpIman</value>
+  </data>
+  <data name="&gt;&gt;dgvIman.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbpIman.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
+  </data>
+  <data name="tbpIman.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1483, 275</value>
+  </data>
+  <data name="tbpIman.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tbpIman.Text" xml:space="preserve">
+    <value>Imán</value>
+  </data>
+  <data name="&gt;&gt;tbpIman.Name" xml:space="preserve">
+    <value>tbpIman</value>
+  </data>
+  <data name="&gt;&gt;tbpIman.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpIman.Parent" xml:space="preserve">
+    <value>tabMaxMin</value>
+  </data>
+  <data name="&gt;&gt;tbpIman.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="tabMaxMin.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 34</value>
@@ -3211,7 +3415,7 @@
     <value>ctlVentasMes</value>
   </data>
   <data name="&gt;&gt;ctlVentasMes.Type" xml:space="preserve">
-    <value>Refaccionaria.App.GridVentasMes, THEOS, Version=1.16.22.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Refaccionaria.App.GridVentasMes, THEOS, Version=1.16.25.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ctlVentasMes.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3227,6 +3431,144 @@
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1497, 454</value>
+  </data>
+  <data name="&gt;&gt;ParteID.Name" xml:space="preserve">
+    <value>ParteID</value>
+  </data>
+  <data name="&gt;&gt;ParteID.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colProcesar.Name" xml:space="preserve">
+    <value>colProcesar</value>
+  </data>
+  <data name="&gt;&gt;colProcesar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NumeroDeParte.Name" xml:space="preserve">
+    <value>NumeroDeParte</value>
+  </data>
+  <data name="&gt;&gt;NumeroDeParte.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Descripcion.Name" xml:space="preserve">
+    <value>Descripcion</value>
+  </data>
+  <data name="&gt;&gt;Descripcion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Proveedor.Name" xml:space="preserve">
+    <value>Proveedor</value>
+  </data>
+  <data name="&gt;&gt;Proveedor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Linea.Name" xml:space="preserve">
+    <value>Linea</value>
+  </data>
+  <data name="&gt;&gt;Linea.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Marca.Name" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="&gt;&gt;Marca.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Existen.Name" xml:space="preserve">
+    <value>Existen</value>
+  </data>
+  <data name="&gt;&gt;Existen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column9.Name" xml:space="preserve">
+    <value>Column9</value>
+  </data>
+  <data name="&gt;&gt;Column9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column10.Name" xml:space="preserve">
+    <value>Column10</value>
+  </data>
+  <data name="&gt;&gt;Column10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column11.Name" xml:space="preserve">
+    <value>Column11</value>
+  </data>
+  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column22.Name" xml:space="preserve">
+    <value>Column22</value>
+  </data>
+  <data name="&gt;&gt;Column22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column23.Name" xml:space="preserve">
+    <value>Column23</value>
+  </data>
+  <data name="&gt;&gt;Column23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column12.Name" xml:space="preserve">
+    <value>Column12</value>
+  </data>
+  <data name="&gt;&gt;Column12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CantidadTotal.Name" xml:space="preserve">
+    <value>CantidadTotal</value>
+  </data>
+  <data name="&gt;&gt;CantidadTotal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Utilidad.Name" xml:space="preserve">
+    <value>Utilidad</value>
+  </data>
+  <data name="&gt;&gt;Utilidad.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Fijo.Name" xml:space="preserve">
+    <value>Fijo</value>
+  </data>
+  <data name="&gt;&gt;Fijo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MinimoActual.Name" xml:space="preserve">
+    <value>MinimoActual</value>
+  </data>
+  <data name="&gt;&gt;MinimoActual.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MaximoActual.Name" xml:space="preserve">
+    <value>MaximoActual</value>
+  </data>
+  <data name="&gt;&gt;MaximoActual.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Minimo.Name" xml:space="preserve">
+    <value>Minimo</value>
+  </data>
+  <data name="&gt;&gt;Minimo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Maximo.Name" xml:space="preserve">
+    <value>Maximo</value>
+  </data>
+  <data name="&gt;&gt;Maximo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Condiciones.Name" xml:space="preserve">
+    <value>Condiciones</value>
+  </data>
+  <data name="&gt;&gt;Condiciones.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FechaCalculo.Name" xml:space="preserve">
+    <value>FechaCalculo</value>
+  </data>
+  <data name="&gt;&gt;FechaCalculo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ParteMaxMinReglaID.Name" xml:space="preserve">
     <value>ParteMaxMinReglaID</value>
@@ -3414,142 +3756,64 @@
   <data name="&gt;&gt;Ventas.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ParteID.Name" xml:space="preserve">
-    <value>ParteID</value>
+  <data name="&gt;&gt;ima_ParteID.Name" xml:space="preserve">
+    <value>ima_ParteID</value>
   </data>
-  <data name="&gt;&gt;ParteID.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_ParteID.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colProcesar.Name" xml:space="preserve">
-    <value>colProcesar</value>
+  <data name="&gt;&gt;ima_Sel.Name" xml:space="preserve">
+    <value>ima_Sel</value>
   </data>
-  <data name="&gt;&gt;colProcesar.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_Sel.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NumeroDeParte.Name" xml:space="preserve">
-    <value>NumeroDeParte</value>
+  <data name="&gt;&gt;ima_NumeroDeParte.Name" xml:space="preserve">
+    <value>ima_NumeroDeParte</value>
   </data>
-  <data name="&gt;&gt;NumeroDeParte.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_NumeroDeParte.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Descripcion.Name" xml:space="preserve">
-    <value>Descripcion</value>
+  <data name="&gt;&gt;ima_Descripcion.Name" xml:space="preserve">
+    <value>ima_Descripcion</value>
   </data>
-  <data name="&gt;&gt;Descripcion.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_Descripcion.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Proveedor.Name" xml:space="preserve">
-    <value>Proveedor</value>
+  <data name="&gt;&gt;ima_Proveedor.Name" xml:space="preserve">
+    <value>ima_Proveedor</value>
   </data>
-  <data name="&gt;&gt;Proveedor.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_Proveedor.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Linea.Name" xml:space="preserve">
-    <value>Linea</value>
+  <data name="&gt;&gt;ima_Marca.Name" xml:space="preserve">
+    <value>ima_Marca</value>
   </data>
-  <data name="&gt;&gt;Linea.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_Marca.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Marca.Name" xml:space="preserve">
-    <value>Marca</value>
+  <data name="&gt;&gt;ima_Linea.Name" xml:space="preserve">
+    <value>ima_Linea</value>
   </data>
-  <data name="&gt;&gt;Marca.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_Linea.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Existen.Name" xml:space="preserve">
-    <value>Existen</value>
+  <data name="&gt;&gt;ima_Maximo.Name" xml:space="preserve">
+    <value>ima_Maximo</value>
   </data>
-  <data name="&gt;&gt;Existen.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_Maximo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column9.Name" xml:space="preserve">
-    <value>Column9</value>
+  <data name="&gt;&gt;ima_Minimo.Name" xml:space="preserve">
+    <value>ima_Minimo</value>
   </data>
-  <data name="&gt;&gt;Column9.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_Minimo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column10.Name" xml:space="preserve">
-    <value>Column10</value>
+  <data name="&gt;&gt;ima_Modificado.Name" xml:space="preserve">
+    <value>ima_Modificado</value>
   </data>
-  <data name="&gt;&gt;Column10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column11.Name" xml:space="preserve">
-    <value>Column11</value>
-  </data>
-  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column22.Name" xml:space="preserve">
-    <value>Column22</value>
-  </data>
-  <data name="&gt;&gt;Column22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column23.Name" xml:space="preserve">
-    <value>Column23</value>
-  </data>
-  <data name="&gt;&gt;Column23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column12.Name" xml:space="preserve">
-    <value>Column12</value>
-  </data>
-  <data name="&gt;&gt;Column12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CantidadTotal.Name" xml:space="preserve">
-    <value>CantidadTotal</value>
-  </data>
-  <data name="&gt;&gt;CantidadTotal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Utilidad.Name" xml:space="preserve">
-    <value>Utilidad</value>
-  </data>
-  <data name="&gt;&gt;Utilidad.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Fijo.Name" xml:space="preserve">
-    <value>Fijo</value>
-  </data>
-  <data name="&gt;&gt;Fijo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MinimoActual.Name" xml:space="preserve">
-    <value>MinimoActual</value>
-  </data>
-  <data name="&gt;&gt;MinimoActual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MaximoActual.Name" xml:space="preserve">
-    <value>MaximoActual</value>
-  </data>
-  <data name="&gt;&gt;MaximoActual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Minimo.Name" xml:space="preserve">
-    <value>Minimo</value>
-  </data>
-  <data name="&gt;&gt;Minimo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Maximo.Name" xml:space="preserve">
-    <value>Maximo</value>
-  </data>
-  <data name="&gt;&gt;Maximo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Condiciones.Name" xml:space="preserve">
-    <value>Condiciones</value>
-  </data>
-  <data name="&gt;&gt;Condiciones.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FechaCalculo.Name" xml:space="preserve">
-    <value>FechaCalculo</value>
-  </data>
-  <data name="&gt;&gt;FechaCalculo.Type" xml:space="preserve">
+  <data name="&gt;&gt;ima_Modificado.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

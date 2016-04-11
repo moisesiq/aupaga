@@ -284,6 +284,23 @@ namespace Refaccionaria.App
             }
             // Se borra la venta en sí
             Guardar.Eliminar<Venta>(oVenta, true);
+
+            // Se borran los datos del kardex
+            var oPartesKardex = General.GetListOf<ParteKardex>(c => c.OperacionID == Cat.OperacionesKardex.Venta && c.RelacionTabla == Cat.Tablas.Venta
+                && c.RelacionID == iVentaID);
+            foreach (var oReg in oVentaDet)
+            {
+                var oKardex = oPartesKardex.FirstOrDefault(c => c.ParteID == oReg.ParteID);
+                if (oKardex == null) continue;
+                Guardar.Eliminar<ParteKardex>(oKardex);
+                // Se verifica si hubo algún otro movimiento en kardex de la misma parte, para hacer el reajuste
+                var oDespues = General.GetListOf<ParteKardex>(c => c.ParteKardexID > oKardex.ParteKardexID && c.ParteID == oKardex.ParteID);
+                foreach (var oRegD in oDespues)
+                {
+                    oRegD.ExistenciaNueva += (oKardex.Cantidad * -1);
+                    Guardar.Generico<ParteKardex>(oRegD);
+                }
+            }
         }
 
         #region [ 9500 ]
@@ -432,6 +449,15 @@ namespace Refaccionaria.App
             };
             Guardar.Generico<CajaIngreso>(oCajaIngreso);
             return oCajaIngreso;
+        }
+
+        public static bool EsFacturaMultiple(int iVentaID)
+        {
+            var oVentaFaDe = General.GetEntity<VentaFacturaDetalle>(c => c.VentaID == iVentaID && c.Estatus);
+            if (oVentaFaDe == null)
+                return false;
+            else
+                return General.Exists<VentasFacturasView>(c => c.VentaFacturaID == oVentaFaDe.VentaFacturaID && c.Ventas > 1);
         }
 
         #region [ Clientes ]
@@ -1677,13 +1703,13 @@ namespace Refaccionaria.App
             string sCfdiTimbrado = ResXml.Respuesta;
 
             // Se guarda la información
-            var oVentaFactura = General.GetEntity<VentasFacturasDetalleAvanzadoView>(q => q.VentaID == iVentaID);
+            // var oVentaFactura = General.GetEntity<VentasFacturasDetalleAvanzadoView>(q => q.VentaID == iVentaID);
             var oFolioFactura = VentasProc.GenerarFolioDeFacturaDevolucion();
             oFacturaE.Serie = oFolioFactura["Serie"];
             oFacturaE.Folio = oFolioFactura["Folio"];
             var oFacturaDevolucion = new VentaFacturaDevolucion()
             {
-                VentaFacturaID = oVentaFactura.VentaFacturaID.Valor(),
+                VentaFacturaID = oVentaFactV.VentaFacturaID.Valor(),
                 Fecha = dAhora,
                 FolioFiscal = (oFacturaE.Timbre == null ? "" : oFacturaE.Timbre.FolioFiscal),
                 Serie = oFacturaE.Serie,
@@ -1703,8 +1729,10 @@ namespace Refaccionaria.App
             oFacturaDevDet.Add(oRegFacDevDet);
             Guardar.FacturaDevolucion(oFacturaDevolucion, oFacturaDevDet);
 
+            // Quizá sea buena opción marcar (de alguna forma) el registro de VentaFacturaDetalle como cancelada, si es que fue una cancelación de la Venta
+
             //
-            oFacturaE.Adicionales.Add("FacturaOrigen", (oVentaFactura.Serie + oVentaFactura.Folio));
+            oFacturaE.Adicionales.Add("FacturaOrigen", (oVentaFactV.Serie + oVentaFactV.Folio));
 
             // Se manda guardar la factura, en pdf y xml
             if (bFacturada)

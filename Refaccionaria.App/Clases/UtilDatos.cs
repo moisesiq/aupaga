@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
+using System.Data;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -190,6 +191,24 @@ namespace Refaccionaria.App
             return oLista.First();
         }
 
+        public static bool AgregarParametroListaEntero(ref Dictionary<string, object> oParams, string sParam, ComboMultiSel oCombo)
+        {
+            if (oCombo.ValoresSeleccionados.Count > 0)
+            {
+                var oDt = Helper.ListaEntityADataTable(oCombo.ElementosSeleccionados);
+                oDt.Columns.Remove("Cadena");
+                oParams.Add(sParam, oDt);
+                return true;
+            }
+            return false;
+        }
+
+        public static string NombreDeSucursal(int iSucursalID)
+        {
+            var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == iSucursalID && c.Estatus);
+            return (oSucursal == null ? "" : oSucursal.NombreSucursal);
+        }
+
         #region [ Almacenamiento temporal en base de datos ]
 
         public static void AgregarTemporal(string sProceso, int iId, string sValor)
@@ -357,6 +376,6 @@ namespace Refaccionaria.App
         }
         
         #endregion
-        
+
     }
 }

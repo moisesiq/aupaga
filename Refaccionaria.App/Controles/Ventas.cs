@@ -262,6 +262,7 @@ namespace Refaccionaria.App
         {
             var ctlClientes = new clientes();
             ctlClientes.ModificaCredito = false;
+            ctlClientes.VieneDeVentas = true;
             ContenedorControl frmCliente = new ContenedorControl("Agregar Cliente", ctlClientes);            
             ctlClientes.CargarCliente(0);
             var btnGuardar = (ctlClientes.Controls[0].Controls[0].Controls["btnGuardar"] as Button);

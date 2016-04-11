@@ -2236,7 +2236,25 @@ namespace Refaccionaria.App
         {
             this.MostrarDiferenciasExistencia();
         }
-                
+
+        private void txtKardexBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            if (this.txtKardexBusqueda.TextLength > 3)
+                this.dgvKardex.FiltrarContiene(this.txtKardexBusqueda.Text, "Kardex_Fecha", "Kardex_Folio", "Kardex_Tipo", "Kardex_Operacion", "Kardex_Entidad"
+                    , "Kardex_Usuario", "Kardex_Origen", "Kardex_Destino", "Kardex_Importe", "Kardex_Cantidad", "Kardex_ExistenciaNueva");
+            else
+                this.dgvKardex.QuitarFiltro();
+        }
+
+        private void dgvKardex_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (this.dgvKardex.VerSeleccionNueva())
+            {
+                int iKardexID = Helper.ConvertirEntero(this.dgvKardex.CurrentRow.Cells["Kardex_ParteKardexID"].Value);
+                this.LlenarObservacionKardex(iKardexID);
+            }
+        }
+
         #endregion
 
         #region [ Métodos ]
@@ -2267,7 +2285,7 @@ namespace Refaccionaria.App
             this.dgvKardex.Rows.Clear();
             foreach (var oReg in oKardex)
             {
-                this.dgvKardex.Rows.Add(oReg.Fecha, oReg.Folio, oReg.Tipo, oReg.Operacion, oReg.Entidad, oReg.Usuario, oReg.Origen, oReg.Destino
+                this.dgvKardex.Rows.Add(oReg.ParteKardexID, oReg.Fecha, oReg.Folio, oReg.Tipo, oReg.Operacion, oReg.Entidad, oReg.Usuario, oReg.Origen, oReg.Destino
                     , oReg.Importe, oReg.Cantidad, oReg.ExistenciaNueva);
             }
             // Se llena el grid de existencias
@@ -2301,6 +2319,17 @@ namespace Refaccionaria.App
             UtilLocal.AbrirEnExcel(oGrid);
 
             Cargando.Cerrar();
+        }
+
+        private void LlenarObservacionKardex(int iKardexID)
+        {
+            var oKardex = General.GetEntity<ParteKardex>(c => c.ParteKardexID == iKardexID);
+            switch (oKardex.RelacionTabla)
+            {
+                case Cat.Tablas.MovimientoInventario:
+
+                    break;
+            }
         }
 
         #endregion

@@ -28,6 +28,8 @@ namespace Refaccionaria.App
 
         public string Observacion { get { return this.txtObservacion.Text; } }
 
+        public bool MostrarTodasLasPartes { get { return (this.dgvAFacturar.CurrentRow.Index == 0); } }
+
         #endregion
 
         #region [ Eventos ]
@@ -198,8 +200,9 @@ namespace Refaccionaria.App
                         NombreDeParte = oProducto.NombreParte,
                         Cantidad = oProducto.Cantidad,
                         PrecioUnitario = oProducto.PrecioUnitario,
-                        Iva = oProducto.Iva
+                        Iva = oProducto.Iva,
                         // PrecioConIva = (oProducto.PrecioUnitario + oProducto.Iva)
+                        UnidadDeMedida = oProducto.Medida
                     });
                 }
             }

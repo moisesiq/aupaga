@@ -163,7 +163,8 @@ namespace Refaccionaria.App
             {
                 var oPagoV = General.GetEntity<VentasPagosView>(c => c.VentaPagoID == iPagoID);
                 if (oPagoV.Facturada)
-                    ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoVentaCredito, iPagoID, oPagoV.Folio, oPagoV.Cliente);
+                    ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoVentaCredito, iPagoID
+                        , (oPagoV.Folio + " / " + UtilDatos.VentaPagoFormasDePago(iPagoID)), oPagoV.Cliente);
 
                 // Si es tiecket a crédito, se hace ajuste de pólizas
                 if (!oPagoV.Facturada)

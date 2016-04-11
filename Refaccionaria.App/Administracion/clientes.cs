@@ -747,6 +747,8 @@ namespace Refaccionaria.App
             //Si viene de Ventas Ocultar  los contenedores de ""abajo"" excepto Personal y vehículos
             if (VieneDeVentas)
             {
+                this.tabClientes.TabPages.Remove(this.tabClientesCalendario);
+                this.tabClientes.TabPages.Remove(this.tabControl);
                 this.gpoCredito.Visible = false;
                 this.gpoMetodoPago.Visible = false;
                 this.gpoCaracteristicas.Visible = false;

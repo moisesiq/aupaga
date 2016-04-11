@@ -228,7 +228,10 @@ namespace Refaccionaria.App
                 Guardar.Generico<VentaDetalle>(ParteDetalle);
 
                 // Se afecta la existencia
-                AdmonProc.AgregarExistencia(ParteDetalle.ParteID, oVenta.SucursalID, (ParteDetalle.Cantidad * -1), Cat.Tablas.Venta, oVenta.VentaID);
+                // AdmonProc.AgregarExistencia(ParteDetalle.ParteID, oVenta.SucursalID, (ParteDetalle.Cantidad * -1), Cat.Tablas.Venta, oVenta.VentaID);
+                // Se meten datos a kardex que se actualizarán posteriormente, al cobrar la venta
+                AdmonProc.AfectarExistenciaYKardex(ParteDetalle.ParteID, oVenta.SucursalID, Cat.OperacionesKardex.Venta, null, oVenta.RealizoUsuarioID, "", "", ""
+                    , (ParteDetalle.Cantidad * -1), 0, Cat.Tablas.Venta, oVenta.VentaID);
             }
 
             // Se generar datos relevantes al cliente comisionista, si hubiera
@@ -356,7 +359,11 @@ namespace Refaccionaria.App
                 Guardar.Generico<VentaDetalle>(oParteVenta, false);
 
                 // Se afecta la existencia
-                AdmonProc.AgregarExistencia(ParteDetalle.ParteID, GlobalClass.SucursalID, ParteDetalle.Cantidad, Cat.Tablas.VentaDevolucion, oDevolucion.VentaDevolucionID);
+                // AdmonProc.AgregarExistencia(ParteDetalle.ParteID, GlobalClass.SucursalID, ParteDetalle.Cantidad, Cat.Tablas.VentaDevolucion, oDevolucion.VentaDevolucionID);
+                var oDevV = General.GetEntity<VentasDevolucionesView>(c => c.VentaDevolucionID == oDevolucion.VentaDevolucionID);
+                AdmonProc.AfectarExistenciaYKardex(ParteDetalle.ParteID, GlobalClass.SucursalID, Cat.OperacionesKardex.VentaCancelada, oDevV.FolioDeVenta
+                    , oDevV.RealizoUsuarioID, oDevV.Cliente, oDevV.ClienteID.ToString(), oDevV.Sucursal, ParteDetalle.Cantidad
+                    , (ParteDetalle.PrecioUnitario + ParteDetalle.Iva), Cat.Tablas.VentaDevolucion, oDevolucion.VentaDevolucionID);
             }
 
             // Si es cancelación, se cambia el estatus de la venta

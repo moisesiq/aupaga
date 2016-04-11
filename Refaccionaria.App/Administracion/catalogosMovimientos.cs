@@ -687,7 +687,25 @@ namespace Refaccionaria.App
                             };
                             General.SaveOrUpdate<MovimientoInventarioDetalle>(detalleMovimiento, detalleMovimiento);
 
-                            //Actualizar ParteExistencia
+                            // Se actualiza la existencia y el kardex
+                            int iFilaDif = this.dgvDiferencia.EncontrarIndiceDeValor("ParteID", parteId);
+                            AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.EntradaCompra, movimientoEntrada.FolioFactura, iAutorizoID
+                                , this.cboProveedor.Text, proveedorId.ToString(), this.cboUbicacionDestino.Text, cantidad
+                                , Helper.ConvertirDecimal(this.dgvDiferencia["Costo Nuevo", iFilaDif].Value)
+                                , Cat.Tablas.MovimientoInventario, movimientoEntrada.MovimientoInventarioID);
+
+                            var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == sucursalId && c.Estatus);
+                            var historial = new MovimientoInventarioHistorial()
+                            {
+                                MovmientoInventarioID = movimientoEntrada.MovimientoInventarioID,
+                                ParteID = parteId,
+                                ExistenciaInicial = Helper.ConvertirDecimal(oExistencia.Existencia - cantidad),
+                                ExistenciaFinal = Helper.ConvertirDecimal(oExistencia.Existencia),
+                                SucursalID = Helper.ConvertirEntero(this.cboUbicacionDestino.SelectedValue)
+                            };
+                            Guardar.Generico<MovimientoInventarioHistorial>(historial);
+
+                            /*
                             var oParte = General.GetEntity<Parte>(c => c.ParteID == parteId && c.Estatus);
                             if (!oParte.EsServicio.Valor())
                             {
@@ -710,6 +728,25 @@ namespace Refaccionaria.App
                                     Guardar.Generico<MovimientoInventarioHistorial>(historial);
                                 }
                             }
+                            // Se agrega al Kardex
+                            int iFilaDif = this.dgvDiferencia.EncontrarIndiceDeValor("ParteID", parteId);
+                            AdmonProc.RegistrarKardex(new ParteKardex()
+                            {
+                                ParteID = parteId,
+                                OperacionID = Cat.OperacionesKardex.EntradaCompra,
+                                SucursalID = sucursalId,
+                                Folio = movimientoEntrada.FolioFactura,
+                                Fecha = DateTime.Now,
+                                RealizoUsuarioID = iAutorizoID,
+                                Entidad = this.cboProveedor.Text,
+                                Origen = proveedorId.ToString(),
+                                Destino = this.cboUbicacionDestino.Text,
+                                Cantidad = cantidad,
+                                Importe = Helper.ConvertirDecimal(this.dgvDiferencia["Costo Nuevo", iFilaDif].Value),
+                                RelacionTabla = Cat.Tablas.MovimientoInventario,
+                                RelacionID = movimientoEntrada.MovimientoInventarioID
+                            });
+                            */
 
                             // Se afectan los datos del pedido, si aplica
                             // if (this.dgvDetalleCaptura.Tag != null)
@@ -734,25 +771,6 @@ namespace Refaccionaria.App
                                 }
                             }
 
-                            // Se agrega al Kardex
-                            int iFilaDif = this.dgvDiferencia.EncontrarIndiceDeValor("ParteID", parteId);
-                            AdmonProc.RegistrarKardex(new ParteKardex()
-                            {
-                                ParteID = parteId,
-                                OperacionID = Cat.OperacionesKardex.EntradaCompra,
-                                SucursalID = sucursalId,
-                                Folio = movimientoEntrada.FolioFactura,
-                                Fecha = DateTime.Now,
-                                RealizoUsuarioID = iAutorizoID,
-                                Entidad = this.cboProveedor.Text,
-                                Origen = proveedorId.ToString(),
-                                Destino = this.cboUbicacionDestino.Text,
-                                Cantidad = cantidad,
-                                Importe = Helper.ConvertirDecimal(this.dgvDiferencia["Costo Nuevo", iFilaDif].Value),
-                                RelacionTabla = Cat.Tablas.MovimientoInventario,
-                                RelacionID = movimientoEntrada.MovimientoInventarioID
-                            });
-                            
                         }
 
                         // Para limpiar el estatus de relación con un pedido
@@ -1004,7 +1022,26 @@ namespace Refaccionaria.App
                             };
                             General.SaveOrUpdate<MovimientoInventarioDetalle>(detalleMovimiento, detalleMovimiento);
 
+                            // Se actualiza la existencia y el kardex
+                            bool bEntradaGarantia = (Helper.ConvertirEntero(this.cboConceptoOperacion.SelectedValue) == Cat.MovimientosConceptosDeOperacion.EntradaGarantia);
+                            var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
+                            AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.EntradaInventario, movimientoEntradaI.FolioFactura, iAutorizoID
+                                , "----", (bEntradaGarantia ? "GARANTÍA" : "----"), this.cboUbicacionDestino.Text, cantidad
+                                , oPartePrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoEntradaI.MovimientoInventarioID);
+
+                            var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == sucursalId && c.Estatus);
+                            var historial = new MovimientoInventarioHistorial()
+                            {
+                                MovmientoInventarioID = movimientoEntradaI.MovimientoInventarioID,
+                                ParteID = parteId,
+                                ExistenciaInicial = Helper.ConvertirDecimal(oExistencia.Existencia - cantidad),
+                                ExistenciaFinal = Helper.ConvertirDecimal(oExistencia.Existencia),
+                                SucursalID = Helper.ConvertirEntero(this.cboUbicacionDestino.SelectedValue)
+                            };
+                            Guardar.Generico<MovimientoInventarioHistorial>(historial);
+
                             //Actualizar ParteExistencia
+                            /*
                             var oParte = General.GetEntity<Parte>(c => c.ParteID == parteId && c.Estatus);
                             if (!oParte.EsServicio.Valor())
                             {
@@ -1027,9 +1064,27 @@ namespace Refaccionaria.App
                                     Guardar.Generico<MovimientoInventarioHistorial>(historial);
                                 }
                             }
+                            // Se agrega al Kardex
+                            var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
+                            AdmonProc.RegistrarKardex(new ParteKardex()
+                            {
+                                ParteID = parteId,
+                                OperacionID = Cat.OperacionesKardex.EntradaInventario,
+                                SucursalID = sucursalId,
+                                Folio = movimientoEntradaI.MovimientoInventarioID.ToString(),
+                                Fecha = DateTime.Now,
+                                RealizoUsuarioID = iAutorizoID,
+                                Entidad = "----",
+                                Origen = (bEntradaGarantia ? "GARANTÍA" : "----"),
+                                Destino = this.cboUbicacionDestino.Text,
+                                Cantidad = cantidad,
+                                Importe = oPartePrecio.Costo.Valor(),
+                                RelacionTabla = Cat.Tablas.MovimientoInventario,
+                                RelacionID = movimientoEntradaI.MovimientoInventarioID
+                            });
+                            */
 
                             // Se verifica si es una garantía, para cambiar el estatus correspondiente
-                            bool bEntradaGarantia = (Helper.ConvertirEntero(this.cboConceptoOperacion.SelectedValue) == Cat.MovimientosConceptosDeOperacion.EntradaGarantia);
                             if (bEntradaGarantia)
                             {
                                 int iGarantiaID = Helper.ConvertirEntero(row.Tag);
@@ -1050,24 +1105,6 @@ namespace Refaccionaria.App
                                 }
                             }
 
-                            // Se agrega al Kardex
-                            var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
-                            AdmonProc.RegistrarKardex(new ParteKardex()
-                            {
-                                ParteID = parteId,
-                                OperacionID = Cat.OperacionesKardex.EntradaInventario,
-                                SucursalID = sucursalId,
-                                Folio = movimientoEntradaI.MovimientoInventarioID.ToString(),
-                                Fecha = DateTime.Now,
-                                RealizoUsuarioID = iAutorizoID,
-                                Entidad = "----",
-                                Origen = (bEntradaGarantia ? "GARANTÍA" : "----"),
-                                Destino = this.cboUbicacionDestino.Text,
-                                Cantidad = cantidad,
-                                Importe = oPartePrecio.Costo.Valor(),
-                                RelacionTabla = Cat.Tablas.MovimientoInventario,
-                                RelacionID = movimientoEntradaI.MovimientoInventarioID
-                            });
                         }
 
                         // Se manda a afectar contabilidad (AfeConta)
@@ -1165,7 +1202,25 @@ namespace Refaccionaria.App
                             };
                             General.SaveOrUpdate<MovimientoInventarioDetalle>(detalleMovimiento, detalleMovimiento);
 
+                            // Se actualiza la existencia y el kardex
+                            var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
+                            AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.SalidaInventario
+                                , movimientoSalida.MovimientoInventarioID.ToString(), iAutorizoID, "----", "----", this.cboUbicacionDestino.Text
+                                , (cantidad * -1), oPartePrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoSalida.MovimientoInventarioID);
+
+                            var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == sucursalId && c.Estatus);
+                            var historial = new MovimientoInventarioHistorial()
+                            {
+                                MovmientoInventarioID = movimientoSalida.MovimientoInventarioID,
+                                ParteID = parteId,
+                                ExistenciaInicial = Helper.ConvertirDecimal(oExistencia.Existencia + cantidad),
+                                ExistenciaFinal = Helper.ConvertirDecimal(oExistencia.Existencia),
+                                SucursalID = Helper.ConvertirEntero(this.cboUbicacionDestino.SelectedValue)
+                            };
+                            Guardar.Generico<MovimientoInventarioHistorial>(historial);
+
                             //Actualizar ParteExistencia
+                            /* 
                             var oParte = General.GetEntity<Parte>(c => c.ParteID == parteId && c.Estatus);
                             if (!oParte.EsServicio.Valor())
                             {
@@ -1188,7 +1243,6 @@ namespace Refaccionaria.App
                                     Guardar.Generico<MovimientoInventarioHistorial>(historial);
                                 }
                             }
-
                             // Se agrega al Kardex
                             var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
                             AdmonProc.RegistrarKardex(new ParteKardex()
@@ -1207,6 +1261,7 @@ namespace Refaccionaria.App
                                 RelacionTabla = Cat.Tablas.MovimientoInventario,
                                 RelacionID = movimientoSalida.MovimientoInventarioID
                             });
+                            */
                         }
 
                         // Se manda a afectar contabilidad (AfeConta)
@@ -1377,7 +1432,27 @@ namespace Refaccionaria.App
                             };
                             General.SaveOrUpdate<MovimientoInventarioDetalle>(detalleMovimiento, detalleMovimiento);
 
+                            // Se actualiza la existencia y el kardex
+                            bool bDevGarantia = (Helper.ConvertirEntero(this.cboConceptoOperacion.SelectedValue) == Cat.MovimientosConceptosDeOperacion.DevolucionGarantia);
+                            // Si no es de garantía, igual se mete un registro de existencia pero en cero, sólo para que quede el dato del movimiento que se hizo
+                            AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.DevolucionAProveedor,
+                                movimientoDevolucion.MovimientoInventarioID.ToString(), iAutorizoID, this.cboProveedor.Text, this.cboUbicacionDestino.Text
+                                , (bDevGarantia ? "GARANTÍA" : proveedorId.ToString()), (bDevGarantia ? 0 : (cantidad * -1))
+                                , Helper.ConvertirDecimal(row.Cells["Costo Inicial"].Value), Cat.Tablas.MovimientoInventario, movimientoDevolucion.MovimientoInventarioID);
+
+                            var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == sucursalId && c.Estatus);
+                            var historial = new MovimientoInventarioHistorial()
+                            {
+                                MovmientoInventarioID = movimientoDevolucion.MovimientoInventarioID,
+                                ParteID = parteId,
+                                ExistenciaInicial = Helper.ConvertirDecimal(oExistencia.Existencia + cantidad),
+                                ExistenciaFinal = Helper.ConvertirDecimal(oExistencia.Existencia),
+                                SucursalID = Helper.ConvertirEntero(this.cboUbicacionDestino.SelectedValue)
+                            };
+                            Guardar.Generico<MovimientoInventarioHistorial>(historial);
+
                             //Actualizar ParteExistencia, si no es garantía y no es servicio
+                            /*
                             bool bDevGarantia = (Helper.ConvertirEntero(this.cboConceptoOperacion.SelectedValue) == Cat.MovimientosConceptosDeOperacion.DevolucionGarantia);
                             var oParte = General.GetEntity<Parte>(c => c.ParteID == parteId && c.Estatus);
                             if (!oParte.EsServicio.Valor() && !bDevGarantia) {
@@ -1401,6 +1476,24 @@ namespace Refaccionaria.App
                                     Guardar.Generico<MovimientoInventarioHistorial>(historial);
                                 }
                             }
+                            // Se agrega al Kardex
+                            AdmonProc.RegistrarKardex(new ParteKardex()
+                            {
+                                ParteID = parteId,
+                                OperacionID = Cat.OperacionesKardex.DevolucionAProveedor,
+                                SucursalID = sucursalId,
+                                Folio = movimientoDevolucion.MovimientoInventarioID.ToString(),
+                                Fecha = DateTime.Now,
+                                RealizoUsuarioID = iAutorizoID,
+                                Entidad = this.cboProveedor.Text,
+                                Origen = this.cboUbicacionDestino.Text,
+                                Destino = (bDevGarantia ? "GARANTÍA" : proveedorId.ToString()),
+                                Cantidad = (bDevGarantia ? 0 : cantidad),
+                                Importe = Helper.ConvertirDecimal(row.Cells["Costo Inicial"].Value),
+                                RelacionTabla = Cat.Tablas.MovimientoInventario,
+                                RelacionID = movimientoDevolucion.MovimientoInventarioID
+                            });
+                            */
 
                             // Se modifica la cantidad devuelta, en el detalle de la compra utilizada
                             if (oFuenteMovDet != null)
@@ -1421,24 +1514,6 @@ namespace Refaccionaria.App
                                     Guardar.Generico<VentaGarantia>(oGarantia);
                                 }
                             }
-
-                            // Se agrega al Kardex
-                            AdmonProc.RegistrarKardex(new ParteKardex()
-                            {
-                                ParteID = parteId,
-                                OperacionID = Cat.OperacionesKardex.DevolucionAProveedor,
-                                SucursalID = sucursalId,
-                                Folio = movimientoDevolucion.MovimientoInventarioID.ToString(),
-                                Fecha = DateTime.Now,
-                                RealizoUsuarioID = iAutorizoID,
-                                Entidad = this.cboProveedor.Text,
-                                Origen = this.cboUbicacionDestino.Text,
-                                Destino = (bDevGarantia ? "GARANTÍA" : proveedorId.ToString()),
-                                Cantidad = (bDevGarantia ? 0 : cantidad),
-                                Importe = Helper.ConvertirDecimal(row.Cells["Costo Inicial"].Value),
-                                RelacionTabla = Cat.Tablas.MovimientoInventario,
-                                RelacionID = movimientoDevolucion.MovimientoInventarioID
-                            });
                         }
 
                         SplashScreen.Close();

@@ -83,15 +83,16 @@ namespace Refaccionaria.App
             // Se verifica si es una cancelación de factura de varios tickets
             int iVentaFacturaID = 0;
             bool bFacturaMultiple = false;
+            bool bCancelarTodaLaFactura = this.ctlBusqueda.CancelarTodaLaFactura;
             List<VentaFacturaDetalle> oVentasFactura = null;
-            if (bCancelacion && oVentaV.Facturada)
+            if (oVentaV.Facturada)
             {
                 iVentaFacturaID = General.GetEntity<VentaFacturaDetalle>(q => q.VentaID == oVentaV.VentaID && q.Estatus).VentaFacturaID;
                 oVentasFactura = General.GetListOf<VentaFacturaDetalle>(q => q.VentaFacturaID == iVentaFacturaID && q.Estatus);
                 bFacturaMultiple = (oVentasFactura.Count > 1);
 
                 // Se muestran los datos de detalle de todas las ventas de la factura
-                if (bFacturaMultiple)
+                if (bCancelarTodaLaFactura && bFacturaMultiple)
                 {
                     if (!this.MostrarDetalleVentasFactura(oVentasFactura))
                         return false;
@@ -130,7 +131,7 @@ namespace Refaccionaria.App
             // Si es factura múltiple, se cancelan todas las ventas de la factura, si no, sólo la venta seleccionada
             var oIdsDev = new List<int>();
             var oIdsCascos = new List<int>();
-            if (bFacturaMultiple)
+            if (bFacturaMultiple && bCancelarTodaLaFactura)
             {
                 var oDevGeneral = this.ctlBusqueda.GenerarDevolucion();
                 foreach (var oVentaFac in oVentasFactura)
@@ -209,7 +210,7 @@ namespace Refaccionaria.App
             // Se verifica si es factura, en cuyo caso, se cancela la factura o se genera nota de crédito, según aplique
             if (oVentaV.Facturada)
             {
-                if (bCancelacion)
+                if (bCancelacion && (!bFacturaMultiple || (bFacturaMultiple && bCancelarTodaLaFactura)))
                 {
                     var ResFactura = VentasProc.GenerarFacturaCancelacion(iVentaFacturaID, oIdsDev);
                     if (ResFactura.Error)
@@ -277,6 +278,7 @@ namespace Refaccionaria.App
                 VentasProc.GenerarTicketDevolucion(iDevID);
 
                 // Se agrega al Kardex
+                /* Ahora se hace desde que se guarda la devolución - Guardar.VentaDevolucion()
                 var oDevV = General.GetEntity<VentasDevolucionesView>(c => c.VentaDevolucionID == iDevID);
                 var oDet = General.GetListOf<VentaDevolucionDetalle>(c => c.VentaDevolucionID == iDevID && c.Estatus);
                 foreach (var oReg in oDet)
@@ -298,6 +300,7 @@ namespace Refaccionaria.App
                         RelacionID = oDevV.VentaDevolucionID
                     });
                 }
+                */
             }
             
             // Se muestra una notifiación con el resultado
@@ -446,7 +449,7 @@ namespace Refaccionaria.App
                     var oVentaV = General.GetEntity<VentasView>(c => c.VentaID == oDev.VentaID);
                     var oCascoRecibidoPrecio = General.GetEntity<PartePrecio>(c => c.ParteID == oCascoReg.RecibidoCascoID.Value && c.Estatus);
                     AdmonProc.AfectarExistenciaYKardex(oCascoReg.RecibidoCascoID.Valor(), GlobalClass.SucursalID, Cat.OperacionesKardex.SalidaInventario
-                        , oCascoReg.CascoRegistroID.ToString(), iUsuarioID, oVentaV.Cliente, "CONTROL DE CASCOS", oVentaV.Sucursal, 1, oCascoRecibidoPrecio.Costo.Valor()
+                        , oCascoReg.CascoRegistroID.ToString(), iUsuarioID, oVentaV.Cliente, "CONTROL DE CASCOS", oVentaV.Sucursal, -1, oCascoRecibidoPrecio.Costo.Valor()
                         , Cat.Tablas.CascoRegistro, oCascoReg.CascoRegistroID);
 
                     // Acciones si no se recibió el casco adecuado

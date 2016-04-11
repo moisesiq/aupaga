@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContaReserva));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -47,6 +47,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.dtpDesde = new System.Windows.Forms.DateTimePicker();
             this.dgvReserva = new System.Windows.Forms.DataGridView();
@@ -91,7 +92,8 @@
             this.CostoMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Restante = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaldoRestante = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Facturar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PreFacturar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Facturado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Reserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReserva)).BeginInit();
             this.SuspendLayout();
@@ -143,16 +145,17 @@
             this.CostoMinimo,
             this.Restante,
             this.SaldoRestante,
-            this.Facturar,
+            this.PreFacturar,
+            this.Facturado,
             this.Reserva});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReserva.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReserva.DefaultCellStyle = dataGridViewCellStyle19;
             this.dgvReserva.Location = new System.Drawing.Point(3, 29);
             this.dgvReserva.Name = "dgvReserva";
             this.dgvReserva.ReadOnly = true;
@@ -614,22 +617,32 @@
             this.SaldoRestante.ReadOnly = true;
             this.SaldoRestante.Width = 80;
             // 
-            // Facturar
+            // PreFacturar
             // 
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle16.Format = "C2";
-            this.Facturar.DefaultCellStyle = dataGridViewCellStyle16;
-            this.Facturar.HeaderText = "Final";
-            this.Facturar.Name = "Facturar";
-            this.Facturar.ReadOnly = true;
-            this.Facturar.Width = 80;
+            this.PreFacturar.DefaultCellStyle = dataGridViewCellStyle16;
+            this.PreFacturar.HeaderText = "Prefacturar";
+            this.PreFacturar.Name = "PreFacturar";
+            this.PreFacturar.ReadOnly = true;
+            this.PreFacturar.Width = 80;
+            // 
+            // Facturado
+            // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.Format = "C2";
+            this.Facturado.DefaultCellStyle = dataGridViewCellStyle17;
+            this.Facturado.HeaderText = "Facturado";
+            this.Facturado.Name = "Facturado";
+            this.Facturado.ReadOnly = true;
+            this.Facturado.Width = 80;
             // 
             // Reserva
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.Format = "C2";
-            this.Reserva.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Format = "C2";
+            this.Reserva.DefaultCellStyle = dataGridViewCellStyle18;
             this.Reserva.HeaderText = "Reserva";
             this.Reserva.Name = "Reserva";
             this.Reserva.ReadOnly = true;
@@ -722,7 +735,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoMinimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Restante;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaldoRestante;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Facturar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PreFacturar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Facturado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reserva;
     }
 }

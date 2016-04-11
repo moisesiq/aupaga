@@ -16,12 +16,10 @@ namespace Refaccionaria.App
         public static void AfectarExistenciaYKardex(int iParteID, int iSucursalID, int iOperacionID, string sFolio, int iUsuarioID, string sEntidad
             , string sOrigen, string sDestino, decimal mCantidad, decimal mImporte, string sTabla, int iId)
         {
-            var oParteEx = General.GetEntity<ParteExistencia>(c => c.ParteID == iParteID && c.SucursalID == iSucursalID && c.Estatus);
-            if (iOperacionID == Cat.OperacionesKardex.Venta || iOperacionID == Cat.OperacionesKardex.DevolucionAProveedor
-                || iOperacionID == Cat.OperacionesKardex.SalidaInventario || iOperacionID == Cat.OperacionesKardex.SalidaTraspaso)
-                mCantidad *= -1;
+            // Se manda a afectar la existencia
             AdmonProc.AgregarExistencia(iParteID, iSucursalID, mCantidad, sTabla, iId);
 
+            // Se manda a afectar en el kardex
             var oSucursal = General.GetEntity<Sucursal>(c => c.SucursalID == iSucursalID && c.Estatus);
             var oKardex = new ParteKardex()
             {
@@ -78,9 +76,10 @@ namespace Refaccionaria.App
                 .OrderByDescending(c => c.ParteKardexID).FirstOrDefault();
             decimal mExistencia = (oParteKardexAnt == null ? 0 : oParteKardexAnt.ExistenciaNueva);
             decimal mCantidad = oParteKardex.Cantidad;
-            if (oParteKardex.OperacionID == Cat.OperacionesKardex.Venta || oParteKardex.OperacionID == Cat.OperacionesKardex.DevolucionAProveedor
+            /* if (oParteKardex.OperacionID == Cat.OperacionesKardex.Venta || oParteKardex.OperacionID == Cat.OperacionesKardex.DevolucionAProveedor
                 || oParteKardex.OperacionID == Cat.OperacionesKardex.SalidaInventario || oParteKardex.OperacionID == Cat.OperacionesKardex.SalidaTraspaso)
                 mCantidad *= -1;
+            */
             oParteKardex.ExistenciaNueva = (mExistencia + mCantidad);
 
             Guardar.Generico<ParteKardex>(oParteKardex);

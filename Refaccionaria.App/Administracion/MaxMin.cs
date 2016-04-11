@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Diagnostics;
 using System.Text;
+using FastReport;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -115,6 +116,9 @@ namespace Refaccionaria.App
                     break;
                 case "tbpEquivalentes":
                     this.LlenarEquivalentes();
+                    break;
+                case "tbpIman":
+                    this.LlenarPartesIman();
                     break;
             }
         }
@@ -408,6 +412,37 @@ namespace Refaccionaria.App
             if (this.dgvSinMaxMin.CurrentRow == null) return;
             int iParteID = Helper.ConvertirEntero(this.dgvSinMaxMin.CurrentRow.Cells["SinMaxMin_ParteID"].Value);
             this.LlenarDatosExtra(iParteID);
+        }
+
+        private void btnImanImprimir_Click(object sender, EventArgs e)
+        {
+            var oDatos = new List<pauPartesBusqueda_Result>();
+            foreach (DataGridViewRow oFila in this.dgvIman.Rows)
+            {
+                if (Helper.ConvertirBool(oFila.Cells["ima_Sel"].Value))
+                    oDatos.Add(oFila.Tag as pauPartesBusqueda_Result);
+            }
+
+            var oRep = new Report();
+            oRep.Load(UtilLocal.RutaReportes("PartesImanes.frx"));
+            oRep.RegisterData(oDatos, "Partes");
+            oRep.SetParameterValue("Sucursal", this.cmbSucursal.Text);
+            UtilLocal.EnviarReporteASalida("Reportes.Partes.Imanes.Salida", oRep);
+        }
+
+        private void dgvIman_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (this.dgvIman.Columns[e.ColumnIndex].Name == "ima_Sel")
+                {
+                    bool bSel = true;
+                    if (this.dgvIman.Rows.Count > 0)
+                        bSel = !Helper.ConvertirBool(this.dgvIman["ima_Sel", 0].Value);
+                    foreach (DataGridViewRow oFila in this.dgvIman.Rows)
+                        oFila.Cells["ima_Sel"].Value = bSel;
+                }
+            }
         }
 
         private void btnExportar_Click(object sender, EventArgs e)
@@ -1521,6 +1556,35 @@ namespace Refaccionaria.App
             var oRegla = General.GetEntity<ParteMaxMinRegla>(c => c.ParteMaxMinReglaID == iRegla && c.Estatus);
             if (oRegla != null)
                 this.txtDescripcionMaxMin.Text = string.Format("Condición: {0}\r\n{1}", iRegla, oRegla.Descripcion);
+        }
+
+        private void LlenarPartesIman()
+        {
+            Cargando.Mostrar();
+
+            var oParams = new Dictionary<string, object>();
+            oParams.Add("SucursalID", Helper.ConvertirEntero(this.cmbSucursal.SelectedValue));
+            UtilDatos.AgregarParametroListaEntero(ref oParams, "Proveedores/tpuTablaEnteros", this.ctlProveedores);
+            UtilDatos.AgregarParametroListaEntero(ref oParams, "Marcas/tpuTablaEnteros", this.ctlMarcas);
+            UtilDatos.AgregarParametroListaEntero(ref oParams, "Lineas/tpuTablaEnteros", this.ctlLineas);
+            if (this.txtImanNumeroDeParte.Text != "")
+                oParams.Add("NumeroDeParte", this.txtImanNumeroDeParte.Text);
+            if (this.txtImanDescripcion.Text != "")
+                oParams.Add("Descripcion", this.txtImanDescripcion.Text);
+
+            var oDatos = General.ExecuteProcedure<pauPartesBusqueda_Result>("pauPartesBusqueda", oParams);
+            if (this.txtImanNumeroDeParte.Text == "")
+                oDatos = oDatos.Where(c => c.Maximo > 0).ToList();
+
+            this.dgvIman.Rows.Clear();
+            foreach (var oReg in oDatos)
+            {
+                int iFila = this.dgvIman.Rows.Add(oReg.ParteID, true, oReg.NumeroDeParte, oReg.Descripcion, oReg.Proveedor, oReg.Marca, oReg.Linea
+                    , oReg.Maximo, oReg.Minimo, oReg.FechaMaxMin);
+                this.dgvIman.Rows[iFila].Tag = oReg;
+            }
+
+            Cargando.Cerrar();
         }
 
         #endregion
