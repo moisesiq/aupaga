@@ -804,6 +804,18 @@ namespace Refaccionaria.App
             UtilLocal.EnviarReporteASalida("Reportes.NotaDeCreditoTicket.Salida", oRep);
         }
 
+        public static void GenerarTicketCasco(int iCascoID)
+        {
+            var oCascoRegV = General.GetEntity<CascosRegistrosView>(c => c.CascoRegistroID == iCascoID);
+            if (oCascoRegV == null) return;
+
+            var oRep = new Report();
+            oRep.Load(UtilLocal.RutaReportes("ControlDeCascos.frx"));
+            VentasProc.TicketAgregarLeyendas(ref oRep);
+            oRep.RegisterData(new List<CascosRegistrosView>() { oCascoRegV }, "ControlDeCasco");
+            UtilLocal.EnviarReporteASalida("Reportes.ControlDeCascos.Completar.Salida", oRep);
+        }
+
         #endregion
         
         #region [ Facturación electrónica ]

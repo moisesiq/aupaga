@@ -113,16 +113,17 @@ namespace Refaccionaria.App
             // int iSucursalID = Helper.ConvertirEntero(this.cmbSucursal.SelectedValue);
             DateTime dDesde = new DateTime(iAnio, 1, 1);
             DateTime dHasta = new DateTime(iAnio, 12, 31);
+            DateTime dDesdeSemUno = UtilLocal.InicioSemanaSabAVie(dDesde);
             var oParams = new Dictionary<string, object>();
             // oParams.Add("SucursalID", (iSucursalID == 0 ? null : (int?)iSucursalID));
             oParams.Add("Pagadas", true);
             oParams.Add("Cobradas", false);
             oParams.Add("Solo9500", false);
             oParams.Add("OmitirDomingo", false);
-            oParams.Add("Desde", dDesde);
+            oParams.Add("Desde", dDesdeSemUno);
             oParams.Add("Hasta", dHasta);
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
-            var oSemanas = oDatos.Where(c => c.Fecha >= dDesde)
+            var oSemanas = oDatos.Where(c => c.Fecha >= dDesdeSemUno)
                 .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha) })
                 .Select(c => new { c.Key.Semana, PrecioSinIva = c.Sum(s => s.PrecioSinIvaActual) })
                 .OrderBy(c => c.Semana);
@@ -139,8 +140,8 @@ namespace Refaccionaria.App
 
             // Se obtienen datos para varios grupos
             DateTime dHastaMas1 = dHasta.AddDays(1);
-            DateTime dDesdeMas1 = dDesde.AddDays(1);
-            var oReinversiones = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.FechaPoliza >= dDesdeMas1 && c.FechaPoliza < dHastaMas1
+            // DateTime dDesdeMas1 = dDesde.AddDays(1);
+            var oReinversiones = General.GetListOf<ContaPolizasDetalleAvanzadoView>(c => c.FechaPoliza >= dDesdeSemUno && c.FechaPoliza < dHastaMas1
                 && (
                     c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.CuentasPorPagarLargoPlazo
                     || (c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.CuentasPorPagarCortoPlazo && c.ContaCuentaAuxiliarID != Cat.ContaCuentasAuxiliares.TarjetaDeCredito)
@@ -155,8 +156,9 @@ namespace Refaccionaria.App
                 .GroupBy(c => UtilLocal.InicioSemanaSabAVie(c.FechaPoliza.Valor()))
                 .Select(c => new { Semana = c.Key, Importe = c.Sum(s => s.Abono) });
             mTotal += oPrestamos.Sum(c => c.Importe);
-            mPromedio += oPrestamos.Average(c => c.Importe);
-            iFila = this.dgvDatos.Rows.Add("Préstamos", oPrestamos.Sum(c => c.Importe), oPrestamos.Average(c => c.Importe));
+            decimal mPromedioAct = (oPrestamos.Count() > 0 ? oPrestamos.Average(c => c.Importe) : 0);
+            mPromedio += mPromedioAct;
+            iFila = this.dgvDatos.Rows.Add("Préstamos", oPrestamos.Sum(c => c.Importe), mPromedioAct);
             foreach (var oReg in oPrestamos)
             {
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -175,7 +177,7 @@ namespace Refaccionaria.App
             
             // Se obtienen los datos para los gastos
             oParams.Clear();
-            oParams.Add("Desde", dDesde);
+            oParams.Add("Desde", dDesdeSemUno);
             oParams.Add("Hasta", dHasta);
             var oGastos = General.ExecuteProcedure<pauContaCuentasPorSemana_Result>("pauContaCuentasPorSemana", oParams);
             var oGastosSem = ContaProc.GastosSemanalizados(oGastos, Helper.ConvertirFechaHora(this.dgvDatos.Columns[this.dgvDatos.Columns.Count - 1].Name));
@@ -192,15 +194,16 @@ namespace Refaccionaria.App
             }
             
             // Para las compras
-            var oCompras = General.GetListOf<ProveedoresPolizasDetalleAvanzadoView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1
+            var oCompras = General.GetListOf<ProveedoresPolizasDetalleAvanzadoView>(c => c.Fecha >= dDesdeSemUno && c.Fecha < dHastaMas1
                 && (c.OrigenID == Cat.OrigenesPagosAProveedores.PagoDirecto || c.OrigenID == Cat.OrigenesPagosAProveedores.PagoDeCaja))
                 .GroupBy(c => new { Semana = UtilLocal.InicioSemanaSabAVie(c.Fecha.Valor()) })
                 .Select(c => new { c.Key.Semana, Importe = c.Sum(s => s.Subtotal) })
                 .OrderBy(c => c.Semana);
             mTotal += oCompras.Sum(c => c.Importe);
-            mPromedio += oCompras.Average(c => c.Importe);
+            mPromedioAct = (oCompras.Count() > 0 ? oCompras.Average(c => c.Importe) : 0);
+            mPromedio += mPromedioAct;
             // Se agrega la fila de compras
-            iFila = this.dgvDatos.Rows.Add("Compras", oCompras.Sum(c => c.Importe), oCompras.Average(c => c.Importe));
+            iFila = this.dgvDatos.Rows.Add("Compras", oCompras.Sum(c => c.Importe), mPromedioAct);
             foreach (var oReg in oCompras)
             {
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -214,9 +217,10 @@ namespace Refaccionaria.App
                 .GroupBy(c => UtilLocal.InicioSemanaSabAVie(c.FechaPoliza.Valor()))
                 .Select(c => new { Semana = c.Key, Importe = c.Sum(s => s.Cargo) });
             mTotal += oDeudas.Sum(c => c.Importe);
-            mPromedio += oDeudas.Average(c => c.Importe);
+            mPromedioAct = (oDeudas.Count() > 0 ? oDeudas.Average(c => c.Importe) : 0);
+            mPromedio += mPromedioAct;
             // Se agrega la fila de deudas
-            iFila = this.dgvDatos.Rows.Add("Deudas", oDeudas.Sum(c => c.Importe), oDeudas.Average(c => c.Importe));
+            iFila = this.dgvDatos.Rows.Add("Deudas", oDeudas.Sum(c => c.Importe), mPromedioAct);
             foreach (var oReg in oDeudas)
             {
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -229,9 +233,10 @@ namespace Refaccionaria.App
                 .GroupBy(c => UtilLocal.InicioSemanaSabAVie(c.FechaPoliza.Valor()))
                 .Select(c => new { Semana = c.Key, Importe = c.Sum(s => s.Cargo) });
             mTotal += oInversiones.Sum(c => c.Importe);
-            mPromedio += oInversiones.Average(c => c.Importe);
+            mPromedioAct = (oInversiones.Count() > 0 ? oInversiones.Average(c => c.Importe) : 0);
+            mPromedio += mPromedioAct;
             // Se agrega la fila de deudas
-            iFila = this.dgvDatos.Rows.Add("Inversiones", oInversiones.Sum(c => c.Importe), oInversiones.Average(c => c.Importe));
+            iFila = this.dgvDatos.Rows.Add("Inversiones", oInversiones.Sum(c => c.Importe), mPromedioAct);
             foreach (var oReg in oInversiones)
             {
                 string sSemana = oReg.Semana.ToShortDateString();
@@ -240,10 +245,11 @@ namespace Refaccionaria.App
             }
 
             // Para lo de Isidro y Don Isidro
-            var oGastosSemEsp = ContaProc.GastosSemanalizados(General.GetListOf<ContaEgresosDevengadoEspecialCuentasView>(c => c.Fecha >= dDesde && c.Fecha < dHastaMas1)
+            var oGastosSemEsp = ContaProc.GastosSemanalizados(General.GetListOf<ContaEgresosDevengadoEspecialCuentasView>(c => c.Fecha >= dDesdeSemUno && c.Fecha < dHastaMas1)
                 , Helper.ConvertirFechaHora(this.dgvDatos.Columns[this.dgvDatos.Columns.Count - 1].Name));
             mTotal += oGastosSemEsp.Sum(c => c.Importe);
-            mPromedio += oGastosSemEsp.Average(c => c.Importe);
+            mPromedioAct = (oGastosSemEsp.Count() > 0 ? oGastosSemEsp.Average(c => c.Importe) : 0);
+            mPromedio += mPromedioAct;
             // Se agregan las filas
             string sDuenio = "";
             foreach (var oReg in oGastosSemEsp)
@@ -325,8 +331,11 @@ namespace Refaccionaria.App
                 this.chrPorSemana.Series["Compras"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 2].Value));
                 this.chrPorSemana.Series["Deudas"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 3].Value));
                 this.chrPorSemana.Series["Inversiones"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 4].Value));
-                this.chrPorSemana.Series["Isidro"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 5].Value));
-                this.chrPorSemana.Series["DonIsidro"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 6].Value));
+                if (this.dgvDatos.Rows.Count > 10)
+                {
+                    this.chrPorSemana.Series["Isidro"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 5].Value));
+                    this.chrPorSemana.Series["DonIsidro"].Points.AddY(Helper.ConvertirDecimal(this.dgvDatos[iCol, iFilaEgresos + 6].Value));
+                }
             }
 
             Cargando.Cerrar();

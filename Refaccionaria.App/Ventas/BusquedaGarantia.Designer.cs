@@ -88,9 +88,9 @@
             // tabGarantia
             // 
             this.tabGarantia.Alignment = System.Windows.Forms.TabAlignment.Right;
-            this.tabGarantia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabGarantia.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabGarantia.Controls.Add(this.tbpGarantia);
             this.tabGarantia.Controls.Add(this.tbpPendientes);
             this.tabGarantia.Location = new System.Drawing.Point(0, 0);
@@ -121,7 +121,7 @@
             this.txtReimpresion.Location = new System.Drawing.Point(543, 3);
             this.txtReimpresion.Name = "txtReimpresion";
             this.txtReimpresion.PasarEnfoqueConEnter = false;
-            this.txtReimpresion.SeleccionarTextoAlEnfoque = false;
+            this.txtReimpresion.SeleccionarTextoAlEnfoque = true;
             this.txtReimpresion.Size = new System.Drawing.Size(85, 20);
             this.txtReimpresion.TabIndex = 6;
             this.txtReimpresion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReimpresion_KeyPress);
@@ -199,8 +199,8 @@
             // 
             // gpbAccion
             // 
-            this.gpbAccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpbAccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpbAccion.Controls.Add(this.rdbAcTransferencia);
             this.gpbAccion.Controls.Add(this.rdbAcRevision);
             this.gpbAccion.Controls.Add(this.rdbAcTarjeta);
@@ -345,8 +345,8 @@
             // 
             // gpbAccionPosterior
             // 
-            this.gpbAccionPosterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpbAccionPosterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpbAccionPosterior.Controls.Add(this.rdbApTransferencia);
             this.gpbAccionPosterior.Controls.Add(this.rdbApNoProcede);
             this.gpbAccionPosterior.Controls.Add(this.txtAccionObservacion);
@@ -387,9 +387,9 @@
             // 
             // txtAccionObservacion
             // 
-            this.txtAccionObservacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAccionObservacion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAccionObservacion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtAccionObservacion.Etiqueta = "Observación";
             this.txtAccionObservacion.EtiquetaColor = System.Drawing.Color.Gray;
@@ -464,9 +464,9 @@
             this.dgvPendientes.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.SkyBlue;
             this.dgvPendientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvPendientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPendientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPendientes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvPendientes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvPendientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;

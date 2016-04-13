@@ -58,6 +58,14 @@ namespace Refaccionaria.App
             Cargando.Cerrar();
         }
 
+        private void txtReimpresion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                this.VerTicketCasco();
+            }
+        }
+        
         private void dgvHistorico_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvHistorico.CurrentRow.Cells["hisNumeroDeParteRecibido"].Value == null && this.dgvHistorico.CurrentRow.Cells["hisFolioDeCobro"].Value != null)
@@ -74,7 +82,11 @@ namespace Refaccionaria.App
 
         #region [ Métodos ]
 
-        
+        private void VerTicketCasco()
+        {
+            int iCascoID = Helper.ConvertirEntero(this.txtReimpresion.Text);
+            VentasProc.GenerarTicketCasco(iCascoID);
+        }
 
         #endregion
 
@@ -95,5 +107,6 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
     }
 }

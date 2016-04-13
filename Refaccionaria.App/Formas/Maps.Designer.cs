@@ -34,6 +34,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.toolTipGuardar = new System.Windows.Forms.ToolTip(this.components);
+            this.pcbCargando = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbCargando)).BeginInit();
             this.SuspendLayout();
             // 
             // wkbMapa
@@ -78,12 +80,23 @@
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
+            // pcbCargando
+            // 
+            this.pcbCargando.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pcbCargando.Location = new System.Drawing.Point(12, 517);
+            this.pcbCargando.Name = "pcbCargando";
+            this.pcbCargando.Size = new System.Drawing.Size(24, 24);
+            this.pcbCargando.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pcbCargando.TabIndex = 3;
+            this.pcbCargando.TabStop = false;
+            // 
             // Maps
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.ClientSize = new System.Drawing.Size(1232, 552);
+            this.Controls.Add(this.pcbCargando);
             this.Controls.Add(this.wkbMapa);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnVolver);
@@ -93,6 +106,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Google Maps";
             this.Shown += new System.EventHandler(this.Maps_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.pcbCargando)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -106,6 +120,7 @@
        
         private textBoxOnlyDouble textBoxOnlyDouble1;
         private WebKit.WebKitBrowser wkbMapa;
+        private System.Windows.Forms.PictureBox pcbCargando;
 
 
     }

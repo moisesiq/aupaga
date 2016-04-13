@@ -81,14 +81,7 @@ namespace Refaccionaria.App
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                this.txtReimpresion.SelectAll();
-                int iGarantiaID = Helper.ConvertirEntero(this.txtReimpresion.Text);
-                if (!General.Exists<VentaGarantia>(c => c.VentaGarantiaID == iGarantiaID && c.Estatus))
-                {
-                    UtilLocal.MensajeAdvertencia("El folio de Garantía especificado no existe.");
-                    return;
-                }
-                VentasProc.GenerarTicketGarantia(iGarantiaID);
+                this.VerTicketGarantia();
             }
         }
 
@@ -263,6 +256,48 @@ namespace Refaccionaria.App
                 }
             }
             return 0;
+        }
+
+        private void VerTicketGarantia()
+        {
+            string sFolio = this.txtReimpresion.Text;
+            var oVenta = General.GetEntity<Venta>(c => c.Folio == sFolio && c.Estatus);
+            if (oVenta == null)
+            {
+                UtilLocal.MensajeAdvertencia("La venta especificada no existe.");
+                return;
+            }
+
+            // Se obtiene la garantía a reimprimir
+            var oGarantias = General.GetListOf<VentasGarantiasView>(c => c.VentaID == oVenta.VentaID);
+            int iGarantiaID = 0;
+            if (oGarantias.Count == 0)
+            {
+                UtilLocal.MensajeAdvertencia("La venta especificada no tiene garantías.");
+                return;
+            }
+            else if (oGarantias.Count > 1)
+            {
+                var frmListado = new SeleccionListado(oGarantias);
+                frmListado.Text = "Selecciona una Garantía";
+                frmListado.MostrarColumnas("Fecha", "VentaGarantiaID", "Total");
+                frmListado.dgvListado.Columns["VentaGarantiaID"].HeaderText = "Folio Gar.";
+                frmListado.dgvListado.Columns["Total"].FormatoMoneda();
+                if (frmListado.ShowDialog(Principal.Instance) == DialogResult.OK)
+                    iGarantiaID = Helper.ConvertirEntero(frmListado.Seleccion["VentaGarantiaID"]);
+                frmListado.Dispose();
+            }
+            else
+            {
+                iGarantiaID = oGarantias[0].VentaGarantiaID;
+            }
+
+            // Se manda reimprimir
+            if (iGarantiaID > 0)
+            {
+                VentasProc.GenerarTicketGarantia(iGarantiaID);
+                this.txtReimpresion.Clear();
+            }
         }
 
         #endregion

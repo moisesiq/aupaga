@@ -2179,6 +2179,7 @@
     <None Include="Resources\BlueEdit.jpg" />
     <None Include="Resources\BlueRefresh.jpg" />
     <None Include="Resources\AG.ico" />
+    <None Include="Resources\32_Procesando.gif" />
     <Content Include="Resources\BotonX.jpg" />
     <None Include="Resources\G sin sombra_fondo blanco_100x75.png" />
     <None Include="Resources\Cargando.gif" />

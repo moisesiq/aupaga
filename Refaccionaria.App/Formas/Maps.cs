@@ -48,8 +48,9 @@ namespace Refaccionaria.App
             {
                 latlong = this.sDireccion;
             }
-            string uri = (@"file:///" + UtilLocal.RutaRecursos("maps.html"));
+            string uri = (@"file:///" + UtilLocal.RutaRecursos("maps.html").Replace("\\", "/"));
             wkbMapa.Navigate(uri);
+            this.Cargando(true);
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -69,6 +70,7 @@ namespace Refaccionaria.App
         
         private void wkbMapa_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            this.Cargando(false);
             if (this.latlong == null) return;
             
             string[] param = latlong.Split(',');
@@ -78,6 +80,14 @@ namespace Refaccionaria.App
             elm2.SetAttribute("value", param[1]);
             wkbMapa.Document.InvokeScriptMethod("setCoords",new object[]{"1","1"});
             
+        }
+
+        private void Cargando(bool bMostrar)
+        {
+            if (bMostrar)
+                this.pcbCargando.Image = Properties.Resources._32_Procesando;
+            else
+                this.pcbCargando.Image = null;
         }
 
     }

@@ -2239,7 +2239,7 @@ namespace Refaccionaria.App
 
         private void txtKardexBusqueda_TextChanged(object sender, EventArgs e)
         {
-            if (this.txtKardexBusqueda.TextLength > 3)
+            if (this.txtKardexBusqueda.TextLength > 0)
                 this.dgvKardex.FiltrarContiene(this.txtKardexBusqueda.Text, "Kardex_Fecha", "Kardex_Folio", "Kardex_Tipo", "Kardex_Operacion", "Kardex_Entidad"
                     , "Kardex_Usuario", "Kardex_Origen", "Kardex_Destino", "Kardex_Importe", "Kardex_Cantidad", "Kardex_ExistenciaNueva");
             else
@@ -2248,7 +2248,7 @@ namespace Refaccionaria.App
 
         private void dgvKardex_CurrentCellChanged(object sender, EventArgs e)
         {
-            if (this.dgvKardex.VerSeleccionNueva())
+            if (this.dgvAplicaciones.CurrentRow != null && this.dgvKardex.VerSeleccionNueva())
             {
                 int iKardexID = Helper.ConvertirEntero(this.dgvKardex.CurrentRow.Cells["Kardex_ParteKardexID"].Value);
                 this.LlenarObservacionKardex(iKardexID);
@@ -2327,7 +2327,12 @@ namespace Refaccionaria.App
             switch (oKardex.RelacionTabla)
             {
                 case Cat.Tablas.MovimientoInventario:
-
+                    var oMov = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oKardex.RelacionID && c.Estatus);
+                    this.txtKardexObservacion.Text = oMov.Observacion;
+                    break;
+                case Cat.Tablas.VentaDevolucion:
+                    var oDev = General.GetEntity<VentaDevolucion>(c => c.VentaDevolucionID == oKardex.RelacionID && c.Estatus);
+                    this.txtKardexObservacion.Text = oDev.Observacion;
                     break;
             }
         }

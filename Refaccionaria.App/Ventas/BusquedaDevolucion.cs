@@ -47,15 +47,7 @@ namespace Refaccionaria.App
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                this.txtReimpresion.SelectAll();
-                int iDevolucionID = Helper.ConvertirEntero(this.txtReimpresion.Text);
-                var oDev = General.GetEntity<VentaDevolucion>(q => q.VentaDevolucionID == iDevolucionID && q.Estatus);
-                if (oDev == null)
-                {
-                    UtilLocal.MensajeAdvertencia("El folio de Devolución/Cancelación especificado no existe.");
-                    return;
-                }
-                VentasProc.GenerarTicketDevolucion(iDevolucionID);
+                this.VerTicketDevolucion();
             }
         }
 
@@ -200,6 +192,48 @@ namespace Refaccionaria.App
                 }
             }
             return iMotivoID;
+        }
+
+        private void VerTicketDevolucion()
+        {
+            string sFolio = this.txtReimpresion.Text;
+            var oVenta = General.GetEntity<Venta>(c => c.Folio == sFolio && c.Estatus);
+            if (oVenta == null)
+            {
+                UtilLocal.MensajeAdvertencia("La venta especificada no existe.");
+                return;
+            }
+
+            // Se obtiene la devolución a reimprimir
+            var oDevs = General.GetListOf<VentasDevolucionesView>(c => c.VentaID == oVenta.VentaID);
+            int iDevID = 0;
+            if (oDevs.Count == 0)
+            {
+                UtilLocal.MensajeAdvertencia("La venta especificada no tiene devoluciones/cancelaciones.");
+                return;
+            }
+            else if (oDevs.Count > 1)
+            {
+                var frmListado = new SeleccionListado(oDevs);
+                frmListado.Text = "Selecciona una Devolución/Cancelación";
+                frmListado.MostrarColumnas("Fecha", "VentaDevolucionID", "Total");
+                frmListado.dgvListado.Columns["VentaDevolucionID"].HeaderText = "Folio Dev.";
+                frmListado.dgvListado.Columns["Total"].FormatoMoneda();
+                if (frmListado.ShowDialog(Principal.Instance) == DialogResult.OK)
+                    iDevID = Helper.ConvertirEntero(frmListado.Seleccion["VentaDevolucionID"]);
+                frmListado.Dispose();
+            }
+            else
+            {
+                iDevID = oDevs[0].VentaDevolucionID;
+            }
+
+            // Se manda reimprimir
+            if (iDevID > 0)
+            {
+                VentasProc.GenerarTicketDevolucion(iDevID);
+                this.txtReimpresion.Clear();
+            }
         }
 
         #endregion
