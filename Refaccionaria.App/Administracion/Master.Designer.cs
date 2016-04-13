@@ -250,6 +250,7 @@
             this.pgrGuardar.ColorDeTexto = System.Drawing.Color.White;
             this.pgrGuardar.Location = new System.Drawing.Point(3, 406);
             this.pgrGuardar.Name = "pgrGuardar";
+            this.pgrGuardar.PosicionTexto = Refaccionaria.Negocio.Progreso.PosTexto.Derecha;
             this.pgrGuardar.Size = new System.Drawing.Size(1253, 20);
             this.pgrGuardar.TabIndex = 7;
             this.pgrGuardar.Visible = false;
@@ -368,7 +369,7 @@
             // 
             this.Descripcion.HeaderText = "Descripción";
             this.Descripcion.Name = "Descripcion";
-            this.Descripcion.Width = 368;
+            this.Descripcion.Width = 300;
             // 
             // ProveedorID
             // 
@@ -378,7 +379,7 @@
             this.ProveedorID.Name = "ProveedorID";
             this.ProveedorID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ProveedorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ProveedorID.Width = 64;
+            this.ProveedorID.Width = 50;
             // 
             // LineaID
             // 
@@ -388,7 +389,7 @@
             this.LineaID.Name = "LineaID";
             this.LineaID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.LineaID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.LineaID.Width = 86;
+            this.LineaID.Width = 65;
             // 
             // MarcaID
             // 
@@ -398,7 +399,7 @@
             this.MarcaID.Name = "MarcaID";
             this.MarcaID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.MarcaID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.MarcaID.Width = 70;
+            this.MarcaID.Width = 65;
             // 
             // UnidadDeMedidaID
             // 
@@ -408,7 +409,7 @@
             this.UnidadDeMedidaID.Name = "UnidadDeMedidaID";
             this.UnidadDeMedidaID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.UnidadDeMedidaID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.UnidadDeMedidaID.Width = 40;
+            this.UnidadDeMedidaID.Width = 22;
             // 
             // UnidadDeEmpaque
             // 
@@ -424,7 +425,7 @@
             this.TiempoDeReposicion.DefaultCellStyle = dataGridViewCellStyle3;
             this.TiempoDeReposicion.HeaderText = "T. de Rep.";
             this.TiempoDeReposicion.Name = "TiempoDeReposicion";
-            this.TiempoDeReposicion.Width = 40;
+            this.TiempoDeReposicion.Width = 25;
             // 
             // Comision
             // 
@@ -435,7 +436,7 @@
             this.Comision.Name = "Comision";
             this.Comision.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Comision.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Comision.Width = 20;
+            this.Comision.Width = 10;
             // 
             // Servicio
             // 
@@ -443,7 +444,7 @@
             this.Servicio.Name = "Servicio";
             this.Servicio.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Servicio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Servicio.Width = 20;
+            this.Servicio.Width = 10;
             // 
             // Etiqueta
             // 
@@ -451,7 +452,7 @@
             this.Etiqueta.Name = "Etiqueta";
             this.Etiqueta.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Etiqueta.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Etiqueta.Width = 20;
+            this.Etiqueta.Width = 10;
             // 
             // SoloUna
             // 
@@ -459,14 +460,14 @@
             this.SoloUna.Name = "SoloUna";
             this.SoloUna.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.SoloUna.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.SoloUna.Width = 20;
+            this.SoloUna.Width = 10;
             // 
             // EsPar
             // 
             this.EsPar.HeaderText = "Par";
             this.EsPar.Name = "EsPar";
             this.EsPar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.EsPar.Width = 25;
+            this.EsPar.Width = 10;
             // 
             // CodigoDeBarra
             // 
@@ -474,7 +475,7 @@
             this.CodigoDeBarra.DefaultCellStyle = dataGridViewCellStyle5;
             this.CodigoDeBarra.HeaderText = "Código Barra";
             this.CodigoDeBarra.Name = "CodigoDeBarra";
-            this.CodigoDeBarra.Width = 82;
+            this.CodigoDeBarra.Width = 20;
             // 
             // Existencia
             // 
@@ -485,7 +486,7 @@
             this.Existencia.HeaderText = "Exist.";
             this.Existencia.Name = "Existencia";
             this.Existencia.ReadOnly = true;
-            this.Existencia.Width = 40;
+            this.Existencia.Width = 33;
             // 
             // Ventas
             // 
@@ -495,7 +496,7 @@
             this.Ventas.HeaderText = "Ventas";
             this.Ventas.Name = "Ventas";
             this.Ventas.ReadOnly = true;
-            this.Ventas.Width = 40;
+            this.Ventas.Width = 30;
             // 
             // Costo
             // 
@@ -506,7 +507,7 @@
             this.Costo.DefaultCellStyle = dataGridViewCellStyle8;
             this.Costo.HeaderText = "Costo";
             this.Costo.Name = "Costo";
-            this.Costo.Width = 60;
+            this.Costo.Width = 50;
             // 
             // CostoConDescuento
             // 
@@ -518,7 +519,7 @@
             // 
             this.Por1.HeaderText = "%1";
             this.Por1.Name = "Por1";
-            this.Por1.Width = 40;
+            this.Por1.Width = 28;
             // 
             // Precio1
             // 
@@ -538,13 +539,13 @@
             this.Precio1Ant.HeaderText = "P1 ant.";
             this.Precio1Ant.Name = "Precio1Ant";
             this.Precio1Ant.ReadOnly = true;
-            this.Precio1Ant.Width = 60;
+            this.Precio1Ant.Width = 50;
             // 
             // Por2
             // 
             this.Por2.HeaderText = "%2";
             this.Por2.Name = "Por2";
-            this.Por2.Width = 40;
+            this.Por2.Width = 28;
             // 
             // Precio2
             // 
@@ -564,13 +565,13 @@
             this.Precio2Ant.HeaderText = "P2 ant.";
             this.Precio2Ant.Name = "Precio2Ant";
             this.Precio2Ant.ReadOnly = true;
-            this.Precio2Ant.Width = 60;
+            this.Precio2Ant.Width = 50;
             // 
             // Por3
             // 
             this.Por3.HeaderText = "%3";
             this.Por3.Name = "Por3";
-            this.Por3.Width = 40;
+            this.Por3.Width = 28;
             // 
             // Precio3
             // 
@@ -590,13 +591,13 @@
             this.Precio3Ant.HeaderText = "P3 ant.";
             this.Precio3Ant.Name = "Precio3Ant";
             this.Precio3Ant.ReadOnly = true;
-            this.Precio3Ant.Width = 60;
+            this.Precio3Ant.Width = 50;
             // 
             // Por4
             // 
             this.Por4.HeaderText = "%4";
             this.Por4.Name = "Por4";
-            this.Por4.Width = 40;
+            this.Por4.Width = 28;
             // 
             // Precio4
             // 
@@ -616,13 +617,13 @@
             this.Precio4Ant.HeaderText = "P4 ant.";
             this.Precio4Ant.Name = "Precio4Ant";
             this.Precio4Ant.ReadOnly = true;
-            this.Precio4Ant.Width = 60;
+            this.Precio4Ant.Width = 50;
             // 
             // Por5
             // 
             this.Por5.HeaderText = "%5";
             this.Por5.Name = "Por5";
-            this.Por5.Width = 40;
+            this.Por5.Width = 28;
             // 
             // Precio5
             // 
@@ -642,7 +643,7 @@
             this.Precio5Ant.HeaderText = "P5 ant.";
             this.Precio5Ant.Name = "Precio5Ant";
             this.Precio5Ant.ReadOnly = true;
-            this.Precio5Ant.Width = 60;
+            this.Precio5Ant.Width = 50;
             // 
             // Master
             // 

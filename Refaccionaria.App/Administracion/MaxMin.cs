@@ -711,7 +711,8 @@ namespace Refaccionaria.App
         {
             string sReglasAp = "";
             // Se ejecuta la regla correspondiente si ya está asignada, si no, se ejecutan todas las reglas
-            if (oParte.ParteMaxMinReglaID > 0)
+            int iReglaID = oParte.ParteMaxMinReglaID.Valor();
+            if (iReglaID > 0 && General.Exists<ParteMaxMinRegla>(c => c.ParteMaxMinReglaID == iReglaID && c.Estatus))
             {
                 string sReglaID = oParte.ParteMaxMinReglaID.ToString();
                 string sPrefijoMet = ("Regla" + sReglaID + "_");

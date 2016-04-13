@@ -66,9 +66,9 @@
             // 
             this.button1.BackgroundImage = global::Refaccionaria.App.Properties.Resources.ok;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(391, 27);
+            this.button1.Location = new System.Drawing.Point(391, 34);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 32);
+            this.button1.Size = new System.Drawing.Size(24, 24);
             this.button1.TabIndex = 3;
             // 
             // label2
