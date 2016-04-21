@@ -829,6 +829,16 @@ namespace Refaccionaria.App
             return Res;
         }
 
+        private static void RegresarFolioDeFacrtura(string sFolio)
+        {
+            // Se obtiene el último folio de la serie especificada
+            string sUltFolio = Config.Valor("Facturacion.Folio");
+            int iFolioAnt = (Helper.ConvertirEntero(sUltFolio) - 1);
+            int iFolio = Helper.ConvertirEntero(sFolio);
+            if (iFolio == iFolioAnt)
+                Config.EstablecerValor("Facturacion.Folio", (iFolio).ToString());
+        }
+
         public static Dictionary<string, string> GenerarFolioDeFacturaDevolucion()
         {
             var Res = new Dictionary<string, string>();
@@ -1264,18 +1274,24 @@ namespace Refaccionaria.App
                 }
             }
 
+            // Se asigna el folio y la serie de la factura
+            var oFolioFactura = VentasProc.GenerarFolioDeFactura();
+            oFacturaE.Serie = oFolioFactura["Serie"];
+            oFacturaE.Folio = oFolioFactura["Folio"];
+
             // Se comienza a procesar la facturación electrónica
 
             // Se envía la factura y se obtiene el Xml generado
             var ResXml = VentasProc.FeEnviarFactura(ref oFacturaE);
             if (ResXml.Error)
+            {
+                // Se trata de regresar el folio de facturación apartado
+                VentasProc.RegresarFolioDeFacrtura(oFacturaE.Folio);
                 return new ResAcc<int>(false, ResXml.Mensaje);
+            }
             string sCfdiTimbrado = ResXml.Respuesta;
 
             // Se guarda la información
-            var oFolioFactura = VentasProc.GenerarFolioDeFactura();
-            oFacturaE.Serie = oFolioFactura["Serie"];
-            oFacturaE.Folio = oFolioFactura["Folio"];
             var oVentaFactura = new VentaFactura()
             {
                 Fecha = dAhora,
@@ -1318,7 +1334,7 @@ namespace Refaccionaria.App
 
             return new ResAcc<int>(true, oVentaFactura.VentaFacturaID);
         }
-        
+
         public static ResAcc<int> GenerarFacturaElectronica(List<int> VentasIDs, int iClienteID, string sObservacion)
         {
             return VentasProc.GenerarFacturaElectronica(VentasIDs, iClienteID, null, null, sObservacion, null);
