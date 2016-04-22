@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlDeCaja = new System.Windows.Forms.TabControl();
             this.tbpPendientes = new System.Windows.Forms.TabPage();
             this.dgvPendientes = new System.Windows.Forms.DataGridView();
@@ -48,6 +48,8 @@
             this.FolioDeCobro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CascoImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpHistorico = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtReimpresion = new Refaccionaria.Negocio.TextoMod();
             this.dgvHistorico = new System.Windows.Forms.DataGridView();
             this.hisCascoRegistroID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hisFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,7 +68,6 @@
             this.dtpHisDesde = new System.Windows.Forms.DateTimePicker();
             this.cmbHisSucursal = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtReimpresion = new Refaccionaria.Negocio.TextoMod();
             this.tabControlDeCaja.SuspendLayout();
             this.tbpPendientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPendientes)).BeginInit();
@@ -109,14 +110,14 @@
             this.dgvPendientes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvPendientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPendientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPendientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPendientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPendientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CascoRegistroID,
@@ -129,14 +130,14 @@
             this.NumeroDeParteRecibido,
             this.FolioDeCobro,
             this.CascoImporte});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPendientes.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPendientes.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPendientes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvPendientes.Location = new System.Drawing.Point(3, 3);
             this.dgvPendientes.MultiSelect = false;
@@ -144,8 +145,8 @@
             this.dgvPendientes.ReadOnly = true;
             this.dgvPendientes.RowHeadersVisible = false;
             this.dgvPendientes.RowHeadersWidth = 25;
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            this.dgvPendientes.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            this.dgvPendientes.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPendientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPendientes.Size = new System.Drawing.Size(905, 326);
             this.dgvPendientes.TabIndex = 3;
@@ -224,6 +225,7 @@
             // tbpHistorico
             // 
             this.tbpHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.tbpHistorico.Controls.Add(this.label4);
             this.tbpHistorico.Controls.Add(this.txtReimpresion);
             this.tbpHistorico.Controls.Add(this.dgvHistorico);
             this.tbpHistorico.Controls.Add(this.btnHisActualizar);
@@ -240,6 +242,29 @@
             this.tbpHistorico.TabIndex = 1;
             this.tbpHistorico.Text = "Histórico";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.LightSteelBlue;
+            this.label4.Location = new System.Drawing.Point(629, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(298, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Captura el folio de \"Control de Cascos\" que deseas reimprimir.";
+            // 
+            // txtReimpresion
+            // 
+            this.txtReimpresion.Etiqueta = "Reimprimir";
+            this.txtReimpresion.EtiquetaColor = System.Drawing.Color.Gray;
+            this.txtReimpresion.Location = new System.Drawing.Point(539, 6);
+            this.txtReimpresion.Name = "txtReimpresion";
+            this.txtReimpresion.PasarEnfoqueConEnter = false;
+            this.txtReimpresion.SeleccionarTextoAlEnfoque = true;
+            this.txtReimpresion.Size = new System.Drawing.Size(85, 20);
+            this.txtReimpresion.TabIndex = 4;
+            this.txtReimpresion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReimpresion_KeyPress);
+            // 
             // dgvHistorico
             // 
             this.dgvHistorico.AllowUserToAddRows = false;
@@ -251,14 +276,14 @@
             this.dgvHistorico.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvHistorico.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvHistorico.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHistorico.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHistorico.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvHistorico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHistorico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.hisCascoRegistroID,
@@ -271,14 +296,14 @@
             this.hisNumeroDeParteRecibido,
             this.hisFolioDeCobro,
             this.hisCascoImporte});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvHistorico.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvHistorico.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvHistorico.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvHistorico.Location = new System.Drawing.Point(3, 33);
             this.dgvHistorico.MultiSelect = false;
@@ -286,8 +311,8 @@
             this.dgvHistorico.ReadOnly = true;
             this.dgvHistorico.RowHeadersVisible = false;
             this.dgvHistorico.RowHeadersWidth = 25;
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            this.dgvHistorico.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            this.dgvHistorico.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvHistorico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvHistorico.Size = new System.Drawing.Size(902, 296);
             this.dgvHistorico.TabIndex = 5;
@@ -432,19 +457,6 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Sucursal";
             // 
-            // txtReimpresion
-            // 
-            this.txtReimpresion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtReimpresion.Etiqueta = "Reimprimir";
-            this.txtReimpresion.EtiquetaColor = System.Drawing.Color.Gray;
-            this.txtReimpresion.Location = new System.Drawing.Point(820, 7);
-            this.txtReimpresion.Name = "txtReimpresion";
-            this.txtReimpresion.PasarEnfoqueConEnter = false;
-            this.txtReimpresion.SeleccionarTextoAlEnfoque = true;
-            this.txtReimpresion.Size = new System.Drawing.Size(85, 20);
-            this.txtReimpresion.TabIndex = 4;
-            this.txtReimpresion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReimpresion_KeyPress);
-            // 
             // ControlDeCascos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -498,5 +510,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn hisFolioDeCobro;
         private System.Windows.Forms.DataGridViewTextBoxColumn hisCascoImporte;
         protected Negocio.TextoMod txtReimpresion;
+        private System.Windows.Forms.Label label4;
     }
 }
