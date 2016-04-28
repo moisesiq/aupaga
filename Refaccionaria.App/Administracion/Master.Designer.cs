@@ -379,7 +379,7 @@
             this.ProveedorID.Name = "ProveedorID";
             this.ProveedorID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ProveedorID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ProveedorID.Width = 50;
+            this.ProveedorID.Width = 40;
             // 
             // LineaID
             // 
@@ -389,7 +389,7 @@
             this.LineaID.Name = "LineaID";
             this.LineaID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.LineaID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.LineaID.Width = 65;
+            this.LineaID.Width = 40;
             // 
             // MarcaID
             // 
@@ -399,7 +399,7 @@
             this.MarcaID.Name = "MarcaID";
             this.MarcaID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.MarcaID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.MarcaID.Width = 65;
+            this.MarcaID.Width = 40;
             // 
             // UnidadDeMedidaID
             // 
@@ -417,7 +417,7 @@
             this.UnidadDeEmpaque.DefaultCellStyle = dataGridViewCellStyle2;
             this.UnidadDeEmpaque.HeaderText = "U. de Empaque";
             this.UnidadDeEmpaque.Name = "UnidadDeEmpaque";
-            this.UnidadDeEmpaque.Width = 40;
+            this.UnidadDeEmpaque.Width = 28;
             // 
             // TiempoDeReposicion
             // 
@@ -519,7 +519,7 @@
             // 
             this.Por1.HeaderText = "%1";
             this.Por1.Name = "Por1";
-            this.Por1.Width = 28;
+            this.Por1.Width = 30;
             // 
             // Precio1
             // 
@@ -545,7 +545,7 @@
             // 
             this.Por2.HeaderText = "%2";
             this.Por2.Name = "Por2";
-            this.Por2.Width = 28;
+            this.Por2.Width = 30;
             // 
             // Precio2
             // 
@@ -571,7 +571,7 @@
             // 
             this.Por3.HeaderText = "%3";
             this.Por3.Name = "Por3";
-            this.Por3.Width = 28;
+            this.Por3.Width = 30;
             // 
             // Precio3
             // 
@@ -597,7 +597,7 @@
             // 
             this.Por4.HeaderText = "%4";
             this.Por4.Name = "Por4";
-            this.Por4.Width = 28;
+            this.Por4.Width = 30;
             // 
             // Precio4
             // 
@@ -623,7 +623,7 @@
             // 
             this.Por5.HeaderText = "%5";
             this.Por5.Name = "Por5";
-            this.Por5.Width = 28;
+            this.Por5.Width = 30;
             // 
             // Precio5
             // 
