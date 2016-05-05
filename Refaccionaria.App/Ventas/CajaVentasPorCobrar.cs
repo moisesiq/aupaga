@@ -80,6 +80,8 @@ namespace Refaccionaria.App
         {
             if (!e.Row.Selected) return;
 
+            this.ctlCobro.Cancelar();
+
             int iVentaID = Helper.ConvertirEntero(e.Row.Cells["colVentaID"].Value);
             this.ctlDetalle.LlenarDetalle(iVentaID);
         }

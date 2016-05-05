@@ -252,7 +252,7 @@ namespace Refaccionaria.App
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
-            this.SendToBack();
+            this.Cancelar();
         }
 
         private void chkEfectivo_CheckedChanged(object sender, EventArgs e)
@@ -744,6 +744,11 @@ namespace Refaccionaria.App
             if (this.ctlNotasDeCredito == null)
                 return new List<int>();
             return this.ctlNotasDeCredito.NotasDeCreditoOtrosClientes();
+        }
+
+        public void Cancelar()
+        {
+            this.SendToBack();
         }
 
         #endregion

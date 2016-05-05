@@ -28,7 +28,8 @@ namespace Refaccionaria.App
 
         public string Observacion { get { return this.txtObservacion.Text; } }
 
-        public bool MostrarTodasLasPartes { get { return (this.dgvAFacturar.CurrentRow.Index == 0); } }
+        private bool _MostrarTodasLasPartes = false;
+        public bool MostrarTodasLasPartes { get { return this._MostrarTodasLasPartes; } }
 
         #endregion
 
@@ -108,12 +109,14 @@ namespace Refaccionaria.App
                 return;
             }
 
+            this._MostrarTodasLasPartes = false;
             if (Helper.ConvertirCadena(this.dgvAFacturar.CurrentRow.Cells["afFecha"].Value) == FacturarVentas.MostrarTodas)
             {
                 var Ventas = new List<int>();
                 foreach (DataGridViewRow Fila in this.dgvAFacturar.Rows)
                     Ventas.Add(Helper.ConvertirEntero(Fila.Cells["afVentaID"].Value));
                 this.MostrarDatosDeVentasVarias(Ventas);
+                this._MostrarTodasLasPartes = (this.dgvAFacturar.Rows.Count > 1);
             }
             else
             {
