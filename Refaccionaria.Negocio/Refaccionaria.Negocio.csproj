@@ -122,6 +122,12 @@
     <Compile Include="Formularios\MensajeObtenerValor.designer.cs">
       <DependentUpon>MensajeObtenerValor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\MensajeTexto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\MensajeTexto.Designer.cs">
+      <DependentUpon>MensajeTexto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\SeleccionListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\MensajeObtenerValor.resx">
       <DependentUpon>MensajeObtenerValor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\MensajeTexto.resx">
+      <DependentUpon>MensajeTexto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\SeleccionListado.resx">
       <DependentUpon>SeleccionListado.cs</DependentUpon>

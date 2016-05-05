@@ -45,6 +45,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabClientes = new System.Windows.Forms.TabControl();
             this.tabDatos = new System.Windows.Forms.TabPage();
+            this.btnAvisos = new System.Windows.Forms.Button();
             this.btnMaps = new System.Windows.Forms.Button();
             this.btnCobranza = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
@@ -93,6 +94,10 @@
             this.cboMetodoPago = new System.Windows.Forms.ComboBox();
             this.lblTipo = new System.Windows.Forms.Label();
             this.gpoCredito = new System.Windows.Forms.GroupBox();
+            this.txtCreditoObservacion = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtCreditoContacto = new System.Windows.Forms.TextBox();
             this.chkSiempreTicket = new System.Windows.Forms.CheckBox();
             this.txtDeudaActual = new System.Windows.Forms.TextBox();
             this.txtComentario = new System.Windows.Forms.TextBox();
@@ -205,6 +210,7 @@
             // tabDatos
             // 
             this.tabDatos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.tabDatos.Controls.Add(this.btnAvisos);
             this.tabDatos.Controls.Add(this.btnMaps);
             this.tabDatos.Controls.Add(this.btnCobranza);
             this.tabDatos.Controls.Add(this.btnExportar);
@@ -254,6 +260,21 @@
             this.tabDatos.Size = new System.Drawing.Size(992, 586);
             this.tabDatos.TabIndex = 0;
             this.tabDatos.Text = "Datos Generales";
+            // 
+            // btnAvisos
+            // 
+            this.btnAvisos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAvisos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnAvisos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAvisos.ForeColor = System.Drawing.Color.White;
+            this.btnAvisos.Location = new System.Drawing.Point(550, 560);
+            this.btnAvisos.Name = "btnAvisos";
+            this.btnAvisos.Size = new System.Drawing.Size(76, 23);
+            this.btnAvisos.TabIndex = 188;
+            this.btnAvisos.Text = "&Avisos";
+            this.btnAvisos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAvisos.UseVisualStyleBackColor = false;
+            this.btnAvisos.Click += new System.EventHandler(this.btnAvisos_Click);
             // 
             // btnMaps
             // 
@@ -871,6 +892,10 @@
             // gpoCredito
             // 
             this.gpoCredito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.gpoCredito.Controls.Add(this.txtCreditoObservacion);
+            this.gpoCredito.Controls.Add(this.label4);
+            this.gpoCredito.Controls.Add(this.label5);
+            this.gpoCredito.Controls.Add(this.txtCreditoContacto);
             this.gpoCredito.Controls.Add(this.chkSiempreTicket);
             this.gpoCredito.Controls.Add(this.txtDeudaActual);
             this.gpoCredito.Controls.Add(this.txtComentario);
@@ -904,6 +929,48 @@
             this.gpoCredito.TabIndex = 164;
             this.gpoCredito.TabStop = false;
             this.gpoCredito.Text = "Crédito";
+            // 
+            // txtCreditoObservacion
+            // 
+            this.txtCreditoObservacion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtCreditoObservacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCreditoObservacion.Location = new System.Drawing.Point(267, 279);
+            this.txtCreditoObservacion.Name = "txtCreditoObservacion";
+            this.txtCreditoObservacion.Size = new System.Drawing.Size(195, 20);
+            this.txtCreditoObservacion.TabIndex = 190;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(195, 282);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 189;
+            this.label4.Text = "Observación";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(7, 282);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 188;
+            this.label5.Text = "Contacto";
+            // 
+            // txtCreditoContacto
+            // 
+            this.txtCreditoContacto.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtCreditoContacto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCreditoContacto.Location = new System.Drawing.Point(63, 280);
+            this.txtCreditoContacto.Name = "txtCreditoContacto";
+            this.txtCreditoContacto.Size = new System.Drawing.Size(122, 20);
+            this.txtCreditoContacto.TabIndex = 187;
             // 
             // chkSiempreTicket
             // 
@@ -1086,7 +1153,7 @@
             this.dgvCredito.RowHeadersVisible = false;
             this.dgvCredito.RowHeadersWidth = 25;
             this.dgvCredito.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCredito.Size = new System.Drawing.Size(452, 125);
+            this.dgvCredito.Size = new System.Drawing.Size(452, 102);
             this.dgvCredito.TabIndex = 176;
             // 
             // lblVencido
@@ -2107,5 +2174,10 @@
         public System.Windows.Forms.TextBox txtImporteParaCobroPorEnvio;
         private System.Windows.Forms.CheckBox chkCobroPorEnvio;
         private System.Windows.Forms.CheckBox chkSiempreTicket;
+        public System.Windows.Forms.Button btnAvisos;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtCreditoObservacion;
+        private System.Windows.Forms.TextBox txtCreditoContacto;
     }
 }

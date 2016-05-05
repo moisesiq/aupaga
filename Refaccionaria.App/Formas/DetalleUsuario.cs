@@ -105,6 +105,8 @@ namespace Refaccionaria.App
                     this.clbAlertas.SetItemChecked(0, Helper.ConvertirBool(Usuario.AlertaCalendarioClientes));
                     this.clbAlertas.SetItemChecked(1, Helper.ConvertirBool(Usuario.AlertaPedidos));
                     this.clbAlertas.SetItemChecked(2, Helper.ConvertirBool(Usuario.Alerta9500));
+                    this.clbAlertas.SetItemChecked(3, Helper.ConvertirBool(Usuario.AlertaTraspasos));
+                    this.clbAlertas.SetItemChecked(4, Helper.ConvertirBool(Usuario.AlertaDevFacturaCreditoAnt));
 
                 }
             }
@@ -137,7 +139,9 @@ namespace Refaccionaria.App
                         Actualizar = true,
                         AlertaCalendarioClientes = this.clbAlertas.GetItemChecked(0),
                         AlertaPedidos = this.clbAlertas.GetItemChecked(1),
-                        Alerta9500 = this.clbAlertas.GetItemChecked(2)
+                        Alerta9500 = this.clbAlertas.GetItemChecked(2),
+                        AlertaTraspasos = this.clbAlertas.GetItemChecked(3),
+                        AlertaDevFacturaCreditoAnt = this.clbAlertas.GetItemChecked(4)
                     };
                     Negocio.General.SaveOrUpdate<Usuario>(usr, usr);
                     UpdateUsuarioPerfiles(usr.UsuarioID, lista);
@@ -173,6 +177,8 @@ namespace Refaccionaria.App
                     Usuario.AlertaCalendarioClientes = this.clbAlertas.GetItemChecked(0);
                     Usuario.AlertaPedidos = this.clbAlertas.GetItemChecked(1);
                     Usuario.Alerta9500 = this.clbAlertas.GetItemChecked(2);
+                    Usuario.AlertaTraspasos = this.clbAlertas.GetItemChecked(3);
+                    Usuario.AlertaDevFacturaCreditoAnt = this.clbAlertas.GetItemChecked(4);
 
                     Negocio.General.SaveOrUpdate<Usuario>(Usuario, Usuario);
                     UpdateUsuarioPerfiles(Usuario.UsuarioID, lista);
@@ -237,6 +243,8 @@ namespace Refaccionaria.App
                 ((ListBox)clbAlertas).Items.Add("Alerta de Calendario de Clientes");
                 ((ListBox)clbAlertas).Items.Add("Alerta de Pedidos");
                 ((ListBox)clbAlertas).Items.Add("Alerta de 9500");
+                ((ListBox)clbAlertas).Items.Add("Alerta de Traspasos");
+                ((ListBox)clbAlertas).Items.Add("Alerta de Devolución factura crédito de días ant.");
                 
             }
             catch (Exception ex)

@@ -329,5 +329,35 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        #region [ Relacionado con Clientes ]
+
+        public static void MostrarEventosClientes(bool bAbiertoManual)
+        {
+            DateTime dHoy = DateTime.Now.Date;
+            DateTime dManiana = dHoy.AddDays(1);
+            var oAlertas = General.GetListOf<ClientesEventosCalendarioView>(c => c.Fecha >= dHoy && c.Fecha < dManiana && !c.Revisado).OrderBy(c => c.Fecha);
+
+            Eventos.Instance.LimpiarEventos();
+            foreach (var oReg in oAlertas)
+            {
+                /* if (oReg.Fecha < DateTime.Now)
+                    AdmonProc.MostrarRecordatorioClientes(oReg.ClienteEventoCalendarioID);
+                else
+                    Program.oTimers.Add("AlertaPedido" + Program.oTimers.Count.ToString(), new System.Threading.Timer(new TimerCallback(AdmonProc.MostrarRecordatorioClientes)
+                        , oReg.ClienteEventoCalendarioID, (int)(oReg.Fecha - DateTime.Now).TotalMilliseconds, Timeout.Infinite));
+                */
+
+                Eventos.Instance.AgregarEvento(oReg.ClienteEventoCalendarioID, oReg.Fecha, oReg.Cliente, oReg.Evento);
+            }
+
+            // Se muestra el formulario de eventos
+            if (oAlertas.Count() > 0)
+                Eventos.Instance.Show();
+            else if (bAbiertoManual)
+                UtilLocal.MensajeAdvertencia("No hay avisos pendientes por notificar.");
+        }
+
+        #endregion
     }
 }

@@ -136,6 +136,8 @@ namespace Refaccionaria.App
                         Tolerancia = this.chkTolerancia.Checked,
                         DiasDeCredito = Helper.ConvertirEntero(this.txtPlazo.Text),
                         LimiteCredito = Helper.ConvertirDecimal(this.txtLimite.Text),
+                        CobranzaContacto = this.txtCreditoContacto.Text,
+                        CobranzaObservacion = this.txtCreditoObservacion.Text,
 
                         TipoFormaPagoID = Helper.ConvertirEntero(this.cboMetodoPago.SelectedValue) > 0 ? Helper.ConvertirEntero(this.cboMetodoPago.SelectedValue) : default(int?),
                         BancoID = Helper.ConvertirEntero(this.cboBanco.SelectedValue) > 0 ? Helper.ConvertirEntero(this.cboBanco.SelectedValue) : default(int?),
@@ -242,6 +244,8 @@ namespace Refaccionaria.App
                     Cliente.Tolerancia = this.chkTolerancia.Checked;
                     Cliente.DiasDeCredito = Helper.ConvertirEntero(this.txtPlazo.Text);
                     Cliente.LimiteCredito = Helper.ConvertirDecimal(this.txtLimite.Text);
+                    Cliente.CobranzaContacto = this.txtCreditoContacto.Text;
+                    Cliente.CobranzaObservacion = this.txtCreditoObservacion.Text;
 
                     Cliente.TipoFormaPagoID = Helper.ConvertirEntero(this.cboMetodoPago.SelectedValue);
                     Cliente.BancoID = Helper.ConvertirEntero(this.cboBanco.SelectedValue);
@@ -499,6 +503,11 @@ namespace Refaccionaria.App
             }
         }
 
+        private void btnAvisos_Click(object sender, EventArgs e)
+        {
+            Eventos.Instance.Show();
+        }
+
         #endregion
 
         #region [ Metodos ]
@@ -568,6 +577,7 @@ namespace Refaccionaria.App
             this.txtTelCelular.Clear();
             this.txtNextel.Clear();
             this.txtFechaIngreso.Clear();
+
             this.txtPlazo.Clear();
             this.txtPromedioPagoTotal.Clear();
             this.txtPromedioPago3meses.Clear();
@@ -576,6 +586,9 @@ namespace Refaccionaria.App
             this.txtVencido.Clear();
             this.chkTieneCredito.Checked = false;
             this.chkTolerancia.Checked = false;
+            this.txtCreditoContacto.Clear();
+            this.txtCreditoObservacion.Clear();
+
             this.chkSiempreFactura.Checked = false;
             this.chkSiempreTicket.Checked = false;
             this.chkSiempreVale.Checked = false;
@@ -802,10 +815,14 @@ namespace Refaccionaria.App
                     this.txtTelParticular.Text = cliente.Particular;
                     this.txtTelCelular.Text = cliente.Celular;
                     this.txtNextel.Text = cliente.Nextel;
+                    
                     this.txtPlazo.Text = Helper.ConvertirCadena(cliente.DiasDeCredito);
                     this.txtLimite.Text = Helper.DecimalToCadenaMoneda(cliente.LimiteCredito);
                     this.chkTieneCredito.Checked = Helper.ConvertirBool(cliente.TieneCredito);
                     this.chkTolerancia.Checked = Helper.ConvertirBool(cliente.Tolerancia);
+                    this.txtCreditoContacto.Text = cliente.CobranzaContacto;
+                    this.txtCreditoObservacion.Text = cliente.CobranzaObservacion;
+
                     if (cliente.TipoFormaPagoID != null)
                         this.cboMetodoPago.SelectedValue = cliente.TipoFormaPagoID;
                     if (cliente.BancoID != null)
@@ -1487,6 +1504,6 @@ namespace Refaccionaria.App
                 ClearFolder(diSubFolder); // Call recursively for all subfolders
             }
         }
-        
+
     }
 }

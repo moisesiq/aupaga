@@ -208,7 +208,8 @@ namespace Refaccionaria.App
                     var oFondo = General.GetEntity<CajaEfectivoPorDiaView>(q => q.CajaEfectivoPorDiaID == oAut.TablaRegistroID);
                     if (oFondo == null) { bNoEncontrado = true; break; }
                     // Se obtiene el registro del día anterior, para obtener el importe del cierre
-                    var oDias = General.GetListOf<CajaEfectivoPorDia>(q => q.CajaEfectivoPorDiaID < oFondo.CajaEfectivoPorDiaID && q.Estatus);
+                    var oDias = General.GetListOf<CajaEfectivoPorDia>(q => q.CajaEfectivoPorDiaID < oFondo.CajaEfectivoPorDiaID 
+                        && q.SucursalID == oAut.SucursalID && q.Estatus);
                     int iAnteriorID = (oDias.Count > 0 ? oDias.Max(r => r.CajaEfectivoPorDiaID) : 0);
                     var oCorteAnt = General.GetEntity<CajaEfectivoPorDiaView>(q => q.CajaEfectivoPorDiaID == iAnteriorID);
                     //

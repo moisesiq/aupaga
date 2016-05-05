@@ -508,5 +508,11 @@ namespace Refaccionaria.Modelo
         {
             public const int Particular = 3;
         }
+
+        public class TraspasosContingenciasEstatus
+        {
+            public const int Solucionado = 1;
+            public const int NoSolucionado = 2;
+        }
     }
 }

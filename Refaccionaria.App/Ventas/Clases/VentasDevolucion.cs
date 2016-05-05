@@ -302,6 +302,14 @@ namespace Refaccionaria.App
                 }
                 */
             }
+
+            // Se manda aviso de cancelación de factura a crédito de días anteriores, si aplica
+            if (oVentaV.Facturada && oVentaV.ACredito && oVentaV.Fecha < DateTime.Now.Date)
+            {
+                var oUsuarios = General.GetListOf<Usuario>(c => c.AlertaDevFacturaCreditoAnt == true && c.Estatus);
+                foreach (var oReg in oUsuarios)
+                    Proc.EnviarMensajeTcp(oReg.Ip, Proc.MensajesTcp.DevolucionFacturaCreditoAnt, oIdsDev[0].ToString());
+            }
             
             // Se muestra una notifiación con el resultado
             UtilLocal.MostrarNotificacion((bCancelacion ? "Cancelación" : "Devolución") + " guardada correctamente.");

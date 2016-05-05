@@ -460,6 +460,25 @@ namespace Refaccionaria.App
                 return General.Exists<VentasFacturasView>(c => c.VentaFacturaID == oVentaFaDe.VentaFacturaID && c.Ventas > 1);
         }
 
+        public static void MostrarAvisoDevolucionFacturaCreditoAnt(int iDevolucionID)
+        {
+            if (Principal.Instance.InvokeRequired)
+            {
+                Principal.Instance.Invoke(new Action<int>(VentasProc.MostrarAvisoDevolucionFacturaCreditoAnt), iDevolucionID);
+            }
+            else
+            {
+                var oDevV = General.GetEntity<VentasDevolucionesView>(c => c.VentaDevolucionID == iDevolucionID);
+                AvisoDevolucionFacturaCreditoAnt.Instance.AgregarTexto("Cliente: " + oDevV.Cliente);
+                AvisoDevolucionFacturaCreditoAnt.Instance.AgregarTexto("Folio: " + oDevV.FolioDeVenta);
+                AvisoDevolucionFacturaCreditoAnt.Instance.AgregarTexto("Motivo: " + oDevV.Motivo);
+                AvisoDevolucionFacturaCreditoAnt.Instance.AgregarTexto("Observación: " + oDevV.Observacion);
+                AvisoDevolucionFacturaCreditoAnt.Instance.AgregarTexto("Acción: " + oDevV.FormaDePago);
+                AvisoDevolucionFacturaCreditoAnt.Instance.AgregarTexto("Usuario: " + oDevV.Realizo);
+                AvisoDevolucionFacturaCreditoAnt.Instance.Show();
+            }
+        }
+
         #region [ Clientes ]
 
         public static int ObtenerClienteID(string sMensaje, bool bVentasMostrador)
@@ -764,12 +783,16 @@ namespace Refaccionaria.App
             int iClienteID = oCobradas[0].ClienteID;
             var oClienteV = General.GetEntity<ClientesDatosView>(q => q.ClienteID == iClienteID);
 
+            // Se agrupan las facturas de varios tickets
+            var oCobradasAg = oCobradas.GroupBy(c => c.Folio).Select(c => new { Folio = c.Key, Fecha = c.Min(s => s.Fecha), Vencimiento = c.Min(s => s.Vencimiento)
+                , Total = c.Sum(s => s.Total), Pagado = c.Sum(s => s.Pagado), Restante = c.Sum(s => s.Restante)});
+
             // Se genera el reporte
             var oRep = new Report();
             oRep.Load(GlobalClass.ConfiguracionGlobal.pathReportes + "CobranzaTicket.frx");
             VentasProc.TicketAgregarLeyendas(ref oRep);
             oRep.RegisterData(new List<ClientesDatosView>() { oClienteV }, "Cliente");
-            oRep.RegisterData(oCobradas, "Ventas");
+            oRep.RegisterData(oCobradasAg, "Ventas");
             oRep.SetParameterValue("TotalPagado", mTotalPagado);
             oRep.SetParameterValue("TotalPagadoLetra", sPagadoLetra);
             //

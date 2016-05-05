@@ -548,9 +548,15 @@ namespace Refaccionaria.App
                 this.pcbEqu_Imagen.Image = null;
                 if (this.dgvEquivalentes.CurrentRow == null) return;
                 int iParteID = Helper.ConvertirEntero(this.dgvEquivalentes.CurrentRow.Cells["equ_ParteIDEquivalente"].Value);
+                // Se carga la imagen
                 string sImagen = AdmonProc.ObtenerImagenParte(iParteID);
                 if (File.Exists(sImagen))
                     this.pcbEqu_Imagen.Image = Image.FromFile(sImagen);
+                // Para cargar los grids
+                this.CargaExistencias(iParteID);
+                this.ctlVentasPorMes.LlenarDatos(iParteID);
+                this.dgvExistencias.CambiarColorDeFondo(Color.CadetBlue);
+                this.ctlVentasPorMes.dgvDatos.CambiarColorDeFondo(Color.CadetBlue);
             }
         }
 
@@ -1517,6 +1523,10 @@ namespace Refaccionaria.App
 
             // Se llenan los datos de las ventas por mes
             this.ctlVentasPorMes.LlenarDatos(iParteID);
+
+            // Para cambiar el color de fondo de algunos grids
+            this.dgvExistencias.CambiarColorDeFondo(Color.FromArgb(58, 79, 109));
+            this.ctlVentasPorMes.dgvDatos.CambiarColorDeFondo(Color.FromArgb(188, 199, 216));
         }
 
         public void LimpiarFormulario()

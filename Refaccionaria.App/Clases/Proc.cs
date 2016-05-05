@@ -240,27 +240,18 @@ namespace Refaccionaria.App
                 }
             }
 
+            // Se verifica la alterta de traspasos
+            if (oUsuario.AlertaTraspasos.Valor())
+            {
+                if (General.Exists<MovimientoInventarioTraspasoContingencia>(
+                    c => c.MovimientoInventarioEstatusContingenciaID == Cat.TraspasosContingenciasEstatus.NoSolucionado))
+                    UtilLocal.MensajeAdvertencia("Existen conflictos de traspasos sin resolver.");
+            }
+
             // Se configuran los recordatorios para Cobros a Clientes, si aplica
             if (oUsuario.AlertaCalendarioClientes.Valor())
             {
-                DateTime dManiana = DateTime.Now.Date.AddDays(1);
-                var oAlertas = General.GetListOf<ClientesEventosCalendarioView>(c => c.Fecha < dManiana && !c.Revisado).OrderBy(c => c.Fecha);
-
-                foreach (var oReg in oAlertas)
-                {
-                    /* if (oReg.Fecha < DateTime.Now)
-                        AdmonProc.MostrarRecordatorioClientes(oReg.ClienteEventoCalendarioID);
-                    else
-                        Program.oTimers.Add("AlertaPedido" + Program.oTimers.Count.ToString(), new System.Threading.Timer(new TimerCallback(AdmonProc.MostrarRecordatorioClientes)
-                            , oReg.ClienteEventoCalendarioID, (int)(oReg.Fecha - DateTime.Now).TotalMilliseconds, Timeout.Infinite));
-                    */
-
-                    Eventos.Instance.AgregarEvento(oReg.ClienteEventoCalendarioID, oReg.Fecha, oReg.Cliente, oReg.Evento);
-                }
-
-                // Se muestra el formulario de eventos
-                if (oAlertas.Count() > 0)
-                    Eventos.Instance.Show();
+                Eventos.Instance.Show();
             }
 
 
@@ -280,6 +271,7 @@ namespace Refaccionaria.App
         public class MensajesTcp
         {
             public const string Alerta9500 = "01";
+            public const string DevolucionFacturaCreditoAnt = "02";
         }
 
         public static void EnviarMensajeTcp(string sEquipo, string sCodigo, string sMensaje)
@@ -309,6 +301,10 @@ namespace Refaccionaria.App
             {
                 case MensajesTcp.Alerta9500:
                     Helper.MensajeInformacion(sMensaje, "Notificación");
+                    break;
+                case MensajesTcp.DevolucionFacturaCreditoAnt:
+                    int iDevolucionID = Helper.ConvertirEntero(sMensaje);
+                    VentasProc.MostrarAvisoDevolucionFacturaCreditoAnt(iDevolucionID);
                     break;
             }
         }

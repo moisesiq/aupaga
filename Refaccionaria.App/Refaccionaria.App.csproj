@@ -740,17 +740,17 @@
     <Compile Include="Ventas\CotizacionesVentas.Designer.cs">
       <DependentUpon>CotizacionesVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ventas\Formas\AvisoDevolucionFacturaCreditoAnt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\Formas\AvisoDevolucionFacturaCreditoAnt.Designer.cs">
+      <DependentUpon>AvisoDevolucionFacturaCreditoAnt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\Formas\Duck.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Ventas\Formas\Duck.Designer.cs">
       <DependentUpon>Duck.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Formas\Gen\MensajeTexto.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formas\Gen\MensajeTexto.Designer.cs">
-      <DependentUpon>MensajeTexto.cs</DependentUpon>
     </Compile>
     <Compile Include="Formas\Gen\ObtenerValores.cs">
       <SubType>Form</SubType>
@@ -1828,11 +1828,11 @@
     <EmbeddedResource Include="Ventas\CotizacionesVentas.resx">
       <DependentUpon>CotizacionesVentas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\Formas\AvisoDevolucionFacturaCreditoAnt.resx">
+      <DependentUpon>AvisoDevolucionFacturaCreditoAnt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ventas\Formas\Duck.resx">
       <DependentUpon>Duck.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formas\Gen\MensajeTexto.resx">
-      <DependentUpon>MensajeTexto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formas\Gen\ObtenerValores.resx">
       <DependentUpon>ObtenerValores.cs</DependentUpon>

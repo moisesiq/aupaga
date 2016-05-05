@@ -533,7 +533,13 @@ namespace Refaccionaria.Negocio
             oGrid.Columns[sNombre].ValueType = typeof(string);
             oGrid.Columns[sNombre].Width = iWidth;
         }
-                
+
+        public static void CambiarColorDeFondo(this DataGridView oGrid, Color oColor)
+        {
+            oGrid.BackgroundColor = oColor;
+            oGrid.DefaultCellStyle.BackColor = oColor;
+        }
+
         public static void EntrarPantallaCompleta(this Form oForm)
         {
             oForm.WindowState = FormWindowState.Normal;
@@ -545,6 +551,44 @@ namespace Refaccionaria.Negocio
         {
             oForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             oForm.WindowState = FormWindowState.Normal;
+        }
+
+        public static void CopiarPropiedades(Control oFuente, Control oDestino, params string[] aExcluir)
+        {
+            // Se hacen todas las propiedades minúsculas, para evitar problemas de cómo lo manden
+            for (int i = 0; i < aExcluir.Length; i++)
+                aExcluir[i] = aExcluir[i].ToLower();
+
+            if (!aExcluir.Contains("anchor"))
+                oDestino.Anchor = oFuente.Anchor;
+            if (!aExcluir.Contains("autosize"))
+                oDestino.AutoSize = oFuente.AutoSize;
+            if (!aExcluir.Contains("backcolor"))
+                oDestino.BackColor = oFuente.BackColor;
+            if (!aExcluir.Contains("backgroundimage"))
+                oDestino.BackgroundImage = oFuente.BackgroundImage;
+            if (!aExcluir.Contains("backgroundimagelayout"))
+                oDestino.BackgroundImageLayout = oFuente.BackgroundImageLayout;
+            if (!aExcluir.Contains("dock"))
+                oDestino.Dock = oFuente.Dock;
+            if (!aExcluir.Contains("enabled"))
+                oDestino.Enabled = oFuente.Enabled;
+            if (!aExcluir.Contains("font"))
+                oDestino.Font = oFuente.Font;
+            if (!aExcluir.Contains("forecolor"))
+                oDestino.ForeColor = oFuente.ForeColor;
+            if (!aExcluir.Contains("height"))
+                oDestino.Height = oFuente.Height;
+            if (!aExcluir.Contains("left"))
+                oDestino.Left = oFuente.Left;
+            if (!aExcluir.Contains("text"))
+                oDestino.Text = oFuente.Text;
+            if (!aExcluir.Contains("top"))
+                oDestino.Top = oFuente.Top;
+            if (!aExcluir.Contains("visible"))
+                oDestino.Visible = oFuente.Visible;
+            if (!aExcluir.Contains("width"))
+                oDestino.Width = oFuente.Width;
         }
 
         #endregion
@@ -1704,5 +1748,6 @@ namespace Refaccionaria.Negocio
         }
 
         #endregion
+
     }
 }

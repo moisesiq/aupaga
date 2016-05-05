@@ -2931,13 +2931,13 @@ namespace Refaccionaria.App
                     {
                         if (parte.Etiqueta != null)
                             if (Helper.ConvertirBool(parte.Etiqueta) == true)
-                                if (parte.SoloUnaEtiqueta != null)
+                                // if (parte.SoloUnaEtiqueta != null)
                                     if (Helper.ConvertirBool(parte.SoloUnaEtiqueta) == true)
                                         this.dgvDiferencia.Rows[rowIndex].Cells["Etiqueta"].Value = 1;
                                     else
                                         this.dgvDiferencia.Rows[rowIndex].Cells["Etiqueta"].Value = uns;
-                                else
-                                    this.dgvDiferencia.Rows[rowIndex].Cells["Etiqueta"].Value = 0;
+                                // else
+                                //     this.dgvDiferencia.Rows[rowIndex].Cells["Etiqueta"].Value = 0;
                     }
                 }
             }
@@ -3688,7 +3688,7 @@ namespace Refaccionaria.App
                     if (parte.Etiqueta != null)
                     {
                         if (Helper.ConvertirBool(parte.Etiqueta) == true)
-                            if (parte.SoloUnaEtiqueta != null)
+                            // if (parte.SoloUnaEtiqueta != null)
                                 if (Helper.ConvertirBool(parte.SoloUnaEtiqueta) == true)
                                     row["Etiqueta"] = 1;
                                 else

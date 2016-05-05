@@ -316,7 +316,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvDatos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Year1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Year2;
@@ -334,5 +333,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mes12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
+        public System.Windows.Forms.DataGridView dgvDatos;
     }
 }

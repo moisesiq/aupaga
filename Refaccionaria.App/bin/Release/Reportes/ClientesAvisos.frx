@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="04/21/2016 19:02:04" ReportInfo.CreatorVersion="2013.3.2.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="Avisos" ReferenceName="Avisos" DataType="System.Collections.Generic.List`1[[Refaccionaria.App.CobroCliente, THEOS, Version=1.16.25.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="Fecha" DataType="System.DateTime"/>
+      <Column Name="Cliente" DataType="System.String"/>
+      <Column Name="Adeudo" DataType="System.Decimal"/>
+      <Column Name="Vencido" DataType="System.Decimal"/>
+      <Column Name="Contacto" DataType="System.String"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="200" PaperHeight="279.4" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <PageHeaderBand Name="PageHeader1" Width="756" Height="69.93">
+      <TextObject Name="Text2" Left="9.45" Width="94.5" Height="18.9" Text="Fecha"/>
+      <TextObject Name="Text4" Left="113.4" Width="94.5" Height="18.9" Text="Cliente"/>
+      <TextObject Name="Text6" Left="217.35" Width="94.5" Height="18.9" Text="Adeudo"/>
+      <TextObject Name="Text8" Left="321.3" Width="94.5" Height="18.9" Text="Vencido"/>
+      <TextObject Name="Text10" Left="425.25" Width="94.5" Height="18.9" Text="Contacto"/>
+    </PageHeaderBand>
+    <DataBand Name="Data4" Top="73.93" Width="756" Height="69.48" DataSource="Avisos">
+      <TextObject Name="Text1" Left="9.45" Width="94.5" Height="18.9" Text="[Avisos.Fecha]" Format="Date" Format.Format="d"/>
+      <TextObject Name="Text3" Left="113.4" Width="321.3" Height="18.9" Text="[Avisos.Cliente]"/>
+      <TextObject Name="Text5" Left="444.15" Width="94.5" Height="18.9" Text="[Avisos.Adeudo]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text7" Left="548.1" Width="94.5" Height="18.9" Text="[Avisos.Vencido]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text9" Left="652.05" Width="94.5" Height="18.9" Text="[Avisos.Contacto]"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="147.41" Width="756" Height="75.6"/>
+  </ReportPage>
+</Report>
