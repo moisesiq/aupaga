@@ -1825,6 +1825,9 @@
     <EmbeddedResource Include="Validaciones\ValCortes.resx">
       <DependentUpon>ValCortes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\CajaRefuerzo.resx">
+      <DependentUpon>CajaRefuerzo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ventas\CotizacionesVentas.resx">
       <DependentUpon>CotizacionesVentas.cs</DependentUpon>
     </EmbeddedResource>

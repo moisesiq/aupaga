@@ -46,6 +46,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -59,14 +67,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvSucursales = new System.Windows.Forms.DataGridView();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.dgvProveedores = new System.Windows.Forms.DataGridView();
@@ -80,6 +80,22 @@
             this.tabPedidos = new System.Windows.Forms.TabControl();
             this.tabSugeridos = new System.Windows.Forms.TabPage();
             this.dgvSugeridos = new System.Windows.Forms.DataGridView();
+            this.sug_ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_ProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.sug_NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_UnidadDeEmpaque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_AbcDeVentas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_NecesidadMatriz = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_NecesidadSuc02 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_NecesidadSuc03 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_CostoConDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sug_Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmsSugeridos = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tmiSugeridosQuitar = new System.Windows.Forms.ToolStripMenuItem();
             this.tabYaPedidos = new System.Windows.Forms.TabPage();
@@ -117,24 +133,8 @@
             this.ctlLineas = new Refaccionaria.Negocio.ComboMultiSel();
             this.ctlMarcas = new Refaccionaria.Negocio.ComboMultiSel();
             this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
-            this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
             this.label6 = new System.Windows.Forms.Label();
-            this.sug_ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_ProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.sug_NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_UnidadDeEmpaque = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_AbcDeVentas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_NecesidadMatriz = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_NecesidadSuc02 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_NecesidadSuc03 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_Pedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_CostoConDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sug_Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExistencias)).BeginInit();
@@ -487,6 +487,150 @@
             this.dgvSugeridos.Sorted += new System.EventHandler(this.dgvSugeridos_Sorted);
             this.dgvSugeridos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvSugeridos_KeyDown);
             this.dgvSugeridos.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvSugeridos_KeyUp);
+            // 
+            // sug_ParteID
+            // 
+            this.sug_ParteID.HeaderText = "ParteID";
+            this.sug_ParteID.Name = "sug_ParteID";
+            this.sug_ParteID.Visible = false;
+            // 
+            // sug_ProveedorID
+            // 
+            this.sug_ProveedorID.HeaderText = "ProveedorID";
+            this.sug_ProveedorID.Name = "sug_ProveedorID";
+            this.sug_ProveedorID.ReadOnly = true;
+            this.sug_ProveedorID.Visible = false;
+            // 
+            // sug_Sel
+            // 
+            this.sug_Sel.HeaderText = "Sel";
+            this.sug_Sel.Name = "sug_Sel";
+            this.sug_Sel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.sug_Sel.Width = 40;
+            // 
+            // sug_NumeroDeParte
+            // 
+            this.sug_NumeroDeParte.HeaderText = "No. de Parte";
+            this.sug_NumeroDeParte.Name = "sug_NumeroDeParte";
+            this.sug_NumeroDeParte.ReadOnly = true;
+            this.sug_NumeroDeParte.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_NumeroDeParte.Width = 80;
+            // 
+            // sug_Descripcion
+            // 
+            this.sug_Descripcion.HeaderText = "Descripción";
+            this.sug_Descripcion.Name = "sug_Descripcion";
+            this.sug_Descripcion.ReadOnly = true;
+            this.sug_Descripcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_Descripcion.Width = 300;
+            // 
+            // sug_UnidadDeEmpaque
+            // 
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "N2";
+            this.sug_UnidadDeEmpaque.DefaultCellStyle = dataGridViewCellStyle16;
+            this.sug_UnidadDeEmpaque.HeaderText = "U. Emp.";
+            this.sug_UnidadDeEmpaque.Name = "sug_UnidadDeEmpaque";
+            this.sug_UnidadDeEmpaque.ReadOnly = true;
+            this.sug_UnidadDeEmpaque.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_UnidadDeEmpaque.Width = 50;
+            // 
+            // sug_AbcDeVentas
+            // 
+            this.sug_AbcDeVentas.HeaderText = "Abc";
+            this.sug_AbcDeVentas.Name = "sug_AbcDeVentas";
+            this.sug_AbcDeVentas.ReadOnly = true;
+            this.sug_AbcDeVentas.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_AbcDeVentas.Width = 50;
+            // 
+            // sug_NecesidadMatriz
+            // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle17.Format = "N2";
+            this.sug_NecesidadMatriz.DefaultCellStyle = dataGridViewCellStyle17;
+            this.sug_NecesidadMatriz.HeaderText = "Matriz";
+            this.sug_NecesidadMatriz.Name = "sug_NecesidadMatriz";
+            this.sug_NecesidadMatriz.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_NecesidadMatriz.Width = 60;
+            // 
+            // sug_NecesidadSuc02
+            // 
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Format = "N2";
+            this.sug_NecesidadSuc02.DefaultCellStyle = dataGridViewCellStyle18;
+            this.sug_NecesidadSuc02.HeaderText = "Suc 02";
+            this.sug_NecesidadSuc02.Name = "sug_NecesidadSuc02";
+            this.sug_NecesidadSuc02.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_NecesidadSuc02.Width = 60;
+            // 
+            // sug_NecesidadSuc03
+            // 
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Format = "N2";
+            this.sug_NecesidadSuc03.DefaultCellStyle = dataGridViewCellStyle19;
+            this.sug_NecesidadSuc03.HeaderText = "Suc 03";
+            this.sug_NecesidadSuc03.Name = "sug_NecesidadSuc03";
+            this.sug_NecesidadSuc03.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_NecesidadSuc03.Width = 60;
+            // 
+            // sug_Total
+            // 
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "N2";
+            this.sug_Total.DefaultCellStyle = dataGridViewCellStyle20;
+            this.sug_Total.HeaderText = "Total";
+            this.sug_Total.Name = "sug_Total";
+            this.sug_Total.ReadOnly = true;
+            this.sug_Total.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_Total.Width = 70;
+            // 
+            // sug_Pedido
+            // 
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.Format = "N2";
+            this.sug_Pedido.DefaultCellStyle = dataGridViewCellStyle21;
+            this.sug_Pedido.HeaderText = "Pedido";
+            this.sug_Pedido.Name = "sug_Pedido";
+            this.sug_Pedido.ReadOnly = true;
+            this.sug_Pedido.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_Pedido.Width = 60;
+            // 
+            // sug_CostoConDescuento
+            // 
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle22.Format = "C2";
+            this.sug_CostoConDescuento.DefaultCellStyle = dataGridViewCellStyle22;
+            this.sug_CostoConDescuento.HeaderText = "Costo desc.";
+            this.sug_CostoConDescuento.Name = "sug_CostoConDescuento";
+            this.sug_CostoConDescuento.ReadOnly = true;
+            this.sug_CostoConDescuento.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_CostoConDescuento.Width = 75;
+            // 
+            // sug_CostoTotal
+            // 
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.Format = "C2";
+            this.sug_CostoTotal.DefaultCellStyle = dataGridViewCellStyle23;
+            this.sug_CostoTotal.HeaderText = "Costo total";
+            this.sug_CostoTotal.Name = "sug_CostoTotal";
+            this.sug_CostoTotal.ReadOnly = true;
+            this.sug_CostoTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.sug_CostoTotal.Width = 75;
+            // 
+            // sug_Observacion
+            // 
+            this.sug_Observacion.HeaderText = "Observación";
+            this.sug_Observacion.Name = "sug_Observacion";
+            this.sug_Observacion.ReadOnly = true;
+            this.sug_Observacion.Visible = false;
+            // 
+            // sug_Caracteristica
+            // 
+            this.sug_Caracteristica.HeaderText = "Característica";
+            this.sug_Caracteristica.Name = "sug_Caracteristica";
+            this.sug_Caracteristica.ReadOnly = true;
+            this.sug_Caracteristica.Visible = false;
             // 
             // cmsSugeridos
             // 
@@ -1009,15 +1153,6 @@
             this.txtDescripcionMaxMin.Size = new System.Drawing.Size(765, 13);
             this.txtDescripcionMaxMin.TabIndex = 315;
             // 
-            // ctlVentasPorMes
-            // 
-            this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctlVentasPorMes.Location = new System.Drawing.Point(631, 560);
-            this.ctlVentasPorMes.Name = "ctlVentasPorMes";
-            this.ctlVentasPorMes.Size = new System.Drawing.Size(754, 104);
-            this.ctlVentasPorMes.TabIndex = 314;
-            // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -1033,157 +1168,22 @@
             this.label6.TabIndex = 306;
             this.label6.Text = "Descripción por tienda del Máximo y Mínimo:";
             // 
-            // sug_ParteID
+            // ctlVentasPorMes
             // 
-            this.sug_ParteID.HeaderText = "ParteID";
-            this.sug_ParteID.Name = "sug_ParteID";
-            this.sug_ParteID.Visible = false;
-            // 
-            // sug_ProveedorID
-            // 
-            this.sug_ProveedorID.HeaderText = "ProveedorID";
-            this.sug_ProveedorID.Name = "sug_ProveedorID";
-            this.sug_ProveedorID.ReadOnly = true;
-            this.sug_ProveedorID.Visible = false;
-            // 
-            // sug_Sel
-            // 
-            this.sug_Sel.HeaderText = "Sel";
-            this.sug_Sel.Name = "sug_Sel";
-            this.sug_Sel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.sug_Sel.Width = 40;
-            // 
-            // sug_NumeroDeParte
-            // 
-            this.sug_NumeroDeParte.HeaderText = "No. de Parte";
-            this.sug_NumeroDeParte.Name = "sug_NumeroDeParte";
-            this.sug_NumeroDeParte.ReadOnly = true;
-            this.sug_NumeroDeParte.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_NumeroDeParte.Width = 80;
-            // 
-            // sug_Descripcion
-            // 
-            this.sug_Descripcion.HeaderText = "Descripción";
-            this.sug_Descripcion.Name = "sug_Descripcion";
-            this.sug_Descripcion.ReadOnly = true;
-            this.sug_Descripcion.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_Descripcion.Width = 300;
-            // 
-            // sug_UnidadDeEmpaque
-            // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "N2";
-            this.sug_UnidadDeEmpaque.DefaultCellStyle = dataGridViewCellStyle16;
-            this.sug_UnidadDeEmpaque.HeaderText = "U. Emp.";
-            this.sug_UnidadDeEmpaque.Name = "sug_UnidadDeEmpaque";
-            this.sug_UnidadDeEmpaque.ReadOnly = true;
-            this.sug_UnidadDeEmpaque.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_UnidadDeEmpaque.Width = 50;
-            // 
-            // sug_AbcDeVentas
-            // 
-            this.sug_AbcDeVentas.HeaderText = "Abc";
-            this.sug_AbcDeVentas.Name = "sug_AbcDeVentas";
-            this.sug_AbcDeVentas.ReadOnly = true;
-            this.sug_AbcDeVentas.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_AbcDeVentas.Width = 50;
-            // 
-            // sug_NecesidadMatriz
-            // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.Format = "N2";
-            this.sug_NecesidadMatriz.DefaultCellStyle = dataGridViewCellStyle17;
-            this.sug_NecesidadMatriz.HeaderText = "Matriz";
-            this.sug_NecesidadMatriz.Name = "sug_NecesidadMatriz";
-            this.sug_NecesidadMatriz.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_NecesidadMatriz.Width = 60;
-            // 
-            // sug_NecesidadSuc02
-            // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Format = "N2";
-            this.sug_NecesidadSuc02.DefaultCellStyle = dataGridViewCellStyle18;
-            this.sug_NecesidadSuc02.HeaderText = "Suc 02";
-            this.sug_NecesidadSuc02.Name = "sug_NecesidadSuc02";
-            this.sug_NecesidadSuc02.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_NecesidadSuc02.Width = 60;
-            // 
-            // sug_NecesidadSuc03
-            // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "N2";
-            this.sug_NecesidadSuc03.DefaultCellStyle = dataGridViewCellStyle19;
-            this.sug_NecesidadSuc03.HeaderText = "Suc 03";
-            this.sug_NecesidadSuc03.Name = "sug_NecesidadSuc03";
-            this.sug_NecesidadSuc03.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_NecesidadSuc03.Width = 60;
-            // 
-            // sug_Total
-            // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.Format = "N2";
-            this.sug_Total.DefaultCellStyle = dataGridViewCellStyle20;
-            this.sug_Total.HeaderText = "Total";
-            this.sug_Total.Name = "sug_Total";
-            this.sug_Total.ReadOnly = true;
-            this.sug_Total.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_Total.Width = 70;
-            // 
-            // sug_Pedido
-            // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.Format = "N2";
-            this.sug_Pedido.DefaultCellStyle = dataGridViewCellStyle21;
-            this.sug_Pedido.HeaderText = "Pedido";
-            this.sug_Pedido.Name = "sug_Pedido";
-            this.sug_Pedido.ReadOnly = true;
-            this.sug_Pedido.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_Pedido.Width = 60;
-            // 
-            // sug_CostoConDescuento
-            // 
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle22.Format = "C2";
-            this.sug_CostoConDescuento.DefaultCellStyle = dataGridViewCellStyle22;
-            this.sug_CostoConDescuento.HeaderText = "Costo desc.";
-            this.sug_CostoConDescuento.Name = "sug_CostoConDescuento";
-            this.sug_CostoConDescuento.ReadOnly = true;
-            this.sug_CostoConDescuento.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_CostoConDescuento.Width = 75;
-            // 
-            // sug_CostoTotal
-            // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle23.Format = "C2";
-            this.sug_CostoTotal.DefaultCellStyle = dataGridViewCellStyle23;
-            this.sug_CostoTotal.HeaderText = "Costo total";
-            this.sug_CostoTotal.Name = "sug_CostoTotal";
-            this.sug_CostoTotal.ReadOnly = true;
-            this.sug_CostoTotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.sug_CostoTotal.Width = 75;
-            // 
-            // sug_Observacion
-            // 
-            this.sug_Observacion.HeaderText = "Observación";
-            this.sug_Observacion.Name = "sug_Observacion";
-            this.sug_Observacion.ReadOnly = true;
-            this.sug_Observacion.Visible = false;
-            // 
-            // sug_Caracteristica
-            // 
-            this.sug_Caracteristica.HeaderText = "Característica";
-            this.sug_Caracteristica.Name = "sug_Caracteristica";
-            this.sug_Caracteristica.ReadOnly = true;
-            this.sug_Caracteristica.Visible = false;
+            this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ctlVentasPorMes.Location = new System.Drawing.Point(631, 560);
+            this.ctlVentasPorMes.Name = "ctlVentasPorMes";
+            this.ctlVentasPorMes.Size = new System.Drawing.Size(754, 104);
+            this.ctlVentasPorMes.TabIndex = 314;
             // 
             // catalogosPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
-            this.Controls.Add(this.ctlVentasPorMes);
             this.Controls.Add(this.txtDescripcionMaxMin);
+            this.Controls.Add(this.ctlVentasPorMes);
             this.Controls.Add(this.lblCriterioAbc);
             this.Controls.Add(this.ctlLineas);
             this.Controls.Add(this.label1);

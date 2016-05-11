@@ -1525,7 +1525,7 @@ namespace Refaccionaria.App
             this.ctlVentasPorMes.LlenarDatos(iParteID);
 
             // Para cambiar el color de fondo de algunos grids
-            this.dgvExistencias.CambiarColorDeFondo(Color.FromArgb(58, 79, 109));
+            this.dgvExistencias.CambiarColorDeFondo(Color.FromArgb(188, 199, 216));
             this.ctlVentasPorMes.dgvDatos.CambiarColorDeFondo(Color.FromArgb(188, 199, 216));
         }
 

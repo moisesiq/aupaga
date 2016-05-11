@@ -278,15 +278,17 @@ namespace Refaccionaria.App
         {
             try
             {
-                var oTcpCli = new TcpClient(sEquipo, GlobalClass.Puerto);
+                int iPuerto = GlobalClass.Puerto;
+                iPuerto = 321000;
+                var oTcpCli = new TcpClient(sEquipo, iPuerto);
                 var oStream = oTcpCli.GetStream();
                 var oMensaje = UTF8Encoding.UTF8.GetBytes(sCodigo + sMensaje);
                 oStream.Write(oMensaje, 0, oMensaje.Length);
                 oStream.Close(1000 * 1);
             }
-            catch
+            catch (Exception oEx)
             {
-
+                UtilLocal.MensajeAdvertencia("Error al mandar un mensaje a través de Ip.\n\n" + oEx.Message + "\n" + Helper.ConvertirCadena(oEx.InnerException));
             }
         }
 

@@ -52,26 +52,26 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flpEventos.AutoScroll = true;
-            this.flpEventos.Location = new System.Drawing.Point(12, 59);
+            this.flpEventos.Location = new System.Drawing.Point(12, 36);
             this.flpEventos.Name = "flpEventos";
-            this.flpEventos.Size = new System.Drawing.Size(420, 231);
+            this.flpEventos.Size = new System.Drawing.Size(420, 248);
             this.flpEventos.TabIndex = 0;
             // 
             // pnlMuestra
             // 
             this.pnlMuestra.BackColor = System.Drawing.Color.White;
             this.pnlMuestra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlMuestra.Controls.Add(this.lblCambio);
+            this.pnlMuestra.Controls.Add(this.btnRevisado);
             this.pnlMuestra.Controls.Add(this.dtpFecha);
+            this.pnlMuestra.Controls.Add(this.lblCambio);
             this.pnlMuestra.Controls.Add(this.lblContacto);
             this.pnlMuestra.Controls.Add(this.lblEtContacto);
             this.pnlMuestra.Controls.Add(this.lblEtAdeudo);
             this.pnlMuestra.Controls.Add(this.lblAdeudo);
             this.pnlMuestra.Controls.Add(this.lblEtVencido);
-            this.pnlMuestra.Controls.Add(this.btnRevisado);
             this.pnlMuestra.Controls.Add(this.lblVencido);
             this.pnlMuestra.Controls.Add(this.lblCliente);
-            this.pnlMuestra.Location = new System.Drawing.Point(12, 59);
+            this.pnlMuestra.Location = new System.Drawing.Point(12, 36);
             this.pnlMuestra.Name = "pnlMuestra";
             this.pnlMuestra.Size = new System.Drawing.Size(400, 64);
             this.pnlMuestra.TabIndex = 0;
@@ -81,7 +81,7 @@
             // 
             this.lblCambio.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCambio.ForeColor = System.Drawing.Color.Red;
-            this.lblCambio.Location = new System.Drawing.Point(372, 15);
+            this.lblCambio.Location = new System.Drawing.Point(226, 16);
             this.lblCambio.Name = "lblCambio";
             this.lblCambio.Size = new System.Drawing.Size(24, 20);
             this.lblCambio.TabIndex = 10;
@@ -93,7 +93,7 @@
             // 
             this.dtpFecha.CustomFormat = "dd/MM/yyyy hh:mm tt";
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFecha.Location = new System.Drawing.Point(0, 0);
+            this.dtpFecha.Location = new System.Drawing.Point(247, 18);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(148, 20);
             this.dtpFecha.TabIndex = 9;
@@ -101,7 +101,7 @@
             // lblContacto
             // 
             this.lblContacto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContacto.Location = new System.Drawing.Point(156, 41);
+            this.lblContacto.Location = new System.Drawing.Point(155, 41);
             this.lblContacto.Name = "lblContacto";
             this.lblContacto.Size = new System.Drawing.Size(209, 19);
             this.lblContacto.TabIndex = 8;
@@ -110,12 +110,13 @@
             // 
             // lblEtContacto
             // 
-            this.lblEtContacto.Location = new System.Drawing.Point(153, 20);
+            this.lblEtContacto.Location = new System.Drawing.Point(155, 20);
             this.lblEtContacto.Name = "lblEtContacto";
             this.lblEtContacto.Size = new System.Drawing.Size(108, 20);
             this.lblEtContacto.TabIndex = 7;
             this.lblEtContacto.Text = "Contacto";
             this.lblEtContacto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEtContacto.Visible = false;
             // 
             // lblEtAdeudo
             // 
@@ -149,7 +150,7 @@
             // 
             this.btnRevisado.BackgroundImage = global::Refaccionaria.App.Properties.Resources.ok;
             this.btnRevisado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRevisado.Location = new System.Drawing.Point(371, 35);
+            this.btnRevisado.Location = new System.Drawing.Point(371, 37);
             this.btnRevisado.Name = "btnRevisado";
             this.btnRevisado.Size = new System.Drawing.Size(24, 24);
             this.btnRevisado.TabIndex = 3;
@@ -168,9 +169,9 @@
             // 
             this.lblCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCliente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
-            this.lblCliente.Location = new System.Drawing.Point(153, 0);
+            this.lblCliente.Location = new System.Drawing.Point(0, -1);
             this.lblCliente.Name = "lblCliente";
-            this.lblCliente.Size = new System.Drawing.Size(242, 20);
+            this.lblCliente.Size = new System.Drawing.Size(395, 20);
             this.lblCliente.TabIndex = 1;
             this.lblCliente.Text = "Nombre del Cliente";
             this.lblCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -178,35 +179,44 @@
             // rdbHoy
             // 
             this.rdbHoy.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdbHoy.Location = new System.Drawing.Point(12, 12);
+            this.rdbHoy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.rdbHoy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rdbHoy.ForeColor = System.Drawing.Color.White;
+            this.rdbHoy.Location = new System.Drawing.Point(12, 6);
             this.rdbHoy.Name = "rdbHoy";
-            this.rdbHoy.Size = new System.Drawing.Size(180, 40);
+            this.rdbHoy.Size = new System.Drawing.Size(171, 24);
             this.rdbHoy.TabIndex = 1;
             this.rdbHoy.Text = "Hoy";
             this.rdbHoy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdbHoy.UseVisualStyleBackColor = true;
+            this.rdbHoy.UseVisualStyleBackColor = false;
             this.rdbHoy.CheckedChanged += new System.EventHandler(this.rdbHoy_CheckedChanged);
             // 
             // rdbManiana
             // 
             this.rdbManiana.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rdbManiana.Location = new System.Drawing.Point(198, 12);
+            this.rdbManiana.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.rdbManiana.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rdbManiana.ForeColor = System.Drawing.Color.White;
+            this.rdbManiana.Location = new System.Drawing.Point(189, 6);
             this.rdbManiana.Name = "rdbManiana";
-            this.rdbManiana.Size = new System.Drawing.Size(180, 40);
+            this.rdbManiana.Size = new System.Drawing.Size(171, 24);
             this.rdbManiana.TabIndex = 2;
             this.rdbManiana.Text = "Mañana";
             this.rdbManiana.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rdbManiana.UseVisualStyleBackColor = true;
+            this.rdbManiana.UseVisualStyleBackColor = false;
             this.rdbManiana.CheckedChanged += new System.EventHandler(this.rdbManiana_CheckedChanged);
             // 
             // btnReporte
             // 
-            this.btnReporte.Location = new System.Drawing.Point(384, 12);
+            this.btnReporte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReporte.ForeColor = System.Drawing.Color.White;
+            this.btnReporte.Location = new System.Drawing.Point(366, 6);
             this.btnReporte.Name = "btnReporte";
-            this.btnReporte.Size = new System.Drawing.Size(48, 40);
+            this.btnReporte.Size = new System.Drawing.Size(66, 24);
             this.btnReporte.TabIndex = 3;
-            this.btnReporte.Text = "Rep";
-            this.btnReporte.UseVisualStyleBackColor = true;
+            this.btnReporte.Text = "Imprimir";
+            this.btnReporte.UseVisualStyleBackColor = false;
             this.btnReporte.Click += new System.EventHandler(this.btnReporte_Click);
             // 
             // Eventos
@@ -214,7 +224,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
-            this.ClientSize = new System.Drawing.Size(444, 302);
+            this.ClientSize = new System.Drawing.Size(444, 296);
             this.Controls.Add(this.btnReporte);
             this.Controls.Add(this.rdbManiana);
             this.Controls.Add(this.rdbHoy);

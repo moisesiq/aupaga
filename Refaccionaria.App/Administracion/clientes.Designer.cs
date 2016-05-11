@@ -203,7 +203,7 @@
             this.tabClientes.Location = new System.Drawing.Point(0, 0);
             this.tabClientes.Name = "tabClientes";
             this.tabClientes.SelectedIndex = 0;
-            this.tabClientes.Size = new System.Drawing.Size(1000, 612);
+            this.tabClientes.Size = new System.Drawing.Size(1000, 703);
             this.tabClientes.TabIndex = 21;
             this.tabClientes.SelectedIndexChanged += new System.EventHandler(this.tabClientes_SelectedIndexChanged);
             // 
@@ -257,7 +257,7 @@
             this.tabDatos.Location = new System.Drawing.Point(4, 22);
             this.tabDatos.Name = "tabDatos";
             this.tabDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDatos.Size = new System.Drawing.Size(992, 586);
+            this.tabDatos.Size = new System.Drawing.Size(992, 677);
             this.tabDatos.TabIndex = 0;
             this.tabDatos.Text = "Datos Generales";
             // 
@@ -267,7 +267,7 @@
             this.btnAvisos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnAvisos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAvisos.ForeColor = System.Drawing.Color.White;
-            this.btnAvisos.Location = new System.Drawing.Point(550, 560);
+            this.btnAvisos.Location = new System.Drawing.Point(550, 651);
             this.btnAvisos.Name = "btnAvisos";
             this.btnAvisos.Size = new System.Drawing.Size(76, 23);
             this.btnAvisos.TabIndex = 188;
@@ -282,7 +282,7 @@
             this.btnMaps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnMaps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaps.ForeColor = System.Drawing.Color.White;
-            this.btnMaps.Location = new System.Drawing.Point(632, 560);
+            this.btnMaps.Location = new System.Drawing.Point(632, 651);
             this.btnMaps.Name = "btnMaps";
             this.btnMaps.Size = new System.Drawing.Size(76, 23);
             this.btnMaps.TabIndex = 187;
@@ -297,7 +297,7 @@
             this.btnCobranza.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnCobranza.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCobranza.ForeColor = System.Drawing.Color.White;
-            this.btnCobranza.Location = new System.Drawing.Point(714, 560);
+            this.btnCobranza.Location = new System.Drawing.Point(714, 651);
             this.btnCobranza.Name = "btnCobranza";
             this.btnCobranza.Size = new System.Drawing.Size(76, 23);
             this.btnCobranza.TabIndex = 186;
@@ -313,7 +313,7 @@
             this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExportar.ForeColor = System.Drawing.Color.White;
             this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
-            this.btnExportar.Location = new System.Drawing.Point(796, 560);
+            this.btnExportar.Location = new System.Drawing.Point(796, 651);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(87, 23);
             this.btnExportar.TabIndex = 172;
@@ -333,7 +333,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(486, 426);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(490, 128);
+            this.groupBox1.Size = new System.Drawing.Size(490, 219);
             this.groupBox1.TabIndex = 168;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Vehículos";
@@ -373,7 +373,7 @@
             this.dgvVehiculos.MultiSelect = false;
             this.dgvVehiculos.Name = "dgvVehiculos";
             this.dgvVehiculos.PermitirBorrar = true;
-            this.dgvVehiculos.Size = new System.Drawing.Size(479, 103);
+            this.dgvVehiculos.Size = new System.Drawing.Size(479, 194);
             this.dgvVehiculos.TabIndex = 0;
             this.dgvVehiculos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehiculos_CellValueChanged);
             // 
@@ -456,7 +456,7 @@
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.Location = new System.Drawing.Point(889, 560);
+            this.btnGuardar.Location = new System.Drawing.Point(889, 651);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(87, 23);
             this.btnGuardar.TabIndex = 170;
@@ -582,7 +582,7 @@
             this.gpoCaracteristicas.Controls.Add(this.nudListaPrecio);
             this.gpoCaracteristicas.Controls.Add(this.lblListadePrecio);
             this.gpoCaracteristicas.ForeColor = System.Drawing.Color.White;
-            this.gpoCaracteristicas.Location = new System.Drawing.Point(9, 452);
+            this.gpoCaracteristicas.Location = new System.Drawing.Point(9, 517);
             this.gpoCaracteristicas.Name = "gpoCaracteristicas";
             this.gpoCaracteristicas.Size = new System.Drawing.Size(468, 128);
             this.gpoCaracteristicas.TabIndex = 166;
@@ -925,7 +925,7 @@
             this.gpoCredito.ForeColor = System.Drawing.Color.White;
             this.gpoCredito.Location = new System.Drawing.Point(9, 140);
             this.gpoCredito.Name = "gpoCredito";
-            this.gpoCredito.Size = new System.Drawing.Size(468, 306);
+            this.gpoCredito.Size = new System.Drawing.Size(468, 371);
             this.gpoCredito.TabIndex = 164;
             this.gpoCredito.TabStop = false;
             this.gpoCredito.Text = "Crédito";
@@ -934,9 +934,10 @@
             // 
             this.txtCreditoObservacion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCreditoObservacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCreditoObservacion.Location = new System.Drawing.Point(267, 279);
+            this.txtCreditoObservacion.Location = new System.Drawing.Point(9, 328);
+            this.txtCreditoObservacion.Multiline = true;
             this.txtCreditoObservacion.Name = "txtCreditoObservacion";
-            this.txtCreditoObservacion.Size = new System.Drawing.Size(195, 20);
+            this.txtCreditoObservacion.Size = new System.Drawing.Size(453, 37);
             this.txtCreditoObservacion.TabIndex = 190;
             // 
             // label4
@@ -945,11 +946,11 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(195, 282);
+            this.label4.Location = new System.Drawing.Point(348, 312);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.Size = new System.Drawing.Size(114, 13);
             this.label4.TabIndex = 189;
-            this.label4.Text = "Observación";
+            this.label4.Text = "Observación cobranza";
             // 
             // label5
             // 
@@ -957,7 +958,7 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(7, 282);
+            this.label5.Location = new System.Drawing.Point(7, 305);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 13);
             this.label5.TabIndex = 188;
@@ -967,16 +968,16 @@
             // 
             this.txtCreditoContacto.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCreditoContacto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCreditoContacto.Location = new System.Drawing.Point(63, 280);
+            this.txtCreditoContacto.Location = new System.Drawing.Point(63, 302);
             this.txtCreditoContacto.Name = "txtCreditoContacto";
-            this.txtCreditoContacto.Size = new System.Drawing.Size(122, 20);
+            this.txtCreditoContacto.Size = new System.Drawing.Size(279, 20);
             this.txtCreditoContacto.TabIndex = 187;
             // 
             // chkSiempreTicket
             // 
             this.chkSiempreTicket.AutoSize = true;
             this.chkSiempreTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkSiempreTicket.Location = new System.Drawing.Point(369, 86);
+            this.chkSiempreTicket.Location = new System.Drawing.Point(369, 67);
             this.chkSiempreTicket.Name = "chkSiempreTicket";
             this.chkSiempreTicket.Size = new System.Drawing.Size(77, 17);
             this.chkSiempreTicket.TabIndex = 186;
@@ -1000,18 +1001,18 @@
             // 
             this.txtComentario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtComentario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComentario.Location = new System.Drawing.Point(65, 146);
+            this.txtComentario.Location = new System.Drawing.Point(65, 123);
             this.txtComentario.MaxLength = 255;
             this.txtComentario.Multiline = true;
             this.txtComentario.Name = "txtComentario";
-            this.txtComentario.Size = new System.Drawing.Size(397, 20);
+            this.txtComentario.Size = new System.Drawing.Size(315, 20);
             this.txtComentario.TabIndex = 177;
             // 
             // chkTicket1
             // 
             this.chkTicket1.AutoSize = true;
             this.chkTicket1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkTicket1.Location = new System.Drawing.Point(111, 123);
+            this.chkTicket1.Location = new System.Drawing.Point(369, 101);
             this.chkTicket1.Name = "chkTicket1";
             this.chkTicket1.Size = new System.Drawing.Size(95, 17);
             this.chkTicket1.TabIndex = 185;
@@ -1022,7 +1023,7 @@
             // 
             this.chkSiempreVale.AutoSize = true;
             this.chkSiempreVale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkSiempreVale.Location = new System.Drawing.Point(9, 123);
+            this.chkSiempreVale.Location = new System.Drawing.Point(369, 84);
             this.chkSiempreVale.Name = "chkSiempreVale";
             this.chkSiempreVale.Size = new System.Drawing.Size(89, 17);
             this.chkSiempreVale.TabIndex = 184;
@@ -1033,7 +1034,7 @@
             // 
             this.chkSiempreFactura.AutoSize = true;
             this.chkSiempreFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkSiempreFactura.Location = new System.Drawing.Point(369, 63);
+            this.chkSiempreFactura.Location = new System.Drawing.Point(369, 50);
             this.chkSiempreFactura.Name = "chkSiempreFactura";
             this.chkSiempreFactura.Size = new System.Drawing.Size(83, 17);
             this.chkSiempreFactura.TabIndex = 183;
@@ -1064,7 +1065,7 @@
             this.dtpHoraCobro.Location = new System.Drawing.Point(267, 97);
             this.dtpHoraCobro.Name = "dtpHoraCobro";
             this.dtpHoraCobro.ShowUpDown = true;
-            this.dtpHoraCobro.Size = new System.Drawing.Size(93, 20);
+            this.dtpHoraCobro.Size = new System.Drawing.Size(96, 20);
             this.dtpHoraCobro.TabIndex = 182;
             // 
             // lblCobrarCreditoHrs
@@ -1097,7 +1098,7 @@
             this.btnCredito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnCredito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCredito.ForeColor = System.Drawing.Color.White;
-            this.btnCredito.Location = new System.Drawing.Point(380, 117);
+            this.btnCredito.Location = new System.Drawing.Point(386, 120);
             this.btnCredito.Name = "btnCredito";
             this.btnCredito.Size = new System.Drawing.Size(76, 23);
             this.btnCredito.TabIndex = 173;
@@ -1112,7 +1113,7 @@
             this.lblComentario.BackColor = System.Drawing.Color.Transparent;
             this.lblComentario.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblComentario.ForeColor = System.Drawing.Color.White;
-            this.lblComentario.Location = new System.Drawing.Point(7, 149);
+            this.lblComentario.Location = new System.Drawing.Point(7, 126);
             this.lblComentario.Name = "lblComentario";
             this.lblComentario.Size = new System.Drawing.Size(60, 13);
             this.lblComentario.TabIndex = 178;
@@ -1147,13 +1148,13 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCredito.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCredito.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvCredito.Location = new System.Drawing.Point(10, 172);
+            this.dgvCredito.Location = new System.Drawing.Point(10, 149);
             this.dgvCredito.Name = "dgvCredito";
             this.dgvCredito.ReadOnly = true;
             this.dgvCredito.RowHeadersVisible = false;
             this.dgvCredito.RowHeadersWidth = 25;
             this.dgvCredito.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCredito.Size = new System.Drawing.Size(452, 102);
+            this.dgvCredito.Size = new System.Drawing.Size(452, 147);
             this.dgvCredito.TabIndex = 176;
             // 
             // lblVencido
@@ -1196,7 +1197,7 @@
             // 
             this.chkTolerancia.AutoSize = true;
             this.chkTolerancia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkTolerancia.Location = new System.Drawing.Point(370, 40);
+            this.chkTolerancia.Location = new System.Drawing.Point(369, 33);
             this.chkTolerancia.Name = "chkTolerancia";
             this.chkTolerancia.Size = new System.Drawing.Size(73, 17);
             this.chkTolerancia.TabIndex = 171;
@@ -1207,7 +1208,7 @@
             // 
             this.chkTieneCredito.AutoSize = true;
             this.chkTieneCredito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkTieneCredito.Location = new System.Drawing.Point(370, 17);
+            this.chkTieneCredito.Location = new System.Drawing.Point(369, 16);
             this.chkTieneCredito.Name = "chkTieneCredito";
             this.chkTieneCredito.Size = new System.Drawing.Size(86, 17);
             this.chkTieneCredito.TabIndex = 170;
@@ -1219,7 +1220,7 @@
             this.txtLimite.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLimite.Location = new System.Drawing.Point(267, 18);
             this.txtLimite.Name = "txtLimite";
-            this.txtLimite.Size = new System.Drawing.Size(97, 20);
+            this.txtLimite.Size = new System.Drawing.Size(96, 20);
             this.txtLimite.TabIndex = 156;
             this.txtLimite.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -2018,7 +2019,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.Controls.Add(this.tabClientes);
             this.Name = "clientes";
-            this.Size = new System.Drawing.Size(1000, 612);
+            this.Size = new System.Drawing.Size(1000, 703);
             this.Load += new System.EventHandler(this.clientes_Load);
             this.tabClientes.ResumeLayout(false);
             this.tabDatos.ResumeLayout(false);

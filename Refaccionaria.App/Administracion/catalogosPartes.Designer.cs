@@ -924,7 +924,7 @@
             this.dgvExistencias.RowHeadersWidth = 25;
             this.dgvExistencias.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvExistencias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvExistencias.Size = new System.Drawing.Size(280, 87);
+            this.dgvExistencias.Size = new System.Drawing.Size(220, 87);
             this.dgvExistencias.TabIndex = 13;
             this.dgvExistencias.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvExistencias_CellValidating);
             this.dgvExistencias.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExistencias_CellValueChanged);
@@ -1044,7 +1044,7 @@
             this.dgvEquivalentes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvEquivalentes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgvEquivalentes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.dgvEquivalentes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvEquivalentes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvEquivalentes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -1935,7 +1935,7 @@
             this.ctlVentasPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ctlVentasPorMes.Location = new System.Drawing.Point(3, 469);
             this.ctlVentasPorMes.Name = "ctlVentasPorMes";
-            this.ctlVentasPorMes.Size = new System.Drawing.Size(745, 89);
+            this.ctlVentasPorMes.Size = new System.Drawing.Size(726, 89);
             this.ctlVentasPorMes.TabIndex = 315;
             // 
             // btnActualizadorDeImagenes
