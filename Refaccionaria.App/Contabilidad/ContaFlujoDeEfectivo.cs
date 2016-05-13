@@ -181,7 +181,8 @@ namespace Refaccionaria.App
             oParams.Add("Hasta", dHasta);
             var oGastos = General.ExecuteProcedure<pauContaCuentasPorSemana_Result>("pauContaCuentasPorSemana", oParams);
             var oGastosSem = ContaProc.GastosSemanalizados(oGastos, Helper.ConvertirFechaHora(this.dgvDatos.Columns[this.dgvDatos.Columns.Count - 1].Name));
-            oGastosSem = oGastosSem.GroupBy(c => new { c.Semana }).Select(c => new ContaProc.GastoSem() { Semana = c.Key.Semana, Importe = c.Sum(s => s.Importe) }).ToList();
+            oGastosSem = oGastosSem.Where(c => c.Semana >= dDesdeSemUno)
+                .GroupBy(c => new { c.Semana }).Select(c => new ContaProc.GastoSem() { Semana = c.Key.Semana, Importe = c.Sum(s => s.Importe) }).ToList();
             mTotal += oGastosSem.Sum(c => c.Importe);
             mPromedio += oGastosSem.Average(c => c.Importe);
             // Se agrega la fila de los Gastos
@@ -247,6 +248,7 @@ namespace Refaccionaria.App
             // Para lo de Isidro y Don Isidro
             var oGastosSemEsp = ContaProc.GastosSemanalizados(General.GetListOf<ContaEgresosDevengadoEspecialCuentasView>(c => c.Fecha >= dDesdeSemUno && c.Fecha < dHastaMas1)
                 , Helper.ConvertirFechaHora(this.dgvDatos.Columns[this.dgvDatos.Columns.Count - 1].Name));
+            oGastosSemEsp = oGastosSemEsp.Where(c => c.Semana >= dDesdeSemUno).ToList();
             mTotal += oGastosSemEsp.Sum(c => c.Importe);
             mPromedioAct = (oGastosSemEsp.Count() > 0 ? oGastosSemEsp.Average(c => c.Importe) : 0);
             mPromedio += mPromedioAct;

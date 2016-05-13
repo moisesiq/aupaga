@@ -65,8 +65,8 @@ namespace Refaccionaria.App
                 {
                     Fecha = (oControl.Controls["dtpFecha"] as DateTimePicker).Value,
                     Cliente = oControl.Controls["lblCliente"].Text,
-                    Adeudo = Helper.ConvertirDecimal(oControl.Controls["lblAdeudo"].Text),
-                    Vencido = Helper.ConvertirDecimal(oControl.Controls["lblVencido"].Text),
+                    Adeudo = Helper.ConvertirDecimal(oControl.Controls["lblAdeudo"].Text.SoloNumeric()),
+                    Vencido = Helper.ConvertirDecimal(oControl.Controls["lblVencido"].Text.SoloNumeric()),
                     Contacto = oControl.Controls["lblContacto"].Text
                 });
             }

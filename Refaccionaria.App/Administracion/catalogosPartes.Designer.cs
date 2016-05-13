@@ -51,9 +51,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -116,6 +113,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblEncontrados = new System.Windows.Forms.Label();
             this.lblBuscar = new System.Windows.Forms.Label();
             this.progreso = new System.Windows.Forms.ProgressBar();
@@ -254,18 +254,6 @@
             this.txtKardexBusqueda = new Refaccionaria.Negocio.TextoMod();
             this.btnDiferenciasExistencia = new System.Windows.Forms.Button();
             this.dgvKardex = new System.Windows.Forms.DataGridView();
-            this.Kardex_ParteKardexID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Operacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kardex_ExistenciaNueva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvKardexMovs = new System.Windows.Forms.DataGridView();
             this.KardexOp_Operacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KardexOp_Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -364,6 +352,18 @@
             this.chkErr_MostrarTodos = new System.Windows.Forms.CheckBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.Kardex_ParteKardexID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Operacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kardex_ExistenciaNueva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabExistencia.SuspendLayout();
             this.tabExistencias.SuspendLayout();
@@ -2377,99 +2377,6 @@
             this.dgvKardex.TabIndex = 4;
             this.dgvKardex.CurrentCellChanged += new System.EventHandler(this.dgvKardex_CurrentCellChanged);
             // 
-            // Kardex_ParteKardexID
-            // 
-            this.Kardex_ParteKardexID.HeaderText = "ParteKardexID";
-            this.Kardex_ParteKardexID.Name = "Kardex_ParteKardexID";
-            this.Kardex_ParteKardexID.ReadOnly = true;
-            this.Kardex_ParteKardexID.Visible = false;
-            // 
-            // Kardex_Fecha
-            // 
-            this.Kardex_Fecha.HeaderText = "Fecha";
-            this.Kardex_Fecha.Name = "Kardex_Fecha";
-            this.Kardex_Fecha.ReadOnly = true;
-            this.Kardex_Fecha.Width = 136;
-            // 
-            // Kardex_Folio
-            // 
-            this.Kardex_Folio.HeaderText = "Folio";
-            this.Kardex_Folio.Name = "Kardex_Folio";
-            this.Kardex_Folio.ReadOnly = true;
-            this.Kardex_Folio.Width = 75;
-            // 
-            // Kardex_Tipo
-            // 
-            this.Kardex_Tipo.HeaderText = "Tipo";
-            this.Kardex_Tipo.Name = "Kardex_Tipo";
-            this.Kardex_Tipo.ReadOnly = true;
-            this.Kardex_Tipo.Width = 30;
-            // 
-            // Kardex_Operacion
-            // 
-            this.Kardex_Operacion.HeaderText = "Operación";
-            this.Kardex_Operacion.Name = "Kardex_Operacion";
-            this.Kardex_Operacion.ReadOnly = true;
-            this.Kardex_Operacion.Width = 120;
-            // 
-            // Kardex_Entidad
-            // 
-            this.Kardex_Entidad.HeaderText = "Entidad";
-            this.Kardex_Entidad.Name = "Kardex_Entidad";
-            this.Kardex_Entidad.ReadOnly = true;
-            this.Kardex_Entidad.Width = 220;
-            // 
-            // Kardex_Usuario
-            // 
-            this.Kardex_Usuario.HeaderText = "Usuario";
-            this.Kardex_Usuario.Name = "Kardex_Usuario";
-            this.Kardex_Usuario.ReadOnly = true;
-            this.Kardex_Usuario.Width = 80;
-            // 
-            // Kardex_Origen
-            // 
-            this.Kardex_Origen.HeaderText = "Origen";
-            this.Kardex_Origen.Name = "Kardex_Origen";
-            this.Kardex_Origen.ReadOnly = true;
-            this.Kardex_Origen.Width = 70;
-            // 
-            // Kardex_Destino
-            // 
-            this.Kardex_Destino.HeaderText = "Destino";
-            this.Kardex_Destino.Name = "Kardex_Destino";
-            this.Kardex_Destino.ReadOnly = true;
-            this.Kardex_Destino.Width = 70;
-            // 
-            // Kardex_Importe
-            // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle21.Format = "C2";
-            this.Kardex_Importe.DefaultCellStyle = dataGridViewCellStyle21;
-            this.Kardex_Importe.HeaderText = "Importe";
-            this.Kardex_Importe.Name = "Kardex_Importe";
-            this.Kardex_Importe.ReadOnly = true;
-            this.Kardex_Importe.Width = 70;
-            // 
-            // Kardex_Cantidad
-            // 
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle22.Format = "N2";
-            this.Kardex_Cantidad.DefaultCellStyle = dataGridViewCellStyle22;
-            this.Kardex_Cantidad.HeaderText = "Cantidad";
-            this.Kardex_Cantidad.Name = "Kardex_Cantidad";
-            this.Kardex_Cantidad.ReadOnly = true;
-            this.Kardex_Cantidad.Width = 50;
-            // 
-            // Kardex_ExistenciaNueva
-            // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle23.Format = "N2";
-            this.Kardex_ExistenciaNueva.DefaultCellStyle = dataGridViewCellStyle23;
-            this.Kardex_ExistenciaNueva.HeaderText = "Exist.Nva.";
-            this.Kardex_ExistenciaNueva.Name = "Kardex_ExistenciaNueva";
-            this.Kardex_ExistenciaNueva.ReadOnly = true;
-            this.Kardex_ExistenciaNueva.Width = 70;
-            // 
             // dgvKardexMovs
             // 
             this.dgvKardexMovs.AllowDrop = true;
@@ -3726,6 +3633,99 @@
             this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // Kardex_ParteKardexID
+            // 
+            this.Kardex_ParteKardexID.HeaderText = "ParteKardexID";
+            this.Kardex_ParteKardexID.Name = "Kardex_ParteKardexID";
+            this.Kardex_ParteKardexID.ReadOnly = true;
+            this.Kardex_ParteKardexID.Visible = false;
+            // 
+            // Kardex_Fecha
+            // 
+            this.Kardex_Fecha.HeaderText = "Fecha";
+            this.Kardex_Fecha.Name = "Kardex_Fecha";
+            this.Kardex_Fecha.ReadOnly = true;
+            this.Kardex_Fecha.Width = 136;
+            // 
+            // Kardex_Folio
+            // 
+            this.Kardex_Folio.HeaderText = "Folio";
+            this.Kardex_Folio.Name = "Kardex_Folio";
+            this.Kardex_Folio.ReadOnly = true;
+            this.Kardex_Folio.Width = 75;
+            // 
+            // Kardex_Tipo
+            // 
+            this.Kardex_Tipo.HeaderText = "Tipo";
+            this.Kardex_Tipo.Name = "Kardex_Tipo";
+            this.Kardex_Tipo.ReadOnly = true;
+            this.Kardex_Tipo.Width = 30;
+            // 
+            // Kardex_Operacion
+            // 
+            this.Kardex_Operacion.HeaderText = "Operación";
+            this.Kardex_Operacion.Name = "Kardex_Operacion";
+            this.Kardex_Operacion.ReadOnly = true;
+            this.Kardex_Operacion.Width = 150;
+            // 
+            // Kardex_Entidad
+            // 
+            this.Kardex_Entidad.HeaderText = "Entidad";
+            this.Kardex_Entidad.Name = "Kardex_Entidad";
+            this.Kardex_Entidad.ReadOnly = true;
+            this.Kardex_Entidad.Width = 220;
+            // 
+            // Kardex_Usuario
+            // 
+            this.Kardex_Usuario.HeaderText = "Usuario";
+            this.Kardex_Usuario.Name = "Kardex_Usuario";
+            this.Kardex_Usuario.ReadOnly = true;
+            this.Kardex_Usuario.Width = 80;
+            // 
+            // Kardex_Origen
+            // 
+            this.Kardex_Origen.HeaderText = "Origen";
+            this.Kardex_Origen.Name = "Kardex_Origen";
+            this.Kardex_Origen.ReadOnly = true;
+            this.Kardex_Origen.Width = 70;
+            // 
+            // Kardex_Destino
+            // 
+            this.Kardex_Destino.HeaderText = "Destino";
+            this.Kardex_Destino.Name = "Kardex_Destino";
+            this.Kardex_Destino.ReadOnly = true;
+            this.Kardex_Destino.Width = 70;
+            // 
+            // Kardex_Importe
+            // 
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Format = "C2";
+            this.Kardex_Importe.DefaultCellStyle = dataGridViewCellStyle21;
+            this.Kardex_Importe.HeaderText = "Importe";
+            this.Kardex_Importe.Name = "Kardex_Importe";
+            this.Kardex_Importe.ReadOnly = true;
+            this.Kardex_Importe.Width = 70;
+            // 
+            // Kardex_Cantidad
+            // 
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle22.Format = "N2";
+            this.Kardex_Cantidad.DefaultCellStyle = dataGridViewCellStyle22;
+            this.Kardex_Cantidad.HeaderText = "Cantidad";
+            this.Kardex_Cantidad.Name = "Kardex_Cantidad";
+            this.Kardex_Cantidad.ReadOnly = true;
+            this.Kardex_Cantidad.Width = 50;
+            // 
+            // Kardex_ExistenciaNueva
+            // 
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.Format = "N2";
+            this.Kardex_ExistenciaNueva.DefaultCellStyle = dataGridViewCellStyle23;
+            this.Kardex_ExistenciaNueva.HeaderText = "Exist.Nva.";
+            this.Kardex_ExistenciaNueva.Name = "Kardex_ExistenciaNueva";
+            this.Kardex_ExistenciaNueva.ReadOnly = true;
+            this.Kardex_ExistenciaNueva.Width = 70;
             // 
             // catalogosPartes
             // 
