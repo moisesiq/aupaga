@@ -7,16 +7,7 @@ DBCC CHECKIDENT('ParteKardex', RESEED, 0)
 DECLARE @SucursalID AS NVARCHAR(10) =  N'1,2,3'
 --DECLARE @FechaInicial AS DATE = '2013-11-17'
 --DECLARE @FechaFinal AS DATE = '2014-02-17'
-/*
-*****************************
-*****************************
-DEBEMOS DE MOFIFICAR ESTE MIGRADOR
-PARA QUE DONDE SÍ TENEMOS EL DATO PRECISO NO LO CALCULE
-(ES EL CASO DEL COSTO DE COMPRAS, QUE LO TOMA DE LA TABLA PARTEPRECIO EN
-VEZ DEL MOVIMIENTO COMPRAS)
-*****************************
-*****************************
-*/
+
 DECLARE @OpVenta INT = 1
 DECLARE @OpVentaDev INT = 2
 DECLARE @OpEntradaCompra INT = 3
@@ -25,6 +16,15 @@ DECLARE @OpEntradaInventario INT = 5
 DECLARE @OpSalidaInventario INT = 6
 DECLARE @OpTraspasoEntrada INT = 7
 DECLARE @OpTraspasoSalida INT = 8
+
+DECLARE @CaCascoChico INT = 28
+DECLARE @CaCascoMediano INT = 29
+DECLARE @CaCascoGrande INT = 30
+DECLARE @CaCascoExtra INT = 64
+DECLARE @PaDepCascoChico INT = 3397
+DECLARE @PaDepCascoMediano INT = 3406
+DECLARE @PaDepCascoGrande INT = 3403
+DECLARE @PaDepCascoExtra INT = 3400
 
 DECLARE @Iva AS DECIMAL(18,2) = (((SELECT CAST(Valor AS DECIMAL(18,2))FROM Configuracion WHERE Configuracion.ConfiguracionID = 1)/100) + 1)
 
@@ -42,7 +42,7 @@ SELECT
 	, Origen
 	, Destino
 	, ISNULL(Cantidad, 0.0) AS Cantidad
-	, ISNULL(Unitario, 0.0) AS Unitario
+	, ISNULL(Unitario, 0.0) AS Importe
 	, 0.0
 FROM (
 
@@ -81,7 +81,7 @@ FROM (
 		,Usuario.NombreUsuario
 		,CAST(MovimientoInventario.ProveedorID AS VARCHAR) AS Origen
 		,Sucursal.NombreSucursal AS Destino
-		,PartePrecio.Costo AS Unitario
+		,MovimientoInventarioDetalle.PrecioUnitario AS Unitario
 		,MovimientoInventarioDetalle.Cantidad
 		,0.0 AS ExistenciaNueva
 		,1 AS Orden
@@ -95,7 +95,6 @@ FROM (
 		INNER JOIN Proveedor ON Proveedor.ProveedorID = MovimientoInventario.ProveedorID
 		INNER JOIN Usuario ON Usuario.UsuarioID = MovimientoInventario.UsuarioID 
 		INNER JOIN Sucursal ON Sucursal.SucursalID = MovimientoInventario.SucursalDestinoID 
-		INNER JOIN PartePrecio ON PartePrecio.ParteID = MovimientoInventarioDetalle.ParteID
 	WHERE 
 		MovimientoInventario.TipoOperacionID = 1 
 		AND MovimientoInventario.Estatus = 1
@@ -145,7 +144,7 @@ FROM (
 		,'-----' AS Origen
 		,Sucursal.NombreSucursal AS Destino
 		,PartePrecio.Costo * @Iva AS Unitario
-		,MovimientoInventarioDetalle.Cantidad
+		, (MovimientoInventarioDetalle.Cantidad * -1)
 		,0.0 AS ExistenciaNueva
 		,6 AS Orden
 		, MovimientoInventarioDetalle.ParteID
@@ -175,8 +174,9 @@ FROM (
 		,Usuario.NombreUsuario
 		,Sucursal.NombreSucursal AS Origen
 		,CAST(MovimientoInventario.ProveedorID AS VARCHAR) AS Destino
-		,PartePrecio.Costo * @Iva AS Unitario
-		,MovimientoInventarioDetalle.Cantidad
+		-- ,PartePrecio.Costo * @Iva AS Unitario
+		, MovimientoInventarioDetalle.PrecioUnitario AS Unitario
+		, (MovimientoInventarioDetalle.Cantidad * -1)
 		,0.0 AS ExistenciaNueva
 		,8 AS Orden
 		, MovimientoInventarioDetalle.ParteID
@@ -189,7 +189,6 @@ FROM (
 		INNER JOIN Proveedor ON Proveedor.ProveedorID = MovimientoInventario.ProveedorID
 		INNER JOIN Usuario ON Usuario.UsuarioID = MovimientoInventario.UsuarioID 
 		INNER JOIN Sucursal ON Sucursal.SucursalID = MovimientoInventario.SucursalDestinoID 
-		INNER JOIN PartePrecio ON PartePrecio.ParteID = MovimientoInventarioDetalle.ParteID
 	WHERE 
 		MovimientoInventario.TipoOperacionID = 4 
 		AND MovimientoInventario.Estatus = 1
@@ -208,7 +207,7 @@ FROM (
 		,O.NombreSucursal AS Origen
 		,D.NombreSucursal AS Destino
 		,PartePrecio.Costo * @Iva AS Unitario
-		,MovimientoInventarioDetalle.Cantidad
+		, (MovimientoInventarioDetalle.Cantidad * -1)
 		,0.0 AS ExistenciaNueva
 		,7 AS Orden
 		, MovimientoInventarioDetalle.ParteID
@@ -273,8 +272,8 @@ FROM (
 		,Usuario.NombreUsuario
 		,Sucursal.NombreSucursal AS Origen
 		,CAST(Venta.ClienteID AS VARCHAR) AS Destino
-		,VentaDetalle.PrecioUnitario * @Iva AS Unitario
-		,VentaDetalle.Cantidad
+		,(VentaDetalle.PrecioUnitario + VentaDetalle.Iva) AS Unitario
+		, (VentaDetalle.Cantidad * -1)
 		,0.0 AS ExistenciaNueva
 		,5 AS Orden
 		, VentaDetalle.ParteID
@@ -307,8 +306,8 @@ FROM (
 			,Usuario.NombreUsuario
 			,Sucursal.NombreSucursal AS Origen
 			,CAST(Venta.ClienteID AS VARCHAR) AS Destino
-			,VentaDevolucionDetalle.PrecioUnitario * @Iva AS Unitario
-			,VentaDevolucionDetalle.Cantidad
+			, (VentaDevolucionDetalle.PrecioUnitario + VentaDevolucionDetalle.Iva) AS Unitario
+			, (VentaDevolucionDetalle.Cantidad * -1)
 			,0.0 AS ExistenciaNueva	
 			,5 AS Orden	
 			, VentaDevolucionDetalle.ParteID
@@ -341,7 +340,7 @@ FROM (
 			,Usuario.NombreUsuario
 			,Sucursal.NombreSucursal AS Origen
 			,CAST(Venta.ClienteID AS VARCHAR) AS Destino
-			,VentaDevolucionDetalle.PrecioUnitario * @Iva AS Unitario
+			, (VentaDevolucionDetalle.PrecioUnitario + VentaDevolucionDetalle.Iva) AS Unitario
 			,VentaDevolucionDetalle.Cantidad
 			,0.0 AS ExistenciaNueva	
 			,4 AS Orden		
@@ -378,8 +377,8 @@ FROM (
 			,Usuario.NombreUsuario
 			,Sucursal.NombreSucursal AS Origen
 			,CAST(Venta.ClienteID AS VARCHAR) AS Destino
-			,VentaDevolucionDetalle.PrecioUnitario * @Iva AS Unitario
-			,VentaDevolucionDetalle.Cantidad
+			, (VentaDevolucionDetalle.PrecioUnitario + VentaDevolucionDetalle.Iva) AS Unitario
+			, (VentaDevolucionDetalle.Cantidad * -1)
 			,0.0 AS ExistenciaNueva
 			,5 AS Orden	
 			, VentaDevolucionDetalle.ParteID
@@ -413,7 +412,7 @@ FROM (
 			,Usuario.NombreUsuario
 			,Sucursal.NombreSucursal AS Origen
 			,CAST(Venta.ClienteID AS VARCHAR) AS Destino
-			,VentaDevolucionDetalle.PrecioUnitario * @Iva AS Unitario
+			, (VentaDevolucionDetalle.PrecioUnitario + VentaDevolucionDetalle.Iva) AS Unitario
 			,VentaDevolucionDetalle.Cantidad
 			,0.0 AS ExistenciaNueva
 			,9 AS Orden	
@@ -437,6 +436,98 @@ FROM (
 			AND VentaDevolucionDetalle.Estatus = 1
 			AND Venta.SucursalID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
 	) AS Devoluciones
+	
+	/* Casco recibido por venta de acumulador */
+	UNION
+	SELECT
+		cr.Fecha
+		, CONVERT(NVARCHAR(8), cr.CascoRegistroID) AS Folio
+		,'E' AS Tipo
+		,'CASCO RECIBIDO' AS Operacion
+		, c.Nombre AS ClienteProveedor
+		, NULL AS NombreUsuario
+		, 'CONTROL DE CASCOS' AS Origen
+		, s.NombreSucursal AS Destino
+		, (pp.Costo * @Iva) AS Unitario
+		, 1 AS Cantidad
+		, 0.0 AS ExistenciaNueva
+		, 10 AS Orden
+		, cr.ParteID
+		, @OpEntradaInventario AS OperacionID
+		, v.SucursalID
+		, cr.RealizoUsuarioID
+	FROM
+		CascoRegistro cr
+		LEFT JOIN Venta v ON v.VentaID = cr.VentaID AND v.Estatus = 1
+		LEFT JOIN Cliente c ON c.ClienteID = v.ClienteID AND c.Estatus = 1
+		LEFT JOIN Sucursal s ON s.SucursalID = v.SucursalID AND s.Estatus = 1
+		-- LEFT JOIN Usuario u ON u.UsuarioID = cr.RealizoUsuarioID AND u.Estatus = 1
+		LEFT JOIN PartePrecio pp ON pp.ParteID = cr.ParteID AND pp.Estatus = 1
+	WHERE
+		cr.RecibidoCascoID IS NOT NULL
+
+	/* Gasto por casco, casco comprado */
+	UNION
+	SELECT
+		ce.Fecha
+		, CONVERT(NVARCHAR(8), cje.CajaEgresoID) AS Folio
+		,'E' AS Tipo
+		,'CASCO COMPRADO' AS Operacion
+		, '----' AS ClienteProveedor
+		, NULL AS NombreUsuario
+		, 'GASTO POR CASCO' AS Origen
+		, s.NombreSucursal AS Destino
+		, ce.Importe AS Unitario
+		, 1 AS Cantidad
+		, 0.0 AS ExistenciaNueva
+		, 11 AS Orden
+		, CASE ce.ContaCuentaAuxiliarID
+			WHEN @CaCascoChico THEN @PaDepCascoChico
+			WHEN @CaCascoMediano THEN @PaDepCascoMediano
+			WHEN @CaCascoGrande THEN @PaDepCascoGrande
+			WHEN @CaCascoExtra THEN @PaDepCascoExtra
+		END AS ParteID
+		, @OpEntradaInventario AS OperacionID
+		, ce.SucursalID
+		, ce.RealizoUsuarioID
+	FROM
+		ContaEgreso ce
+		LEFT JOIN CajaEgreso cje ON cje.ContaEgresoID = ce.ContaEgresoID AND cje.Estatus = 1
+		LEFT JOIN Sucursal s ON s.SucursalID = ce.SucursalID AND s.Estatus = 1
+	WHERE
+		ce.ContaCuentaAuxiliarID IN (@CaCascoChico, @CaCascoMediano, @CaCascoGrande, @CaCascoExtra)
+
+	/* Devolución de parte que tiene casco */
+	UNION
+	SELECT
+		vd.Fecha
+		, CONVERT(NVARCHAR(8), cr.CascoRegistroID) AS Folio
+		,'S' AS Tipo
+		,'CASCO DEVUELTO' AS Operacion
+		, c.Nombre AS ClienteProveedor
+		, NULL AS NombreUsuario
+		, 'CONTROL DE CASCOS' AS Origen
+		, s.NombreSucursal AS Destino
+		, pp.Costo AS Unitario
+		, -1 AS Cantidad
+		, 0.0 AS ExistenciaNueva
+		, 12 AS Orden
+		, vdd.ParteID
+		, @OpSalidaInventario AS OperacionID
+		, vd.SucursalID
+		, vd.RealizoUsuarioID
+	FROM
+		VentaDevolucionDetalle vdd
+		INNER JOIN VentaDevolucion vd ON vd.VentaDevolucionID = vdd.VentaDevolucionID AND vd.Estatus = 1
+		INNER JOIN Parte p ON p.ParteID = vdd.ParteID AND p.Estatus = 1
+		INNER JOIN CascoRegistro cr ON cr.VentaID = vd.VentaID
+		LEFT JOIN Venta v ON v.VentaID = vd.VentaID AND v.Estatus = 1
+		LEFT JOIN Cliente c ON c.ClienteID = v.ClienteID AND c.Estatus = 1
+		LEFT JOIN Sucursal s ON s.SucursalID = vd.SucursalID AND s.Estatus = 1
+		LEFT JOIN PartePrecio pp ON pp.ParteID = vdd.ParteID AND pp.Estatus = 1
+	WHERE
+		vdd.Estatus = 1
+		AND p.RequiereCascoDe IS NOT NULL
 
 ) AS Kardex
 
