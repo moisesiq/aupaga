@@ -120,6 +120,8 @@ namespace Refaccionaria.App
                     Contingencia.TipoOperacionID = Helper.ConvertirEntero(this.cboTipoOperacion.SelectedValue);
                     Contingencia.TipoConceptoOperacionID = Helper.ConvertirEntero(this.cboConceptoOperacion.SelectedValue);
                     Contingencia.ObservacionSolucion = this.txtObservacion.Text;
+                    if (Helper.ConvertirEntero(this.cboTipoOperacion.SelectedValue) == Cat.TiposDeOperacionMovimientos.SalidaInventario)
+                        Contingencia.ObservacionSolucion += (" - SE CREA UNA ENTRADA PARA DEVOLVER EL TRASPASO A LA TIENDA ORIGEN Y EN EL SEGUNDO MOVIMIENTO UNA SALIDA PARA PODER HACER LA SALIDA DEL INVENTARIO");
                     Contingencia.FechaModificacion = DateTime.Now;
                     General.SaveOrUpdate<MovimientoInventarioTraspasoContingencia>(Contingencia, Contingencia);
 

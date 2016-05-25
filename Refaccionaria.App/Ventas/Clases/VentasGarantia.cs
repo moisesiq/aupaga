@@ -147,6 +147,25 @@ namespace Refaccionaria.App
                 this.CompletarAccionGarantia(oGarantia.VentaGarantiaID, iValeClienteID);
             }
 
+            // Se mete un registro en kárdex, en cero, sólo para mantener historial de la operación
+            var oKardex = new ParteKardex()
+            {
+                ParteID = oGarantia.ParteID,
+                OperacionID = Cat.OperacionesKardex.VentaCancelada,
+                SucursalID = oGarantia.SucursalID,
+                Folio = oVentaV.Folio,
+                Fecha = dAhora,
+                RealizoUsuarioID = iUsuarioID,
+                Entidad = oVentaV.Cliente,
+                Origen = oVentaV.Sucursal,
+                Destino = "GARANTÍA RECIBIDA",
+                Cantidad = 0,
+                Importe = (oGarantia.PrecioUnitario + oGarantia.Iva),
+                RelacionTabla = Cat.Tablas.VentaGarantia,
+                RelacionID = oGarantia.VentaGarantiaID
+            };
+            AdmonProc.RegistrarKardex(oKardex);
+
             // Se guarda la autorización, si aplica
             VentasProc.GenerarAutorizacion(Cat.AutorizacionesProcesos.Garantia, Cat.Tablas.VentaGarantia, oGarantia.VentaGarantiaID, iAutorizoID);
             // Se genera el ticket correspondiente

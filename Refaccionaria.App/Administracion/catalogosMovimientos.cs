@@ -1025,8 +1025,8 @@ namespace Refaccionaria.App
                             // Se actualiza la existencia y el kardex
                             bool bEntradaGarantia = (Helper.ConvertirEntero(this.cboConceptoOperacion.SelectedValue) == Cat.MovimientosConceptosDeOperacion.EntradaGarantia);
                             var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
-                            AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.EntradaInventario, movimientoEntradaI.FolioFactura, iAutorizoID
-                                , "----", (bEntradaGarantia ? "GARANTÍA" : "----"), this.cboUbicacionDestino.Text, cantidad
+                            AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.EntradaInventario, movimientoEntradaI.MovimientoInventarioID.ToString(), iAutorizoID
+                                , this.cboConceptoOperacion.Text, (bEntradaGarantia ? "GARANTÍA" : "----"), this.cboUbicacionDestino.Text, cantidad
                                 , oPartePrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoEntradaI.MovimientoInventarioID);
 
                             var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == sucursalId && c.Estatus);
@@ -1205,7 +1205,7 @@ namespace Refaccionaria.App
                             // Se actualiza la existencia y el kardex
                             var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
                             AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.SalidaInventario
-                                , movimientoSalida.MovimientoInventarioID.ToString(), iAutorizoID, "----", "----", this.cboUbicacionDestino.Text
+                                , movimientoSalida.MovimientoInventarioID.ToString(), iAutorizoID, this.cboConceptoOperacion.Text, "----", this.cboUbicacionDestino.Text
                                 , (cantidad * -1), oPartePrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoSalida.MovimientoInventarioID);
 
                             var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == sucursalId && c.Estatus);

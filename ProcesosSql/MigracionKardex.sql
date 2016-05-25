@@ -17,6 +17,11 @@ DECLARE @OpSalidaInventario INT = 6
 DECLARE @OpTraspasoEntrada INT = 7
 DECLARE @OpTraspasoSalida INT = 8
 
+DECLARE @TipoOpEntradaInv INT = 2
+DECLARE @TipoOpSalidaInv INT = 3
+DECLARE @TipoOpTraspaso INT = 5
+DECLARE @TipoConOpGarantia INT = 12
+
 DECLARE @CaCascoChico INT = 28
 DECLARE @CaCascoMediano INT = 29
 DECLARE @CaCascoGrande INT = 30
@@ -27,6 +32,21 @@ DECLARE @PaDepCascoGrande INT = 3403
 DECLARE @PaDepCascoExtra INT = 3400
 
 DECLARE @Iva AS DECIMAL(18,2) = (((SELECT CAST(Valor AS DECIMAL(18,2))FROM Configuracion WHERE Configuracion.ConfiguracionID = 1)/100) + 1)
+
+/* PARA DIFERENCIA MOVIMIENTOS ENTRADA Y SALIDA DE INVENTARIO PROVENIENTES DE CONFLICTO */
+DECLARE @MovsDeConflicto TABLE (OperacionID INT, MovID INT, MovFuenteID INT)
+INSERT INTO @MovsDeConflicto
+SELECT
+	TipoOperacionID
+	, MovimientoInventarioID
+	, CONVERT(INT, REPLACE(Observacion, 'Traspaso por resolucion de un Conflicto. Movimiento: : ', ''))
+FROM MovimientoInventario
+WHERE
+	Estatus = 1
+	AND Observacion LIKE 'Traspaso por resolucion de un Conflicto. Movimiento: : %'
+	AND SucursalDestinoID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
+
+/* INICIO DE LA MIGRACIÓN */
 
 INSERT INTO ParteKardex (ParteID, OperacionID, SucursalID, Folio, Fecha, RealizoUsuarioID
 	, Entidad, Origen, Destino, Cantidad, Importe, ExistenciaNueva)
@@ -56,7 +76,7 @@ FROM (
 		, NULL AS NombreUsuario
 		, NULL AS Origen
 		, s.NombreSucursal AS Destino
-		, pp.Costo * @Iva AS Unitario
+		, pp.Costo AS Unitario
 		, pe.ExistenciaInicial AS Cantidad
 		, 0.0 AS ExistenciaNueva
 		, 0 AS Orden
@@ -112,7 +132,7 @@ FROM (
 		,Usuario.NombreUsuario
 		,'-----' AS Origen
 		,Sucursal.NombreSucursal AS Destino
-		,PartePrecio.Costo * @Iva AS Unitario
+		,PartePrecio.Costo AS Unitario
 		,MovimientoInventarioDetalle.Cantidad
 		,0.0 AS ExistenciaNueva
 		,2 AS Orden
@@ -131,6 +151,8 @@ FROM (
 		AND MovimientoInventario.Estatus = 1
 		-- AND MovimientoInventarioDetalle.ParteID = @ParteId			
 		AND MovimientoInventario.SucursalDestinoID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
+		-- Se excluyen los movimientos provenientes de conflicto
+		AND MovimientoInventario.MovimientoInventarioID NOT IN (SELECT MovID FROM @MovsDeConflicto)
 		
 	/* SALIDA INVENTARIO */
 	UNION
@@ -143,8 +165,8 @@ FROM (
 		,Usuario.NombreUsuario
 		,'-----' AS Origen
 		,Sucursal.NombreSucursal AS Destino
-		,PartePrecio.Costo * @Iva AS Unitario
-		, (MovimientoInventarioDetalle.Cantidad * -1)
+		,PartePrecio.Costo AS Unitario
+		, (MovimientoInventarioDetalle.Cantidad * -1) AS Cantidad
 		,0.0 AS ExistenciaNueva
 		,6 AS Orden
 		, MovimientoInventarioDetalle.ParteID
@@ -162,6 +184,38 @@ FROM (
 		AND MovimientoInventario.Estatus = 1
 		-- AND MovimientoInventarioDetalle.ParteID = @ParteId
 		AND MovimientoInventario.SucursalDestinoID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
+		-- Se excluyen los movimientos provenientes de conflicto
+		AND MovimientoInventario.MovimientoInventarioID NOT IN (SELECT MovID FROM @MovsDeConflicto)
+
+	/* SE AGREGAN LOS MOVIMIENTOS PROVENIENTES DE CONFLICTOS */
+	UNION
+	SELECT
+		mi.FechaRegistro AS Fecha
+		, CAST(mc.MovFuenteID AS VARCHAR) AS Folio
+		, (CASE WHEN mi.TipoOperacionID = @TipoOpEntradaInv THEN 'E' ELSE 'S' END) AS Tipo
+		, ((CASE WHEN mi.TipoOperacionID = @TipoOpEntradaInv THEN 'ENTRADA' ELSE 'SALIDA' END) + ' INVENTARIO') AS Operacion
+		, '-----------------' AS ClienteProveedor
+		, u.NombreUsuario
+		, '-----' AS Origen
+		, s.NombreSucursal AS Destino
+		, pp.Costo AS Unitario
+		, (mid.Cantidad * (CASE WHEN mi.TipoOperacionID = @TipoOpEntradaInv THEN 1 ELSE -1 END)) AS Cantidad
+		, 0.0 AS ExistenciaNueva
+		, 6 AS Orden
+		, mid.ParteID
+		, (CASE WHEN mi.TipoOperacionID = @TipoOpEntradaInv THEN @OpEntradaInventario ELSE @OpSalidaInventario END) AS OperacionID
+		, mif.SucursalOrigenID AS SucursalID
+		, u.UsuarioID
+	FROM 
+		@MovsDeConflicto mc
+		LEFT JOIN MovimientoInventario mi ON mi.MovimientoInventarioID = mc.MovID AND mi.Estatus = 1
+		LEFT JOIN MovimientoInventarioDetalle mid ON mid.MovimientoInventarioID = mi.MovimientoInventarioID AND mid.Estatus = 1
+		LEFT JOIN Usuario u ON u.UsuarioID = mi.UsuarioID AND u.Estatus = 1
+		LEFT JOIN Sucursal s ON s.SucursalID = mi.SucursalDestinoID AND s.Estatus = 1
+		LEFT JOIN PartePrecio pp ON pp.ParteID = mid.ParteID AND pp.Estatus = 1
+		LEFT JOIN MovimientoInventario mif ON mif.MovimientoInventarioID = mc.MovFuenteID AND mif.Estatus = 1
+	WHERE
+		mc.OperacionID IN (@TipoOpEntradaInv, @TipoOpSalidaInv)
 
 	/* DEVOLUCION A PROVEEDOR */
 	UNION
@@ -176,7 +230,7 @@ FROM (
 		,CAST(MovimientoInventario.ProveedorID AS VARCHAR) AS Destino
 		-- ,PartePrecio.Costo * @Iva AS Unitario
 		, MovimientoInventarioDetalle.PrecioUnitario AS Unitario
-		, (MovimientoInventarioDetalle.Cantidad * -1)
+		, (CASE WHEN MovimientoInventario.TipoConceptoOperacionID = @TipoConOpGarantia THEN 0 ELSE (MovimientoInventarioDetalle.Cantidad * -1) END) AS Cantidad
 		,0.0 AS ExistenciaNueva
 		,8 AS Orden
 		, MovimientoInventarioDetalle.ParteID
@@ -206,8 +260,8 @@ FROM (
 		,Usuario.NombreUsuario
 		,O.NombreSucursal AS Origen
 		,D.NombreSucursal AS Destino
-		,PartePrecio.Costo * @Iva AS Unitario
-		, (MovimientoInventarioDetalle.Cantidad * -1)
+		,PartePrecio.Costo AS Unitario
+		, (MovimientoInventarioDetalle.Cantidad * -1) AS Cantidad
 		,0.0 AS ExistenciaNueva
 		,7 AS Orden
 		, MovimientoInventarioDetalle.ParteID
@@ -226,6 +280,8 @@ FROM (
 		AND MovimientoInventario.Estatus = 1
 		-- AND MovimientoInventarioDetalle.ParteID = @ParteId		
 		AND MovimientoInventario.SucursalOrigenID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
+		-- Se excluyen los movimientos provenientes de conflicto
+		AND MovimientoInventario.MovimientoInventarioID NOT IN (SELECT MovID FROM @MovsDeConflicto)
 		
 	/* TRASPASO ENTRADA */
 	UNION
@@ -238,8 +294,8 @@ FROM (
 		,Usuario.NombreUsuario
 		,O.NombreSucursal AS Origen
 		,D.NombreSucursal AS Destino
-		,PartePrecio.Costo * @Iva AS Unitario
-		,MovimientoInventarioDetalle.Cantidad
+		,PartePrecio.Costo AS Unitario
+		, ISNULL(tg.CantidadRecibida, MovimientoInventarioDetalle.Cantidad) AS Cantidad
 		,0.0 AS ExistenciaNueva
 		,3 AS Orden
 		, MovimientoInventarioDetalle.ParteID
@@ -249,6 +305,8 @@ FROM (
 	FROM 
 		MovimientoInventario 
 		INNER JOIN MovimientoInventarioDetalle ON MovimientoInventarioDetalle.MovimientoInventarioID = MovimientoInventario.MovimientoInventarioID
+		LEFT JOIN MovimientoInventarioTraspasoContingencia tg ON tg.MovimientoInventarioID = MovimientoInventario.MovimientoInventarioID
+			AND tg.ParteID = MovimientoInventarioDetalle.ParteID AND tg.Estatus = 1
 		INNER JOIN Usuario ON Usuario.UsuarioID = MovimientoInventario.UsuarioRecibioTraspasoID 
 		INNER JOIN Sucursal O ON O.SucursalID = MovimientoInventario.SucursalOrigenID 
 		INNER JOIN Sucursal D ON D.SucursalID = MovimientoInventario.SucursalDestinoID 
@@ -260,6 +318,37 @@ FROM (
 		AND MovimientoInventario.FechaRecepcion IS NOT NULL
 		AND MovimientoInventario.UsuarioRecibioTraspasoID IS NOT NULL
 		AND MovimientoInventario.SucursalDestinoID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
+
+	/* CONFLICTO TRASPASO RESUELTO CON SALIDA DE INVENTARIO - SE AGREGA REGISTRO DE ENTRADA */
+	UNION
+	SELECT
+		tg.FechaSoluciono AS Fecha
+		, CAST(mi.MovimientoInventarioID AS VARCHAR) AS Folio 
+		, 'E' AS Tipo
+		, 'TRASPASO ENTRADA' AS Operacion
+		, 'CONFLICTO RESUELTO SALIDA' AS ClienteProveedor
+		, u.NombreUsuario
+		, so.NombreSucursal AS Origen
+		, sd.NombreSucursal AS Destino
+		, pp.Costo AS Unitario
+		, tg.CantidadEnviada AS Cantidad
+		, 0.0 AS ExistenciaNueva
+		, 6 AS Orden
+		, tg.ParteID
+		, @OpTraspasoEntrada AS OperacionID
+		, mi.SucursalOrigenID AS SucursalID
+		, u.UsuarioID
+	FROM
+		MovimientoInventarioTraspasoContingencia tg
+		LEFT JOIN MovimientoInventarioDetalle mid ON mid.MovimientoInventarioDetalleID = tg.MovimientoInventarioDetalleID AND mid.Estatus = 1
+		LEFT JOIN MovimientoInventario mi ON mi.MovimientoInventarioID = mid.MovimientoInventarioID AND mi.Estatus = 1
+		LEFT JOIN Usuario u ON u.UsuarioID = tg.UsuarioSolucionoID AND u.Estatus = 1
+		LEFT JOIN Sucursal so ON so.SucursalID = mi.SucursalOrigenID AND so.Estatus = 1
+		LEFT JOIN Sucursal sd ON sd.SucursalID = mi.SucursalDestinoID AND sd.Estatus = 1
+		LEFT JOIN PartePrecio pp ON pp.ParteID = tg.ParteID AND pp.Estatus = 1
+	WHERE
+		tg.MovimientoInventarioEstatusContingenciaID = 1
+		AND tg.TipoOperacionID = 3
 
 	/* VENTA (PAGADA Y COBRADA) */
 	UNION
@@ -273,11 +362,11 @@ FROM (
 		,Sucursal.NombreSucursal AS Origen
 		,CAST(Venta.ClienteID AS VARCHAR) AS Destino
 		,(VentaDetalle.PrecioUnitario + VentaDetalle.Iva) AS Unitario
-		, (VentaDetalle.Cantidad * -1)
+		, (VentaDetalle.Cantidad * -1) AS Cantidad
 		,0.0 AS ExistenciaNueva
 		,5 AS Orden
 		, VentaDetalle.ParteID
-		, @OpVenta AS OperacionID
+		, 1 AS OperacionID
 		, Venta.SucursalID AS SucursalID
 		, Usuario.UsuarioID
 	FROM
@@ -292,7 +381,7 @@ FROM (
 		AND Venta.VentaEstatusID IN (2, 3)
 		-- AND VentaDetalle.ParteID = @ParteId
 		AND VentaDetalle.Estatus = 1 
-		AND Venta.SucursalID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
+		AND Venta.SucursalID IN (SELECT * FROM dbo.fnuDividirCadena('1,2,3', ','))
 
 	/* VENTA (CANCELADA) */
 	UNION		
@@ -307,7 +396,7 @@ FROM (
 			,Sucursal.NombreSucursal AS Origen
 			,CAST(Venta.ClienteID AS VARCHAR) AS Destino
 			, (VentaDevolucionDetalle.PrecioUnitario + VentaDevolucionDetalle.Iva) AS Unitario
-			, (VentaDevolucionDetalle.Cantidad * -1)
+			, (VentaDevolucionDetalle.Cantidad * -1) AS Cantidad
 			,0.0 AS ExistenciaNueva	
 			,5 AS Orden	
 			, VentaDevolucionDetalle.ParteID
@@ -378,7 +467,7 @@ FROM (
 			,Sucursal.NombreSucursal AS Origen
 			,CAST(Venta.ClienteID AS VARCHAR) AS Destino
 			, (VentaDevolucionDetalle.PrecioUnitario + VentaDevolucionDetalle.Iva) AS Unitario
-			, (VentaDevolucionDetalle.Cantidad * -1)
+			, (VentaDevolucionDetalle.Cantidad * -1) AS Cantidad
 			,0.0 AS ExistenciaNueva
 			,5 AS Orden	
 			, VentaDevolucionDetalle.ParteID
@@ -395,7 +484,7 @@ FROM (
 		WHERE
 			Venta.Estatus = 1
 			AND	Venta.Fecha > '2013-12-12'
-			AND Venta.VentaEstatusID IN (4, 5)
+			-- AND Venta.VentaEstatusID IN (4, 5)
 			-- AND VentaDevolucionDetalle.ParteID = @ParteId
 			AND VentaDevolucion.EsCancelacion = 0
 			AND VentaDevolucionDetalle.Estatus = 1
@@ -430,12 +519,75 @@ FROM (
 		WHERE
 			Venta.Estatus = 1
 			AND	Venta.Fecha > '2013-12-12'
-			AND Venta.VentaEstatusID IN (4, 5)
+			-- AND Venta.VentaEstatusID IN (4, 5)
 			-- AND VentaDevolucionDetalle.ParteID = @ParteId
 			AND VentaDevolucion.EsCancelacion = 0
 			AND VentaDevolucionDetalle.Estatus = 1
 			AND Venta.SucursalID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
 	) AS Devoluciones
+	
+	/* Ventas Garantías */
+	UNION		
+	SELECT * FROM (
+		SELECT
+			vg.Fecha AS Fecha
+			, CAST(vg.VentaGarantiaID AS VARCHAR) AS Folio
+			, 'S' AS Tipo
+			, 'VENTAS' AS Operacion
+			, c.Nombre AS ClienteProveedor
+			, u.NombreUsuario
+			, s.NombreSucursal AS Origen
+			, CAST(v.ClienteID AS VARCHAR) AS Destino
+			, (vg.PrecioUnitario + vg.Iva) AS Unitario
+			, -1 AS Cantidad
+			, 0.0 AS ExistenciaNueva	
+			, 10 AS Orden	
+			, vg.ParteID
+			, @OpVenta AS OperacionID
+			, v.SucursalID AS SucursalID
+			, u.UsuarioID
+		FROM
+			Venta v
+			LEFT JOIN VentaGarantia vg ON vg.VentaID = v.VentaID AND vg.Estatus = 1
+			LEFT JOIN Cliente c ON c.ClienteID = v.ClienteID AND c.Estatus = 1
+			LEFT JOIN Usuario u ON u.UsuarioID = v.RealizoUsuarioID AND u.Estatus = 1
+			LEFT JOIN Sucursal s ON s.SucursalID = v.SucursalID AND s.Estatus = 1
+		WHERE
+			v.Estatus = 1
+			AND	v.Fecha > '2013-12-12'
+			AND v.VentaEstatusID IN (6)
+			AND v.SucursalID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
+
+		UNION			
+		SELECT
+			v.Fecha AS Fecha
+			, CAST(v.Folio AS VARCHAR) AS Folio
+			, 'E' AS Tipo
+			, 'VENTA GARANTÍA' AS Operacion
+			, c.Nombre AS ClienteProveedor
+			, u.NombreUsuario
+			, s.NombreSucursal AS Origen
+			, CAST(v.ClienteID AS VARCHAR) AS Destino
+			, (vg.PrecioUnitario + vg.Iva) AS Unitario
+			, 0 AS Cantidad
+			, 0.0 AS ExistenciaNueva	
+			, 11 AS Orden		
+			, vg.ParteID
+			, @OpVentaDev AS OperacionID
+			, vg.SucursalID AS SucursalID
+			, u.UsuarioID
+		FROM
+			Venta v
+			LEFT JOIN VentaGarantia vg ON vg.VentaID = v.VentaID AND vg.Estatus = 1
+			LEFT JOIN Cliente c ON c.ClienteID = v.ClienteID AND c.Estatus = 1
+			LEFT JOIN Usuario u ON u.UsuarioID = vg.RealizoUsuarioID AND u.Estatus = 1
+			LEFT JOIN Sucursal s ON s.SucursalID = vg.SucursalID AND s.Estatus = 1
+		WHERE
+			v.Estatus = 1
+			AND	v.Fecha > '2013-12-12'
+			AND v.VentaEstatusID IN (6)
+			AND vg.SucursalID IN (SELECT * FROM dbo.fnuDividirCadena(@SucursalID, ','))
+	) AS Garantias
 	
 	/* Casco recibido por venta de acumulador */
 	UNION
@@ -451,14 +603,14 @@ FROM (
 		, (pp.Costo * @Iva) AS Unitario
 		, 1 AS Cantidad
 		, 0.0 AS ExistenciaNueva
-		, 10 AS Orden
-		, cr.ParteID
+		, 12 AS Orden
+		, cr.RecibidoCascoID
 		, @OpEntradaInventario AS OperacionID
 		, v.SucursalID
-		, cr.RealizoUsuarioID
+		, cr.RealizoUsuarioID AS UsuarioID
 	FROM
 		CascoRegistro cr
-		LEFT JOIN Venta v ON v.VentaID = cr.VentaID AND v.Estatus = 1
+		INNER JOIN Venta v ON v.VentaID = cr.VentaID AND v.Estatus = 1
 		LEFT JOIN Cliente c ON c.ClienteID = v.ClienteID AND c.Estatus = 1
 		LEFT JOIN Sucursal s ON s.SucursalID = v.SucursalID AND s.Estatus = 1
 		-- LEFT JOIN Usuario u ON u.UsuarioID = cr.RealizoUsuarioID AND u.Estatus = 1
@@ -480,7 +632,7 @@ FROM (
 		, ce.Importe AS Unitario
 		, 1 AS Cantidad
 		, 0.0 AS ExistenciaNueva
-		, 11 AS Orden
+		, 13 AS Orden
 		, CASE ce.ContaCuentaAuxiliarID
 			WHEN @CaCascoChico THEN @PaDepCascoChico
 			WHEN @CaCascoMediano THEN @PaDepCascoMediano
@@ -489,7 +641,7 @@ FROM (
 		END AS ParteID
 		, @OpEntradaInventario AS OperacionID
 		, ce.SucursalID
-		, ce.RealizoUsuarioID
+		, ce.RealizoUsuarioID AS UsuarioID
 	FROM
 		ContaEgreso ce
 		LEFT JOIN CajaEgreso cje ON cje.ContaEgresoID = ce.ContaEgresoID AND cje.Estatus = 1
@@ -511,11 +663,11 @@ FROM (
 		, pp.Costo AS Unitario
 		, -1 AS Cantidad
 		, 0.0 AS ExistenciaNueva
-		, 12 AS Orden
-		, vdd.ParteID
+		, 14 AS Orden
+		, cr.RecibidoCascoID
 		, @OpSalidaInventario AS OperacionID
 		, vd.SucursalID
-		, vd.RealizoUsuarioID
+		, vd.RealizoUsuarioID AS UsuarioID
 	FROM
 		VentaDevolucionDetalle vdd
 		INNER JOIN VentaDevolucion vd ON vd.VentaDevolucionID = vdd.VentaDevolucionID AND vd.Estatus = 1
@@ -528,6 +680,7 @@ FROM (
 	WHERE
 		vdd.Estatus = 1
 		AND p.RequiereCascoDe IS NOT NULL
+		AND cr.RecibidoCascoID IS NOT NULL
 
 ) AS Kardex
 
@@ -572,7 +725,8 @@ WHILE @@FETCH_STATUS = 0 BEGIN
 		SET @Existencia = 0
 	END
 
-	SET @Existencia = @Existencia + (@Cantidad *
+	SET @Existencia = (@Existencia + @Cantidad)
+		/*
 		CASE @OperacionID
 			WHEN @OpVenta THEN -1
 			WHEN @OpVentaDev THEN 1
@@ -583,7 +737,8 @@ WHILE @@FETCH_STATUS = 0 BEGIN
 			WHEN @OpTraspasoEntrada THEN 1
 			WHEN @OpTraspasoSalida THEN -1
 		END
-	)
+		*/
+	-- )
 
 	UPDATE ParteKardex SET ExistenciaNueva = @Existencia WHERE ParteKardexID = @ParteKardexID
 	

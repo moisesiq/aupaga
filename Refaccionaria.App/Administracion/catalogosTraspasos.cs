@@ -1618,7 +1618,7 @@ namespace Refaccionaria.App
                     int iSucursalID = GlobalClass.SucursalID;
                     var oPartePrecio = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
                     AdmonProc.AfectarExistenciaYKardex(parteId, iSucursalID, Cat.OperacionesKardex.EntradaTraspaso, movimientoId.ToString(), iAutorizoID
-                        , this.cboProveedor.Text, sOrigen, sDestino, recibido, oPartePrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoId);
+                        , (existeContingencia ? "CONFLICTO" : this.cboProveedor.Text), sOrigen, sDestino, recibido, oPartePrecio.Costo.Valor(), Cat.Tablas.MovimientoInventario, movimientoId);
 
                     var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == iSucursalID && c.Estatus);
                     var historial = new MovimientoInventarioHistorial()

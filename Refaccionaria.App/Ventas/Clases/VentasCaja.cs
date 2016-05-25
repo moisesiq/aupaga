@@ -1469,7 +1469,7 @@ namespace Refaccionaria.App
             }
 
             // Se hace el cálculo final
-            decimal mCostoMinimo = (UtilLocal.ObtenerImporteMasIva(mCostoTotal) * 1.1M);
+            decimal mCostoMinimo = (UtilLocal.ObtenerImporteMasIva(mCostoTotal) * 1.03M);
             // decimal mOficial = (mTickets - mNegativos - mDevoluciones - mCancelaciones - mFacturadoDiasAnt);
             decimal mOficial = (mTickets - mNegativos - mDevolucionesDia - mDevolucionesDiasAnt - mGarantiasDia - mGarantiasDiasAnt - mFacturadoDiasAnt);
             decimal mFacturar = (mOficial - mRestar);
