@@ -221,7 +221,7 @@ FROM (
 	UNION
 	SELECT 
 		MovimientoInventario.FechaRegistro AS Fecha
-		,CAST(MovimientoInventario.FolioFactura AS VARCHAR) AS Folio
+		,CAST(MovimientoInventario.MovimientoInventarioID AS VARCHAR) AS Folio
 		,'S' AS Tipo
 		,'DEVOLUCION A PROVEEDOR' AS Operacion
 		,Proveedor.NombreProveedor AS ClienteProveedor
@@ -530,14 +530,14 @@ FROM (
 	UNION		
 	SELECT * FROM (
 		SELECT
-			vg.Fecha AS Fecha
-			, CAST(vg.VentaGarantiaID AS VARCHAR) AS Folio
+			v.Fecha AS Fecha
+			, v.Folio
 			, 'S' AS Tipo
-			, 'VENTAS' AS Operacion
+			, 'VENTA' AS Operacion
 			, c.Nombre AS ClienteProveedor
 			, u.NombreUsuario
 			, s.NombreSucursal AS Origen
-			, CAST(v.ClienteID AS VARCHAR) AS Destino
+			, '----' AS Destino
 			, (vg.PrecioUnitario + vg.Iva) AS Unitario
 			, -1 AS Cantidad
 			, 0.0 AS ExistenciaNueva	
@@ -560,14 +560,14 @@ FROM (
 
 		UNION			
 		SELECT
-			v.Fecha AS Fecha
+			vg.Fecha AS Fecha
 			, CAST(v.Folio AS VARCHAR) AS Folio
 			, 'E' AS Tipo
 			, 'VENTA GARANTÍA' AS Operacion
 			, c.Nombre AS ClienteProveedor
 			, u.NombreUsuario
 			, s.NombreSucursal AS Origen
-			, CAST(v.ClienteID AS VARCHAR) AS Destino
+			, CAST(vg.VentaGarantiaID AS VARCHAR) AS Destino
 			, (vg.PrecioUnitario + vg.Iva) AS Unitario
 			, 0 AS Cantidad
 			, 0.0 AS ExistenciaNueva	
