@@ -18,6 +18,7 @@ namespace Refaccionaria.App
         // DataTable dtProveedores = new DataTable();
         // DataTable dtPedidos = new DataTable();
         bool sel = true;
+        bool bGridPedidosSel = false;
 
         public static catalogosPedidos Instance
         {
@@ -525,9 +526,10 @@ namespace Refaccionaria.App
             this.dgvEquivalente.Rows.Clear();   
             foreach (var equivalente in equivalentes)
             {
-                this.dgvEquivalente.Rows.Add(equivalente.ParteID, equivalente.NumeroParte, equivalente.Descripcion
+                this.dgvEquivalente.Rows.Add(equivalente.ParteIDEquivalente, equivalente.NumeroParte, equivalente.Descripcion
                     , equivalente.CostoConDescuento, equivalente.Matriz, equivalente.Suc02, equivalente.Suc03);
             }
+            this.dgvEquivalente.CurrentCell = null;
         }
 
         private void QuitarSugerido(DataGridViewRow oFila)
@@ -803,6 +805,11 @@ namespace Refaccionaria.App
 
                 // Se cargan los datos de las ventas para la parte seleccionada
                 this.ctlVentasPorMes.LlenarDatos(parteId);
+
+                // Para cambiar el color de fondo de algunos grids
+                this.dgvExistencias.CambiarColorDeFondo(Color.FromArgb(188, 199, 216));
+                this.ctlVentasPorMes.dgvDatos.CambiarColorDeFondo(Color.FromArgb(188, 199, 216));
+                // this.bGridPedidosSel = true;
             }
         }
 
@@ -1135,6 +1142,25 @@ namespace Refaccionaria.App
             this.LlenarDescripcionMaxMin(this.dgvExistencias.CurrentRow);
         }
 
+        private void dgvEquivalente_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (this.dgvEquivalente.VerSeleccionNueva())
+            {
+                if (this.dgvEquivalente.CurrentRow == null)
+                    return;
+                int iParteID = Helper.ConvertirEntero(this.dgvEquivalente.CurrentRow.Cells["eqParteID"].Value);
+                // Se carga el grid de las existencias
+                this.CargaExistencias(iParteID);
+                // Se carga el grid de ventas por mes
+                this.ctlVentasPorMes.LlenarDatos(iParteID);
+
+                // Para cambiar el color de fondo de algunos grids
+                this.dgvExistencias.CambiarColorDeFondo(Color.CadetBlue);
+                this.ctlVentasPorMes.dgvDatos.CambiarColorDeFondo(Color.CadetBlue);
+                // this.bGridPedidosSel = false;
+            }
+        }
+
         #endregion
 
         #region [ Pedidos ]
@@ -1257,7 +1283,7 @@ namespace Refaccionaria.App
         }
 
         #endregion
-                    
+            
         #endregion
                 
     }

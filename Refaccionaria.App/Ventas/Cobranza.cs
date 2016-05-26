@@ -147,11 +147,15 @@ namespace Refaccionaria.App
         private void btnImprimir_Click(object sender, EventArgs e)
         {
             var oVentas = this.ObtenerVentasMarcadas();
+            // Se agrupan las facturas de varios tickets
+            var oVentasAg = oVentas.GroupBy(c => c.Folio).Select(c => new { Folio = c.Key, Fecha = c.Min(s => s.Fecha), Vencimiento = c.Min(s => s.Vencimiento)
+                , Total = c.Sum(s => s.Total), Pagado = c.Sum(s => s.Pagado), Restante = c.Sum(s => s.Restante)});
+
             var oClienteV = General.GetEntity<ClientesDatosView>(q => q.ClienteID == this.Cliente.ClienteID);
             var oRep = new Report();
             oRep.Load(GlobalClass.ConfiguracionGlobal.pathReportes + "Cobranza.frx");
             oRep.RegisterData(new List<ClientesDatosView>() { oClienteV }, "Cliente");
-            oRep.RegisterData(oVentas, "Ventas");
+            oRep.RegisterData(oVentasAg, "Ventas");
             UtilLocal.EnviarReporteASalida("Reportes.Cobranza.Salida", oRep);
         }
 

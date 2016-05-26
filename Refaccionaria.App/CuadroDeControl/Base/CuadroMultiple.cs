@@ -29,6 +29,15 @@ namespace Refaccionaria.App
 
         #region [ Clases auxiliares ]
 
+        protected class TiposDeReporte
+        {
+            public const int Proveedores = 1;
+            public const int Marcas = 2;
+            public const int Lineas = 3;
+            public const int Vendedores = 4;
+            public const int Clientes = 5;
+        }
+
         protected class EnteroCadenaComp : IEnumerable, IEquatable<EnteroCadenaComp>
         {
 
@@ -103,6 +112,12 @@ namespace Refaccionaria.App
                 
         #endregion
 
+        #region [ Propiedades ]
+
+        public int TipoDeReporte { get; set; }
+
+        #endregion
+
         #region [ Eventos ]
 
         private void CuadroMultiple_Load(object sender, EventArgs e)
@@ -119,6 +134,16 @@ namespace Refaccionaria.App
             this.cmbSucursal.SelectedValue = 0;
             this.chkPagadas.Checked = true;
             this.chkCostoConDescuento.Checked = true;
+            // Se mustran u ocunltan los combos especiales de marcas y líneas, según el caso
+            if (this.TipoDeReporte == TiposDeReporte.Marcas || this.TipoDeReporte == TiposDeReporte.Lineas)
+            {
+                var oMarcas = General.GetListOf<MarcaParte>(c => c.Estatus).OrderBy(c => c.NombreMarcaParte);
+                foreach (var oReg in oMarcas)
+                    this.ctlMarcas.AgregarElemento(oReg.MarcaParteID, oReg.NombreMarcaParte);
+                var oLineas = General.GetListOf<Linea>(c => c.Estatus).OrderBy(c => c.NombreLinea);
+                foreach (var oReg in oLineas)
+                    this.ctlLineas.AgregarElemento(oReg.LineaID, oReg.NombreLinea);
+            }
             // Se llenan las fechas
             this.dtpDesde.Value = new DateTime(DateTime.Now.Year, 1, 1);
             // Se agrega la fila de totales del grid principal
@@ -199,6 +224,8 @@ namespace Refaccionaria.App
             this.dgvPartes.Rows.Clear();
             if (!this.dgvPrincipal.Focused) return;
 
+            Cargando.Mostrar();
+
             bool bSelNueva = this.dgvPrincipal.VerSeleccionNueva();
             if (bSelNueva)
             {
@@ -211,6 +238,8 @@ namespace Refaccionaria.App
                 // this.dgvPartes.Rows.Clear();
             }
 
+            Cargando.Cerrar();
+
             this.PrincipalCambioSel(bSelNueva);
         }
                 
@@ -218,9 +247,23 @@ namespace Refaccionaria.App
         {
             if (this.dgvGrupos.Focused && this.dgvGrupos.VerSeleccionNueva())
             {
+                Cargando.Mostrar();
+
                 int iId = (this.dgvPrincipal.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvPrincipal.CurrentRow.Cells["Principal_Id"].Value));
                 int iGrupoId = (this.dgvGrupos.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvGrupos.CurrentRow.Cells["Grupos_Id"].Value));
+
+                // Se cargan todos los grids, si es marcas o líneas
+                if (this.TipoDeReporte == TiposDeReporte.Marcas || this.TipoDeReporte == TiposDeReporte.Lineas)
+                {
+                    this.LlenarSemanas(iId);
+                    this.LlenarMeses(iId);
+                    this.LLenarVendedores(iId);
+                    this.LlenarSucursales(iId);
+                }
+
                 this.LlenarPartes(CuadroMultiple.GridFuente.Grupos, iId, iGrupoId);
+
+                Cargando.Cerrar();
             }
         }
 
@@ -472,7 +515,7 @@ namespace Refaccionaria.App
             return null;
         }
                 
-        protected IEnumerable<AgrupadoPorEnteroCadenaEntero> AgruparPorEnteroCadenaEntero(
+        protected virtual IEnumerable<AgrupadoPorEnteroCadenaEntero> AgruparPorEnteroCadenaEntero(
             IEnumerable<IGrouping<AgrupadoPorEnteroCadenaEntero, pauCuadroDeControlGeneral_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
@@ -546,6 +589,16 @@ namespace Refaccionaria.App
             return null;
         }
 
+        protected virtual IEnumerable<TotalesPorEnteroCadena> FiltrarMarcas(IEnumerable<TotalesPorEnteroCadena> oDatos)
+        {
+            return oDatos.Where(c => this.ctlMarcas.ValoresSeleccionados.Contains(c.Llave));
+        }
+
+        protected virtual void FiltrarLineas()
+        {
+
+        }
+        
         #endregion
                                         
     }

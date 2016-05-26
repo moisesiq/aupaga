@@ -1670,6 +1670,7 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Fijo" Type="bit" />
           <Property Name="ParteMaxMinReglaID" Type="int" />
+          <Property Name="FechaIman" Type="datetime" />
         </EntityType>
         <EntityType Name="ParteMaxMinCriterioPredefinido">
           <Key>
@@ -16727,20 +16728,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
             <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
           </AssociationSet>
-          <EntitySet Name="ParteMaxMin" EntityType="RefaccionariaModelo.ParteMaxMin" />
           <EntitySet Name="ParteMaxMinRegla" EntityType="RefaccionariaModelo.ParteMaxMinRegla" />
-          <AssociationSet Name="FK__ParteMaxM__Parte__3FC65688" Association="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688">
-            <End Role="Parte" EntitySet="Parte" />
-            <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ParteMaxM__Parte__4026493B" Association="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B">
-            <End Role="ParteMaxMinRegla" EntitySet="ParteMaxMinRegla" />
-            <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ParteMaxM__Sucur__40BA7AC1" Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1">
-            <End Role="Sucursal" EntitySet="Sucursal" />
-            <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
-          </AssociationSet>
           <AssociationSet Name="FK__ParteMaxM__Sucur__17835B04" Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__17835B04">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="ParteMaxMinRegla" EntitySet="ParteMaxMinRegla" />
@@ -17362,10 +17350,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ParteKardex" EntitySet="ParteKardex" />
           </AssociationSet>
-          <AssociationSet Name="FK__ParteMaxM__Usuar__41AE9EFA" Association="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
-          </AssociationSet>
           <AssociationSet Name="FK__ParteMaxM__Usuar__630F92C5" Association="RefaccionariaModelo.FK__ParteMaxM__Usuar__630F92C5">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ParteMaxMinRegla" EntitySet="ParteMaxMinRegla" />
@@ -17609,6 +17593,23 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__VentaPago__Usuar__6FBF826D" Association="RefaccionariaModelo.FK__VentaPago__Usuar__6FBF826D">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
+          </AssociationSet>
+          <EntitySet Name="ParteMaxMin" EntityType="RefaccionariaModelo.ParteMaxMin" />
+          <AssociationSet Name="FK__ParteMaxM__Parte__3FC65688" Association="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteMaxM__Parte__4026493B" Association="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B">
+            <End Role="ParteMaxMinRegla" EntitySet="ParteMaxMinRegla" />
+            <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteMaxM__Sucur__40BA7AC1" Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteMaxM__Usuar__41AE9EFA" Association="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Configuracion">
@@ -21617,13 +21618,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteExistenciaHistorico" Relationship="RefaccionariaModelo.FK__ParteExis__Parte__0E8EEDA7" FromRole="Parte" ToRole="ParteExistenciaHistorico" />
           <NavigationProperty Name="ParteCodigoAlterno" Relationship="RefaccionariaModelo.FK_ParteCodigoAlterno_Parte" FromRole="Parte" ToRole="ParteCodigoAlterno" />
           <NavigationProperty Name="ParteVehiculo" Relationship="RefaccionariaModelo.FK__ParteVehi__Parte__0EAE1DE1" FromRole="Parte" ToRole="ParteVehiculo" />
-          <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688" FromRole="Parte" ToRole="ParteMaxMin" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" FromRole="Parte" ToRole="VentaGarantia" />
           <NavigationProperty Name="ParteEquivalente" Relationship="RefaccionariaModelo.FK_ParteEquivalente_Parte" FromRole="Parte" ToRole="ParteEquivalente" />
           <NavigationProperty Name="ParteCompletado" Relationship="RefaccionariaModelo.FK__ParteComp__Parte__55216621" FromRole="Parte" ToRole="ParteCompletado" />
           <NavigationProperty Name="VentaCotizacionDetalle" Relationship="RefaccionariaModelo.FK__VentaCoti__Parte__6DED13EB" FromRole="Parte" ToRole="VentaCotizacionDetalle" />
           <NavigationProperty Name="InventarioConteo" Relationship="RefaccionariaModelo.FK__Inventari__Parte__22CAF07E" FromRole="Parte" ToRole="InventarioConteo" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK_Parte_Fabricante" FromRole="Parte" ToRole="Usuario" />
+          <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688" FromRole="Parte" ToRole="ParteMaxMin" />
         </EntityType>
         <Association Name="FK__CascoRegi__Parte__023E255B">
           <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
@@ -25151,7 +25152,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaPago__Sucur__20A2B0EA" FromRole="Sucursal" ToRole="VentaPago" />
           <NavigationProperty Name="SucursalCriterioABC" Relationship="RefaccionariaModelo.FK_SucursalCriterioABC_Sucursal" FromRole="Sucursal" ToRole="SucursalCriterioABC" />
           <NavigationProperty Name="NotaDeCredito" Relationship="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" FromRole="Sucursal" ToRole="NotaDeCredito" />
-          <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1" FromRole="Sucursal" ToRole="ParteMaxMin" />
           <NavigationProperty Name="ParteMaxMinRegla" Relationship="RefaccionariaModelo.FK__ParteMaxM__Sucur__17835B04" FromRole="Sucursal" ToRole="ParteMaxMinRegla" />
           <NavigationProperty Name="VentaGarantia" Relationship="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" FromRole="Sucursal" ToRole="VentaGarantia" />
           <NavigationProperty Name="CorteDetalleHistorico" Relationship="RefaccionariaModelo.FK__CorteDeta__Sucur__72E6D332" FromRole="Sucursal" ToRole="CorteDetalleHistorico" />
@@ -25160,6 +25160,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="FacturaGlobalPendientePorDescontar" Relationship="RefaccionariaModelo.FK__FacturaGl__Sucur__00FFE85F" FromRole="Sucursal" ToRole="FacturaGlobalPendientePorDescontar" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__Sucursal__Gerent__129488B5" FromRole="Sucursal" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK_Sucursal_Usuario" FromRole="Sucursal" ToRole="Usuario" />
+          <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1" FromRole="Sucursal" ToRole="ParteMaxMin" />
           </EntityType>
         <Association Name="FK__Autorizac__Sucur__2D9297B4">
           <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
@@ -25886,29 +25887,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ParteMaxMin">
-          <Key>
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="SucursalID" />
-          </Key>
-          <Property Name="ParteMaxMinID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="SucursalID" Type="Int32" Nullable="false" />
-          <Property Name="Maximo" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="Minimo" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="FechaCalculo" Type="DateTime" Precision="3" />
-          <Property Name="Calcular" Type="Boolean" />
-          <Property Name="VentasGlobales" Type="Boolean" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Fijo" Type="Boolean" />
-          <Property Name="ParteMaxMinReglaID" Type="Int32" />
-          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688" FromRole="ParteMaxMin" ToRole="Parte" />
-          <NavigationProperty Name="ParteMaxMinRegla" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B" FromRole="ParteMaxMin" ToRole="ParteMaxMinRegla" />
-          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1" FromRole="ParteMaxMin" ToRole="Sucursal" />
-          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" FromRole="ParteMaxMin" ToRole="Usuario" />
-        </EntityType>
         <EntityType Name="ParteMaxMinRegla">
           <Key>
             <PropertyRef Name="ParteMaxMinReglaID" />
@@ -25926,46 +25904,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Actualizar" Type="Boolean" Nullable="false" />
           <Property Name="SucursalID" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B" FromRole="ParteMaxMinRegla" ToRole="ParteMaxMin" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__ParteMaxM__Sucur__17835B04" FromRole="ParteMaxMinRegla" ToRole="Sucursal" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__630F92C5" FromRole="ParteMaxMinRegla" ToRole="Usuario" />
+          <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B" FromRole="ParteMaxMinRegla" ToRole="ParteMaxMin" />
         </EntityType>
-        <Association Name="FK__ParteMaxM__Parte__3FC65688">
-          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ParteMaxMin" Role="ParteMaxMin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ParteID" />
-            </Principal>
-            <Dependent Role="ParteMaxMin">
-              <PropertyRef Name="ParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ParteMaxM__Parte__4026493B">
-          <End Type="RefaccionariaModelo.ParteMaxMinRegla" Role="ParteMaxMinRegla" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.ParteMaxMin" Role="ParteMaxMin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ParteMaxMinRegla">
-              <PropertyRef Name="ParteMaxMinReglaID" />
-            </Principal>
-            <Dependent Role="ParteMaxMin">
-              <PropertyRef Name="ParteMaxMinReglaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ParteMaxM__Sucur__40BA7AC1">
-          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ParteMaxMin" Role="ParteMaxMin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sucursal">
-              <PropertyRef Name="SucursalID" />
-            </Principal>
-            <Dependent Role="ParteMaxMin">
-              <PropertyRef Name="SucursalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ParteMaxM__Sucur__17835B04">
           <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
           <End Type="RefaccionariaModelo.ParteMaxMinRegla" Role="ParteMaxMinRegla" Multiplicity="*" />
@@ -27239,6 +27181,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Minimo" Nullable="true" Precision="12" Scale="2" />
           <Property Type="DateTime" Name="FechaMaxMin" Nullable="true" Precision="23" />
           <Property Type="String" Name="CodigoDeBarras" Nullable="true" />
+          <Property Type="DateTime" Name="FechaIman" Nullable="true" />
         </ComplexType>
         <EntityType Name="CajaFacturasGlobalesView">
           <Key>
@@ -27810,7 +27753,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteGiro" Relationship="RefaccionariaModelo.FK_ParteGiro_Usuario" FromRole="Usuario" ToRole="ParteGiro" />
           <NavigationProperty Name="ParteImagen" Relationship="RefaccionariaModelo.FK_ParteImagen_Usuario" FromRole="Usuario" ToRole="ParteImagen" />
           <NavigationProperty Name="ParteKardex" Relationship="RefaccionariaModelo.FK__ParteKard__Reali__66CB1510" FromRole="Usuario" ToRole="ParteKardex" />
-          <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" FromRole="Usuario" ToRole="ParteMaxMin" />
           <NavigationProperty Name="ParteMaxMinRegla" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__630F92C5" FromRole="Usuario" ToRole="ParteMaxMinRegla" />
           <NavigationProperty Name="ParteMxMn" Relationship="RefaccionariaModelo.FK_ParteMxMn_Usuario" FromRole="Usuario" ToRole="ParteMxMn" />
           <NavigationProperty Name="ParteMxMnCriterio" Relationship="RefaccionariaModelo.FK_ParteMxMnCriterio_Usuario" FromRole="Usuario" ToRole="ParteMxMnCriterio" />
@@ -27872,6 +27814,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaGarantia1" Relationship="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" FromRole="Usuario" ToRole="VentaGarantia" />
           <NavigationProperty Name="VentaPago" Relationship="RefaccionariaModelo.FK__VentaPago__Usuar__644DCFC1" FromRole="Usuario" ToRole="VentaPago" />
           <NavigationProperty Name="VentaPagoDetalle" Relationship="RefaccionariaModelo.FK__VentaPago__Usuar__6FBF826D" FromRole="Usuario" ToRole="VentaPagoDetalle" />
+          <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" FromRole="Usuario" ToRole="ParteMaxMin" />
         </EntityType>
         <Association Name="FK__Autorizac__Autor__21E0EDE6">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -28869,18 +28812,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ParteMaxM__Usuar__41AE9EFA">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ParteMaxMin" Role="ParteMaxMin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="ParteMaxMin">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ParteMaxM__Usuar__630F92C5">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="RefaccionariaModelo.ParteMaxMinRegla" Role="ParteMaxMinRegla" Multiplicity="*" />
@@ -29609,6 +29540,78 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               <PropertyRef Name="UsuarioID" />
             </Principal>
             <Dependent Role="VentaPagoDetalle">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ParteMaxMin">
+          <Key>
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="SucursalID" />
+          </Key>
+          <Property Name="ParteMaxMinID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="Maximo" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Minimo" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="FechaCalculo" Type="DateTime" Precision="3" />
+          <Property Name="Calcular" Type="Boolean" />
+          <Property Name="VentasGlobales" Type="Boolean" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Fijo" Type="Boolean" />
+          <Property Name="ParteMaxMinReglaID" Type="Int32" />
+          <Property Name="FechaIman" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Parte" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688" FromRole="ParteMaxMin" ToRole="Parte" />
+          <NavigationProperty Name="ParteMaxMinRegla" Relationship="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B" FromRole="ParteMaxMin" ToRole="ParteMaxMinRegla" />
+          <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1" FromRole="ParteMaxMin" ToRole="Sucursal" />
+          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" FromRole="ParteMaxMin" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__ParteMaxM__Parte__3FC65688">
+          <End Type="RefaccionariaModelo.Parte" Role="Parte" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ParteMaxMin" Role="ParteMaxMin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteMaxMin">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteMaxM__Parte__4026493B">
+          <End Type="RefaccionariaModelo.ParteMaxMinRegla" Role="ParteMaxMinRegla" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ParteMaxMin" Role="ParteMaxMin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParteMaxMinRegla">
+              <PropertyRef Name="ParteMaxMinReglaID" />
+            </Principal>
+            <Dependent Role="ParteMaxMin">
+              <PropertyRef Name="ParteMaxMinReglaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteMaxM__Sucur__40BA7AC1">
+          <End Type="RefaccionariaModelo.Sucursal" Role="Sucursal" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ParteMaxMin" Role="ParteMaxMin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="ParteMaxMin">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteMaxM__Usuar__41AE9EFA">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ParteMaxMin" Role="ParteMaxMin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ParteMaxMin">
               <PropertyRef Name="UsuarioID" />
             </Dependent>
           </ReferentialConstraint>
@@ -34810,25 +34813,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ParteMaxMin">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ParteMaxMin">
-              <MappingFragment StoreEntitySet="ParteMaxMin">
-                <ScalarProperty Name="ParteMaxMinReglaID" ColumnName="ParteMaxMinReglaID" />
-                <ScalarProperty Name="Fijo" ColumnName="Fijo" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="VentasGlobales" ColumnName="VentasGlobales" />
-                <ScalarProperty Name="Calcular" ColumnName="Calcular" />
-                <ScalarProperty Name="FechaCalculo" ColumnName="FechaCalculo" />
-                <ScalarProperty Name="Minimo" ColumnName="Minimo" />
-                <ScalarProperty Name="Maximo" ColumnName="Maximo" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="ParteMaxMinID" ColumnName="ParteMaxMinID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ParteMaxMinRegla">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ParteMaxMinRegla">
               <MappingFragment StoreEntitySet="ParteMaxMinRegla">
@@ -35661,6 +35645,26 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="NombrePersona" ColumnName="NombrePersona" />
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParteMaxMin">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ParteMaxMin">
+              <MappingFragment StoreEntitySet="ParteMaxMin">
+                <ScalarProperty Name="FechaIman" ColumnName="FechaIman" />
+                <ScalarProperty Name="ParteMaxMinReglaID" ColumnName="ParteMaxMinReglaID" />
+                <ScalarProperty Name="Fijo" ColumnName="Fijo" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="VentasGlobales" ColumnName="VentasGlobales" />
+                <ScalarProperty Name="Calcular" ColumnName="Calcular" />
+                <ScalarProperty Name="FechaCalculo" ColumnName="FechaCalculo" />
+                <ScalarProperty Name="Minimo" ColumnName="Minimo" />
+                <ScalarProperty Name="Maximo" ColumnName="Maximo" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="ParteMaxMinID" ColumnName="ParteMaxMinID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -38694,11 +38698,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__Sucur__2FEFE172" />
         <AssociationConnector Association="RefaccionariaModelo.FK__NotaDeCre__UsoVe__0C7BBCAC" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__NotaD__11207638" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ParteMaxMin" Width="1.5" PointX="29.75" PointY="113" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ParteMaxMinRegla" Width="1.5" PointX="7.5" PointY="142.75" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__17835B04" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ExistenciasView" Width="1.5" PointX="36.375" PointY="16.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.CajaEgresosProveedoresView" Width="1.5" PointX="0.75" PointY="10.75" />
@@ -38880,7 +38880,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK_ParteGiro_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ParteImagen_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteKard__Reali__66CB1510" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Usuar__630F92C5" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ParteMxMn_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ParteMxMnCriterio_Usuario" />
@@ -38942,6 +38941,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Usuar__1AB4CD6A" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__Usuar__644DCFC1" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__Usuar__6FBF826D" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ParteMaxMin" Width="1.5" PointX="32.75" PointY="111" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Parte__3FC65688" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" />
         </Diagram>
     </Diagrams>
   </Designer>

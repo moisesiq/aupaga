@@ -157,6 +157,10 @@
             this.lblCalculo = new System.Windows.Forms.Label();
             this.nudDecimales = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ctlMarcas = new Refaccionaria.Negocio.ComboMultiSel();
+            this.ctlLineas = new Refaccionaria.Negocio.ComboMultiSel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMeses)).BeginInit();
@@ -1269,11 +1273,55 @@
             this.label9.TabIndex = 184;
             this.label9.Text = "Decimales";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(204, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 185;
+            this.label2.Text = "Marcas";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(416, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 186;
+            this.label3.Text = "Líneas";
+            // 
+            // ctlMarcas
+            // 
+            this.ctlMarcas.AltoLista = 160;
+            this.ctlMarcas.Etiqueta = null;
+            this.ctlMarcas.Location = new System.Drawing.Point(249, 3);
+            this.ctlMarcas.Margin = new System.Windows.Forms.Padding(0);
+            this.ctlMarcas.Name = "ctlMarcas";
+            this.ctlMarcas.Size = new System.Drawing.Size(160, 20);
+            this.ctlMarcas.TabIndex = 187;
+            // 
+            // ctlLineas
+            // 
+            this.ctlLineas.AltoLista = 160;
+            this.ctlLineas.Etiqueta = null;
+            this.ctlLineas.Location = new System.Drawing.Point(459, 3);
+            this.ctlLineas.Margin = new System.Windows.Forms.Padding(0);
+            this.ctlLineas.Name = "ctlLineas";
+            this.ctlLineas.Size = new System.Drawing.Size(160, 20);
+            this.ctlLineas.TabIndex = 188;
+            // 
             // CuadroMultiple
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.ctlLineas);
+            this.Controls.Add(this.ctlMarcas);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.nudDecimales);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cmbCalculo);
@@ -1394,6 +1442,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal_Porcentaje;
         private System.Windows.Forms.NumericUpDown nudDecimales;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        protected Negocio.ComboMultiSel ctlMarcas;
+        protected Negocio.ComboMultiSel ctlLineas;
 
     }
 }

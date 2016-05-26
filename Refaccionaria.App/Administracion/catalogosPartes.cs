@@ -42,6 +42,7 @@ namespace Refaccionaria.App
         ControlError cntError = new ControlError();
         ControlError ctlAdv = new ControlError() { Icon = Properties.Resources._16_Ico_Advertencia };
         bool EsNuevo = true;
+        bool bGridPartesSel = false;
 
         public catalogosPartes()
         {
@@ -130,6 +131,23 @@ namespace Refaccionaria.App
                         UtilLocal.EnviarReporteASalida("Reportes.Partes.Etiqueta", report);
                     }
                 }
+            }
+        }
+
+        private void dgvDatos_Enter(object sender, EventArgs e)
+        {
+            switch (this.tabPartes.SelectedTab.Name)
+            {
+                case "tbpParte":
+                    if (!this.bGridPartesSel)
+                    {
+                        this.dgvDatos.Tag = null;  // Para hacerlo como selección nueva
+                        this.dgvDatos_CurrentCellChanged(sender, e);
+                    }
+                    break;
+                case "tbpKardex":
+                    this.dgvKardex.QuitarFiltro();
+                    break;
             }
         }
 
@@ -543,7 +561,7 @@ namespace Refaccionaria.App
 
         private void dgvEquivalentes_CurrentCellChanged(object sender, EventArgs e)
         {
-            if (this.dgvEquivalentes.VerSeleccionNueva())
+            if (this.dgvEquivalentes.Focused && this.dgvEquivalentes.VerSeleccionNueva())
             {
                 this.pcbEqu_Imagen.Image = null;
                 if (this.dgvEquivalentes.CurrentRow == null) return;
@@ -557,6 +575,7 @@ namespace Refaccionaria.App
                 this.ctlVentasPorMes.LlenarDatos(iParteID);
                 this.dgvExistencias.CambiarColorDeFondo(Color.CadetBlue);
                 this.ctlVentasPorMes.dgvDatos.CambiarColorDeFondo(Color.CadetBlue);
+                this.bGridPartesSel = false;
             }
         }
 
@@ -1527,6 +1546,7 @@ namespace Refaccionaria.App
             // Para cambiar el color de fondo de algunos grids
             this.dgvExistencias.CambiarColorDeFondo(Color.FromArgb(188, 199, 216));
             this.ctlVentasPorMes.dgvDatos.CambiarColorDeFondo(Color.FromArgb(188, 199, 216));
+            this.bGridPartesSel = true;
         }
 
         public void LimpiarFormulario()
@@ -2256,9 +2276,23 @@ namespace Refaccionaria.App
                 this.dgvKardex.QuitarFiltro();
         }
 
+        private void dgvKardexMovs_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvKardexMovs.CurrentRow != null && this.dgvKardexMovs.VerSeleccionNueva())
+            {
+                string sOperacion = Helper.ConvertirCadena(this.dgvKardexMovs.CurrentRow.Cells["KardexOp_Operacion"].Value);
+                this.dgvKardex.FiltrarCadena(sOperacion, "Kardex_Operacion");
+            }
+        }
+
+        private void dgvKardexMovs_CurrentCellChanged(object sender, EventArgs e)
+        {
+            
+        }
+
         private void dgvKardex_CurrentCellChanged(object sender, EventArgs e)
         {
-            if (this.dgvAplicaciones.CurrentRow != null && this.dgvKardex.VerSeleccionNueva())
+            if (this.dgvKardex.CurrentRow != null && this.dgvKardex.VerSeleccionNueva())
             {
                 int iKardexID = Helper.ConvertirEntero(this.dgvKardex.CurrentRow.Cells["Kardex_ParteKardexID"].Value);
                 this.LlenarObservacionKardex(iKardexID);
@@ -2290,7 +2324,7 @@ namespace Refaccionaria.App
             // Se llenan las operaciones
             this.dgvKardexMovs.Rows.Clear();
             foreach (var oReg in oKardexOp)
-                this.dgvKardexMovs.Rows.Add(oReg.Operacion, oReg.Cantidad, oReg.Importe);
+                this.dgvKardexMovs.Rows.Add(oReg.Operacion, Math.Abs(oReg.Cantidad), oReg.Importe);
             // Se llena el kardex en sí
             this.dgvKardex.Rows.Clear();
             foreach (var oReg in oKardex)
@@ -2333,6 +2367,8 @@ namespace Refaccionaria.App
 
         private void LlenarObservacionKardex(int iKardexID)
         {
+            this.txtKardexObservacion.Text = "";
+
             var oKardex = General.GetEntity<ParteKardex>(c => c.ParteKardexID == iKardexID);
             switch (oKardex.RelacionTabla)
             {
@@ -2340,9 +2376,19 @@ namespace Refaccionaria.App
                     var oMov = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oKardex.RelacionID && c.Estatus);
                     this.txtKardexObservacion.Text = oMov.Observacion;
                     break;
+                case Cat.Tablas.Venta:
+                    this.txtKardexObservacion.Text = "Venta. No hay observación";
+                    break;
                 case Cat.Tablas.VentaDevolucion:
                     var oDev = General.GetEntity<VentaDevolucion>(c => c.VentaDevolucionID == oKardex.RelacionID && c.Estatus);
                     this.txtKardexObservacion.Text = oDev.Observacion;
+                    break;
+                case Cat.Tablas.CascoRegistro:
+                    this.txtKardexObservacion.Text = "Registro de casco. No hay observación";
+                    break;
+                case Cat.Tablas.CajaEgreso:
+                    var oEgreso = General.GetEntity<CajaEgreso>(c => c.CajaEgresoID == oKardex.RelacionID && c.Estatus);
+                    this.txtKardexObservacion.Text = oEgreso.Concepto;
                     break;
             }
         }

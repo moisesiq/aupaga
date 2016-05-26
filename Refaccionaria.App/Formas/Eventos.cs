@@ -40,6 +40,8 @@ namespace Refaccionaria.App
         {
             this.ActiveControl = this.rdbHoy;
             this.rdbHoy.Checked = true;
+
+            this.LlenarEventos(true);
         }
 
         private void rdbHoy_CheckedChanged(object sender, EventArgs e)

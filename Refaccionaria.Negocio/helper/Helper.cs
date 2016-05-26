@@ -261,6 +261,14 @@ namespace Refaccionaria.Negocio
             }
         }
 
+        public static void FiltrarCadena(this DataGridView oGrid, string sValor, string sColumna)
+        {
+            foreach (DataGridViewRow oFila in oGrid.Rows)
+            {
+                oFila.Visible = (Helper.ConvertirCadena(oFila.Cells[sColumna].Value).ToLower() == sValor.ToLower());
+            }
+        }
+
         public static void FiltrarContiene(this DataGridView oGrid, string sBusqueda, params string[] oColumnas)
         {
             sBusqueda = sBusqueda.ToLower();

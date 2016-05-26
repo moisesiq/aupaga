@@ -179,6 +179,7 @@ namespace Refaccionaria.App
             this.LlenarDatosExtra(iParteID);
             this.LlenarDescripcionMaxMin(this.dgvDetalle.CurrentRow);
             this.ctlVentasMes.LlenarDatos(iParteID);
+            this.ctlExistencias.CargarDatos(iParteID);
         }
 
         private void dgvDetalle_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -416,18 +417,7 @@ namespace Refaccionaria.App
 
         private void btnImanImprimir_Click(object sender, EventArgs e)
         {
-            var oDatos = new List<pauPartesBusqueda_Result>();
-            foreach (DataGridViewRow oFila in this.dgvIman.Rows)
-            {
-                if (Helper.ConvertirBool(oFila.Cells["ima_Sel"].Value))
-                    oDatos.Add(oFila.Tag as pauPartesBusqueda_Result);
-            }
-
-            var oRep = new Report();
-            oRep.Load(UtilLocal.RutaReportes("PartesImanes.frx"));
-            oRep.RegisterData(oDatos, "Partes");
-            oRep.SetParameterValue("Sucursal", this.cmbSucursal.Text);
-            UtilLocal.EnviarReporteASalida("Reportes.Partes.Imanes.Salida", oRep);
+            this.ImprimirImanes();
         }
 
         private void dgvIman_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1576,15 +1566,44 @@ namespace Refaccionaria.App
             var oDatos = General.ExecuteProcedure<pauPartesBusqueda_Result>("pauPartesBusqueda", oParams);
             if (this.txtImanNumeroDeParte.Text == "")
                 oDatos = oDatos.Where(c => c.Maximo > 0).ToList();
+            this.dgvIman.Tag = this.cmbSucursal.SelectedValue;
 
             this.dgvIman.Rows.Clear();
             foreach (var oReg in oDatos)
             {
                 int iFila = this.dgvIman.Rows.Add(oReg.ParteID, true, oReg.NumeroDeParte, oReg.Descripcion, oReg.Proveedor, oReg.Marca, oReg.Linea
-                    , oReg.Maximo, oReg.Minimo, oReg.FechaMaxMin);
+                    , oReg.Maximo, oReg.Minimo, oReg.FechaMaxMin, oReg.FechaIman);
                 this.dgvIman.Rows[iFila].Tag = oReg;
             }
 
+            Cargando.Cerrar();
+        }
+
+        private void ImprimirImanes()
+        {
+            var oDatos = new List<pauPartesBusqueda_Result>();
+            foreach (DataGridViewRow oFila in this.dgvIman.Rows)
+            {
+                if (Helper.ConvertirBool(oFila.Cells["ima_Sel"].Value))
+                    oDatos.Add(oFila.Tag as pauPartesBusqueda_Result);
+            }
+
+            var oRep = new Report();
+            oRep.Load(UtilLocal.RutaReportes("PartesImanes.frx"));
+            oRep.RegisterData(oDatos, "Partes");
+            oRep.SetParameterValue("Sucursal", this.cmbSucursal.Text);
+            UtilLocal.EnviarReporteASalida("Reportes.Partes.Imanes.Salida", oRep);
+
+            // Se guarda la fecha de impresión del imán, en cada parte
+            Cargando.Mostrar();
+            int iSucursalID = Helper.ConvertirEntero(this.dgvIman.Tag);
+            DateTime dAhora = DateTime.Now;
+            foreach (var oReg in oDatos)
+            {
+                var oParteMaxMin = General.GetEntity<ParteMaxMin>(c => c.SucursalID == iSucursalID && c.ParteID == oReg.ParteID);
+                oParteMaxMin.FechaIman = dAhora;
+                Guardar.Generico<ParteMaxMin>(oParteMaxMin);
+            }
             Cargando.Cerrar();
         }
 
