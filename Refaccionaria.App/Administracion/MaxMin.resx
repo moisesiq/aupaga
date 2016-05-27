@@ -3700,7 +3700,7 @@
     <value>ctlVentasMes</value>
   </data>
   <data name="&gt;&gt;ctlVentasMes.Type" xml:space="preserve">
-    <value>Refaccionaria.App.GridVentasMes, THEOS, Version=1.16.26.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Refaccionaria.App.GridVentasMes, THEOS, Version=1.16.28.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ctlVentasMes.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3708,11 +3708,14 @@
   <data name="&gt;&gt;ctlVentasMes.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ctlExistencias.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="ctlExistencias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>957, 344</value>
+    <value>957, 367</value>
   </data>
   <data name="ctlExistencias.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 100</value>
+    <value>222, 81</value>
   </data>
   <data name="ctlExistencias.TabIndex" type="System.Int32, mscorlib">
     <value>161</value>
@@ -3721,7 +3724,7 @@
     <value>ctlExistencias</value>
   </data>
   <data name="&gt;&gt;ctlExistencias.Type" xml:space="preserve">
-    <value>Refaccionaria.App.GridExsitencias, THEOS, Version=1.16.26.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Refaccionaria.App.GridExsitencias, THEOS, Version=1.16.28.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ctlExistencias.Parent" xml:space="preserve">
     <value>$this</value>

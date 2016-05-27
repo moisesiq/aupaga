@@ -279,7 +279,6 @@ namespace Refaccionaria.App
             try
             {
                 int iPuerto = GlobalClass.Puerto;
-                iPuerto = 321000;
                 var oTcpCli = new TcpClient(sEquipo, iPuerto);
                 var oStream = oTcpCli.GetStream();
                 var oMensaje = UTF8Encoding.UTF8.GetBytes(sCodigo + sMensaje);

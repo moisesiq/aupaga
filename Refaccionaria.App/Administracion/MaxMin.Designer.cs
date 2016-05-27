@@ -1552,8 +1552,8 @@
             // 
             // ctlExistencias
             // 
-            this.ctlExistencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             resources.ApplyResources(this.ctlExistencias, "ctlExistencias");
+            this.ctlExistencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.ctlExistencias.Name = "ctlExistencias";
             // 
             // MaxMin

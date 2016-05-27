@@ -85,10 +85,12 @@ namespace Refaccionaria.App
             Guardar.Generico<ParteKardex>(oParteKardex);
 
             // Se valida la última entrada del kárdex con la existencia
+            /* 
             var oParteEx = General.GetEntity<ParteExistencia>(c => c.ParteID == oParteKardex.ParteID && c.SucursalID == oParteKardex.SucursalID && c.Estatus);
             if (oParteKardex.ExistenciaNueva != oParteEx.Existencia)
                 UtilLocal.MensajeError(string.Format("Hay una diferencia entre la existencia del Kárdex y la existencia del sistema. ¡Verificar!"
                     + "\n\nExistencia Kárdex: {0}\nExistencia Sistema: {1}", oParteKardex.ExistenciaNueva, oParteEx.Existencia));
+            */
         }
 
         public static void CopiarAplicacionesDeEquivalentes(int iParteID)

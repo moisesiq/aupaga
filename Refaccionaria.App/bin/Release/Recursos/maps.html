@@ -13,73 +13,84 @@
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
-		var marker;
-		function initialize() {
-		  var params = get_url_params(document.location.href);
-		  var myLatlng = new google.maps.LatLng(params.lat,params.lon);
-		  var mapOptions = {
-			zoom: 16,
-			center: myLatlng
-		  }
-		  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	var marker
+function initialize() {
+	
+  var params = get_url_params(document.location.href);
+  var myLatlng = new google.maps.LatLng(params.lat,params.lon);
+  var mapOptions = {
+    zoom: 16,
+    center: myLatlng
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-		  marker = new google.maps.Marker({
-			  position: myLatlng,
-			  map: map,
-			  draggable : true,
-			  title: 'Arrástrame'
-		  });
-		}
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+	  draggable : true,
+      title: 'Arrastrame'
+  });
+}
 
-		function setCoords(){
-		 var lat = document.getElementById('lat').value;
-		 var lon = document.getElementById('lon').value;
-		var myLatlng = new google.maps.LatLng(lat,lon);
-		  var mapOptions = {
-			zoom: 16,
-			center: myLatlng
-		  }
-		  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+function setCoords(){
+ var lat = document.getElementById('lat').value;
+ var lon = document.getElementById('lon').value;
+var myLatlng = new google.maps.LatLng(lat,lon);
+  var mapOptions = {
+    zoom: 16,
+    center: myLatlng
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-		  marker = new google.maps.Marker({
-			  position: myLatlng,
-			  map: map,
-			  draggable : true,
-			  title: 'Arrastrame'
-		  });
-		  return true;
-		}
+  marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+	  draggable : true,
+      title: 'Arrastrame'
+  });
+  return true;
+}
 
-		function saveCoords(){
-			var lat = document.getElementById('lat');
-			var lon = document.getElementById('lon');
-			lat.value = marker.position.lat();
-			lon.value = marker.position.lng();
-			return (lat.value + ',' + lon.value);
-		}
+function saveCoords(){
+	var lat = document.getElementById('lat');
+	var lon = document.getElementById('lon');
+	lat.value = marker.position.lat();
+	lon.value = marker.position.lng();
+	return lat.value+','+lon.value;
+}
 
-		function get_url_params(u){ 
-			var theURL = u; 
-			var JS_GET = new Object(); 
-			var splitURL = theURL.split('?'); 
-			
-			if(splitURL.length>1){ 
-				var splitVars = splitURL[1].split('&'); 
-				for(i=0; i< splitVars.length; i++){ 
-						splitPair = splitVars[i].split('='); 
-						JS_GET[splitPair[0]] = splitPair[1]; 
-				}//end for 
-				return JS_GET; 
-			}//end if 
-			else{ 
-				return false; 
-			}
-		 }//end get_url_params 
 
-		google.maps.event.addDomListener(window, 'load', initialize);
+function get_url_params(u){ 
+     
+          var theURL = u; 
+          var JS_GET = new Object(); 
+          var splitURL = theURL.split('?'); 
+          
+          if(splitURL.length>1){ 
+               var splitVars = splitURL[1].split('&'); 
+               for(i=0; i< splitVars.length; i++){ 
+                    splitPair = splitVars[i].split('='); 
+                    JS_GET[splitPair[0]] = splitPair[1]; 
+               }//end for 
+          
+               return JS_GET; 
+          
+          }//end if 
+          else{ 
+               
+               return false; 
+               
+          } 
+     
+     }//end get_url_params 
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
     </script>
   </head>
   <body>
+	
+	
     <div id="map-canvas"></div>
 	<input type=text id="lat"  />  
 	<input type=text id="lon"  />
