@@ -240,8 +240,10 @@ FROM (
 		, Usuario.UsuarioID
 		,Proveedor.NombreProveedor AS ClienteProveedor
 		,Sucursal.NombreSucursal AS Origen
-		,CAST(MovimientoInventario.ProveedorID AS VARCHAR) AS Destino
-		, (CASE WHEN MovimientoInventario.TipoConceptoOperacionID = @TipoConOpGarantia THEN 0 ELSE (MovimientoInventarioDetalle.Cantidad * -1) END) AS Cantidad
+		, (CASE WHEN MovimientoInventario.TipoConceptoOperacionID = @TipoConOpGarantia THEN 'GARANTÍA'
+			ELSE CAST(MovimientoInventario.ProveedorID AS VARCHAR) END) AS Destino
+		, (CASE WHEN MovimientoInventario.TipoConceptoOperacionID = @TipoConOpGarantia THEN 0
+			ELSE (MovimientoInventarioDetalle.Cantidad * -1) END) AS Cantidad
 		, MovimientoInventarioDetalle.PrecioUnitario AS Importe
 		, 'MovimientoInventario' AS RelacionTabla
 		, MovimientoInventario.MovimientoInventarioID AS RelacionID
