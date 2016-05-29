@@ -4633,6 +4633,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesExistenciasView' do
           <Property Name="SucursalID" Type="int" />
           <Property Name="Existencia" Type="decimal" Precision="18" Scale="2" />
           <Property Name="UltimaVenta" Type="datetime" />
+          <Property Name="UltimaCompra" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesMaxMinView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -12721,7 +12722,8 @@ FROM [dbo].[PartesExistenciasMaxMinView] AS [PartesExistenciasMaxMinView]</Defin
 [PartesExistenciasView].[CostoConDescuento] AS [CostoConDescuento], 
 [PartesExistenciasView].[SucursalID] AS [SucursalID], 
 [PartesExistenciasView].[Existencia] AS [Existencia], 
-[PartesExistenciasView].[UltimaVenta] AS [UltimaVenta]
+[PartesExistenciasView].[UltimaVenta] AS [UltimaVenta], 
+[PartesExistenciasView].[UltimaCompra] AS [UltimaCompra]
 FROM [dbo].[PartesExistenciasView] AS [PartesExistenciasView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PartesMaxMinView" EntityType="Self.PartesMaxMinView" store:Type="Views" store:Schema="dbo">
@@ -16898,7 +16900,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ParteCompletado" EntitySet="ParteCompletado" />
           </AssociationSet>
           <EntitySet Name="PartesExistenciasMaxMinView" EntityType="RefaccionariaModelo.PartesExistenciasMaxMinView" />
-          <EntitySet Name="PartesExistenciasView" EntityType="RefaccionariaModelo.PartesExistenciasView" />
           <EntitySet Name="PartesView" EntityType="RefaccionariaModelo.PartesView" />
           <EntitySet Name="VentaCotizacion" EntityType="RefaccionariaModelo.VentaCotizacion" />
           <AssociationSet Name="FK__VentaCoti__Sucur__61873D06" Association="RefaccionariaModelo.FK__VentaCoti__Sucur__61873D06">
@@ -17611,6 +17612,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
           </AssociationSet>
+          <EntitySet Name="PartesExistenciasView" EntityType="RefaccionariaModelo.PartesExistenciasView" />
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -26949,33 +26951,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Maximo" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Minimo" Type="Decimal" Precision="12" Scale="2" />
         </EntityType>
-        <EntityType Name="PartesExistenciasView">
-          <Key>
-            <PropertyRef Name="Registro" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="NumeroDeParte" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="ProveedorID" />
-            <PropertyRef Name="MarcaID" />
-            <PropertyRef Name="LineaID" />
-          </Key>
-          <Property Name="Registro" Type="Int64" Nullable="false" />
-          <Property Name="ParteExistenciaID" Type="Int32" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="NumeroDeParte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MarcaID" Type="Int32" Nullable="false" />
-          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LineaID" Type="Int32" Nullable="false" />
-          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CostoConDescuento" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SucursalID" Type="Int32" />
-          <Property Name="Existencia" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="UltimaVenta" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="PartesView">
           <Key>
             <PropertyRef Name="ParteID" />
@@ -29616,6 +29591,34 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PartesExistenciasView">
+          <Key>
+            <PropertyRef Name="Registro" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="NumeroDeParte" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="LineaID" />
+          </Key>
+          <Property Name="Registro" Type="Int64" Nullable="false" />
+          <Property Name="ParteExistenciaID" Type="Int32" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="NumeroDeParte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MarcaID" Type="Int32" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CostoConDescuento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SucursalID" Type="Int32" />
+          <Property Name="Existencia" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UltimaVenta" Type="DateTime" Precision="3" />
+          <Property Name="UltimaCompra" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -35292,28 +35295,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PartesExistenciasView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.PartesExistenciasView">
-              <MappingFragment StoreEntitySet="PartesExistenciasView">
-                <ScalarProperty Name="UltimaVenta" ColumnName="UltimaVenta" />
-                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="CostoConDescuento" ColumnName="CostoConDescuento" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="ParteExistenciaID" ColumnName="ParteExistenciaID" />
-                <ScalarProperty Name="Registro" ColumnName="Registro" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PartesView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.PartesView">
               <MappingFragment StoreEntitySet="PartesView">
@@ -35665,6 +35646,29 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
                 <ScalarProperty Name="ParteID" ColumnName="ParteID" />
                 <ScalarProperty Name="ParteMaxMinID" ColumnName="ParteMaxMinID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartesExistenciasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.PartesExistenciasView">
+              <MappingFragment StoreEntitySet="PartesExistenciasView">
+                <ScalarProperty Name="UltimaCompra" ColumnName="UltimaCompra" />
+                <ScalarProperty Name="UltimaVenta" ColumnName="UltimaVenta" />
+                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="CostoConDescuento" ColumnName="CostoConDescuento" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="ParteExistenciaID" ColumnName="ParteExistenciaID" />
+                <ScalarProperty Name="Registro" ColumnName="Registro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -38757,7 +38761,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesAvancesView" Width="1.5" PointX="7.375" PointY="32.75" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteComp__Parte__55216621" />
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesExistenciasMaxMinView" Width="1.5" PointX="0.75" PointY="25.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.PartesExistenciasView" Width="1.5" PointX="32.75" PointY="5.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.PartesView" Width="1.5" PointX="37.375" PointY="6.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentaCotizacion" Width="1.5" PointX="7.5" PointY="148.5" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaCoti__Sucur__61873D06" />
@@ -38946,6 +38949,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Parte__4026493B" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__40BA7AC1" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.PartesExistenciasView" Width="1.5" PointX="32.375" PointY="5.75" />
         </Diagram>
     </Diagrams>
   </Designer>
