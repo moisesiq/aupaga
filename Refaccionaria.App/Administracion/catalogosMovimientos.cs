@@ -1437,7 +1437,7 @@ namespace Refaccionaria.App
                             // Si no es de garantía, igual se mete un registro de existencia pero en cero, sólo para que quede el dato del movimiento que se hizo
                             AdmonProc.AfectarExistenciaYKardex(parteId, sucursalId, Cat.OperacionesKardex.DevolucionAProveedor,
                                 movimientoDevolucion.MovimientoInventarioID.ToString(), iAutorizoID, this.cboProveedor.Text, this.cboUbicacionDestino.Text
-                                , (bDevGarantia ? "GARANTÍA" : proveedorId.ToString()), (bDevGarantia ? 0 : (cantidad * -1))
+                                , this.cboConceptoOperacion.Text, (bDevGarantia ? 0 : (cantidad * -1))
                                 , Helper.ConvertirDecimal(row.Cells["Costo Inicial"].Value), Cat.Tablas.MovimientoInventario, movimientoDevolucion.MovimientoInventarioID);
 
                             var oExistencia = General.GetEntity<ParteExistencia>(c => c.ParteID == parteId && c.SucursalID == sucursalId && c.Estatus);

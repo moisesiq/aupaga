@@ -240,8 +240,7 @@ FROM (
 		, Usuario.UsuarioID
 		,Proveedor.NombreProveedor AS ClienteProveedor
 		,Sucursal.NombreSucursal AS Origen
-		, (CASE WHEN MovimientoInventario.TipoConceptoOperacionID = @TipoConOpGarantia THEN 'GARANTÍA'
-			ELSE CAST(MovimientoInventario.ProveedorID AS VARCHAR) END) AS Destino
+		, tco.NombreConceptoOperacion AS Destino
 		, (CASE WHEN MovimientoInventario.TipoConceptoOperacionID = @TipoConOpGarantia THEN 0
 			ELSE (MovimientoInventarioDetalle.Cantidad * -1) END) AS Cantidad
 		, MovimientoInventarioDetalle.PrecioUnitario AS Importe
@@ -259,6 +258,8 @@ FROM (
 		INNER JOIN Proveedor ON Proveedor.ProveedorID = MovimientoInventario.ProveedorID
 		INNER JOIN Usuario ON Usuario.UsuarioID = MovimientoInventario.UsuarioID 
 		INNER JOIN Sucursal ON Sucursal.SucursalID = MovimientoInventario.SucursalDestinoID 
+		LEFT JOIN TipoConceptoOperacion tco ON tco.TipoConceptoOperacionID = MovimientoInventario.TipoConceptoOperacionID
+			AND tco.Estatus = 1
 	WHERE 
 		MovimientoInventario.TipoOperacionID = 4 
 		AND MovimientoInventario.Estatus = 1
