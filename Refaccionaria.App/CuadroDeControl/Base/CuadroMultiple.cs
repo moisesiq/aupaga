@@ -255,10 +255,10 @@ namespace Refaccionaria.App
                 // Se cargan todos los grids, si es marcas o líneas
                 if (this.TipoDeReporte == TiposDeReporte.Marcas || this.TipoDeReporte == TiposDeReporte.Lineas)
                 {
-                    this.LlenarSemanas(iId);
-                    this.LlenarMeses(iId);
-                    this.LLenarVendedores(iId);
-                    this.LlenarSucursales(iId);
+                    this.LlenarSemanas(iGrupoId);
+                    this.LlenarMeses(iGrupoId);
+                    this.LLenarVendedores(iGrupoId);
+                    this.LlenarSucursales(iGrupoId);
                 }
 
                 this.LlenarPartes(CuadroMultiple.GridFuente.Grupos, iId, iGrupoId);
@@ -271,9 +271,11 @@ namespace Refaccionaria.App
         {
             if (this.dgvSemanas.Focused && this.dgvSemanas.VerSeleccionNueva())
             {
+                Cargando.Mostrar();
                 int iId = (this.dgvPrincipal.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvPrincipal.CurrentRow.Cells["Principal_Id"].Value));
                 int iSemana = (this.dgvSemanas.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvSemanas.CurrentRow.Cells["Semanas_Id"].Value));
                 this.LlenarPartes(CuadroMultiple.GridFuente.Semanas, iId, iSemana);
+                Cargando.Cerrar();
             }
         }
 
@@ -281,9 +283,11 @@ namespace Refaccionaria.App
         {
             if (this.dgvMeses.Focused && this.dgvMeses.VerSeleccionNueva())
             {
+                Cargando.Mostrar();
                 int iId = (this.dgvPrincipal.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvPrincipal.CurrentRow.Cells["Principal_Id"].Value));
                 int iMes = (this.dgvMeses.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvMeses.CurrentRow.Cells["Meses_Id"].Value));
                 this.LlenarPartes(CuadroMultiple.GridFuente.Meses, iId, iMes);
+                Cargando.Cerrar();
             }
         }
 
@@ -291,9 +295,11 @@ namespace Refaccionaria.App
         {
             if (this.dgvVendedor.Focused && this.dgvVendedor.VerSeleccionNueva())
             {
+                Cargando.Mostrar();
                 int iIdPrincipal = (this.dgvPrincipal.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvPrincipal.CurrentRow.Cells["Principal_Id"].Value));
                 int iId = (this.dgvVendedor.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvVendedor.CurrentRow.Cells["Vendedor_Id"].Value));
                 this.LlenarPartes(CuadroMultiple.GridFuente.Vendedores, iIdPrincipal, iId);
+                Cargando.Cerrar();
             }
         }
 
@@ -301,9 +307,11 @@ namespace Refaccionaria.App
         {
             if (this.dgvSucursal.Focused && this.dgvSucursal.VerSeleccionNueva())
             {
+                Cargando.Mostrar();
                 int iIdPrincipal = (this.dgvPrincipal.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvPrincipal.CurrentRow.Cells["Principal_Id"].Value));
                 int iId = (this.dgvSucursal.CurrentRow == null ? 0 : Helper.ConvertirEntero(this.dgvSucursal.CurrentRow.Cells["Sucursal_Id"].Value));
                 this.LlenarPartes(CuadroMultiple.GridFuente.Sucursales, iIdPrincipal, iId);
+                Cargando.Cerrar();
             }
         }
 

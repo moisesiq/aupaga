@@ -40,6 +40,8 @@
             this.tbpMetas = new System.Windows.Forms.TabPage();
             this.tbpExistencias = new System.Windows.Forms.TabPage();
             this.tbpSucursales = new System.Windows.Forms.TabPage();
+            this.tbpCobranza = new System.Windows.Forms.TabPage();
+            this.tbpVip = new System.Windows.Forms.TabPage();
             this.tabCuadroDeControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +62,8 @@
             this.tabCuadroDeControl.Controls.Add(this.tbpMetas);
             this.tabCuadroDeControl.Controls.Add(this.tbpExistencias);
             this.tabCuadroDeControl.Controls.Add(this.tbpSucursales);
+            this.tabCuadroDeControl.Controls.Add(this.tbpCobranza);
+            this.tabCuadroDeControl.Controls.Add(this.tbpVip);
             this.tabCuadroDeControl.Location = new System.Drawing.Point(3, 3);
             this.tabCuadroDeControl.Name = "tabCuadroDeControl";
             this.tabCuadroDeControl.SelectedIndex = 0;
@@ -173,6 +177,24 @@
             this.tbpSucursales.Text = "Sucursales";
             this.tbpSucursales.UseVisualStyleBackColor = true;
             // 
+            // tbpCobranza
+            // 
+            this.tbpCobranza.Location = new System.Drawing.Point(4, 25);
+            this.tbpCobranza.Name = "tbpCobranza";
+            this.tbpCobranza.Size = new System.Drawing.Size(757, 483);
+            this.tbpCobranza.TabIndex = 11;
+            this.tbpCobranza.Text = "Crédito y Cobranza";
+            this.tbpCobranza.UseVisualStyleBackColor = true;
+            // 
+            // tbpVip
+            // 
+            this.tbpVip.Location = new System.Drawing.Point(4, 25);
+            this.tbpVip.Name = "tbpVip";
+            this.tbpVip.Size = new System.Drawing.Size(757, 483);
+            this.tbpVip.TabIndex = 12;
+            this.tbpVip.Text = "VIP";
+            this.tbpVip.UseVisualStyleBackColor = true;
+            // 
             // CuadroDeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,5 +223,7 @@
         private System.Windows.Forms.TabPage tbpExistencias;
         private System.Windows.Forms.TabPage tbpMarcas;
         private System.Windows.Forms.TabPage tbpSucursales;
+        private System.Windows.Forms.TabPage tbpCobranza;
+        private System.Windows.Forms.TabPage tbpVip;
     }
 }

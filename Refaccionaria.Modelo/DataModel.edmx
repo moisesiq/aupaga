@@ -4634,6 +4634,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesExistenciasView' do
           <Property Name="Existencia" Type="decimal" Precision="18" Scale="2" />
           <Property Name="UltimaVenta" Type="datetime" />
           <Property Name="UltimaCompra" Type="datetime" />
+          <Property Name="FolioFactura" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesMaxMinView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -12723,7 +12724,8 @@ FROM [dbo].[PartesExistenciasMaxMinView] AS [PartesExistenciasMaxMinView]</Defin
 [PartesExistenciasView].[SucursalID] AS [SucursalID], 
 [PartesExistenciasView].[Existencia] AS [Existencia], 
 [PartesExistenciasView].[UltimaVenta] AS [UltimaVenta], 
-[PartesExistenciasView].[UltimaCompra] AS [UltimaCompra]
+[PartesExistenciasView].[UltimaCompra] AS [UltimaCompra], 
+[PartesExistenciasView].[FolioFactura] AS [FolioFactura]
 FROM [dbo].[PartesExistenciasView] AS [PartesExistenciasView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PartesMaxMinView" EntityType="Self.PartesMaxMinView" store:Type="Views" store:Schema="dbo">
@@ -29618,6 +29620,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Existencia" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="UltimaVenta" Type="DateTime" Precision="3" />
           <Property Name="UltimaCompra" Type="DateTime" Precision="3" />
+          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -35652,6 +35655,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySetMapping Name="PartesExistenciasView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.PartesExistenciasView">
               <MappingFragment StoreEntitySet="PartesExistenciasView">
+                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
                 <ScalarProperty Name="UltimaCompra" ColumnName="UltimaCompra" />
                 <ScalarProperty Name="UltimaVenta" ColumnName="UltimaVenta" />
                 <ScalarProperty Name="Existencia" ColumnName="Existencia" />

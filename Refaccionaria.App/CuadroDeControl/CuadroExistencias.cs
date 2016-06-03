@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Linq;
+using System.Collections.Generic;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -66,9 +67,14 @@ namespace Refaccionaria.App
                 && (iLineaID == 0 || c.LineaID == iLineaID)
                 && (!bSoloConExist || c.Existencia > 0)
             ).OrderBy(c => c.NumeroDeParte).ToList();
+            List<PartesExistenciasView> oDatosOr = null;
             // Si no hay sucursal, se agrupan los datos
             if (iSucursalID == 0)
             {
+                // Se guarda una copia de los datos originales, para obtener el folio posteriormente, sólo si aplica
+                if (this.chkFolioFactura.Checked)
+                    oDatosOr = oDatos;
+                //
                 oDatos = oDatos.GroupBy(g => new { g.ParteID, g.NumeroDeParte, g.Descripcion, g.ProveedorID, g.Proveedor, g.MarcaID, g.Marca, g.LineaID, g.Linea
                     , g.Costo, g.CostoConDescuento}).Select(c => new PartesExistenciasView
                 {
@@ -84,7 +90,8 @@ namespace Refaccionaria.App
                     Costo = c.Key.Costo,
                     CostoConDescuento = c.Key.CostoConDescuento,
                     Existencia = c.Sum(s => s.Existencia),
-                    UltimaVenta = c.Max(m => m.UltimaVenta)
+                    UltimaVenta = c.Max(m => m.UltimaVenta),
+                    UltimaCompra = c.Max(m => m.UltimaCompra)
                 }).ToList();
             }
 
@@ -144,9 +151,17 @@ namespace Refaccionaria.App
             {
                 foreach (var oReg in oDatos)
                 {
+                    // Si se agruparon los datos, por no seleccionar sucursal, se llena la última copra
+                    if (iSucursalID == 0 && this.chkFolioFactura.Checked)
+                    {
+                        var oRegMax = oDatosOr.Where(c => c.ParteID == oReg.ParteID).OrderByDescending(c => c.UltimaCompra).FirstOrDefault();
+                        // oReg.UltimaCompra = oRegMax.UltimaCompra;
+                        oReg.FolioFactura = oRegMax.FolioFactura;
+                    }
+                    //
                     this.dgvDatos.Rows.Add(oReg.ParteID, oReg.NumeroDeParte, oReg.Descripcion, oReg.Proveedor, oReg.Marca, oReg.Linea
                         , (bCostoDesc ? oReg.CostoConDescuento : oReg.Costo), oReg.Existencia, ((bCostoDesc ? oReg.CostoConDescuento : oReg.Costo) * oReg.Existencia)
-                        , oReg.UltimaVenta);
+                        , oReg.UltimaVenta, oReg.UltimaCompra, oReg.FolioFactura);
                     mExistenciaT += oReg.Existencia.Valor();
                     mCostoT += ((bCostoDesc ? oReg.CostoConDescuento : oReg.Costo) * oReg.Existencia).Valor();
                 }

@@ -39,13 +39,14 @@ namespace Refaccionaria.App
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
 
+            // Se filtran según el combo de marcas
+            if (this.ctlMarcas.ValoresSeleccionados.Count > 0)
+                oDatos = oDatos.Where(c => this.ctlMarcas.ValoresSeleccionados.Contains(c.MarcaID.Valor())).ToList();
+
             // Se llena el grid de líneas
             var oLineas = this.AgruparPorEnteroCadena(oDatos.GroupBy(g => new EnteroCadenaComp() { Entero = g.LineaID.Valor(), Cadena = g.Linea }))
                 .OrderByDescending(c => c.Actual);
-            // Se filtran según el combo de líneas
-            if (this.ctlLineas.ValoresSeleccionados.Count > 0)
-                oLineas = oLineas.Where(c => this.ctlLineas.ValoresSeleccionados.Contains(c.Llave)).OrderBy(c => c.Llave);
-            //
+            
             decimal mTotal = (oLineas.Count() > 0 ? oLineas.Sum(c => c.Actual) : 0);
             this.dgvPrincipal.Rows.Clear();
             foreach (var oReg in oLineas)
@@ -74,6 +75,10 @@ namespace Refaccionaria.App
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
 
+            // Se filtran según el combo de marcas
+            if (this.ctlMarcas.ValoresSeleccionados.Count > 0)
+                oDatos = oDatos.Where(c => this.ctlMarcas.ValoresSeleccionados.Contains(c.MarcaID.Valor())).ToList();
+
             // Se llena el grid de clientes
             var oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.LineaID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.ClienteID, Cadena = g.Cliente }))
                 .OrderByDescending(c => c.Actual);
@@ -95,6 +100,10 @@ namespace Refaccionaria.App
 
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+
+            // Se filtran según el combo de marcas
+            if (this.ctlMarcas.ValoresSeleccionados.Count > 0)
+                oDatos = oDatos.Where(c => this.ctlMarcas.ValoresSeleccionados.Contains(c.MarcaID.Valor())).ToList();
 
             // Se llena el grid y la gráfica de Semanas
             IEnumerable<TotalesPorEntero> oConsulta;
@@ -125,6 +134,10 @@ namespace Refaccionaria.App
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
 
+            // Se filtran según el combo de marcas
+            if (this.ctlMarcas.ValoresSeleccionados.Count > 0)
+                oDatos = oDatos.Where(c => this.ctlMarcas.ValoresSeleccionados.Contains(c.MarcaID.Valor())).ToList();
+
             // Se llena el grid y la gráfica de Meses
             IEnumerable<TotalesPorEntero> oConsulta;
             if (this.ActiveControl == this.dgvPrincipal)
@@ -152,6 +165,10 @@ namespace Refaccionaria.App
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
 
+            // Se filtran según el combo de marcas
+            if (this.ctlMarcas.ValoresSeleccionados.Count > 0)
+                oDatos = oDatos.Where(c => this.ctlMarcas.ValoresSeleccionados.Contains(c.MarcaID.Valor())).ToList();
+
             // Se llena el grid de Vendedor
             IEnumerable<TotalesPorEnteroCadena> oConsulta;
             if (this.ActiveControl == this.dgvPrincipal)
@@ -177,6 +194,10 @@ namespace Refaccionaria.App
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
 
+            // Se filtran según el combo de marcas
+            if (this.ctlMarcas.ValoresSeleccionados.Count > 0)
+                oDatos = oDatos.Where(c => this.ctlMarcas.ValoresSeleccionados.Contains(c.MarcaID.Valor())).ToList();
+
             // Se llena el grid de Sucursales
             IEnumerable<TotalesPorEnteroCadena> oConsulta;
             if (this.ActiveControl == this.dgvPrincipal)
@@ -200,6 +221,10 @@ namespace Refaccionaria.App
 
             var oParams = this.ObtenerParametros();
             var oDatos = General.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+
+            // Se filtran según el combo de marcas
+            if (this.ctlMarcas.ValoresSeleccionados.Count > 0)
+                oDatos = oDatos.Where(c => this.ctlMarcas.ValoresSeleccionados.Contains(c.MarcaID.Valor())).ToList();
 
             var oConsulta = oDatos.Where(c => c.LineaID == iIdPrincipal && c.Fecha >= this.dtpDesde.Value.Date);
             switch (iGridFuente)
