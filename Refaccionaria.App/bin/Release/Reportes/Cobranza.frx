@@ -1,17 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="12/22/2014 17:33:14" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="\\CAJA01\TicketMatriz" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="05/27/2016 17:14:36" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="\\CAJA01\TicketMatriz" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
   <Dictionary>
-    <BusinessObjectDataSource Name="Ventas" ReferenceName="Ventas" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.VentasACreditoView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
-      <Column Name="VentaID" DataType="System.Int32"/>
-      <Column Name="ClienteID" DataType="System.Int32"/>
+    <BusinessObjectDataSource Name="Ventas" ReferenceName="Ventas" DataType="System.Linq.Enumerable+WhereSelectEnumerableIterator`2[[System.Linq.IGrouping`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Refaccionaria.Modelo.VentasACreditoView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[&lt;&gt;f__AnonymousType3a`6[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], THEOS, Version=1.16.28.0, Culture=neutral, PublicKeyToken=null]], System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Enabled="true">
       <Column Name="Folio" DataType="System.String"/>
       <Column Name="Fecha" DataType="System.DateTime"/>
       <Column Name="Vencimiento" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
       <Column Name="Total" DataType="System.Decimal"/>
       <Column Name="Pagado" DataType="System.Decimal"/>
       <Column Name="Restante" DataType="System.Decimal"/>
-      <Column Name="VentaEstatusID" DataType="System.Int32"/>
-      <Column Name="Cliente" DataType="System.String"/>
     </BusinessObjectDataSource>
     <BusinessObjectDataSource Name="Cliente" ReferenceName="Cliente" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.ClientesDatosView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="ClienteID" DataType="System.Int32"/>
@@ -56,21 +52,21 @@
       <TextObject Name="Text17" Left="132.3" Top="100.95" Width="141.75" Height="15.12" Text="[Date]" Format="Time" Format.Format="t" HorzAlign="Right" Font="Arial Narrow, 8pt"/>
       <TextObject Name="Text18" Top="144.75" Width="179.55" Height="14.74" Text="[Cliente.Telefono]" Font="Arial, 8pt"/>
     </PageHeaderBand>
-    <DataBand Name="Data4" Top="179.72" Width="302.4" Height="22.23" DataSource="Ventas">
+    <DataBand Name="Data4" Top="179.58" Width="302.4" Height="22.23" DataSource="Ventas">
       <TextObject Name="Text3" Top="4" Width="42.97" Height="15.12" Text="[Ventas.Fecha]" Format="Date" Format.Format="dd/MM/yy" VertAlign="Bottom" Font="Arial Narrow, 7pt"/>
-      <TextObject Name="Text5" Left="79.6" Top="4" Width="47.25" Height="15.12" Text="[Ventas.Vencimiento]" Format="Date" Format.Format="dd/MM/yy" HorzAlign="Right" VertAlign="Bottom" Font="Arial Narrow, 8pt"/>
-      <TextObject Name="Text7" Left="123.85" Top="4" Width="54.81" Height="15.12" Text="[Ventas.Total]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial Narrow, 9pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text5" Left="78.6" Top="4" Width="47.25" Height="15.12" Text="[Ventas.Vencimiento]" Format="Date" Format.Format="dd/MM/yy" HorzAlign="Right" VertAlign="Bottom" Font="Arial Narrow, 8pt"/>
+      <TextObject Name="Text7" Left="118.42" Top="4" Width="60.24" Height="15.12" Text="[Ventas.Total]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial Narrow, 9pt" Trimming="EllipsisCharacter"/>
       <TextObject Name="Text9" Left="172.1" Top="4" Width="54.81" Height="15.12" Text="[Ventas.Pagado]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial Narrow, 9pt, style=Bold" Trimming="EllipsisCharacter"/>
-      <TextObject Name="Text11" Left="223.02" Top="4" Width="54.81" Height="15.12" Text="[Ventas.Restante]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial Narrow, 9pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text11" Left="219.29" Top="4" Width="59.54" Height="15.12" Text="[Ventas.Restante]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial Narrow, 9pt" Trimming="EllipsisCharacter"/>
       <TextObject Name="Text1" Left="27.35" Top="4" Width="62.1" Height="15.12" Text="[Ventas.Folio]" HorzAlign="Right" VertAlign="Bottom" Font="Arial Narrow, 9pt, style=Bold"/>
     </DataBand>
-    <DataBand Name="Data1" Top="204.78" Width="302.4" Height="83.04">
+    <DataBand Name="Data1" Top="204.52" Width="302.4" Height="83.04">
       <TextObject Name="Text19" Top="39.8" Width="274.05" Height="14.89" Text="Entregué  ___________________________________" Font="Arial, 8pt"/>
       <TextObject Name="Text20" Top="68.15" Width="274.05" Height="14.89" Text="Recibí      ___________________________________" Font="Arial, 8pt"/>
-      <TextObject Name="Text21" Left="109.59" Top="3" Width="59.16" Height="15.12" Text="[Total]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Arial Narrow, 9pt, style=Bold"/>
-      <TextObject Name="Text22" Left="166.1" Top="3" Width="59.35" Height="15.12" Text="[Abonado]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Arial Narrow, 9pt, style=Bold"/>
-      <TextObject Name="Text23" Left="218.47" Top="3" Width="59.35" Height="15.12" Text="[Saldo]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Arial Narrow, 9pt, style=Bold"/>
-      <TextObject Name="Text24" Left="63.15" Top="3" Width="46.45" Height="15.63" Text="Totales" HorzAlign="Right" VertAlign="Center" Font="Arial Narrow, 8pt, style=Bold"/>
+      <TextObject Name="Text21" Left="81.24" Top="3" Width="65.27" Height="15.12" Text="[Total]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Arial Narrow, 9pt, style=Bold"/>
+      <TextObject Name="Text22" Left="147.2" Top="3" Width="59.35" Height="15.12" Text="[Abonado]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Arial Narrow, 9pt, style=Bold"/>
+      <TextObject Name="Text23" Left="208.32" Top="3" Width="69.5" Height="15.12" Text="[Saldo]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" Font="Arial Narrow, 9pt, style=Bold"/>
+      <TextObject Name="Text24" Left="34.8" Top="3" Width="46.45" Height="15.63" Text="Totales" HorzAlign="Right" VertAlign="Center" Font="Arial Narrow, 8pt, style=Bold"/>
     </DataBand>
   </ReportPage>
 </Report>
