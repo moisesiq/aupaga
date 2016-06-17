@@ -81,6 +81,14 @@ namespace Refaccionaria.App
                     if (this.tbpSucursales.Controls.Count <= 0)
                         this.tbpSucursales.Controls.Add(new CuadroSucursales() { Dock = DockStyle.Fill });
                     break;
+                case "tbpCobranza":
+                    if (this.tbpCobranza.Controls.Count <= 0)
+                        this.tbpCobranza.Controls.Add(new CuadroCobranza() { Dock = DockStyle.Fill });
+                    break;
+                case "tbpVip":
+                    if (this.tbpVip.Controls.Count <= 0)
+                        this.tbpVip.Controls.Add(new CuadroVip() { Dock = DockStyle.Fill });
+                    break;
             }
         }
 

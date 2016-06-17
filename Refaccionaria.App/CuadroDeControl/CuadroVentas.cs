@@ -44,7 +44,7 @@ namespace Refaccionaria.App
             int iAnioAnt = (iAnio - 1);
             foreach (Control oControl in this.Controls)
             {
-                if (oControl is DataGridView)
+                if (oControl is DataGridView && oControl != this.dgvPorAnio)
                 {
                     (oControl as DataGridView).Columns[1].HeaderText = iAnio.ToString();
                     (oControl as DataGridView).Columns[2].HeaderText = iAnioAnt.ToString();
@@ -148,6 +148,7 @@ namespace Refaccionaria.App
             }
             this.dgvPorDiaT["DiaT_Actual", 0].Value = (oPorDia.Count() > 0 ? oPorDia.Average(c => c.Actual) : 0);
             this.dgvPorDiaT["DiaT_Anterior", 0].Value = (oPorDia.Count() > 0 ? oPorDia.Average(c => c.Anterior) : 0);
+
             // Se llena el grid de por semana
             var oPorSemana = this.AgruparPorEntero(oDatos.GroupBy(g => UtilLocal.SemanaSabAVie(g.Fecha)));
             this.dgvPorSemana.Rows.Clear();
@@ -162,6 +163,7 @@ namespace Refaccionaria.App
             }
             this.dgvPorSemanaT["SemanaT_Actual", 0].Value = (oPorSemana.Count() > 0 ? oPorSemana.Average(c => c.Actual) : 0);
             this.dgvPorSemanaT["SemanaT_Anterior", 0].Value = (oPorSemana.Count() > 0 ? oPorSemana.Average(c => c.Anterior) : 0);
+
             // Se llena el grid de por mes
             var oPorMes = this.AgruparPorEntero(oDatos.GroupBy(g => g.Fecha.Month));
             this.dgvPorMes.Rows.Clear();
@@ -174,6 +176,7 @@ namespace Refaccionaria.App
                 this.chrPorMes.Series["Actual"].Points.AddXY(oReg.Llave, oReg.Actual);
                 this.chrPorMes.Series["Pasado"].Points.AddXY(oReg.Llave, oReg.Anterior);
             }
+
             // Se llena el grid de días
             oParams["Desde"] = this.dtpDesde.Value;
             oParams["Hasta"] = this.dtpHasta.Value;
@@ -190,6 +193,7 @@ namespace Refaccionaria.App
                 int iPunto = this.chrPorDiaSem.Series["Actual"].Points.AddXY((int)oReg.Dia, oReg.Actual);
                 this.chrPorDiaSem.Series["Actual"].Points[iPunto].AxisLabel = CultureInfo.CurrentCulture.DateTimeFormat.GetShortestDayName(oReg.Dia).ToUpper();
             }
+
             // Se llena el grid de horas
             var oPorHora = this.AgruparPorEntero(oDatos.GroupBy(g => g.Fecha.Hour));
             this.dgvHoras.Rows.Clear();
@@ -199,6 +203,28 @@ namespace Refaccionaria.App
                 this.dgvHoras.Rows.Add(string.Format("{0:00}:00", oReg.Llave), oReg.Actual, oReg.Anterior
                     , Helper.DividirONull(oReg.Actual, oReg.Anterior), (Helper.DividirONull(oReg.Actual, mTotalDiaSem) * 100));
                 this.AgregarSerieCilindro(this.chrPorHora, oReg.Llave, oReg.Actual);
+            }
+
+            // Se llena el grid de sucursales
+            var oPorSucursal = this.AgruparPorEntero(oDatos.GroupBy(g => g.SucursalID));
+            var oSucursales = oDatos.Select(c => new { c.SucursalID, c.Sucursal }).Distinct();
+            this.dgvSucursales.Rows.Clear();
+            foreach (var oReg in oPorSucursal)
+            {
+                string sSucursal = oSucursales.FirstOrDefault(c => c.SucursalID == oReg.Llave).Sucursal;
+                this.dgvSucursales.Rows.Add(sSucursal, oReg.Actual, oReg.Anterior
+                    , Helper.DividirONull(oReg.Actual, oReg.Anterior), (Helper.DividirONull(oReg.Actual, mTotalDiaSem) * 100));
+            }
+
+            // Se llena el grid de por año
+            oParams.Remove("Desde");
+            oParams.Remove("Hasta");
+            var oPorAnio = General.ExecuteProcedure<pauCuadroDeControlPorAnio_Result>("pauCuadroDeControlPorAnio", oParams);
+            this.dgvPorAnio.Rows.Clear();
+            foreach (var oReg in oPorAnio)
+            {
+                decimal mDato = this.ObtenerDatoAnio(oReg);
+                this.dgvPorAnio.Rows.Add(oReg.Anio, mDato);
             }
 
             // Se configuran columnas del grid
@@ -230,6 +256,26 @@ namespace Refaccionaria.App
             this.dgvDias.Columns["Dias_AnioAnterior"].DefaultCellStyle.Format = sFormato;
             this.dgvHoras.Columns["Horas_AnioActual"].DefaultCellStyle.Format = sFormato;
             this.dgvHoras.Columns["Horas_AnioAnterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvSucursales.Columns["Sucursal_Actual"].DefaultCellStyle.Format = sFormato;
+            this.dgvSucursales.Columns["Sucursal_Anterior"].DefaultCellStyle.Format = sFormato;
+            this.dgvPorAnio.Columns["Anio_Actual"].DefaultCellStyle.Format = sFormato;
+        }
+
+        private decimal ObtenerDatoAnio(pauCuadroDeControlPorAnio_Result oReg)
+        {
+            string sCalculo = this.cmbCalculo.Text;
+            switch (sCalculo)
+            {
+                case "Utilidad": return oReg.Utilidad.Valor();
+                case "Utilidad Desc.": return oReg.UtilidadConDescuento.Valor();
+                case "Precio": return oReg.Precio.Valor();
+                case "Costo": return oReg.Costo.Valor();
+                case "Costo Desc.": return oReg.CostoConDescuento.Valor();
+                case "Ventas": return oReg.Ventas.Valor();
+                case "Productos": return oReg.Productos.Valor();
+            }
+
+            return 0;
         }
 
         class TotalesPorFecha {

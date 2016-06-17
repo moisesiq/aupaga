@@ -36,7 +36,13 @@ namespace Refaccionaria.App
             Application.DoEvents();
             
             // Se inicializan parámetros de la aplicación
-            Proc.InicializarAplicacion();
+            var oIni = Proc.InicializarAplicacion();
+            if (oIni.Error)
+            {
+                UtilLocal.MensajeAdvertencia("Hubo un error al inicializar la aplicación. El sistema se cerrará.\n\n" + oIni.Mensaje);
+                frmIniciando.Close();
+                return;
+            }
 
             // Se verifica si hay una actualización
             if (Helper.ConvertirBool(System.Configuration.ConfigurationManager.AppSettings["VerNuevaVersion"]))

@@ -2375,6 +2375,14 @@ namespace Refaccionaria.App
                 case Cat.Tablas.MovimientoInventario:
                     var oMov = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oKardex.RelacionID && c.Estatus);
                     this.txtKardexObservacion.Text = oMov.Observacion;
+
+                    // Si es una entrada compra, se busca cambio de costo con descuento
+                    if (oMov.TipoOperacionID == Cat.TiposDeOperacionMovimientos.EntradaCompra)
+                    {
+                        var oPrecioHist = General.GetEntity<PartePrecioHistorico>(c => c.MovimientoInventarioID == oMov.MovimientoInventarioID && c.Estatus);
+                        if (oPrecioHist != null)
+                            this.txtKardexObservacion.Text += ("\r\nCosto con descuento: " + oPrecioHist.CostoConDescuento.Valor().ToString(GlobalClass.FormatoMoneda));
+                    }
                     break;
                 case Cat.Tablas.Venta:
                     this.txtKardexObservacion.Text = "Venta. No hay observación";

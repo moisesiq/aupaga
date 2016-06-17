@@ -326,61 +326,123 @@ namespace Refaccionaria.App
                     this.establecerTotalPorFilas(this.dgvDetalleDescuentos);
 
             this.txtTotalDescuentos.Text = "0.0";
-            decimal ImporteConDescuento = 0;
             decimal total = Helper.ConvertirDecimal(this.lblTotal.Text);
+            decimal mDescuento = 0;
+            decimal mUnitario, mCantidad, resultado;
+
+            // Primero se restablecen los costos con descuento de todas las partes,
+            foreach (DataGridViewRow oFila in this.dgvDetalleDescuentos.Rows)
+                oFila.Cells["CostoConDescuento"].Value = oFila.Cells["Unitario"].Value;
+
+            // Se procesan primero los descuentos individuales a factura
             foreach (DataGridViewRow row in this.dgvHistorialDescuentos.Rows)
             {
-                if (Negocio.Helper.ConvertirEntero(row.Cells["TipoDescuento"].Value) == -2) //Marca Factura
+                if (Helper.ConvertirEntero(row.Cells["TipoDescuento"].Value) == -3)
                 {
+                    var aDescuentos = this.ObtenerDescuentosFila(row);
+                    int iParteID = Helper.ConvertirEntero(row.Cells["ParteID"].Value);
+                    foreach (DataGridViewRow fila in this.dgvDetalleDescuentos.Rows)
+                    {
+                        if (Helper.ConvertirEntero(fila.Cells["ParteID"].Value) == iParteID)
+                        {
+                            mUnitario = Helper.ConvertirDecimal(fila.Cells["CostoConDescuento"].Value);
+                            mCantidad = Helper.ConvertirDecimal(fila.Cells["UNS"].Value);
+                            resultado = this.calcularDescuento(mUnitario, aDescuentos[0], aDescuentos[1], aDescuentos[2], aDescuentos[3], aDescuentos[4]);
+                            fila.Cells["CostoConDescuento"].Value = resultado;
+                            resultado = (mUnitario - resultado);
+                            resultado *= mCantidad;
+                            mDescuento += (resultado * iva);
+                        }
+                    }
+                    // total -= mDescuento;
+                }
+            }
+
+            // Después los descuentos a marca factura 
+            foreach (DataGridViewRow row in this.dgvHistorialDescuentos.Rows)
+            {
+                if (Helper.ConvertirEntero(row.Cells["TipoDescuento"].Value) == -2)
+                {
+                    var aDescuentos = this.ObtenerDescuentosFila(row);
                     //Primero: Se identifica el ParteID y su Importe del grid dgvDetalleDescuentos, se le aplica el descuento registrado
                     var parteId = row.Cells["ParteID"].Value.ToString();
                     foreach (DataGridViewRow fila in this.dgvDetalleDescuentos.Rows)
                     {
                         if (fila.Cells["ParteID"].Value.ToString().Equals(parteId))
                         {
-                            var importe = Helper.ConvertirDecimal(fila.Cells["Importe"].Value);
-                            var desUno = Helper.ConvertirDecimal(row.Cells["DescuentoUno"].Value);
-                            var desDos = Helper.ConvertirDecimal(row.Cells["DescuentoDos"].Value);
-                            var desTres = Helper.ConvertirDecimal(row.Cells["DescuentoTres"].Value);
-                            var desCuatro = Helper.ConvertirDecimal(row.Cells["DescuentoCuatro"].Value);
-                            var desCinco = Helper.ConvertirDecimal(row.Cells["DescuentoCinco"].Value);
-
-                            var resultado = this.calcularDescuento(importe, desUno, desDos, desTres, desCuatro, desCinco);
-                            resultado = importe - resultado;
+                            mUnitario = Helper.ConvertirDecimal(fila.Cells["CostoConDescuento"].Value);
+                            mCantidad = Helper.ConvertirDecimal(fila.Cells["UNS"].Value);
+                            resultado = this.calcularDescuento(mUnitario, aDescuentos[0], aDescuentos[1], aDescuentos[2], aDescuentos[3], aDescuentos[4]);
+                            fila.Cells["CostoConDescuento"].Value = resultado;
+                            resultado = (mUnitario - resultado);
+                            resultado *= mCantidad;
                             //Segundo: Se suma el importe de descuento y se resta en el total de la factura
-
-                            ImporteConDescuento += (resultado * iva);
+                            mDescuento += (resultado * iva);
                         }
                     }
+                    // total -= mDescuento;
+
+                    /*
                     //Resultado en el total de la factura (ImporteConDescuento - Total)                    
                     this.txtTotalDescuentos.Text = Helper.DecimalToCadenaMoneda(ImporteConDescuento);
                     this.lblTotal.Text = Helper.DecimalToCadenaMoneda(total - ImporteConDescuento);
                     if (!this.chkImporteFactura.Checked)
                         this.lblImporteFactura.Text = this.lblTotal.Text;
                     this.txtSubtotal.Text = Helper.DecimalToCadenaMoneda(Helper.ConvertirDecimal(this.lblTotal.Text) / iva);
+                    */
                 }
             }
 
+            // Y por último los descuentos a factura
             foreach (DataGridViewRow row in this.dgvHistorialDescuentos.Rows)
-                if (Negocio.Helper.ConvertirEntero(row.Cells["TipoDescuento"].Value) == -1) //A Factura
-                {
-                    var importe = Negocio.Helper.ConvertirDecimal(this.lblTotal.Text);
-                    var desUno = Negocio.Helper.ConvertirDecimal(row.Cells["DescuentoUno"].Value);
-                    var desDos = Negocio.Helper.ConvertirDecimal(row.Cells["DescuentoDos"].Value);
-                    var desTres = Negocio.Helper.ConvertirDecimal(row.Cells["DescuentoTres"].Value);
-                    var desCuatro = Negocio.Helper.ConvertirDecimal(row.Cells["DescuentoCuatro"].Value);
-                    var desCinco = Negocio.Helper.ConvertirDecimal(row.Cells["DescuentoCinco"].Value);
+            {
+                if (Helper.ConvertirEntero(row.Cells["TipoDescuento"].Value) == -1) {
+                    var aDescuentos = this.ObtenerDescuentosFila(row);
+                    foreach (DataGridViewRow fila in this.dgvDetalleDescuentos.Rows)
+                    {
+                        mUnitario = Helper.ConvertirDecimal(fila.Cells["CostoConDescuento"].Value);
+                        mCantidad = Helper.ConvertirDecimal(fila.Cells["UNS"].Value);
+                        resultado = this.calcularDescuento(mUnitario, aDescuentos[0], aDescuentos[1], aDescuentos[2], aDescuentos[3], aDescuentos[4]);
+                        fila.Cells["CostoConDescuento"].Value = resultado;
+                        resultado = (mUnitario - resultado);
+                        resultado *= mCantidad;
+                        mDescuento += (resultado * iva);
+                    }
+                    // total -= mDescuento;
 
-                    var resultado = this.calcularDescuento(importe, desUno, desDos, desTres, desCuatro, desCinco);
+                    /*
+                    importe = total;
+                    resultado = this.calcularDescuento(importe, desUno, desDos, desTres, desCuatro, desCinco);
                     var oper = Helper.ConvertirDecimal(this.lblTotal.Text) - resultado;
                     this.txtTotalDescuentos.Text = Helper.DecimalToCadenaMoneda(Helper.ConvertirDecimal(this.txtTotalDescuentos.Text) + oper);
                     this.lblTotal.Text = Negocio.Helper.DecimalToCadenaMoneda(resultado);
                     if (!this.chkImporteFactura.Checked)
                         this.lblImporteFactura.Text = this.lblTotal.Text;
                     this.txtSubtotal.Text = Helper.DecimalToCadenaMoneda(Helper.ConvertirDecimal(this.lblTotal.Text) / iva);
+                    */
                 }
+            }
+
+
+            total -= mDescuento;
+            this.txtTotalDescuentos.Text = Helper.DecimalToCadenaMoneda(mDescuento);
+            this.lblTotal.Text = Negocio.Helper.DecimalToCadenaMoneda(total);
+            if (!this.chkImporteFactura.Checked)
+                this.lblImporteFactura.Text = this.lblTotal.Text;
+            this.txtSubtotal.Text = Helper.DecimalToCadenaMoneda(total / iva);
 
             this.sacarImporteProntoPago();
+        }
+
+        private decimal[] ObtenerDescuentosFila(DataGridViewRow oFilaDesc)
+        {
+            var aDescuentos = new decimal[5];
+            aDescuentos[0] = Helper.ConvertirDecimal(oFilaDesc.Cells["DescuentoUno"].Value);
+            aDescuentos[1] = Helper.ConvertirDecimal(oFilaDesc.Cells["DescuentoDos"].Value);
+            aDescuentos[2] = Helper.ConvertirDecimal(oFilaDesc.Cells["DescuentoTres"].Value);
+            aDescuentos[3] = Helper.ConvertirDecimal(oFilaDesc.Cells["DescuentoCuatro"].Value);
+            aDescuentos[4] = Helper.ConvertirDecimal(oFilaDesc.Cells["DescuentoCinco"].Value);
+            return aDescuentos;
         }
 
         private void sacarImporteProntoPago()
@@ -784,21 +846,11 @@ namespace Refaccionaria.App
                             int tipoDescuentoId = 1;
                             switch (tipoDescuento)
                             {
-                                case -1:
-                                    tipoDescuentoId = 2;
-                                    break;
-
-                                case 2:
-                                    tipoDescuentoId = 3;
-                                    break;
-
-                                case 3:
-                                    tipoDescuentoId = 4;
-                                    break;
-
-                                case -2:
-                                    tipoDescuentoId = 5;
-                                    break;
+                                case -1: tipoDescuentoId = 2; break;
+                                case 2: tipoDescuentoId = 3; break;
+                                case 3: tipoDescuentoId = 4; break;
+                                case -2: tipoDescuentoId = 5; break;
+                                case -3: tipoDescuentoId = Cat.TiposDeDescuentoCompras.IndividualAFactura; break;
                             }
 
                             var parteId = Helper.ConvertirEntero(row.Cells["ParteID"].Value);
@@ -821,6 +873,7 @@ namespace Refaccionaria.App
                         {
                             var parteId = Helper.ConvertirEntero(row.Cells["ParteID"].Value);
                             var partePrecio = General.GetEntity<PartePrecio>(p => p.ParteID.Equals(parteId));
+                            var oPartePrecioAnt = General.GetEntity<PartePrecio>(c => c.ParteID == parteId && c.Estatus);
                             var costoNuevo = Helper.ConvertirDecimal(row.Cells["Costo Nuevo"].Value);
                             var costoActual = Helper.ConvertirDecimal(row.Cells["Costo Actual"].Value);
                             decimal costoConDescuento = 0;
@@ -847,8 +900,10 @@ namespace Refaccionaria.App
                                 var rowIndex = Helper.findRowIndex(this.dgvDetalleDescuentos, "ParteID", parteId.ToString());
                                 if (rowIndex != -1)
                                 {
-                                    decimal precioConDescuento = Helper.ConvertirDecimal(this.dgvDetalleDescuentos.Rows[rowIndex].Cells["Unitario"].Value);
+                                    costoConDescuento = Helper.ConvertirDecimal(this.dgvDetalleDescuentos.Rows[rowIndex].Cells["CostoConDescuento"].Value);
+                                    partePrecio.CostoConDescuento = costoConDescuento;
 
+                                    /*
                                     var rowIndexHisAFactura = Helper.findRowIndex(this.dgvHistorialDescuentos, "ParteID", "-1");
                                     if (rowIndexHisAFactura != -1)
                                     {
@@ -877,15 +932,18 @@ namespace Refaccionaria.App
                                         var desCinco = Helper.ConvertirDecimal(this.dgvHistorialDescuentos.Rows[rowIndexHisAMarcaF].Cells["DescuentoCinco"].Value);
                                         precioConDescuento = this.calcularDescuento(precioConDescuento, desUno, desDos, desTres, desCuatro, desCinco);
                                     }
-
                                     partePrecio.CostoConDescuento = precioConDescuento;
+                                    */
                                 }
 
                                 Guardar.Generico<PartePrecio>(partePrecio);
 
                                 //Si cambia de el valor del precio entonces
                                 //Actualizar PartePrecioHistorico
-                                if (costoActual != costoNuevo)
+                                if (partePrecio.Costo != oPartePrecioAnt.Costo || partePrecio.CostoConDescuento != oPartePrecioAnt.CostoConDescuento
+                                    || partePrecio.PrecioUno != oPartePrecioAnt.PrecioUno || partePrecio.PrecioDos != oPartePrecioAnt.PrecioDos
+                                    || partePrecio.PrecioDos != oPartePrecioAnt.PrecioDos || partePrecio.PrecioTres != oPartePrecioAnt.PrecioTres
+                                    || partePrecio.PrecioCinco != oPartePrecioAnt.PrecioCinco)
                                 {
                                     var precioHis = new PartePrecioHistorico()
                                     {
@@ -1919,6 +1977,8 @@ namespace Refaccionaria.App
                         this.dgvDetalleDescuentos.Rows[rowIndex].Cells["UNS"].Value = uns;
                         this.dgvDetalleDescuentos.Rows[rowIndex].Cells["Importe"].Value = imp;
                         this.dgvDetalleDescuentos.Rows[rowIndex].Cells["Unitario"].Value = imp > 0 ? imp / uns : 0;
+                        // Se recalculan los descuentos, para llenar la columna de CostoConDescuento
+                        this.recorrerHistorialYCalcularTotal();
                     }
 
                     //Grid Diferencias
@@ -2655,12 +2715,17 @@ namespace Refaccionaria.App
                 colImporte.DataType = Type.GetType("System.Decimal");
                 colImporte.ColumnName = "Importe";
 
+                var colCostoConDescuento = new DataColumn();
+                colCostoConDescuento.DataType = Type.GetType("System.Decimal");
+                colCostoConDescuento.ColumnName = "CostoConDescuento";
+
                 dtDetalleDescuentos.Columns.AddRange(new DataColumn[] { colParteId, colMarcaParteId, colNumeroParte, colDescripcion, colCostoInicial, 
                     colDescuentoMarca, colResultadoMarca, colDescuentoItems, colResultadoItems, colDescuentoIndividual, colResultadoIndividual, 
-                    colUnitarios, colUnidades, colImporte });
+                    colUnitarios, colUnidades, colImporte, colCostoConDescuento });
 
                 this.dgvDetalleDescuentos.DataSource = dtDetalleDescuentos;
                 Negocio.Helper.OcultarColumnas(this.dgvDetalleDescuentos, new string[] { "ParteID", "MarcaParteID" });
+                // this.dgvDetalleDescuentos.Columns["CostoConDescuento"].HeaderText = "Costo Desc.";
 
                 if (!this.dgvDetalleDescuentos.Columns.Contains("X"))
                 {
@@ -3291,6 +3356,45 @@ namespace Refaccionaria.App
             catch (Exception ex)
             {
                 Negocio.Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
+            }
+        }
+
+        private void btnAplicarIndividualAFactura_Click(object sender, EventArgs e)
+        {
+            var desUno = Helper.ConvertirDecimal(this.txtIndividualAFactura1.Text) / 100;
+            var desDos = Helper.ConvertirDecimal(this.txtIndividualAFactura2.Text) / 100;
+            var desTres = Helper.ConvertirDecimal(this.txtIndividualAFactura3.Text) / 100;
+            var desCuatro = Helper.ConvertirDecimal(this.txtIndividualAFactura4.Text) / 100;
+            var desCinco = Helper.ConvertirDecimal(this.txtIndividualAFactura5.Text) / 100;
+            var selCount = 0;
+
+            foreach (DataGridViewRow row in this.dgvDetalleDescuentos.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells["X"].Value).Equals(true))
+                {
+                    selCount += 1;
+                    var parteId = Negocio.Helper.ConvertirEntero(row.Cells["ParteID"].Value);
+                    var importe = Helper.ConvertirDecimal(row.Cells["Importe"].Value);
+                    this.establecerHistoriaDescuentos(importe, -3, parteId, desUno, desDos, desTres, desCuatro, desCinco);
+                }
+            }
+
+            if (selCount == 0)
+                Negocio.Helper.MensajeAdvertencia("Es necesario seleccionar al menos un Número de Parte.", GlobalClass.NombreApp);
+            else
+            {
+                foreach (DataGridViewRow row in this.dgvDetalleDescuentos.Rows)
+                    row.Cells["X"].Value = false; //Limpiar seleccionados
+
+                if (desUno == 0)
+                {
+                    this.txtIndividualUno.Text = "0.0";
+                    this.txtIndividualDos.Text = "0.0";
+                    this.txtIndividualTres.Text = "0.0";
+                    this.txtIndividualCuatro.Text = "0.0";
+                    this.txtIndividualCinco.Text = "0.0";
+                }
+                this.recorrerHistorialYCalcularTotal();
             }
         }
 
@@ -4223,6 +4327,6 @@ namespace Refaccionaria.App
 
             return (oCeldaError == null);
         }
-                
+        
     }
 }

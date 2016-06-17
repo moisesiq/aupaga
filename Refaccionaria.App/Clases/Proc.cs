@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Linq;
+using System.Data;
 
 using Refaccionaria.Modelo;
 using Refaccionaria.Negocio;
@@ -21,7 +22,7 @@ namespace Refaccionaria.App
 
         #region [ Aplicación ]
 
-        public static bool InicializarAplicacion()
+        public static ResAcc InicializarAplicacion()
         {
             // Se llena la cadena de conexión
             string sCadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings[GlobalClass.Modo].ConnectionString;
@@ -34,14 +35,15 @@ namespace Refaccionaria.App
             ModelHelper.CadenaDeConexion = sCadenaDeConexion;
 
             // Se cargan parámetros de configuración iniciales
-            if (!Proc.loadConfiguraciones())
-            {
-                Cargando.Cerrar();
-                Helper.MensajeError("No se pudo cargar la configuración inicial.", GlobalClass.NombreApp);
-                return false;
-            }
+            var oResCon = Proc.loadConfiguraciones();
+            if (oResCon.Error)
+                return oResCon;
 
-            return true;
+            // Se verifica la hora del sistema con la hora de sql
+            if ((DateTime.Now - UtilDatos.FechaServidorDeDatos()).Minutes >= 5)
+                return new ResAcc(false, "Favor de actualizar la fecha y hora de la computadora. Informar a Soporte Técnico.");
+
+            return new ResAcc(true);
         }
 
         public static void FinalizarAplicacion()
@@ -64,7 +66,7 @@ namespace Refaccionaria.App
 
         #region [ Uso interno ]
 
-        private static bool loadConfiguraciones()
+        private static ResAcc loadConfiguraciones()
         {
             try
             {
@@ -93,12 +95,15 @@ namespace Refaccionaria.App
 
                 GlobalClass.ConfiguracionGlobal.pathReportes = string.Format("{0}{1}", System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "\\Reportes\\");
             }
+            catch (EntityException ex)
+            {
+                return new ResAcc(false, "Error al conectarse al servidor de datos.\n");
+            }
             catch (Exception ex)
             {
-                Negocio.Helper.MensajeError(ex.Message, GlobalClass.NombreApp);
-                return false;
+                return new ResAcc(false, ex.MensajeDeError());
             }
-            return true;
+            return new ResAcc(true);
         }
 
         #endregion

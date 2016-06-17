@@ -138,6 +138,10 @@ namespace Refaccionaria.App
 
         public decimal? EfectivoRecibido { get; set; }
 
+        public int BancoCuentaID { get; set; }
+        public int? MesesSinIntereses { get; set; }
+        public string CelularTarjeta { get; set; }
+
         #endregion
 
         #region [ Eventos ]
@@ -527,17 +531,36 @@ namespace Refaccionaria.App
                 return false;
 
             // Se pide el efectivo, si aplica
+            bool bExito = true;
             decimal mEfectivo = this.txtEfectivo.Text.ValorDecimal();
-            if (mEfectivo <= 0) return true;  // No hay necesidad de pedir efectivo
-
-            bool bExito = false;
-            var frmEfectivo = new Efectivo(mEfectivo);
-            if (frmEfectivo.ShowDialog(Principal.Instance) == DialogResult.OK)
+            if (mEfectivo > 0)
             {
-                bExito = true;
-                this.EfectivoRecibido = frmEfectivo.Recibido;
+                var frmEfectivo = new Efectivo(mEfectivo);
+                bExito = (frmEfectivo.ShowDialog(Principal.Instance) == DialogResult.OK);
+                if (bExito)
+                    this.EfectivoRecibido = frmEfectivo.Recibido;
+                frmEfectivo.Dispose();
             }
-            frmEfectivo.Dispose();
+
+            if (!bExito)
+                return false;
+
+            // Se piden los datos de cobro con tarjeta, si aplica
+            bExito = true;
+            if (this.txtTarjetaDeCredito.Text.ValorDecimal() > 0)
+            {
+                var frmTarjeta = new CobroTarjeta();
+                var oCliente = General.GetEntity<Cliente>(c => c.ClienteID == this.ClienteID && c.Estatus);
+                frmTarjeta.Celular = oCliente.Celular;
+                bExito = (frmTarjeta.ShowDialog(Principal.Instance) == DialogResult.OK);
+                if (bExito)
+                {
+                    this.BancoCuentaID = frmTarjeta.BancoCuentaID;
+                    this.MesesSinIntereses = frmTarjeta.Meses;
+                    this.CelularTarjeta = frmTarjeta.Celular;
+                }
+                frmTarjeta.Dispose();
+            }
 
             return bExito;
         }

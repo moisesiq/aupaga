@@ -522,7 +522,7 @@ namespace Refaccionaria.App
 
             return null;
         }
-                
+
         protected virtual IEnumerable<AgrupadoPorEnteroCadenaEntero> AgruparPorEnteroCadenaEntero(
             IEnumerable<IGrouping<AgrupadoPorEnteroCadenaEntero, pauCuadroDeControlGeneral_Result>> oDatos)
         {

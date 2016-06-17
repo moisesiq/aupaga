@@ -447,6 +447,7 @@ namespace Refaccionaria.Modelo
         {
             public const int Scotiabank = 1;
             public const int Banamex = 2;
+            public const int Serfin = 5;
         }
 
         public class ContaTiposDePoliza
@@ -513,6 +514,16 @@ namespace Refaccionaria.Modelo
         {
             public const int Solucionado = 1;
             public const int NoSolucionado = 2;
+        }
+
+        public class TiposDeDescuentoCompras
+        {
+            public const int AItems = 1;
+            public const int AFactura = 2;
+            public const int Individual = 3;
+            public const int AMarcaArticulo = 4;
+            public const int AMarcaFactura = 5;
+            public const int IndividualAFactura = 6;
         }
     }
 }

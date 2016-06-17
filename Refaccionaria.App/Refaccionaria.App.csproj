@@ -528,6 +528,12 @@
     <Compile Include="CuadroDeControl\CuadroClientes.Designer.cs">
       <DependentUpon>CuadroClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuadroDeControl\CuadroCobranza.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CuadroDeControl\CuadroCobranza.Designer.cs">
+      <DependentUpon>CuadroCobranza.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuadroDeControl\CuadroExistencias.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -581,6 +587,12 @@
     </Compile>
     <Compile Include="CuadroDeControl\CuadroVentas.Designer.cs">
       <DependentUpon>CuadroVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuadroDeControl\CuadroVip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CuadroDeControl\CuadroVip.Designer.cs">
+      <DependentUpon>CuadroVip.cs</DependentUpon>
     </Compile>
     <Compile Include="Formas\AgregarEventoCalendario.cs">
       <SubType>Form</SubType>
@@ -745,6 +757,12 @@
     </Compile>
     <Compile Include="Ventas\Formas\AvisoDevolucionFacturaCreditoAnt.Designer.cs">
       <DependentUpon>AvisoDevolucionFacturaCreditoAnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\Formas\CobroTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\Formas\CobroTarjeta.Designer.cs">
+      <DependentUpon>CobroTarjeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventas\Formas\Duck.cs">
       <SubType>Form</SubType>
@@ -1726,6 +1744,9 @@
     <EmbeddedResource Include="CuadroDeControl\CuadroClientes.resx">
       <DependentUpon>CuadroClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CuadroDeControl\CuadroCobranza.resx">
+      <DependentUpon>CuadroCobranza.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CuadroDeControl\CuadroExistencias.resx">
       <DependentUpon>CuadroExistencias.cs</DependentUpon>
     </EmbeddedResource>
@@ -1752,6 +1773,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CuadroDeControl\CuadroVentas.resx">
       <DependentUpon>CuadroVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuadroDeControl\CuadroVip.resx">
+      <DependentUpon>CuadroVip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formas\AgregarEventoCalendario.resx">
       <DependentUpon>AgregarEventoCalendario.cs</DependentUpon>
@@ -1833,6 +1857,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\Formas\AvisoDevolucionFacturaCreditoAnt.resx">
       <DependentUpon>AvisoDevolucionFacturaCreditoAnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\Formas\CobroTarjeta.resx">
+      <DependentUpon>CobroTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\Formas\Duck.resx">
       <DependentUpon>Duck.cs</DependentUpon>

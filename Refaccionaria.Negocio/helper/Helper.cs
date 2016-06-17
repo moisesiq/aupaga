@@ -309,7 +309,7 @@ namespace Refaccionaria.Negocio
             {
                 foreach (string sCol in oColumnas)
                 {
-                    if (Helper.ConvertirCadena(oFila.Cells[sCol].Value).ToLower().Contains(sBusqueda))
+                    if (Helper.ConvertirCadena(oFila.Cells[sCol].Value).ToLower().Contains(sBusqueda) && oFila.Visible)
                     {
                         oGrid.CurrentCell = oFila.Cells[sCol];
                         return;
@@ -1280,6 +1280,11 @@ namespace Refaccionaria.Negocio
         public static DialogResult MensajePregunta(string sMensaje, string sTitulo)
         {
             return MessageBox.Show(sMensaje, sTitulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+        }
+
+        public static string MensajeDeError(this Exception oEx)
+        {
+            return (oEx.Message + (oEx.InnerException == null ? "" : (oEx.InnerException.Message == oEx.Message ? "" : ("\n" + oEx.InnerException.Message))));
         }
 
         #endregion

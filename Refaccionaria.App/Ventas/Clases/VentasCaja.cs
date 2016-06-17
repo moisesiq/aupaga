@@ -662,6 +662,9 @@ namespace Refaccionaria.App
                 iAutorizoID = (Res.Exito ? Res.Respuesta.UsuarioID : 0);
             }
 
+            // Se muestra la ventana de "Cargando.."
+            Cargando.Mostrar();
+
             // Se procede a guardar los datos
             DateTime dAhora = DateTime.Now;
 
@@ -674,6 +677,7 @@ namespace Refaccionaria.App
             if (oPorCobrar.ctlCobro.ACredito)
             {
                 oVenta.ACredito = true;
+                oVenta.Vencimiento = oVenta.Fecha.AddDays(oCliente.DiasDeCredito.Valor());
                 Guardar.Generico<Venta>(oVenta);
             }
             else
@@ -689,9 +693,33 @@ namespace Refaccionaria.App
                 // Se actualiza la venta, pues pudo haber cambiado en el proceso anterior
                 oVenta = General.GetEntity<Venta>(q => q.VentaID == oPorCobrar.VentaID && q.Estatus);
                 iVentaPagoID = oPago.VentaPagoID;
+
+                // Si hubo un pago con tarjeta de crédito se guarda la información de tarjeta y meses
+                if (oPorCobrar.ctlCobro.BancoCuentaID > 0)
+                {
+                    var oPagoTar = oPagoDetalle.FirstOrDefault(c => c.TipoFormaPagoID == Cat.FormasDePago.Tarjeta);
+                    var oTarjeta = new VentaPagoConTarjeta()
+                    {
+                        BancoCuentaID = oPorCobrar.ctlCobro.BancoCuentaID,
+                        VentaPagoDetalleID = oPagoTar.VentaPagoDetalleID,
+                        MesesSinIntereses = oPorCobrar.ctlCobro.MesesSinIntereses.Value,
+                        Telefono = oPorCobrar.ctlCobro.CelularTarjeta
+                    };
+                    Guardar.Generico<VentaPagoConTarjeta>(oTarjeta);
+                    // Se actualiza el movimiento bancario, con el dato de la cuenta seleccionada
+                    var oMovBanco = General.GetEntity<BancoCuentaMovimiento>(c => c.RelacionID == oPagoTar.VentaPagoDetalleID
+                        && c.RelacionTabla == Cat.Tablas.VentaPagoDetalle);
+                    oMovBanco.BancoCuentaID = oPorCobrar.ctlCobro.BancoCuentaID;
+                    Guardar.Generico<BancoCuentaMovimiento>(oMovBanco);
+                    // Se guarda el dato de teléfono en el registro del cliente
+                    if (oCliente.Celular != oPorCobrar.ctlCobro.CelularTarjeta)
+                    {
+                        oCliente.Celular = oPorCobrar.ctlCobro.CelularTarjeta;
+                        Guardar.Generico<Cliente>(oCliente);
+                    }
+                }
             }
-            // Se muestra la ventana de "Cargando.."
-            Cargando.Mostrar();
+            
             // Si es de un 9500, se completa el 9500
             if (b9500)
                 VentasProc.Completar9500(o9500, mSobrante, bDevolverEfectivo);
@@ -1469,7 +1497,7 @@ namespace Refaccionaria.App
             }
 
             // Se hace el cálculo final
-            decimal mCostoMinimo = (UtilLocal.ObtenerImporteMasIva(mCostoTotal) * 1.03M);
+            decimal mCostoMinimo = (UtilLocal.ObtenerImporteMasIva(mCostoTotal) * 1.1M);
             // decimal mOficial = (mTickets - mNegativos - mDevoluciones - mCancelaciones - mFacturadoDiasAnt);
             decimal mOficial = (mTickets - mNegativos - mDevolucionesDia - mDevolucionesDiasAnt - mGarantiasDia - mGarantiasDiasAnt - mFacturadoDiasAnt);
             decimal mFacturar = (mOficial - mRestar);

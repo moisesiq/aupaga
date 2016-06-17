@@ -297,7 +297,7 @@ namespace Refaccionaria.App
 
                     var oMovBanc = new BancoCuentaMovimiento()
                     {
-                        BancoCuentaID = (PartePago.TipoFormaPagoID == Cat.FormasDePago.Tarjeta ? (int?)Cat.CuentasBancarias.Banamex : null),
+                        // BancoCuentaID = (PartePago.TipoFormaPagoID == Cat.FormasDePago.Tarjeta ? (int?)Cat.CuentasBancarias.Banamex : null),
                         EsIngreso = true,
                         Fecha = oPago.Fecha,
                         FechaAsignado = (PartePago.TipoFormaPagoID == Cat.FormasDePago.Tarjeta ? (DateTime?)oPago.Fecha : null),

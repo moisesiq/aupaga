@@ -580,12 +580,14 @@ namespace Refaccionaria.App
             // Si es una venta (ingreso), se realiza una póliza para pasar el dinero de Caja a la Cuenta correspondiente
             if (oMov.RelacionTabla == Cat.Tablas.VentaPagoDetalle)
             {
+                /* Ya no se valida, pues si no existe la cuenta auxiliar, ésta se crea automáticamente
                 var oCuentaAux = General.GetEntity<ContaCuentaAuxiliar>(c => c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.Bancos
                     && c.RelacionID == oMov.BancoCuentaID);
                 if (oCuentaAux == null)
                 {
                     UtilLocal.MensajeAdvertencia(string.Format("La cuenta bancaria seleccionada no tiene una cuenta auxiliar en contabilidad. No se agregará la póliza."));
                 }
+                */
                 // Se hace la afectación contable (AfeConta)
                 DateTime dFechaPoliza = oMov.FechaAsignado.Valor();
                 if (oMov.MovimientoAgrupadorID.HasValue)
