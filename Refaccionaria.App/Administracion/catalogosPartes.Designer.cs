@@ -867,9 +867,9 @@
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(3, 96);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(261, 13);
+            this.label7.Size = new System.Drawing.Size(138, 13);
             this.label7.TabIndex = 101;
-            this.label7.Text = "Descripción por tienda del Máximo y Mínimo:";
+            this.label7.Text = "Selecciona una tienda:";
             // 
             // txtDescripcionMaxMin
             // 
@@ -2298,6 +2298,8 @@
             // 
             // txtKardexBusqueda
             // 
+            this.txtKardexBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtKardexBusqueda.Etiqueta = "Búsqueda";
             this.txtKardexBusqueda.EtiquetaColor = System.Drawing.Color.Gray;
             this.txtKardexBusqueda.Location = new System.Drawing.Point(264, 5);

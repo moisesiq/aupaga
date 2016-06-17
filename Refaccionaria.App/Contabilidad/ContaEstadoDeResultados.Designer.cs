@@ -89,7 +89,7 @@
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(824, 233);
+            this.dgvDatos.Size = new System.Drawing.Size(824, 114);
             this.dgvDatos.TabIndex = 7;
             // 
             // Concepto
@@ -251,7 +251,7 @@
             chartArea1.Position.Width = 98F;
             chartArea1.Position.Y = 3F;
             this.chrPorSemana.ChartAreas.Add(chartArea1);
-            this.chrPorSemana.Location = new System.Drawing.Point(3, 269);
+            this.chrPorSemana.Location = new System.Drawing.Point(3, 147);
             this.chrPorSemana.Margin = new System.Windows.Forms.Padding(0);
             this.chrPorSemana.Name = "chrPorSemana";
             series1.ChartArea = "ChartArea1";
@@ -266,12 +266,14 @@
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series4.Name = "Gastos";
+            series5.BorderWidth = 2;
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series5.Name = "Utilidad";
             series6.ChartArea = "ChartArea1";
             series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series6.Name = "Especiales";
+            series7.BorderWidth = 3;
             series7.ChartArea = "ChartArea1";
             series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series7.Name = "Dividendos";
@@ -282,7 +284,7 @@
             this.chrPorSemana.Series.Add(series5);
             this.chrPorSemana.Series.Add(series6);
             this.chrPorSemana.Series.Add(series7);
-            this.chrPorSemana.Size = new System.Drawing.Size(824, 200);
+            this.chrPorSemana.Size = new System.Drawing.Size(824, 381);
             this.chrPorSemana.TabIndex = 8;
             this.chrPorSemana.Text = "chart1";
             title1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;

@@ -1529,6 +1529,13 @@ namespace Refaccionaria.App
 
         private void AgruparMovimientos()
         {
+            // Se valida que haya un proveedor seleccionado
+            if (this.Proveedor.ProveedorID <= 0)
+            {
+                UtilLocal.MensajeAdvertencia("No hay ningún proveedor seleccionado. No se puede continuar.");
+                return;
+            }
+
             var oMovsSel = new List<int>();
             foreach (DataGridViewRow oFila in this.dgvMovimientosNoPagados.Rows)
             {
