@@ -97,7 +97,7 @@ namespace Refaccionaria.App
             }
             catch (EntityException ex)
             {
-                return new ResAcc(false, "Error al conectarse al servidor de datos.\n");
+                return new ResAcc(false, "Error al conectarse al servidor de datos.\n" + (ex.InnerException == null ? "" : ex.InnerException.Message));
             }
             catch (Exception ex)
             {

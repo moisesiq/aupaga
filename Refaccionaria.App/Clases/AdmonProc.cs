@@ -275,11 +275,25 @@ namespace Refaccionaria.App
 
         public static void VerMarcarDisponibilidadNotaDeCreditoProveedor(int iNotaDeCreditoID)
         {
-            if (General.Exists<ProveedoresNotasDeCreditoView>(c => c.ProveedorNotaDeCreditoID == iNotaDeCreditoID && c.Restante <= 0))
+            var oNotaView = General.GetEntity<ProveedoresNotasDeCreditoView>(c => c.ProveedorNotaDeCreditoID == iNotaDeCreditoID);
+            bool bDisponible = (oNotaView.Restante > 0);
+            if (oNotaView.Disponible != bDisponible)
             {
                 var oNota = General.GetEntity<ProveedorNotaDeCredito>(c => c.ProveedorNotaDeCreditoID == iNotaDeCreditoID);
-                oNota.Disponible = false;
+                oNota.Disponible = bDisponible;
                 Guardar.Generico<ProveedorNotaDeCredito>(oNota);
+            }
+        }
+
+        public static void VerMarcarDisponibilidadGastoDeCajaParaProveedor(int iCajaEgresoID)
+        {
+            var oGastoView = General.GetEntity<CajaEgresosProveedoresView>(c => c.CajaEgresoID == iCajaEgresoID);
+            bool bDisponible = (oGastoView.Restante > 0);
+            if (oGastoView.AfectadoEnProveedores.Valor() == bDisponible)
+            {
+                var oGasto = General.GetEntity<CajaEgreso>(c => c.CajaEgresoID == iCajaEgresoID && c.Estatus);
+                oGasto.AfectadoEnProveedores = !bDisponible;
+                Guardar.Generico<CajaEgreso>(oGasto);
             }
         }
 

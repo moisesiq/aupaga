@@ -1391,7 +1391,9 @@ namespace Refaccionaria.App
             var poliza = new DetalleProveedorPoliza();
             poliza.FacturasSel = ids;
             poliza.ProveedorId = Proveedor.ProveedorID;
-            poliza.ShowDialog();
+            if (poliza.ShowDialog() == DialogResult.OK)
+                this.CargarMovimientosNoPagados(this.Proveedor.ProveedorID);
+            poliza.Dispose();
         }
 
         private void btnAplicarDevolucion_Click(object sender, EventArgs e)

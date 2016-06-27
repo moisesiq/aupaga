@@ -63,6 +63,15 @@
             this.cboFormaPago = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvAbonos = new System.Windows.Forms.DataGridView();
+            this.btnCrearDescuentosFacturas = new System.Windows.Forms.Button();
+            this.btnCrearDescuento = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbCuentaBancaria = new System.Windows.Forms.ComboBox();
+            this.btnNotaDeCredito = new System.Windows.Forms.Button();
+            this.btnPagoDeCaja = new System.Windows.Forms.Button();
+            this.lblInfoNotasDeCredito = new System.Windows.Forms.Label();
+            this.btnSoloGuardar = new System.Windows.Forms.Button();
+            this.abo_EsNuevo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.abo_ProveedorPolizaDetalleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.abo_MovimientoInventarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.abo_OrigenID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,13 +84,6 @@
             this.abo_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.abo_NotaDeCredito = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.abo_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnCrearDescuentosFacturas = new System.Windows.Forms.Button();
-            this.btnCrearDescuento = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbCuentaBancaria = new System.Windows.Forms.ComboBox();
-            this.btnNotaDeCredito = new System.Windows.Forms.Button();
-            this.btnPagoDeCaja = new System.Windows.Forms.Button();
-            this.lblInfoNotasDeCredito = new System.Windows.Forms.Label();
             this.gpoGen.SuspendLayout();
             this.gpoDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -123,10 +125,9 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(551, 581);
-            this.btnGuardar.Size = new System.Drawing.Size(155, 23);
+            this.btnGuardar.Location = new System.Drawing.Point(624, 581);
             this.btnGuardar.TabIndex = 1;
-            this.btnGuardar.Text = "&Agregar y Generar Poliza";
+            this.btnGuardar.Text = "&Pagar";
             // 
             // lblFecha
             // 
@@ -384,6 +385,7 @@
             this.dgvAbonos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             this.dgvAbonos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAbonos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.abo_EsNuevo,
             this.abo_ProveedorPolizaDetalleID,
             this.abo_MovimientoInventarioID,
             this.abo_OrigenID,
@@ -422,6 +424,105 @@
             this.dgvAbonos.Size = new System.Drawing.Size(755, 197);
             this.dgvAbonos.TabIndex = 0;
             this.dgvAbonos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvAbonos_KeyDown);
+            // 
+            // btnCrearDescuentosFacturas
+            // 
+            this.btnCrearDescuentosFacturas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnCrearDescuentosFacturas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCrearDescuentosFacturas.ForeColor = System.Drawing.Color.White;
+            this.btnCrearDescuentosFacturas.Location = new System.Drawing.Point(661, 81);
+            this.btnCrearDescuentosFacturas.Name = "btnCrearDescuentosFacturas";
+            this.btnCrearDescuentosFacturas.Size = new System.Drawing.Size(115, 23);
+            this.btnCrearDescuentosFacturas.TabIndex = 6;
+            this.btnCrearDescuentosFacturas.Text = "Descuento Factura";
+            this.btnCrearDescuentosFacturas.UseVisualStyleBackColor = false;
+            this.btnCrearDescuentosFacturas.Click += new System.EventHandler(this.btnCrearDescuentosFacturas_Click);
+            // 
+            // btnCrearDescuento
+            // 
+            this.btnCrearDescuento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnCrearDescuento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCrearDescuento.ForeColor = System.Drawing.Color.White;
+            this.btnCrearDescuento.Location = new System.Drawing.Point(661, 110);
+            this.btnCrearDescuento.Name = "btnCrearDescuento";
+            this.btnCrearDescuento.Size = new System.Drawing.Size(115, 23);
+            this.btnCrearDescuento.TabIndex = 7;
+            this.btnCrearDescuento.Text = "Descuento Directo";
+            this.btnCrearDescuento.UseVisualStyleBackColor = false;
+            this.btnCrearDescuento.Click += new System.EventHandler(this.btnCrearDescuento_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(389, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Cuenta";
+            // 
+            // cmbCuentaBancaria
+            // 
+            this.cmbCuentaBancaria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCuentaBancaria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbCuentaBancaria.FormattingEnabled = true;
+            this.cmbCuentaBancaria.Location = new System.Drawing.Point(433, 14);
+            this.cmbCuentaBancaria.Name = "cmbCuentaBancaria";
+            this.cmbCuentaBancaria.Size = new System.Drawing.Size(189, 21);
+            this.cmbCuentaBancaria.TabIndex = 1;
+            // 
+            // btnNotaDeCredito
+            // 
+            this.btnNotaDeCredito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnNotaDeCredito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotaDeCredito.ForeColor = System.Drawing.Color.White;
+            this.btnNotaDeCredito.Location = new System.Drawing.Point(661, 139);
+            this.btnNotaDeCredito.Name = "btnNotaDeCredito";
+            this.btnNotaDeCredito.Size = new System.Drawing.Size(115, 23);
+            this.btnNotaDeCredito.TabIndex = 8;
+            this.btnNotaDeCredito.Text = "Nota de Crédito";
+            this.btnNotaDeCredito.UseVisualStyleBackColor = false;
+            this.btnNotaDeCredito.Click += new System.EventHandler(this.btnNotaDeCredito_Click);
+            // 
+            // btnPagoDeCaja
+            // 
+            this.btnPagoDeCaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnPagoDeCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPagoDeCaja.ForeColor = System.Drawing.Color.White;
+            this.btnPagoDeCaja.Location = new System.Drawing.Point(661, 168);
+            this.btnPagoDeCaja.Name = "btnPagoDeCaja";
+            this.btnPagoDeCaja.Size = new System.Drawing.Size(115, 23);
+            this.btnPagoDeCaja.TabIndex = 14;
+            this.btnPagoDeCaja.Text = "Pago de Caja";
+            this.btnPagoDeCaja.UseVisualStyleBackColor = false;
+            this.btnPagoDeCaja.Click += new System.EventHandler(this.btnPagoDeCaja_Click);
+            // 
+            // lblInfoNotasDeCredito
+            // 
+            this.lblInfoNotasDeCredito.AutoSize = true;
+            this.lblInfoNotasDeCredito.Location = new System.Drawing.Point(758, 144);
+            this.lblInfoNotasDeCredito.Name = "lblInfoNotasDeCredito";
+            this.lblInfoNotasDeCredito.Size = new System.Drawing.Size(0, 13);
+            this.lblInfoNotasDeCredito.TabIndex = 15;
+            // 
+            // btnSoloGuardar
+            // 
+            this.btnSoloGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnSoloGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSoloGuardar.ForeColor = System.Drawing.Color.White;
+            this.btnSoloGuardar.Location = new System.Drawing.Point(536, 581);
+            this.btnSoloGuardar.Name = "btnSoloGuardar";
+            this.btnSoloGuardar.Size = new System.Drawing.Size(82, 23);
+            this.btnSoloGuardar.TabIndex = 16;
+            this.btnSoloGuardar.Text = "&Guardar";
+            this.btnSoloGuardar.UseVisualStyleBackColor = false;
+            this.btnSoloGuardar.Click += new System.EventHandler(this.btnSoloGuardar_Click);
+            // 
+            // abo_EsNuevo
+            // 
+            this.abo_EsNuevo.HeaderText = "EsNuevo";
+            this.abo_EsNuevo.Name = "abo_EsNuevo";
+            this.abo_EsNuevo.ReadOnly = true;
+            this.abo_EsNuevo.Visible = false;
             // 
             // abo_ProveedorPolizaDetalleID
             // 
@@ -514,95 +615,21 @@
             this.abo_Observacion.ReadOnly = true;
             this.abo_Observacion.Width = 200;
             // 
-            // btnCrearDescuentosFacturas
-            // 
-            this.btnCrearDescuentosFacturas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnCrearDescuentosFacturas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCrearDescuentosFacturas.ForeColor = System.Drawing.Color.White;
-            this.btnCrearDescuentosFacturas.Location = new System.Drawing.Point(661, 81);
-            this.btnCrearDescuentosFacturas.Name = "btnCrearDescuentosFacturas";
-            this.btnCrearDescuentosFacturas.Size = new System.Drawing.Size(115, 23);
-            this.btnCrearDescuentosFacturas.TabIndex = 6;
-            this.btnCrearDescuentosFacturas.Text = "Descuento Factura";
-            this.btnCrearDescuentosFacturas.UseVisualStyleBackColor = false;
-            this.btnCrearDescuentosFacturas.Click += new System.EventHandler(this.btnCrearDescuentosFacturas_Click);
-            // 
-            // btnCrearDescuento
-            // 
-            this.btnCrearDescuento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnCrearDescuento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCrearDescuento.ForeColor = System.Drawing.Color.White;
-            this.btnCrearDescuento.Location = new System.Drawing.Point(661, 110);
-            this.btnCrearDescuento.Name = "btnCrearDescuento";
-            this.btnCrearDescuento.Size = new System.Drawing.Size(115, 23);
-            this.btnCrearDescuento.TabIndex = 7;
-            this.btnCrearDescuento.Text = "Descuento Directo";
-            this.btnCrearDescuento.UseVisualStyleBackColor = false;
-            this.btnCrearDescuento.Click += new System.EventHandler(this.btnCrearDescuento_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(389, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Cuenta";
-            // 
-            // cmbCuentaBancaria
-            // 
-            this.cmbCuentaBancaria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCuentaBancaria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbCuentaBancaria.FormattingEnabled = true;
-            this.cmbCuentaBancaria.Location = new System.Drawing.Point(433, 14);
-            this.cmbCuentaBancaria.Name = "cmbCuentaBancaria";
-            this.cmbCuentaBancaria.Size = new System.Drawing.Size(189, 21);
-            this.cmbCuentaBancaria.TabIndex = 1;
-            // 
-            // btnNotaDeCredito
-            // 
-            this.btnNotaDeCredito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnNotaDeCredito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNotaDeCredito.ForeColor = System.Drawing.Color.White;
-            this.btnNotaDeCredito.Location = new System.Drawing.Point(661, 139);
-            this.btnNotaDeCredito.Name = "btnNotaDeCredito";
-            this.btnNotaDeCredito.Size = new System.Drawing.Size(115, 23);
-            this.btnNotaDeCredito.TabIndex = 8;
-            this.btnNotaDeCredito.Text = "Nota de Crédito";
-            this.btnNotaDeCredito.UseVisualStyleBackColor = false;
-            this.btnNotaDeCredito.Click += new System.EventHandler(this.btnNotaDeCredito_Click);
-            // 
-            // btnPagoDeCaja
-            // 
-            this.btnPagoDeCaja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnPagoDeCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPagoDeCaja.ForeColor = System.Drawing.Color.White;
-            this.btnPagoDeCaja.Location = new System.Drawing.Point(661, 168);
-            this.btnPagoDeCaja.Name = "btnPagoDeCaja";
-            this.btnPagoDeCaja.Size = new System.Drawing.Size(115, 23);
-            this.btnPagoDeCaja.TabIndex = 14;
-            this.btnPagoDeCaja.Text = "Pago de Caja";
-            this.btnPagoDeCaja.UseVisualStyleBackColor = false;
-            this.btnPagoDeCaja.Click += new System.EventHandler(this.btnPagoDeCaja_Click);
-            // 
-            // lblInfoNotasDeCredito
-            // 
-            this.lblInfoNotasDeCredito.AutoSize = true;
-            this.lblInfoNotasDeCredito.Location = new System.Drawing.Point(758, 144);
-            this.lblInfoNotasDeCredito.Name = "lblInfoNotasDeCredito";
-            this.lblInfoNotasDeCredito.Size = new System.Drawing.Size(0, 13);
-            this.lblInfoNotasDeCredito.TabIndex = 15;
-            // 
             // DetalleProveedorPoliza
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(806, 612);
+            this.Controls.Add(this.btnSoloGuardar);
             this.KeyPreview = true;
             this.Name = "DetalleProveedorPoliza";
             this.Load += new System.EventHandler(this.DetalleProveedorPoliza_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DetalleProveedorPoliza_KeyDown);
+            this.Controls.SetChildIndex(this.gpoGen, 0);
+            this.Controls.SetChildIndex(this.btnGuardar, 0);
+            this.Controls.SetChildIndex(this.btnCerrar, 0);
+            this.Controls.SetChildIndex(this.btnSoloGuardar, 0);
             this.gpoGen.ResumeLayout(false);
             this.gpoGen.PerformLayout();
             this.gpoDetalle.ResumeLayout(false);
@@ -645,6 +672,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fac_Descuento;
         private System.Windows.Forms.DataGridViewTextBoxColumn fac_Final;
         private System.Windows.Forms.Button btnPagoDeCaja;
+        private System.Windows.Forms.Label lblInfoNotasDeCredito;
+        private System.Windows.Forms.Button btnSoloGuardar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn abo_EsNuevo;
         private System.Windows.Forms.DataGridViewTextBoxColumn abo_ProveedorPolizaDetalleID;
         private System.Windows.Forms.DataGridViewTextBoxColumn abo_MovimientoInventarioID;
         private System.Windows.Forms.DataGridViewTextBoxColumn abo_OrigenID;
@@ -657,6 +687,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn abo_Importe;
         private System.Windows.Forms.DataGridViewTextBoxColumn abo_NotaDeCredito;
         private System.Windows.Forms.DataGridViewTextBoxColumn abo_Observacion;
-        private System.Windows.Forms.Label lblInfoNotasDeCredito;
     }
 }

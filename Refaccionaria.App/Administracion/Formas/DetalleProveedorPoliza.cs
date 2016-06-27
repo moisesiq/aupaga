@@ -54,7 +54,7 @@ namespace Refaccionaria.App
             this.dgvDetalle.DefaultCellStyle.ForeColor = Color.Black;
             this.dgvAbonos.DefaultCellStyle.ForeColor = Color.Black;
 
-            this.CargarMovimientosNoPagados(FacturasSel);
+            this.CargarMovimientosNoPagados(this.FacturasSel);
             // this.CargarNotasDeCredito(this.Proveedor.ProveedorID);
 
             this.AnalizarNotasDeCredito();
@@ -91,8 +91,7 @@ namespace Refaccionaria.App
                 if (this.dgvAbonos.CurrentRow == null) return;
                 if (UtilLocal.MensajePregunta("¿Estás seguro que deseas eliminar el descuento seleccionado?") == DialogResult.Yes)
                 {
-                    this.dgvAbonos.Rows.Remove(this.dgvAbonos.CurrentRow);
-                    this.CalcularDescuentos();
+                    this.EliminarAbono(this.dgvAbonos.CurrentRow);
                 }
             }
         }
@@ -129,9 +128,20 @@ namespace Refaccionaria.App
             this.AgregarPagoDeCaja(this.dgvDetalle.CurrentRow);
         }
 
+        private void btnSoloGuardar_Click(object sender, EventArgs e)
+        {
+            if (this.SoloGuardar(true))
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
+
         protected override void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (this.AccionGuardar()) {
+            if (this.AccionGuardar())
+            {
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
 
@@ -253,14 +263,24 @@ namespace Refaccionaria.App
 
         private void CargarMovimientosNoPagados(List<int> Ids)
         {
+            // Se llena el grid de las facturas y el grid de los descuentos ya pagados y pendientes
             this.dgvDetalle.Rows.Clear();
+            this.dgvAbonos.Rows.Clear();
             foreach (int iId in Ids)
             {
+                // Facturas
                 var oCompra = General.GetEntity<ProveedoresComprasView>(c => c.MovimientoInventarioID == iId);
                 this.dgvDetalle.Rows.Add(oCompra.MovimientoInventarioID, oCompra.Factura, oCompra.Fecha, oCompra.ImporteFactura
-                    , oCompra.Abonado, oCompra.Saldo.Valor(), 0, oCompra.Saldo.Valor());
+                    , oCompra.Abonado, oCompra.Saldo, oCompra.Descuento, oCompra.Final);
+
+                // Descuentos / Abonos
+                var oAbonos = General.GetListOf<ProveedoresPolizasDetalleAvanzadoView>(c => c.MovimientoInventarioID == iId && !c.Pagado);
+                foreach (var oReg in oAbonos)
+                    this.dgvAbonos.Rows.Add(false, oReg.ProveedorPolizaDetalleID, oReg.MovimientoInventarioID, oReg.OrigenID, oReg.CajaEgresoID, oReg.NotaDeCreditoID
+                        , oReg.FolioFactura, oReg.Origen, null, null, oReg.Importe, oReg.Folio, oReg.Observacion);
             }
-            this.CalcularImporteRestante();
+            
+            this.CalcularDescuentos();
         }
 
         private void CalcularImporteRestante()
@@ -332,7 +352,7 @@ namespace Refaccionaria.App
                 int iMovID = Helper.ConvertirEntero(this.dgvDetalle.CurrentRow.Cells["fac_MovimientoInventarioID"].Value);
                 string sFactura = Helper.ConvertirCadena(this.dgvDetalle.CurrentRow.Cells["fac_Factura"].Value);
                 decimal mImporteDesc = Helper.ConvertirDecimal(frmDatos.Valor1);
-                this.dgvAbonos.Rows.Add(null, iMovID, Cat.OrigenesPagosAProveedores.DescuentoDirecto, null, null, sFactura, "Descuento Directo", null, null, mImporteDesc
+                this.dgvAbonos.Rows.Add(true, null, iMovID, Cat.OrigenesPagosAProveedores.DescuentoDirecto, null, null, sFactura, "Descuento Directo", null, null, mImporteDesc
                     , null, frmDatos.Valor2);
             }
             frmDatos.Dispose();
@@ -357,11 +377,14 @@ namespace Refaccionaria.App
             {
                 int iMovID = Helper.ConvertirEntero(oFila.Cells["fac_MovimientoInventarioID"].Value);
                 var oMov = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iMovID && c.Estatus);
-                decimal mImporteDescuento = (oMov.ImporteFactura - oMov.ImporteTotal);
+                decimal mPorcentajeDesc = (1 - (oMov.ImporteTotal / oMov.ImporteFactura));
+                // decimal mImporteDescuento = (oMov.ImporteFactura - oMov.ImporteTotal);
+                decimal mFinal = Helper.ConvertirDecimal(oFila.Cells["fac_Final"].Value);
+                decimal mImporteDescuento = (mFinal * mPorcentajeDesc);
                 if (mImporteDescuento > 0)
                 {
-                    this.dgvAbonos.Rows.Add(null, oMov.MovimientoInventarioID, Cat.OrigenesPagosAProveedores.DescuentoFactura, null, null, oMov.FolioFactura, "Descuento Factura"
-                        , oMov.ImporteFactura, oMov.ImporteTotal, mImporteDescuento, null, "");
+                    this.dgvAbonos.Rows.Add(true, null, oMov.MovimientoInventarioID, Cat.OrigenesPagosAProveedores.DescuentoFactura, null, null, oMov.FolioFactura
+                        , "Descuento Factura", oMov.ImporteFactura, oMov.ImporteTotal, mImporteDescuento, null, "");
                 }
             }
             this.CalcularDescuentos();
@@ -434,7 +457,7 @@ namespace Refaccionaria.App
                 {
                     if (Helper.ConvertirBool(oFila["Sel"]) && Helper.ConvertirDecimal(oFila["ImporteAUsar"]) > 0)
                     {
-                        this.dgvAbonos.Rows.Add(null, oFactura.Cells["fac_MovimientoInventarioID"].Value, Cat.OrigenesPagosAProveedores.NotaDeCredito
+                        this.dgvAbonos.Rows.Add(true, null, oFactura.Cells["fac_MovimientoInventarioID"].Value, Cat.OrigenesPagosAProveedores.NotaDeCredito
                             , null, oFila["ProveedorNotaDeCreditoID"], oFactura.Cells["fac_Factura"].Value, "Nota de Crédito", null, null, oFila["ImporteAUsar"]
                             , oFila["Folio"], null);
                     }
@@ -546,8 +569,8 @@ namespace Refaccionaria.App
                 {
                     if (Helper.ConvertirBool(oFila["Sel"]) && Helper.ConvertirDecimal(oFila["ImporteAUsar"]) > 0)
                     {
-                        this.dgvAbonos.Rows.Add(null, oFactura.Cells["fac_MovimientoInventarioID"].Value, Cat.OrigenesPagosAProveedores.PagoDeCaja
-                            , oFila["CajaEgresoID"], null, oFactura.Cells["fac_Factura"].Value, "Pago de Caja", null, null, oFila["ImporteAUsar"]
+                        this.dgvAbonos.Rows.Add(true, null, oFactura.Cells["fac_MovimientoInventarioID"].Value, Cat.OrigenesPagosAProveedores.PagoDeCaja
+                            , oFila["CajaEgresoID"], null, oFactura.Cells["fac_Factura"].Value, "Pago de Caja", null, null, Helper.ConvertirDecimal(oFila["ImporteAUsar"])
                             , null, oFila["Concepto"]);
                     }
                 }
@@ -556,48 +579,68 @@ namespace Refaccionaria.App
 
             this.CalcularDescuentos();
         }
-        
-        private bool AccionGuardar()
-        {
-            if (!this.Validaciones())
-                return false;
 
+        private void EliminarAbono(DataGridViewRow oFila)
+        {
+            int iAbonoID = Helper.ConvertirEntero(oFila.Cells["abo_ProveedorPolizaDetalleID"].Value);
+            if (iAbonoID > 0)
+            {
+                var oAbono = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iAbonoID && c.Estatus);
+                int iNotaDeCreditoID = oAbono.NotaDeCreditoID.Valor();
+                int iCajaEgresoID = oAbono.CajaEgresoID.Valor();
+                // Se borra el registro de la base de datos
+                Guardar.Eliminar<ProveedorPolizaDetalle>(oAbono);
+                // Se borra el registro de ProveedorPoliza, si ya no tiene más abonos
+                if (!General.Exists<ProveedorPolizaDetalle>(c => c.ProveedorPolizaID == oAbono.ProveedorPolizaID))
+                {
+                    var oPago = General.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == oAbono.ProveedorPolizaID);
+                    Guardar.Eliminar<ProveedorPoliza>(oPago);
+                }
+
+                // Se restablecen las notas de crédito o pagos de caja, para que vuelvan a estar disponibles, si aplica
+                switch (oAbono.OrigenID)
+                {
+                    case Cat.OrigenesPagosAProveedores.NotaDeCredito:
+                        AdmonProc.VerMarcarDisponibilidadNotaDeCreditoProveedor(iNotaDeCreditoID);
+                        break;
+                    case Cat.OrigenesPagosAProveedores.PagoDeCaja:
+                        AdmonProc.VerMarcarDisponibilidadGastoDeCajaParaProveedor(iCajaEgresoID);
+                        break;
+                }
+            }
+            this.dgvAbonos.Rows.Remove(oFila);
+
+            this.CalcularDescuentos();
+        }
+
+        private bool SoloGuardar(bool bReporte)
+        {
             // Se verifican los totales
-            decimal mImportePago = Helper.ConvertirDecimal(this.txtImporte.Text);
-            decimal mFaltanteTotal = 0;
-            foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
-                mFaltanteTotal += Helper.ConvertirDecimal(oFila.Cells["fac_Final"].Value);
-            if (mImportePago > mFaltanteTotal)
-            {
-                UtilLocal.MensajeAdvertencia("El Importe indicado es mayor al total por pagar. No se puede continuar.");
+            if (!this.Validaciones() || !this.ValidarTotales())
                 return false;
-            }
-            else if (mImportePago < mFaltanteTotal)
-            {
-                if (UtilLocal.MensajePregunta("El Importe indicado es menor al total por pagar. ¿Deseas continuar?") != DialogResult.Yes)
-                    return false;
-            }
 
             Cargando.Mostrar();
-
+            
             // Se comienza a guardar la información
+            /*
             var poliza = new ProveedorPoliza
             {
                 ProveedorID = ProveedorId,
                 FechaPago = this.dtpFechaMovimiento.Value,
                 // ImportePago = mImportePago,
-                BancoCuentaID = Helper.ConvertirEntero(this.cmbCuentaBancaria.SelectedValue),
-                TipoFormaPagoID = Helper.ConvertirEntero(this.cboFormaPago.SelectedValue),
-                FolioDePago = this.txtDocumento.Text,
+                // BancoCuentaID = Helper.ConvertirEntero(this.cmbCuentaBancaria.SelectedValue),
+                // TipoFormaPagoID = Helper.ConvertirEntero(this.cboFormaPago.SelectedValue),
+                // FolioDePago = this.txtDocumento.Text,
                 UsuarioID = GlobalClass.UsuarioGlobal.UsuarioID,
             };
             Guardar.Generico<ProveedorPoliza>(poliza);
-            
+            */
+
             // Se guarda el detalle de la poliza
+            DateTime dAhora = DateTime.Now;
             var oPolizaDetalle = new List<ProveedorPolizaDetalle>();
-            var oIdsPagosDeCaja = new List<int>();
             // Se agregan los pagos directos, uno para cada factura
-            decimal mTotalRestante = mImportePago;
+            decimal mTotalRestante = Helper.ConvertirDecimal(this.txtImporte.Text);
             foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
             {
                 int iMovID = Helper.ConvertirEntero(oFila.Cells["fac_MovimientoInventarioID"].Value);
@@ -609,91 +652,185 @@ namespace Refaccionaria.App
                     mImporte = (mImporte < mTotalRestante ? mImporte : mTotalRestante);
                 else
                     break;
-                
+
+                /*
                 var polizaDetalle = new ProveedorPolizaDetalle
                 {
-                    ProveedorPolizaID = poliza.ProveedorPolizaID,
+                    // ProveedorPolizaID = poliza.ProveedorPolizaID,
                     MovimientoInventarioID = iMovID,
+                    FechaPago = dAhora,
                     OrigenID = Cat.OrigenesPagosAProveedores.PagoDirecto,
                     Subtotal = UtilLocal.ObtenerPrecioSinIva(mImporte),
                     Iva = UtilLocal.ObtenerIvaDePrecio(mImporte),
-                    Folio = this.txtDocumento.Text
+                    Folio = this.txtDocumento.Text,
+                    Pagado = false
                 };
-                Guardar.Generico<ProveedorPolizaDetalle>(polizaDetalle);
+                // Guardar.Generico<ProveedorPolizaDetalle>(polizaDetalle);
                 oPolizaDetalle.Add(polizaDetalle);
+                */
 
-                // Se marca cada factura como liquidada, si ya se pagó en su totalidad
-                if (mImporte == Helper.ConvertirDecimal(oFila.Cells["fac_Final"].Value))
-                {
-                    var oMovFact = General.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iMovID && c.Estatus);
-                    oMovFact.FueLiquidado = true;
-                    Guardar.Generico<MovimientoInventario>(oMovFact);
-                }
+                // Se agrega el movimiento al grid de abonos, por si es usado para guardar ya bien
+                this.dgvAbonos.Rows.Add(true, null, iMovID, Cat.OrigenesPagosAProveedores.PagoDirecto, null, null, "", "PAGO DIRECTO", null, null
+                    , mImporte, this.txtDocumento.Text, null);
 
                 mTotalRestante -= mImporte;
-
-                // Se llena el dato del id asignado al registro de abono
-                // No se recuerda para qué se había puesto la sig. línea, pero al parecer no se necesita, x eso se comentó.
-                // oFila.Cells["abo_ProveedorPolizaDetalleID"].Value = polizaDetalle.ProveedorPolizaDetalleID;
             }
             // Se agregan los descuentos
             foreach (DataGridViewRow oFila in this.dgvAbonos.Rows)
             {
+                if (Helper.ConvertirEntero(oFila.Cells["abo_ProveedorPolizaDetalleID"].Value) > 0)
+                    continue;
+
                 decimal mImporte = Helper.ConvertirDecimal(oFila.Cells["abo_Importe"].Value);
                 int iNotaDeCreditoID = Helper.ConvertirEntero(oFila.Cells["abo_NotaDeCreditoID"].Value);
                 int iOrigenID = Helper.ConvertirEntero(oFila.Cells["abo_OrigenID"].Value);
-                string sOrigen = Helper.ConvertirCadena(oFila.Cells["abo_Origen"].Value);
                 int iCajaEgresoID = Helper.ConvertirEntero(oFila.Cells["abo_CajaEgresoID"].Value);
 
                 var polizaDetalle = new ProveedorPolizaDetalle
                 {
-                    ProveedorPolizaID = poliza.ProveedorPolizaID,
+                    // ProveedorPolizaID = poliza.ProveedorPolizaID,
                     MovimientoInventarioID = Helper.ConvertirEntero(oFila.Cells["abo_MovimientoInventarioID"].Value),
+                    FechaPago = dAhora,
                     OrigenID = iOrigenID,
                     Subtotal = UtilLocal.ObtenerPrecioSinIva(mImporte),
                     Iva = UtilLocal.ObtenerIvaDePrecio(mImporte),
                     NotaDeCreditoID = (iNotaDeCreditoID > 0 ? (int?)iNotaDeCreditoID : null),
                     CajaEgresoID = (iCajaEgresoID > 0 ? (int?)iCajaEgresoID : null),
                     Observacion = Helper.ConvertirCadena(oFila.Cells["abo_Observacion"].Value),
-                    Folio = (iNotaDeCreditoID > 0 ? Helper.ConvertirCadena(oFila.Cells["abo_NotaDeCredito"].Value) : null)
+                    Folio = Helper.ConvertirCadena(oFila.Cells["abo_NotaDeCredito"].Value),
+                    Pagado = false
                 };
-                Guardar.Generico<ProveedorPolizaDetalle>(polizaDetalle);
+                // Guardar.Generico<ProveedorPolizaDetalle>(polizaDetalle);
                 oPolizaDetalle.Add(polizaDetalle);
 
-                // Se marcan las notas de crédito como no disponibles, si ya se utilizaron por completo
-                if (iNotaDeCreditoID > 0)
-                    AdmonProc.VerMarcarDisponibilidadNotaDeCreditoProveedor(iNotaDeCreditoID);
+                // Se llena el dato del id asignado al registro de abono
+                // oFila.Cells["abo_ProveedorPolizaDetalleID"].Value = polizaDetalle.ProveedorPolizaDetalleID;
+            }
 
-                // Se marca el gasto de caja como afectado en proveedores, si aplica
-                if (iCajaEgresoID > 0)
+            // Se verifica si se debe de generar un nuevo registro de ProveedorPoliza
+            ProveedorPoliza poliza = null;
+            if (oPolizaDetalle.Any(c => c.ProveedorPolizaID == 0))
+            {
+                poliza = new ProveedorPoliza
                 {
-                    var oGasto = General.GetEntity<CajaEgreso>(c => c.CajaEgresoID == iCajaEgresoID && c.Estatus);
+                    ProveedorID = ProveedorId,
+                    FechaPago = this.dtpFechaMovimiento.Value
+                };
+                Guardar.Generico<ProveedorPoliza>(poliza);
+                
+                // Se guardan los abonos
+                foreach (var oReg in oPolizaDetalle)
+                {
+                    oReg.ProveedorPolizaID = poliza.ProveedorPolizaID;
+                    Guardar.Generico<ProveedorPolizaDetalle>(oReg);
 
-                    // if (iOrigenID == Cat.OrigenesPagosAProveedores.PagoDeCaja)  // No sé x q se hacía está validación. No le vi caso - Moi 2015-08-17
-                    // {
-                        if (General.Exists<CajaEgresosProveedoresView>(c => c.CajaEgresoID == iCajaEgresoID && c.Restante <= 0))
-                        {
-                            oGasto.AfectadoEnProveedores = true;
-                            Guardar.Generico<CajaEgreso>(oGasto);    
-                        }
+                    // Se marcan las notas de crédito como no disponibles, si ya se utilizaron por completo
+                    if (oReg.NotaDeCreditoID > 0)
+                        AdmonProc.VerMarcarDisponibilidadNotaDeCreditoProveedor(oReg.NotaDeCreditoID.Valor());
 
-                        // Se agrega el CajaEgresoID a la lista oIdsPagosDeCaja para después mandarlos a la afectación contable (Pólizas)
-                        oIdsPagosDeCaja.Add(iCajaEgresoID);
-                    // }
-
-                    // Si es un gasto de caja y es nota, se modifica el pago, para incluir el iva en el subtotal y dejar el iva en cero
-                    if (oGasto.Facturado.HasValue && !oGasto.Facturado.Value)
+                    // Se marca el gasto de caja como afectado en proveedores, si aplica
+                    if (oReg.CajaEgresoID > 0)
                     {
-                        polizaDetalle.Subtotal = mImporte;
-                        polizaDetalle.Iva = 0;
-                        Guardar.Generico<ProveedorPolizaDetalle>(polizaDetalle);
+                        var oGasto = General.GetEntity<CajaEgreso>(c => c.CajaEgresoID == oReg.CajaEgresoID && c.Estatus);
+
+                        AdmonProc.VerMarcarDisponibilidadGastoDeCajaParaProveedor(oReg.CajaEgresoID.Valor());
+                        
+                        // Si es un gasto de caja y es nota, se modifica el pago, para incluir el iva en el subtotal y dejar el iva en cero
+                        if (oGasto.Facturado.HasValue && !oGasto.Facturado.Value)
+                        {
+                            oReg.Subtotal += oReg.Iva;
+                            oReg.Iva = 0;
+                            Guardar.Generico<ProveedorPolizaDetalle>(oReg);
+                        }
+                    }
+
+                    // Se busca el registro en el grid y se llena el dato del id que se le asignó
+                    foreach (DataGridViewRow oFila in this.dgvAbonos.Rows)
+                    {
+                        if (Helper.ConvertirEntero(oFila.Cells["abo_ProveedorPolizaDetalleID"].Value) == 0
+                            && Helper.ConvertirEntero(oFila.Cells["abo_MovimientoInventarioID"].Value) == oReg.MovimientoInventarioID
+                            && Helper.ConvertirEntero(oFila.Cells["abo_OrigenID"].Value) == oReg.OrigenID
+                            && Helper.ConvertirDecimal(oFila.Cells["abo_Importe"].Value) == (oReg.Subtotal + oReg.Iva))
+                        {
+                            oFila.Cells["abo_ProveedorPolizaDetalleID"].Value = oReg.ProveedorPolizaDetalleID;
+                            break;
+                        }
                     }
                 }
-
-                // Se llena el dato del id asignado al registro de abono
-                oFila.Cells["abo_ProveedorPolizaDetalleID"].Value = polizaDetalle.ProveedorPolizaDetalleID;
             }
             
+            Cargando.Cerrar();
+            
+            // Se manda imprimir el reporte, si aplica
+            if (poliza != null && bReporte)
+            {
+                var resp = UtilLocal.MensajePregunta("Guardado exitosamente. ¿Deseas ver el reporte?");
+                if (resp == DialogResult.Yes)
+                    this.MostrarReporte(poliza.ProveedorPolizaID);
+            }
+
+            return true;
+        }
+
+        private bool AccionGuardar()
+        {
+            if (!this.Validaciones() || !this.ValidarTotales())
+                return false;
+                        
+            // Se manda guardar la información
+            if (!this.SoloGuardar(false))
+                return false;
+            
+            // 
+            DateTime dPago = this.dtpFechaMovimiento.Value;
+            int iCuentaID = Helper.ConvertirEntero(this.cmbCuentaBancaria.SelectedValue);
+            int iFormaDePagoID = Helper.ConvertirEntero(this.cboFormaPago.SelectedValue);
+            string sFolioDePago = this.txtDocumento.Text;
+
+            // Se marcan los abonos como ya pagados
+            int iPolizaNuevaID = 0, iPolizaAntID = 0;
+            var oPolizaDetalle = new List<ProveedorPolizaDetalle>();
+            var oIdsPagosDeCaja = new List<int>();
+            decimal mImportePago = 0;
+            foreach (DataGridViewRow oFila in this.dgvAbonos.Rows)
+            {
+                int iAbonoID = Helper.ConvertirEntero(oFila.Cells["abo_ProveedorPolizaDetalleID"].Value);
+                var oAbono = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iAbonoID && c.Estatus);
+                
+                if (oAbono.OrigenID == Cat.OrigenesPagosAProveedores.PagoDirecto)
+                {
+                    // Se marca el primer pago directo que se encuentre como principal
+                    if (Helper.ConvertirBool(oFila.Cells["abo_EsNuevo"].Value))
+                    {
+                        if (iPolizaNuevaID == 0)
+                            iPolizaNuevaID = oAbono.ProveedorPolizaID;
+                    }
+                    else
+                    {
+                        if (iPolizaAntID == 0)
+                            iPolizaAntID = oAbono.ProveedorPolizaID;
+                    }
+
+                    //
+                    mImportePago += (oAbono.Subtotal + oAbono.Iva);
+                    oAbono.TipoFormaPagoID = iFormaDePagoID;
+                    oAbono.Folio = sFolioDePago;
+                    oAbono.BancoCuentaID = iCuentaID;
+                }
+                
+                // Se guarda si es un pago de caja, para uso posterior al hacer las pólizas
+                if (oAbono.OrigenID == Cat.OrigenesPagosAProveedores.PagoDeCaja)
+                    oIdsPagosDeCaja.Add(oAbono.CajaEgresoID.Valor());
+
+                // Se guarda
+                oAbono.FechaPago = dPago;
+                oAbono.Pagado = true;
+                Guardar.Generico<ProveedorPolizaDetalle>(oAbono);
+                oPolizaDetalle.Add(oAbono);
+            }
+            int iPolizaID = (iPolizaNuevaID > 0 ? iPolizaNuevaID : iPolizaAntID);
+            var poliza = General.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == iPolizaID && c.Estatus);
+
             // Se guarda el movimiento bancario
             if (mImportePago > 0)
             {
@@ -706,10 +843,10 @@ namespace Refaccionaria.App
                     FechaAsignado = poliza.FechaPago,
                     Importe = mImportePago,
                     Concepto = oProveedor.NombreProveedor,
-                    Referencia = poliza.ProveedorPolizaID.ToString(),
-                    TipoFormaPagoID = Helper.ConvertirEntero(this.cboFormaPago.SelectedValue),
-                    DatosDePago = this.txtDocumento.Text,
-                    RelacionID = poliza.ProveedorPolizaID
+                    Referencia = iPolizaID.ToString(),
+                    TipoFormaPagoID = iFormaDePagoID,
+                    DatosDePago = sFolioDePago,
+                    RelacionID = iPolizaID
                 };
                 ContaProc.RegistrarMovimientoBancario(oMovBanc);
             }
@@ -750,7 +887,7 @@ namespace Refaccionaria.App
                                 , "PAGO CAJA", oGasto.Concepto, oGasto.SucursalID, poliza.FechaPago);
                         break;
                     case Cat.OrigenesPagosAProveedores.PagoDirecto:
-                        if (poliza.BancoCuentaID == Cat.CuentasBancarias.Banamex || poliza.BancoCuentaID == Cat.CuentasBancarias.Scotiabank)
+                        if (oReg.BancoCuentaID == Cat.CuentasBancarias.Banamex || oReg.BancoCuentaID == Cat.CuentasBancarias.Scotiabank)
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoCompraCredito, oReg.ProveedorPolizaDetalleID, this.txtDocumento.Text
                                 , ("PAGO DIRECTO / " + this.cmbCuentaBancaria.Text), poliza.FechaPago);
                         else
@@ -764,31 +901,51 @@ namespace Refaccionaria.App
             Cargando.Cerrar();
 
             // Se manda imprimir el reporte,
-            //new Notificacion("Poliza Guardada exitosamente", 2 * 1000).Mostrar(Principal.Instance);
-            var resp = Negocio.Helper.MensajePregunta(string.Format("{0}{1}{2}", "Poliza generada exitosamente con el Número: ", poliza.ProveedorPolizaID, ", desea ver reporte?"), GlobalClass.NombreApp);
+            var resp = UtilLocal.MensajePregunta("Guardado exitosamente. ¿Deseas ver el reporte?");
             if (resp == DialogResult.Yes)
-            {
-                var oPoliza = General.GetEntity<ProveedoresPolizasView>(pro => pro.ProveedorPolizaID == poliza.ProveedorPolizaID);
-                var oAbonos = General.GetListOf<ProveedoresPolizasDetalleAvanzadoView>(pr => pr.ProveedorPolizaID == poliza.ProveedorPolizaID);
-                var oFacturas = new List<ProveedoresPagosView>();
-                var oIdsFacturas = oAbonos.Select(c => c.MovimientoInventarioID).Distinct();
-                foreach (int iMovId in oIdsFacturas)
-                    oFacturas.Add(General.GetEntity<ProveedoresPagosView>(c => c.ProveedorPolizaID == poliza.ProveedorPolizaID && c.MovimientoInventarioID == iMovId));
-
-                // Se genera el ticket
-                var oRep = new Report();
-                oRep.Load(GlobalClass.ConfiguracionGlobal.pathReportes + "ProveedorPoliza.frx");
-                oRep.RegisterData(new List<ProveedoresPolizasView>() { oPoliza }, "Poliza");
-                oRep.RegisterData(oAbonos, "Abonos");
-                oRep.RegisterData(oFacturas, "Facturas");
-                //oRep.GetDataSource("Pagos").Enabled = true;
-                UtilLocal.EnviarReporteASalida("Reportes.ProveedoresPolizas.Salida", oRep);
-            }
-            catalogosProveedores.Instance.CustomInvoke<catalogosProveedores>(m => m.CargarMovimientosNoPagados(ProveedorId));
-            // catalogosProveedores.Instance.CustomInvoke<catalogosProveedores>(m => m.CargarPagosParcialesYdevoluciones(0, null));
+                this.MostrarReporte(poliza.ProveedorPolizaID);
 
             return true;
         }
+
+        private void MostrarReporte(int iPolizaID)
+        {
+            var oPoliza = General.GetEntity<ProveedoresPolizasView>(pro => pro.ProveedorPolizaID == iPolizaID);
+            var oAbonos = General.GetListOf<ProveedoresPolizasDetalleAvanzadoView>(pr => pr.ProveedorPolizaID == iPolizaID);
+            var oFacturas = new List<ProveedoresPagosView>();
+            var oIdsFacturas = oAbonos.Select(c => c.MovimientoInventarioID).Distinct();
+            foreach (int iMovId in oIdsFacturas)
+                oFacturas.Add(General.GetEntity<ProveedoresPagosView>(c => c.ProveedorPolizaID == iPolizaID && c.MovimientoInventarioID == iMovId));
+
+            // Se genera el ticket
+            var oRep = new Report();
+            oRep.Load(GlobalClass.ConfiguracionGlobal.pathReportes + "ProveedorPoliza.frx");
+            oRep.RegisterData(new List<ProveedoresPolizasView>() { oPoliza }, "Poliza");
+            oRep.RegisterData(oAbonos, "Abonos");
+            oRep.RegisterData(oFacturas, "Facturas");
+            UtilLocal.EnviarReporteASalida("Reportes.ProveedoresPolizas.Salida", oRep);
+        }
+
+        private bool ValidarTotales()
+        {
+            decimal mImportePago = Helper.ConvertirDecimal(this.txtImporte.Text);
+            decimal mFaltanteTotal = 0;
+            foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
+                mFaltanteTotal += Helper.ConvertirDecimal(oFila.Cells["fac_Final"].Value);
+            if (mImportePago > mFaltanteTotal)
+            {
+                UtilLocal.MensajeAdvertencia("El Importe indicado es mayor al total por pagar. No se puede continuar.");
+                return false;
+            }
+            else if (mImportePago < mFaltanteTotal)
+            {
+                if (UtilLocal.MensajePregunta("El Importe indicado es menor al total por pagar. ¿Deseas continuar?") != DialogResult.Yes)
+                    return false;
+            }
+
+            return true;
+        }
+
 
         private bool Validaciones()
         {

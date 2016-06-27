@@ -1887,9 +1887,10 @@ namespace Refaccionaria.App
             switch (iAfectacionID)
             {
                 case Cat.ContaAfectaciones.PagoCompraCredito:
-                    var oMov = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId && c.Estatus);
-                    var oPago = General.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == oMov.ProveedorPolizaID && c.Estatus);
-                    iBancoCuentaID = oPago.BancoCuentaID;
+                    var oMov = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId && c.OrigenID == Cat.OrigenesPagosAProveedores.PagoDirecto
+                        && c.Estatus);
+                    // var oPago = General.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == oMov.ProveedorPolizaID && c.Estatus);
+                    iBancoCuentaID = oMov.BancoCuentaID.Valor();
                     break;
                 case Cat.ContaAfectaciones.GastoFacturadoBanco:
                 case Cat.ContaAfectaciones.GastoFacturadoEfectivo:
@@ -1940,9 +1941,10 @@ namespace Refaccionaria.App
             switch (iAfectacionID)
             {
                 case Cat.ContaAfectaciones.PagoProveedorDirectoCpcp:
-                    var oMov = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId && c.Estatus);
-                    var oPago = General.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == oMov.ProveedorPolizaID && c.Estatus);
-                    iBancoCuentaID = oPago.BancoCuentaID;
+                    var oMov = General.GetEntity<ProveedorPolizaDetalle>(c => c.ProveedorPolizaDetalleID == iId && c.OrigenID == Cat.OrigenesPagosAProveedores.PagoDirecto
+                        && c.Estatus);
+                    // var oPago = General.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == oMov.ProveedorPolizaID && c.Estatus);
+                    iBancoCuentaID = oMov.BancoCuentaID.Valor();
                     break;
                 case Cat.ContaAfectaciones.GastoContableFacturadoBancoCpcp:
                     var oContaEgreso = General.GetEntity<ContaEgreso>(c => c.ContaEgresoID == iId);

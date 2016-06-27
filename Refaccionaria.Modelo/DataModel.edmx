@@ -2137,9 +2137,6 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="Estatus" Type="bit" Nullable="false" />
           <Property Name="Actualizar" Type="bit" Nullable="false" />
-          <Property Name="BancoCuentaID" Type="int" Nullable="false" />
-          <Property Name="TipoFormaPagoID" Type="int" Nullable="false" />
-          <Property Name="FolioDePago" Type="nvarchar" MaxLength="16" Nullable="false" />
         </EntityType>
         <EntityType Name="ProveedorPolizaDetalle">
           <Key>
@@ -2157,6 +2154,10 @@
           <Property Name="CajaEgresoID" Type="int" />
           <Property Name="Subtotal" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Iva" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="TipoFormaPagoID" Type="int" />
+          <Property Name="BancoCuentaID" Type="int" />
+          <Property Name="Pagado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ProveedorPolizaDetalleOrigen">
           <Key>
@@ -4982,7 +4983,6 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresComprasView' d
             <PropertyRef Name="MovimientoInventarioID" />
             <PropertyRef Name="ImporteFactura" />
             <PropertyRef Name="ImporteTotal" />
-            <PropertyRef Name="Abonado" />
             <PropertyRef Name="EsAgrupador" />
           </Key>
           <Property Name="MovimientoInventarioID" Type="int" Nullable="false" />
@@ -4991,10 +4991,14 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresComprasView' d
           <Property Name="Fecha" Type="datetime" />
           <Property Name="ImporteFactura" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="ImporteTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Abonado" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+          <Property Name="Abonado" Type="decimal" Precision="38" Scale="2" />
           <Property Name="Saldo" Type="decimal" Precision="38" Scale="2" />
-          <Property Name="Descuento" Type="numeric" Precision="38" Scale="2" />
-          <Property Name="Final" Type="numeric" Precision="38" Scale="2" />
+          <Property Name="Descuento" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="Final" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="AbonadoMasPendiente" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="SaldoMasPendiente" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="DescuentoMasPendiente" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="FinalMasPendiente" Type="decimal" Precision="38" Scale="2" />
           <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
           <Property Name="EsAgrupador" Type="bit" Nullable="false" />
           <Property Name="MovimientoAgrupadorID" Type="int" />
@@ -5148,6 +5152,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPolizasDetalle
             <PropertyRef Name="MovimientoInventarioID" />
             <PropertyRef Name="Subtotal" />
             <PropertyRef Name="Iva" />
+            <PropertyRef Name="Pagado" />
           </Key>
           <Property Name="ProveedorPolizaDetalleID" Type="int" Nullable="false" />
           <Property Name="ProveedorPolizaID" Type="int" Nullable="false" />
@@ -5160,10 +5165,11 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPolizasDetalle
           <Property Name="Iva" Type="decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="Importe" Type="decimal" Precision="13" Scale="2" />
           <Property Name="FormaDePago" Type="nvarchar" MaxLength="50" />
-          <Property Name="FolioDePago" Type="nvarchar" MaxLength="16" />
           <Property Name="NotaDeCreditoID" Type="int" />
+          <Property Name="CajaEgresoID" Type="int" />
           <Property Name="Observacion" Type="nvarchar" MaxLength="128" />
           <Property Name="Folio" Type="nvarchar" MaxLength="16" />
+          <Property Name="Pagado" Type="bit" Nullable="false" />
           <Property Name="NotaDeCredito" Type="nvarchar" MaxLength="16" />
           <Property Name="NotaDeCreditoOrigenID" Type="int" />
           <Property Name="NotaDeCreditoOrigen" Type="nvarchar" MaxLength="32" />
@@ -5176,21 +5182,19 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresPolizasView' d
             <PropertyRef Name="ProveedorID" />
             <PropertyRef Name="FechaPago" />
             <PropertyRef Name="UsuarioID" />
-            <PropertyRef Name="BancoCuentaID" />
-            <PropertyRef Name="FormaDePagoID" />
-            <PropertyRef Name="FolioDePago" />
           </Key>
           <Property Name="ProveedorPolizaID" Type="int" Nullable="false" />
           <Property Name="ProveedorID" Type="int" Nullable="false" />
           <Property Name="Proveedor" Type="nvarchar" MaxLength="200" />
+          <Property Name="Beneficiario" Type="nvarchar" MaxLength="200" />
           <Property Name="FechaPago" Type="datetime" Nullable="false" />
           <Property Name="UsuarioID" Type="int" Nullable="false" />
           <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
-          <Property Name="BancoCuentaID" Type="int" Nullable="false" />
+          <Property Name="BancoCuentaID" Type="int" />
           <Property Name="NombreDeCuenta" Type="nvarchar" MaxLength="32" />
-          <Property Name="FormaDePagoID" Type="int" Nullable="false" />
+          <Property Name="FormaDePagoID" Type="int" />
           <Property Name="FormaDePago" Type="nvarchar" MaxLength="50" />
-          <Property Name="FolioDePago" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Folio" Type="nvarchar" MaxLength="16" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.ProveedoresView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -8479,14 +8483,14 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Proveedor__Banco__169A23C3">
-          <End Role="BancoCuenta" Type="Self.BancoCuenta" Multiplicity="1" />
-          <End Role="ProveedorPoliza" Type="Self.ProveedorPoliza" Multiplicity="*" />
+        <Association Name="FK__Proveedor__Banco__122A7461">
+          <End Role="BancoCuenta" Type="Self.BancoCuenta" Multiplicity="0..1" />
+          <End Role="ProveedorPolizaDetalle" Type="Self.ProveedorPolizaDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BancoCuenta">
               <PropertyRef Name="BancoCuentaID" />
             </Principal>
-            <Dependent Role="ProveedorPoliza">
+            <Dependent Role="ProveedorPolizaDetalle">
               <PropertyRef Name="BancoCuentaID" />
             </Dependent>
           </ReferentialConstraint>
@@ -8647,14 +8651,14 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Proveedor__TipoF__178E47FC">
-          <End Role="TipoFormaPago" Type="Self.TipoFormaPago" Multiplicity="1" />
-          <End Role="ProveedorPoliza" Type="Self.ProveedorPoliza" Multiplicity="*" />
+        <Association Name="FK__Proveedor__TipoF__11365028">
+          <End Role="TipoFormaPago" Type="Self.TipoFormaPago" Multiplicity="0..1" />
+          <End Role="ProveedorPolizaDetalle" Type="Self.ProveedorPolizaDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoFormaPago">
               <PropertyRef Name="TipoFormaPagoID" />
             </Principal>
-            <Dependent Role="ProveedorPoliza">
+            <Dependent Role="ProveedorPolizaDetalle">
               <PropertyRef Name="TipoFormaPagoID" />
             </Dependent>
           </ReferentialConstraint>
@@ -13036,6 +13040,10 @@ FROM [dbo].[ProveedorEquivalContactoPpalView] AS [ProveedorEquivalContactoPpalVi
 [ProveedoresComprasView].[Saldo] AS [Saldo], 
 [ProveedoresComprasView].[Descuento] AS [Descuento], 
 [ProveedoresComprasView].[Final] AS [Final], 
+[ProveedoresComprasView].[AbonadoMasPendiente] AS [AbonadoMasPendiente], 
+[ProveedoresComprasView].[SaldoMasPendiente] AS [SaldoMasPendiente], 
+[ProveedoresComprasView].[DescuentoMasPendiente] AS [DescuentoMasPendiente], 
+[ProveedoresComprasView].[FinalMasPendiente] AS [FinalMasPendiente], 
 [ProveedoresComprasView].[Usuario] AS [Usuario], 
 [ProveedoresComprasView].[EsAgrupador] AS [EsAgrupador], 
 [ProveedoresComprasView].[MovimientoAgrupadorID] AS [MovimientoAgrupadorID], 
@@ -13154,10 +13162,11 @@ FROM [dbo].[ProveedoresPartesGananciasView] AS [ProveedoresPartesGananciasView]<
 [ProveedoresPolizasDetalleAvanzadoView].[Iva] AS [Iva], 
 [ProveedoresPolizasDetalleAvanzadoView].[Importe] AS [Importe], 
 [ProveedoresPolizasDetalleAvanzadoView].[FormaDePago] AS [FormaDePago], 
-[ProveedoresPolizasDetalleAvanzadoView].[FolioDePago] AS [FolioDePago], 
 [ProveedoresPolizasDetalleAvanzadoView].[NotaDeCreditoID] AS [NotaDeCreditoID], 
+[ProveedoresPolizasDetalleAvanzadoView].[CajaEgresoID] AS [CajaEgresoID], 
 [ProveedoresPolizasDetalleAvanzadoView].[Observacion] AS [Observacion], 
 [ProveedoresPolizasDetalleAvanzadoView].[Folio] AS [Folio], 
+[ProveedoresPolizasDetalleAvanzadoView].[Pagado] AS [Pagado], 
 [ProveedoresPolizasDetalleAvanzadoView].[NotaDeCredito] AS [NotaDeCredito], 
 [ProveedoresPolizasDetalleAvanzadoView].[NotaDeCreditoOrigenID] AS [NotaDeCreditoOrigenID], 
 [ProveedoresPolizasDetalleAvanzadoView].[NotaDeCreditoOrigen] AS [NotaDeCreditoOrigen]
@@ -13168,6 +13177,7 @@ FROM [dbo].[ProveedoresPolizasDetalleAvanzadoView] AS [ProveedoresPolizasDetalle
 [ProveedoresPolizasView].[ProveedorPolizaID] AS [ProveedorPolizaID], 
 [ProveedoresPolizasView].[ProveedorID] AS [ProveedorID], 
 [ProveedoresPolizasView].[Proveedor] AS [Proveedor], 
+[ProveedoresPolizasView].[Beneficiario] AS [Beneficiario], 
 [ProveedoresPolizasView].[FechaPago] AS [FechaPago], 
 [ProveedoresPolizasView].[UsuarioID] AS [UsuarioID], 
 [ProveedoresPolizasView].[Usuario] AS [Usuario], 
@@ -13175,7 +13185,7 @@ FROM [dbo].[ProveedoresPolizasDetalleAvanzadoView] AS [ProveedoresPolizasDetalle
 [ProveedoresPolizasView].[NombreDeCuenta] AS [NombreDeCuenta], 
 [ProveedoresPolizasView].[FormaDePagoID] AS [FormaDePagoID], 
 [ProveedoresPolizasView].[FormaDePago] AS [FormaDePago], 
-[ProveedoresPolizasView].[FolioDePago] AS [FolioDePago]
+[ProveedoresPolizasView].[Folio] AS [Folio]
 FROM [dbo].[ProveedoresPolizasView] AS [ProveedoresPolizasView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProveedoresView" EntityType="Self.ProveedoresView" store:Type="Views" store:Schema="dbo">
@@ -14557,9 +14567,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ParteVehiculo" EntitySet="ParteVehiculo" />
           </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__Banco__169A23C3" Association="Self.FK__Proveedor__Banco__169A23C3">
+          <AssociationSet Name="FK__Proveedor__Banco__122A7461" Association="Self.FK__Proveedor__Banco__122A7461">
             <End Role="BancoCuenta" EntitySet="BancoCuenta" />
-            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK__Proveedor__CajaE__2977EE0D" Association="Self.FK__Proveedor__CajaE__2977EE0D">
             <End Role="CajaEgreso" EntitySet="CajaEgreso" />
@@ -14613,9 +14623,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
           </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__TipoF__178E47FC" Association="Self.FK__Proveedor__TipoF__178E47FC">
+          <AssociationSet Name="FK__Proveedor__TipoF__11365028" Association="Self.FK__Proveedor__TipoF__11365028">
             <End Role="TipoFormaPago" EntitySet="TipoFormaPago" />
-            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK__ReporteDe__Parte__2097C3F2" Association="Self.FK__ReporteDe__Parte__2097C3F2">
             <End Role="Parte" EntitySet="Parte" />
@@ -16753,38 +16763,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="ExistenciasView" EntityType="RefaccionariaModelo.ExistenciasView" />
           <EntitySet Name="CajaEgresosProveedoresView" EntityType="RefaccionariaModelo.CajaEgresosProveedoresView" />
-          <EntitySet Name="ProveedoresPolizasView" EntityType="RefaccionariaModelo.ProveedoresPolizasView" />
-          <EntitySet Name="ProveedorPoliza" EntityType="RefaccionariaModelo.ProveedorPoliza" />
-          <EntitySet Name="ProveedorPolizaDetalle" EntityType="RefaccionariaModelo.ProveedorPolizaDetalle" />
-          <AssociationSet Name="FK__Proveedor__Banco__169A23C3" Association="RefaccionariaModelo.FK__Proveedor__Banco__169A23C3">
-            <End Role="BancoCuenta" EntitySet="BancoCuenta" />
-            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__CajaE__2977EE0D" Association="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D">
-            <End Role="CajaEgreso" EntitySet="CajaEgreso" />
-            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProveedorPoliza_Proveedor" Association="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__NotaD__70A98505" Association="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505">
-            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
-            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__TipoF__178E47FC" Association="RefaccionariaModelo.FK__Proveedor__TipoF__178E47FC">
-            <End Role="TipoFormaPago" EntitySet="TipoFormaPago" />
-            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProveedorPolizaDetalle_ProveedorPoliza" Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza">
-            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
-            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__Orige__7EF7A45C" Association="RefaccionariaModelo.FK__Proveedor__Orige__7EF7A45C">
-            <End Role="ProveedorPolizaDetalleOrigen" EntitySet="ProveedorPolizaDetalleOrigen" />
-            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
-          </AssociationSet>
-          <EntitySet Name="ProveedoresPolizasDetalleAvanzadoView" EntityType="RefaccionariaModelo.ProveedoresPolizasDetalleAvanzadoView" />
           <EntitySet Name="ProveedoresPagosView" EntityType="RefaccionariaModelo.ProveedoresPagosView" />
           <EntitySet Name="ProveedorNotaDeCreditoDetalle" EntityType="RefaccionariaModelo.ProveedorNotaDeCreditoDetalle" />
           <AssociationSet Name="FK__Proveedor__Prove__46D346CA" Association="RefaccionariaModelo.FK__Proveedor__Prove__46D346CA">
@@ -16837,10 +16815,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
             <End Role="PartePrecioHistorico" EntitySet="PartePrecioHistorico" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProveedorPolizaDetalle_MovimientoInventario" Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario">
-            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
-            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
-          </AssociationSet>
           <AssociationSet Name="FK__VentaGara__Movim__3EA8151D" Association="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D">
             <End Role="MovimientoInventarioDetalle" EntitySet="MovimientoInventarioDetalle" />
             <End Role="VentaGarantia" EntitySet="VentaGarantia" />
@@ -16875,7 +16849,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="VentasGarantiasView" EntityType="RefaccionariaModelo.VentasGarantiasView" />
           <EntitySet Name="ProveedoresNotasDeCreditoView" EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" />
-          <EntitySet Name="ProveedoresComprasView" EntityType="RefaccionariaModelo.ProveedoresComprasView" />
           <EntitySet Name="MovimientoInventarioView" EntityType="RefaccionariaModelo.MovimientoInventarioView" />
           <EntitySet Name="CorteDetalleHistorico" EntityType="RefaccionariaModelo.CorteDetalleHistorico" />
           <AssociationSet Name="FK__CorteDeta__Corte__73DAF76B" Association="RefaccionariaModelo.FK__CorteDeta__Corte__73DAF76B">
@@ -17427,10 +17400,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ProveedorPaqueteria" EntitySet="ProveedorPaqueteria" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProveedorPoliza_Usuario" Association="RefaccionariaModelo.FK_ProveedorPoliza_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProveedorProntoPago_Usuario" Association="RefaccionariaModelo.FK_ProveedorProntoPago_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ProveedorProntoPago" EntitySet="ProveedorProntoPago" />
@@ -17738,6 +17707,47 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="ProveedoresComprasView" EntityType="RefaccionariaModelo.ProveedoresComprasView" />
+          <EntitySet Name="ProveedoresPolizasDetalleAvanzadoView" EntityType="RefaccionariaModelo.ProveedoresPolizasDetalleAvanzadoView" />
+          <EntitySet Name="ProveedoresPolizasView" EntityType="RefaccionariaModelo.ProveedoresPolizasView" />
+          <EntitySet Name="ProveedorPoliza" EntityType="RefaccionariaModelo.ProveedorPoliza" />
+          <EntitySet Name="ProveedorPolizaDetalle" EntityType="RefaccionariaModelo.ProveedorPolizaDetalle" />
+          <AssociationSet Name="FK__Proveedor__Banco__122A7461" Association="RefaccionariaModelo.FK__Proveedor__Banco__122A7461">
+            <End Role="BancoCuenta" EntitySet="BancoCuenta" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__CajaE__2977EE0D" Association="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D">
+            <End Role="CajaEgreso" EntitySet="CajaEgreso" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorPolizaDetalle_MovimientoInventario" Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorPoliza_Proveedor" Association="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__NotaD__70A98505" Association="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorPoliza_Usuario" Association="RefaccionariaModelo.FK_ProveedorPoliza_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorPolizaDetalle_ProveedorPoliza" Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza">
+            <End Role="ProveedorPoliza" EntitySet="ProveedorPoliza" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Orige__7EF7A45C" Association="RefaccionariaModelo.FK__Proveedor__Orige__7EF7A45C">
+            <End Role="ProveedorPolizaDetalleOrigen" EntitySet="ProveedorPolizaDetalleOrigen" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__TipoF__11365028" Association="RefaccionariaModelo.FK__Proveedor__TipoF__11365028">
+            <End Role="TipoFormaPago" EntitySet="TipoFormaPago" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Configuracion">
           <Key>
@@ -18382,8 +18392,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaDevolucion" Relationship="RefaccionariaModelo.FK__VentaDevo__TipoF__75435199" FromRole="TipoFormaPago" ToRole="VentaDevolucion" />
           <NavigationProperty Name="BancoCuentaMovimiento" Relationship="RefaccionariaModelo.FK__BancoCuen__TipoF__4C6C248F" FromRole="TipoFormaPago" ToRole="BancoCuentaMovimiento" />
           <NavigationProperty Name="NominaImpuesto" Relationship="RefaccionariaModelo.FK__NominaImp__TipoF__2B9540A9" FromRole="TipoFormaPago" ToRole="NominaImpuesto" />
-          <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK__Proveedor__TipoF__178E47FC" FromRole="TipoFormaPago" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK_TipoFormaPago_Usuario" FromRole="TipoFormaPago" ToRole="Usuario" />
+          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__TipoF__11365028" FromRole="TipoFormaPago" ToRole="ProveedorPolizaDetalle" />
         </EntityType>
         <EntityType Name="ProveedorGananciasView">
           <Key>
@@ -22714,8 +22724,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorProntoPago" Relationship="RefaccionariaModelo.FK_ProveedorProntoPago_Proveedor" FromRole="Proveedor" ToRole="ProveedorProntoPago" />
           <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__69FC8776" FromRole="Proveedor" ToRole="ProveedorNotaDeCredito" />
           <NavigationProperty Name="ProveedorParteGanancia" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__4EA972BC" FromRole="Proveedor" ToRole="ProveedorParteGanancia" />
-          <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor" FromRole="Proveedor" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK_Proveedor_Usuario" FromRole="Proveedor" ToRole="Usuario" />
+          <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor" FromRole="Proveedor" ToRole="ProveedorPoliza" />
         </EntityType>
         <Association Name="FK__Cotizacio__Prove__09B45E9A">
           <End Type="RefaccionariaModelo.Proveedor" Role="Proveedor" Multiplicity="1" />
@@ -22865,9 +22875,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Boolean" Name="Disponible" Nullable="false" />
           <NavigationProperty Name="Proveedor" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__69FC8776" FromRole="ProveedorNotaDeCredito" ToRole="Proveedor" />
           <NavigationProperty Name="ProveedorNotaDeCreditoOrigen" Relationship="RefaccionariaModelo.FK__Proveedor__Orige__6BE4CFE8" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoOrigen" />
-          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorPolizaDetalle" />
           <NavigationProperty Name="ProveedorNotaDeCreditoDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__Prove__46D346CA" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoDetalle" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__Proveedor__Reali__6CD8F421" FromRole="ProveedorNotaDeCredito" ToRole="Usuario" />
+          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorPolizaDetalle" />
         </EntityType>
         <Association Name="FK__Proveedor__Prove__69FC8776">
           <End Type="RefaccionariaModelo.Proveedor" Role="Proveedor" Multiplicity="1" />
@@ -22928,9 +22938,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="CajaTipoEgreso" Relationship="RefaccionariaModelo.FK__CajaEgres__CajaT__3AAC9BB0" FromRole="CajaEgreso" ToRole="CajaTipoEgreso" />
           <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__CajaEgres__Conta__106C4921" FromRole="CajaEgreso" ToRole="ContaEgreso" />
           <NavigationProperty Name="Sucursal" Relationship="RefaccionariaModelo.FK__CajaEgres__Sucur__3BA0BFE9" FromRole="CajaEgreso" ToRole="Sucursal" />
-          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D" FromRole="CajaEgreso" ToRole="ProveedorPolizaDetalle" />
           <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK__CajaEgres__Reali__1A94D1D9" FromRole="CajaEgreso" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="RefaccionariaModelo.FK__CajaEgres__Usuar__3C94E422" FromRole="CajaEgreso" ToRole="Usuario" />
+          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D" FromRole="CajaEgreso" ToRole="ProveedorPolizaDetalle" />
           </EntityType>
         <Association Name="FK__CajaEgres__CajaT__3AAC9BB0">
           <End Type="RefaccionariaModelo.CajaTipoEgreso" Role="CajaTipoEgreso" Multiplicity="1" />
@@ -23647,9 +23657,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Boolean" Name="EsCpcp" Nullable="false" />
           <NavigationProperty Name="Banco" Relationship="RefaccionariaModelo.FK__BancoCuen__Banco__1EA559DF" FromRole="BancoCuenta" ToRole="Banco" />
           <NavigationProperty Name="ContaEgreso" Relationship="RefaccionariaModelo.FK__ContaEgre__Banco__214CBC60" FromRole="BancoCuenta" ToRole="ContaEgreso" />
-          <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK__Proveedor__Banco__169A23C3" FromRole="BancoCuenta" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="Nomina" Relationship="RefaccionariaModelo.FK__Nomina__BancoCue__725CC34D" FromRole="BancoCuenta" ToRole="Nomina" />
           <NavigationProperty Name="VentaPagoConTarjeta" Relationship="RefaccionariaModelo.FK__VentaPago__Banco__0D65BF44" FromRole="BancoCuenta" ToRole="VentaPagoConTarjeta" />
+          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK__Proveedor__Banco__122A7461" FromRole="BancoCuenta" ToRole="ProveedorPolizaDetalle" />
         </EntityType>
         <Association Name="FK__BancoCuen__Banco__1EA559DF">
           <End Type="RefaccionariaModelo.Banco" Role="Banco" Multiplicity="1" />
@@ -25886,183 +25896,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Facturado" Type="Boolean" />
           <Property Name="AfectadoEnProveedores" Type="Boolean" />
         </EntityType>
-        <EntityType Name="ProveedoresPolizasView">
-          <Key>
-            <PropertyRef Name="ProveedorPolizaID" />
-            <PropertyRef Name="ProveedorID" />
-            <PropertyRef Name="FechaPago" />
-            <PropertyRef Name="UsuarioID" />
-            <PropertyRef Name="BancoCuentaID" />
-            <PropertyRef Name="FormaDePagoID" />
-            <PropertyRef Name="FolioDePago" />
-          </Key>
-          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BancoCuentaID" Type="Int32" Nullable="false" />
-          <Property Name="NombreDeCuenta" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="FormaDePagoID" Type="Int32" Nullable="false" />
-          <Property Name="FormaDePago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FolioDePago" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="ProveedorPoliza">
-          <Key>
-            <PropertyRef Name="ProveedorPolizaID" />
-          </Key>
-          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
-          <Property Name="BancoCuentaID" Type="Int32" Nullable="false" />
-          <Property Name="TipoFormaPagoID" Type="Int32" Nullable="false" />
-          <Property Name="FolioDePago" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BancoCuenta" Relationship="RefaccionariaModelo.FK__Proveedor__Banco__169A23C3" FromRole="ProveedorPoliza" ToRole="BancoCuenta" />
-          <NavigationProperty Name="Proveedor" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor" FromRole="ProveedorPoliza" ToRole="Proveedor" />
-          <NavigationProperty Name="TipoFormaPago" Relationship="RefaccionariaModelo.FK__Proveedor__TipoF__178E47FC" FromRole="ProveedorPoliza" ToRole="TipoFormaPago" />
-          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza" FromRole="ProveedorPoliza" ToRole="ProveedorPolizaDetalle" />
-          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Usuario" FromRole="ProveedorPoliza" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="ProveedorPolizaDetalle">
-          <Key>
-            <PropertyRef Name="ProveedorPolizaDetalleID" />
-          </Key>
-          <Property Name="ProveedorPolizaDetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
-          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-          <Property Name="NotaDeCreditoID" Type="Int32" />
-          <Property Name="OrigenID" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Folio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="CajaEgresoID" Type="Int32" />
-          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <NavigationProperty Name="CajaEgreso" Relationship="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D" FromRole="ProveedorPolizaDetalle" ToRole="CajaEgreso" />
-          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorNotaDeCredito" />
-          <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorPoliza" />
-          <NavigationProperty Name="ProveedorPolizaDetalleOrigen" Relationship="RefaccionariaModelo.FK__Proveedor__Orige__7EF7A45C" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorPolizaDetalleOrigen" />
-          <NavigationProperty Name="MovimientoInventario" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" FromRole="ProveedorPolizaDetalle" ToRole="MovimientoInventario" />
-        </EntityType>
-        <Association Name="FK__Proveedor__Banco__169A23C3">
-          <End Type="RefaccionariaModelo.BancoCuenta" Role="BancoCuenta" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorPoliza" Role="ProveedorPoliza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BancoCuenta">
-              <PropertyRef Name="BancoCuentaID" />
-            </Principal>
-            <Dependent Role="ProveedorPoliza">
-              <PropertyRef Name="BancoCuentaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__CajaE__2977EE0D">
-          <End Type="RefaccionariaModelo.CajaEgreso" Role="CajaEgreso" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CajaEgreso">
-              <PropertyRef Name="CajaEgresoID" />
-            </Principal>
-            <Dependent Role="ProveedorPolizaDetalle">
-              <PropertyRef Name="CajaEgresoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProveedorPoliza_Proveedor">
-          <End Type="RefaccionariaModelo.Proveedor" Role="Proveedor" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorPoliza" Role="ProveedorPoliza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ProveedorID" />
-            </Principal>
-            <Dependent Role="ProveedorPoliza">
-              <PropertyRef Name="ProveedorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__NotaD__70A98505">
-          <End Type="RefaccionariaModelo.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="0..1" />
-          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProveedorNotaDeCredito">
-              <PropertyRef Name="ProveedorNotaDeCreditoID" />
-            </Principal>
-            <Dependent Role="ProveedorPolizaDetalle">
-              <PropertyRef Name="NotaDeCreditoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__TipoF__178E47FC">
-          <End Type="RefaccionariaModelo.TipoFormaPago" Role="TipoFormaPago" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorPoliza" Role="ProveedorPoliza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoFormaPago">
-              <PropertyRef Name="TipoFormaPagoID" />
-            </Principal>
-            <Dependent Role="ProveedorPoliza">
-              <PropertyRef Name="TipoFormaPagoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProveedorPolizaDetalle_ProveedorPoliza">
-          <End Type="RefaccionariaModelo.ProveedorPoliza" Role="ProveedorPoliza" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProveedorPoliza">
-              <PropertyRef Name="ProveedorPolizaID" />
-            </Principal>
-            <Dependent Role="ProveedorPolizaDetalle">
-              <PropertyRef Name="ProveedorPolizaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__Orige__7EF7A45C">
-          <End Type="RefaccionariaModelo.ProveedorPolizaDetalleOrigen" Role="ProveedorPolizaDetalleOrigen" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProveedorPolizaDetalleOrigen">
-              <PropertyRef Name="ProveedorPolizaDetalleOrigenID" />
-            </Principal>
-            <Dependent Role="ProveedorPolizaDetalle">
-              <PropertyRef Name="OrigenID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProveedoresPolizasDetalleAvanzadoView">
-          <Key>
-            <PropertyRef Name="ProveedorPolizaDetalleID" />
-            <PropertyRef Name="ProveedorPolizaID" />
-            <PropertyRef Name="OrigenID" />
-            <PropertyRef Name="MovimientoInventarioID" />
-            <PropertyRef Name="Subtotal" />
-            <PropertyRef Name="Iva" />
-          </Key>
-          <Property Name="ProveedorPolizaDetalleID" Type="Int32" Nullable="false" />
-          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
-          <Property Name="OrigenID" Type="Int32" Nullable="false" />
-          <Property Name="Origen" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
-          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Importe" Type="Decimal" Precision="13" Scale="2" />
-          <Property Name="FormaDePago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FolioDePago" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="NotaDeCreditoID" Type="Int32" />
-          <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Folio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="NotaDeCredito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="NotaDeCreditoOrigenID" Type="Int32" />
-          <Property Name="NotaDeCreditoOrigen" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="ProveedoresPagosView">
           <Key>
             <PropertyRef Name="ProveedorPolizaID" />
@@ -26332,18 +26165,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProveedorPolizaDetalle_MovimientoInventario">
-          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MovimientoInventario">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Principal>
-            <Dependent Role="ProveedorPolizaDetalle">
-              <PropertyRef Name="MovimientoInventarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__VentaGara__Movim__3EA8151D">
           <End Type="RefaccionariaModelo.MovimientoInventarioDetalle" Role="MovimientoInventarioDetalle" Multiplicity="0..1" />
           <End Type="RefaccionariaModelo.VentaGarantia" Role="VentaGarantia" Multiplicity="*" />
@@ -26526,30 +26347,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Disponible" Type="Boolean" Nullable="false" />
           <Property Name="Facturas" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="ProveedoresComprasView">
-          <Key>
-            <PropertyRef Name="MovimientoInventarioID" />
-            <PropertyRef Name="ImporteFactura" />
-            <PropertyRef Name="ImporteTotal" />
-            <PropertyRef Name="Abonado" />
-            <PropertyRef Name="EsAgrupador" />
-          </Key>
-          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
-          <Property Name="ProveedorID" Type="Int32" />
-          <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <Property Name="ImporteFactura" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="ImporteTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Abonado" Type="Decimal" Nullable="false" Precision="38" Scale="2" />
-          <Property Name="Saldo" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Final" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EsAgrupador" Type="Boolean" Nullable="false" />
-          <Property Name="MovimientoAgrupadorID" Type="Int32" />
-          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DiasPlazo" Type="Int32" />
         </EntityType>
         <EntityType Name="MovimientoInventarioView">
           <Key>
@@ -27587,7 +27384,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="RefaccionariaModelo.FK__Proveedor__Reali__6CD8F421" FromRole="Usuario" ToRole="ProveedorNotaDeCredito" />
           <NavigationProperty Name="ProveedorObservacion" Relationship="RefaccionariaModelo.FK_ProveedorObservacion_Usuario" FromRole="Usuario" ToRole="ProveedorObservacion" />
           <NavigationProperty Name="ProveedorPaqueteria" Relationship="RefaccionariaModelo.FK_ProveedorPaqueteria_Usuario" FromRole="Usuario" ToRole="ProveedorPaqueteria" />
-          <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Usuario" FromRole="Usuario" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="ProveedorProntoPago" Relationship="RefaccionariaModelo.FK_ProveedorProntoPago_Usuario" FromRole="Usuario" ToRole="ProveedorProntoPago" />
           <NavigationProperty Name="ReporteDeFaltante" Relationship="RefaccionariaModelo.FK__ReporteDe__Usuar__1FA39FB9" FromRole="Usuario" ToRole="ReporteDeFaltante" />
           <NavigationProperty Name="ReporteDeFaltante1" Relationship="RefaccionariaModelo.FK__ReporteDe__Usuar__218BE82B" FromRole="Usuario" ToRole="ReporteDeFaltante" />
@@ -27630,6 +27426,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteMaxMin" Relationship="RefaccionariaModelo.FK__ParteMaxM__Usuar__41AE9EFA" FromRole="Usuario" ToRole="ParteMaxMin" />
           <NavigationProperty Name="Venta" Relationship="RefaccionariaModelo.FK__Venta__RealizoUs__7F01C5FD" FromRole="Usuario" ToRole="Venta" />
           <NavigationProperty Name="Venta1" Relationship="RefaccionariaModelo.FK__Venta__UsuarioID__32B6742D" FromRole="Usuario" ToRole="Venta" />
+          <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Usuario" FromRole="Usuario" ToRole="ProveedorPoliza" />
         </EntityType>
         <Association Name="FK__Autorizac__Autor__21E0EDE6">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -28855,18 +28652,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProveedorPoliza_Usuario">
-          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="RefaccionariaModelo.ProveedorPoliza" Role="ProveedorPoliza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="ProveedorPoliza">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProveedorProntoPago_Usuario">
           <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="RefaccionariaModelo.ProveedorProntoPago" Role="ProveedorProntoPago" Multiplicity="*" />
@@ -29862,6 +29647,235 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Decimal" Name="Costo" Nullable="true" Precision="38" Scale="4" />
           <Property Type="Decimal" Name="CostoConDescuento" Nullable="true" Precision="38" Scale="4" />
         </ComplexType>
+        <EntityType Name="ProveedoresComprasView">
+          <Key>
+            <PropertyRef Name="MovimientoInventarioID" />
+            <PropertyRef Name="ImporteFactura" />
+            <PropertyRef Name="ImporteTotal" />
+            <PropertyRef Name="EsAgrupador" />
+          </Key>
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorID" Type="Int32" />
+          <Property Name="Factura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="ImporteFactura" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ImporteTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Abonado" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Saldo" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Descuento" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Final" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="AbonadoMasPendiente" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="SaldoMasPendiente" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="DescuentoMasPendiente" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="FinalMasPendiente" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EsAgrupador" Type="Boolean" Nullable="false" />
+          <Property Name="MovimientoAgrupadorID" Type="Int32" />
+          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DiasPlazo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProveedoresPolizasDetalleAvanzadoView">
+          <Key>
+            <PropertyRef Name="ProveedorPolizaDetalleID" />
+            <PropertyRef Name="ProveedorPolizaID" />
+            <PropertyRef Name="OrigenID" />
+            <PropertyRef Name="MovimientoInventarioID" />
+            <PropertyRef Name="Subtotal" />
+            <PropertyRef Name="Iva" />
+            <PropertyRef Name="Pagado" />
+          </Key>
+          <Property Name="ProveedorPolizaDetalleID" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
+          <Property Name="OrigenID" Type="Int32" Nullable="false" />
+          <Property Name="Origen" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
+          <Property Name="FolioFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Importe" Type="Decimal" Precision="13" Scale="2" />
+          <Property Name="FormaDePago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NotaDeCreditoID" Type="Int32" />
+          <Property Name="CajaEgresoID" Type="Int32" />
+          <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Folio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Pagado" Type="Boolean" Nullable="false" />
+          <Property Name="NotaDeCredito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="NotaDeCreditoOrigenID" Type="Int32" />
+          <Property Name="NotaDeCreditoOrigen" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProveedoresPolizasView">
+          <Key>
+            <PropertyRef Name="ProveedorPolizaID" />
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Beneficiario" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BancoCuentaID" Type="Int32" />
+          <Property Name="NombreDeCuenta" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="FormaDePagoID" Type="Int32" />
+          <Property Name="FormaDePago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Folio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProveedorPoliza">
+          <Key>
+            <PropertyRef Name="ProveedorPolizaID" />
+          </Key>
+          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Proveedor" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor" FromRole="ProveedorPoliza" ToRole="Proveedor" />
+          <NavigationProperty Name="Usuario" Relationship="RefaccionariaModelo.FK_ProveedorPoliza_Usuario" FromRole="ProveedorPoliza" ToRole="Usuario" />
+          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza" FromRole="ProveedorPoliza" ToRole="ProveedorPolizaDetalle" />
+        </EntityType>
+        <EntityType Name="ProveedorPolizaDetalle">
+          <Key>
+            <PropertyRef Name="ProveedorPolizaDetalleID" />
+          </Key>
+          <Property Name="ProveedorPolizaDetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProveedorPolizaID" Type="Int32" Nullable="false" />
+          <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="NotaDeCreditoID" Type="Int32" />
+          <Property Name="OrigenID" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Folio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="CajaEgresoID" Type="Int32" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TipoFormaPagoID" Type="Int32" />
+          <Property Name="BancoCuentaID" Type="Int32" />
+          <Property Name="Pagado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BancoCuenta" Relationship="RefaccionariaModelo.FK__Proveedor__Banco__122A7461" FromRole="ProveedorPolizaDetalle" ToRole="BancoCuenta" />
+          <NavigationProperty Name="CajaEgreso" Relationship="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D" FromRole="ProveedorPolizaDetalle" ToRole="CajaEgreso" />
+          <NavigationProperty Name="MovimientoInventario" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" FromRole="ProveedorPolizaDetalle" ToRole="MovimientoInventario" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorNotaDeCredito" />
+          <NavigationProperty Name="ProveedorPoliza" Relationship="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorPoliza" />
+          <NavigationProperty Name="ProveedorPolizaDetalleOrigen" Relationship="RefaccionariaModelo.FK__Proveedor__Orige__7EF7A45C" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorPolizaDetalleOrigen" />
+          <NavigationProperty Name="TipoFormaPago" Relationship="RefaccionariaModelo.FK__Proveedor__TipoF__11365028" FromRole="ProveedorPolizaDetalle" ToRole="TipoFormaPago" />
+        </EntityType>
+        <Association Name="FK__Proveedor__Banco__122A7461">
+          <End Type="RefaccionariaModelo.BancoCuenta" Role="BancoCuenta" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BancoCuenta">
+              <PropertyRef Name="BancoCuentaID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="BancoCuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__CajaE__2977EE0D">
+          <End Type="RefaccionariaModelo.CajaEgreso" Role="CajaEgreso" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaEgreso">
+              <PropertyRef Name="CajaEgresoID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="CajaEgresoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorPolizaDetalle_MovimientoInventario">
+          <End Type="RefaccionariaModelo.MovimientoInventario" Role="MovimientoInventario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorPoliza_Proveedor">
+          <End Type="RefaccionariaModelo.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorPoliza" Role="ProveedorPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ProveedorID" />
+            </Principal>
+            <Dependent Role="ProveedorPoliza">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__NotaD__70A98505">
+          <End Type="RefaccionariaModelo.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="NotaDeCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorPoliza_Usuario">
+          <End Type="RefaccionariaModelo.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorPoliza" Role="ProveedorPoliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ProveedorPoliza">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorPolizaDetalle_ProveedorPoliza">
+          <End Type="RefaccionariaModelo.ProveedorPoliza" Role="ProveedorPoliza" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorPoliza">
+              <PropertyRef Name="ProveedorPolizaID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="ProveedorPolizaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Orige__7EF7A45C">
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalleOrigen" Role="ProveedorPolizaDetalleOrigen" Multiplicity="1" />
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorPolizaDetalleOrigen">
+              <PropertyRef Name="ProveedorPolizaDetalleOrigenID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="OrigenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__TipoF__11365028">
+          <End Type="RefaccionariaModelo.TipoFormaPago" Role="TipoFormaPago" Multiplicity="0..1" />
+          <End Type="RefaccionariaModelo.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoFormaPago">
+              <PropertyRef Name="TipoFormaPagoID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="TipoFormaPagoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -35087,82 +35101,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProveedoresPolizasView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPolizasView">
-              <MappingFragment StoreEntitySet="ProveedoresPolizasView">
-                <ScalarProperty Name="FolioDePago" ColumnName="FolioDePago" />
-                <ScalarProperty Name="FormaDePago" ColumnName="FormaDePago" />
-                <ScalarProperty Name="FormaDePagoID" ColumnName="FormaDePagoID" />
-                <ScalarProperty Name="NombreDeCuenta" ColumnName="NombreDeCuenta" />
-                <ScalarProperty Name="BancoCuentaID" ColumnName="BancoCuentaID" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedorPoliza">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorPoliza">
-              <MappingFragment StoreEntitySet="ProveedorPoliza">
-                <ScalarProperty Name="FolioDePago" ColumnName="FolioDePago" />
-                <ScalarProperty Name="TipoFormaPagoID" ColumnName="TipoFormaPagoID" />
-                <ScalarProperty Name="BancoCuentaID" ColumnName="BancoCuentaID" />
-                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedorPolizaDetalle">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorPolizaDetalle">
-              <MappingFragment StoreEntitySet="ProveedorPolizaDetalle">
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="CajaEgresoID" ColumnName="CajaEgresoID" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
-                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
-                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
-                <ScalarProperty Name="ProveedorPolizaDetalleID" ColumnName="ProveedorPolizaDetalleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedoresPolizasDetalleAvanzadoView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPolizasDetalleAvanzadoView">
-              <MappingFragment StoreEntitySet="ProveedoresPolizasDetalleAvanzadoView">
-                <ScalarProperty Name="NotaDeCreditoOrigen" ColumnName="NotaDeCreditoOrigen" />
-                <ScalarProperty Name="NotaDeCreditoOrigenID" ColumnName="NotaDeCreditoOrigenID" />
-                <ScalarProperty Name="NotaDeCredito" ColumnName="NotaDeCredito" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
-                <ScalarProperty Name="FolioDePago" ColumnName="FolioDePago" />
-                <ScalarProperty Name="FormaDePago" ColumnName="FormaDePago" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
-                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Origen" ColumnName="Origen" />
-                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
-                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
-                <ScalarProperty Name="ProveedorPolizaDetalleID" ColumnName="ProveedorPolizaDetalleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProveedoresPagosView">
             <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPagosView">
               <MappingFragment StoreEntitySet="ProveedoresPagosView">
@@ -35323,27 +35261,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="Folio" ColumnName="Folio" />
                 <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
                 <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedoresComprasView">
-            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresComprasView">
-              <MappingFragment StoreEntitySet="ProveedoresComprasView">
-                <ScalarProperty Name="DiasPlazo" ColumnName="DiasPlazo" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="MovimientoAgrupadorID" ColumnName="MovimientoAgrupadorID" />
-                <ScalarProperty Name="EsAgrupador" ColumnName="EsAgrupador" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Final" ColumnName="Final" />
-                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="Abonado" ColumnName="Abonado" />
-                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
-                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Factura" ColumnName="Factura" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -36022,6 +35939,110 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ProveedoresComprasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresComprasView">
+              <MappingFragment StoreEntitySet="ProveedoresComprasView">
+                <ScalarProperty Name="DiasPlazo" ColumnName="DiasPlazo" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="MovimientoAgrupadorID" ColumnName="MovimientoAgrupadorID" />
+                <ScalarProperty Name="EsAgrupador" ColumnName="EsAgrupador" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="FinalMasPendiente" ColumnName="FinalMasPendiente" />
+                <ScalarProperty Name="DescuentoMasPendiente" ColumnName="DescuentoMasPendiente" />
+                <ScalarProperty Name="SaldoMasPendiente" ColumnName="SaldoMasPendiente" />
+                <ScalarProperty Name="AbonadoMasPendiente" ColumnName="AbonadoMasPendiente" />
+                <ScalarProperty Name="Final" ColumnName="Final" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Abonado" ColumnName="Abonado" />
+                <ScalarProperty Name="ImporteTotal" ColumnName="ImporteTotal" />
+                <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresPolizasDetalleAvanzadoView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPolizasDetalleAvanzadoView">
+              <MappingFragment StoreEntitySet="ProveedoresPolizasDetalleAvanzadoView">
+                <ScalarProperty Name="NotaDeCreditoOrigen" ColumnName="NotaDeCreditoOrigen" />
+                <ScalarProperty Name="NotaDeCreditoOrigenID" ColumnName="NotaDeCreditoOrigenID" />
+                <ScalarProperty Name="NotaDeCredito" ColumnName="NotaDeCredito" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="CajaEgresoID" ColumnName="CajaEgresoID" />
+                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
+                <ScalarProperty Name="FormaDePago" ColumnName="FormaDePago" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
+                <ScalarProperty Name="ProveedorPolizaDetalleID" ColumnName="ProveedorPolizaDetalleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresPolizasView">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedoresPolizasView">
+              <MappingFragment StoreEntitySet="ProveedoresPolizasView">
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="FormaDePago" ColumnName="FormaDePago" />
+                <ScalarProperty Name="FormaDePagoID" ColumnName="FormaDePagoID" />
+                <ScalarProperty Name="NombreDeCuenta" ColumnName="NombreDeCuenta" />
+                <ScalarProperty Name="BancoCuentaID" ColumnName="BancoCuentaID" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedorPoliza">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorPoliza">
+              <MappingFragment StoreEntitySet="ProveedorPoliza">
+                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedorPolizaDetalle">
+            <EntityTypeMapping TypeName="RefaccionariaModelo.ProveedorPolizaDetalle">
+              <MappingFragment StoreEntitySet="ProveedorPolizaDetalle">
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+                <ScalarProperty Name="BancoCuentaID" ColumnName="BancoCuentaID" />
+                <ScalarProperty Name="TipoFormaPagoID" ColumnName="TipoFormaPagoID" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="CajaEgresoID" ColumnName="CajaEgresoID" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+                <ScalarProperty Name="ProveedorPolizaID" ColumnName="ProveedorPolizaID" />
+                <ScalarProperty Name="ProveedorPolizaDetalleID" ColumnName="ProveedorPolizaDetalleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -39039,17 +39060,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__ParteMaxM__Sucur__17835B04" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ExistenciasView" Width="1.5" PointX="36.375" PointY="16.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.CajaEgresosProveedoresView" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPolizasView" Width="1.5" PointX="42.75" PointY="15.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorPoliza" Width="1.5" PointX="36.375" PointY="102.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorPolizaDetalle" Width="1.5" PointX="38.625" PointY="73.625" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Banco__169A23C3" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__TipoF__178E47FC" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza" />
-        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Orige__7EF7A45C" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPolizasDetalleAvanzadoView" Width="1.5" PointX="43.375" PointY="0.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPagosView" Width="1.5" PointX="42.375" PointY="29.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorNotaDeCreditoDetalle" Width="1.5" PointX="27" PointY="79.875" />
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Prove__46D346CA" />
@@ -39066,7 +39076,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioEtiqueta_MovimientoInventario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_PartePrecioHistorico_MovimientoInventario" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Movim__3EA8151D" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Parte__2B403AEE" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Sucur__14FBF414" />
@@ -39077,7 +39086,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaGara__Venta__2429290B" />
         <EntityTypeShape EntityType="RefaccionariaModelo.VentasGarantiasView" Width="1.5" PointX="42.375" PointY="19.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresNotasDeCreditoView" Width="1.5" PointX="31.375" PointY="17.75" />
-        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresComprasView" Width="1.5" PointX="17.375" PointY="24.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.MovimientoInventarioView" Width="1.5" PointX="32.375" PointY="38.75" />
         <EntityTypeShape EntityType="RefaccionariaModelo.CorteDetalleHistorico" Width="1.5" PointX="8.25" PointY="132.5" />
         <AssociationConnector Association="RefaccionariaModelo.FK__CorteDeta__Corte__73DAF76B" />
@@ -39231,7 +39239,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Reali__6CD8F421" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorObservacion_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPaqueteria_Usuario" />
-        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPoliza_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorProntoPago_Usuario" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ReporteDe__Usuar__1FA39FB9" />
         <AssociationConnector Association="RefaccionariaModelo.FK__ReporteDe__Usuar__218BE82B" />
@@ -39303,6 +39310,20 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="RefaccionariaModelo.VentaPagoConTarjeta" Width="1.5" PointX="15.75" PointY="66.875" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__Banco__0D65BF44" />
         <AssociationConnector Association="RefaccionariaModelo.FK__VentaPago__Venta__0E59E37D" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresComprasView" Width="1.5" PointX="43.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPolizasDetalleAvanzadoView" Width="1.5" PointX="43.375" PointY="12.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedoresPolizasView" Width="1.5" PointX="34.375" PointY="42.75" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorPoliza" Width="1.5" PointX="37.625" PointY="69.5" />
+        <EntityTypeShape EntityType="RefaccionariaModelo.ProveedorPolizaDetalle" Width="1.5" PointX="39.875" PointY="69.375" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Banco__122A7461" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__CajaE__2977EE0D" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_MovimientoInventario" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPoliza_Proveedor" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__NotaD__70A98505" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPoliza_Usuario" />
+        <AssociationConnector Association="RefaccionariaModelo.FK_ProveedorPolizaDetalle_ProveedorPoliza" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__Orige__7EF7A45C" />
+        <AssociationConnector Association="RefaccionariaModelo.FK__Proveedor__TipoF__11365028" />
         </Diagram>
     </Diagrams>
   </Designer>
