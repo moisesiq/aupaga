@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="04/21/2016 19:08:42" ReportInfo.CreatorVersion="2013.3.2.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="Partes" ReferenceName="Partes" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.pauPartesBusqueda_Result, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="ParteID" DataType="System.Int32"/>
+      <Column Name="NumeroDeParte" DataType="System.String"/>
+      <Column Name="Descripcion" DataType="System.String"/>
+      <Column Name="ProveedorID" DataType="System.Int32"/>
+      <Column Name="Proveedor" DataType="System.String"/>
+      <Column Name="MarcaParteID" DataType="System.Int32"/>
+      <Column Name="Marca" DataType="System.String"/>
+      <Column Name="LineaID" DataType="System.Int32"/>
+      <Column Name="Linea" DataType="System.String"/>
+      <Column Name="Maximo" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="Minimo" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="FechaMaxMin" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="CodigoDeBarras" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <Parameter Name="Sucursal" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperHeight="279.4" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <PageHeaderBand Name="PageHeader1" Width="793.8" Height="69.93">
+      <TextObject Name="Text2" Left="9.45" Width="94.5" Height="18.9" Text="NumeroDeParte"/>
+      <TextObject Name="Text4" Left="113.4" Width="94.5" Height="18.9" Text="Descripcion"/>
+      <TextObject Name="Text5" Left="264.6" Top="18.9" Width="94.5" Height="18.9" Text="[Sucursal]"/>
+      <TextObject Name="Text6" Left="661.5" Top="9.45" Width="94.5" Height="18.9" Text="[Sucursal]"/>
+    </PageHeaderBand>
+    <DataBand Name="Data4" Top="73.93" Width="793.8" Height="69.48" DataSource="Partes">
+      <TextObject Name="Text1" Left="9.45" Top="9.45" Width="94.5" Height="18.9" Text="[Partes.NumeroDeParte]"/>
+      <TextObject Name="Text3" Left="113.4" Top="9.45" Width="94.5" Height="18.9" Text="[Partes.Descripcion]"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="147.41" Width="793.8" Height="75.6"/>
+  </ReportPage>
+</Report>

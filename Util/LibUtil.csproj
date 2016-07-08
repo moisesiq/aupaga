@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3E90DFBE-E97E-473C-9325-CDFA1568A07F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibUtil</RootNamespace>
+    <AssemblyName>LibUtil</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\Cargando.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clases\Constantes.cs" />
+    <Compile Include="Clases\Ejec.cs" />
+    <Compile Include="Clases\ListaEstatus.cs" />
+    <Compile Include="Clases\ServidorTcp.cs" />
+    <Compile Include="Controles\CheckBoxMod.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controles\ComboEtiqueta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ComboEtiqueta.Designer.cs">
+      <DependentUpon>ComboEtiqueta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ComboMultiSel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\ComboMultiSel.Designer.cs">
+      <DependentUpon>ComboMultiSel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlError.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controles\GridEditable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controles\LinkedTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controles\ListViewColumnSorter.cs" />
+    <Compile Include="Controles\NumericUpDownMod.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controles\Progreso.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\Progreso.Designer.cs">
+      <DependentUpon>Progreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\SortableBindingList.cs" />
+    <Compile Include="Controles\TextoAutocompletar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controles\TextoAutocompletar.Designer.cs">
+      <DependentUpon>TextoAutocompletar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\TextoMod.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Formularios\EdicionListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\EdicionListado.Designer.cs">
+      <DependentUpon>EdicionListado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\MensajeObtenerValor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\MensajeObtenerValor.designer.cs">
+      <DependentUpon>MensajeObtenerValor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\MensajeTexto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\MensajeTexto.Designer.cs">
+      <DependentUpon>MensajeTexto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clases\Modelos.cs" />
+    <Compile Include="Clases\ResAcc.cs" />
+    <Compile Include="Clases\Util.cs" />
+    <Compile Include="Formularios\SeleccionListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\SeleccionListado.Designer.cs">
+      <DependentUpon>SeleccionListado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controles\ComboEtiqueta.resx">
+      <DependentUpon>ComboEtiqueta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\ComboMultiSel.resx">
+      <DependentUpon>ComboMultiSel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\Progreso.resx">
+      <DependentUpon>Progreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controles\TextoAutocompletar.resx">
+      <DependentUpon>TextoAutocompletar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\EdicionListado.resx">
+      <DependentUpon>EdicionListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\MensajeObtenerValor.resx">
+      <DependentUpon>MensajeObtenerValor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\MensajeTexto.resx">
+      <DependentUpon>MensajeTexto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\SeleccionListado.resx">
+      <DependentUpon>SeleccionListado.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,27 @@
+/* ****************************************************************************
+ * Motivo    : Estilos css generales para utilizarse en cualquier página      *
+ * Autor     : Moisés Iquingari González Paredes                              *
+ * Creado    : 2015/12/23                                                     *
+ * Ult. Mod. : 2015/12/23                                                     *
+ **************************************************************************** */
+
+.centrado {
+	left: 50%;
+	margin-left: -25%;
+	margin-top: -25%;
+	position: absolute;
+	top: 50%;
+}
+
+.borde { border: 1px solid; }
+
+.borde-r5 {
+	border: 1px solid;
+	border-radius: 5px;
+}
+
+.no-top { top: 0px; }
+.flot { float: left; }
+.flot-d { float: right; }
+.flot-100 { float: left; width: 100%; }
+.margen-ab5 { margin: 5px; 0px; }

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/07/2013 12:00:26" ReportInfo.Modified="03/30/2016 11:36:55" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="\\Administrativo\Label" PrintSettings.SavePrinterWithReport="true">
+  <Dictionary>
+    <BusinessObjectDataSource Name="etiquetas" ReferenceName="etiquetas" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.Etiquetas, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="MovimientoInventarioEtiquetaID" DataType="System.Int32"/>
+      <Column Name="MovimientoInventarioID" DataType="System.Int32"/>
+      <Column Name="ParteID" DataType="System.Int32"/>
+      <Column Name="NumeroParte" DataType="System.String"/>
+      <Column Name="NombreParte" DataType="System.String"/>
+      <Column Name="CodigoBarra" DataType="System.String"/>
+      <Column Name="NumeroEtiquetas" DataType="System.Int32"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="100" PaperHeight="25" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <DataBand Name="Data1" Width="378" Height="94.5" DataSource="etiquetas">
+      <TextObject Name="Text2" Left="141.74" Top="-3.45" Width="235.7" Height="96.5" Fill.Color="White" Text="[etiquetas.NombreParte]" HorzAlign="Justify" Font="Arial Narrow, 18pt" LineHeight="15.12"/>
+      <TextObject Name="NumeroParte" Left="1.45" Width="132.3" Height="94.5" Text="[etiquetas.NumeroParte]" HorzAlign="Center" Font="Arial Narrow, 19pt, style=Bold" LineHeight="18.9"/>
+    </DataBand>
+  </ReportPage>
+</Report>

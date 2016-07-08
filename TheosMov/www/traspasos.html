@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<!-- Ícono de la página -->
+		<link rel="shortcut icon" type="image/png" href="img/Icono.png" />
+		<!-- Hojas de estilo -->
+		<link rel="stylesheet" type="text/css" href="css/jquery.mobile.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/util.css" />
+		<link rel="stylesheet" type="text/css" href="css/local.css" />
+		<!-- Scripts -->
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile.min.js"></script>
+		<script type="text/javascript" src="js/html.js"></script>
+		<script type="text/javascript" src="js/util.js"></script>
+		<script type="text/javascript" src="js/util.vista.js"></script>
+		<script type="text/javascript" src="js/config.js"></script>
+		<script type="text/javascript" src="js/local.js"></script>
+		<script type="text/javascript" src="js/proc.js"></script>
+		<script type="text/javascript" src="js/contenido.js"></script>
+
+		<!-- Css -->
+		<style type="text/css">
+			table th { cursor: pointer; }
+			div.Grid { display: inline-block; width: 80%; }
+			div.Teclado {
+				display: inline-block;
+				min-height: 200px;
+				min-width: 20%;
+				position: fixed;
+				vertical-align: top;
+				top: 79px;
+			}
+			/* #tableRecibir th:last-child { width: 50px; }
+			#tableRecibir td:last-child { width: 50px; }
+			*/
+			#tableRecibir input[type=text] { width: 70px; }
+			#tableRecibir input[type=text][readonly] {
+				background-color: #3a4f6d;
+				box-shadow: 0px 0px 4px #3a4f6d;
+				color: white;
+			}
+		</style>
+
+		<!-- Javascript -->
+		<script type="text/javascript">
+			$(function() {
+				// Se inicializar el contenido
+				window.contenido.Inicializar("divTraspasos");
+				// Se verifica la sesión
+				window.proc.VerSesion();
+
+				// Para el teclado numérico
+				window.contenido.TecladoNumerico($("div.Teclado")[0]);
+
+				// Se obtienen los traspasos a recibir
+				window.proc.Inicializado = function() {
+					window.local.Ajax({
+						url: window.local.RutaMetodo("Traspasos", "TraspasosARecibir")
+						, data: { id: window.config.Acceso.SucursalID }
+						, success: function(oRes) {
+							var jTabla = $("#tableTraspasos tbody");
+							for (var i = 0; i < oRes.length; i++) {
+								var oReg = oRes[i];
+								jTabla.append(window.html.Fila([ oReg.MovimientoInventarioID, window.local.Ef.Fecha(oReg.FechaRegistro)
+									, oReg.Origen, oReg.Solicito, oReg.Registro ]));
+							}
+
+							$("#tableTraspasos tbody tr").click(function() {
+								var sMovID = $(this).children("td").eq(0).text();
+								// window.contenido.CambiarContenido("divTraspasos", "divRecibir", window.divRecibir_Ini, { Id: sMovID });
+								$("body").pagecontainer("change", $("#divRecibir"), { data: { Id: sMovID } });
+							});
+						}
+					});
+				}
+
+				$("body").pagecontainer({
+					change: function(e, u) {
+						switch (u.toPage.attr("id")) {
+							case "divRecibir":
+								if (u.options.data)
+									window.divRecibir_Ini(u.options.data);
+								break;
+						}
+					}
+				});
+
+				$("table th").click(function() {
+					var bAscendente = !($(this).hasClass("_Asc"));
+					var jTabla = $(this).parent().parent().parent();
+					window.vista.OrdenarTabla(jTabla[0], jTabla.find("th").index(this), bAscendente);
+				});
+
+				$("#formRecibir").submit(function() {
+					// return false;
+				});
+
+				$("#aRec_Guardar").click(function(e) {
+					e.preventDefault();
+
+					// Se pide la autorización
+					window.contenido.MostrarAcceso(function(oRes) {
+// console.log($("#formRecibir").serializeArray());
+// return;
+						var aPartes = [];
+						$("#tableRecibir tbody tr").each(function() {
+							aPartes.push({
+								MovimientoInventarioDetalleID: $(this).find("[name=MovimientoInventarioDetalleID]").val()
+								, ParteID: $(this).find("[name=ParteID]").val()
+								, Cantidad: $(this).find("[name=Cantidad]").val()
+								, Recibido: $(this).find("[name=Recibido]").val()
+							});
+						});
+
+						window.RecibirTraspaso(oRes.UsuarioID, $("#txtMotivo").val(), aPartes, true);
+					});
+				});
+			});
+
+			function divRecibir_Ini(oDatos) {
+				window.local.Ajax({
+					url: window.local.RutaMetodo("Traspasos", "DetalleTraspaso")
+					, data: { id: oDatos.Id }
+					, success: function(oRes) {
+						var jTabla = $("#tableRecibir tbody");
+						jTabla.empty();
+						for (var i = 0; i < oRes.length; i++) {
+							var oReg = oRes[i];
+							jTabla.append(window.html.tr(
+								window.html.hidden("MovimientoInventarioDetalleID", oReg.MovimientoInventarioDetalleID)
+								+ window.html.hidden("ParteID", oReg.ParteID)
+								+ window.html.hidden("Cantidad", oReg.Cantidad)
+								// + window.html.td(oReg.MovimientoInventarioDetalleID)
+								+ window.html.td(oReg.NumeroDeParte)
+								+ window.html.td(oReg.Descripcion)
+								+ window.html.td(window.html.text("Recibido", ""))
+							));
+						}
+						jTabla.find("input[type=text]").focus(function() {
+							$(this).attr("readonly", "readonly");
+							var oNum = $("div.TecladoNumerico")[0];
+							oNum.oInput = this;
+						}).focusout(function() {
+							window.setTimeout(function(oInput) {
+								var oNum = $("div.TecladoNumerico")[0];
+								if (oNum.oInput !== oInput) {
+									$(oInput).removeAttr("readonly");
+								}
+							}, 0, this);
+						});
+
+						jTabla.find("input[name=Recibido]").eq(0).focus();
+					}
+				});
+			}
+
+			function RecibirTraspaso(iUsuarioID, sMotivo, aPartes, bConflictos) {
+				window.local.Ajax({
+					url: window.local.RutaMetodo("Traspasos", "RecibirTraspaso")
+					, data: JSON.stringify({
+						eParam1: iUsuarioID
+						, eParam2: sMotivo
+						, eParam3: aPartes
+						, eParam4: bConflictos
+					})
+					, contentType: "application/json, charset=utf-8"
+					, success: function(oRes) {
+						if (oRes && oRes.Exito) {
+							window.contenido.Notificacion("Proceso completado exitosamente.");
+							// $("body").pagecontainer("change", "traspasos.html", { reload: true });
+							window.setTimeout(function() {
+								window.location.href = "traspasos.html";
+							}, 2000);
+						} else {
+							if (oRes.Codigo > 0) {
+								window.contenido.MensajePregunta("El traspaso tiene uno o más conflictos. ¿Deseas continuar?"
+									, function() {
+										window.RecibirTraspaso(iUsuarioID, sMotivo, aPartes, false);
+									}, null);
+							} else {
+								window.contenido.MensajeAdvertencia(oRes.Mensaje);
+							}
+						}
+					}
+					
+				});
+			}
+		</script>
+
+		<title>TheosMov - Traspasos</title>
+	</head>
+
+	<body>
+		<!-- Panel -->
+		<div id="divPanel" data-role="panel" data-position="right" data-display="overlay"></div>
+
+		<!-- Traspasos inicial -->
+		<div id="divTraspasos" class="Pagina" data-role="page">
+			<div class="Encabezado" data-role="header"></div>
+
+			<div class="Contenido" data-role="main">
+				<h4>Selecciona el traspaso a recibir:</h4>
+				<table id="tableTraspasos" data-role="table" data-mode="column">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Fecha</th>
+							<th>Origen</th>
+							<th>Solicitó</th>
+							<th>Registró</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Detalle del traspaso -->
+		<div id="divRecibir" class="Pagina" data-role="page">
+			<div class="Encabezado" data-role="header"></div>
+
+			<div class="Contenido" data-role="main">
+				<h4>Indica las cantidades a recibir:</h4>
+				<form id="formRecibir" action="#">
+					<input type="hidden" id="hndOperUsID" name="OperUsID" />
+					<div class="Grid">
+						<table id="tableRecibir" data-role="table" data-mode="column">
+							<thead>
+								<tr>
+									<!--tableRecibir <th>Id</th> -->
+									<th>No. Parte</th>
+									<th>Descripción</th>
+									<th>Recibido</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div class="Teclado">
+						
+					</div>
+					<div class="margen-ab5">
+						<label for="txtMotivo">Motivo</label>
+						<input id="txtMotivo" name="Motivo" type="text" />
+					</div>
+				</form>
+			</div>
+
+			<div class="Pie Botones" data-role="footer">
+				<a href="#" data-rel="back" class="ui-btn-left ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete no-top">Regresar</a>
+				<a id="aRec_Guardar" href="#" class="ui-btn-right ui-btn ui-corner-all ui-btn-icon-right ui-icon-check ui-btn-b no-top">Guardar</a>
+				<!-- <button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Save</button> -->
+			</div>
+		</div>
+	</body>
+</html>
