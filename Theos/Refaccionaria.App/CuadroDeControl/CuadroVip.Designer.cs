@@ -1127,11 +1127,11 @@
             this.tgvPartes.DefaultCellStyle = dataGridViewCellStyle33;
             this.tgvPartes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.tgvPartes.ImageList = null;
-            this.tgvPartes.Location = new System.Drawing.Point(263, 374);
+            this.tgvPartes.Location = new System.Drawing.Point(1297, 55);
             this.tgvPartes.MultiSelect = false;
             this.tgvPartes.Name = "tgvPartes";
             this.tgvPartes.RowHeadersVisible = false;
-            this.tgvPartes.Size = new System.Drawing.Size(296, 290);
+            this.tgvPartes.Size = new System.Drawing.Size(445, 290);
             this.tgvPartes.TabIndex = 227;
             // 
             // par_Categoria
@@ -1141,6 +1141,7 @@
             this.par_Categoria.Name = "par_Categoria";
             this.par_Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.par_Categoria.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.par_Categoria.Width = 300;
             // 
             // par_Importe
             // 
@@ -1201,7 +1202,7 @@
             this.Controls.Add(this.cmbSucursal);
             this.Controls.Add(this.label1);
             this.Name = "CuadroVip";
-            this.Size = new System.Drawing.Size(1201, 659);
+            this.Size = new System.Drawing.Size(1488, 706);
             this.Load += new System.EventHandler(this.CuadroVip_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();

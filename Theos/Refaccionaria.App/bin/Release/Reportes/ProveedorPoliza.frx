@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="06/23/2016 13:13:35" ReportInfo.CreatorVersion="2013.3.2.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="07/08/2016 13:42:17" ReportInfo.CreatorVersion="2013.3.2.0">
   <Dictionary>
-    <BusinessObjectDataSource Name="Poliza" ReferenceName="Poliza" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.ProveedoresPolizasView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+    <BusinessObjectDataSource Name="Poliza" ReferenceName="Poliza" DataType="System.Collections.Generic.List`1[[TheosProc.ProveedoresPolizasView, TheosProc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="ProveedorPolizaID" DataType="System.Int32"/>
       <Column Name="ProveedorID" DataType="System.Int32"/>
       <Column Name="Proveedor" DataType="System.String"/>
@@ -15,7 +15,7 @@
       <Column Name="Beneficiario" DataType="System.String"/>
       <Column Name="Folio" DataType="System.String"/>
     </BusinessObjectDataSource>
-    <BusinessObjectDataSource Name="Abonos" ReferenceName="Abonos" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.ProveedoresPolizasDetalleAvanzadoView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+    <BusinessObjectDataSource Name="Abonos" ReferenceName="Abonos" DataType="System.Collections.Generic.List`1[[TheosProc.ProveedoresPolizasDetalleAvanzadoView, TheosProc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="ProveedorPolizaDetalleID" DataType="System.Int32"/>
       <Column Name="ProveedorPolizaID" DataType="System.Int32"/>
       <Column Name="OrigenID" DataType="System.Int32"/>
@@ -36,7 +36,7 @@
       <Column Name="CajaEgresoID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
       <Column Name="Pagado" DataType="System.Boolean" BindableControl="CheckBox"/>
     </BusinessObjectDataSource>
-    <BusinessObjectDataSource Name="Facturas" ReferenceName="Facturas" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.ProveedoresPagosView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+    <BusinessObjectDataSource Name="Facturas" ReferenceName="Facturas" DataType="System.Collections.Generic.List`1[[TheosProc.ProveedoresPagosView, TheosProc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="ProveedorPolizaID" DataType="System.Int32"/>
       <Column Name="MovimientoInventarioID" DataType="System.Int32"/>
       <Column Name="ProveedorID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
@@ -71,14 +71,15 @@
       <TextObject Name="Text74" Left="406.35" Top="130.3" Width="113.4" Height="17.01" Text="SALDO" HorzAlign="Right" VertAlign="Center" Font="Consolas, 9pt, style=Bold" TextFill.Color="White"/>
       <TextObject Name="Text85" Left="623.7" Top="130.3" Width="113.4" Height="17.01" Text="FINAL" HorzAlign="Right" VertAlign="Center" Font="Consolas, 9pt, style=Bold" TextFill.Color="White"/>
       <TextObject Name="Text102" Left="633.15" Top="42.74" Width="103.95" Height="13.61" Text="[Poliza.ProveedorPolizaID]" HorzAlign="Right" Font="Calibri, 11pt, style=Bold"/>
-      <TextObject Name="Text103" Left="453.6" Top="113.24" Width="283.5" Height="15.86" Text="[Poliza.FechaPago]" Format="Date" Format.Format="f" HorzAlign="Right" VertAlign="Bottom" Font="Calibri, 10pt"/>
+      <TextObject Name="Text103" Left="453.6" Top="116.24" Width="283.5" Height="15.86" Text="[Poliza.FechaPago]" Format="Date" Format.Format="f" HorzAlign="Right" VertAlign="Bottom" Font="Calibri, 10pt"/>
       <TextObject Name="Text104" Left="633.15" Top="71.52" Width="103.95" Height="13.61" Text="[Poliza.NombreDeCuenta]" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text105" Left="633.15" Top="57.13" Width="103.95" Height="13.61" Text="[Poliza.Folio]" HorzAlign="Right" Font="Calibri, 11pt, style=Bold"/>
       <TextObject Name="Text106" Left="633.15" Top="85.91" Width="103.95" Height="13.61" Text="[Poliza.Usuario]" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text1" Top="66.8" Width="340.2" Height="37.15" Text="[Poliza.Proveedor]" Font="Calibri, 20pt, style=Bold"/>
       <TextObject Name="Text2" Top="101.95" Width="302.4" Height="18.9" Text="[PagoDirecto]" ProcessAt="ReportFinished" Format="Currency" Format.UseLocale="true" WordWrap="false" Font="Calibri, 12pt, style=Bold" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text130" Left="425.25" Top="99.36" Width="311.85" Height="13.61" Text="[Poliza.Beneficiario]" HorzAlign="Right" Font="Calibri, 11pt"/>
     </PageHeaderBand>
-    <DataBand Name="Data4" Top="153.76" Width="740.5" Height="18.41" DataSource="Facturas">
+    <DataBand Name="Data4" Top="152.46" Width="740.5" Height="18.41" DataSource="Facturas">
       <TextObject Name="Text108" Left="103.95" Width="94.5" Height="15.21" Text="[Facturas.Factura]" Font="Calibri, 11pt"/>
       <TextObject Name="Text109" Left="217.35" Width="85.05" Height="15.21" Text="[Facturas.ImporteFactura]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text112" Left="543.36" Width="85.05" Height="15.21" Text="[Facturas.Descuento]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt, style=Bold"/>
@@ -86,35 +87,35 @@
       <TextObject Name="Text110" Left="326.02" Width="85.05" Height="15.21" Text="[[Facturas.AbonadoTotal]-[Facturas.AbonadoImporte]]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text111" Left="434.69" Width="85.05" Height="15.21" Text="[[Facturas.ImporteFactura]-([Facturas.AbonadoTotal]-[Facturas.AbonadoImporte])]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 11pt"/>
       <TextObject Name="Text129" Width="103.95" Height="15.21" Text="[Facturas.FechaFactura]" Font="Calibri, 11pt"/>
-      <DataFooterBand Name="DataFooter1" Top="176.17" Width="740.5" Height="18.9">
+      <DataFooterBand Name="DataFooter1" Top="173.58" Width="740.5" Height="18.9">
         <TextObject Name="Text114" Left="113.4" Top="3" Width="103.95" Height="13.99" Text="Totales" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
         <TextObject Name="Text115" Left="217.35" Top="3" Width="94.5" Height="13.99" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
         <TextObject Name="Text118" Left="538.65" Top="3" Width="94.5" Height="13.99" Border.Lines="Top" Border.Color="Gray" Text="[Descuento]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
         <TextObject Name="Text119" Left="642.6" Top="3" Width="94.5" Height="13.99" Border.Lines="Top" Border.Color="Gray" Text="[PagoDirecto]" ProcessAt="ReportFinished" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Consolas, 10pt, style=Bold"/>
       </DataFooterBand>
     </DataBand>
-    <DataBand Name="Data1" Top="221.97" Width="740.5" Height="18.9" DataSource="Abonos">
+    <DataBand Name="Data1" Top="216.78" Width="740.5" Height="18.9" DataSource="Abonos">
       <TextObject Name="Text120" Top="2" Width="94.5" Height="15.21" Text="[Abonos.FolioFactura]" VertAlign="Bottom" Font="Calibri, 9pt"/>
       <TextObject Name="Text121" Left="94.5" Top="2" Width="179.55" Height="15.21" Text="[Abonos.Origen] [Abonos.NotaDeCreditoOrigen]" Font="Arial Narrow, 8pt"/>
       <TextObject Name="Text122" Left="434.7" Top="2" Width="75.6" Height="15.21" Text="[Abonos.Importe]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Bottom" Font="Calibri, 9pt, style=Bold"/>
       <TextObject Name="Text126" Left="529.2" Top="2" Width="207.9" Height="15.12" Text="[Abonos.Observacion]" Format="Number" Format.UseLocale="true" VertAlign="Bottom" Font="Calibri, 9pt"/>
       <TextObject Name="Text3" Left="274.05" Top="2" Width="75.6" Height="15.12" Text="[Abonos.Folio]" VertAlign="Bottom" Font="Calibri, 9pt"/>
       <TextObject Name="Text125" Left="349.65" Top="2" Width="47.25" Height="15.12" Text="[Abonos.NotaDeCreditoID]" HorzAlign="Right" VertAlign="Bottom" Font="Calibri, 9pt"/>
-      <DataHeaderBand Name="DataHeader1" Top="199.07" Width="740.5" Height="18.9">
+      <DataHeaderBand Name="DataHeader1" Top="195.18" Width="740.5" Height="18.9">
         <TextObject Name="Text95" Top="1" Width="737.3" Height="17.01" Fill.Color="Gray" Text="FACTURA" VertAlign="Center" Font="Consolas, 10pt, style=Bold" TextFill.Color="White"/>
         <TextObject Name="Text96" Left="415.8" Top="1" Width="94.5" Height="17.01" Text="IMPORTE" HorzAlign="Right" VertAlign="Center" Font="Consolas, 10pt, style=Bold" TextFill.Color="White"/>
         <TextObject Name="Text97" Left="103.95" Top="1" Width="113.4" Height="17.01" Text="TIPO PAGO" VertAlign="Center" Font="Consolas, 10pt, style=Bold" TextFill.Color="White"/>
         <TextObject Name="Text99" Left="264.6" Top="1.8" Width="85.05" Height="17.01" Text="FOLIO" HorzAlign="Center" VertAlign="Center" Font="Consolas, 10pt, style=Bold" TextFill.Color="White"/>
         <TextObject Name="Text101" Left="529.2" Top="1.8" Width="207.9" Height="17.01" Text="OBSERVACION" HorzAlign="Center" VertAlign="Center" Font="Consolas, 10pt, style=Bold" TextFill.Color="White"/>
       </DataHeaderBand>
-      <DataFooterBand Name="DataFooter2" Top="244.87" Width="740.5" Height="18.9">
+      <DataFooterBand Name="DataFooter2" Top="238.38" Width="740.5" Height="18.9">
         <TextObject Name="Text4" Left="434.7" Width="75.6" Height="18.9" Border.Lines="Top" Border.Color="Gray" Text="[Abonos]" Format="Number" Format.UseLocale="true" HorzAlign="Right" Font="Calibri, 10pt, style=Bold"/>
       </DataFooterBand>
       <Sort>
         <Sort Expression="[Abonos.FolioFactura]"/>
       </Sort>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="267.77" Width="740.5" Height="18.9">
+    <PageFooterBand Name="PageFooter1" Top="259.99" Width="740.5" Height="18.9">
       <TextObject Name="Text127" Width="170.1" Height="13.61" Text="Autopartes Garibaldi" Font="Consolas, 8pt, style=Bold" TextFill.Color="DimGray"/>
       <TextObject Name="Text128" Left="567" Width="170.1" Height="13.61" Text="[Poliza.Proveedor]" HorzAlign="Right" Font="Consolas, 8pt, style=Bold" TextFill.Color="DimGray"/>
     </PageFooterBand>
