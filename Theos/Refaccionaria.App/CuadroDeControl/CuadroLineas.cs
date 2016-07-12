@@ -24,6 +24,9 @@ namespace Refaccionaria.App
             // Se configuran las columnas
             this.dgvPrincipal.Columns["Principal_Nombre"].HeaderText = "Línea";
 
+            // Se muestra el combo de marcas, para filtro
+            this.MostrarComboMarcas(true);
+
             // Se manda a cargar los datos
             // this.CargarDatos();
         }

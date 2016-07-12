@@ -712,10 +712,13 @@ namespace Refaccionaria.App
                     oMovBanco.BancoCuentaID = oPorCobrar.ctlCobro.BancoCuentaID;
                     Datos.Guardar<BancoCuentaMovimiento>(oMovBanco);
                     // Se guarda el dato de teléfono en el registro del cliente
-                    if (oCliente.Celular != oPorCobrar.ctlCobro.CelularTarjeta)
+                    if (oCliente.ClienteID != Cat.Clientes.Mostrador)
                     {
-                        oCliente.Celular = oPorCobrar.ctlCobro.CelularTarjeta;
-                        Datos.Guardar<Cliente>(oCliente);
+                        if (oCliente.Celular != oPorCobrar.ctlCobro.CelularTarjeta)
+                        {
+                            oCliente.Celular = oPorCobrar.ctlCobro.CelularTarjeta;
+                            Datos.Guardar<Cliente>(oCliente);
+                        }
                     }
                 }
             }

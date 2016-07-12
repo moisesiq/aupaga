@@ -608,6 +608,23 @@ namespace Refaccionaria.App
         }
         
         #endregion
-                                        
+
+        #region [ Públicos ]
+
+        public void MostrarComboMarcas(bool bMostrar)
+        {
+            this.lblMarcas.Visible = bMostrar;
+            this.ctlMarcas.Visible = bMostrar;
+        }
+
+        public void MostrarComboLineas(bool bMostrar)
+        {
+            this.lblLineas.Visible = bMostrar;
+            this.ctlLineas.Visible = bMostrar;
+            this.lblLineas.Left = this.lblMarcas.Left;
+            this.ctlLineas.Left = this.ctlMarcas.Left;
+        }
+
+        #endregion
     }
 }

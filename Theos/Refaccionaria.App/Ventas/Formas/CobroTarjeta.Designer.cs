@@ -31,14 +31,13 @@
             this.rdbUnaSolaExhibicion = new System.Windows.Forms.RadioButton();
             this.rdbMeses = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.nudMeses = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCelular = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbCuenta = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMeses)).BeginInit();
+            this.cmbMeses = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // rdbUnaSolaExhibicion
@@ -76,13 +75,6 @@
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Meses";
-            // 
-            // nudMeses
-            // 
-            this.nudMeses.Location = new System.Drawing.Point(74, 79);
-            this.nudMeses.Name = "nudMeses";
-            this.nudMeses.Size = new System.Drawing.Size(57, 20);
-            this.nudMeses.TabIndex = 3;
             // 
             // label2
             // 
@@ -147,6 +139,16 @@
             this.cmbCuenta.Size = new System.Drawing.Size(121, 21);
             this.cmbCuenta.TabIndex = 0;
             // 
+            // cmbMeses
+            // 
+            this.cmbMeses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMeses.Enabled = false;
+            this.cmbMeses.FormattingEnabled = true;
+            this.cmbMeses.Location = new System.Drawing.Point(74, 78);
+            this.cmbMeses.Name = "cmbMeses";
+            this.cmbMeses.Size = new System.Drawing.Size(106, 21);
+            this.cmbMeses.TabIndex = 15;
+            // 
             // CobroTarjeta
             // 
             this.AcceptButton = this.btnAceptar;
@@ -155,13 +157,13 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(193, 161);
+            this.Controls.Add(this.cmbMeses);
             this.Controls.Add(this.cmbCuenta);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txtCelular);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.nudMeses);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rdbMeses);
             this.Controls.Add(this.rdbUnaSolaExhibicion);
@@ -174,7 +176,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Cobro con Tarjeta";
             this.Load += new System.EventHandler(this.CobroTarjeta_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.nudMeses)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,12 +186,12 @@
         private System.Windows.Forms.RadioButton rdbUnaSolaExhibicion;
         private System.Windows.Forms.RadioButton rdbMeses;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown nudMeses;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCelular;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbCuenta;
+        private System.Windows.Forms.ComboBox cmbMeses;
     }
 }

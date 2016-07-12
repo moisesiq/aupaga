@@ -169,8 +169,6 @@ namespace Refaccionaria.App
             sFormato += Util.Cadena((int)this.nudDecimales.Value);
             this.dgvClientes.Columns["cli_Adeudo"].DefaultCellStyle.Format = sFormato;
             this.dgvClientes.Columns["cli_Vencido"].DefaultCellStyle.Format = sFormato;
-            this.dgvClientes.Columns["cli_PromedioAnual"].DefaultCellStyle.Format = sFormato;
-            this.dgvClientes.Columns["cli_Promedio3Meses"].DefaultCellStyle.Format = sFormato;
             this.dgvPorSemana.Columns["sem_Expectativa"].DefaultCellStyle.Format = sFormato;
             this.dgvPorSemana.Columns["sem_Cobrado"].DefaultCellStyle.Format = sFormato;
             // this.dgvPorSemanaT.Columns["SemanaT_Actual"].DefaultCellStyle.Format = sFormato;

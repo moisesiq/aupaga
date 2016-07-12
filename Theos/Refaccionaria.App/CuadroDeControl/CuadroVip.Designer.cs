@@ -139,6 +139,8 @@
             this.par_Categoria = new AdvancedDataGridView.TreeGridColumn();
             this.par_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.par_Porcentaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblClientes = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSucursales)).BeginInit();
@@ -1127,11 +1129,11 @@
             this.tgvPartes.DefaultCellStyle = dataGridViewCellStyle33;
             this.tgvPartes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.tgvPartes.ImageList = null;
-            this.tgvPartes.Location = new System.Drawing.Point(1297, 55);
+            this.tgvPartes.Location = new System.Drawing.Point(263, 374);
             this.tgvPartes.MultiSelect = false;
             this.tgvPartes.Name = "tgvPartes";
             this.tgvPartes.RowHeadersVisible = false;
-            this.tgvPartes.Size = new System.Drawing.Size(445, 290);
+            this.tgvPartes.Size = new System.Drawing.Size(296, 290);
             this.tgvPartes.TabIndex = 227;
             // 
             // par_Categoria
@@ -1141,7 +1143,6 @@
             this.par_Categoria.Name = "par_Categoria";
             this.par_Categoria.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.par_Categoria.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.par_Categoria.Width = 300;
             // 
             // par_Importe
             // 
@@ -1163,12 +1164,36 @@
             this.par_Porcentaje.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.par_Porcentaje.Width = 60;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(565, 31);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 228;
+            this.label6.Text = "Clientes";
+            // 
+            // lblClientes
+            // 
+            this.lblClientes.AutoSize = true;
+            this.lblClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClientes.ForeColor = System.Drawing.Color.White;
+            this.lblClientes.Location = new System.Drawing.Point(623, 31);
+            this.lblClientes.Name = "lblClientes";
+            this.lblClientes.Size = new System.Drawing.Size(14, 13);
+            this.lblClientes.TabIndex = 229;
+            this.lblClientes.Text = "0";
+            // 
             // CuadroVip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.Controls.Add(this.lblClientes);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.tgvPartes);
             this.Controls.Add(this.txtPromedioAnios);
             this.Controls.Add(this.label5);
@@ -1202,7 +1227,7 @@
             this.Controls.Add(this.cmbSucursal);
             this.Controls.Add(this.label1);
             this.Name = "CuadroVip";
-            this.Size = new System.Drawing.Size(1488, 706);
+            this.Size = new System.Drawing.Size(1167, 625);
             this.Load += new System.EventHandler(this.CuadroVip_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
@@ -1286,5 +1311,7 @@
         private AdvancedDataGridView.TreeGridColumn par_Categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn par_Importe;
         private System.Windows.Forms.DataGridViewTextBoxColumn par_Porcentaje;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblClientes;
     }
 }

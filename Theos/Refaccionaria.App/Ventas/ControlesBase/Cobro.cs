@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Drawing;
@@ -50,7 +50,7 @@ namespace Refaccionaria.App
                 this._Total = value;
                 this.lblTotal.Text = value.ToString(GlobalClass.FormatoDecimal);
 
-                // Para actualizar autom√°ticamente el importe en efectivo (ya que es lo m√°s com√∫n)
+                // Para actualizar autom·ticamente el importe en efectivo (ya que es lo m·s com˙n)
                 /* if (this._AfectarEfectivo)
                 {
                     this.chkEfectivo.Checked = true;
@@ -165,7 +165,7 @@ namespace Refaccionaria.App
 
         private void rdbContado_CheckedChanged(object sender, EventArgs e)
         {
-            // Si no est√° habilitada la selecci√≥n de tipo de cobro, se sale
+            // Si no est· habilitada la selecciÛn de tipo de cobro, se sale
             if (!this.HabilitarTipoDePago) return;
 
             this.chkNoIdentificado.Enabled = this.rdbCredito.Checked;
@@ -174,12 +174,12 @@ namespace Refaccionaria.App
             // Si es Contado
             if (this.rdbContado.Checked)
             {
-                // Se quita la advertencia de no cr√©dito, si hubiera
+                // Se quita la advertencia de no crÈdito, si hubiera
                 this.ctlAdvertencia.QuitarError(this.rdbCredito);
                 this.ctlError.QuitarError(this.rdbCredito);
             }
 
-            // Si es Cr√©dito
+            // Si es CrÈdito
             else
             {
                 // Se desmarcan las formas de pago
@@ -190,21 +190,21 @@ namespace Refaccionaria.App
                 // this.chkNoIdentificado.Checked = false;
                 this.chkNotaDeCredito.Checked = false;
 
-                // Se verifica si el cliente tiene cr√©dito permitido
+                // Se verifica si el cliente tiene crÈdito permitido
                 var oCliente = Datos.GetEntity<Cliente>(q => q.ClienteID == this.ClienteID);
                 bool bTolerancia = oCliente.Tolerancia.Valor();
                 string sNoCredito = "No se puede continuar.";
-                string sAutorizacion = "Se requerir√° autorizaci√≥n para continuar con la Venta.";
+                string sAutorizacion = "Se requerir· autorizaciÛn para continuar con la Venta.";
                 string sError;
 
                 if (!oCliente.TieneCredito)
                 {
-                    this.ctlAdvertencia.PonerError(this.rdbCredito, "El cliente especificado no tiene Cr√©dito. " + sAutorizacion);
+                    this.ctlAdvertencia.PonerError(this.rdbCredito, "El cliente especificado no tiene CrÈdito. " + sAutorizacion);
                     return;
                 }
                 if (this.Total > oCliente.LimiteCredito)
                 {
-                    sError = "El Importe de la Venta es mayor al Cr√©dito que tiene el Cliente. ";
+                    sError = "El Importe de la Venta es mayor al CrÈdito que tiene el Cliente. ";
                     if (bTolerancia)
                         this.ctlAdvertencia.PonerError(this.rdbCredito, sError + sAutorizacion);
                     else
@@ -217,7 +217,7 @@ namespace Refaccionaria.App
                     DateTime dAdeudoIni = AdeudosCliente.Min(q => q.Fecha);
                     if (dAdeudoIni >= DateTime.Now.AddDays(oCliente.DiasDeCredito.Valor()))
                     {
-                        sError = "El Cliente ha sobrepasado su fecha l√≠mite de pago. ";
+                        sError = "El Cliente ha sobrepasado su fecha lÌmite de pago. ";
                         if (bTolerancia)
                             this.ctlAdvertencia.PonerError(this.rdbCredito, sError + sAutorizacion);
                         else
@@ -227,7 +227,7 @@ namespace Refaccionaria.App
                     decimal mAdeudo = AdeudosCliente.Sum(q => q.Restante.Valor());
                     if ((mAdeudo + this.Total) > oCliente.LimiteCredito)
                     {
-                        sError = "El Cliente ha sobrepasado su l√≠mite de cr√©dito. ";
+                        sError = "El Cliente ha sobrepasado su lÌmite de crÈdito. ";
                         if (bTolerancia)
                             this.ctlAdvertencia.PonerError(this.rdbCredito, sError + sAutorizacion);
                         else
@@ -349,11 +349,11 @@ namespace Refaccionaria.App
             this.frmNotasDeCredito.ShowDialog(Principal.Instance);
             if (this.frmNotasDeCredito.DialogResult == DialogResult.OK)
             {
-                // Si se agregaron notas de otros clientes, se requerir√° autorizaci√≥n
+                // Si se agregaron notas de otros clientes, se requerir· autorizaciÛn
                 if (this.ctlNotasDeCredito.HayNotasDeOtrosClientes)
                     this.ctlAdvertencia.PonerError(this.txtNotaDeCredito,
-                        "Uno o m√°s Vales no pertenecen al Cliente seleccionado. Se requerir√° autorizaci√≥n para continuar.", ErrorIconAlignment.MiddleLeft);
-                // Se agregan las notas de cr√©dito al texto
+                        "Uno o m·s Vales no pertenecen al Cliente seleccionado. Se requerir· autorizaciÛn para continuar.", ErrorIconAlignment.MiddleLeft);
+                // Se agregan las notas de crÈdito al texto
                 this.NotasDeCredito = this.ctlNotasDeCredito.GenerarNotasDeCredito();
                 this.txtNotaDeCredito.Clear();
                 foreach (var oNota in this.NotasDeCredito)
@@ -377,7 +377,7 @@ namespace Refaccionaria.App
 
         #endregion
 
-        #region [ M√©todos ]
+        #region [ MÈtodos ]
 
         private void HabilitarTextosFP()
         {
@@ -433,7 +433,7 @@ namespace Refaccionaria.App
             this.lblSuma.Text = mSuma.ToString(GlobalClass.FormatoDecimal);
             this.lblRestante.Text = (this.Total - mSuma).ToString(GlobalClass.FormatoDecimal);
 
-            // Se colorea el importe restante, seg√∫n sea el caso
+            // Se colorea el importe restante, seg˙n sea el caso
             this.lblRestante.ForeColor = (this.lblRestante.Text == "0.00" ? Color.SteelBlue : Color.OrangeRed);
         }
 
@@ -444,19 +444,19 @@ namespace Refaccionaria.App
 
             var Nota = Datos.GetEntity<NotaDeCredito>(q => q.NotaDeCreditoID == iNotaID);
             
-            // Se verifica si existe la nota de cr√©dito
+            // Se verifica si existe la nota de crÈdito
             if (Nota == null)
             {
-                UtilLocal.MensajeAdvertencia("La Nota de Cr√©dito especificada no existe.");
+                UtilLocal.MensajeAdvertencia("La Nota de CrÈdito especificada no existe.");
                 return;
             }
 
             // Se verifica si es del cliente seleccionado
             if (Nota.ClienteID != this.ClienteID)
                 this.ctlAdvertencia.PonerError(this.txtNotaDeCredito,
-                    "Una o m√°s Notas de Cr√©dito no pertenecen al Cliente seleccionado. Se requerir√° autorizaci√≥n para continuar.", ErrorIconAlignment.MiddleLeft);
+                    "Una o m·s Notas de CrÈdito no pertenecen al Cliente seleccionado. Se requerir· autorizaciÛn para continuar.", ErrorIconAlignment.MiddleLeft);
             
-            // Se agrea la nota de cr√©dito
+            // Se agrea la nota de crÈdito
             this.txtNotaDeCredito.Text += (", " + iNotaID.ToString());
             this.NotasDeCredito.Add(iNotaID, Nota.Importe);
 
@@ -473,7 +473,7 @@ namespace Refaccionaria.App
 
         #endregion
 
-        #region [ P√∫blicos ]
+        #region [ P˙blicos ]
 
         public void CambiarCliente(int iClienteID)
         {
@@ -502,7 +502,7 @@ namespace Refaccionaria.App
 
         public virtual bool Validar()
         {
-            // Se verifica si hay error por cobro a cr√©dito y no tolerancia
+            // Se verifica si hay error por cobro a crÈdito y no tolerancia
             if (this.ctlError.TieneError(this.rdbCredito))
                 return false;
 
@@ -514,7 +514,7 @@ namespace Refaccionaria.App
                 if (this.txtFolio.Text == "")
                     this.ctlError.PonerError(this.lblFolio, "Debes especificar el Folio.", ErrorIconAlignment.MiddleLeft);
                 if (this.txtCuenta.Text.Length != 4 || !Util.ValidarEntero(this.txtCuenta.Text))
-                    this.ctlError.PonerError(this.lblCuenta, "Debes especificar los √∫ltimos 4 d√≠gitos de la Cuenta.", ErrorIconAlignment.MiddleLeft);
+                    this.ctlError.PonerError(this.lblCuenta, "Debes especificar los ˙ltimos 4 dÌgitos de la Cuenta.", ErrorIconAlignment.MiddleLeft);
             }
             if (this.cmbVendedor.SelectedValue == null)
                 this.ctlError.PonerError(this.cmbVendedor, "Debes especificar el Vendedor.");
@@ -549,9 +549,14 @@ namespace Refaccionaria.App
             bExito = true;
             if (this.txtTarjetaDeCredito.Text.ValorDecimal() > 0)
             {
+                bool bClienteMostrador = (this.ClienteID == Cat.Clientes.Mostrador);
+
                 var frmTarjeta = new CobroTarjeta();
-                var oCliente = Datos.GetEntity<Cliente>(c => c.ClienteID == this.ClienteID && c.Estatus);
-                frmTarjeta.Celular = oCliente.Celular;
+                if (!bClienteMostrador)
+                {
+                    var oCliente = Datos.GetEntity<Cliente>(c => c.ClienteID == this.ClienteID && c.Estatus);
+                    frmTarjeta.Celular = oCliente.Celular;
+                }
                 bExito = (frmTarjeta.ShowDialog(Principal.Instance) == DialogResult.OK);
                 if (bExito)
                 {
@@ -596,7 +601,7 @@ namespace Refaccionaria.App
             // No identificado
             if (this.chkNoIdentificado.Checked && (mImporte = this.txtNoIdentificado.Text.ValorDecimal()) > 0)
                 PagoDetalle.Add(new VentaPagoDetalle() { TipoFormaPagoID = Cat.FormasDePago.NoIdentificado, Importe = mImporte });
-            // Notas de cr√©dito
+            // Notas de crÈdito
             if (this.chkNotaDeCredito.Checked)
             {
                 foreach (var Nota in this.NotasDeCredito)
@@ -619,6 +624,7 @@ namespace Refaccionaria.App
             this.txtKilometraje.Clear();
 
             this.EfectivoRecibido = null;
+            this.BancoCuentaID = 0;
         }
 
         public void LimpiarFormasDePago()
@@ -635,7 +641,7 @@ namespace Refaccionaria.App
         {
             // Se limpian datos
             this.LimpiarDatos();
-            // Se llenan los datos seg√∫n la venta especificada
+            // Se llenan los datos seg˙n la venta especificada
             var oVenta = Datos.GetEntity<Venta>(c => c.VentaID == iVentaID && c.Estatus);
             this.VentaID = iVentaID;
             // this.ClienteID = oVenta.ClienteID;
@@ -705,7 +711,7 @@ namespace Refaccionaria.App
                         break;
                     case Cat.FormasDePago.Vale:
                         this.chkNotaDeCredito.Checked = true;
-                        // S√≥lo se agregan en el TextBox de forma informativa, no se agregan en el listado de notas (this.NotasDeCredito)
+                        // SÛlo se agregan en el TextBox de forma informativa, no se agregan en el listado de notas (this.NotasDeCredito)
                         this.txtNotaDeCredito.Text += ((this.txtNotaDeCredito.Text == "" ? "" : ", ") + oFormaDePago.NotaDeCreditoID.Valor().ToString());
                         break;
                 }
@@ -740,8 +746,8 @@ namespace Refaccionaria.App
                     this.txtTransferencia.Text = sImporte;
                     break;
                 case Cat.FormasDePago.NoIdentificado:
-                    // Ahora si est√° como predeterminado No Identificado, s√≥lo se llena la leyenda "NO IDENTIFICADO", para que as√≠ se vea en la factura,
-                    // pero no se marcar para que se obligue a seleccionar otro m√©todo de pago
+                    // Ahora si est· como predeterminado No Identificado, sÛlo se llena la leyenda "NO IDENTIFICADO", para que asÌ se vea en la factura,
+                    // pero no se marcar para que se obligue a seleccionar otro mÈtodo de pago
                     this.chkEfectivo.Checked = true;
                     this.txtEfectivo.Text = sImporte;
                     this.txtFormaDePagoLibre.Text = "NO IDENTIFICADO";

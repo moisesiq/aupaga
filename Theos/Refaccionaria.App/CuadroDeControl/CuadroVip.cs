@@ -122,7 +122,7 @@ namespace Refaccionaria.App
             oParams.Remove("Hasta");
             this.oDatosPorAnio = Datos.ExecuteProcedure<pauCuadroDeControlPorAnio_Result>("pauCuadroDeControlPorAnio", oParams);
             // Se obtienen los datos agrupados por clientes y semanas, para marcar en rojo
-            var oCliSem = this.ObtenerClientesSemanas(this.oDatos).ToList();
+            var oCliSem = this.ObtenerClientesSemanas(this.oDatos).OrderByDescending(c => c.Semana).ToList();
             var oCliProm = oCliSem.GroupBy(c => c.ClienteID).Select(c => new { ClienteID = c.Key, Promedio = c.Average(s => s.Actual) }).ToList();
 
             // Se llena el grid de clientes
@@ -137,9 +137,10 @@ namespace Refaccionaria.App
 
                 // Se obtiene un el dato de si tiene más de 2 semanas abajo del promedio, para marcarlo en rojo
                 decimal mPromedio = oCliProm.FirstOrDefault(c => c.ClienteID == oReg.Llave).Promedio;
-                if (oCliSem.Count(c => c.ClienteID == oReg.Llave && c.Actual < mPromedio) > 2)
-                    this.dgvClientes.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
+                if (oCliSem.Where(c => c.ClienteID == oReg.Llave).Take(3).Any(c => c.Actual < mPromedio))
+                    this.dgvClientes.Rows[iFila].DefaultCellStyle.ForeColor = Color.Black;
             }
+            int iTotalClientes = this.dgvClientes.Rows.Count;
 
             // Se llena el dato de acumulado
             decimal mPorAcum = 0;
@@ -149,10 +150,14 @@ namespace Refaccionaria.App
                 oFila.Cells["cli_Acumulado"].Value = mPorAcum;
                 // Se valida si se pasa del máximo, para ocultarlo
                 if ((mPorAcum * 100) > this.nudAcumuladoMostrar.Value)
+                {
                     oFila.Visible = false;
+                    iTotalClientes--;
+                }
             }
 
             // Para configurar las columnas de los grids
+            this.lblClientes.Text = iTotalClientes.ToString(Con.Formatos.Entero);
             this.AplicarFormatoColumnas();
 
             Cargando.Cerrar();
@@ -178,7 +183,7 @@ namespace Refaccionaria.App
                 this.chrPorSemana.Series["Anterior"].Points.AddXY(oReg.Llave, oReg.Anterior);
                 this.chrPorSemana.Series["Promedio"].Points.AddXY(oReg.Llave, mPromedio);
                 if (oReg.Actual < mPromedio)
-                    this.dgvSemanas.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
+                    this.dgvSemanas.Rows[iFila].DefaultCellStyle.ForeColor = Color.Black;
             }
             this.txtPromedioSemanas.Text = mPromedio.ToString();
         }
@@ -203,7 +208,7 @@ namespace Refaccionaria.App
                 this.chrPorMes.Series["Anterior"].Points.AddXY(oReg.Llave, oReg.Anterior);
                 this.chrPorMes.Series["Promedio"].Points.AddXY(oReg.Llave, mPromedio);
                 if (oReg.Actual < mPromedio)
-                    this.dgvMeses.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red;
+                    this.dgvMeses.Rows[iFila].DefaultCellStyle.ForeColor = Color.Black;
             }
             this.txtPromedioMeses.Text = mPromedio.ToString();
         }
@@ -289,19 +294,21 @@ namespace Refaccionaria.App
 
             return 0;
         }
-        
+
         private void CargarArbolPartes(int iClienteID)
         {
             if (this.oDatosPartes.Count == 0)
                 return;
 
-            var oPartes = this.ObtenerDatosPartes(this.oDatosPartes).OrderBy(c => c.Sistema).ThenBy(c => c.Subsistema).ThenBy(c => c.Linea).ThenBy(c => c.Marca).ToList();
+            var oFiltro = this.oDatosPartes.Where(c => c.ClienteID == iClienteID);
+            var oPartes = this.ObtenerDatosPartes(oFiltro).OrderBy(c => c.Sistema).ThenBy(c => c.Subsistema).ThenBy(c => c.Linea).ThenBy(c => c.Marca).ToList();
             decimal mTotal = (oPartes.Count() > 0 ? oPartes.Sum(c => c.Actual) : 0);
 
             string sSistema, sSubsistema, sLinea, sMarca;
             TreeGridNode oNodoSistema, oNodoSubsistema, oNodoLinea, oNodoMarca;
             sSistema = sSubsistema = sLinea = sMarca = "";
             oNodoSistema = oNodoSubsistema = oNodoLinea = oNodoMarca = null;
+            this.tgvPartes.Nodes.Clear();
             foreach (var oReg in oPartes)
             {
                 if (oReg.Sistema != sSistema)
@@ -595,7 +602,7 @@ namespace Refaccionaria.App
             public string Marca { get; set; }
             public decimal Actual { get; set; }
         }
-        private IEnumerable<TotalesPartes> ObtenerDatosPartes(List<pauCuadroDeControlPartes_Result> oDatos)
+        private IEnumerable<TotalesPartes> ObtenerDatosPartes(IEnumerable<pauCuadroDeControlPartes_Result> oDatos)
         {
             var oGrupo = oDatos.GroupBy(c => new { c.Sistema, c.Subsistema, c.Linea, c.Marca });
             string sCalculo = this.cmbCalculo.Text;

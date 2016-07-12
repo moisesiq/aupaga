@@ -2379,7 +2379,8 @@ namespace Refaccionaria.App
                     // Si es una entrada compra, se busca cambio de costo con descuento
                     if (oMov.TipoOperacionID == Cat.TiposDeOperacionMovimientos.EntradaCompra)
                     {
-                        var oPrecioHist = Datos.GetEntity<PartePrecioHistorico>(c => c.MovimientoInventarioID == oMov.MovimientoInventarioID && c.Estatus);
+                        var oPrecioHist = Datos.GetEntity<PartePrecioHistorico>(c => c.MovimientoInventarioID == oMov.MovimientoInventarioID
+                            && c.ParteID == oKardex.ParteID && c.Estatus);
                         if (oPrecioHist != null)
                             this.txtKardexObservacion.Text += ("\r\nCosto con descuento: " + oPrecioHist.CostoConDescuento.Valor().ToString(GlobalClass.FormatoMoneda));
                     }

@@ -333,7 +333,7 @@ namespace Refaccionaria.App
 
             // Primero se restablecen los costos con descuento de todas las partes,
             foreach (DataGridViewRow oFila in this.dgvDetalleDescuentos.Rows)
-                oFila.Cells["CostoConDescuento"].Value = oFila.Cells["Unitario"].Value;
+                oFila.Cells["CostoConDescuentoNuevo"].Value = oFila.Cells["Unitario"].Value;
 
             // Se procesan primero los descuentos individuales a factura
             foreach (DataGridViewRow row in this.dgvHistorialDescuentos.Rows)
@@ -346,10 +346,10 @@ namespace Refaccionaria.App
                     {
                         if (Util.Entero(fila.Cells["ParteID"].Value) == iParteID)
                         {
-                            mUnitario = Util.Decimal(fila.Cells["CostoConDescuento"].Value);
+                            mUnitario = Util.Decimal(fila.Cells["CostoConDescuentoNuevo"].Value);
                             mCantidad = Util.Decimal(fila.Cells["UNS"].Value);
                             resultado = this.calcularDescuento(mUnitario, aDescuentos[0], aDescuentos[1], aDescuentos[2], aDescuentos[3], aDescuentos[4]);
-                            fila.Cells["CostoConDescuento"].Value = resultado;
+                            fila.Cells["CostoConDescuentoNuevo"].Value = resultado;
                             resultado = (mUnitario - resultado);
                             resultado *= mCantidad;
                             mDescuento += (resultado * iva);
@@ -371,10 +371,10 @@ namespace Refaccionaria.App
                     {
                         if (fila.Cells["ParteID"].Value.ToString().Equals(parteId))
                         {
-                            mUnitario = Util.Decimal(fila.Cells["CostoConDescuento"].Value);
+                            mUnitario = Util.Decimal(fila.Cells["CostoConDescuentoNuevo"].Value);
                             mCantidad = Util.Decimal(fila.Cells["UNS"].Value);
                             resultado = this.calcularDescuento(mUnitario, aDescuentos[0], aDescuentos[1], aDescuentos[2], aDescuentos[3], aDescuentos[4]);
-                            fila.Cells["CostoConDescuento"].Value = resultado;
+                            fila.Cells["CostoConDescuentoNuevo"].Value = resultado;
                             resultado = (mUnitario - resultado);
                             resultado *= mCantidad;
                             //Segundo: Se suma el importe de descuento y se resta en el total de la factura
@@ -401,10 +401,10 @@ namespace Refaccionaria.App
                     var aDescuentos = this.ObtenerDescuentosFila(row);
                     foreach (DataGridViewRow fila in this.dgvDetalleDescuentos.Rows)
                     {
-                        mUnitario = Util.Decimal(fila.Cells["CostoConDescuento"].Value);
+                        mUnitario = Util.Decimal(fila.Cells["CostoConDescuentoNuevo"].Value);
                         mCantidad = Util.Decimal(fila.Cells["UNS"].Value);
                         resultado = this.calcularDescuento(mUnitario, aDescuentos[0], aDescuentos[1], aDescuentos[2], aDescuentos[3], aDescuentos[4]);
-                        fila.Cells["CostoConDescuento"].Value = resultado;
+                        fila.Cells["CostoConDescuentoNuevo"].Value = resultado;
                         resultado = (mUnitario - resultado);
                         resultado *= mCantidad;
                         mDescuento += (resultado * iva);
@@ -901,7 +901,7 @@ namespace Refaccionaria.App
                                 var rowIndex = UtilLocal.findRowIndex(this.dgvDetalleDescuentos, "ParteID", parteId.ToString());
                                 if (rowIndex != -1)
                                 {
-                                    costoConDescuento = Util.Decimal(this.dgvDetalleDescuentos.Rows[rowIndex].Cells["CostoConDescuento"].Value);
+                                    costoConDescuento = Util.Decimal(this.dgvDetalleDescuentos.Rows[rowIndex].Cells["CostoConDescuentoNuevo"].Value);
                                     partePrecio.CostoConDescuento = costoConDescuento;
 
                                     /*
@@ -2247,7 +2247,8 @@ namespace Refaccionaria.App
                     row["Costo Inicial"] = parte.Costo;
                     row["UNS"] = 1;
                     row["Importe"] = parte.Costo;
-
+                    row["CostoConDescuento"] = parte.CostoConDescuento;
+                    
                     dtDetalleConceptos.Rows.Add(row);
                     if (this.dgvDetalleCaptura.Rows.Count > 0)
                     {
@@ -2402,21 +2403,24 @@ namespace Refaccionaria.App
                 colImporte.DataType = Type.GetType("System.Decimal");
                 colImporte.ColumnName = "Importe";
 
+                var oColCostoConDescuento = new DataColumn() { DataType = typeof(decimal), ColumnName = "CostoConDescuento" };
+
                 // Se agrega una columna para saber cuál es el detalle movimiento fuente
                 var oColFuente = new DataColumn() { DataType = typeof(int), ColumnName = "FuenteMovimientoInventarioDetalleID" };
 
                 dtDetalleConceptos.Columns.AddRange(new DataColumn[] { colParteId, colMarcaParteId, colNumeroParte, colNombreParte, colPrecioLista, colUnidades, colImporte
-                    , oColFuente });
+                    , oColCostoConDescuento, oColFuente });
 
                 this.dgvDetalleCaptura.DataSource = dtDetalleConceptos;
                 Util.OcultarColumnas(this.dgvDetalleCaptura, new string[] { "ParteID", "MarcaParteID", "FuenteMovimientoInventarioDetalleID" });
+                this.dgvDetalleCaptura.Columns["CostoConDescuento"].HeaderText = "Costo Desc.";
                 foreach (DataGridViewColumn column in this.dgvDetalleCaptura.Columns)
                 {
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                     if (column.Name != "Costo Inicial" && column.Name != "UNS")
                         column.ReadOnly = true;
 
-                    if (column.Name == "Costo Inicial" || column.Name == "UNS" || column.Name == "Importe")
+                    if (column.Name == "Costo Inicial" || column.Name == "UNS" || column.Name == "Importe" || column.Name == "CostoConDescuento")
                     {
                         column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                         column.DefaultCellStyle.Format = GlobalClass.FormatoDecimal;
@@ -2428,7 +2432,7 @@ namespace Refaccionaria.App
             }
             catch (Exception ex)
             {
-
+                UtilLocal.MensajeError(ex.MensajeDeError());
             }
         }
 
@@ -2632,6 +2636,7 @@ namespace Refaccionaria.App
                     row["Unitario"] = 0;                //=(Importe / UNS)
                     row["UNS"] = 0;                     //Valor UNS del grid incial
                     row["Importe"] = 0;                 //Valor Importe del grid inicial
+                    row["CostoConDescuentoActual"] = parte.CostoConDescuento;
                     dtDetalleDescuentos.Rows.Add(row);
                 }
             }
@@ -2716,17 +2721,18 @@ namespace Refaccionaria.App
                 colImporte.DataType = Type.GetType("System.Decimal");
                 colImporte.ColumnName = "Importe";
 
-                var colCostoConDescuento = new DataColumn();
-                colCostoConDescuento.DataType = Type.GetType("System.Decimal");
-                colCostoConDescuento.ColumnName = "CostoConDescuento";
-
+                var colCostoConDescuentoActual = new DataColumn() { DataType = typeof(decimal), ColumnName = "CostoConDescuentoActual" };
+                var colCostoConDescuentoNuevo = new DataColumn() { DataType = typeof(decimal), ColumnName = "CostoConDescuentoNuevo" };
+                
                 dtDetalleDescuentos.Columns.AddRange(new DataColumn[] { colParteId, colMarcaParteId, colNumeroParte, colDescripcion, colCostoInicial, 
                     colDescuentoMarca, colResultadoMarca, colDescuentoItems, colResultadoItems, colDescuentoIndividual, colResultadoIndividual, 
-                    colUnitarios, colUnidades, colImporte, colCostoConDescuento });
+                    colUnitarios, colUnidades, colImporte, colCostoConDescuentoActual, colCostoConDescuentoNuevo });
 
                 this.dgvDetalleDescuentos.DataSource = dtDetalleDescuentos;
                 Util.OcultarColumnas(this.dgvDetalleDescuentos, new string[] { "ParteID", "MarcaParteID" });
-                // this.dgvDetalleDescuentos.Columns["CostoConDescuento"].HeaderText = "Costo Desc.";
+                this.dgvDetalleDescuentos.Columns["CostoConDescuentoActual"].HeaderText = "Costo D. Actual";
+                this.dgvDetalleDescuentos.Columns["CostoConDescuentoNuevo"].HeaderText = "Costo D. Nuevo";
+                // this.dgvDetalleCaptura.DefaultCellStyle.ForeColor = Color.Black;
 
                 if (!this.dgvDetalleDescuentos.Columns.Contains("X"))
                 {
@@ -2853,7 +2859,7 @@ namespace Refaccionaria.App
             }
             catch (Exception ex)
             {
-
+                UtilLocal.MensajeError(ex.MensajeDeError());
             }
         }
 
@@ -3572,6 +3578,9 @@ namespace Refaccionaria.App
 
         private void dgvDetalleDescuentos_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
             foreach (DataGridViewColumn column in this.dgvDetalleDescuentos.Columns)
                 if (column.Name != "ParteID" && column.Name != "Numero Parte" && column.Name != "Descripcion" && column.Name != "Costo Inicial"
                     && column.Name != "Unitario" && column.Name != "UNS" && column.Name != "Importe")

@@ -225,6 +225,7 @@ namespace Refaccionaria.App
             {
                 decimal mDato = this.ObtenerDatoAnio(oReg);
                 this.dgvPorAnio.Rows.Add(oReg.Anio, mDato);
+                this.chrPorAnio.Series["Actual"].Points.AddXY(oReg.Anio, mDato);
             }
 
             // Se configuran columnas del grid

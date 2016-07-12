@@ -34,6 +34,8 @@ namespace Refaccionaria.App
             // Se carga el combo de bancos
             this.cmbCuenta.CargarDatos("BancoCuentaID", "NombreDeCuenta", Datos.GetListOf<BancoCuenta>(
                 c => c.BancoCuentaID == Cat.CuentasBancarias.Banamex || c.BancoCuentaID == Cat.CuentasBancarias.Serfin));
+            // Se carga el combo de meses
+            this.cmbMeses.Items.AddRange(new object[] { 3, 6, 9, 12 });
         }
 
         private void rdbUnaSolaExhibicion_CheckedChanged(object sender, EventArgs e)
@@ -47,7 +49,7 @@ namespace Refaccionaria.App
             if (this.rdbMeses.Focused)
                 this.VerHabilitarControles();
         }
-
+        
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (!this.Validar())
@@ -55,7 +57,7 @@ namespace Refaccionaria.App
 
             this.BancoCuentaID = Util.Entero(this.cmbCuenta.SelectedValue);
             if (this.rdbMeses.Checked)
-                this.Meses = (int)this.nudMeses.Value;
+                this.Meses = Util.Entero(this.cmbMeses.Text);
             // this.Celular = this.txtCelular.Text;
 
             this.DialogResult = DialogResult.OK;
@@ -73,7 +75,7 @@ namespace Refaccionaria.App
 
         private void VerHabilitarControles()
         {
-            this.nudMeses.Enabled = this.rdbMeses.Checked;
+            this.cmbMeses.Enabled = this.rdbMeses.Checked;
         }
 
         private bool Validar()

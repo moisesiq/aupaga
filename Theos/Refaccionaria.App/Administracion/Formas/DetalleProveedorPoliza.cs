@@ -43,7 +43,6 @@ namespace Refaccionaria.App
                 || c.TipoFormaPagoID == Cat.FormasDePago.Tarjeta || c.TipoFormaPagoID == Cat.FormasDePago.Transferencia));
             this.cboFormaPago.DisplayMember = "NombreTipoFormaPago";
             this.cboFormaPago.ValueMember = "TipoFormaPagoID";
-            this.cboFormaPago.SelectedValue = Cat.FormasDePago.Transferencia;
 
             Proveedor = Datos.GetEntity<Proveedor>(p => p.ProveedorID.Equals(ProveedorId));
             this.txtBeneficiario.Text = Proveedor.Beneficiario;

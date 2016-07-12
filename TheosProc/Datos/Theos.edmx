@@ -4449,6 +4449,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesBusquedaEnMovimient
           <Property Name="Marca" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="PartePrecioID" Type="int" Nullable="false" />
           <Property Name="Costo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CostoConDescuento" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PorcentajeUtilidadUno" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PorcentajeUtilidadDos" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PorcentajeUtilidadTres" Type="decimal" Precision="18" Scale="2" />
@@ -12666,6 +12667,7 @@ FROM [dbo].[PartesAvancesView] AS [PartesAvancesView]</DefiningQuery>
 [PartesBusquedaEnMovimientosView].[Marca] AS [Marca], 
 [PartesBusquedaEnMovimientosView].[PartePrecioID] AS [PartePrecioID], 
 [PartesBusquedaEnMovimientosView].[Costo] AS [Costo], 
+[PartesBusquedaEnMovimientosView].[CostoConDescuento] AS [CostoConDescuento], 
 [PartesBusquedaEnMovimientosView].[PorcentajeUtilidadUno] AS [PorcentajeUtilidadUno], 
 [PartesBusquedaEnMovimientosView].[PorcentajeUtilidadDos] AS [PorcentajeUtilidadDos], 
 [PartesBusquedaEnMovimientosView].[PorcentajeUtilidadTres] AS [PorcentajeUtilidadTres], 
@@ -15705,7 +15707,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="NotasDeCreditoFiscalesView" EntityType="ControlRefaccionariaModel.NotasDeCreditoFiscalesView" />
           <EntitySet Name="NotasDeCreditoView" EntityType="ControlRefaccionariaModel.NotasDeCreditoView" />
           <EntitySet Name="PartesAvancesView" EntityType="ControlRefaccionariaModel.PartesAvancesView" />
-          <EntitySet Name="PartesBusquedaEnMovimientosView" EntityType="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView" />
           <EntitySet Name="PartesCaracteristicasView" EntityType="ControlRefaccionariaModel.PartesCaracteristicasView" />
           <EntitySet Name="PartesClasificacionAbcView" EntityType="ControlRefaccionariaModel.PartesClasificacionAbcView" />
           <EntitySet Name="PartesCodigosAlternosView" EntityType="ControlRefaccionariaModel.PartesCodigosAlternosView" />
@@ -17748,6 +17749,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="InventarioLinea" EntitySet="InventarioLinea" />
           </AssociationSet>
+          <EntitySet Name="PartesBusquedaEnMovimientosView" EntityType="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView" />
           </EntityContainer>
         <EntityType Name="Autorizacion">
           <Key>
@@ -22824,42 +22826,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="ComplementariosVal" Type="Boolean" />
           <Property Name="CaracteristicasVal" Type="Boolean" />
           <Property Name="Validado" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="PartesBusquedaEnMovimientosView">
-          <Key>
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="MarcaParteID" />
-            <PropertyRef Name="LineaID" />
-            <PropertyRef Name="NumeroParte" />
-            <PropertyRef Name="NombreParte" />
-            <PropertyRef Name="Linea" />
-            <PropertyRef Name="Marca" />
-            <PropertyRef Name="PartePrecioID" />
-            <PropertyRef Name="Busqueda" />
-          </Key>
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="ParteEstatusID" Type="Int32" />
-          <Property Name="MarcaParteID" Type="Int32" Nullable="false" />
-          <Property Name="LineaID" Type="Int32" Nullable="false" />
-          <Property Name="NumeroParte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NombreParte" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Linea" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Marca" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PartePrecioID" Type="Int32" Nullable="false" />
-          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PorcentajeUtilidadUno" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PorcentajeUtilidadDos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PorcentajeUtilidadTres" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PorcentajeUtilidadCuatro" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PorcentajeUtilidadCinco" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PrecioUno" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PrecioDos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PrecioTres" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PrecioCuatro" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PrecioCinco" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Etiqueta" Type="Boolean" />
-          <Property Name="SoloUnaEtiqueta" Type="Boolean" />
-          <Property Name="Busqueda" Type="String" Nullable="false" MaxLength="862" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PartesCaracteristicasView">
           <Key>
@@ -29950,6 +29916,43 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PartesBusquedaEnMovimientosView">
+          <Key>
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="MarcaParteID" />
+            <PropertyRef Name="LineaID" />
+            <PropertyRef Name="NumeroParte" />
+            <PropertyRef Name="NombreParte" />
+            <PropertyRef Name="Linea" />
+            <PropertyRef Name="Marca" />
+            <PropertyRef Name="PartePrecioID" />
+            <PropertyRef Name="Busqueda" />
+          </Key>
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="ParteEstatusID" Type="Int32" />
+          <Property Name="MarcaParteID" Type="Int32" Nullable="false" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="NumeroParte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NombreParte" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Linea" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Marca" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PartePrecioID" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CostoConDescuento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeUtilidadUno" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeUtilidadDos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeUtilidadTres" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeUtilidadCuatro" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PorcentajeUtilidadCinco" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrecioUno" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrecioDos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrecioTres" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrecioCuatro" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PrecioCinco" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Etiqueta" Type="Boolean" />
+          <Property Name="SoloUnaEtiqueta" Type="Boolean" />
+          <Property Name="Busqueda" Type="String" Nullable="false" MaxLength="862" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -34154,35 +34157,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PartesBusquedaEnMovimientosView">
-            <EntityTypeMapping TypeName="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView">
-              <MappingFragment StoreEntitySet="PartesBusquedaEnMovimientosView">
-                <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
-                <ScalarProperty Name="SoloUnaEtiqueta" ColumnName="SoloUnaEtiqueta" />
-                <ScalarProperty Name="Etiqueta" ColumnName="Etiqueta" />
-                <ScalarProperty Name="PrecioCinco" ColumnName="PrecioCinco" />
-                <ScalarProperty Name="PrecioCuatro" ColumnName="PrecioCuatro" />
-                <ScalarProperty Name="PrecioTres" ColumnName="PrecioTres" />
-                <ScalarProperty Name="PrecioDos" ColumnName="PrecioDos" />
-                <ScalarProperty Name="PrecioUno" ColumnName="PrecioUno" />
-                <ScalarProperty Name="PorcentajeUtilidadCinco" ColumnName="PorcentajeUtilidadCinco" />
-                <ScalarProperty Name="PorcentajeUtilidadCuatro" ColumnName="PorcentajeUtilidadCuatro" />
-                <ScalarProperty Name="PorcentajeUtilidadTres" ColumnName="PorcentajeUtilidadTres" />
-                <ScalarProperty Name="PorcentajeUtilidadDos" ColumnName="PorcentajeUtilidadDos" />
-                <ScalarProperty Name="PorcentajeUtilidadUno" ColumnName="PorcentajeUtilidadUno" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="PartePrecioID" ColumnName="PartePrecioID" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="NombreParte" ColumnName="NombreParte" />
-                <ScalarProperty Name="NumeroParte" ColumnName="NumeroParte" />
-                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
-                <ScalarProperty Name="ParteEstatusID" ColumnName="ParteEstatusID" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PartesCaracteristicasView">
             <EntityTypeMapping TypeName="ControlRefaccionariaModel.PartesCaracteristicasView">
               <MappingFragment StoreEntitySet="PartesCaracteristicasView">
@@ -36075,6 +36049,36 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PartesBusquedaEnMovimientosView">
+            <EntityTypeMapping TypeName="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView">
+              <MappingFragment StoreEntitySet="PartesBusquedaEnMovimientosView">
+                <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
+                <ScalarProperty Name="SoloUnaEtiqueta" ColumnName="SoloUnaEtiqueta" />
+                <ScalarProperty Name="Etiqueta" ColumnName="Etiqueta" />
+                <ScalarProperty Name="PrecioCinco" ColumnName="PrecioCinco" />
+                <ScalarProperty Name="PrecioCuatro" ColumnName="PrecioCuatro" />
+                <ScalarProperty Name="PrecioTres" ColumnName="PrecioTres" />
+                <ScalarProperty Name="PrecioDos" ColumnName="PrecioDos" />
+                <ScalarProperty Name="PrecioUno" ColumnName="PrecioUno" />
+                <ScalarProperty Name="PorcentajeUtilidadCinco" ColumnName="PorcentajeUtilidadCinco" />
+                <ScalarProperty Name="PorcentajeUtilidadCuatro" ColumnName="PorcentajeUtilidadCuatro" />
+                <ScalarProperty Name="PorcentajeUtilidadTres" ColumnName="PorcentajeUtilidadTres" />
+                <ScalarProperty Name="PorcentajeUtilidadDos" ColumnName="PorcentajeUtilidadDos" />
+                <ScalarProperty Name="PorcentajeUtilidadUno" ColumnName="PorcentajeUtilidadUno" />
+                <ScalarProperty Name="CostoConDescuento" ColumnName="CostoConDescuento" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="PartePrecioID" ColumnName="PartePrecioID" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="NombreParte" ColumnName="NombreParte" />
+                <ScalarProperty Name="NumeroParte" ColumnName="NumeroParte" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
+                <ScalarProperty Name="ParteEstatusID" ColumnName="ParteEstatusID" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -36362,7 +36366,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="ControlRefaccionariaModel.NotasDeCreditoFiscalesView" Width="1.5" PointX="16.75" PointY="26.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.NotasDeCreditoView" Width="1.5" PointX="26.75" PointY="20.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesAvancesView" Width="1.5" PointX="26.75" PointY="25.75" />
-        <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView" Width="1.5" PointX="10.75" PointY="27.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesCaracteristicasView" Width="1.5" PointX="28.75" PointY="0.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesClasificacionAbcView" Width="1.5" PointX="28.75" PointY="3.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesCodigosAlternosView" Width="1.5" PointX="28.75" PointY="6.75" />
@@ -36856,6 +36859,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Inventari__Inven__20E2A80C" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Inventari__Linea__1B29CEB6" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Inventari__Sucur__1A35AA7D" />
+        <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView" Width="1.5" PointX="0.75" PointY="38.75" />
         </Diagram>
     </Diagrams>
   </Designer>

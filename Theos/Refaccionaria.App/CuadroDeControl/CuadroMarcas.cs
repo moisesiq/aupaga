@@ -23,6 +23,9 @@ namespace Refaccionaria.App
         {
             // Se configuran las columnas
             this.dgvPrincipal.Columns["Principal_Nombre"].HeaderText = "Marca";
+
+            // Se muestra el combo de líneas, para filtro
+            this.MostrarComboLineas(true);
         }
 
         #endregion

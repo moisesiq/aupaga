@@ -157,8 +157,8 @@
             this.lblCalculo = new System.Windows.Forms.Label();
             this.nudDecimales = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblMarcas = new System.Windows.Forms.Label();
+            this.lblLineas = new System.Windows.Forms.Label();
             this.ctlMarcas = new LibUtil.ComboMultiSel();
             this.ctlLineas = new LibUtil.ComboMultiSel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).BeginInit();
@@ -1273,25 +1273,27 @@
             this.label9.TabIndex = 184;
             this.label9.Text = "Decimales";
             // 
-            // label2
+            // lblMarcas
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(204, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 185;
-            this.label2.Text = "Marcas";
+            this.lblMarcas.AutoSize = true;
+            this.lblMarcas.ForeColor = System.Drawing.Color.White;
+            this.lblMarcas.Location = new System.Drawing.Point(204, 6);
+            this.lblMarcas.Name = "lblMarcas";
+            this.lblMarcas.Size = new System.Drawing.Size(42, 13);
+            this.lblMarcas.TabIndex = 185;
+            this.lblMarcas.Text = "Marcas";
+            this.lblMarcas.Visible = false;
             // 
-            // label3
+            // lblLineas
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(416, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 186;
-            this.label3.Text = "Líneas";
+            this.lblLineas.AutoSize = true;
+            this.lblLineas.ForeColor = System.Drawing.Color.White;
+            this.lblLineas.Location = new System.Drawing.Point(416, 6);
+            this.lblLineas.Name = "lblLineas";
+            this.lblLineas.Size = new System.Drawing.Size(40, 13);
+            this.lblLineas.TabIndex = 186;
+            this.lblLineas.Text = "Líneas";
+            this.lblLineas.Visible = false;
             // 
             // ctlMarcas
             // 
@@ -1302,6 +1304,7 @@
             this.ctlMarcas.Name = "ctlMarcas";
             this.ctlMarcas.Size = new System.Drawing.Size(160, 20);
             this.ctlMarcas.TabIndex = 187;
+            this.ctlMarcas.Visible = false;
             // 
             // ctlLineas
             // 
@@ -1312,6 +1315,7 @@
             this.ctlLineas.Name = "ctlLineas";
             this.ctlLineas.Size = new System.Drawing.Size(160, 20);
             this.ctlLineas.TabIndex = 188;
+            this.ctlLineas.Visible = false;
             // 
             // CuadroMultiple
             // 
@@ -1320,8 +1324,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.Controls.Add(this.ctlLineas);
             this.Controls.Add(this.ctlMarcas);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblLineas);
+            this.Controls.Add(this.lblMarcas);
             this.Controls.Add(this.nudDecimales);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cmbCalculo);
@@ -1442,8 +1446,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal_Porcentaje;
         private System.Windows.Forms.NumericUpDown nudDecimales;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblMarcas;
+        private System.Windows.Forms.Label lblLineas;
         protected LibUtil.ComboMultiSel ctlMarcas;
         protected LibUtil.ComboMultiSel ctlLineas;
 
