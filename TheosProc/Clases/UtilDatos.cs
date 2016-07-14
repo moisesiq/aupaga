@@ -69,6 +69,20 @@ namespace TheosProc
             return "";
         }
 
+        public static int FormaDePagoDeAccionGarantia(int iAccionID)
+        {
+            switch (iAccionID)
+            {
+                case Cat.VentasGarantiasAcciones.Efectivo: return Cat.FormasDePago.Efectivo;
+                case Cat.VentasGarantiasAcciones.Cheque: return Cat.FormasDePago.Cheque;
+                case Cat.VentasGarantiasAcciones.Tarjeta: return Cat.FormasDePago.Tarjeta;
+                case Cat.VentasGarantiasAcciones.TarjetaDeDebito: return Cat.FormasDePago.TarjetaDeDebito;
+                case Cat.VentasGarantiasAcciones.Transferencia: return Cat.FormasDePago.Transferencia;
+                case Cat.VentasGarantiasAcciones.NotaDeCredito: return Cat.FormasDePago.Vale;
+                default: return 0;
+            }
+        }
+
         public static decimal PartePrecioDeVenta(PartePrecio oPartePrecio, int iListaDePrecios)
         {
             switch (iListaDePrecios)

@@ -60,6 +60,7 @@ namespace Refaccionaria.App
             this.rdbAcEfectivo.Tag = Cat.VentasGarantiasAcciones.Efectivo;
             this.rdbAcCheque.Tag = Cat.VentasGarantiasAcciones.Cheque;
             this.rdbAcTarjeta.Tag = Cat.VentasGarantiasAcciones.Tarjeta;
+            this.rdbAcDebito.Tag = Cat.VentasGarantiasAcciones.TarjetaDeDebito;
             this.rdbAcTransferencia.Tag = Cat.VentasGarantiasAcciones.Transferencia;
             this.rdbAcRevision.Tag = Cat.VentasGarantiasAcciones.RevisionDeProveedor;
             // Pendientes
@@ -71,6 +72,7 @@ namespace Refaccionaria.App
             this.rdbApEfectivo.Tag = Cat.VentasGarantiasAcciones.Efectivo;
             this.rdbApCheque.Tag = Cat.VentasGarantiasAcciones.Cheque;
             this.rdbApTarjeta.Tag = Cat.VentasGarantiasAcciones.Tarjeta;
+            this.rdbApDebito.Tag = Cat.VentasGarantiasAcciones.TarjetaDeDebito;
             this.rdbApTransferencia.Tag = Cat.VentasGarantiasAcciones.Transferencia;
             this.rdbApNoProcede.Tag = Cat.VentasGarantiasAcciones.NoProcede;
 
@@ -206,17 +208,19 @@ namespace Refaccionaria.App
 
         private void HabilitarDeshabilitarAcciones(bool bAccionesNormales, int iVentaID)
         {
-            RadioButton rdbCheque, rdbTarjeta, rdbTransferencia;
+            RadioButton rdbCheque, rdbTarjeta, rdbDebito, rdbTransferencia;
             if (bAccionesNormales)
             {
                 rdbCheque = this.rdbAcCheque;
                 rdbTarjeta = this.rdbAcTarjeta;
+                rdbDebito = this.rdbAcDebito;
                 rdbTransferencia = this.rdbAcTransferencia;
             }
             else
             {
                 rdbCheque = this.rdbApCheque;
                 rdbTarjeta = this.rdbApTarjeta;
+                rdbDebito = this.rdbApDebito;
                 rdbTransferencia = this.rdbApTransferencia;
             }
 
@@ -226,21 +230,24 @@ namespace Refaccionaria.App
 
             DateTime dHoy = DateTime.Today;
             var oVentaPagos = Datos.GetListOf<VentasPagosDetalleView>(q => q.VentaID == iVentaID && EntityFunctions.TruncateTime(q.Fecha) == dHoy);
-            int iPagosCheque = 0, iPagosTarjeta = 0, iPagosTransferencia = 0, iPagosOtro = 0;
+            int iPagosCheque = 0, iPagosTarjeta = 0, iPagosDebito = 0, iPagosTransferencia = 0, iPagosOtro = 0;
             foreach (var oFormaP in oVentaPagos)
             {
                 if (oFormaP.FormaDePagoID == Cat.FormasDePago.Cheque)
                     iPagosCheque++;
                 else if (oFormaP.FormaDePagoID == Cat.FormasDePago.Tarjeta)
                     iPagosTarjeta++;
+                else if (oFormaP.FormaDePagoID == Cat.FormasDePago.TarjetaDeDebito)
+                    iPagosDebito++;
                 else if (oFormaP.FormaDePagoID == Cat.FormasDePago.Transferencia)
                     iPagosTransferencia++;
                 else
                     iPagosOtro++;
             }
-            rdbCheque.Enabled = (iPagosCheque == 1 && iPagosTarjeta == 0 && iPagosTransferencia == 0 && iPagosOtro == 0);
-            rdbTarjeta.Enabled = (iPagosTarjeta == 1 && iPagosCheque == 0 && iPagosTransferencia == 0 && iPagosOtro == 0);
-            rdbTransferencia.Enabled = (iPagosTransferencia == 1 && iPagosCheque == 0 && iPagosTarjeta == 0 && iPagosOtro == 0);
+            rdbCheque.Enabled = (iPagosCheque == 1 && (iPagosTarjeta + iPagosDebito + iPagosTransferencia + iPagosOtro) == 0);
+            rdbTarjeta.Enabled = (iPagosTarjeta == 1 && (iPagosDebito + iPagosCheque + iPagosTransferencia + iPagosOtro) == 0);
+            rdbDebito.Enabled = (iPagosDebito == 1 && (iPagosTarjeta + iPagosCheque + iPagosTransferencia + iPagosOtro) == 0);
+            rdbTransferencia.Enabled = (iPagosTransferencia == 1 && (iPagosCheque + iPagosTarjeta + iPagosDebito + iPagosOtro) == 0);
         }
 
         private int ObtenerIdDeRadioSeleccionado(Control oContenedor)
@@ -318,8 +325,8 @@ namespace Refaccionaria.App
             if (this.ObtenerIdDeRadioSeleccionado(this.gpbAccion) == 0)
                 this.ctlError.PonerError(this.rdbAcArticuloNuevo, "Debes especificar una acción a tomar.");
 
-            // Se valida que el tipo de acción a tomar sea válido
-            if (this.rdbAcCheque.Checked || this.rdbAcTarjeta.Checked || this.rdbAcTransferencia.Checked)
+            // Se evalúa que el tipo de acción a tomar sea válido
+            if (this.rdbAcCheque.Checked || this.rdbAcTarjeta.Checked || this.rdbAcDebito.Checked || this.rdbAcTransferencia.Checked)
             {
                 var oSeleccion = this.oGarantia.ctlDetalle.ProductosSel();
                 if (oSeleccion.Count == 1 && oSeleccion[0].Cantidad > 1)
@@ -382,8 +389,8 @@ namespace Refaccionaria.App
             if (this.txtAccionObservacion.Text == "")
                 this.ctlError.PonerError(this.txtAccionObservacion, "Debes especificar una observación.", ErrorIconAlignment.BottomLeft);
 
-            // Se valida que el tipo de acción a tomar sea válido
-            if (this.rdbApCheque.Checked || this.rdbApTarjeta.Checked)
+            // Se evalúa que el tipo de acción a tomar sea válido
+            if (this.rdbApCheque.Checked || this.rdbApTarjeta.Checked || this.rdbApDebito.Checked)
             {
                 var oGarantia = Datos.GetEntity<VentaGarantia>(c => c.VentaGarantiaID == this.SeleccionGarantiaID && c.Estatus);
                 if (oGarantia != null)

@@ -69,6 +69,7 @@
             this.cmbLeyanda = new LibUtil.ComboEtiqueta();
             this.txtLeyenda = new System.Windows.Forms.TextBox();
             this.chkFacturarDividir = new LibUtil.CheckBoxMod();
+            this.chkTarjetaDeDebito = new System.Windows.Forms.CheckBox();
             this.gpbFormasDePago.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gpbTipoDePago.SuspendLayout();
@@ -177,6 +178,7 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.chkTarjetaDeDebito);
             this.groupBox3.Controls.Add(this.cmbBanco);
             this.groupBox3.Controls.Add(this.lblCuenta);
             this.groupBox3.Controls.Add(this.chkCheque);
@@ -308,9 +310,9 @@
             this.chkTarjetaDeCredito.ForeColor = System.Drawing.Color.SteelBlue;
             this.chkTarjetaDeCredito.Location = new System.Drawing.Point(6, 33);
             this.chkTarjetaDeCredito.Name = "chkTarjetaDeCredito";
-            this.chkTarjetaDeCredito.Size = new System.Drawing.Size(103, 19);
+            this.chkTarjetaDeCredito.Size = new System.Drawing.Size(55, 19);
             this.chkTarjetaDeCredito.TabIndex = 2;
-            this.chkTarjetaDeCredito.Text = "Tarjeta Crédito";
+            this.chkTarjetaDeCredito.Text = "Crédit";
             this.chkTarjetaDeCredito.UseVisualStyleBackColor = false;
             this.chkTarjetaDeCredito.CheckedChanged += new System.EventHandler(this.chkTarjetaDeCredito_CheckedChanged);
             // 
@@ -620,6 +622,21 @@
             this.chkFacturarDividir.Text = "Dividir";
             this.chkFacturarDividir.UseVisualStyleBackColor = true;
             // 
+            // chkTarjetaDeDebito
+            // 
+            this.chkTarjetaDeDebito.AutoSize = true;
+            this.chkTarjetaDeDebito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.chkTarjetaDeDebito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkTarjetaDeDebito.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTarjetaDeDebito.ForeColor = System.Drawing.Color.SteelBlue;
+            this.chkTarjetaDeDebito.Location = new System.Drawing.Point(67, 33);
+            this.chkTarjetaDeDebito.Name = "chkTarjetaDeDebito";
+            this.chkTarjetaDeDebito.Size = new System.Drawing.Size(52, 19);
+            this.chkTarjetaDeDebito.TabIndex = 9;
+            this.chkTarjetaDeDebito.Text = "Débit";
+            this.chkTarjetaDeDebito.UseVisualStyleBackColor = false;
+            this.chkTarjetaDeDebito.CheckedChanged += new System.EventHandler(this.chkTarjetaDeDebito_CheckedChanged);
+            // 
             // Cobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -699,5 +716,6 @@
         private System.Windows.Forms.TextBox txtLeyenda;
         private System.Windows.Forms.TextBox txtFormaDePagoLibre;
         private LibUtil.CheckBoxMod chkFacturarDividir;
+        private System.Windows.Forms.CheckBox chkTarjetaDeDebito;
     }
 }

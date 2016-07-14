@@ -75,6 +75,8 @@
             this.penEstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.penAccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.penObservacionCompletado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rdbAcDebito = new System.Windows.Forms.RadioButton();
+            this.rdbApDebito = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.ctlError)).BeginInit();
             this.tabGarantia.SuspendLayout();
             this.tbpGarantia.SuspendLayout();
@@ -201,6 +203,7 @@
             // 
             this.gpbAccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpbAccion.Controls.Add(this.rdbAcDebito);
             this.gpbAccion.Controls.Add(this.rdbAcTransferencia);
             this.gpbAccion.Controls.Add(this.rdbAcRevision);
             this.gpbAccion.Controls.Add(this.rdbAcTarjeta);
@@ -347,6 +350,7 @@
             // 
             this.gpbAccionPosterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpbAccionPosterior.Controls.Add(this.rdbApDebito);
             this.gpbAccionPosterior.Controls.Add(this.rdbApTransferencia);
             this.gpbAccionPosterior.Controls.Add(this.rdbApNoProcede);
             this.gpbAccionPosterior.Controls.Add(this.txtAccionObservacion);
@@ -400,7 +404,7 @@
             this.txtAccionObservacion.PasarEnfoqueConEnter = true;
             this.txtAccionObservacion.SeleccionarTextoAlEnfoque = false;
             this.txtAccionObservacion.Size = new System.Drawing.Size(401, 35);
-            this.txtAccionObservacion.TabIndex = 7;
+            this.txtAccionObservacion.TabIndex = 8;
             this.txtAccionObservacion.WordWrap = false;
             // 
             // rdbApTarjeta
@@ -596,6 +600,28 @@
             this.penObservacionCompletado.ReadOnly = true;
             this.penObservacionCompletado.Width = 200;
             // 
+            // rdbAcDebito
+            // 
+            this.rdbAcDebito.AutoSize = true;
+            this.rdbAcDebito.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rdbAcDebito.Location = new System.Drawing.Point(293, 32);
+            this.rdbAcDebito.Name = "rdbAcDebito";
+            this.rdbAcDebito.Size = new System.Drawing.Size(82, 17);
+            this.rdbAcDebito.TabIndex = 7;
+            this.rdbAcDebito.Text = "Dev. Débito";
+            this.rdbAcDebito.UseVisualStyleBackColor = true;
+            // 
+            // rdbApDebito
+            // 
+            this.rdbApDebito.AutoSize = true;
+            this.rdbApDebito.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rdbApDebito.Location = new System.Drawing.Point(305, 32);
+            this.rdbApDebito.Name = "rdbApDebito";
+            this.rdbApDebito.Size = new System.Drawing.Size(84, 17);
+            this.rdbApDebito.TabIndex = 7;
+            this.rdbApDebito.Text = "Dev. Tarjeta";
+            this.rdbApDebito.UseVisualStyleBackColor = true;
+            // 
             // BusquedaGarantia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -677,5 +703,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn penEstatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn penAccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn penObservacionCompletado;
+        private System.Windows.Forms.RadioButton rdbAcDebito;
+        private System.Windows.Forms.RadioButton rdbApDebito;
     }
 }

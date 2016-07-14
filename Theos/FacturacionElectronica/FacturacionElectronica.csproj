@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Clases\AccesoCbb.cs" />
     <Compile Include="Clases\AccesoZip.cs" />
+    <Compile Include="Clases\Constantes.cs" />
     <Compile Include="Clases\StringWriterMod.cs" />
     <Compile Include="Clases\UtilFe.cs" />
     <Compile Include="ConSat.cs" />

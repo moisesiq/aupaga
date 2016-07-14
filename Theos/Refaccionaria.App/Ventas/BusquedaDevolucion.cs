@@ -147,24 +147,28 @@ namespace Refaccionaria.App
             // Se configuran las acciones a tomar, según la venta seleccionada
             this.rdbDevolucionCheque.Checked = false;
             this.rdbDevolucionTarjeta.Checked = false;
+            this.rdbDevolucionDebito.Checked = false;
             this.rdbDevolucionTransferencia.Checked = false;
             DateTime dHoy = DateTime.Today;
             var oVentaPagos = Datos.GetListOf<VentasPagosDetalleView>(q => q.VentaID == iVentaID && EntityFunctions.TruncateTime(q.Fecha) == dHoy);
-            int iPagosCheque = 0, iPagosTarjeta = 0, iPagosTransferencia = 0, iPagosOtro = 0;
+            int iPagosCheque = 0, iPagosTarjeta = 0, iPagosDebito = 0, iPagosTransferencia = 0, iPagosOtro = 0;
             foreach (var oFormaP in oVentaPagos)
             {
                 if (oFormaP.FormaDePagoID == Cat.FormasDePago.Cheque)
                     iPagosCheque++;
                 else if (oFormaP.FormaDePagoID == Cat.FormasDePago.Tarjeta)
                     iPagosTarjeta++;
+                else if (oFormaP.FormaDePagoID == Cat.FormasDePago.TarjetaDeDebito)
+                    iPagosDebito++;
                 else if (oFormaP.FormaDePagoID == Cat.FormasDePago.Transferencia)
                     iPagosTransferencia++;
                 else
                     iPagosOtro++;
             }
-            this.rdbDevolucionCheque.Enabled = (iPagosCheque == 1 && iPagosTarjeta == 0 && iPagosTransferencia == 0 && iPagosOtro == 0);
-            this.rdbDevolucionTarjeta.Enabled = (iPagosTarjeta == 1 && iPagosCheque == 0 && iPagosTransferencia == 0 && iPagosOtro == 0);
-            this.rdbDevolucionTransferencia.Enabled = (iPagosTransferencia == 1 && iPagosCheque == 0 && iPagosTarjeta == 0 && iPagosOtro == 0);
+            this.rdbDevolucionCheque.Enabled = (iPagosCheque == 1 && (iPagosTarjeta + iPagosDebito + iPagosTransferencia + iPagosOtro) == 0);
+            this.rdbDevolucionTarjeta.Enabled = (iPagosTarjeta == 1 && (iPagosDebito + iPagosCheque + iPagosTransferencia + iPagosOtro) == 0);
+            this.rdbDevolucionDebito.Enabled = (iPagosDebito == 1 && (iPagosTarjeta + iPagosCheque + iPagosTransferencia + iPagosOtro) == 0);
+            this.rdbDevolucionTransferencia.Enabled = (iPagosTransferencia == 1 && (iPagosCheque + iPagosTarjeta + iPagosDebito + iPagosOtro) == 0);
 
             // Para mostrar el detalle de la venta
             this.oDevolucion.ctlDetalle.LlenarDetalle(iVentaID);
@@ -252,6 +256,8 @@ namespace Refaccionaria.App
                     return Cat.FormasDePago.Cheque;
                 else if (this.rdbDevolucionTarjeta.Checked)
                     return Cat.FormasDePago.Tarjeta;
+                else if (this.rdbDevolucionDebito.Checked)
+                    return Cat.FormasDePago.TarjetaDeDebito;
                 else if (this.rdbDevolucionTransferencia.Checked)
                     return Cat.FormasDePago.Transferencia;
                 else
@@ -273,8 +279,8 @@ namespace Refaccionaria.App
             if (this.FormaDeDevolucion == 0)
                 this.ctlError.PonerError(this.rdbNotaDeCredito, "Debes especificar una acción a tomar.");
 
-            // Se valida que el tipo de acción a tomar sea válido
-            if ((this.rdbDevolucionCheque.Checked || this.rdbDevolucionTarjeta.Checked || this.rdbDevolucionTransferencia.Checked)
+            // Se evalúa que el tipo de acción a tomar sea válido
+            if ((this.rdbDevolucionCheque.Checked || this.rdbDevolucionTarjeta.Checked || this.rdbDevolucionDebito.Checked || this.rdbDevolucionTransferencia.Checked)
                 && !this.oDevolucion.ctlDetalle.TodosMarcados())
                 this.ctlError.PonerError(this.rdbNotaDeCredito, "No se puede especificar Cheque, Tarjeta o Transferencia si no es una cancelación.");
 

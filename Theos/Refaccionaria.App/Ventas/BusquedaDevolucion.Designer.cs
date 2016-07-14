@@ -52,6 +52,7 @@
             this.tbpFacturasPorCancelar = new System.Windows.Forms.TabPage();
             this.btnCancelarFacPen = new System.Windows.Forms.Button();
             this.dgvFacturasPorCancelar = new System.Windows.Forms.DataGridView();
+            this.rdbDevolucionDebito = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.ctlError)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.gpbMotivo.SuspendLayout();
@@ -72,6 +73,7 @@
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox3.Controls.Add(this.rdbDevolucionDebito);
             this.groupBox3.Controls.Add(this.rdbDevolucionTransferencia);
             this.groupBox3.Controls.Add(this.rdbDevolucionTarjeta);
             this.groupBox3.Controls.Add(this.rdbDevolucionCheque);
@@ -348,6 +350,17 @@
             this.dgvFacturasPorCancelar.StandardTab = true;
             this.dgvFacturasPorCancelar.TabIndex = 9;
             // 
+            // rdbDevolucionDebito
+            // 
+            this.rdbDevolucionDebito.AutoSize = true;
+            this.rdbDevolucionDebito.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rdbDevolucionDebito.Location = new System.Drawing.Point(227, 32);
+            this.rdbDevolucionDebito.Name = "rdbDevolucionDebito";
+            this.rdbDevolucionDebito.Size = new System.Drawing.Size(85, 17);
+            this.rdbDevolucionDebito.TabIndex = 5;
+            this.rdbDevolucionDebito.Text = "Dev.  Débito";
+            this.rdbDevolucionDebito.UseVisualStyleBackColor = true;
+            // 
             // BusquedaDevolucion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -409,5 +422,6 @@
         private System.Windows.Forms.CheckBox chkCancelarFactura;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton rdbDevolucionDebito;
     }
 }

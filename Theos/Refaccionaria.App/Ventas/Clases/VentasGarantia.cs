@@ -286,15 +286,9 @@ namespace Refaccionaria.App
                         break;
                     case Cat.VentasGarantiasAcciones.Cheque:
                     case Cat.VentasGarantiasAcciones.Tarjeta:
+                    case Cat.VentasGarantiasAcciones.TarjetaDeDebito:
                     case Cat.VentasGarantiasAcciones.Transferencia:
-                        int iFormaDePagoID = 0;
-                        if (oGarantiaV.AccionID == Cat.VentasGarantiasAcciones.Cheque)
-                            iFormaDePagoID = Cat.FormasDePago.Cheque;
-                        else if (oGarantiaV.AccionID == Cat.VentasGarantiasAcciones.Tarjeta)
-                            iFormaDePagoID = Cat.FormasDePago.Tarjeta;
-                        else
-                            iFormaDePagoID = Cat.FormasDePago.Transferencia;
-                        
+                        int iFormaDePagoID = UtilDatos.FormaDePagoDeAccionGarantia(oGarantiaV.AccionID);
                         var oVentaPago = Datos.GetEntity<VentaPago>(q => q.VentaID == iVentaID && q.Estatus);
                         var oFormaPago = Datos.GetEntity<VentaPagoDetalle>(q => 
                             q.VentaPagoID == oVentaPago.VentaPagoID && q.TipoFormaPagoID == iFormaDePagoID && q.Estatus);

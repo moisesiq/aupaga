@@ -63,6 +63,7 @@
             public const int NoIdentificado = 5;
             public const int Vale = 6;
             public const int NotaDeCreditoFiscal = 7;
+            public const int TarjetaDeDebito = 8;
         }
 
         public class PartesEstatus
@@ -192,7 +193,7 @@
             public const int OtroOficial = 2;
             public const int Nota = 3;
         }
-                
+
         public class Procesos
         {
             public const string VentasLeyendas = "VentasLeyendas";
@@ -208,6 +209,7 @@
             public const int Cheque = 6;
             public const int Tarjeta = 7;
             public const int Transferencia = 8;
+            public const int TarjetaDeDebito = 9;
         }
 
         public class VentasGarantiasRespuestas
