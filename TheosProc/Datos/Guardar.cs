@@ -249,8 +249,8 @@ namespace TheosProc
                 }
 
                 // Si es un pago bancario, se genera el movimiento correspondiente
-                if (PartePago.TipoFormaPagoID == Cat.FormasDePago.Tarjeta || PartePago.TipoFormaPagoID == Cat.FormasDePago.Transferencia
-                    || PartePago.TipoFormaPagoID == Cat.FormasDePago.Cheque)
+                if (PartePago.TipoFormaPagoID == Cat.FormasDePago.Tarjeta || PartePago.TipoFormaPagoID == Cat.FormasDePago.TarjetaDeDebito
+                    || PartePago.TipoFormaPagoID == Cat.FormasDePago.Transferencia || PartePago.TipoFormaPagoID == Cat.FormasDePago.Cheque)
                 {
                     var oBanco = Datos.GetEntity<Banco>(c => c.BancoID == PartePago.BancoID && c.Estatus);
 

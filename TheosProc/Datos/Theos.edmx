@@ -15722,7 +15722,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="PartesUbicacionView" EntityType="ControlRefaccionariaModel.PartesUbicacionView" />
           <EntitySet Name="PartesVehiculosBasicoView" EntityType="ControlRefaccionariaModel.PartesVehiculosBasicoView" />
           <EntitySet Name="PartesVehiculosMotoresView" EntityType="ControlRefaccionariaModel.PartesVehiculosMotoresView" />
-          <EntitySet Name="PartesVehiculosView" EntityType="ControlRefaccionariaModel.PartesVehiculosView" />
           <EntitySet Name="PartesVentasView" EntityType="ControlRefaccionariaModel.PartesVentasView" />
           <EntitySet Name="PartesView" EntityType="ControlRefaccionariaModel.PartesView" />
           <EntitySet Name="PedidosDetalleView" EntityType="ControlRefaccionariaModel.PedidosDetalleView" />
@@ -17750,6 +17749,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="InventarioLinea" EntitySet="InventarioLinea" />
           </AssociationSet>
           <EntitySet Name="PartesBusquedaEnMovimientosView" EntityType="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView" />
+          <EntitySet Name="PartesVehiculosView" EntityType="ControlRefaccionariaModel.PartesVehiculosView" />
           </EntityContainer>
         <EntityType Name="Autorizacion">
           <Key>
@@ -23073,20 +23073,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="ModeloID" Type="Int32" Nullable="false" />
           <Property Name="MarcaID" Type="Int32" Nullable="false" />
           <Property Name="NombreMotor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PartesVehiculosView">
-          <Key>
-            <PropertyRef Name="GenericoID" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="ModeloID" />
-          </Key>
-          <Property Name="GenericoID" Type="Int64" Nullable="false" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="ModeloID" Type="Int32" Nullable="false" />
-          <Property Name="NombreModelo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="MotorID" Type="Int32" />
-          <Property Name="NombreMotor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="Anio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PartesVentasView">
           <Key>
@@ -29953,6 +29939,20 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="SoloUnaEtiqueta" Type="Boolean" />
           <Property Name="Busqueda" Type="String" Nullable="false" MaxLength="862" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="PartesVehiculosView">
+          <Key>
+            <PropertyRef Name="GenericoID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="ModeloID" />
+          </Key>
+          <Property Name="GenericoID" Type="Int64" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="ModeloID" Type="Int32" Nullable="false" />
+          <Property Name="NombreModelo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="MotorID" Type="Int32" />
+          <Property Name="NombreMotor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Anio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -34373,19 +34373,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PartesVehiculosView">
-            <EntityTypeMapping TypeName="ControlRefaccionariaModel.PartesVehiculosView">
-              <MappingFragment StoreEntitySet="PartesVehiculosView">
-                <ScalarProperty Name="Anio" ColumnName="Anio" />
-                <ScalarProperty Name="NombreMotor" ColumnName="NombreMotor" />
-                <ScalarProperty Name="MotorID" ColumnName="MotorID" />
-                <ScalarProperty Name="NombreModelo" ColumnName="NombreModelo" />
-                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="GenericoID" ColumnName="GenericoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PartesVentasView">
             <EntityTypeMapping TypeName="ControlRefaccionariaModel.PartesVentasView">
               <MappingFragment StoreEntitySet="PartesVentasView">
@@ -36079,6 +36066,19 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PartesVehiculosView">
+            <EntityTypeMapping TypeName="ControlRefaccionariaModel.PartesVehiculosView">
+              <MappingFragment StoreEntitySet="PartesVehiculosView">
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="NombreMotor" ColumnName="NombreMotor" />
+                <ScalarProperty Name="MotorID" ColumnName="MotorID" />
+                <ScalarProperty Name="NombreModelo" ColumnName="NombreModelo" />
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="GenericoID" ColumnName="GenericoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -36381,7 +36381,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesUbicacionView" Width="1.5" PointX="6.75" PointY="29.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesVehiculosBasicoView" Width="1.5" PointX="28.75" PointY="29.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesVehiculosMotoresView" Width="1.5" PointX="30.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesVehiculosView" Width="1.5" PointX="30.75" PointY="3.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesVentasView" Width="1.5" PointX="30.75" PointY="7.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesView" Width="1.5" PointX="30.75" PointY="13.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PedidosDetalleView" Width="1.5" PointX="30.75" PointY="18.75" />
@@ -36860,6 +36859,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Inventari__Linea__1B29CEB6" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Inventari__Sucur__1A35AA7D" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView" Width="1.5" PointX="0.75" PointY="38.75" />
+        <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesVehiculosView" Width="1.5" PointX="9.375" PointY="29.75" />
         </Diagram>
     </Diagrams>
   </Designer>
