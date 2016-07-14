@@ -186,6 +186,7 @@ namespace Refaccionaria.App
                 this.chkEfectivo.Checked = false;
                 this.chkCheque.Checked = false;
                 this.chkTarjetaDeCredito.Checked = false;
+                this.chkTarjetaDeDebito.Checked = false;
                 this.chkTransferencia.Checked = false;
                 // this.chkNoIdentificado.Checked = false;
                 this.chkNotaDeCredito.Checked = false;
@@ -287,9 +288,22 @@ namespace Refaccionaria.App
 
         private void chkTarjetaDeCredito_CheckedChanged(object sender, EventArgs e)
         {
-            this.HabilitarTextosFP();
-            if (this.chkTarjetaDeCredito.Checked && this.chkTarjetaDeCredito.Focused)
-                this.txtTarjetaDeCredito.Focus();
+            if (this.chkTarjetaDeCredito.Focused)
+            {
+                this.HabilitarTextosFP();
+                if (this.chkTarjetaDeCredito.Checked)
+                    this.txtTarjetaDeCredito.Focus();
+            }
+        }
+
+        private void chkTarjetaDeDebito_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.chkTarjetaDeDebito.Focused)
+            {
+                this.HabilitarTextosFP();
+                if (this.chkTarjetaDeDebito.Checked)
+                    this.txtTarjetaDeCredito.Focus();
+            }
         }
 
         private void chkTransferencia_CheckedChanged(object sender, EventArgs e)
@@ -383,20 +397,20 @@ namespace Refaccionaria.App
         {
             this.txtEfectivo.Enabled = this.chkEfectivo.Checked;
             this.txtCheque.Enabled = this.chkCheque.Checked;
-            this.txtTarjetaDeCredito.Enabled = this.chkTarjetaDeCredito.Checked;
+            this.txtTarjetaDeCredito.Enabled = (this.chkTarjetaDeCredito.Checked || this.chkTarjetaDeDebito.Checked);
             this.txtTransferencia.Enabled = this.chkTransferencia.Checked;
-            this.cmbBanco.Enabled = (this.chkCheque.Checked || this.chkTarjetaDeCredito.Checked || this.chkTransferencia.Checked);
-            this.txtFolio.Enabled = (this.chkCheque.Checked || this.chkTarjetaDeCredito.Checked || this.chkTransferencia.Checked);
-            this.txtCuenta.Enabled = (this.chkCheque.Checked || this.chkTarjetaDeCredito.Checked || this.chkTransferencia.Checked);
+            this.cmbBanco.Enabled = (this.chkCheque.Checked || this.chkTarjetaDeCredito.Checked || this.chkTarjetaDeDebito.Checked || this.chkTransferencia.Checked);
+            this.txtFolio.Enabled = (this.chkCheque.Checked || this.chkTarjetaDeCredito.Checked || this.chkTarjetaDeDebito.Checked || this.chkTransferencia.Checked);
+            this.txtCuenta.Enabled = (this.chkCheque.Checked || this.chkTarjetaDeCredito.Checked || this.chkTarjetaDeDebito.Checked || this.chkTransferencia.Checked);
             this.txtNoIdentificado.Enabled = this.chkNoIdentificado.Checked;
             this.txtNotaDeCredito.Enabled = this.chkNotaDeCredito.Checked;
             this.btnEditarNotasDeCredito.Enabled = this.chkNotaDeCredito.Checked;
 
             if (!this.chkEfectivo.Checked) this.txtEfectivo.Clear();
             if (!this.chkCheque.Checked) this.txtCheque.Clear();
-            if (!this.chkTarjetaDeCredito.Checked) this.txtTarjetaDeCredito.Clear();
+            if (!this.chkTarjetaDeCredito.Checked && !this.chkTarjetaDeDebito.Checked) this.txtTarjetaDeCredito.Clear();
             if (!this.chkTransferencia.Checked) this.txtTransferencia.Clear();
-            if (!this.chkCheque.Checked && !this.chkTarjetaDeCredito.Checked && !this.chkTransferencia.Checked)
+            if (!this.chkCheque.Checked && !this.chkTarjetaDeCredito.Checked && !this.chkTarjetaDeDebito.Checked && !this.chkTransferencia.Checked)
             {
                 this.cmbBanco.SelectedIndex = -1;
                 this.txtFolio.Clear();
@@ -425,7 +439,7 @@ namespace Refaccionaria.App
             decimal mSuma = 0M;
             mSuma += (this.chkEfectivo.Checked ? this.txtEfectivo.Text.ValorDecimal() : 0);
             mSuma += (this.chkCheque.Checked ? this.txtCheque.Text.ValorDecimal() : 0);
-            mSuma += (this.chkTarjetaDeCredito.Checked ? this.txtTarjetaDeCredito.Text.ValorDecimal() : 0);
+            mSuma += ((this.chkTarjetaDeCredito.Checked || this.chkTarjetaDeDebito.Checked) ? this.txtTarjetaDeCredito.Text.ValorDecimal() : 0);
             mSuma += (this.chkTransferencia.Checked ? this.txtTransferencia.Text.ValorDecimal() : 0);
             mSuma += (this.chkNoIdentificado.Checked ? this.txtNoIdentificado.Text.ValorDecimal() : 0);
             mSuma += (this.chkNotaDeCredito.Checked ? this.ImporteDeNotasDeCredito() : 0);
@@ -507,7 +521,7 @@ namespace Refaccionaria.App
                 return false;
 
             this.ctlError.LimpiarErrores();
-            if (this.chkCheque.Checked || this.chkTarjetaDeCredito.Checked || this.chkTransferencia.Checked)
+            if (this.chkCheque.Checked || this.chkTarjetaDeCredito.Checked || this.chkTarjetaDeDebito.Checked || this.chkTransferencia.Checked)
             {
                 if (this.cmbBanco.SelectedValue == null)
                     this.ctlError.PonerError(this.cmbBanco, "Debes especificar el Banco.", ErrorIconAlignment.MiddleLeft);
@@ -591,6 +605,13 @@ namespace Refaccionaria.App
                     TipoFormaPagoID = Cat.FormasDePago.Tarjeta, Importe = mImporte,
                     BancoID = Util.Entero(this.cmbBanco.SelectedValue), Folio = this.txtFolio.Text, Cuenta = this.txtCuenta.Text
                 });
+            // Tarjeta de Débito
+            if (this.chkTarjetaDeDebito.Checked && (mImporte = this.txtTarjetaDeCredito.Text.ValorDecimal()) > 0)
+                PagoDetalle.Add(new VentaPagoDetalle()
+                {
+                    TipoFormaPagoID = Cat.FormasDePago.TarjetaDeDebito, Importe = mImporte,
+                    BancoID = Util.Entero(this.cmbBanco.SelectedValue), Folio = this.txtFolio.Text, Cuenta = this.txtCuenta.Text
+                });
             // Transferencia
             if (this.chkTransferencia.Checked && (mImporte = this.txtTransferencia.Text.ValorDecimal()) > 0)
                 PagoDetalle.Add(new VentaPagoDetalle()
@@ -632,6 +653,7 @@ namespace Refaccionaria.App
             this.chkEfectivo.Checked = false;
             this.chkCheque.Checked = false;
             this.chkTarjetaDeCredito.Checked = false;
+            this.chkTarjetaDeDebito.Checked = false;
             this.chkTransferencia.Checked = false;
             this.chkNoIdentificado.Checked = false;
             this.chkNotaDeCredito.Checked = false;
@@ -668,6 +690,7 @@ namespace Refaccionaria.App
             this.chkEfectivo.Checked = false;
             this.chkCheque.Checked = false;
             this.chkTarjetaDeCredito.Checked = false;
+            this.chkTarjetaDeDebito.Checked = false;
             this.chkTransferencia.Checked = false;
             this.chkNoIdentificado.Checked = false;
             this.chkNotaDeCredito.Checked = false;
@@ -685,22 +708,28 @@ namespace Refaccionaria.App
                         this.txtEfectivo.Text = oFormaDePago.Importe.ToString(GlobalClass.FormatoMoneda);
                         break;
                     case Cat.FormasDePago.Cheque:
-                        this.chkCheque.Checked = true;
-                        this.txtCheque.Text = oFormaDePago.Importe.ToString(GlobalClass.FormatoMoneda);
-                        this.cmbBanco.Text = oFormaDePago.Banco;
-                        this.txtFolio.Text = oFormaDePago.Folio;
-                        this.txtCuenta.Text = oFormaDePago.Cuenta;
-                        break;
                     case Cat.FormasDePago.Tarjeta:
-                        this.chkTarjetaDeCredito.Checked = true;
-                        this.txtTarjetaDeCredito.Text = oFormaDePago.Importe.ToString(GlobalClass.FormatoMoneda);
-                        this.cmbBanco.Text = oFormaDePago.Banco;
-                        this.txtFolio.Text = oFormaDePago.Folio;
-                        this.txtCuenta.Text = oFormaDePago.Cuenta;
-                        break;
+                    case Cat.FormasDePago.TarjetaDeDebito:
                     case Cat.FormasDePago.Transferencia:
-                        this.chkTransferencia.Checked = true;
-                        this.txtTransferencia.Text = oFormaDePago.Importe.ToString(GlobalClass.FormatoMoneda);
+                        switch (oFormaDePago.FormaDePagoID)
+                        {
+                            case Cat.FormasDePago.Cheque:
+                                this.chkCheque.Checked = true;
+                                this.txtCheque.Text = oFormaDePago.Importe.ToString(GlobalClass.FormatoMoneda);
+                                break;
+                            case Cat.FormasDePago.Tarjeta:
+                                this.chkTarjetaDeCredito.Checked = true;
+                                this.txtTarjetaDeCredito.Text = oFormaDePago.Importe.ToString(GlobalClass.FormatoMoneda);
+                                break;
+                            case Cat.FormasDePago.TarjetaDeDebito:
+                                this.chkTarjetaDeDebito.Checked = true;
+                                this.txtTarjetaDeCredito.Text = oFormaDePago.Importe.ToString(GlobalClass.FormatoMoneda);
+                                break;
+                            case Cat.FormasDePago.Transferencia:
+                                this.chkTransferencia.Checked = true;
+                                this.txtTransferencia.Text = oFormaDePago.Importe.ToString(GlobalClass.FormatoMoneda);
+                                break;
+                        }
                         this.cmbBanco.Text = oFormaDePago.Banco;
                         this.txtFolio.Text = oFormaDePago.Folio;
                         this.txtCuenta.Text = oFormaDePago.Cuenta;
@@ -739,6 +768,10 @@ namespace Refaccionaria.App
                     break;
                 case Cat.FormasDePago.Tarjeta:
                     this.chkTarjetaDeCredito.Checked = true;
+                    this.txtTarjetaDeCredito.Text = sImporte;
+                    break;
+                case Cat.FormasDePago.TarjetaDeDebito:
+                    this.chkTarjetaDeDebito.Checked = true;
                     this.txtTarjetaDeCredito.Text = sImporte;
                     break;
                 case Cat.FormasDePago.Transferencia:
@@ -781,6 +814,6 @@ namespace Refaccionaria.App
         }
 
         #endregion
-                        
+                
     }
 }

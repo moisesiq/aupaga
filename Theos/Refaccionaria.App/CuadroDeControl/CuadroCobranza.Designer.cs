@@ -30,6 +30,13 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -56,13 +63,6 @@
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.nudDecimales = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbCalculo = new System.Windows.Forms.ComboBox();
@@ -77,6 +77,15 @@
             this.cmbSucursal = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.cli_ClienteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cli_Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cli_Plazo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cli_Adeudo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cli_PorAdeudo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cli_Vencido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cli_PorVencido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cli_PromedioAnual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cli_Promedio3Meses = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvClientesT = new System.Windows.Forms.DataGridView();
             this.clt_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clt_Adeudo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,15 +107,6 @@
             this.mes_Resultado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chrPorSemana = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chrPorMes = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.cli_ClienteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cli_Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cli_Plazo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cli_Adeudo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cli_PorAdeudo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cli_Vencido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cli_PorVencido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cli_PromedioAnual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cli_Promedio3Meses = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientesT)).BeginInit();
@@ -252,6 +252,8 @@
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.AllowUserToResizeRows = false;
+            this.dgvClientes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvClientes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -289,9 +291,92 @@
             this.dgvClientes.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvClientes.RowHeadersVisible = false;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(595, 305);
+            this.dgvClientes.Size = new System.Drawing.Size(595, 355);
             this.dgvClientes.TabIndex = 196;
             this.dgvClientes.CurrentCellChanged += new System.EventHandler(this.dgvClientes_CurrentCellChanged);
+            // 
+            // cli_ClienteID
+            // 
+            this.cli_ClienteID.HeaderText = "ClienteID";
+            this.cli_ClienteID.Name = "cli_ClienteID";
+            this.cli_ClienteID.ReadOnly = true;
+            this.cli_ClienteID.Visible = false;
+            // 
+            // cli_Cliente
+            // 
+            dataGridViewCellStyle1.NullValue = null;
+            this.cli_Cliente.DefaultCellStyle = dataGridViewCellStyle1;
+            this.cli_Cliente.HeaderText = "Cliente";
+            this.cli_Cliente.Name = "cli_Cliente";
+            this.cli_Cliente.ReadOnly = true;
+            this.cli_Cliente.Width = 120;
+            // 
+            // cli_Plazo
+            // 
+            this.cli_Plazo.HeaderText = "Plazo";
+            this.cli_Plazo.Name = "cli_Plazo";
+            this.cli_Plazo.ReadOnly = true;
+            this.cli_Plazo.Width = 40;
+            // 
+            // cli_Adeudo
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            this.cli_Adeudo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.cli_Adeudo.HeaderText = "Deuda";
+            this.cli_Adeudo.Name = "cli_Adeudo";
+            this.cli_Adeudo.ReadOnly = true;
+            this.cli_Adeudo.Width = 80;
+            // 
+            // cli_PorAdeudo
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "P2";
+            this.cli_PorAdeudo.DefaultCellStyle = dataGridViewCellStyle3;
+            this.cli_PorAdeudo.HeaderText = "% Deuda";
+            this.cli_PorAdeudo.Name = "cli_PorAdeudo";
+            this.cli_PorAdeudo.ReadOnly = true;
+            this.cli_PorAdeudo.Width = 60;
+            // 
+            // cli_Vencido
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "C2";
+            this.cli_Vencido.DefaultCellStyle = dataGridViewCellStyle4;
+            this.cli_Vencido.HeaderText = "Vencido";
+            this.cli_Vencido.Name = "cli_Vencido";
+            this.cli_Vencido.ReadOnly = true;
+            this.cli_Vencido.Width = 80;
+            // 
+            // cli_PorVencido
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "P2";
+            this.cli_PorVencido.DefaultCellStyle = dataGridViewCellStyle5;
+            this.cli_PorVencido.HeaderText = "% Ven.";
+            this.cli_PorVencido.Name = "cli_PorVencido";
+            this.cli_PorVencido.ReadOnly = true;
+            this.cli_PorVencido.Width = 60;
+            // 
+            // cli_PromedioAnual
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "C2";
+            this.cli_PromedioAnual.DefaultCellStyle = dataGridViewCellStyle6;
+            this.cli_PromedioAnual.HeaderText = "Prom. Anual";
+            this.cli_PromedioAnual.Name = "cli_PromedioAnual";
+            this.cli_PromedioAnual.ReadOnly = true;
+            this.cli_PromedioAnual.Width = 60;
+            // 
+            // cli_Promedio3Meses
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "C2";
+            this.cli_Promedio3Meses.DefaultCellStyle = dataGridViewCellStyle7;
+            this.cli_Promedio3Meses.HeaderText = "Prom. 3";
+            this.cli_Promedio3Meses.Name = "cli_Promedio3Meses";
+            this.cli_Promedio3Meses.ReadOnly = true;
+            this.cli_Promedio3Meses.Width = 60;
             // 
             // dgvClientesT
             // 
@@ -406,6 +491,8 @@
             this.dgvPorSemana.AllowUserToAddRows = false;
             this.dgvPorSemana.AllowUserToDeleteRows = false;
             this.dgvPorSemana.AllowUserToResizeRows = false;
+            this.dgvPorSemana.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPorSemana.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPorSemana.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPorSemana.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -439,7 +526,7 @@
             this.dgvPorSemana.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.dgvPorSemana.RowHeadersVisible = false;
             this.dgvPorSemana.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPorSemana.Size = new System.Drawing.Size(320, 300);
+            this.dgvPorSemana.Size = new System.Drawing.Size(320, 355);
             this.dgvPorSemana.TabIndex = 198;
             // 
             // Semana_Semana
@@ -527,7 +614,7 @@
             this.dgvPorMes.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.dgvPorMes.RowHeadersVisible = false;
             this.dgvPorMes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPorMes.Size = new System.Drawing.Size(320, 300);
+            this.dgvPorMes.Size = new System.Drawing.Size(320, 335);
             this.dgvPorMes.TabIndex = 202;
             // 
             // mes_Mes
@@ -579,6 +666,8 @@
             // 
             // chrPorSemana
             // 
+            this.chrPorSemana.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chrPorSemana.BackColor = System.Drawing.Color.Transparent;
             chartArea1.AxisX.Interval = 5D;
             chartArea1.AxisX.IntervalOffset = 1D;
@@ -600,7 +689,7 @@
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chrPorSemana.ChartAreas.Add(chartArea1);
-            this.chrPorSemana.Location = new System.Drawing.Point(3, 394);
+            this.chrPorSemana.Location = new System.Drawing.Point(-2, 414);
             this.chrPorSemana.Name = "chrPorSemana";
             series1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
             series1.BackSecondaryColor = System.Drawing.Color.Red;
@@ -642,7 +731,7 @@
             series2.SmartLabelStyle.Enabled = false;
             this.chrPorSemana.Series.Add(series1);
             this.chrPorSemana.Series.Add(series2);
-            this.chrPorSemana.Size = new System.Drawing.Size(600, 200);
+            this.chrPorSemana.Size = new System.Drawing.Size(881, 200);
             this.chrPorSemana.TabIndex = 203;
             this.chrPorSemana.Text = "chart1";
             title1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
@@ -656,6 +745,7 @@
             // 
             // chrPorMes
             // 
+            this.chrPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chrPorMes.BackColor = System.Drawing.Color.Transparent;
             chartArea2.AxisX.IsLabelAutoFit = false;
             chartArea2.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
@@ -675,7 +765,7 @@
             chartArea2.BackColor = System.Drawing.Color.Transparent;
             chartArea2.Name = "ChartArea1";
             this.chrPorMes.ChartAreas.Add(chartArea2);
-            this.chrPorMes.Location = new System.Drawing.Point(609, 394);
+            this.chrPorMes.Location = new System.Drawing.Point(885, 414);
             this.chrPorMes.Name = "chrPorMes";
             series3.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
             series3.BackSecondaryColor = System.Drawing.Color.Red;
@@ -729,87 +819,6 @@
             title2.Text = "Gráfica mensual";
             this.chrPorMes.Titles.Add(title2);
             // 
-            // cli_ClienteID
-            // 
-            this.cli_ClienteID.HeaderText = "ClienteID";
-            this.cli_ClienteID.Name = "cli_ClienteID";
-            this.cli_ClienteID.ReadOnly = true;
-            this.cli_ClienteID.Visible = false;
-            // 
-            // cli_Cliente
-            // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.cli_Cliente.DefaultCellStyle = dataGridViewCellStyle1;
-            this.cli_Cliente.HeaderText = "Cliente";
-            this.cli_Cliente.Name = "cli_Cliente";
-            this.cli_Cliente.ReadOnly = true;
-            this.cli_Cliente.Width = 120;
-            // 
-            // cli_Plazo
-            // 
-            this.cli_Plazo.HeaderText = "Plazo";
-            this.cli_Plazo.Name = "cli_Plazo";
-            this.cli_Plazo.ReadOnly = true;
-            this.cli_Plazo.Width = 40;
-            // 
-            // cli_Adeudo
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "C2";
-            this.cli_Adeudo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.cli_Adeudo.HeaderText = "Deuda";
-            this.cli_Adeudo.Name = "cli_Adeudo";
-            this.cli_Adeudo.ReadOnly = true;
-            this.cli_Adeudo.Width = 80;
-            // 
-            // cli_PorAdeudo
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "P2";
-            this.cli_PorAdeudo.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cli_PorAdeudo.HeaderText = "% Deuda";
-            this.cli_PorAdeudo.Name = "cli_PorAdeudo";
-            this.cli_PorAdeudo.ReadOnly = true;
-            this.cli_PorAdeudo.Width = 60;
-            // 
-            // cli_Vencido
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "C2";
-            this.cli_Vencido.DefaultCellStyle = dataGridViewCellStyle4;
-            this.cli_Vencido.HeaderText = "Vencido";
-            this.cli_Vencido.Name = "cli_Vencido";
-            this.cli_Vencido.ReadOnly = true;
-            this.cli_Vencido.Width = 80;
-            // 
-            // cli_PorVencido
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "P2";
-            this.cli_PorVencido.DefaultCellStyle = dataGridViewCellStyle5;
-            this.cli_PorVencido.HeaderText = "% Ven.";
-            this.cli_PorVencido.Name = "cli_PorVencido";
-            this.cli_PorVencido.ReadOnly = true;
-            this.cli_PorVencido.Width = 60;
-            // 
-            // cli_PromedioAnual
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cli_PromedioAnual.DefaultCellStyle = dataGridViewCellStyle6;
-            this.cli_PromedioAnual.HeaderText = "Prom. Anual";
-            this.cli_PromedioAnual.Name = "cli_PromedioAnual";
-            this.cli_PromedioAnual.ReadOnly = true;
-            this.cli_PromedioAnual.Width = 60;
-            // 
-            // cli_Promedio3Meses
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cli_Promedio3Meses.DefaultCellStyle = dataGridViewCellStyle7;
-            this.cli_Promedio3Meses.HeaderText = "Prom. 3";
-            this.cli_Promedio3Meses.Name = "cli_Promedio3Meses";
-            this.cli_Promedio3Meses.ReadOnly = true;
-            this.cli_Promedio3Meses.Width = 60;
-            // 
             // CuadroCobranza
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -838,7 +847,7 @@
             this.Controls.Add(this.cmbSucursal);
             this.Controls.Add(this.label1);
             this.Name = "CuadroCobranza";
-            this.Size = new System.Drawing.Size(1204, 597);
+            this.Size = new System.Drawing.Size(1297, 617);
             this.Load += new System.EventHandler(this.CuadroCobranza_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudDecimales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
@@ -873,6 +882,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvPorSemana;
         private System.Windows.Forms.DataGridView dgvPorMes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_ClienteID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Cliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Plazo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Adeudo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_PorAdeudo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Vencido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_PorVencido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_PromedioAnual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Promedio3Meses;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrPorSemana;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrPorMes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Semana_Semana;
@@ -889,14 +907,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clt_Adeudo;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiaT_Porcentaje;
         private System.Windows.Forms.DataGridViewTextBoxColumn clt_Vencido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_ClienteID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Cliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Plazo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Adeudo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_PorAdeudo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Vencido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_PorVencido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_PromedioAnual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cli_Promedio3Meses;
     }
 }

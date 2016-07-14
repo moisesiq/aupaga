@@ -748,9 +748,12 @@ namespace Refaccionaria.App
             bool bGenerarFolio = true;
             if (oPorCobrar.ctlCobro.Facturar)
             {
+                /*
                 string sFormaDePago = oPorCobrar.ctlCobro.FormaDePagoLibre;
                 if (sFormaDePago == "")
                     sFormaDePago = VentasProc.GenerarFormaDePago(oPorCobrar.ctlCobro.GenerarPagoDetalle());
+                */
+                var oFormasDePago = oPorCobrar.ctlCobro.GenerarPagoDetalle();
 
                 // Se verifica si se debe dividir la factura
                 var oProductos = oPorCobrar.ctlDetalle.ObtenerListaVenta();
@@ -773,7 +776,7 @@ namespace Refaccionaria.App
                             if (++iFactura > 1)
                                 oProductos[0].NombreDeParte = string.Format("{0}\n(Complemento {1})", sDescripcion, (iFactura - 1));
                             // Se manda hacer la factura
-                            ResFactura = VentasLoc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iAFClienteID, oProductos, sFormaDePago, "", oAdicionales);
+                            ResFactura = VentasLoc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iAFClienteID, oProductos, oFormasDePago, "", oAdicionales);
                             if (ResFactura.Error)
                                 break;
                             //
@@ -788,7 +791,7 @@ namespace Refaccionaria.App
                 }
                 
                 if (ResFactura == null)
-                    ResFactura = VentasLoc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iAFClienteID, oProductos, sFormaDePago, "", oAdicionales);
+                    ResFactura = VentasLoc.GenerarFacturaElectronica(new List<int>() { iVentaID }, iAFClienteID, oProductos, oFormasDePago, "", oAdicionales);
 
                 // Se obtiene la forma de pago
                 /* if (oPorCobrar.ctlCobro.FormaDePagoLibre == "")
