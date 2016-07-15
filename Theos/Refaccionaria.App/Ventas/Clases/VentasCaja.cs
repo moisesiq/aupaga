@@ -697,7 +697,7 @@ namespace Refaccionaria.App
                 // Si hubo un pago con tarjeta de crédito se guarda la información de tarjeta y meses
                 if (oPorCobrar.ctlCobro.BancoCuentaID > 0)
                 {
-                    var oPagoTar = oPagoDetalle.FirstOrDefault(c => c.TipoFormaPagoID == Cat.FormasDePago.Tarjeta);
+                    var oPagoTar = oPagoDetalle.FirstOrDefault(c => c.TipoFormaPagoID == Cat.FormasDePago.Tarjeta || c.TipoFormaPagoID == Cat.FormasDePago.TarjetaDeDebito);
                     var oTarjeta = new VentaPagoConTarjeta()
                     {
                         BancoCuentaID = oPorCobrar.ctlCobro.BancoCuentaID,

@@ -164,6 +164,8 @@ namespace Refaccionaria.App
                     case 4:
                     case 5:
                     case 6:
+                    case 7:
+                    case 8:
                         this.AgregarLineaDetalle(
                             oMov.Pendientes.Valor()
                             , oMov.Concepto.RellenarCortarDerecha(20)
@@ -190,8 +192,8 @@ namespace Refaccionaria.App
 
                         break;
                     // Refuerzos / Otros ingresos
-                    case 7:
-                    case 8:
+                    case 9:
+                    case 10:
                         iFila = this.AgregarLineaDetalle(
                             oMov.Pendientes.Valor()
                             , oMov.Concepto.RellenarCortarDerecha(46)
@@ -202,8 +204,8 @@ namespace Refaccionaria.App
                         this.Total += oMov.Total.Valor();
                         break;
                     // Pagos con notas de crédito y ventas a crédito
-                    case 9:
-                    case 10:
+                    case 11:
+                    case 12:
                         this.AgregarLineaDetalle(
                             oMov.Pendientes.Valor()
                             , oMov.Concepto.RellenarCortarDerecha(20)
@@ -226,10 +228,10 @@ namespace Refaccionaria.App
 
                         break;
                     // Devoluciones
-                    case 11:
-                    case 12:
                     case 13:
                     case 14:
+                    case 15:
+                    case 16:
                         iFila = this.AgregarLineaDetalle(
                             oMov.Pendientes.Valor()
                             , oMov.Concepto.RellenarCortarDerecha(20)
@@ -262,8 +264,8 @@ namespace Refaccionaria.App
 
                         break;
                     // Resguardos / Gastos
-                    case 15:
-                    case 16:
+                    case 17:
+                    case 18:
                         iFila = this.AgregarLineaDetalle(
                             oMov.Pendientes.Valor()
                             , oMov.Concepto.RellenarCortarDerecha(46)
@@ -273,8 +275,8 @@ namespace Refaccionaria.App
                         );
                         this.Total -= oMov.Total.Valor();
                         break;
-                    case 17:
-                    case 18:
+                    case 19:
+                    case 20:
                         this.AgregarLineaDetalle(
                             oMov.Pendientes.Valor()
                             , oMov.Concepto.RellenarCortarDerecha(20)
