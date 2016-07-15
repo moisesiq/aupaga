@@ -352,7 +352,7 @@ namespace Refaccionaria.App
                             fila.Cells["CostoConDescuentoNuevo"].Value = resultado;
                             resultado = (mUnitario - resultado);
                             resultado *= mCantidad;
-                            mDescuento += (resultado * iva);
+                            mDescuento += resultado;
                         }
                     }
                     // total -= mDescuento;
@@ -378,7 +378,7 @@ namespace Refaccionaria.App
                             resultado = (mUnitario - resultado);
                             resultado *= mCantidad;
                             //Segundo: Se suma el importe de descuento y se resta en el total de la factura
-                            mDescuento += (resultado * iva);
+                            mDescuento += resultado;
                         }
                     }
                     // total -= mDescuento;
@@ -407,7 +407,7 @@ namespace Refaccionaria.App
                         fila.Cells["CostoConDescuentoNuevo"].Value = resultado;
                         resultado = (mUnitario - resultado);
                         resultado *= mCantidad;
-                        mDescuento += (resultado * iva);
+                        mDescuento += resultado;
                     }
                     // total -= mDescuento;
 
@@ -424,13 +424,22 @@ namespace Refaccionaria.App
                 }
             }
 
+            // Se calcula el seguro
+            decimal mSeguro = 0;
+            decimal mSubtotal = Util.Decimal(this.txtSubtotal.Text);
+            mSubtotal -= mDescuento;
+            if (this.proveedor != null && this.proveedor.Seguro.HasValue)
+                mSeguro = (mSubtotal * (this.proveedor.Seguro.Value / 100));
+            //
+            mDescuento *= iva;
+            decimal mTotal = ((mSubtotal + mSeguro) * iva);
 
-            total -= mDescuento;
+            this.txtSubtotal.Text = UtilLocal.DecimalToCadenaMoneda(mSubtotal);
+            this.txtSeguro.Text = UtilLocal.DecimalToCadenaMoneda(mSeguro);
             this.txtTotalDescuentos.Text = UtilLocal.DecimalToCadenaMoneda(mDescuento);
-            this.lblTotal.Text = UtilLocal.DecimalToCadenaMoneda(total);
+            this.lblTotal.Text = UtilLocal.DecimalToCadenaMoneda(mTotal);
             if (!this.chkImporteFactura.Checked)
                 this.lblImporteFactura.Text = this.lblTotal.Text;
-            this.txtSubtotal.Text = UtilLocal.DecimalToCadenaMoneda(total / iva);
 
             this.sacarImporteProntoPago();
         }
@@ -3272,6 +3281,9 @@ namespace Refaccionaria.App
 
                     var totalDescuentos = Util.Decimal(this.txtTotalDescuentos.Text);
                     this.txtTotalDescuentos.Text = resultado > 0 ? UtilLocal.DecimalToCadenaMoneda(totalDescuentos + (importe - resultado)) : "0.0";
+
+                    // Si el resultado es cero (porque hubo un descuento del cien por ciento, se hace uno, sólo para que se tome en cuenta y no se ignore
+                    resultado = (resultado == 0 ? 1 : resultado);
 
                     //Segundo: Registrar un descuento de tipo Factura
                     this.establecerHistoriaDescuentos(resultado, -1, -1, desUno, desDos, desTres, desCuatro, desCinco);
