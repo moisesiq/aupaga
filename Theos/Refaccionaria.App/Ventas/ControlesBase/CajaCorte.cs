@@ -179,7 +179,7 @@ namespace Refaccionaria.App
                         mFacturas += oMov.Facturas.Valor();
                         this.Total += (oMov.Tickets.Valor() + oMov.Facturas.Valor());
 
-                        if (oMov.Orden == 6)
+                        if (oMov.Orden == 8)
                         {
                             this.AgregarLineaEncabezado(
                                 " ".PadRight(20)
