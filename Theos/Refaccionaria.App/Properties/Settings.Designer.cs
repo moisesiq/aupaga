@@ -34,19 +34,19 @@ namespace Refaccionaria.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\THEOS\\IMG\\Partes\\")]
-        public string RutaImagenes {
+        [global::System.Configuration.DefaultSettingValueAttribute("Pruebas")]
+        public string Modo {
             get {
-                return ((string)(this["RutaImagenes"]));
+                return ((string)(this["Modo"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Pruebas")]
-        public string Modo {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Theos\\Img\\")]
+        public string RutaImagenes {
             get {
-                return ((string)(this["Modo"]));
+                return ((string)(this["RutaImagenes"]));
             }
         }
     }

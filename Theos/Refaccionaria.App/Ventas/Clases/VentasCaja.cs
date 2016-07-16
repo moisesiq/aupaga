@@ -1254,6 +1254,8 @@ namespace Refaccionaria.App
             Rep.SetParameterValue("Sucursal", GlobalClass.NombreTienda);
             // Se obtiene el nombre del archivo
             string sRuta = Config.Valor("Caja.Corte.RutaArchivos");
+            if (!Directory.Exists(sRuta))
+                Directory.CreateDirectory(sRuta);
             string sArchivo = (sRuta + DateTime.Now.ToString("yyyyMMdd") + "_" + GlobalClass.NombreTienda + ".pdf");
             // Se genera el Pdf
             var oRepPdf = new FastReport.Export.Pdf.PDFExport() { ShowProgress = true };

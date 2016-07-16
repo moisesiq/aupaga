@@ -42,14 +42,13 @@ function BuscarEmitidasPorFecha(sFechaIni, sFechaFin) {
     // Se manda hacer la petición de búsqueda
     window.setTimeout(function () {
         j('#ctl00_MainContent_BtnBusqueda').click();
-
-        // Se manda notificar la búsqueda
-        window.setTimeout(function () {
-            document.title = "b";
-            window.open(("about:blank?paso=" + document.title), "_blank", "width=64,height=64");
-        }, 2000);
     }, 400);
 
+    // Se manda notificar la búsqueda
+    window.setTimeout(function () {
+        document.title = "b";
+        window.open(("about:blank?paso=" + document.title), "_blank", "width=64,height=64");
+    }, 2000);
 }
 
 function BuscarRecibidasPorFecha(iAnio, iMes, iDia) {
@@ -76,15 +75,15 @@ function BuscarRecibidasPorFecha(iAnio, iMes, iDia) {
         // Se manda hacer la petición de búsqueda
         window.setTimeout(function () {
             j('#ctl00_MainContent_BtnBusqueda').click();
-
-            // Se manda notificar la búsqueda
-            window.setTimeout(function () {
-                document.title = "b";
-                window.open(("about:blank?paso=" + document.title), "_blank", "width=64,height=64");
-            }, 2000);
         }, 1000);
 
-    }, 1000);
+        // Se manda notificar la búsqueda
+        window.setTimeout(function () {
+            document.title = "b";
+            window.open(("about:blank?paso=" + document.title), "_blank", "width=64,height=64");
+        }, 2000);
+
+    }, 500);
 }
 
 function ObtenerXmls() {
