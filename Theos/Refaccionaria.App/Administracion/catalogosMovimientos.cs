@@ -3287,7 +3287,7 @@ namespace Refaccionaria.App
 
                     //Segundo: Registrar un descuento de tipo Factura
                     this.establecerHistoriaDescuentos(resultado, -1, -1, desUno, desDos, desTres, desCuatro, desCinco);
-
+                    
                     //Tercero: recorrer dgvHistorial y aplicar los descuentos a factura en cascada, junto con el ingresado en el paso 2
                     this.recorrerHistorialYCalcularTotal();
                 }

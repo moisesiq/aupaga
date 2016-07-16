@@ -29945,7 +29945,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <PropertyRef Name="ParteID" />
             <PropertyRef Name="ModeloID" />
           </Key>
-          <Property Name="GenericoID" Type="Int64" Nullable="false" />
+          <Property Name="GenericoID" Type="Int32" Nullable="false" />
           <Property Name="ParteID" Type="Int32" Nullable="false" />
           <Property Name="ModeloID" Type="Int32" Nullable="false" />
           <Property Name="NombreModelo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
