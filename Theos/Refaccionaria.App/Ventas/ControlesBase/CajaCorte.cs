@@ -215,7 +215,7 @@ namespace Refaccionaria.App
                             , ""
                         );
 
-                        if (oMov.Orden == 10)
+                        if (oMov.Orden == 12)
                         {
                             // this.AgregarLineaTitulo("Egresos");
                             this.AgregarLineaTitulo(
@@ -243,14 +243,14 @@ namespace Refaccionaria.App
                         mTickets += oMov.Tickets.Valor();
                         mFacturas += oMov.Facturas.Valor();
 
-                        if (oMov.Orden == 12 || oMov.Orden == 14)
+                        if (oMov.Orden == 14 || oMov.Orden == 16)
                         {
                             this.dgvDetalle["Contenido", iFila].Value += " [-]";
                             this.dgvDetalle["Totales", iFila].Value = ("$" + oMov.Total.Valor().ToString(GlobalClass.FormatoDecimal).RellenarCortarIzquierda(12));
                             this.Total -= oMov.Total.Valor();
                         }
 
-                        if (oMov.Orden == 14)
+                        if (oMov.Orden == 16)
                         {
                             this.AgregarLineaEncabezado(
                                 " ".PadRight(20)
