@@ -789,7 +789,7 @@ namespace Refaccionaria.App
             string sFolioDePago = this.txtDocumento.Text;
 
             // Se marcan los abonos como ya pagados
-            int iPolizaNuevaID = 0, iPolizaAntID = 0;
+            int iPolizaNuevaID = 0, iPolizaAntID = 0, iPolizaGeneralID = 0;
             var oPolizaDetalle = new List<ProveedorPolizaDetalle>();
             var oIdsPagosDeCaja = new List<int>();
             decimal mImportePago = 0;
@@ -818,6 +818,8 @@ namespace Refaccionaria.App
                     oAbono.Folio = sFolioDePago;
                     oAbono.BancoCuentaID = iCuentaID;
                 }
+                if (iPolizaGeneralID == 0)
+                    iPolizaGeneralID = oAbono.ProveedorPolizaID;
                 
                 // Se guarda si es un pago de caja, para uso posterior al hacer las pólizas
                 if (oAbono.OrigenID == Cat.OrigenesPagosAProveedores.PagoDeCaja)
@@ -830,6 +832,7 @@ namespace Refaccionaria.App
                 oPolizaDetalle.Add(oAbono);
             }
             int iPolizaID = (iPolizaNuevaID > 0 ? iPolizaNuevaID : iPolizaAntID);
+            iPolizaID = (iPolizaID > 0 ? iPolizaID : iPolizaGeneralID);
             var poliza = Datos.GetEntity<ProveedorPoliza>(c => c.ProveedorPolizaID == iPolizaID && c.Estatus);
 
             // Se guarda el movimiento bancario

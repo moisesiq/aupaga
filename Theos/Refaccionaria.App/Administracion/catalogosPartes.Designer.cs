@@ -2680,7 +2680,7 @@
             this.lblAvValidadosNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAvValidadosNum.Location = new System.Drawing.Point(470, 35);
             this.lblAvValidadosNum.Name = "lblAvValidadosNum";
-            this.lblAvValidadosNum.Size = new System.Drawing.Size(40, 13);
+            this.lblAvValidadosNum.Size = new System.Drawing.Size(64, 13);
             this.lblAvValidadosNum.TabIndex = 190;
             this.lblAvValidadosNum.Text = "0";
             this.lblAvValidadosNum.TextAlign = System.Drawing.ContentAlignment.TopRight;
