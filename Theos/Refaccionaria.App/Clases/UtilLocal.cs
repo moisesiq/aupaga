@@ -67,7 +67,7 @@ namespace Refaccionaria.App
 
         public static ResAcc<Usuario> ValidarObtenerUsuario(List<string> oPermisos, bool bCumplirTodosLosPermisos, string sTitulo)
         {
-            var Res = new ResAcc<Usuario>();
+            var Res = new ResAcc<Usuario>(false);
 
             var frmValidar = new ValidarUsuario(oPermisos, bCumplirTodosLosPermisos);
             if (sTitulo != null)
