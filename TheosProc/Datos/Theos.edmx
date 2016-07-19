@@ -748,6 +748,7 @@
           <Property Name="Estatus" Type="bit" Nullable="false" />
           <Property Name="Actualizar" Type="bit" Nullable="false" />
           <Property Name="Cotizacion9500ID" Type="int" Nullable="false" />
+          <Property Name="Pedido" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CriterioABC">
           <Key>
@@ -15493,7 +15494,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="CorteCategoria" EntityType="ControlRefaccionariaModel.CorteCategoria" />
           <EntitySet Name="CorteDetalleHistorico" EntityType="ControlRefaccionariaModel.CorteDetalleHistorico" />
           <EntitySet Name="Cotizacion9500" EntityType="ControlRefaccionariaModel.Cotizacion9500" />
-          <EntitySet Name="Cotizacion9500Detalle" EntityType="ControlRefaccionariaModel.Cotizacion9500Detalle" />
           <EntitySet Name="CriterioABC" EntityType="ControlRefaccionariaModel.CriterioABC" />
           <EntitySet Name="Duenio" EntityType="ControlRefaccionariaModel.Duenio" />
           <EntitySet Name="Estado" EntityType="ControlRefaccionariaModel.Estado" />
@@ -15724,7 +15724,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="PartesVehiculosMotoresView" EntityType="ControlRefaccionariaModel.PartesVehiculosMotoresView" />
           <EntitySet Name="PartesVentasView" EntityType="ControlRefaccionariaModel.PartesVentasView" />
           <EntitySet Name="PartesView" EntityType="ControlRefaccionariaModel.PartesView" />
-          <EntitySet Name="PedidosDetalleView" EntityType="ControlRefaccionariaModel.PedidosDetalleView" />
           <EntitySet Name="PedidosView" EntityType="ControlRefaccionariaModel.PedidosView" />
           <EntitySet Name="PerfilesView" EntityType="ControlRefaccionariaModel.PerfilesView" />
           <EntitySet Name="PerfilPermisosView" EntityType="ControlRefaccionariaModel.PerfilPermisosView" />
@@ -16288,10 +16287,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cotizacio__Cotiz__73901351" Association="ControlRefaccionariaModel.FK__Cotizacio__Cotiz__73901351">
-            <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
-            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
-          </AssociationSet>
           <AssociationSet Name="FK__Cotizacio__Estat__002AF460" Association="ControlRefaccionariaModel.FK__Cotizacio__Estat__002AF460">
             <End Role="EstatusGenerico" EntitySet="EstatusGenerico" />
             <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
@@ -16311,26 +16306,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__Cotizacio__Venta__17B8652E" Association="ControlRefaccionariaModel.FK__Cotizacio__Venta__17B8652E">
             <End Role="Venta" EntitySet="Venta" />
             <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cotizacio__Linea__0AA882D3" Association="ControlRefaccionariaModel.FK__Cotizacio__Linea__0AA882D3">
-            <End Role="Linea" EntitySet="Linea" />
-            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cotizacio__Marca__0B9CA70C" Association="ControlRefaccionariaModel.FK__Cotizacio__Marca__0B9CA70C">
-            <End Role="MarcaParte" EntitySet="MarcaParte" />
-            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cotizacio__Parte__0C90CB45" Association="ControlRefaccionariaModel.FK__Cotizacio__Parte__0C90CB45">
-            <End Role="Parte" EntitySet="Parte" />
-            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cotizacio__Prove__09B45E9A" Association="ControlRefaccionariaModel.FK__Cotizacio__Prove__09B45E9A">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cotizacio__Usuar__0D84EF7E" Association="ControlRefaccionariaModel.FK__Cotizacio__Usuar__0D84EF7E">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
           </AssociationSet>
           <AssociationSet Name="FK_CriterioABC_Usuario" Association="ControlRefaccionariaModel.FK_CriterioABC_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -17750,6 +17725,32 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="PartesBusquedaEnMovimientosView" EntityType="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView" />
           <EntitySet Name="PartesVehiculosView" EntityType="ControlRefaccionariaModel.PartesVehiculosView" />
+          <EntitySet Name="PedidosDetalleView" EntityType="ControlRefaccionariaModel.PedidosDetalleView" />
+          <EntitySet Name="Cotizacion9500Detalle" EntityType="ControlRefaccionariaModel.Cotizacion9500Detalle" />
+          <AssociationSet Name="FK__Cotizacio__Cotiz__73901351" Association="ControlRefaccionariaModel.FK__Cotizacio__Cotiz__73901351">
+            <End Role="Cotizacion9500" EntitySet="Cotizacion9500" />
+            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Linea__0AA882D3" Association="ControlRefaccionariaModel.FK__Cotizacio__Linea__0AA882D3">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Marca__0B9CA70C" Association="ControlRefaccionariaModel.FK__Cotizacio__Marca__0B9CA70C">
+            <End Role="MarcaParte" EntitySet="MarcaParte" />
+            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Parte__0C90CB45" Association="ControlRefaccionariaModel.FK__Cotizacio__Parte__0C90CB45">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Prove__09B45E9A" Association="ControlRefaccionariaModel.FK__Cotizacio__Prove__09B45E9A">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cotizacio__Usuar__0D84EF7E" Association="ControlRefaccionariaModel.FK__Cotizacio__Usuar__0D84EF7E">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cotizacion9500Detalle" EntitySet="Cotizacion9500Detalle" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Autorizacion">
           <Key>
@@ -18643,37 +18644,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Cliente1" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Comis__41248F15" FromRole="Cotizacion9500" ToRole="Cliente" />
           <NavigationProperty Name="Venta" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Antic__674A37FD" FromRole="Cotizacion9500" ToRole="Venta" />
           <NavigationProperty Name="Usuario" Relationship="ControlRefaccionariaModel.FK__Cotizacio__BajaU__4E89772B" FromRole="Cotizacion9500" ToRole="Usuario" />
-          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Cotiz__73901351" FromRole="Cotizacion9500" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="EstatusGenerico" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Estat__002AF460" FromRole="Cotizacion9500" ToRole="EstatusGenerico" />
           <NavigationProperty Name="Usuario1" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Reali__7FF5EA36" FromRole="Cotizacion9500" ToRole="Usuario" />
           <NavigationProperty Name="Sucursal" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Sucur__011F1899" FromRole="Cotizacion9500" ToRole="Sucursal" />
           <NavigationProperty Name="Usuario2" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Usuar__02133CD2" FromRole="Cotizacion9500" ToRole="Usuario" />
           <NavigationProperty Name="Venta1" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Venta__17B8652E" FromRole="Cotizacion9500" ToRole="Venta" />
-        </EntityType>
-        <EntityType Name="Cotizacion9500Detalle">
-          <Key>
-            <PropertyRef Name="Cotizacion9500DetalleID" />
-          </Key>
-          <Property Name="Cotizacion9500DetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="LineaID" Type="Int32" Nullable="false" />
-          <Property Name="MarcaParteID" Type="Int32" Nullable="false" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="Cantidad" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="PrecioAlCliente" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
-          <Property Name="Cotizacion9500ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cotizacion9500" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Cotiz__73901351" FromRole="Cotizacion9500Detalle" ToRole="Cotizacion9500" />
-          <NavigationProperty Name="Linea" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Linea__0AA882D3" FromRole="Cotizacion9500Detalle" ToRole="Linea" />
-          <NavigationProperty Name="MarcaParte" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Marca__0B9CA70C" FromRole="Cotizacion9500Detalle" ToRole="MarcaParte" />
-          <NavigationProperty Name="Parte" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Parte__0C90CB45" FromRole="Cotizacion9500Detalle" ToRole="Parte" />
-          <NavigationProperty Name="Proveedor" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Prove__09B45E9A" FromRole="Cotizacion9500Detalle" ToRole="Proveedor" />
-          <NavigationProperty Name="Usuario" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Usuar__0D84EF7E" FromRole="Cotizacion9500Detalle" ToRole="Usuario" />
+          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Cotiz__73901351" FromRole="Cotizacion9500" ToRole="Cotizacion9500Detalle" />
         </EntityType>
         <EntityType Name="CriterioABC">
           <Key>
@@ -18804,7 +18780,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Cilindros" Type="Boolean" />
           <Property Name="Garantia" Type="Boolean" />
           <Property Name="SubsistemaID" Type="Int32" />
-          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Linea__0AA882D3" FromRole="Linea" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="InventarioLineaPeriodicidad" Relationship="ControlRefaccionariaModel.FK__Inventari__Linea__76EC6E40" FromRole="Linea" ToRole="InventarioLineaPeriodicidad" />
           <NavigationProperty Name="LineaCaracteristica" Relationship="ControlRefaccionariaModel.FK__LineaCara__Linea__11B57315" FromRole="Linea" ToRole="LineaCaracteristica" />
           <NavigationProperty Name="Meta" Relationship="ControlRefaccionariaModel.FK__Meta__LineaID__46C859D2" FromRole="Linea" ToRole="Meta" />
@@ -18817,6 +18792,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Parte1" Relationship="ControlRefaccionariaModel.FK_Parte_Linea" FromRole="Linea" ToRole="Parte" />
           <NavigationProperty Name="ProveedorGanancia" Relationship="ControlRefaccionariaModel.FK_ProveedorGanancia_Linea" FromRole="Linea" ToRole="ProveedorGanancia" />
           <NavigationProperty Name="InventarioLinea" Relationship="ControlRefaccionariaModel.FK__Inventari__Linea__1B29CEB6" FromRole="Linea" ToRole="InventarioLinea" />
+          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Linea__0AA882D3" FromRole="Linea" ToRole="Cotizacion9500Detalle" />
         </EntityType>
         <EntityType Name="LineaAttachFile">
           <Key>
@@ -18886,7 +18862,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
           <Property Name="Estatus" Type="Boolean" Nullable="false" />
           <Property Name="Actualizar" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Marca__0B9CA70C" FromRole="MarcaParte" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="Meta" Relationship="ControlRefaccionariaModel.FK__Meta__MarcaParte__45D43599" FromRole="MarcaParte" ToRole="Meta" />
           <NavigationProperty Name="ParteMaxMinCriterioPredefinido" Relationship="ControlRefaccionariaModel.FK__ParteMaxM__Marca__13B2CA20" FromRole="MarcaParte" ToRole="ParteMaxMinCriterioPredefinido" />
           <NavigationProperty Name="ProveedorParteGanancia" Relationship="ControlRefaccionariaModel.FK__Proveedor__Marca__4F9D96F5" FromRole="MarcaParte" ToRole="ProveedorParteGanancia" />
@@ -18894,6 +18869,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Parte" Relationship="ControlRefaccionariaModel.FK_Parte_MarcaParte" FromRole="MarcaParte" ToRole="Parte" />
           <NavigationProperty Name="ProveedorGanancia" Relationship="ControlRefaccionariaModel.FK_ProveedorGanancia_MarcaParte" FromRole="MarcaParte" ToRole="ProveedorGanancia" />
           <NavigationProperty Name="ProveedorMarcaParte" Relationship="ControlRefaccionariaModel.FK_ProveedorMarcaParte_MarcaParte" FromRole="MarcaParte" ToRole="ProveedorMarcaParte" />
+          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Marca__0B9CA70C" FromRole="MarcaParte" ToRole="Cotizacion9500Detalle" />
         </EntityType>
         <EntityType Name="Medida">
           <Key>
@@ -19464,7 +19440,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="RequiereDepositoDe" Type="Int32" />
           <NavigationProperty Name="CascoRegistro" Relationship="ControlRefaccionariaModel.FK__CascoRegi__Parte__023E255B" FromRole="Parte" ToRole="CascoRegistro" />
           <NavigationProperty Name="CascoRegistro1" Relationship="ControlRefaccionariaModel.FK__CascoRegi__Recib__03324994" FromRole="Parte" ToRole="CascoRegistro" />
-          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Parte__0C90CB45" FromRole="Parte" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="InventarioConteo" Relationship="ControlRefaccionariaModel.FK__Inventari__Parte__22CAF07E" FromRole="Parte" ToRole="InventarioConteo" />
           <NavigationProperty Name="Linea" Relationship="ControlRefaccionariaModel.FK__Parte__EsCascoPa__66960AE6" FromRole="Parte" ToRole="Linea" />
           <NavigationProperty Name="Linea1" Relationship="ControlRefaccionariaModel.FK_Parte_Linea" FromRole="Parte" ToRole="Linea" />
@@ -19507,6 +19482,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="PartePrecio" Relationship="ControlRefaccionariaModel.FK_PartePrecio_Parte" FromRole="Parte" ToRole="PartePrecio" />
           <NavigationProperty Name="PartePrecioHistorico" Relationship="ControlRefaccionariaModel.FK_PartePrecioHistorico_Parte" FromRole="Parte" ToRole="PartePrecioHistorico" />
           <NavigationProperty Name="PedidoDetalle" Relationship="ControlRefaccionariaModel.FK_PedidoDetalle_Parte" FromRole="Parte" ToRole="PedidoDetalle" />
+          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Parte__0C90CB45" FromRole="Parte" ToRole="Cotizacion9500Detalle" />
         </EntityType>
         <EntityType Name="ParteAbc">
           <Key>
@@ -20119,7 +20095,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Actualizar" Type="Boolean" Nullable="false" />
           <Property Name="MontoPaqueteria" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="HoraMaxima" Type="Time" Precision="7" />
-          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Prove__09B45E9A" FromRole="Proveedor" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="Parte" Relationship="ControlRefaccionariaModel.FK_Parte_Proveedor" FromRole="Proveedor" ToRole="Parte" />
           <NavigationProperty Name="ParteMaxMinCriterioPredefinido" Relationship="ControlRefaccionariaModel.FK__ParteMaxM__Prove__12BEA5E7" FromRole="Proveedor" ToRole="ParteMaxMinCriterioPredefinido" />
           <NavigationProperty Name="Pedido" Relationship="ControlRefaccionariaModel.FK_Pedido_Proveedor" FromRole="Proveedor" ToRole="Pedido" />
@@ -20134,6 +20109,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorObservacion" Relationship="ControlRefaccionariaModel.FK_ProveedorObservacion_Proveedor" FromRole="Proveedor" ToRole="ProveedorObservacion" />
           <NavigationProperty Name="ProveedorPoliza" Relationship="ControlRefaccionariaModel.FK_ProveedorPoliza_Proveedor" FromRole="Proveedor" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="ProveedorProntoPago" Relationship="ControlRefaccionariaModel.FK_ProveedorProntoPago_Proveedor" FromRole="Proveedor" ToRole="ProveedorProntoPago" />
+          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Prove__09B45E9A" FromRole="Proveedor" ToRole="Cotizacion9500Detalle" />
         </EntityType>
         <EntityType Name="ProveedorContacto">
           <Key>
@@ -20760,7 +20736,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Cotizacion9500" Relationship="ControlRefaccionariaModel.FK__Cotizacio__BajaU__4E89772B" FromRole="Usuario" ToRole="Cotizacion9500" />
           <NavigationProperty Name="Cotizacion95001" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Reali__7FF5EA36" FromRole="Usuario" ToRole="Cotizacion9500" />
           <NavigationProperty Name="Cotizacion95002" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Usuar__02133CD2" FromRole="Usuario" ToRole="Cotizacion9500" />
-          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Usuar__0D84EF7E" FromRole="Usuario" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="CriterioABC" Relationship="ControlRefaccionariaModel.FK_CriterioABC_Usuario" FromRole="Usuario" ToRole="CriterioABC" />
           <NavigationProperty Name="Estado" Relationship="ControlRefaccionariaModel.FK_Estado_Usuario" FromRole="Usuario" ToRole="Estado" />
           <NavigationProperty Name="InventarioConteo" Relationship="ControlRefaccionariaModel.FK__Inventari__Conte__21D6CC45" FromRole="Usuario" ToRole="InventarioConteo" />
@@ -20869,6 +20844,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaGarantia1" Relationship="ControlRefaccionariaModel.FK__VentaGara__Usuar__1AB4CD6A" FromRole="Usuario" ToRole="VentaGarantia" />
           <NavigationProperty Name="VentaPago" Relationship="ControlRefaccionariaModel.FK__VentaPago__Usuar__644DCFC1" FromRole="Usuario" ToRole="VentaPago" />
           <NavigationProperty Name="VentaPagoDetalle" Relationship="ControlRefaccionariaModel.FK__VentaPago__Usuar__6FBF826D" FromRole="Usuario" ToRole="VentaPagoDetalle" />
+          <NavigationProperty Name="Cotizacion9500Detalle" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Usuar__0D84EF7E" FromRole="Usuario" ToRole="Cotizacion9500Detalle" />
         </EntityType>
         <EntityType Name="UsuarioAsistencia">
           <Key>
@@ -23124,33 +23100,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Es9500" Type="Boolean" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Busqueda" Type="String" MaxLength="862" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PedidosDetalleView">
-          <Key>
-            <PropertyRef Name="PedidoDetalleID" />
-            <PropertyRef Name="PedidoID" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="NumeroParte" />
-            <PropertyRef Name="NombreParte" />
-            <PropertyRef Name="PedidoEstatusID" />
-            <PropertyRef Name="NombrePedidoEstatus" />
-            <PropertyRef Name="CantidadPedido" />
-            <PropertyRef Name="CostosUnitario" />
-            <PropertyRef Name="FechaRegistro" />
-          </Key>
-          <Property Name="PedidoDetalleID" Type="Int32" Nullable="false" />
-          <Property Name="PedidoID" Type="Int32" Nullable="false" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="NumeroParte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NombreParte" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PedidoEstatusID" Type="Int32" Nullable="false" />
-          <Property Name="NombrePedidoEstatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Abreviacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CantidadPedido" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="CantidadSurtida" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CostosUnitario" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Fecha" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="PedidosView">
           <Key>
@@ -25785,18 +25734,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cotizacio__Cotiz__73901351">
-          <End Type="ControlRefaccionariaModel.Cotizacion9500" Role="Cotizacion9500" Multiplicity="1" />
-          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cotizacion9500">
-              <PropertyRef Name="Cotizacion9500ID" />
-            </Principal>
-            <Dependent Role="Cotizacion9500Detalle">
-              <PropertyRef Name="Cotizacion9500ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Cotizacio__Estat__002AF460">
           <End Type="ControlRefaccionariaModel.EstatusGenerico" Role="EstatusGenerico" Multiplicity="1" />
           <End Type="ControlRefaccionariaModel.Cotizacion9500" Role="Cotizacion9500" Multiplicity="*" />
@@ -25854,66 +25791,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="Cotizacion9500">
               <PropertyRef Name="VentaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cotizacio__Linea__0AA882D3">
-          <End Type="ControlRefaccionariaModel.Linea" Role="Linea" Multiplicity="1" />
-          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Linea">
-              <PropertyRef Name="LineaID" />
-            </Principal>
-            <Dependent Role="Cotizacion9500Detalle">
-              <PropertyRef Name="LineaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cotizacio__Marca__0B9CA70C">
-          <End Type="ControlRefaccionariaModel.MarcaParte" Role="MarcaParte" Multiplicity="1" />
-          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MarcaParte">
-              <PropertyRef Name="MarcaParteID" />
-            </Principal>
-            <Dependent Role="Cotizacion9500Detalle">
-              <PropertyRef Name="MarcaParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cotizacio__Parte__0C90CB45">
-          <End Type="ControlRefaccionariaModel.Parte" Role="Parte" Multiplicity="1" />
-          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ParteID" />
-            </Principal>
-            <Dependent Role="Cotizacion9500Detalle">
-              <PropertyRef Name="ParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cotizacio__Prove__09B45E9A">
-          <End Type="ControlRefaccionariaModel.Proveedor" Role="Proveedor" Multiplicity="1" />
-          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ProveedorID" />
-            </Principal>
-            <Dependent Role="Cotizacion9500Detalle">
-              <PropertyRef Name="ProveedorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cotizacio__Usuar__0D84EF7E">
-          <End Type="ControlRefaccionariaModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="Cotizacion9500Detalle">
-              <PropertyRef Name="UsuarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -29953,6 +29830,131 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="NombreMotor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Anio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="PedidosDetalleView">
+          <Key>
+            <PropertyRef Name="PedidoDetalleID" />
+            <PropertyRef Name="PedidoID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="NumeroParte" />
+            <PropertyRef Name="NombreParte" />
+            <PropertyRef Name="PedidoEstatusID" />
+            <PropertyRef Name="NombrePedidoEstatus" />
+            <PropertyRef Name="CantidadPedido" />
+            <PropertyRef Name="CostosUnitario" />
+            <PropertyRef Name="FechaRegistro" />
+          </Key>
+          <Property Name="PedidoDetalleID" Type="Int32" Nullable="false" />
+          <Property Name="PedidoID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="NumeroParte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NombreParte" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PedidoEstatusID" Type="Int32" Nullable="false" />
+          <Property Name="NombrePedidoEstatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Abreviacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CantidadPedido" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CantidadSurtida" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CostosUnitario" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Cotizacion9500Detalle">
+          <Key>
+            <PropertyRef Name="Cotizacion9500DetalleID" />
+          </Key>
+          <Property Name="Cotizacion9500DetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="MarcaParteID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="PrecioAlCliente" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
+          <Property Name="Cotizacion9500ID" Type="Int32" Nullable="false" />
+          <Property Name="Pedido" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cotizacion9500" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Cotiz__73901351" FromRole="Cotizacion9500Detalle" ToRole="Cotizacion9500" />
+          <NavigationProperty Name="Linea" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Linea__0AA882D3" FromRole="Cotizacion9500Detalle" ToRole="Linea" />
+          <NavigationProperty Name="MarcaParte" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Marca__0B9CA70C" FromRole="Cotizacion9500Detalle" ToRole="MarcaParte" />
+          <NavigationProperty Name="Parte" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Parte__0C90CB45" FromRole="Cotizacion9500Detalle" ToRole="Parte" />
+          <NavigationProperty Name="Proveedor" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Prove__09B45E9A" FromRole="Cotizacion9500Detalle" ToRole="Proveedor" />
+          <NavigationProperty Name="Usuario" Relationship="ControlRefaccionariaModel.FK__Cotizacio__Usuar__0D84EF7E" FromRole="Cotizacion9500Detalle" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__Cotizacio__Cotiz__73901351">
+          <End Type="ControlRefaccionariaModel.Cotizacion9500" Role="Cotizacion9500" Multiplicity="1" />
+          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cotizacion9500">
+              <PropertyRef Name="Cotizacion9500ID" />
+            </Principal>
+            <Dependent Role="Cotizacion9500Detalle">
+              <PropertyRef Name="Cotizacion9500ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Linea__0AA882D3">
+          <End Type="ControlRefaccionariaModel.Linea" Role="Linea" Multiplicity="1" />
+          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="LineaID" />
+            </Principal>
+            <Dependent Role="Cotizacion9500Detalle">
+              <PropertyRef Name="LineaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Marca__0B9CA70C">
+          <End Type="ControlRefaccionariaModel.MarcaParte" Role="MarcaParte" Multiplicity="1" />
+          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarcaParte">
+              <PropertyRef Name="MarcaParteID" />
+            </Principal>
+            <Dependent Role="Cotizacion9500Detalle">
+              <PropertyRef Name="MarcaParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Parte__0C90CB45">
+          <End Type="ControlRefaccionariaModel.Parte" Role="Parte" Multiplicity="1" />
+          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="Cotizacion9500Detalle">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Prove__09B45E9A">
+          <End Type="ControlRefaccionariaModel.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ProveedorID" />
+            </Principal>
+            <Dependent Role="Cotizacion9500Detalle">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cotizacio__Usuar__0D84EF7E">
+          <End Type="ControlRefaccionariaModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="ControlRefaccionariaModel.Cotizacion9500Detalle" Role="Cotizacion9500Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="Cotizacion9500Detalle">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -30731,26 +30733,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="EstatusGenericoID" ColumnName="EstatusGenericoID" />
                 <ScalarProperty Name="Cotizacion9500ID" ColumnName="Cotizacion9500ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cotizacion9500Detalle">
-            <EntityTypeMapping TypeName="ControlRefaccionariaModel.Cotizacion9500Detalle">
-              <MappingFragment StoreEntitySet="Cotizacion9500Detalle">
-                <ScalarProperty Name="Cotizacion9500ID" ColumnName="Cotizacion9500ID" />
-                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="PrecioAlCliente" ColumnName="PrecioAlCliente" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
-                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="Cotizacion9500DetalleID" ColumnName="Cotizacion9500DetalleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -34417,25 +34399,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PedidosDetalleView">
-            <EntityTypeMapping TypeName="ControlRefaccionariaModel.PedidosDetalleView">
-              <MappingFragment StoreEntitySet="PedidosDetalleView">
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="CostosUnitario" ColumnName="CostosUnitario" />
-                <ScalarProperty Name="CantidadSurtida" ColumnName="CantidadSurtida" />
-                <ScalarProperty Name="CantidadPedido" ColumnName="CantidadPedido" />
-                <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
-                <ScalarProperty Name="NombrePedidoEstatus" ColumnName="NombrePedidoEstatus" />
-                <ScalarProperty Name="PedidoEstatusID" ColumnName="PedidoEstatusID" />
-                <ScalarProperty Name="NombreParte" ColumnName="NombreParte" />
-                <ScalarProperty Name="NumeroParte" ColumnName="NumeroParte" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="PedidoID" ColumnName="PedidoID" />
-                <ScalarProperty Name="PedidoDetalleID" ColumnName="PedidoDetalleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PedidosView">
             <EntityTypeMapping TypeName="ControlRefaccionariaModel.PedidosView">
               <MappingFragment StoreEntitySet="PedidosView">
@@ -36079,6 +36042,46 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PedidosDetalleView">
+            <EntityTypeMapping TypeName="ControlRefaccionariaModel.PedidosDetalleView">
+              <MappingFragment StoreEntitySet="PedidosDetalleView">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="CostosUnitario" ColumnName="CostosUnitario" />
+                <ScalarProperty Name="CantidadSurtida" ColumnName="CantidadSurtida" />
+                <ScalarProperty Name="CantidadPedido" ColumnName="CantidadPedido" />
+                <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
+                <ScalarProperty Name="NombrePedidoEstatus" ColumnName="NombrePedidoEstatus" />
+                <ScalarProperty Name="PedidoEstatusID" ColumnName="PedidoEstatusID" />
+                <ScalarProperty Name="NombreParte" ColumnName="NombreParte" />
+                <ScalarProperty Name="NumeroParte" ColumnName="NumeroParte" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="PedidoID" ColumnName="PedidoID" />
+                <ScalarProperty Name="PedidoDetalleID" ColumnName="PedidoDetalleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cotizacion9500Detalle">
+            <EntityTypeMapping TypeName="ControlRefaccionariaModel.Cotizacion9500Detalle">
+              <MappingFragment StoreEntitySet="Cotizacion9500Detalle">
+                <ScalarProperty Name="Pedido" ColumnName="Pedido" />
+                <ScalarProperty Name="Cotizacion9500ID" ColumnName="Cotizacion9500ID" />
+                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="PrecioAlCliente" ColumnName="PrecioAlCliente" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="Cotizacion9500DetalleID" ColumnName="Cotizacion9500DetalleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -36152,7 +36155,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="ControlRefaccionariaModel.CorteCategoria" Width="1.5" PointX="8.25" PointY="350.125" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.CorteDetalleHistorico" Width="1.5" PointX="10.5" PointY="353.875" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.Cotizacion9500" Width="1.5" PointX="29" PointY="308.125" />
-        <EntityTypeShape EntityType="ControlRefaccionariaModel.Cotizacion9500Detalle" Width="1.5" PointX="36.25" PointY="319.25" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.CriterioABC" Width="1.5" PointX="5.25" PointY="208" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.Duenio" Width="1.5" PointX="18.75" PointY="277.625" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.Estado" Width="1.5" PointX="5.25" PointY="392.125" />
@@ -36383,7 +36385,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesVehiculosMotoresView" Width="1.5" PointX="30.75" PointY="0.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesVentasView" Width="1.5" PointX="30.75" PointY="7.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesView" Width="1.5" PointX="30.75" PointY="13.75" />
-        <EntityTypeShape EntityType="ControlRefaccionariaModel.PedidosDetalleView" Width="1.5" PointX="30.75" PointY="18.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PedidosView" Width="1.5" PointX="22.75" PointY="30.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PerfilesView" Width="1.5" PointX="30.75" PointY="23.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PerfilPermisosView" Width="1.5" PointX="30.75" PointY="26.75" />
@@ -36566,17 +36567,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="ControlRefaccionariaModel.FK__CorteDeta__Sucur__72E6D332" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Antic__674A37FD" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__BajaU__4E89772B" />
-        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Cotiz__73901351" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Estat__002AF460" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Reali__7FF5EA36" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Sucur__011F1899" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Usuar__02133CD2" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Venta__17B8652E" />
-        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Linea__0AA882D3" />
-        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Marca__0B9CA70C" />
-        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Parte__0C90CB45" />
-        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Prove__09B45E9A" />
-        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Usuar__0D84EF7E" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK_CriterioABC_Usuario" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK_SucursalCriterioABC_CriterioABC" />
         <AssociationConnector Association="ControlRefaccionariaModel.FK_Estado_Usuario" />
@@ -36860,6 +36855,14 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="ControlRefaccionariaModel.FK__Inventari__Sucur__1A35AA7D" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesBusquedaEnMovimientosView" Width="1.5" PointX="0.75" PointY="38.75" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.PartesVehiculosView" Width="1.5" PointX="9.375" PointY="29.75" />
+        <EntityTypeShape EntityType="ControlRefaccionariaModel.PedidosDetalleView" Width="1.5" PointX="23.375" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControlRefaccionariaModel.Cotizacion9500Detalle" Width="1.5" PointX="36.25" PointY="319.125" />
+        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Cotiz__73901351" />
+        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Linea__0AA882D3" />
+        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Marca__0B9CA70C" />
+        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Parte__0C90CB45" />
+        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Prove__09B45E9A" />
+        <AssociationConnector Association="ControlRefaccionariaModel.FK__Cotizacio__Usuar__0D84EF7E" />
         </Diagram>
     </Diagrams>
   </Designer>
