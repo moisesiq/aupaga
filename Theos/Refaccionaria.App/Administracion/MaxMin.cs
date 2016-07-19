@@ -562,8 +562,8 @@ namespace Refaccionaria.App
 
             // Se genera el código dinámico
             var oDin = new CodigoDinamico();
-            oDin.Referencias.AddRange(new string[] { "System.dll", "THEOS.exe", "Refaccionaria.dll" });
-            oDin.Usings.AddRange(new string[] { "System", "Refaccionaria.App", "Refaccionaria.Negocio" });
+            oDin.Referencias.AddRange(new string[] { "System.dll", "THEOS.exe", "LibUtil.dll" });
+            oDin.Usings.AddRange(new string[] { "System", "Refaccionaria.App", "LibUtil" });
             var oCodigo = new StringBuilder();
             foreach (var oRegla in oReglas)
             {
