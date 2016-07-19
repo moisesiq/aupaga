@@ -4818,15 +4818,6 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.PedidosDetalleView' does 
         <EntityType Name="PedidosDetalleView">
           <Key>
             <PropertyRef Name="PedidoDetalleID" />
-            <PropertyRef Name="PedidoID" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="NumeroParte" />
-            <PropertyRef Name="NombreParte" />
-            <PropertyRef Name="PedidoEstatusID" />
-            <PropertyRef Name="NombrePedidoEstatus" />
-            <PropertyRef Name="CantidadPedido" />
-            <PropertyRef Name="CostosUnitario" />
-            <PropertyRef Name="FechaRegistro" />
           </Key>
           <Property Name="PedidoDetalleID" Type="int" Nullable="false" />
           <Property Name="PedidoID" Type="int" Nullable="false" />
@@ -29833,15 +29824,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityType Name="PedidosDetalleView">
           <Key>
             <PropertyRef Name="PedidoDetalleID" />
-            <PropertyRef Name="PedidoID" />
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="NumeroParte" />
-            <PropertyRef Name="NombreParte" />
-            <PropertyRef Name="PedidoEstatusID" />
-            <PropertyRef Name="NombrePedidoEstatus" />
-            <PropertyRef Name="CantidadPedido" />
-            <PropertyRef Name="CostosUnitario" />
-            <PropertyRef Name="FechaRegistro" />
           </Key>
           <Property Name="PedidoDetalleID" Type="Int32" Nullable="false" />
           <Property Name="PedidoID" Type="Int32" Nullable="false" />
@@ -36103,7 +36085,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ControlRefaccionaria" ZoomLevel="63">
+      <Diagram Name="ControlRefaccionaria" ZoomLevel="94">
         <EntityTypeShape EntityType="ControlRefaccionariaModel.Autorizacion" Width="1.5" PointX="13.5" PointY="301.125" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.AutorizacionProceso" Width="1.5" PointX="5.25" PointY="280.875" />
         <EntityTypeShape EntityType="ControlRefaccionariaModel.Banco" Width="1.5" PointX="5.25" PointY="318" />
