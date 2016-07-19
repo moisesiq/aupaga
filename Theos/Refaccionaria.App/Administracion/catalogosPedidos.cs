@@ -1094,6 +1094,17 @@ namespace Refaccionaria.App
                     };
                     Datos.Guardar<PedidoDetalle>(detallePedido);
 
+                    // Se marca como pedido si es 9500
+                    if (Util.Cadena(oFila.Cells["sug_Caracteristica"].Value) == "9500")
+                    {
+                        var o9500 = Datos.GetListOf<Cotizacion9500Detalle>(c => c.ParteID == iParteID && !c.Pedido && c.Estatus);
+                        foreach (var oReg in o9500)
+                        {
+                            oReg.Pedido = true;
+                            Datos.Guardar<Cotizacion9500Detalle>(oReg);
+                        }
+                    }
+
                     // Se marca como pedido en reporte de faltante, si aplica
                     if (Util.Cadena(oFila.Cells["sug_Caracteristica"].Value) == "RF")
                     {
