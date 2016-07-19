@@ -41,6 +41,7 @@
             this.rdbMotivo2 = new System.Windows.Forms.RadioButton();
             this.rdbMotivo1 = new System.Windows.Forms.RadioButton();
             this.gpbAccion = new System.Windows.Forms.GroupBox();
+            this.rdbAcDebito = new System.Windows.Forms.RadioButton();
             this.rdbAcTransferencia = new System.Windows.Forms.RadioButton();
             this.rdbAcRevision = new System.Windows.Forms.RadioButton();
             this.rdbAcTarjeta = new System.Windows.Forms.RadioButton();
@@ -53,6 +54,7 @@
             this.dtpPenDesde = new System.Windows.Forms.DateTimePicker();
             this.chkPenMostrarTodas = new System.Windows.Forms.CheckBox();
             this.gpbAccionPosterior = new System.Windows.Forms.GroupBox();
+            this.rdbApDebito = new System.Windows.Forms.RadioButton();
             this.rdbApTransferencia = new System.Windows.Forms.RadioButton();
             this.rdbApNoProcede = new System.Windows.Forms.RadioButton();
             this.txtAccionObservacion = new LibUtil.TextoMod();
@@ -75,8 +77,6 @@
             this.penEstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.penAccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.penObservacionCompletado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rdbAcDebito = new System.Windows.Forms.RadioButton();
-            this.rdbApDebito = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.ctlError)).BeginInit();
             this.tabGarantia.SuspendLayout();
             this.tbpGarantia.SuspendLayout();
@@ -99,7 +99,7 @@
             this.tabGarantia.Multiline = true;
             this.tabGarantia.Name = "tabGarantia";
             this.tabGarantia.SelectedIndex = 0;
-            this.tabGarantia.Size = new System.Drawing.Size(840, 380);
+            this.tabGarantia.Size = new System.Drawing.Size(840, 417);
             this.tabGarantia.TabIndex = 107;
             this.tabGarantia.SelectedIndexChanged += new System.EventHandler(this.tabGarantia_SelectedIndexChanged);
             // 
@@ -112,7 +112,7 @@
             this.tbpGarantia.Location = new System.Drawing.Point(4, 4);
             this.tbpGarantia.Name = "tbpGarantia";
             this.tbpGarantia.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpGarantia.Size = new System.Drawing.Size(813, 372);
+            this.tbpGarantia.Size = new System.Drawing.Size(813, 409);
             this.tbpGarantia.TabIndex = 0;
             this.tbpGarantia.Text = "Garantía";
             // 
@@ -137,7 +137,7 @@
             this.gpbMotivo.Controls.Add(this.rdbMotivo2);
             this.gpbMotivo.Controls.Add(this.rdbMotivo1);
             this.gpbMotivo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gpbMotivo.Location = new System.Drawing.Point(6, 312);
+            this.gpbMotivo.Location = new System.Drawing.Point(6, 349);
             this.gpbMotivo.Name = "gpbMotivo";
             this.gpbMotivo.Size = new System.Drawing.Size(450, 54);
             this.gpbMotivo.TabIndex = 10;
@@ -212,12 +212,23 @@
             this.gpbAccion.Controls.Add(this.rdbAcNotaDeCredito);
             this.gpbAccion.Controls.Add(this.rdbAcArticuloNuevo);
             this.gpbAccion.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gpbAccion.Location = new System.Drawing.Point(462, 312);
+            this.gpbAccion.Location = new System.Drawing.Point(462, 349);
             this.gpbAccion.Name = "gpbAccion";
             this.gpbAccion.Size = new System.Drawing.Size(345, 54);
             this.gpbAccion.TabIndex = 11;
             this.gpbAccion.TabStop = false;
             this.gpbAccion.Text = "Acción a tomar";
+            // 
+            // rdbAcDebito
+            // 
+            this.rdbAcDebito.AutoSize = true;
+            this.rdbAcDebito.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rdbAcDebito.Location = new System.Drawing.Point(293, 32);
+            this.rdbAcDebito.Name = "rdbAcDebito";
+            this.rdbAcDebito.Size = new System.Drawing.Size(82, 17);
+            this.rdbAcDebito.TabIndex = 7;
+            this.rdbAcDebito.Text = "Dev. Débito";
+            this.rdbAcDebito.UseVisualStyleBackColor = true;
             // 
             // rdbAcTransferencia
             // 
@@ -307,7 +318,7 @@
             this.tbpPendientes.Location = new System.Drawing.Point(4, 4);
             this.tbpPendientes.Name = "tbpPendientes";
             this.tbpPendientes.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpPendientes.Size = new System.Drawing.Size(813, 372);
+            this.tbpPendientes.Size = new System.Drawing.Size(813, 498);
             this.tbpPendientes.TabIndex = 1;
             this.tbpPendientes.Text = "Pendientes";
             // 
@@ -360,12 +371,23 @@
             this.gpbAccionPosterior.Controls.Add(this.rdbApNotaDeCredito);
             this.gpbAccionPosterior.Controls.Add(this.rdbApArticuloNuevo);
             this.gpbAccionPosterior.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.gpbAccionPosterior.Location = new System.Drawing.Point(6, 312);
+            this.gpbAccionPosterior.Location = new System.Drawing.Point(6, 403);
             this.gpbAccionPosterior.Name = "gpbAccionPosterior";
             this.gpbAccionPosterior.Size = new System.Drawing.Size(801, 54);
             this.gpbAccionPosterior.TabIndex = 13;
             this.gpbAccionPosterior.TabStop = false;
             this.gpbAccionPosterior.Text = "Acción a tomar";
+            // 
+            // rdbApDebito
+            // 
+            this.rdbApDebito.AutoSize = true;
+            this.rdbApDebito.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rdbApDebito.Location = new System.Drawing.Point(305, 32);
+            this.rdbApDebito.Name = "rdbApDebito";
+            this.rdbApDebito.Size = new System.Drawing.Size(84, 17);
+            this.rdbApDebito.TabIndex = 7;
+            this.rdbApDebito.Text = "Dev. Tarjeta";
+            this.rdbApDebito.UseVisualStyleBackColor = true;
             // 
             // rdbApTransferencia
             // 
@@ -505,7 +527,7 @@
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
             this.dgvPendientes.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPendientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPendientes.Size = new System.Drawing.Size(804, 277);
+            this.dgvPendientes.Size = new System.Drawing.Size(804, 368);
             this.dgvPendientes.StandardTab = true;
             this.dgvPendientes.TabIndex = 10;
             this.dgvPendientes.CurrentCellChanged += new System.EventHandler(this.dgvPendientes_CurrentCellChanged);
@@ -600,35 +622,13 @@
             this.penObservacionCompletado.ReadOnly = true;
             this.penObservacionCompletado.Width = 200;
             // 
-            // rdbAcDebito
-            // 
-            this.rdbAcDebito.AutoSize = true;
-            this.rdbAcDebito.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.rdbAcDebito.Location = new System.Drawing.Point(293, 32);
-            this.rdbAcDebito.Name = "rdbAcDebito";
-            this.rdbAcDebito.Size = new System.Drawing.Size(82, 17);
-            this.rdbAcDebito.TabIndex = 7;
-            this.rdbAcDebito.Text = "Dev. Débito";
-            this.rdbAcDebito.UseVisualStyleBackColor = true;
-            // 
-            // rdbApDebito
-            // 
-            this.rdbApDebito.AutoSize = true;
-            this.rdbApDebito.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.rdbApDebito.Location = new System.Drawing.Point(305, 32);
-            this.rdbApDebito.Name = "rdbApDebito";
-            this.rdbApDebito.Size = new System.Drawing.Size(84, 17);
-            this.rdbApDebito.TabIndex = 7;
-            this.rdbApDebito.Text = "Dev. Tarjeta";
-            this.rdbApDebito.UseVisualStyleBackColor = true;
-            // 
             // BusquedaGarantia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabGarantia);
             this.Name = "BusquedaGarantia";
-            this.Size = new System.Drawing.Size(840, 380);
+            this.Size = new System.Drawing.Size(840, 417);
             this.Load += new System.EventHandler(this.BusquedaGarantia_Load);
             this.Controls.SetChildIndex(this.tabGarantia, 0);
             this.Controls.SetChildIndex(this.rdbTicket, 0);

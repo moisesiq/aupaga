@@ -6,7 +6,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="Modo" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Pruebas</Value>
+      <Value Profile="(Default)">Prod</Value>
     </Setting>
     <Setting Name="RutaImagenes" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Theos\Img\</Value>

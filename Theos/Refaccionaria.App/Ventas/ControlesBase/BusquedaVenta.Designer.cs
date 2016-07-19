@@ -68,6 +68,8 @@
             this.rdbCredito = new System.Windows.Forms.RadioButton();
             this.label56 = new System.Windows.Forms.Label();
             this.chkMostrarTodasLasVentas = new LibUtil.CheckBoxMod();
+            this.txtDebito = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.pnlDatosDePago.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -79,9 +81,9 @@
             this.dgvVentas.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.SkyBlue;
             this.dgvVentas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvVentas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvVentas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvVentas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -108,7 +110,7 @@
             dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
             this.dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentas.Size = new System.Drawing.Size(370, 255);
+            this.dgvVentas.Size = new System.Drawing.Size(370, 291);
             this.dgvVentas.StandardTab = true;
             this.dgvVentas.TabIndex = 8;
             this.dgvVentas.CurrentCellChanged += new System.EventHandler(this.dgvVentas_CurrentCellChanged);
@@ -256,13 +258,13 @@
             this.pnlDatosDePago.ForeColor = System.Drawing.Color.Black;
             this.pnlDatosDePago.Location = new System.Drawing.Point(382, 32);
             this.pnlDatosDePago.Name = "pnlDatosDePago";
-            this.pnlDatosDePago.Size = new System.Drawing.Size(205, 279);
+            this.pnlDatosDePago.Size = new System.Drawing.Size(205, 313);
             this.pnlDatosDePago.TabIndex = 9;
             // 
             // txtVendedor
             // 
             this.txtVendedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.txtVendedor.Location = new System.Drawing.Point(94, 258);
+            this.txtVendedor.Location = new System.Drawing.Point(94, 284);
             this.txtVendedor.Name = "txtVendedor";
             this.txtVendedor.ReadOnly = true;
             this.txtVendedor.Size = new System.Drawing.Size(100, 20);
@@ -291,6 +293,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtDebito);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtNotaDeCredito);
             this.groupBox1.Controls.Add(this.txtNoIdentificado);
             this.groupBox1.Controls.Add(this.txtEPoints);
@@ -307,7 +311,7 @@
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Location = new System.Drawing.Point(1, 53);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(202, 199);
+            this.groupBox1.Size = new System.Drawing.Size(202, 225);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Forma de Pago";
@@ -315,41 +319,41 @@
             // txtNotaDeCredito
             // 
             this.txtNotaDeCredito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.txtNotaDeCredito.Location = new System.Drawing.Point(93, 170);
+            this.txtNotaDeCredito.Location = new System.Drawing.Point(93, 196);
             this.txtNotaDeCredito.Name = "txtNotaDeCredito";
             this.txtNotaDeCredito.ReadOnly = true;
             this.txtNotaDeCredito.Size = new System.Drawing.Size(100, 20);
-            this.txtNotaDeCredito.TabIndex = 6;
+            this.txtNotaDeCredito.TabIndex = 7;
             this.txtNotaDeCredito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtNoIdentificado
             // 
             this.txtNoIdentificado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.txtNoIdentificado.Location = new System.Drawing.Point(93, 144);
+            this.txtNoIdentificado.Location = new System.Drawing.Point(93, 170);
             this.txtNoIdentificado.Name = "txtNoIdentificado";
             this.txtNoIdentificado.ReadOnly = true;
             this.txtNoIdentificado.Size = new System.Drawing.Size(100, 20);
-            this.txtNoIdentificado.TabIndex = 5;
+            this.txtNoIdentificado.TabIndex = 6;
             this.txtNoIdentificado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtEPoints
             // 
             this.txtEPoints.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.txtEPoints.Location = new System.Drawing.Point(93, 119);
+            this.txtEPoints.Location = new System.Drawing.Point(93, 145);
             this.txtEPoints.Name = "txtEPoints";
             this.txtEPoints.ReadOnly = true;
             this.txtEPoints.Size = new System.Drawing.Size(100, 20);
-            this.txtEPoints.TabIndex = 4;
+            this.txtEPoints.TabIndex = 5;
             this.txtEPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtTransferencia
             // 
             this.txtTransferencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.txtTransferencia.Location = new System.Drawing.Point(93, 93);
+            this.txtTransferencia.Location = new System.Drawing.Point(93, 119);
             this.txtTransferencia.Name = "txtTransferencia";
             this.txtTransferencia.ReadOnly = true;
             this.txtTransferencia.Size = new System.Drawing.Size(100, 20);
-            this.txtTransferencia.TabIndex = 3;
+            this.txtTransferencia.TabIndex = 4;
             this.txtTransferencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtTarjeta
@@ -387,7 +391,7 @@
             this.label53.AutoSize = true;
             this.label53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.label53.ForeColor = System.Drawing.Color.Black;
-            this.label53.Location = new System.Drawing.Point(21, 173);
+            this.label53.Location = new System.Drawing.Point(21, 199);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(66, 13);
             this.label53.TabIndex = 0;
@@ -398,7 +402,7 @@
             this.label47.AutoSize = true;
             this.label47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.label47.ForeColor = System.Drawing.Color.Black;
-            this.label47.Location = new System.Drawing.Point(45, 122);
+            this.label47.Location = new System.Drawing.Point(45, 148);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(42, 13);
             this.label47.TabIndex = 0;
@@ -409,7 +413,7 @@
             this.label52.AutoSize = true;
             this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.label52.ForeColor = System.Drawing.Color.Black;
-            this.label52.Location = new System.Drawing.Point(8, 147);
+            this.label52.Location = new System.Drawing.Point(8, 173);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(79, 13);
             this.label52.TabIndex = 0;
@@ -420,7 +424,7 @@
             this.label46.AutoSize = true;
             this.label46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.label46.ForeColor = System.Drawing.Color.Black;
-            this.label46.Location = new System.Drawing.Point(15, 96);
+            this.label46.Location = new System.Drawing.Point(15, 122);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(72, 13);
             this.label46.TabIndex = 0;
@@ -494,7 +498,7 @@
             this.label56.AutoSize = true;
             this.label56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.label56.ForeColor = System.Drawing.Color.Black;
-            this.label56.Location = new System.Drawing.Point(34, 261);
+            this.label56.Location = new System.Drawing.Point(34, 287);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(53, 13);
             this.label56.TabIndex = 104;
@@ -513,6 +517,27 @@
             this.chkMostrarTodasLasVentas.UseVisualStyleBackColor = true;
             this.chkMostrarTodasLasVentas.CheckedChanged += new System.EventHandler(this.chkMostrarTodasLasVentas_CheckedChanged);
             // 
+            // txtDebito
+            // 
+            this.txtDebito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.txtDebito.Location = new System.Drawing.Point(93, 93);
+            this.txtDebito.Name = "txtDebito";
+            this.txtDebito.ReadOnly = true;
+            this.txtDebito.Size = new System.Drawing.Size(100, 20);
+            this.txtDebito.TabIndex = 3;
+            this.txtDebito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(9, 96);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Tarj. de Débito";
+            // 
             // BusquedaVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -530,7 +555,7 @@
             this.Controls.Add(this.label51);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "BusquedaVenta";
-            this.Size = new System.Drawing.Size(592, 320);
+            this.Size = new System.Drawing.Size(592, 356);
             this.Load += new System.EventHandler(this.BusquedaVenta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             this.pnlDatosDePago.ResumeLayout(false);
@@ -580,5 +605,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFolio;
         private System.Windows.Forms.DataGridViewTextBoxColumn colImporte;
+        private System.Windows.Forms.TextBox txtDebito;
+        private System.Windows.Forms.Label label1;
     }
 }

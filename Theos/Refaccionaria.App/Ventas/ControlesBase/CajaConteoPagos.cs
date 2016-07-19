@@ -70,6 +70,7 @@ namespace Refaccionaria.App
                     this.Cheques += (mImporte * (bMarcado ? 1 : -1));
                     break;
                 case Cat.FormasDePago.Tarjeta:
+                case Cat.FormasDePago.TarjetaDeDebito:
                     this.Tarjetas += (mImporte * (bMarcado ? 1 : -1));
                     break;
                 case Cat.FormasDePago.Transferencia:
@@ -109,7 +110,7 @@ namespace Refaccionaria.App
             {
                 // Solo se cuenta los pagos de tipo bancario
                 if (oPago.FormaDePagoID != Cat.FormasDePago.Cheque && oPago.FormaDePagoID != Cat.FormasDePago.Tarjeta
-                    && oPago.FormaDePagoID != Cat.FormasDePago.Transferencia)
+                    && oPago.FormaDePagoID != Cat.FormasDePago.TarjetaDeDebito && oPago.FormaDePagoID != Cat.FormasDePago.Transferencia)
                     continue;
                 // Se verifica si existe un pago contrario, lo cual indica que hubo una devolución de Cheque o Tarjeta
                 var oPagoCont = oPagos.FirstOrDefault(q => q.VentaPagoDetalleID != oPago.VentaPagoDetalleID && q.VentaID == oPago.VentaID

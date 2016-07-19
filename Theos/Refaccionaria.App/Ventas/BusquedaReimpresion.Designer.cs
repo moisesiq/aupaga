@@ -34,9 +34,9 @@
             // 
             // txtObservaciones
             // 
-            this.txtObservaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtObservaciones.Location = new System.Drawing.Point(6, 317);
+            this.txtObservaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtObservaciones.Location = new System.Drawing.Point(6, 353);
             this.txtObservaciones.Multiline = true;
             this.txtObservaciones.Name = "txtObservaciones";
             this.txtObservaciones.ReadOnly = true;
@@ -49,7 +49,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.txtObservaciones);
             this.Name = "BusquedaReimpresion";
-            this.Size = new System.Drawing.Size(592, 380);
+            this.Size = new System.Drawing.Size(592, 416);
             this.Controls.SetChildIndex(this.txtObservaciones, 0);
             this.Controls.SetChildIndex(this.rdbTicket, 0);
             this.Controls.SetChildIndex(this.rdbFactura, 0);

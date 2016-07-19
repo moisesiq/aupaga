@@ -153,6 +153,7 @@ namespace Refaccionaria.App
             this.txtEfectivo.Clear();
             this.txtCheque.Clear();
             this.txtTarjeta.Clear();
+            this.txtDebito.Clear();
             this.txtTransferencia.Clear();
             this.txtNoIdentificado.Clear();
             this.txtNotaDeCredito.Clear();
@@ -184,6 +185,9 @@ namespace Refaccionaria.App
                             break;
                         case Cat.FormasDePago.Tarjeta:
                             this.txtTarjeta.Text = oFormaPago.Importe.ToString(GlobalClass.FormatoMoneda);
+                            break;
+                        case Cat.FormasDePago.TarjetaDeDebito:
+                            this.txtDebito.Text = oFormaPago.Importe.ToString(GlobalClass.FormatoMoneda);
                             break;
                         case Cat.FormasDePago.Transferencia:
                             this.txtTransferencia.Text = oFormaPago.Importe.ToString(GlobalClass.FormatoMoneda);
