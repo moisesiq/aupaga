@@ -205,6 +205,11 @@ namespace LibUtil
 
         #region [ Numéricos ]
 
+        public static decimal Promedio(params decimal[] aParametros)
+        {
+            return aParametros.Average();
+        }
+
         public static decimal? DividirONull(decimal? mDividendo, decimal? mDivisor)
         {
             if (mDivisor == 0)
