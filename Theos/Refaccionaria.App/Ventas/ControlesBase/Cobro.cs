@@ -132,7 +132,7 @@ namespace Refaccionaria.App
 
         public string Leyenda { get { return this.txtLeyenda.Text; } set { this.txtLeyenda.Text = value; } }
 
-        public string FormaDePagoLibre { get { return this.txtFormaDePagoLibre.Text; } }
+        public List<VentasPagosDetalleView> FormasDePagoLibre { get; set; }
 
         public int VentaID { get; set; }
 
@@ -148,6 +148,9 @@ namespace Refaccionaria.App
 
         private void Cobro_Load(object sender, EventArgs e)
         {
+            if (this.DesignMode)
+                return;
+
             // Se llenan los Combos
             this.cmbBanco.CargarDatos("BancoID", "NombreBanco", Datos.GetListOf<Banco>(q => q.Estatus).OrderBy(q => q.NombreBanco).ToList());
             this.cmbVendedor.CargarDatos("UsuarioID", "NombreUsuario", Datos.GetListOf<Usuario>(q => q.Activo && q.Estatus).OrderBy(q => q.NombreUsuario).ToList());
@@ -182,17 +185,25 @@ namespace Refaccionaria.App
             // Si es Crédito
             else
             {
-                // Se desmarcan las formas de pago
-                this.chkEfectivo.Checked = false;
-                this.chkCheque.Checked = false;
-                this.chkTarjetaDeCredito.Checked = false;
-                this.chkTarjetaDeDebito.Checked = false;
-                this.chkTransferencia.Checked = false;
-                // this.chkNoIdentificado.Checked = false;
-                this.chkNotaDeCredito.Checked = false;
+                // Se verifica si el cliente tiene forma de pago predeterminada, para dejar las formas de pago y que así se facture
+                var oCliente = Datos.GetEntity<Cliente>(q => q.ClienteID == this.ClienteID);
+                if (oCliente.TipoFormaPagoID.HasValue)
+                {
+                    this.chkNoIdentificado.Checked = false;
+                }
+                else
+                {
+                    // Se desmarcan las formas de pago
+                    this.chkEfectivo.Checked = false;
+                    this.chkCheque.Checked = false;
+                    this.chkTarjetaDeCredito.Checked = false;
+                    this.chkTarjetaDeDebito.Checked = false;
+                    this.chkTransferencia.Checked = false;
+                    // this.chkNoIdentificado.Checked = false;
+                    this.chkNotaDeCredito.Checked = false;
+                }
 
                 // Se verifica si el cliente tiene crédito permitido
-                var oCliente = Datos.GetEntity<Cliente>(q => q.ClienteID == this.ClienteID);
                 bool bTolerancia = oCliente.Tolerancia.Valor();
                 string sNoCredito = "No se puede continuar.";
                 string sAutorizacion = "Se requerirá autorización para continuar con la Venta.";
@@ -292,7 +303,10 @@ namespace Refaccionaria.App
             {
                 this.HabilitarTextosFP();
                 if (this.chkTarjetaDeCredito.Checked)
+                {
+                    this.chkTarjetaDeDebito.Checked = false;
                     this.txtTarjetaDeCredito.Focus();
+                }
             }
         }
 
@@ -302,7 +316,10 @@ namespace Refaccionaria.App
             {
                 this.HabilitarTextosFP();
                 if (this.chkTarjetaDeDebito.Checked)
+                {
+                    this.chkTarjetaDeCredito.Checked = false;
                     this.txtTarjetaDeCredito.Focus();
+                }
             }
         }
 
@@ -318,6 +335,15 @@ namespace Refaccionaria.App
             this.HabilitarTextosFP();
             if (this.chkNoIdentificado.Checked && this.chkNoIdentificado.Focused)
                 this.txtNoIdentificado.Focus();
+        }
+
+        private void btnFormaDePagoLibre_Click(object sender, EventArgs e)
+        {
+            var frmForma = new FormasDePago();
+            frmForma.FormasDePagoSel = this.FormasDePagoLibre;
+            if (frmForma.ShowDialog(Principal.Instance) == DialogResult.OK)
+                this.FormasDePagoLibre = frmForma.FormasDePagoSel;
+            frmForma.Dispose();
         }
 
         private void chkNotaDeCredito_CheckedChanged(object sender, EventArgs e)
@@ -638,7 +664,9 @@ namespace Refaccionaria.App
             this.chkFacturar.Checked = false;
             this.chkFacturarDividir.Checked = false;
             this.LimpiarFormasDePago();
-            this.txtFormaDePagoLibre.Clear();
+            if (this.FormasDePagoLibre != null)
+                this.FormasDePagoLibre.Clear();
+            // this.txtFormaDePagoLibre.Clear();
             this.cmbVendedor.SelectedIndex = -1;
             this.cmbClienteComisionista.SelectedIndex = -1;
             this.cmbVehiculo.SelectedIndex = -1;
@@ -749,12 +777,15 @@ namespace Refaccionaria.App
             this.Total = mPago;
         }
 
-        public void EstablecerFormaDePagoPredeterminada(int iFormaDePagoID, decimal mImporte, int iBancoID, string sCuenta)
+        public void EstablecerFormaDePagoPredeterminada(int iFormaDePagoID, decimal mImporte, int iBancoID, string sCuenta, bool bMenorQue2000Efectivo)
         {
             // Se limpian las formas de pago
             this.LimpiarFormasDePago();
-            // Se asigna la forma de pago especificada
+            //
             string sImporte = mImporte.ToString(GlobalClass.FormatoMoneda);
+            if (bMenorQue2000Efectivo)
+                iFormaDePagoID = Cat.FormasDePago.Efectivo;
+            // Se asigna la forma de pago especificada
             switch (iFormaDePagoID)
             {
                 default:
@@ -783,13 +814,14 @@ namespace Refaccionaria.App
                     // pero no se marcar para que se obligue a seleccionar otro método de pago
                     this.chkEfectivo.Checked = true;
                     this.txtEfectivo.Text = sImporte;
-                    this.txtFormaDePagoLibre.Text = "NO IDENTIFICADO";
+                    // this.txtFormaDePagoLibre.Text = "NO IDENTIFICADO";
                     // this.chkNoIdentificado.Checked = true;
                     // this.txtNoIdentificado.Text = sImporte;
                     break;
             }
 
-            if (iFormaDePagoID == Cat.FormasDePago.Cheque || iFormaDePagoID == Cat.FormasDePago.Tarjeta || iFormaDePagoID == Cat.FormasDePago.Transferencia)
+            if (iFormaDePagoID == Cat.FormasDePago.Cheque || iFormaDePagoID == Cat.FormasDePago.Tarjeta || iFormaDePagoID == Cat.FormasDePago.TarjetaDeDebito
+                || iFormaDePagoID == Cat.FormasDePago.Transferencia)
             {
                 this.cmbBanco.SelectedValue = iBancoID;
                 this.txtCuenta.Text = sCuenta;
@@ -798,7 +830,7 @@ namespace Refaccionaria.App
 
         public void EstablecerFormaDePagoPredeterminada(int iFormaDePagoID, decimal mImporte)
         {
-            this.EstablecerFormaDePagoPredeterminada(iFormaDePagoID, mImporte, 0, "");
+            this.EstablecerFormaDePagoPredeterminada(iFormaDePagoID, mImporte, 0, "", false);
         }
 
         public List<int> NotasDeCreditoOtrosClientes()

@@ -471,6 +471,8 @@ namespace Refaccionaria.App
                     oRep.SetParameterValue("EfectivoRecibido", Util.Decimal(oFacturaE.Adicionales["EfectivoRecibido"]));
                 if (oFacturaE.Adicionales.ContainsKey("Cambio"))
                     oRep.SetParameterValue("Cambio", Util.Decimal(oFacturaE.Adicionales["Cambio"]));
+                if (oFacturaE.Adicionales.ContainsKey("LeyendaDePago"))
+                    oRep.SetParameterValue("LeyendaDePago", oFacturaE.Adicionales["LeyendaDePago"]);
             }
             oRep.SetParameterValue("TotalConLetra", Util.ImporteALetra(oFacturaE.Total).ToUpper());
 
@@ -648,7 +650,7 @@ namespace Refaccionaria.App
         }
 
         public static ResAcc<int> GenerarFacturaElectronica(List<int> VentasIDs, int iClienteID
-            , List<ProductoVenta> oListaVenta, List<VentaPagoDetalle> oFormasDePago, string sObservacion, Dictionary<string, object> oAdicionales)
+            , List<ProductoVenta> oListaVenta, List<VentasPagosDetalleView> oFormasDePago, string sObservacion, Dictionary<string, object> oAdicionales)
         {
             // Se crea la instancia de la clase de Facturación Electrónica
             var oFacturaE = new FacturaElectronica();
@@ -699,8 +701,10 @@ namespace Refaccionaria.App
             // Se procesa la forma de pago con nueva modalidad del sat
             string sFormaDePago = VentasLoc.GenerarMetodoDePagoFactura(oFormasDePago);
             oFacturaE.MetodoDePago = sFormaDePago;
+            oFacturaE.CuentaPago = VentasLoc.ObtenerCuentaDePago(oFormasDePago);
+            // Se agraga la cadena del método de pago, como adicional
+            oFacturaE.Adicionales.Add("LeyendaDePago", VentasLoc.GenerarCadenaMetodoDePagoFactura(oFormasDePago));
             
-
             oFacturaE.Fecha = dAhora;
             oFacturaE.FormaDePago = "UNA SOLA EXHIBICIÓN";
             oFacturaE.LugarDeExpedicion = string.Format("{0}, {1}", oConfig["Facturacion.Municipio"], oConfig["Facturacion.Estado"]);
@@ -824,7 +828,8 @@ namespace Refaccionaria.App
         }
 
         public static ResAcc<int> GenerarFacturaGlobal(string sConceptoVentas, decimal mCostoTotal, decimal mTotalVentas
-            , string sConceptoCancelaciones, decimal mTotalCancelaciones, string sConceptoDevoluciones, decimal mTotalDevoluciones)
+            , string sConceptoCancelaciones, decimal mTotalCancelaciones, string sConceptoDevoluciones, decimal mTotalDevoluciones
+            , List<VentasPagosDetalleView> oFormasDePago)
         {
             // Se crea la instancia de la clase de Facturación Electrónica
             var oFacturaE = new FacturaElectronica();
@@ -841,7 +846,9 @@ namespace Refaccionaria.App
             oFacturaE.LugarDeExpedicion = string.Format("{0}, {1}", oConfig["Facturacion.Municipio"], oConfig["Facturacion.Estado"]);
             oFacturaE.TipoDeComprobante = Enumerados.TiposDeComprobante.Ingreso;
             oFacturaE.TasaDeImpuesto = GlobalClass.ConfiguracionGlobal.IVA.ToString();
-            oFacturaE.MetodoDePago = CatFe.MetodosDePago.Otros;
+            oFacturaE.MetodoDePago = VentasLoc.GenerarMetodoDePagoFactura(oFormasDePago);
+            // Se agraga la cadena del método de pago, como adicional
+            oFacturaE.Adicionales.Add("LeyendaDePago", VentasLoc.GenerarCadenaMetodoDePagoFactura(oFormasDePago));
 
             // Se llenan los datos del receptor
             var ResRec = VentasLoc.FeLlenarDatosReceptor(ref oFacturaE, iClienteID);
@@ -1056,7 +1063,7 @@ namespace Refaccionaria.App
             return new ResAcc<bool>(bFacturada, ResC.Mensaje);
         }
                 
-        public static string GenerarMetodoDePagoFactura(List<VentaPagoDetalle> oFormasDePago)
+        public static string GenerarMetodoDePagoFactura(List<VentasPagosDetalleView> oFormasDePago)
         {
             string sMetodo = "";
 
@@ -1065,7 +1072,7 @@ namespace Refaccionaria.App
                 oFormasDePago = oFormasDePago.OrderByDescending(c => c.Importe).ToList();
                 foreach (var oReg in oFormasDePago)
                 {
-                    switch (oReg.TipoFormaPagoID)
+                    switch (oReg.FormaDePagoID)
                     {
                         case Cat.FormasDePago.Efectivo:
                             sMetodo += ("," + CatFe.MetodosDePago.Efectivo);
@@ -1089,7 +1096,36 @@ namespace Refaccionaria.App
             sMetodo = (sMetodo == "" ? CatFe.MetodosDePago.Otros : sMetodo.Substring(1));
             return sMetodo;
         }
-        
+
+        public static string GenerarCadenaMetodoDePagoFactura(List<VentasPagosDetalleView> oFormasDePago)
+        {
+            string sMetodo = "";
+
+            if (oFormasDePago != null && oFormasDePago.Count > 0)
+            {
+                oFormasDePago = oFormasDePago.OrderByDescending(c => c.Importe).ToList();
+                foreach (var oReg in oFormasDePago)
+                    sMetodo += ("," + oReg.FormaDePago);
+            }
+
+            sMetodo = (sMetodo == "" ? "" : sMetodo.Substring(1));
+            return sMetodo;
+        }
+
+        public static string ObtenerCuentaDePago(List<VentasPagosDetalleView> oFormasDePago)
+        {
+            string sCuenta = "";
+            foreach (var oReg in oFormasDePago)
+            {
+                if (oReg.Folio != "")
+                {
+                    sCuenta = oReg.Folio;
+                    break;
+                }
+            }
+            return sCuenta;
+        }
+
         /*
         public static ResAcc<int> GenerarFacturaDevolucion(int iDevolucionID, int iUsuarioID)
         {
@@ -1186,7 +1222,7 @@ namespace Refaccionaria.App
         }
         */
 
-        public static ResAcc<int> GenerarFacturaDevolucion(List<VentaPagoDetalle> oFormasDePago, int iVentaID, List<ProductoVenta> oDetalle, int iUsuarioID
+        public static ResAcc<int> GenerarFacturaDevolucion(List<VentasPagosDetalleView> oFormasDePago, int iVentaID, List<ProductoVenta> oDetalle, int iUsuarioID
             , bool bEsDevolucion, int iId)
         {
             // Se crea la instancia de la clase de Facturación Electrónica
@@ -1210,6 +1246,8 @@ namespace Refaccionaria.App
             oFacturaE.TipoDeComprobante = Enumerados.TiposDeComprobante.Egreso;
             oFacturaE.TasaDeImpuesto = GlobalClass.ConfiguracionGlobal.IVA.ToString();
             oFacturaE.MetodoDePago = VentasLoc.GenerarMetodoDePagoFactura(oFormasDePago);
+            // Se agraga la cadena del método de pago, como adicional
+            oFacturaE.Adicionales.Add("LeyendaDePago", VentasLoc.GenerarCadenaMetodoDePagoFactura(oFormasDePago));
 
             // Se llenan los datos del receptor
             // var oVenta = General.GetEntity<Venta>(q => q.VentaID == iVentaID && q.Estatus);
@@ -1312,8 +1350,8 @@ namespace Refaccionaria.App
             }
 
             // Se genera el objeto con la forma de pago
-            var oFormaDePago = new List<VentaPagoDetalle>() { new VentaPagoDetalle() { TipoFormaPagoID = oDev.FormaDePagoID } };
-
+            var oFormaDePago = new List<VentasPagosDetalleView>() { new VentasPagosDetalleView() { FormaDePagoID = oDev.FormaDePagoID, FormaDePago = oDev.FormaDePago } };
+            
             return VentasLoc.GenerarFacturaDevolucion(oFormaDePago, oDev.VentaID, oPartesDev, oDev.RealizoUsuarioID, true, oDev.VentaDevolucionID);
         }
 
@@ -1332,7 +1370,8 @@ namespace Refaccionaria.App
             });
 
             // Se genera el objeto con la forma de pago
-            var oFormaDePago = new List<VentaPagoDetalle>() { new VentaPagoDetalle() { TipoFormaPagoID = oGarantia.AccionID } };
+            int iFormaDePagoID = UtilDatos.FormaDePagoDeAccionGarantia(oGarantia.AccionID);
+            var oFormaDePago = new List<VentasPagosDetalleView>() { new VentasPagosDetalleView() { FormaDePagoID = iFormaDePagoID, FormaDePago = oGarantia.Accion } };
 
             return VentasLoc.GenerarFacturaDevolucion(oFormaDePago, oGarantia.VentaID, oPartesDev, oGarantia.RealizoUsuarioID, false, oGarantia.VentaGarantiaID);
         }

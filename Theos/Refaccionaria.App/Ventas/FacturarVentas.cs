@@ -31,6 +31,8 @@ namespace Refaccionaria.App
         private bool _MostrarTodasLasPartes = false;
         public bool MostrarTodasLasPartes { get { return this._MostrarTodasLasPartes; } }
 
+        public List<VentasPagosDetalleView> FormasDePagoLibre { get; set; }
+
         #endregion
 
         #region [ Eventos ]
@@ -131,7 +133,16 @@ namespace Refaccionaria.App
             if (Util.Cadena(this.dgvAFacturar.CurrentRow.Cells["afFecha"].Value) == FacturarVentas.MostrarTodas) return;
             this.dgvAFacturar.Rows.Remove(this.dgvAFacturar.CurrentRow);
         }
-        
+
+        private void btnFormaDePagoLibre_Click(object sender, EventArgs e)
+        {
+            var frmForma = new FormasDePago();
+            frmForma.FormasDePagoSel = this.FormasDePagoLibre;
+            if (frmForma.ShowDialog(Principal.Instance) == DialogResult.OK)
+                this.FormasDePagoLibre = frmForma.FormasDePagoSel;
+            frmForma.Dispose();
+        }
+
         #endregion
 
         #region [ Métodos ]

@@ -1231,6 +1231,12 @@
     <Compile Include="Ventas\Formas\Efectivo.Designer.cs">
       <DependentUpon>Efectivo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ventas\Formas\FormasDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\Formas\FormasDePago.Designer.cs">
+      <DependentUpon>FormasDePago.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\Formas\ReportarErrorParte.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2008,6 +2014,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\Formas\Efectivo.resx">
       <DependentUpon>Efectivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\Formas\FormasDePago.resx">
+      <DependentUpon>FormasDePago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\Formas\ReportarErrorParte.resx">
       <DependentUpon>ReportarErrorParte.cs</DependentUpon>

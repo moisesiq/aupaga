@@ -80,7 +80,8 @@ namespace Refaccionaria.App
 
             // Se procede a generar la factura
             var oVentasAF = this.ctlFacturar.GenerarListaDeVentas();
-            var ResFe = VentasLoc.GenerarFacturaElectronica(oVentasAF, iAFClienteID, oPartes, null, this.ctlFacturar.Observacion, null);
+            var oFormasDePago = this.ctlFacturar.FormasDePagoLibre;
+            var ResFe = VentasLoc.GenerarFacturaElectronica(oVentasAF, iAFClienteID, oPartes, oFormasDePago, this.ctlFacturar.Observacion, null);
             if (ResFe.Error)
             {
                 UtilLocal.MensajeAdvertencia(ResFe.Mensaje);

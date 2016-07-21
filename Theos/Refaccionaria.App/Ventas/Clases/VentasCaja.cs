@@ -537,7 +537,7 @@ namespace Refaccionaria.App
                 oPorCobrar.ctlCobro.LlenarDatosGenerales(oPorCobrar.VentaID);
                 oPorCobrar.ctlCobro.Total = oPorCobrar.ImporteVenta;
                 oPorCobrar.ctlCobro.EstablecerFormaDePagoPredeterminada(oCliente.TipoFormaPagoID.Valor(),
-                    oPorCobrar.ctlCobro.Total, oCliente.BancoID.Valor(), oCliente.CuentaBancaria);
+                    oPorCobrar.ctlCobro.Total, oCliente.BancoID.Valor(), oCliente.CuentaBancaria, oCliente.MenorQue2000Efectivo.Valor());
                 oPorCobrar.ctlCobro.Leyenda = VentasProc.ObtenerLeyenda(iVentaID);
                 oPorCobrar.ctlCobro.BringToFront();
                 return false;
@@ -748,12 +748,9 @@ namespace Refaccionaria.App
             bool bGenerarFolio = true;
             if (oPorCobrar.ctlCobro.Facturar)
             {
-                /*
-                string sFormaDePago = oPorCobrar.ctlCobro.FormaDePagoLibre;
-                if (sFormaDePago == "")
-                    sFormaDePago = VentasProc.GenerarFormaDePago(oPorCobrar.ctlCobro.GenerarPagoDetalle());
-                */
-                var oFormasDePago = oPorCobrar.ctlCobro.GenerarPagoDetalle();
+                var oFormasDePago = UtilDatos.DeVentaPagoDetalleAVentasPagosDetalleView(oPorCobrar.ctlCobro.GenerarPagoDetalle());
+                if (oPorCobrar.ctlCobro.FormasDePagoLibre != null && oPorCobrar.ctlCobro.FormasDePagoLibre.Count > 0)
+                    oFormasDePago = oPorCobrar.ctlCobro.FormasDePagoLibre;
 
                 // Se verifica si se debe dividir la factura
                 var oProductos = oPorCobrar.ctlDetalle.ObtenerListaVenta();
@@ -1297,6 +1294,7 @@ namespace Refaccionaria.App
             decimal mCostoTotal = 0;
             var oVentasProc = new List<int>();
             var oPagosProc = new List<int>();
+            var oFormasDePago = new List<VentasPagosDetalleView>();
             foreach (var oReg in oPagosDet)
             {
                 // Si es nota de crédito negativa, se ignora
@@ -1342,6 +1340,15 @@ namespace Refaccionaria.App
 
                         oPagosProc.Add(oReg.VentaPagoID.Valor());
                     }
+
+                    // Para tener el dato de las diferentes formas de pago
+                    var oFormaDePago = oFormasDePago.FirstOrDefault(c => c.FormaDePagoID == oReg.FormaDePagoID);
+                    if (oFormaDePago == null)
+                    {
+                        oFormaDePago = new VentasPagosDetalleView() { FormaDePagoID = oReg.FormaDePagoID, FormaDePago = oReg.FormaDePago };
+                        oFormasDePago.Add(oFormaDePago);
+                    }
+                    oFormaDePago.Importe += oReg.Importe;
                 }
                 else
                 {
@@ -1450,7 +1457,7 @@ namespace Refaccionaria.App
                 }
             }
 
-            // Se obtiene lo pendinete por restar de facturado días anteriores de otras sucursales cuando no se abrió alguna tienda o no se hizo, si hubiera
+            // Se obtiene lo pendiente por restar de facturado días anteriores de otras sucursales cuando no se abrió alguna tienda o no se hizo, si hubiera
             decimal mFacturadoDiasAnt = 0;
             var oPendientePorFacturar = Datos.GetListOf<FacturaGlobalPendientePorDescontar>(c => c.SucursalID == GlobalClass.SucursalID && c.Fecha < dHoy);
             foreach (var oReg in oPendientePorFacturar)
@@ -1570,7 +1577,7 @@ namespace Refaccionaria.App
                 sCancelaciones = ("CANCELACIONES: " + (sCancelaciones.Length > 0 ? sCancelaciones.Substring(2).Replace("|", "") : ""));
                 sDevoluciones = ("DEVOLUCIONES: " + (sDevoluciones.Length > 0 ? sDevoluciones.Substring(2).Replace("|", "") : ""));
                 var oResFactura = VentasLoc.GenerarFacturaGlobal(sVentas, mCostoTotal, (mFacturar + mCancelaciones + mDevoluciones)
-                    , sCancelaciones, mCancelaciones, sDevoluciones, mDevoluciones);
+                    , sCancelaciones, mCancelaciones, sDevoluciones, mDevoluciones, oFormasDePago);
                 if (oResFactura.Error)
                 {
                     UtilLocal.MensajeAdvertencia("Hubo un error al generar la factura.\n\n" + oResFactura.Mensaje);

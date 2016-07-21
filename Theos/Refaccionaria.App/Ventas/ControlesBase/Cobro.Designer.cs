@@ -30,13 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cobro));
             this.gpbFormasDePago = new System.Windows.Forms.GroupBox();
-            this.txtFormaDePagoLibre = new System.Windows.Forms.TextBox();
+            this.btnFormaDePagoLibre = new System.Windows.Forms.Button();
             this.btnEditarNotasDeCredito = new System.Windows.Forms.Button();
             this.chkEfectivo = new System.Windows.Forms.CheckBox();
             this.txtEfectivo = new System.Windows.Forms.TextBox();
             this.chkNoIdentificado = new System.Windows.Forms.CheckBox();
             this.chkNotaDeCredito = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkTarjetaDeDebito = new System.Windows.Forms.CheckBox();
             this.cmbBanco = new LibUtil.ComboEtiqueta();
             this.lblCuenta = new System.Windows.Forms.Label();
             this.chkCheque = new System.Windows.Forms.CheckBox();
@@ -63,13 +64,12 @@
             this.txtKilometraje = new LibUtil.TextoMod();
             this.lblEtSuma = new System.Windows.Forms.Label();
             this.lblSuma = new System.Windows.Forms.Label();
-            this.btnAtras = new System.Windows.Forms.Button();
             this.chkFacturar = new LibUtil.CheckBoxMod();
             this.btnCotizacion = new System.Windows.Forms.Button();
             this.cmbLeyanda = new LibUtil.ComboEtiqueta();
             this.txtLeyenda = new System.Windows.Forms.TextBox();
             this.chkFacturarDividir = new LibUtil.CheckBoxMod();
-            this.chkTarjetaDeDebito = new System.Windows.Forms.CheckBox();
+            this.btnAtras = new System.Windows.Forms.Button();
             this.gpbFormasDePago.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gpbTipoDePago.SuspendLayout();
@@ -77,7 +77,7 @@
             // 
             // gpbFormasDePago
             // 
-            this.gpbFormasDePago.Controls.Add(this.txtFormaDePagoLibre);
+            this.gpbFormasDePago.Controls.Add(this.btnFormaDePagoLibre);
             this.gpbFormasDePago.Controls.Add(this.btnEditarNotasDeCredito);
             this.gpbFormasDePago.Controls.Add(this.chkEfectivo);
             this.gpbFormasDePago.Controls.Add(this.txtEfectivo);
@@ -92,13 +92,15 @@
             this.gpbFormasDePago.TabIndex = 4;
             this.gpbFormasDePago.TabStop = false;
             // 
-            // txtFormaDePagoLibre
+            // btnFormaDePagoLibre
             // 
-            this.txtFormaDePagoLibre.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFormaDePagoLibre.Location = new System.Drawing.Point(192, 122);
-            this.txtFormaDePagoLibre.Name = "txtFormaDePagoLibre";
-            this.txtFormaDePagoLibre.Size = new System.Drawing.Size(129, 18);
-            this.txtFormaDePagoLibre.TabIndex = 8;
+            this.btnFormaDePagoLibre.Location = new System.Drawing.Point(192, 122);
+            this.btnFormaDePagoLibre.Name = "btnFormaDePagoLibre";
+            this.btnFormaDePagoLibre.Size = new System.Drawing.Size(20, 20);
+            this.btnFormaDePagoLibre.TabIndex = 9;
+            this.btnFormaDePagoLibre.Text = "f";
+            this.btnFormaDePagoLibre.UseVisualStyleBackColor = true;
+            this.btnFormaDePagoLibre.Click += new System.EventHandler(this.btnFormaDePagoLibre_Click);
             // 
             // btnEditarNotasDeCredito
             // 
@@ -195,6 +197,21 @@
             this.groupBox3.Size = new System.Drawing.Size(321, 84);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
+            // 
+            // chkTarjetaDeDebito
+            // 
+            this.chkTarjetaDeDebito.AutoSize = true;
+            this.chkTarjetaDeDebito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.chkTarjetaDeDebito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkTarjetaDeDebito.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTarjetaDeDebito.ForeColor = System.Drawing.Color.SteelBlue;
+            this.chkTarjetaDeDebito.Location = new System.Drawing.Point(67, 33);
+            this.chkTarjetaDeDebito.Name = "chkTarjetaDeDebito";
+            this.chkTarjetaDeDebito.Size = new System.Drawing.Size(52, 19);
+            this.chkTarjetaDeDebito.TabIndex = 9;
+            this.chkTarjetaDeDebito.Text = "Débit";
+            this.chkTarjetaDeDebito.UseVisualStyleBackColor = false;
+            this.chkTarjetaDeDebito.CheckedChanged += new System.EventHandler(this.chkTarjetaDeDebito_CheckedChanged);
             // 
             // cmbBanco
             // 
@@ -535,20 +552,6 @@
             this.lblSuma.Text = "0.00";
             this.lblSuma.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // btnAtras
-            // 
-            this.btnAtras.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAtras.BackgroundImage")));
-            this.btnAtras.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAtras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAtras.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAtras.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.btnAtras.Location = new System.Drawing.Point(304, 9);
-            this.btnAtras.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAtras.Name = "btnAtras";
-            this.btnAtras.Size = new System.Drawing.Size(26, 26);
-            this.btnAtras.TabIndex = 3;
-            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
-            // 
             // chkFacturar
             // 
             this.chkFacturar.AutoSize = true;
@@ -622,20 +625,19 @@
             this.chkFacturarDividir.Text = "Dividir";
             this.chkFacturarDividir.UseVisualStyleBackColor = true;
             // 
-            // chkTarjetaDeDebito
+            // btnAtras
             // 
-            this.chkTarjetaDeDebito.AutoSize = true;
-            this.chkTarjetaDeDebito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.chkTarjetaDeDebito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chkTarjetaDeDebito.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkTarjetaDeDebito.ForeColor = System.Drawing.Color.SteelBlue;
-            this.chkTarjetaDeDebito.Location = new System.Drawing.Point(67, 33);
-            this.chkTarjetaDeDebito.Name = "chkTarjetaDeDebito";
-            this.chkTarjetaDeDebito.Size = new System.Drawing.Size(52, 19);
-            this.chkTarjetaDeDebito.TabIndex = 9;
-            this.chkTarjetaDeDebito.Text = "Débit";
-            this.chkTarjetaDeDebito.UseVisualStyleBackColor = false;
-            this.chkTarjetaDeDebito.CheckedChanged += new System.EventHandler(this.chkTarjetaDeDebito_CheckedChanged);
+            this.btnAtras.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAtras.BackgroundImage")));
+            this.btnAtras.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAtras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAtras.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtras.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.btnAtras.Location = new System.Drawing.Point(304, 9);
+            this.btnAtras.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(26, 26);
+            this.btnAtras.TabIndex = 3;
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
             // 
             // Cobro
             // 
@@ -714,8 +716,8 @@
         private System.Windows.Forms.Button btnCotizacion;
         private LibUtil.ComboEtiqueta cmbLeyanda;
         private System.Windows.Forms.TextBox txtLeyenda;
-        private System.Windows.Forms.TextBox txtFormaDePagoLibre;
         private LibUtil.CheckBoxMod chkFacturarDividir;
         private System.Windows.Forms.CheckBox chkTarjetaDeDebito;
+        private System.Windows.Forms.Button btnFormaDePagoLibre;
     }
 }

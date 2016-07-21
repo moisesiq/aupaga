@@ -188,6 +188,32 @@ namespace TheosProc
             return (oSucursal == null ? "" : oSucursal.NombreSucursal);
         }
 
+        public static List<VentasPagosDetalleView> DeVentaPagoDetalleAVentasPagosDetalleView(List<VentaPagoDetalle> oPagoDetalle)
+        {
+            var oRes = new List<VentasPagosDetalleView>();
+
+            // Se hace un dictionario con las descripciones de las formas de pago
+            var oFormasDePago = Datos.GetListOf<TipoFormaPago>(c => c.Estatus);
+            var oFormasDesc = new Dictionary<int, string>();
+            foreach (var oReg in oFormasDePago)
+                oFormasDesc.Add(oReg.TipoFormaPagoID, oReg.NombreTipoFormaPago);
+
+            foreach (var oReg in oPagoDetalle)
+            {
+                oRes.Add(new VentasPagosDetalleView()
+                {
+                    FormaDePagoID = oReg.TipoFormaPagoID,
+                    FormaDePago = oFormasDesc[oReg.TipoFormaPagoID],
+                    Importe = oReg.Importe,
+                    BancoID = oReg.BancoID,
+                    Folio = oReg.Folio,
+                    Cuenta = oReg.Cuenta
+                });
+            }
+
+            return oRes;
+        }
+
         #region [ Almacenamiento temporal en base de datos ]
 
         public static void AgregarTemporal(string sProceso, int iId, string sValor)

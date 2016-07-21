@@ -358,7 +358,7 @@ namespace Refaccionaria.App
                 this.oVentasCobranza.ctlCobro.LimpiarFormasDePago();
             else
                 this.oVentasCobranza.ctlCobro.EstablecerFormaDePagoPredeterminada(this.Cliente.TipoFormaPagoID.Valor(),
-                    this.Total, this.Cliente.BancoID.Valor(), this.Cliente.CuentaBancaria);
+                    this.Total, this.Cliente.BancoID.Valor(), this.Cliente.CuentaBancaria, this.Cliente.MenorQue2000Efectivo.Valor());
         }
 
         private void CalcularTotales()
@@ -401,7 +401,7 @@ namespace Refaccionaria.App
         {
             this.oVentasCobranza.ctlCobro.Total = this.Total;
             this.oVentasCobranza.ctlCobro.EstablecerFormaDePagoPredeterminada(this.Cliente.TipoFormaPagoID.Valor(),
-                this.Total, this.Cliente.BancoID.Valor(), this.Cliente.CuentaBancaria);
+                this.Total, this.Cliente.BancoID.Valor(), this.Cliente.CuentaBancaria, this.Cliente.MenorQue2000Efectivo.Valor());
         }
 
         private void LlenarVencimientos()

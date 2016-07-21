@@ -139,6 +139,7 @@ namespace Refaccionaria.App
                         CobranzaContacto = this.txtCreditoContacto.Text,
                         CobranzaObservacion = this.txtCreditoObservacion.Text,
 
+                        MenorQue2000Efectivo = this.chkMenor2000Efectivo.Checked,
                         TipoFormaPagoID = Util.Entero(this.cboMetodoPago.SelectedValue) > 0 ? Util.Entero(this.cboMetodoPago.SelectedValue) : default(int?),
                         BancoID = Util.Entero(this.cboBanco.SelectedValue) > 0 ? Util.Entero(this.cboBanco.SelectedValue) : default(int?),
                         CuentaBancaria = this.txtCuenta.Text,
@@ -247,6 +248,7 @@ namespace Refaccionaria.App
                     Cliente.CobranzaContacto = this.txtCreditoContacto.Text;
                     Cliente.CobranzaObservacion = this.txtCreditoObservacion.Text;
 
+                    Cliente.MenorQue2000Efectivo = this.chkMenor2000Efectivo.Checked;
                     Cliente.TipoFormaPagoID = Util.Entero(this.cboMetodoPago.SelectedValue);
                     Cliente.BancoID = Util.Entero(this.cboBanco.SelectedValue);
                     Cliente.CuentaBancaria = this.txtCuenta.Text;
@@ -823,6 +825,7 @@ namespace Refaccionaria.App
                     this.txtCreditoContacto.Text = cliente.CobranzaContacto;
                     this.txtCreditoObservacion.Text = cliente.CobranzaObservacion;
 
+                    this.chkMenor2000Efectivo.Checked = cliente.MenorQue2000Efectivo.Valor();
                     if (cliente.TipoFormaPagoID != null)
                         this.cboMetodoPago.SelectedValue = cliente.TipoFormaPagoID;
                     if (cliente.BancoID != null)
