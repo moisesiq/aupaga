@@ -1,6 +1,6 @@
 /* Script con modificaciones a la base de datos de Theos. Archivo 075
  * Creado: 2016/07/20
- * Subido: 2016/07/
+ * Subido: 2016/07/21
  */
 
 DECLARE @ScriptID INT = 75
