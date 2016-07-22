@@ -34,7 +34,7 @@ namespace Refaccionaria.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Prod")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Pruebas")]
         public string Modo {
             get {
                 return ((string)(this["Modo"]));
