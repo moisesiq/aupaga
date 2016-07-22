@@ -187,7 +187,7 @@ namespace Refaccionaria.App
             {
                 // Se verifica si el cliente tiene forma de pago predeterminada, para dejar las formas de pago y que así se facture
                 var oCliente = Datos.GetEntity<Cliente>(q => q.ClienteID == this.ClienteID);
-                if (oCliente.TipoFormaPagoID.HasValue)
+                if (oCliente.TipoFormaPagoID.HasValue && oCliente.TipoFormaPagoID.Value > 0)
                 {
                     this.chkNoIdentificado.Checked = false;
                 }
@@ -573,7 +573,7 @@ namespace Refaccionaria.App
             // Se pide el efectivo, si aplica
             bool bExito = true;
             decimal mEfectivo = this.txtEfectivo.Text.ValorDecimal();
-            if (mEfectivo > 0)
+            if (mEfectivo > 0 && !this.ACredito)
             {
                 var frmEfectivo = new Efectivo(mEfectivo);
                 bExito = (frmEfectivo.ShowDialog(Principal.Instance) == DialogResult.OK);
