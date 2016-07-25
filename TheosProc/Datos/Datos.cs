@@ -14,6 +14,7 @@ namespace TheosProc
 {
     public static class Datos
     {
+        private const string DefaultContainerName = "TheosEntityContainer";
         private static ObjectContext PersistentContext;
 
         #region [ Propiedades ]
@@ -27,7 +28,7 @@ namespace TheosProc
         
         public static void StartPersistentContext()
         {
-            Datos.PersistentContext = new ObjectContext(Datos.CadenaDeConexion);
+            Datos.PersistentContext = new ObjectContext(Datos.CadenaDeConexion) { DefaultContainerName = Datos.DefaultContainerName };
             Datos.PersistentContextEnabled = true;
         }
 
@@ -227,7 +228,7 @@ namespace TheosProc
 
         private static ObjectContext GetDataContext() {
             return (Datos.PersistentContextEnabled ? Datos.PersistentContext :
-                new ObjectContext(Datos.CadenaDeConexion) { DefaultContainerName = "ControlRefaccionariaEntities" });
+                new ObjectContext(Datos.CadenaDeConexion) { DefaultContainerName = Datos.DefaultContainerName });
         }
 
         private static void ReleaseDataContext(ref ObjectContext oContext)
