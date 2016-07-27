@@ -869,7 +869,8 @@ namespace Refaccionaria.App
             var oPagoDet = Datos.GetListOf<VentaPagoDetalle>(c => c.VentaPagoID == iVentaPagoID && c.Estatus);
             foreach (var oReg in oPagoDet)
             {
-                if (oReg.TipoFormaPagoID == Cat.FormasDePago.Cheque || oReg.TipoFormaPagoID == Cat.FormasDePago.Tarjeta || oReg.TipoFormaPagoID == Cat.FormasDePago.Transferencia)
+                if (oReg.TipoFormaPagoID == Cat.FormasDePago.Cheque || oReg.TipoFormaPagoID == Cat.FormasDePago.Tarjeta
+                    || oReg.TipoFormaPagoID == Cat.FormasDePago.TarjetaDeDebito || oReg.TipoFormaPagoID == Cat.FormasDePago.Transferencia)
                 {
                     var oMovBanco = Datos.GetEntity<BancoCuentaMovimiento>(c => c.RelacionTabla == Cat.Tablas.VentaPagoDetalle && c.RelacionID == oReg.VentaPagoDetalleID);
                     oMovBanco.Referencia = oVentaV.Folio;

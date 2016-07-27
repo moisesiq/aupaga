@@ -259,7 +259,8 @@ namespace TheosProc
                         // BancoCuentaID = (PartePago.TipoFormaPagoID == Cat.FormasDePago.Tarjeta ? (int?)Cat.CuentasBancarias.Banamex : null),
                         EsIngreso = true,
                         Fecha = oPago.Fecha,
-                        FechaAsignado = (PartePago.TipoFormaPagoID == Cat.FormasDePago.Tarjeta ? (DateTime?)oPago.Fecha : null),
+                        FechaAsignado = ((PartePago.TipoFormaPagoID == Cat.FormasDePago.Tarjeta || PartePago.TipoFormaPagoID == Cat.FormasDePago.TarjetaDeDebito) 
+                            ? (DateTime?)oPago.Fecha : null),
                         SucursalID = oPago.SucursalID,
                         Importe = PartePago.Importe,
                         Concepto = oVentaV.Cliente,
