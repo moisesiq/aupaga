@@ -1114,6 +1114,9 @@ namespace Refaccionaria.App
 
         public static string ObtenerCuentaDePago(List<VentasPagosDetalleView> oFormasDePago)
         {
+            if (oFormasDePago == null)
+                return "";
+
             string sCuenta = "";
             foreach (var oReg in oFormasDePago)
             {
