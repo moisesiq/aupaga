@@ -44,19 +44,30 @@ namespace TheosProc
 
         public static List<T> GetListOf<T>() where T : class
         {
+            var context = Datos.GetDataContext();
+            var oList = context.CreateObjectSet<T>().ToList();
+            Datos.ReleaseDataContext(ref context);
+            return oList;
+
             // return General.GetListOf<T>(q => q is object);
-            using (var context = Datos.GetDataContext())
+            /* using (var context = Datos.GetDataContext())
             {
                 return context.CreateObjectSet<T>().ToList();
             }
+            */
         }
 
         public static List<T> GetListOf<T>(Expression<Func<T, bool>> expression) where T : class
         {
-            using (var context = Datos.GetDataContext())
+            var context = Datos.GetDataContext();
+            var oList = context.CreateObjectSet<T>().Where(expression).ToList();
+            Datos.ReleaseDataContext(ref context);
+            return oList;
+            /* using (var context = Datos.GetDataContext())
             {
                 return context.CreateObjectSet<T>().Where(expression).ToList();
             }
+            */
         }       
 
         public static T GetEntity<T>(Expression<Func<T, bool>> expression) where T : class
@@ -227,8 +238,10 @@ namespace TheosProc
         #region [ Uso interno ]
 
         private static ObjectContext GetDataContext() {
-            return (Datos.PersistentContextEnabled ? Datos.PersistentContext :
-                new ObjectContext(Datos.CadenaDeConexion) { DefaultContainerName = Datos.DefaultContainerName });
+            if (Datos.PersistentContextEnabled)
+                return Datos.PersistentContext;
+            else
+                return new ObjectContext(Datos.CadenaDeConexion) { DefaultContainerName = Datos.DefaultContainerName };
         }
 
         private static void ReleaseDataContext(ref ObjectContext oContext)
