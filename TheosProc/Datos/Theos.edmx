@@ -2545,6 +2545,8 @@
           <Property Name="Estatus" Type="bit" Nullable="false" />
           <Property Name="Actualizar" Type="bit" Nullable="false" />
           <Property Name="SucursalID" Type="int" Nullable="false" />
+          <Property Name="RepartidorIDAntes" Type="int" />
+          <Property Name="RepartidorIDDespues" Type="int" />
         </EntityType>
         <EntityType Name="VentaCotizacion">
           <Key>
@@ -9083,6 +9085,30 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__VentaCamb__Repar__31A31FBA">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="VentaCambio" Type="Self.VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="RepartidorIDAntes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Repar__329743F3">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="VentaCambio" Type="Self.VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="RepartidorIDDespues" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__VentaCamb__Sucur__530E3526">
           <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
           <End Role="VentaCambio" Type="Self.VentaCambio" Multiplicity="*" />
@@ -14889,6 +14915,14 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="VentaCambio" EntitySet="VentaCambio" />
           </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Repar__31A31FBA" Association="Self.FK__VentaCamb__Repar__31A31FBA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Repar__329743F3" Association="Self.FK__VentaCamb__Repar__329743F3">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
           <AssociationSet Name="FK__VentaCamb__Sucur__530E3526" Association="Self.FK__VentaCamb__Sucur__530E3526">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="VentaCambio" EntitySet="VentaCambio" />
@@ -15760,7 +15794,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="UsuarioNominaOficial" EntityType="TheosProc.UsuarioNominaOficial" />
           <EntitySet Name="UsuarioPerfil" EntityType="TheosProc.UsuarioPerfil" />
           <EntitySet Name="VehiculoTipo" EntityType="TheosProc.VehiculoTipo" />
-          <EntitySet Name="VentaCambio" EntityType="TheosProc.VentaCambio" />
           <EntitySet Name="VentaCotizacion" EntityType="TheosProc.VentaCotizacion" />
           <EntitySet Name="VentaCotizacionDetalle" EntityType="TheosProc.VentaCotizacionDetalle" />
           <EntitySet Name="VentaDetalle" EntityType="TheosProc.VentaDetalle" />
@@ -17133,10 +17166,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="UsuarioNomina" EntitySet="UsuarioNomina" />
           </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Sucur__530E3526" Association="TheosProc.FK__VentaCamb__Sucur__530E3526">
-            <End Role="Sucursal" EntitySet="Sucursal" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
-          </AssociationSet>
           <AssociationSet Name="FK__VentaCoti__Sucur__61873D06" Association="TheosProc.FK__VentaCoti__Sucur__61873D06">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="VentaCotizacion" EntitySet="VentaCotizacion" />
@@ -17241,18 +17270,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioNomina" EntitySet="UsuarioNomina" />
           </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Reali__15460CD7" Association="TheosProc.FK__VentaCamb__Reali__15460CD7">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Reali__163A3110" Association="TheosProc.FK__VentaCamb__Reali__163A3110">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Usuar__19169DBB" Association="TheosProc.FK__VentaCamb__Usuar__19169DBB">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
-          </AssociationSet>
           <AssociationSet Name="FK__VentaCoti__Vende__636F8578" Association="TheosProc.FK__VentaCoti__Vende__636F8578">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="VentaCotizacion" EntitySet="VentaCotizacion" />
@@ -17312,10 +17329,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK_UsuarioPerfil_UsuarioPerfil" Association="TheosProc.FK_UsuarioPerfil_UsuarioPerfil">
             <End Role="UsuarioPerfil" EntitySet="UsuarioPerfil" />
             <End Role="UsuarioPerfil1" EntitySet="UsuarioPerfil" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Venta__1451E89E" Association="TheosProc.FK__VentaCamb__Venta__1451E89E">
-            <End Role="VentaPago" EntitySet="VentaPago" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
           </AssociationSet>
           <AssociationSet Name="FK__VentaCoti__Venta__6CF8EFB2" Association="TheosProc.FK__VentaCoti__Venta__6CF8EFB2">
             <End Role="VentaCotizacion" EntitySet="VentaCotizacion" />
@@ -17761,14 +17774,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="NotaDeCredito" EntitySet="NotaDeCredito" />
           </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Comis__172E5549" Association="TheosProc.FK__VentaCamb__Comis__172E5549">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VentaCamb__Comis__18227982" Association="TheosProc.FK__VentaCamb__Comis__18227982">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="VentaCambio" EntitySet="VentaCambio" />
-          </AssociationSet>
           <AssociationSet Name="FK__VentaCoti__Clien__627B613F" Association="TheosProc.FK__VentaCoti__Clien__627B613F">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="VentaCotizacion" EntitySet="VentaCotizacion" />
@@ -17917,6 +17922,43 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__ParteComi__Parte__2EC6B30F" Association="TheosProc.FK__ParteComi__Parte__2EC6B30F">
             <End Role="Parte" EntitySet="Parte" />
             <End Role="ParteComision" EntitySet="ParteComision" />
+          </AssociationSet>
+          <EntitySet Name="VentaCambio" EntityType="TheosProc.VentaCambio" />
+          <AssociationSet Name="FK__VentaCamb__Comis__172E5549" Association="TheosProc.FK__VentaCamb__Comis__172E5549">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Comis__18227982" Association="TheosProc.FK__VentaCamb__Comis__18227982">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Sucur__530E3526" Association="TheosProc.FK__VentaCamb__Sucur__530E3526">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Reali__15460CD7" Association="TheosProc.FK__VentaCamb__Reali__15460CD7">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Reali__163A3110" Association="TheosProc.FK__VentaCamb__Reali__163A3110">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Repar__31A31FBA" Association="TheosProc.FK__VentaCamb__Repar__31A31FBA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Repar__329743F3" Association="TheosProc.FK__VentaCamb__Repar__329743F3">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Usuar__19169DBB" Association="TheosProc.FK__VentaCamb__Usuar__19169DBB">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaCamb__Venta__1451E89E" Association="TheosProc.FK__VentaCamb__Venta__1451E89E">
+            <End Role="VentaPago" EntitySet="VentaPago" />
+            <End Role="VentaCambio" EntitySet="VentaCambio" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Autorizacion">
@@ -20542,7 +20584,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="SucursalGastoFijo" Relationship="TheosProc.FK__SucursalG__Sucur__30D918B3" FromRole="Sucursal" ToRole="SucursalGastoFijo" />
           <NavigationProperty Name="UsuarioAsistencia" Relationship="TheosProc.FK__UsuarioAs__Sucur__475269B7" FromRole="Sucursal" ToRole="UsuarioAsistencia" />
           <NavigationProperty Name="UsuarioNomina" Relationship="TheosProc.FK__UsuarioNo__Sucur__65F6EC68" FromRole="Sucursal" ToRole="UsuarioNomina" />
-          <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Sucur__530E3526" FromRole="Sucursal" ToRole="VentaCambio" />
           <NavigationProperty Name="VentaCotizacion" Relationship="TheosProc.FK__VentaCoti__Sucur__61873D06" FromRole="Sucursal" ToRole="VentaCotizacion" />
           <NavigationProperty Name="VentaDevolucion" Relationship="TheosProc.FK__VentaDevo__Sucur__3651FAE7" FromRole="Sucursal" ToRole="VentaDevolucion" />
           <NavigationProperty Name="VentaFacturaDevolucion" Relationship="TheosProc.FK__VentaFact__Sucur__63449CEF" FromRole="Sucursal" ToRole="VentaFacturaDevolucion" />
@@ -20553,6 +20594,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="SucursalCriterioABC" Relationship="TheosProc.FK_SucursalCriterioABC_Sucursal" FromRole="Sucursal" ToRole="SucursalCriterioABC" />
           <NavigationProperty Name="InventarioLinea" Relationship="TheosProc.FK__Inventari__Sucur__1A35AA7D" FromRole="Sucursal" ToRole="InventarioLinea" />
           <NavigationProperty Name="Venta" Relationship="TheosProc.FK__Venta__SucursalI__0F382DC6" FromRole="Sucursal" ToRole="Venta" />
+          <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Sucur__530E3526" FromRole="Sucursal" ToRole="VentaCambio" />
         </EntityType>
         <EntityType Name="SucursalCriterioABC">
           <Key>
@@ -20892,9 +20934,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="UsuarioAsistencia" Relationship="TheosProc.FK__UsuarioAs__Acces__465E457E" FromRole="Usuario" ToRole="UsuarioAsistencia" />
           <NavigationProperty Name="UsuarioNominaOficial" Relationship="TheosProc.FK__UsuarioNo__IdUsu__48668981" FromRole="Usuario" ToRole="UsuarioNominaOficial" />
           <NavigationProperty Name="UsuarioNomina" Relationship="TheosProc.FK__UsuarioNo__IdUsu__4F138710" FromRole="Usuario" ToRole="UsuarioNomina" />
-          <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Reali__15460CD7" FromRole="Usuario" ToRole="VentaCambio" />
-          <NavigationProperty Name="VentaCambio1" Relationship="TheosProc.FK__VentaCamb__Reali__163A3110" FromRole="Usuario" ToRole="VentaCambio" />
-          <NavigationProperty Name="VentaCambio2" Relationship="TheosProc.FK__VentaCamb__Usuar__19169DBB" FromRole="Usuario" ToRole="VentaCambio" />
           <NavigationProperty Name="VentaCotizacion" Relationship="TheosProc.FK__VentaCoti__Vende__636F8578" FromRole="Usuario" ToRole="VentaCotizacion" />
           <NavigationProperty Name="VentaDetalle" Relationship="TheosProc.FK__VentaDeta__Usuar__44D52468" FromRole="Usuario" ToRole="VentaDetalle" />
           <NavigationProperty Name="VentaDevolucion" Relationship="TheosProc.FK__VentaDevo__Reali__383A4359" FromRole="Usuario" ToRole="VentaDevolucion" />
@@ -20916,6 +20955,11 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Venta2" Relationship="TheosProc.FK__Venta__UsuarioID__32B6742D" FromRole="Usuario" ToRole="Venta" />
           <NavigationProperty Name="ParteComplementaria" Relationship="TheosProc.FK__ParteComp__Reali__65A1E6AD" FromRole="Usuario" ToRole="ParteComplementaria" />
           <NavigationProperty Name="ParteComplementaria1" Relationship="TheosProc.FK__ParteComp__Usuar__343F9543" FromRole="Usuario" ToRole="ParteComplementaria" />
+          <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Reali__15460CD7" FromRole="Usuario" ToRole="VentaCambio" />
+          <NavigationProperty Name="VentaCambio1" Relationship="TheosProc.FK__VentaCamb__Reali__163A3110" FromRole="Usuario" ToRole="VentaCambio" />
+          <NavigationProperty Name="VentaCambio2" Relationship="TheosProc.FK__VentaCamb__Repar__31A31FBA" FromRole="Usuario" ToRole="VentaCambio" />
+          <NavigationProperty Name="VentaCambio3" Relationship="TheosProc.FK__VentaCamb__Repar__329743F3" FromRole="Usuario" ToRole="VentaCambio" />
+          <NavigationProperty Name="VentaCambio4" Relationship="TheosProc.FK__VentaCamb__Usuar__19169DBB" FromRole="Usuario" ToRole="VentaCambio" />
         </EntityType>
         <EntityType Name="UsuarioAsistencia">
           <Key>
@@ -20971,33 +21015,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="VehiculoTipoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClienteFlotilla" Relationship="TheosProc.FK__ClienteFl__Vehic__29F710FA" FromRole="VehiculoTipo" ToRole="ClienteFlotilla" />
-        </EntityType>
-        <EntityType Name="VentaCambio">
-          <Key>
-            <PropertyRef Name="VentaCambioID" />
-          </Key>
-          <Property Name="VentaCambioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VentaPagoID" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FormasDePagoAntes" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="FormasDePagoDespues" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="RealizoIDAntes" Type="Int32" />
-          <Property Name="RealizoIDDespues" Type="Int32" />
-          <Property Name="ComisionistaIDAntes" Type="Int32" />
-          <Property Name="ComisionistaIDDespues" Type="Int32" />
-          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
-          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
-          <Property Name="SucursalID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Sucursal" Relationship="TheosProc.FK__VentaCamb__Sucur__530E3526" FromRole="VentaCambio" ToRole="Sucursal" />
-          <NavigationProperty Name="Usuario" Relationship="TheosProc.FK__VentaCamb__Reali__15460CD7" FromRole="VentaCambio" ToRole="Usuario" />
-          <NavigationProperty Name="Usuario1" Relationship="TheosProc.FK__VentaCamb__Reali__163A3110" FromRole="VentaCambio" ToRole="Usuario" />
-          <NavigationProperty Name="Usuario2" Relationship="TheosProc.FK__VentaCamb__Usuar__19169DBB" FromRole="VentaCambio" ToRole="Usuario" />
-          <NavigationProperty Name="VentaPago" Relationship="TheosProc.FK__VentaCamb__Venta__1451E89E" FromRole="VentaCambio" ToRole="VentaPago" />
-          <NavigationProperty Name="Cliente" Relationship="TheosProc.FK__VentaCamb__Comis__172E5549" FromRole="VentaCambio" ToRole="Cliente" />
-          <NavigationProperty Name="Cliente1" Relationship="TheosProc.FK__VentaCamb__Comis__18227982" FromRole="VentaCambio" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="VentaCotizacion">
           <Key>
@@ -21290,9 +21307,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="CobranzaTicket" Relationship="TheosProc.FK__CobranzaT__Venta__29A20B3F" FromRole="VentaPago" ToRole="CobranzaTicket" />
           <NavigationProperty Name="Sucursal" Relationship="TheosProc.FK__VentaPago__Sucur__20A2B0EA" FromRole="VentaPago" ToRole="Sucursal" />
           <NavigationProperty Name="Usuario" Relationship="TheosProc.FK__VentaPago__Usuar__644DCFC1" FromRole="VentaPago" ToRole="Usuario" />
-          <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Venta__1451E89E" FromRole="VentaPago" ToRole="VentaCambio" />
           <NavigationProperty Name="VentaPagoDetalle" Relationship="TheosProc.FK__VentaPago__Venta__6CE315C2" FromRole="VentaPago" ToRole="VentaPagoDetalle" />
           <NavigationProperty Name="Venta" Relationship="TheosProc.FK__VentaPago__Venta__6265874F" FromRole="VentaPago" ToRole="Venta" />
+          <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Venta__1451E89E" FromRole="VentaPago" ToRole="VentaCambio" />
         </EntityType>
         <EntityType Name="VentaPagoConTarjeta">
           <Key>
@@ -27779,18 +27796,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VentaCamb__Sucur__530E3526">
-          <End Type="TheosProc.Sucursal" Role="Sucursal" Multiplicity="1" />
-          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sucursal">
-              <PropertyRef Name="SucursalID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="SucursalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__VentaCoti__Sucur__61873D06">
           <End Type="TheosProc.Sucursal" Role="Sucursal" Multiplicity="1" />
           <End Type="TheosProc.VentaCotizacion" Role="VentaCotizacion" Multiplicity="*" />
@@ -28103,42 +28108,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VentaCamb__Reali__15460CD7">
-          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="RealizoIDAntes" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaCamb__Reali__163A3110">
-          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="RealizoIDDespues" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaCamb__Usuar__19169DBB">
-          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__VentaCoti__Vende__636F8578">
           <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="TheosProc.VentaCotizacion" Role="VentaCotizacion" Multiplicity="*" />
@@ -28316,18 +28285,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="UsuarioPerfil1">
               <PropertyRef Name="UsuarioPerfilID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaCamb__Venta__1451E89E">
-          <End Type="TheosProc.VentaPago" Role="VentaPago" Multiplicity="1" />
-          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VentaPago">
-              <PropertyRef Name="VentaPagoID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="VentaPagoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -29419,14 +29376,14 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Cotizacion95001" Relationship="TheosProc.FK__Cotizacio__Comis__41248F15" FromRole="Cliente" ToRole="Cotizacion9500" />
           <NavigationProperty Name="NotaDeCreditoFiscal" Relationship="TheosProc.FK__NotaDeCre__Clien__53833672" FromRole="Cliente" ToRole="NotaDeCreditoFiscal" />
           <NavigationProperty Name="NotaDeCredito" Relationship="TheosProc.FK__NotaDeCre__Clien__59D0414E" FromRole="Cliente" ToRole="NotaDeCredito" />
-          <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Comis__172E5549" FromRole="Cliente" ToRole="VentaCambio" />
-          <NavigationProperty Name="VentaCambio1" Relationship="TheosProc.FK__VentaCamb__Comis__18227982" FromRole="Cliente" ToRole="VentaCambio" />
           <NavigationProperty Name="VentaCotizacion" Relationship="TheosProc.FK__VentaCoti__Clien__627B613F" FromRole="Cliente" ToRole="VentaCotizacion" />
           <NavigationProperty Name="VentaFactura" Relationship="TheosProc.FK__VentaFact__Clien__6561EF8B" FromRole="Cliente" ToRole="VentaFactura" />
           <NavigationProperty Name="ClienteCredito" Relationship="TheosProc.FK_ClienteCredito_Cliente" FromRole="Cliente" ToRole="ClienteCredito" />
           <NavigationProperty Name="ClientePersonal" Relationship="TheosProc.FK_ClientePersonal_Cliente" FromRole="Cliente" ToRole="ClientePersonal" />
           <NavigationProperty Name="Venta" Relationship="TheosProc.FK__Venta__ClienteID__30CE2BBB" FromRole="Cliente" ToRole="Venta" />
           <NavigationProperty Name="Venta1" Relationship="TheosProc.FK__Venta__Comisioni__5DF5D7ED" FromRole="Cliente" ToRole="Venta" />
+          <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Comis__172E5549" FromRole="Cliente" ToRole="VentaCambio" />
+          <NavigationProperty Name="VentaCambio1" Relationship="TheosProc.FK__VentaCamb__Comis__18227982" FromRole="Cliente" ToRole="VentaCambio" />
         </EntityType>
         <Association Name="FK__Cliente__Usuario__70E8B0D0">
           <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="1" />
@@ -29533,30 +29490,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="NotaDeCredito">
               <PropertyRef Name="ClienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaCamb__Comis__172E5549">
-          <End Type="TheosProc.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="ComisionistaIDAntes" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VentaCamb__Comis__18227982">
-          <End Type="TheosProc.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="ClienteID" />
-            </Principal>
-            <Dependent Role="VentaCambio">
-              <PropertyRef Name="ComisionistaIDDespues" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -30222,6 +30155,145 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="ParteComision">
               <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VentaCambio">
+          <Key>
+            <PropertyRef Name="VentaCambioID" />
+          </Key>
+          <Property Name="VentaCambioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VentaPagoID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FormasDePagoAntes" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="FormasDePagoDespues" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="RealizoIDAntes" Type="Int32" />
+          <Property Name="RealizoIDDespues" Type="Int32" />
+          <Property Name="ComisionistaIDAntes" Type="Int32" />
+          <Property Name="ComisionistaIDDespues" Type="Int32" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="Actualizar" Type="Boolean" Nullable="false" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="RepartidorIDAntes" Type="Int32" />
+          <Property Name="RepartidorIDDespues" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="TheosProc.FK__VentaCamb__Comis__172E5549" FromRole="VentaCambio" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente1" Relationship="TheosProc.FK__VentaCamb__Comis__18227982" FromRole="VentaCambio" ToRole="Cliente" />
+          <NavigationProperty Name="Sucursal" Relationship="TheosProc.FK__VentaCamb__Sucur__530E3526" FromRole="VentaCambio" ToRole="Sucursal" />
+          <NavigationProperty Name="Usuario" Relationship="TheosProc.FK__VentaCamb__Reali__15460CD7" FromRole="VentaCambio" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="TheosProc.FK__VentaCamb__Reali__163A3110" FromRole="VentaCambio" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="TheosProc.FK__VentaCamb__Repar__31A31FBA" FromRole="VentaCambio" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario3" Relationship="TheosProc.FK__VentaCamb__Repar__329743F3" FromRole="VentaCambio" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario4" Relationship="TheosProc.FK__VentaCamb__Usuar__19169DBB" FromRole="VentaCambio" ToRole="Usuario" />
+          <NavigationProperty Name="VentaPago" Relationship="TheosProc.FK__VentaCamb__Venta__1451E89E" FromRole="VentaCambio" ToRole="VentaPago" />
+        </EntityType>
+        <Association Name="FK__VentaCamb__Comis__172E5549">
+          <End Type="TheosProc.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="ComisionistaIDAntes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Comis__18227982">
+          <End Type="TheosProc.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="ComisionistaIDDespues" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Sucur__530E3526">
+          <End Type="TheosProc.Sucursal" Role="Sucursal" Multiplicity="1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Reali__15460CD7">
+          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="RealizoIDAntes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Reali__163A3110">
+          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="RealizoIDDespues" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Repar__31A31FBA">
+          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="RepartidorIDAntes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Repar__329743F3">
+          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="RepartidorIDDespues" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Usuar__19169DBB">
+          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="UsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaCamb__Venta__1451E89E">
+          <End Type="TheosProc.VentaPago" Role="VentaPago" Multiplicity="1" />
+          <End Type="TheosProc.VentaCambio" Role="VentaCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaPago">
+              <PropertyRef Name="VentaPagoID" />
+            </Principal>
+            <Dependent Role="VentaCambio">
+              <PropertyRef Name="VentaPagoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -32750,27 +32822,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               <MappingFragment StoreEntitySet="VehiculoTipo">
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="VehiculoTipoID" ColumnName="VehiculoTipoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VentaCambio">
-            <EntityTypeMapping TypeName="TheosProc.VentaCambio">
-              <MappingFragment StoreEntitySet="VentaCambio">
-                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
-                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="ComisionistaIDDespues" ColumnName="ComisionistaIDDespues" />
-                <ScalarProperty Name="ComisionistaIDAntes" ColumnName="ComisionistaIDAntes" />
-                <ScalarProperty Name="RealizoIDDespues" ColumnName="RealizoIDDespues" />
-                <ScalarProperty Name="RealizoIDAntes" ColumnName="RealizoIDAntes" />
-                <ScalarProperty Name="FormasDePagoDespues" ColumnName="FormasDePagoDespues" />
-                <ScalarProperty Name="FormasDePagoAntes" ColumnName="FormasDePagoAntes" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="VentaPagoID" ColumnName="VentaPagoID" />
-                <ScalarProperty Name="VentaCambioID" ColumnName="VentaCambioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -36406,6 +36457,29 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VentaCambio">
+            <EntityTypeMapping TypeName="TheosProc.VentaCambio">
+              <MappingFragment StoreEntitySet="VentaCambio">
+                <ScalarProperty Name="RepartidorIDDespues" ColumnName="RepartidorIDDespues" />
+                <ScalarProperty Name="RepartidorIDAntes" ColumnName="RepartidorIDAntes" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="Actualizar" ColumnName="Actualizar" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="ComisionistaIDDespues" ColumnName="ComisionistaIDDespues" />
+                <ScalarProperty Name="ComisionistaIDAntes" ColumnName="ComisionistaIDAntes" />
+                <ScalarProperty Name="RealizoIDDespues" ColumnName="RealizoIDDespues" />
+                <ScalarProperty Name="RealizoIDAntes" ColumnName="RealizoIDAntes" />
+                <ScalarProperty Name="FormasDePagoDespues" ColumnName="FormasDePagoDespues" />
+                <ScalarProperty Name="FormasDePagoAntes" ColumnName="FormasDePagoAntes" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="VentaPagoID" ColumnName="VentaPagoID" />
+                <ScalarProperty Name="VentaCambioID" ColumnName="VentaCambioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -36597,7 +36671,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.UsuarioNominaOficial" Width="1.5" PointX="5.25" PointY="284.625" />
         <EntityTypeShape EntityType="TheosProc.UsuarioPerfil" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="TheosProc.VehiculoTipo" Width="1.5" PointX="5.25" PointY="277.75" />
-        <EntityTypeShape EntityType="TheosProc.VentaCambio" Width="1.5" PointX="35.25" PointY="305.625" />
         <EntityTypeShape EntityType="TheosProc.VentaCotizacion" Width="1.5" PointX="13.5" PointY="310.875" />
         <EntityTypeShape EntityType="TheosProc.VentaCotizacionDetalle" Width="1.5" PointX="20.75" PointY="311" />
         <EntityTypeShape EntityType="TheosProc.VentaDetalle" Width="1.5" PointX="26" PointY="315.25" />
@@ -37061,7 +37134,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK__SucursalG__Sucur__30D918B3" />
         <AssociationConnector Association="TheosProc.FK__UsuarioAs__Sucur__475269B7" />
         <AssociationConnector Association="TheosProc.FK__UsuarioNo__Sucur__65F6EC68" />
-        <AssociationConnector Association="TheosProc.FK__VentaCamb__Sucur__530E3526" />
         <AssociationConnector Association="TheosProc.FK__VentaCoti__Sucur__61873D06" />
         <AssociationConnector Association="TheosProc.FK__VentaDevo__Sucur__3651FAE7" />
         <AssociationConnector Association="TheosProc.FK__VentaFact__Sucur__63449CEF" />
@@ -37088,9 +37160,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK__UsuarioAs__Acces__465E457E" />
         <AssociationConnector Association="TheosProc.FK__UsuarioNo__IdUsu__48668981" />
         <AssociationConnector Association="TheosProc.FK__UsuarioNo__IdUsu__4F138710" />
-        <AssociationConnector Association="TheosProc.FK__VentaCamb__Reali__15460CD7" />
-        <AssociationConnector Association="TheosProc.FK__VentaCamb__Reali__163A3110" />
-        <AssociationConnector Association="TheosProc.FK__VentaCamb__Usuar__19169DBB" />
         <AssociationConnector Association="TheosProc.FK__VentaCoti__Vende__636F8578" />
         <AssociationConnector Association="TheosProc.FK__VentaDeta__Usuar__44D52468" />
         <AssociationConnector Association="TheosProc.FK__VentaDevo__Reali__383A4359" />
@@ -37106,7 +37175,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK__VentaPago__Usuar__644DCFC1" />
         <AssociationConnector Association="TheosProc.FK__VentaPago__Usuar__6FBF826D" />
         <AssociationConnector Association="TheosProc.FK_UsuarioPerfil_UsuarioPerfil" />
-        <AssociationConnector Association="TheosProc.FK__VentaCamb__Venta__1451E89E" />
         <AssociationConnector Association="TheosProc.FK__VentaCoti__Venta__6CF8EFB2" />
         <AssociationConnector Association="TheosProc.FK__VentaDevo__Motiv__37461F20" />
         <AssociationConnector Association="TheosProc.FK__VentaDevo__Venta__233504D2" />
@@ -37148,8 +37216,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK__Cotizacio__Comis__41248F15" />
         <AssociationConnector Association="TheosProc.FK__NotaDeCre__Clien__53833672" />
         <AssociationConnector Association="TheosProc.FK__NotaDeCre__Clien__59D0414E" />
-        <AssociationConnector Association="TheosProc.FK__VentaCamb__Comis__172E5549" />
-        <AssociationConnector Association="TheosProc.FK__VentaCamb__Comis__18227982" />
         <AssociationConnector Association="TheosProc.FK__VentaCoti__Clien__627B613F" />
         <AssociationConnector Association="TheosProc.FK__VentaFact__Clien__6561EF8B" />
         <AssociationConnector Association="TheosProc.FK_ClienteCredito_Cliente" />
@@ -37194,6 +37260,16 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.PartesComisionesView" Width="1.5" PointX="39.375" PointY="11.75" />
         <EntityTypeShape EntityType="TheosProc.ParteComision" Width="1.5" PointX="21" PointY="341.625" />
         <AssociationConnector Association="TheosProc.FK__ParteComi__Parte__2EC6B30F" />
+        <EntityTypeShape EntityType="TheosProc.VentaCambio" Width="1.5" PointX="35.25" PointY="304.25" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Comis__172E5549" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Comis__18227982" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Sucur__530E3526" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Reali__15460CD7" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Reali__163A3110" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Repar__31A31FBA" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Repar__329743F3" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Usuar__19169DBB" />
+        <AssociationConnector Association="TheosProc.FK__VentaCamb__Venta__1451E89E" />
         </Diagram>
     </Diagrams>
   </Designer>

@@ -928,7 +928,8 @@ namespace Refaccionaria.App
             var oCambios = this.CambiosPagoDetalle(oPagoDetActual, oPagoDetNuevo);
             bool bCambioFP = (oCambios.Count > 0);
             var oVenta = Datos.GetEntity<Venta>(q => q.VentaID == iVentaID);
-            bool bCambioGen = (oVentasCambios.ctlCobro.VendodorID != oVenta.RealizoUsuarioID || oVentasCambios.ctlCobro.ComisionistaID != oVenta.ComisionistaClienteID);
+            bool bCambioGen = (oVentasCambios.ctlCobro.VendodorID != oVenta.RealizoUsuarioID || oVentasCambios.ctlCobro.RepartidorID != oVenta.RepartidorID.Valor()
+                || oVentasCambios.ctlCobro.ComisionistaID != oVenta.ComisionistaClienteID.Valor());
             
             if (!bCambioFP && !bCambioGen)
             {
@@ -970,6 +971,16 @@ namespace Refaccionaria.App
                     oRegCambios.RealizoIDDespues = oVentasCambios.ctlCobro.VendodorID;
                     //
                     oVenta.RealizoUsuarioID = oVentasCambios.ctlCobro.VendodorID;
+                }
+
+                // Cambio de repartidor
+                if (oVentasCambios.ctlCobro.RepartidorID != oVenta.RepartidorID.Valor())
+                {
+                    // Se registra el cambio
+                    oRegCambios.RepartidorIDAntes = oVenta.RepartidorID;
+                    oRegCambios.RepartidorIDDespues = oVentasCambios.ctlCobro.RepartidorID;
+                    //
+                    oVenta.RepartidorID = oVentasCambios.ctlCobro.RepartidorID;
                 }
 
                 // Cambio de comisionista
