@@ -2474,6 +2474,7 @@ namespace Refaccionaria.App
             if (oText != null)
                 oText.KeyDown += tgvDescGan_TextBox_KeyDown;
         }
+
         Keys oUlt;
         void tgvDescGan_TextBox_KeyDown(object sender, KeyEventArgs e)
         {

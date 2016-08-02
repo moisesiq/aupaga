@@ -118,6 +118,8 @@ namespace Refaccionaria.App
 
         public int VendodorID { get { return Util.Entero(this.cmbVendedor.SelectedValue); } }
 
+        public int RepartidorID { get { return Util.Entero(this.cmbRepartidor.SelectedValue); } }
+
         public int ComisionistaID { get { return Util.Entero(this.cmbClienteComisionista.SelectedValue); } }
 
         public bool ACredito { get { return this.rdbCredito.Checked; } }
@@ -154,6 +156,8 @@ namespace Refaccionaria.App
             // Se llenan los Combos
             this.cmbBanco.CargarDatos("BancoID", "NombreBanco", Datos.GetListOf<Banco>(q => q.Estatus).OrderBy(q => q.NombreBanco).ToList());
             this.cmbVendedor.CargarDatos("UsuarioID", "NombreUsuario", Datos.GetListOf<Usuario>(q => q.Activo && q.Estatus).OrderBy(q => q.NombreUsuario).ToList());
+            this.cmbRepartidor.CargarDatos("UsuarioID", "NombreUsuario", Datos.GetListOf<Usuario>(c => c.TipoUsuarioID == Cat.TiposDeUsuario.Repartidor
+                && c.Activo && c.Estatus));
             this.cmbClienteComisionista.CargarDatos("ClienteID", "Nombre", 
                 Datos.GetListOf<Cliente>(q => q.EsClienteComisionista.Value && q.Estatus).OrderBy(q => q.Nombre).ToList());
             
@@ -668,6 +672,7 @@ namespace Refaccionaria.App
                 this.FormasDePagoLibre.Clear();
             // this.txtFormaDePagoLibre.Clear();
             this.cmbVendedor.SelectedIndex = -1;
+            this.cmbRepartidor.SelectedIndex = -1;
             this.cmbClienteComisionista.SelectedIndex = -1;
             this.cmbVehiculo.SelectedIndex = -1;
             this.txtKilometraje.Clear();
@@ -706,6 +711,7 @@ namespace Refaccionaria.App
             }
 
             this.cmbVendedor.SelectedValue = oVenta.RealizoUsuarioID;
+            this.cmbRepartidor.SelectedValue = oVenta.RepartidorID.Valor();
             this.cmbClienteComisionista.SelectedValue = oVenta.ComisionistaClienteID.Valor();
             this.cmbVehiculo.SelectedValue = oVenta.ClienteVehiculoID.Valor();
             this.txtKilometraje.Text = Util.Cadena(oVenta.Kilometraje);

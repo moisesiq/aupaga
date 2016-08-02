@@ -5,6 +5,7 @@ using System.Linq;
 using System.Drawing;
 using System.Globalization;
 using FastReport;
+using AdvancedDataGridView;
 
 using TheosProc;
 using LibUtil;
@@ -66,6 +67,17 @@ namespace Refaccionaria.App
             oCadMeses = DateTimeFormatInfo.CurrentInfo.AbbreviatedMonthNames;
             for (int iMes = 1; iMes <= 12; iMes += 2)
                 this.oBimestres.Add(new EnteroCadena(iMes, string.Format("{0}-{1}", oCadMeses[iMes - 1], oCadMeses[iMes]).ToUpper()));
+        }
+
+        private void tabCapitalHumano_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (this.tabCapitalHumano.SelectedTab.Name)
+            {
+                case "tbpComisiones":
+                    if (this.tgvComisiones.Nodes.Count <= 0)
+                        this.CargarArbolDeComisiones();
+                    break;
+            }
         }
 
         #region [ Nómina ]
@@ -1188,6 +1200,59 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        #endregion
+
+        #region [ Comisiones ]
+
+        private void CargarArbolDeComisiones()
+        {
+            Cargando.Mostrar();
+            // this.bCargandoDescuentosGanancias = true;
+
+            string sProveedor = "", sMarca = "", sLinea = "";
+            TreeGridNode oNodoProveedor = null, oNodoMarca = null, oNodoLinea = null;
+            var oDatos = Datos.GetListOf<PartesComisionesView>().OrderBy(c => c.Proveedor).ThenBy(c => c.Marca).ThenBy(c => c.Linea).ThenBy(c => c.Descripcion);
+            this.tgvComisiones.Nodes.Clear();
+            foreach (var oReg in oDatos)
+            {
+                if (oReg.Proveedor != sProveedor)
+                {
+                    sProveedor = oReg.Proveedor;
+                    oNodoProveedor = this.tgvComisiones.Nodes.Add(oReg.ProveedorID, sProveedor, oReg.PorcentajeNormal, oReg.ComisionFija
+                        , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
+                        , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
+                    oNodoProveedor.Expand();
+                    continue;
+                }
+                if (oReg.Marca != sMarca)
+                {
+                    sMarca = oReg.Marca;
+                    oNodoMarca = oNodoProveedor.Nodes.Add(oReg.MarcaID, sMarca, oReg.PorcentajeNormal, oReg.ComisionFija
+                        , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
+                        , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
+                    continue;
+                }
+                if (oReg.Linea != sLinea)
+                {
+                    sLinea = oReg.Linea;
+                    oNodoLinea = oNodoMarca.Nodes.Add(oReg.Linea, sProveedor, oReg.PorcentajeNormal, oReg.ComisionFija
+                        , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
+                        , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
+                    continue;
+                }
+
+                /* Se carga sólo hasta líneas, para que sea más rápido
+                oNodoLinea.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.ParteID, oReg.Parte
+                    , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
+                    , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
+                    , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                */
+            }
+
+            // this.bCargandoDescuentosGanancias = false;
+            Cargando.Cerrar();
+        }
 
         #endregion
 

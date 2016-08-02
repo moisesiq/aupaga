@@ -70,6 +70,7 @@
             this.txtLeyenda = new System.Windows.Forms.TextBox();
             this.chkFacturarDividir = new LibUtil.CheckBoxMod();
             this.btnAtras = new System.Windows.Forms.Button();
+            this.cmbRepartidor = new LibUtil.ComboEtiqueta();
             this.gpbFormasDePago.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gpbTipoDePago.SuspendLayout();
@@ -89,7 +90,7 @@
             this.gpbFormasDePago.Location = new System.Drawing.Point(3, 36);
             this.gpbFormasDePago.Name = "gpbFormasDePago";
             this.gpbFormasDePago.Size = new System.Drawing.Size(333, 172);
-            this.gpbFormasDePago.TabIndex = 4;
+            this.gpbFormasDePago.TabIndex = 5;
             this.gpbFormasDePago.TabStop = false;
             // 
             // btnFormaDePagoLibre
@@ -475,8 +476,8 @@
             this.cmbVendedor.SelectedItem = null;
             this.cmbVendedor.SelectedText = "";
             this.cmbVendedor.SelectedValue = null;
-            this.cmbVendedor.Size = new System.Drawing.Size(174, 21);
-            this.cmbVendedor.TabIndex = 5;
+            this.cmbVendedor.Size = new System.Drawing.Size(87, 21);
+            this.cmbVendedor.TabIndex = 6;
             this.cmbVendedor.ValueMember = "";
             // 
             // cmbClienteComisionista
@@ -496,7 +497,7 @@
             this.cmbClienteComisionista.SelectedText = "";
             this.cmbClienteComisionista.SelectedValue = null;
             this.cmbClienteComisionista.Size = new System.Drawing.Size(174, 21);
-            this.cmbClienteComisionista.TabIndex = 6;
+            this.cmbClienteComisionista.TabIndex = 8;
             this.cmbClienteComisionista.ValueMember = "";
             // 
             // cmbVehiculo
@@ -516,7 +517,7 @@
             this.cmbVehiculo.SelectedText = "";
             this.cmbVehiculo.SelectedValue = null;
             this.cmbVehiculo.Size = new System.Drawing.Size(174, 21);
-            this.cmbVehiculo.TabIndex = 7;
+            this.cmbVehiculo.TabIndex = 10;
             this.cmbVehiculo.ValueMember = "";
             // 
             // txtKilometraje
@@ -528,7 +529,7 @@
             this.txtKilometraje.PasarEnfoqueConEnter = true;
             this.txtKilometraje.SeleccionarTextoAlEnfoque = false;
             this.txtKilometraje.Size = new System.Drawing.Size(100, 20);
-            this.txtKilometraje.TabIndex = 9;
+            this.txtKilometraje.TabIndex = 11;
             // 
             // lblEtSuma
             // 
@@ -575,7 +576,7 @@
             this.btnCotizacion.Margin = new System.Windows.Forms.Padding(0);
             this.btnCotizacion.Name = "btnCotizacion";
             this.btnCotizacion.Size = new System.Drawing.Size(49, 24);
-            this.btnCotizacion.TabIndex = 2;
+            this.btnCotizacion.TabIndex = 3;
             this.btnCotizacion.Text = "Cotizar";
             this.btnCotizacion.Visible = false;
             this.btnCotizacion.Click += new System.EventHandler(this.btnCotizacion_Click);
@@ -597,7 +598,7 @@
             this.cmbLeyanda.SelectedText = "";
             this.cmbLeyanda.SelectedValue = null;
             this.cmbLeyanda.Size = new System.Drawing.Size(174, 21);
-            this.cmbLeyanda.TabIndex = 30;
+            this.cmbLeyanda.TabIndex = 9;
             this.cmbLeyanda.ValueMember = "";
             this.cmbLeyanda.SelectedIndexChanged += new System.EventHandler(this.cmbLeyanda_SelectedIndexChanged);
             // 
@@ -609,7 +610,7 @@
             this.txtLeyenda.Multiline = true;
             this.txtLeyenda.Name = "txtLeyenda";
             this.txtLeyenda.Size = new System.Drawing.Size(333, 56);
-            this.txtLeyenda.TabIndex = 31;
+            this.txtLeyenda.TabIndex = 12;
             // 
             // chkFacturarDividir
             // 
@@ -621,7 +622,7 @@
             this.chkFacturarDividir.Location = new System.Drawing.Point(236, 7);
             this.chkFacturarDividir.Name = "chkFacturarDividir";
             this.chkFacturarDividir.Size = new System.Drawing.Size(40, 28);
-            this.chkFacturarDividir.TabIndex = 32;
+            this.chkFacturarDividir.TabIndex = 2;
             this.chkFacturarDividir.Text = "Dividir";
             this.chkFacturarDividir.UseVisualStyleBackColor = true;
             // 
@@ -636,14 +637,35 @@
             this.btnAtras.Margin = new System.Windows.Forms.Padding(0);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(26, 26);
-            this.btnAtras.TabIndex = 3;
+            this.btnAtras.TabIndex = 4;
             this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
+            // 
+            // cmbRepartidor
+            // 
+            this.cmbRepartidor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbRepartidor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbRepartidor.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.cmbRepartidor.DataSource = null;
+            this.cmbRepartidor.DisplayMember = "";
+            this.cmbRepartidor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbRepartidor.Etiqueta = "Repartidor";
+            this.cmbRepartidor.EtiquetaColor = System.Drawing.Color.Gray;
+            this.cmbRepartidor.Location = new System.Drawing.Point(96, 214);
+            this.cmbRepartidor.Name = "cmbRepartidor";
+            this.cmbRepartidor.SelectedIndex = -1;
+            this.cmbRepartidor.SelectedItem = null;
+            this.cmbRepartidor.SelectedText = "";
+            this.cmbRepartidor.SelectedValue = null;
+            this.cmbRepartidor.Size = new System.Drawing.Size(81, 21);
+            this.cmbRepartidor.TabIndex = 7;
+            this.cmbRepartidor.ValueMember = "";
             // 
             // Cobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.Controls.Add(this.cmbRepartidor);
             this.Controls.Add(this.chkFacturarDividir);
             this.Controls.Add(this.txtLeyenda);
             this.Controls.Add(this.cmbLeyanda);
@@ -719,5 +741,6 @@
         private LibUtil.CheckBoxMod chkFacturarDividir;
         private System.Windows.Forms.CheckBox chkTarjetaDeDebito;
         private System.Windows.Forms.Button btnFormaDePagoLibre;
+        private LibUtil.ComboEtiqueta cmbRepartidor;
     }
 }

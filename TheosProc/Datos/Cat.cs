@@ -477,6 +477,7 @@
         {
             public const int Vendedor = 1;
             public const int Gerente = 2;
+            public const int Repartidor = 3;
         }
 
         public class CategoriasCorte

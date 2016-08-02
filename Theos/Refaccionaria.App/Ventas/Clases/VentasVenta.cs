@@ -116,6 +116,7 @@ namespace Refaccionaria.App
                 ClienteID = this.oControlVentas.Cliente.ClienteID,
                 VentaEstatusID = Cat.VentasEstatus.Realizada,
                 RealizoUsuarioID = this.oControlVentas.ctlCobro.VendodorID,
+                RepartidorID = (this.oControlVentas.ctlCobro.RepartidorID > 0 ? (int?)this.oControlVentas.ctlCobro.RepartidorID : null),
                 ComisionistaClienteID = this.oControlVentas.ctlCobro.ComisionistaID,
                 ClienteVehiculoID = this.oControlVentas.ctlCobro.ClienteVehiculoID,
                 Kilometraje = this.oControlVentas.ctlCobro.Kilometraje
