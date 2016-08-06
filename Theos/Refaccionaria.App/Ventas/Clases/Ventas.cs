@@ -848,6 +848,7 @@ namespace Refaccionaria.App
             oFacturaE.TasaDeImpuesto = GlobalClass.ConfiguracionGlobal.IVA.ToString();
             oFacturaE.MetodoDePago = VentasLoc.GenerarMetodoDePagoFactura(oFormasDePago);
             // Se agraga la cadena del método de pago, como adicional
+            oFacturaE.Adicionales = new Dictionary<string, string>();
             oFacturaE.Adicionales.Add("LeyendaDePago", VentasLoc.GenerarCadenaMetodoDePagoFactura(oFormasDePago));
 
             // Se llenan los datos del receptor
@@ -1120,9 +1121,9 @@ namespace Refaccionaria.App
             string sCuenta = "";
             foreach (var oReg in oFormasDePago)
             {
-                if (oReg.Folio != "")
+                if (oReg.Cuenta != "")
                 {
-                    sCuenta = oReg.Folio;
+                    sCuenta = oReg.Cuenta;
                     break;
                 }
             }

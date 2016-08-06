@@ -323,13 +323,13 @@ namespace Refaccionaria.App
             for (int iSem = 1; iSem <= 52; iSem++)
             {
                 // Para el año anterior
-                var oRegistro = oUtilAnt.Where(c => c.Semana == iSem).FirstOrDefault();
+                var oRegistro = oUtilAnt.FirstOrDefault(c => c.Semana == iSem);
                 mUtilidad = (oRegistro == null ? 0 : oRegistro.Utilidad.Valor());
                 this.chrUtilidadSem.Series["Pasado"].Points.Add(new DataPoint((double)iSem, (double)mUtilidad));
                 this.chrUtilidadSem.Series["Pasado"].Points[iSem - 1].AxisLabel = 
                     ((mUtilidad / this.oMetaSucursal.UtilSucursalLargoPlazo) * 100).ToString(GlobalClass.FormatoDecimal);
                 // Para el año actual
-                oRegistro = oUtilAct.Where(c => c.Semana == iSem).FirstOrDefault();
+                oRegistro = oUtilAct.FirstOrDefault(c => c.Semana == iSem);
                 mUtilidad = (oRegistro == null ? 0 : oRegistro.Utilidad.Valor());
                 this.chrUtilidadSem.Series["Actual"].Points.Add(new DataPoint((double)iSem, (double)mUtilidad));
                 this.chrUtilidadSem.Series["Actual"].Points[iSem - 1].AxisLabel = 

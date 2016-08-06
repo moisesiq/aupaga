@@ -151,7 +151,8 @@ namespace Refaccionaria.App
             {
                 var aVerAct = Application.ProductVersion.Split('.');
                 var aVerNueva = oInfoVer.ProductVersion.Split('.');
-                for (int i = 0; i < 4; i++)
+                int iNumerosVersion = Math.Min(aVerAct.Length, aVerNueva.Length);
+                for (int i = 0; i < iNumerosVersion; i++)
                 {
                     if (Util.Entero(aVerAct[i]) < Util.Entero(aVerNueva[i]))
                     {

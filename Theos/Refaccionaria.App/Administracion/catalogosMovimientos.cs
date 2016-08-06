@@ -1609,7 +1609,7 @@ namespace Refaccionaria.App
                 SplashScreen.Close();
                 this.btnFinish.Enabled = true;
                 this.Cursor = Cursors.Default;
-                Util.MensajeError(ex.Message, GlobalClass.NombreApp);
+                UtilLocal.MensajeError(ex.MensajeDeError());
             }
         }
 

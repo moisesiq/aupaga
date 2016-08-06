@@ -94,6 +94,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -107,15 +116,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblEncontrados = new System.Windows.Forms.Label();
             this.lblBuscar = new System.Windows.Forms.Label();
             this.progreso = new System.Windows.Forms.ProgressBar();
@@ -329,21 +329,6 @@
             this.marCaracteristicasVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.marValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvAvProveedores = new System.Windows.Forms.DataGridView();
-            this.proProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proFotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proFotosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proEquivalentes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proEquivalentesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proAplicaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proAplicacionesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proAlternos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proAlternosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proComplementarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proComplementariosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proCaracteristicasVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpErrores = new System.Windows.Forms.TabPage();
             this.dgvErrores = new System.Windows.Forms.DataGridView();
             this.err_ParteErrorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -365,6 +350,21 @@
             this.chkErr_MostrarTodos = new System.Windows.Forms.CheckBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.proProveedorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proFotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proFotosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proEquivalentes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proEquivalentesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proAplicaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proAplicacionesVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proAlternos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proAlternosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proComplementarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proComplementariosVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proCaracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proCaracteristicasVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proValidadosNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabExistencia.SuspendLayout();
             this.tabExistencias.SuspendLayout();
@@ -2670,7 +2670,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(3, 480);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(540, 78);
+            this.groupBox1.Size = new System.Drawing.Size(588, 78);
             this.groupBox1.TabIndex = 174;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Totales";
@@ -2678,7 +2678,7 @@
             // lblAvValidadosNum
             // 
             this.lblAvValidadosNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvValidadosNum.Location = new System.Drawing.Point(470, 35);
+            this.lblAvValidadosNum.Location = new System.Drawing.Point(518, 35);
             this.lblAvValidadosNum.Name = "lblAvValidadosNum";
             this.lblAvValidadosNum.Size = new System.Drawing.Size(64, 13);
             this.lblAvValidadosNum.TabIndex = 190;
@@ -2688,7 +2688,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(392, 35);
+            this.label13.Location = new System.Drawing.Point(440, 35);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(72, 13);
             this.label13.TabIndex = 189;
@@ -2697,9 +2697,9 @@
             // lblAvCaracteristicas
             // 
             this.lblAvCaracteristicas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvCaracteristicas.Location = new System.Drawing.Point(282, 54);
+            this.lblAvCaracteristicas.Location = new System.Drawing.Point(314, 54);
             this.lblAvCaracteristicas.Name = "lblAvCaracteristicas";
-            this.lblAvCaracteristicas.Size = new System.Drawing.Size(100, 13);
+            this.lblAvCaracteristicas.Size = new System.Drawing.Size(120, 13);
             this.lblAvCaracteristicas.TabIndex = 186;
             this.lblAvCaracteristicas.Text = "0%";
             this.lblAvCaracteristicas.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2707,7 +2707,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(186, 54);
+            this.label12.Location = new System.Drawing.Point(218, 54);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 13);
             this.label12.TabIndex = 185;
@@ -2716,9 +2716,9 @@
             // lblAvComplementarios
             // 
             this.lblAvComplementarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvComplementarios.Location = new System.Drawing.Point(282, 35);
+            this.lblAvComplementarios.Location = new System.Drawing.Point(314, 35);
             this.lblAvComplementarios.Name = "lblAvComplementarios";
-            this.lblAvComplementarios.Size = new System.Drawing.Size(100, 13);
+            this.lblAvComplementarios.Size = new System.Drawing.Size(120, 13);
             this.lblAvComplementarios.TabIndex = 184;
             this.lblAvComplementarios.Text = "0%";
             this.lblAvComplementarios.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2726,7 +2726,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(186, 35);
+            this.label10.Location = new System.Drawing.Point(218, 35);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(90, 13);
             this.label10.TabIndex = 183;
@@ -2735,9 +2735,9 @@
             // lblAvAlternos
             // 
             this.lblAvAlternos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvAlternos.Location = new System.Drawing.Point(282, 16);
+            this.lblAvAlternos.Location = new System.Drawing.Point(314, 16);
             this.lblAvAlternos.Name = "lblAvAlternos";
-            this.lblAvAlternos.Size = new System.Drawing.Size(100, 13);
+            this.lblAvAlternos.Size = new System.Drawing.Size(120, 13);
             this.lblAvAlternos.TabIndex = 182;
             this.lblAvAlternos.Text = "0%";
             this.lblAvAlternos.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2745,7 +2745,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(186, 16);
+            this.label8.Location = new System.Drawing.Point(218, 16);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 13);
             this.label8.TabIndex = 181;
@@ -2754,9 +2754,9 @@
             // lblAvAplicaciones
             // 
             this.lblAvAplicaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvAplicaciones.Location = new System.Drawing.Point(82, 54);
+            this.lblAvAplicaciones.Location = new System.Drawing.Point(83, 55);
             this.lblAvAplicaciones.Name = "lblAvAplicaciones";
-            this.lblAvAplicaciones.Size = new System.Drawing.Size(100, 13);
+            this.lblAvAplicaciones.Size = new System.Drawing.Size(120, 13);
             this.lblAvAplicaciones.TabIndex = 180;
             this.lblAvAplicaciones.Text = "0%";
             this.lblAvAplicaciones.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2773,9 +2773,9 @@
             // lblAvEquivalentes
             // 
             this.lblAvEquivalentes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvEquivalentes.Location = new System.Drawing.Point(82, 35);
+            this.lblAvEquivalentes.Location = new System.Drawing.Point(83, 36);
             this.lblAvEquivalentes.Name = "lblAvEquivalentes";
-            this.lblAvEquivalentes.Size = new System.Drawing.Size(100, 13);
+            this.lblAvEquivalentes.Size = new System.Drawing.Size(120, 13);
             this.lblAvEquivalentes.TabIndex = 178;
             this.lblAvEquivalentes.Text = "0%";
             this.lblAvEquivalentes.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -2792,9 +2792,9 @@
             // lblAvFotos
             // 
             this.lblAvFotos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvFotos.Location = new System.Drawing.Point(82, 16);
+            this.lblAvFotos.Location = new System.Drawing.Point(83, 17);
             this.lblAvFotos.Name = "lblAvFotos";
-            this.lblAvFotos.Size = new System.Drawing.Size(100, 13);
+            this.lblAvFotos.Size = new System.Drawing.Size(120, 13);
             this.lblAvFotos.TabIndex = 176;
             this.lblAvFotos.Text = "0%";
             this.lblAvFotos.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -3329,157 +3329,6 @@
             this.dgvAvProveedores.TabIndex = 0;
             this.dgvAvProveedores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAvProveedores_CellDoubleClick);
             // 
-            // proProveedorID
-            // 
-            this.proProveedorID.HeaderText = "ProveedorID";
-            this.proProveedorID.Name = "proProveedorID";
-            this.proProveedorID.ReadOnly = true;
-            this.proProveedorID.Visible = false;
-            this.proProveedorID.Width = 70;
-            // 
-            // proProveedor
-            // 
-            this.proProveedor.HeaderText = "Proveedor";
-            this.proProveedor.Name = "proProveedor";
-            this.proProveedor.ReadOnly = true;
-            this.proProveedor.Width = 120;
-            // 
-            // proFotos
-            // 
-            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle64.Format = "N1";
-            dataGridViewCellStyle64.NullValue = null;
-            this.proFotos.DefaultCellStyle = dataGridViewCellStyle64;
-            this.proFotos.HeaderText = "Fotos";
-            this.proFotos.Name = "proFotos";
-            this.proFotos.ReadOnly = true;
-            this.proFotos.Width = 36;
-            // 
-            // proFotosVal
-            // 
-            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle65.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle65.Format = "N1";
-            this.proFotosVal.DefaultCellStyle = dataGridViewCellStyle65;
-            this.proFotosVal.HeaderText = "FotoV.";
-            this.proFotosVal.Name = "proFotosVal";
-            this.proFotosVal.ReadOnly = true;
-            this.proFotosVal.Width = 36;
-            // 
-            // proEquivalentes
-            // 
-            dataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle66.Format = "N1";
-            this.proEquivalentes.DefaultCellStyle = dataGridViewCellStyle66;
-            this.proEquivalentes.HeaderText = "Equiv.";
-            this.proEquivalentes.Name = "proEquivalentes";
-            this.proEquivalentes.ReadOnly = true;
-            this.proEquivalentes.Width = 36;
-            // 
-            // proEquivalentesVal
-            // 
-            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle67.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle67.Format = "N1";
-            this.proEquivalentesVal.DefaultCellStyle = dataGridViewCellStyle67;
-            this.proEquivalentesVal.HeaderText = "EquiV.";
-            this.proEquivalentesVal.Name = "proEquivalentesVal";
-            this.proEquivalentesVal.ReadOnly = true;
-            this.proEquivalentesVal.Width = 36;
-            // 
-            // proAplicaciones
-            // 
-            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle68.Format = "N1";
-            this.proAplicaciones.DefaultCellStyle = dataGridViewCellStyle68;
-            this.proAplicaciones.HeaderText = "Aplic.";
-            this.proAplicaciones.Name = "proAplicaciones";
-            this.proAplicaciones.ReadOnly = true;
-            this.proAplicaciones.Width = 36;
-            // 
-            // proAplicacionesVal
-            // 
-            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle69.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle69.Format = "N1";
-            this.proAplicacionesVal.DefaultCellStyle = dataGridViewCellStyle69;
-            this.proAplicacionesVal.HeaderText = "AplicV.";
-            this.proAplicacionesVal.Name = "proAplicacionesVal";
-            this.proAplicacionesVal.ReadOnly = true;
-            this.proAplicacionesVal.Width = 36;
-            // 
-            // proAlternos
-            // 
-            dataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle70.Format = "N1";
-            this.proAlternos.DefaultCellStyle = dataGridViewCellStyle70;
-            this.proAlternos.HeaderText = "Alternos";
-            this.proAlternos.Name = "proAlternos";
-            this.proAlternos.ReadOnly = true;
-            this.proAlternos.Width = 36;
-            // 
-            // proAlternosVal
-            // 
-            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle71.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle71.Format = "N1";
-            this.proAlternosVal.DefaultCellStyle = dataGridViewCellStyle71;
-            this.proAlternosVal.HeaderText = "AlteV.";
-            this.proAlternosVal.Name = "proAlternosVal";
-            this.proAlternosVal.ReadOnly = true;
-            this.proAlternosVal.Width = 36;
-            // 
-            // proComplementarios
-            // 
-            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle72.Format = "N1";
-            this.proComplementarios.DefaultCellStyle = dataGridViewCellStyle72;
-            this.proComplementarios.HeaderText = "Complem.";
-            this.proComplementarios.Name = "proComplementarios";
-            this.proComplementarios.ReadOnly = true;
-            this.proComplementarios.Width = 36;
-            // 
-            // proComplementariosVal
-            // 
-            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle73.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle73.Format = "N1";
-            this.proComplementariosVal.DefaultCellStyle = dataGridViewCellStyle73;
-            this.proComplementariosVal.HeaderText = "CompV.";
-            this.proComplementariosVal.Name = "proComplementariosVal";
-            this.proComplementariosVal.ReadOnly = true;
-            this.proComplementariosVal.Width = 36;
-            // 
-            // proCaracteristicas
-            // 
-            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle74.Format = "N1";
-            this.proCaracteristicas.DefaultCellStyle = dataGridViewCellStyle74;
-            this.proCaracteristicas.HeaderText = "Caract.";
-            this.proCaracteristicas.Name = "proCaracteristicas";
-            this.proCaracteristicas.ReadOnly = true;
-            this.proCaracteristicas.Width = 36;
-            // 
-            // proCaracteristicasVal
-            // 
-            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle75.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle75.Format = "N1";
-            this.proCaracteristicasVal.DefaultCellStyle = dataGridViewCellStyle75;
-            this.proCaracteristicasVal.HeaderText = "CaracV.";
-            this.proCaracteristicasVal.Name = "proCaracteristicasVal";
-            this.proCaracteristicasVal.ReadOnly = true;
-            this.proCaracteristicasVal.Width = 36;
-            // 
-            // proValidadosNum
-            // 
-            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.proValidadosNum.DefaultCellStyle = dataGridViewCellStyle76;
-            this.proValidadosNum.HeaderText = "N.V.";
-            this.proValidadosNum.Name = "proValidadosNum";
-            this.proValidadosNum.ReadOnly = true;
-            this.proValidadosNum.Width = 36;
-            // 
             // tbpErrores
             // 
             this.tbpErrores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
@@ -3746,6 +3595,157 @@
             this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // proProveedorID
+            // 
+            this.proProveedorID.HeaderText = "ProveedorID";
+            this.proProveedorID.Name = "proProveedorID";
+            this.proProveedorID.ReadOnly = true;
+            this.proProveedorID.Visible = false;
+            this.proProveedorID.Width = 70;
+            // 
+            // proProveedor
+            // 
+            this.proProveedor.HeaderText = "Proveedor";
+            this.proProveedor.Name = "proProveedor";
+            this.proProveedor.ReadOnly = true;
+            this.proProveedor.Width = 120;
+            // 
+            // proFotos
+            // 
+            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle64.Format = "N0";
+            dataGridViewCellStyle64.NullValue = null;
+            this.proFotos.DefaultCellStyle = dataGridViewCellStyle64;
+            this.proFotos.HeaderText = "Fotos";
+            this.proFotos.Name = "proFotos";
+            this.proFotos.ReadOnly = true;
+            this.proFotos.Width = 36;
+            // 
+            // proFotosVal
+            // 
+            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle65.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle65.Format = "N0";
+            this.proFotosVal.DefaultCellStyle = dataGridViewCellStyle65;
+            this.proFotosVal.HeaderText = "FotoV.";
+            this.proFotosVal.Name = "proFotosVal";
+            this.proFotosVal.ReadOnly = true;
+            this.proFotosVal.Width = 36;
+            // 
+            // proEquivalentes
+            // 
+            dataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle66.Format = "N0";
+            this.proEquivalentes.DefaultCellStyle = dataGridViewCellStyle66;
+            this.proEquivalentes.HeaderText = "Equiv.";
+            this.proEquivalentes.Name = "proEquivalentes";
+            this.proEquivalentes.ReadOnly = true;
+            this.proEquivalentes.Width = 36;
+            // 
+            // proEquivalentesVal
+            // 
+            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle67.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle67.Format = "N0";
+            this.proEquivalentesVal.DefaultCellStyle = dataGridViewCellStyle67;
+            this.proEquivalentesVal.HeaderText = "EquiV.";
+            this.proEquivalentesVal.Name = "proEquivalentesVal";
+            this.proEquivalentesVal.ReadOnly = true;
+            this.proEquivalentesVal.Width = 36;
+            // 
+            // proAplicaciones
+            // 
+            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle68.Format = "N0";
+            this.proAplicaciones.DefaultCellStyle = dataGridViewCellStyle68;
+            this.proAplicaciones.HeaderText = "Aplic.";
+            this.proAplicaciones.Name = "proAplicaciones";
+            this.proAplicaciones.ReadOnly = true;
+            this.proAplicaciones.Width = 36;
+            // 
+            // proAplicacionesVal
+            // 
+            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle69.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle69.Format = "N0";
+            this.proAplicacionesVal.DefaultCellStyle = dataGridViewCellStyle69;
+            this.proAplicacionesVal.HeaderText = "AplicV.";
+            this.proAplicacionesVal.Name = "proAplicacionesVal";
+            this.proAplicacionesVal.ReadOnly = true;
+            this.proAplicacionesVal.Width = 36;
+            // 
+            // proAlternos
+            // 
+            dataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle70.Format = "N0";
+            this.proAlternos.DefaultCellStyle = dataGridViewCellStyle70;
+            this.proAlternos.HeaderText = "Alternos";
+            this.proAlternos.Name = "proAlternos";
+            this.proAlternos.ReadOnly = true;
+            this.proAlternos.Width = 36;
+            // 
+            // proAlternosVal
+            // 
+            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle71.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle71.Format = "N0";
+            this.proAlternosVal.DefaultCellStyle = dataGridViewCellStyle71;
+            this.proAlternosVal.HeaderText = "AlteV.";
+            this.proAlternosVal.Name = "proAlternosVal";
+            this.proAlternosVal.ReadOnly = true;
+            this.proAlternosVal.Width = 36;
+            // 
+            // proComplementarios
+            // 
+            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle72.Format = "N0";
+            this.proComplementarios.DefaultCellStyle = dataGridViewCellStyle72;
+            this.proComplementarios.HeaderText = "Complem.";
+            this.proComplementarios.Name = "proComplementarios";
+            this.proComplementarios.ReadOnly = true;
+            this.proComplementarios.Width = 36;
+            // 
+            // proComplementariosVal
+            // 
+            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle73.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle73.Format = "N0";
+            this.proComplementariosVal.DefaultCellStyle = dataGridViewCellStyle73;
+            this.proComplementariosVal.HeaderText = "CompV.";
+            this.proComplementariosVal.Name = "proComplementariosVal";
+            this.proComplementariosVal.ReadOnly = true;
+            this.proComplementariosVal.Width = 36;
+            // 
+            // proCaracteristicas
+            // 
+            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle74.Format = "N0";
+            this.proCaracteristicas.DefaultCellStyle = dataGridViewCellStyle74;
+            this.proCaracteristicas.HeaderText = "Caract.";
+            this.proCaracteristicas.Name = "proCaracteristicas";
+            this.proCaracteristicas.ReadOnly = true;
+            this.proCaracteristicas.Width = 36;
+            // 
+            // proCaracteristicasVal
+            // 
+            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle75.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle75.Format = "N0";
+            this.proCaracteristicasVal.DefaultCellStyle = dataGridViewCellStyle75;
+            this.proCaracteristicasVal.HeaderText = "CaracV.";
+            this.proCaracteristicasVal.Name = "proCaracteristicasVal";
+            this.proCaracteristicasVal.ReadOnly = true;
+            this.proCaracteristicasVal.Width = 36;
+            // 
+            // proValidadosNum
+            // 
+            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.proValidadosNum.DefaultCellStyle = dataGridViewCellStyle76;
+            this.proValidadosNum.HeaderText = "N.V.";
+            this.proValidadosNum.Name = "proValidadosNum";
+            this.proValidadosNum.ReadOnly = true;
+            this.proValidadosNum.Width = 36;
             // 
             // catalogosPartes
             // 
@@ -4035,21 +4035,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn linCaracteristicas;
         private System.Windows.Forms.DataGridViewTextBoxColumn linCaracteristicasVal;
         private System.Windows.Forms.DataGridViewTextBoxColumn linValidadosNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proProveedorID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proProveedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proFotos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proFotosVal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proEquivalentes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proEquivalentesVal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proAplicaciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proAplicacionesVal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proAlternos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proAlternosVal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proComplementarios;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proComplementariosVal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicasVal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proValidadosNum;
         private System.Windows.Forms.Label label7;
         private LibUtil.TextoMod txtKardexBusqueda;
         private System.Windows.Forms.TextBox txtKardexObservacion;
@@ -4066,6 +4051,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Kardex_Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Kardex_ExistenciaNueva;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proProveedorID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proProveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proFotos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proFotosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proEquivalentes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proEquivalentesVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proAplicaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proAplicacionesVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proAlternos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proAlternosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proComplementarios;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proComplementariosVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proCaracteristicasVal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proValidadosNum;
 
     }
 }

@@ -3895,9 +3895,9 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.MedidasView' does not hav
 warning 6002: The table/view 'ControlRefaccionaria.dbo.MetasComisionVendedoresView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MetasComisionVendedoresView">
           <Key>
-            <PropertyRef Name="VendedorID" />
+            <PropertyRef Name="Registro" />
           </Key>
-          <Property Name="Registro" Type="bigint" />
+          <Property Name="Registro" Type="bigint" Nullable="false" />
           <Property Name="VendedorID" Type="int" Nullable="false" />
           <Property Name="Anio" Type="int" />
           <Property Name="Mes" Type="int" />
@@ -3908,9 +3908,9 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.MetasComisionVendedoresVi
 warning 6002: The table/view 'ControlRefaccionaria.dbo.MetasUtilidadSucursalesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MetasUtilidadSucursalesView">
           <Key>
-            <PropertyRef Name="SucursalID" />
+            <PropertyRef Name="Registro" />
           </Key>
-          <Property Name="Registro" Type="bigint" />
+          <Property Name="Registro" Type="bigint" Nullable="false" />
           <Property Name="SucursalID" Type="int" Nullable="false" />
           <Property Name="Anio" Type="int" />
           <Property Name="Mes" Type="int" />
@@ -22240,9 +22240,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         </EntityType>
         <EntityType Name="MetasComisionVendedoresView">
           <Key>
-            <PropertyRef Name="VendedorID" />
+            <PropertyRef Name="Registro" />
           </Key>
-          <Property Name="Registro" Type="Int64" />
+          <Property Name="Registro" Type="Int64" Nullable="false" />
           <Property Name="VendedorID" Type="Int32" Nullable="false" />
           <Property Name="Anio" Type="Int32" />
           <Property Name="Mes" Type="Int32" />
@@ -22251,9 +22251,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         </EntityType>
         <EntityType Name="MetasUtilidadSucursalesView">
           <Key>
-            <PropertyRef Name="SucursalID" />
+            <PropertyRef Name="Registro" />
           </Key>
-          <Property Name="Registro" Type="Int64" />
+          <Property Name="Registro" Type="Int64" Nullable="false" />
           <Property Name="SucursalID" Type="Int32" Nullable="false" />
           <Property Name="Anio" Type="Int32" />
           <Property Name="Mes" Type="Int32" />
@@ -36501,7 +36501,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ControlRefaccionaria" ZoomLevel="55">
+      <Diagram Name="ControlRefaccionaria" ZoomLevel="94">
         <EntityTypeShape EntityType="TheosProc.Autorizacion" Width="1.5" PointX="13.5" PointY="301.125" />
         <EntityTypeShape EntityType="TheosProc.AutorizacionProceso" Width="1.5" PointX="5.25" PointY="280.875" />
         <EntityTypeShape EntityType="TheosProc.Banco" Width="1.5" PointX="5.25" PointY="318" />
