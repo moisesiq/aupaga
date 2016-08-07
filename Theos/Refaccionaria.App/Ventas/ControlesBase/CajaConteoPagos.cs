@@ -155,7 +155,7 @@ namespace Refaccionaria.App
         }
 
 
-        public virtual ConteoCaja GenerarConteo()
+        public override ConteoCaja GenerarConteo()
         {
             var oConteo = base.GenerarConteo();
             foreach (DataGridViewRow Fila in this.dgvPagosBancarios.Rows)

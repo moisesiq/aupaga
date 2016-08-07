@@ -1561,6 +1561,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.txtDescripcionMaxMin);
             this.Controls.Add(this.ctlExistencias);
             this.Controls.Add(this.ctlVentasMes);
@@ -1617,7 +1618,6 @@
             this.Controls.Add(this.label40);
             this.Controls.Add(this.cmbMarca);
             this.Controls.Add(this.label39);
-            this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.label38);
             this.Controls.Add(this.btnProcesar);
             this.Controls.Add(this.lblMarca);

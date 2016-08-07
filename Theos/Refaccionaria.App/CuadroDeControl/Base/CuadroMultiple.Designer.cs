@@ -257,6 +257,8 @@
             this.dgvPrincipal.AllowUserToAddRows = false;
             this.dgvPrincipal.AllowUserToDeleteRows = false;
             this.dgvPrincipal.AllowUserToResizeRows = false;
+            this.dgvPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPrincipal.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPrincipal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPrincipal.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -362,6 +364,8 @@
             this.dgvGrupos.AllowUserToAddRows = false;
             this.dgvGrupos.AllowUserToDeleteRows = false;
             this.dgvGrupos.AllowUserToResizeRows = false;
+            this.dgvGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvGrupos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvGrupos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvGrupos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -558,6 +562,8 @@
             this.dgvSemanas.AllowUserToAddRows = false;
             this.dgvSemanas.AllowUserToDeleteRows = false;
             this.dgvSemanas.AllowUserToResizeRows = false;
+            this.dgvSemanas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvSemanas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvSemanas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvSemanas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -795,6 +801,7 @@
             this.dgvVendedor.AllowUserToAddRows = false;
             this.dgvVendedor.AllowUserToDeleteRows = false;
             this.dgvVendedor.AllowUserToResizeRows = false;
+            this.dgvVendedor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvVendedor.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvVendedor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvVendedor.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -991,6 +998,7 @@
             this.dgvPartes.AllowUserToAddRows = false;
             this.dgvPartes.AllowUserToDeleteRows = false;
             this.dgvPartes.AllowUserToResizeRows = false;
+            this.dgvPartes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPartes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPartes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPartes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -1073,6 +1081,7 @@
             this.dgvPrincipalTotales.AllowUserToAddRows = false;
             this.dgvPrincipalTotales.AllowUserToDeleteRows = false;
             this.dgvPrincipalTotales.AllowUserToResizeRows = false;
+            this.dgvPrincipalTotales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPrincipalTotales.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPrincipalTotales.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPrincipalTotales.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;

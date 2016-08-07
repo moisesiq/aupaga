@@ -60,21 +60,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1D, "10,14,16");
             System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1D, "10,14,16");
+            System.Windows.Forms.DataVisualization.Charting.Title title9 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle96 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle97 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -100,9 +100,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle113 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle114 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle112 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title9 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title10 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbSucursal = new System.Windows.Forms.ComboBox();
             this.chkPagadas = new System.Windows.Forms.CheckBox();
@@ -214,6 +214,7 @@
             // cmbSucursal
             // 
             this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSucursal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSucursal.FormattingEnabled = true;
             this.cmbSucursal.Location = new System.Drawing.Point(215, 13);
             this.cmbSucursal.Name = "cmbSucursal";
@@ -224,10 +225,11 @@
             // chkPagadas
             // 
             this.chkPagadas.AutoSize = true;
+            this.chkPagadas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkPagadas.ForeColor = System.Drawing.Color.White;
             this.chkPagadas.Location = new System.Drawing.Point(371, 15);
             this.chkPagadas.Name = "chkPagadas";
-            this.chkPagadas.Size = new System.Drawing.Size(68, 17);
+            this.chkPagadas.Size = new System.Drawing.Size(65, 17);
             this.chkPagadas.TabIndex = 2;
             this.chkPagadas.Text = "Pagadas";
             this.chkPagadas.UseVisualStyleBackColor = true;
@@ -236,10 +238,11 @@
             // chkCobradas
             // 
             this.chkCobradas.AutoSize = true;
+            this.chkCobradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkCobradas.ForeColor = System.Drawing.Color.White;
             this.chkCobradas.Location = new System.Drawing.Point(445, 15);
             this.chkCobradas.Name = "chkCobradas";
-            this.chkCobradas.Size = new System.Drawing.Size(71, 17);
+            this.chkCobradas.Size = new System.Drawing.Size(68, 17);
             this.chkCobradas.TabIndex = 3;
             this.chkCobradas.Text = "Cobradas";
             this.chkCobradas.UseVisualStyleBackColor = true;
@@ -250,6 +253,8 @@
             this.dgvPorDia.AllowUserToAddRows = false;
             this.dgvPorDia.AllowUserToDeleteRows = false;
             this.dgvPorDia.AllowUserToResizeRows = false;
+            this.dgvPorDia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPorDia.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPorDia.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPorDia.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -283,7 +288,7 @@
             this.dgvPorDia.RowHeadersDefaultCellStyle = dataGridViewCellStyle64;
             this.dgvPorDia.RowHeadersVisible = false;
             this.dgvPorDia.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPorDia.Size = new System.Drawing.Size(320, 413);
+            this.dgvPorDia.Size = new System.Drawing.Size(320, 456);
             this.dgvPorDia.TabIndex = 10;
             // 
             // Dia_Fecha
@@ -363,6 +368,8 @@
             this.dgvPorSemana.AllowUserToAddRows = false;
             this.dgvPorSemana.AllowUserToDeleteRows = false;
             this.dgvPorSemana.AllowUserToResizeRows = false;
+            this.dgvPorSemana.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPorSemana.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPorSemana.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPorSemana.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -396,7 +403,7 @@
             this.dgvPorSemana.RowHeadersDefaultCellStyle = dataGridViewCellStyle70;
             this.dgvPorSemana.RowHeadersVisible = false;
             this.dgvPorSemana.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPorSemana.Size = new System.Drawing.Size(320, 413);
+            this.dgvPorSemana.Size = new System.Drawing.Size(320, 456);
             this.dgvPorSemana.TabIndex = 12;
             // 
             // Semana_Semana
@@ -744,10 +751,11 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(15, 519);
+            this.label5.Location = new System.Drawing.Point(9, 550);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 13);
             this.label5.TabIndex = 174;
@@ -755,10 +763,11 @@
             // 
             // lblAnioActual
             // 
+            this.lblAnioActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAnioActual.AutoSize = true;
             this.lblAnioActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnioActual.ForeColor = System.Drawing.Color.White;
-            this.lblAnioActual.Location = new System.Drawing.Point(52, 519);
+            this.lblAnioActual.Location = new System.Drawing.Point(46, 550);
             this.lblAnioActual.Name = "lblAnioActual";
             this.lblAnioActual.Size = new System.Drawing.Size(35, 13);
             this.lblAnioActual.TabIndex = 175;
@@ -766,10 +775,11 @@
             // 
             // lblAnioAnterior
             // 
+            this.lblAnioAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAnioAnterior.AutoSize = true;
             this.lblAnioAnterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnioAnterior.ForeColor = System.Drawing.Color.White;
-            this.lblAnioAnterior.Location = new System.Drawing.Point(217, 519);
+            this.lblAnioAnterior.Location = new System.Drawing.Point(211, 550);
             this.lblAnioAnterior.Name = "lblAnioAnterior";
             this.lblAnioAnterior.Size = new System.Drawing.Size(35, 13);
             this.lblAnioAnterior.TabIndex = 177;
@@ -777,10 +787,11 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(188, 519);
+            this.label7.Location = new System.Drawing.Point(182, 550);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 176;
@@ -788,7 +799,8 @@
             // 
             // txtAnioActual
             // 
-            this.txtAnioActual.Location = new System.Drawing.Point(89, 516);
+            this.txtAnioActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtAnioActual.Location = new System.Drawing.Point(83, 547);
             this.txtAnioActual.Name = "txtAnioActual";
             this.txtAnioActual.ReadOnly = true;
             this.txtAnioActual.Size = new System.Drawing.Size(80, 20);
@@ -797,7 +809,8 @@
             // 
             // txtAnioAnterior
             // 
-            this.txtAnioAnterior.Location = new System.Drawing.Point(258, 516);
+            this.txtAnioAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtAnioAnterior.Location = new System.Drawing.Point(252, 547);
             this.txtAnioAnterior.Name = "txtAnioAnterior";
             this.txtAnioAnterior.ReadOnly = true;
             this.txtAnioAnterior.Size = new System.Drawing.Size(80, 20);
@@ -806,10 +819,11 @@
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(353, 519);
+            this.label11.Location = new System.Drawing.Point(347, 550);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(64, 13);
             this.label11.TabIndex = 180;
@@ -817,7 +831,8 @@
             // 
             // txtResultado
             // 
-            this.txtResultado.Location = new System.Drawing.Point(426, 516);
+            this.txtResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtResultado.Location = new System.Drawing.Point(420, 547);
             this.txtResultado.Name = "txtResultado";
             this.txtResultado.ReadOnly = true;
             this.txtResultado.Size = new System.Drawing.Size(80, 20);
@@ -826,88 +841,10 @@
             // 
             // chrPorSemana
             // 
+            this.chrPorSemana.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.chrPorSemana.BackColor = System.Drawing.Color.Transparent;
-            chartArea5.AxisX.Interval = 5D;
-            chartArea5.AxisX.IntervalOffset = 1D;
-            chartArea5.AxisX.IsLabelAutoFit = false;
-            chartArea5.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            chartArea5.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea5.AxisX.LineColor = System.Drawing.Color.DarkGray;
-            chartArea5.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
-            chartArea5.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
-            chartArea5.AxisX.ScaleBreakStyle.LineColor = System.Drawing.Color.Maroon;
-            chartArea5.AxisX.ScaleView.Size = 52D;
-            chartArea5.AxisY.IsLabelAutoFit = false;
-            chartArea5.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            chartArea5.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea5.AxisY.LineColor = System.Drawing.Color.DarkGray;
-            chartArea5.AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
-            chartArea5.AxisY.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
-            chartArea5.AxisY.TitleForeColor = System.Drawing.Color.Empty;
-            chartArea5.BackColor = System.Drawing.Color.Transparent;
-            chartArea5.Name = "ChartArea1";
-            this.chrPorSemana.ChartAreas.Add(chartArea5);
-            this.chrPorSemana.Location = new System.Drawing.Point(0, 556);
-            this.chrPorSemana.Name = "chrPorSemana";
-            series7.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
-            series7.BackSecondaryColor = System.Drawing.Color.Red;
-            series7.BorderColor = System.Drawing.Color.Silver;
-            series7.BorderWidth = 2;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Color = System.Drawing.Color.White;
-            series7.CustomProperties = "LabelStyle=Center";
-            series7.EmptyPointStyle.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            series7.EmptyPointStyle.Label = "3213";
-            series7.EmptyPointStyle.LabelForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            series7.EmptyPointStyle.LabelToolTip = "9879";
-            series7.EmptyPointStyle.ToolTip = "pp";
-            series7.Label = "o";
-            series7.LabelForeColor = System.Drawing.Color.Transparent;
-            series7.LabelToolTip = "Semana: #VALX\\nComisión: $#VAL";
-            series7.MarkerSize = 4;
-            series7.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series7.Name = "Actual";
-            series7.ShadowColor = System.Drawing.Color.Silver;
-            series7.ShadowOffset = 1;
-            series7.SmartLabelStyle.Enabled = false;
-            series8.BorderColor = System.Drawing.Color.White;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Color = System.Drawing.Color.IndianRed;
-            series8.CustomProperties = "LabelStyle=Center";
-            series8.Label = "o";
-            series8.LabelForeColor = System.Drawing.Color.Transparent;
-            series8.LabelToolTip = "Semana: #VALX\\nComisión: $#VAL";
-            series8.MarkerBorderColor = System.Drawing.Color.IndianRed;
-            series8.MarkerColor = System.Drawing.Color.IndianRed;
-            series8.MarkerSize = 4;
-            series8.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series8.Name = "Pasado";
-            series8.ShadowColor = System.Drawing.Color.Silver;
-            series8.ShadowOffset = 1;
-            series8.SmartLabelStyle.Enabled = false;
-            this.chrPorSemana.Series.Add(series7);
-            this.chrPorSemana.Series.Add(series8);
-            this.chrPorSemana.Size = new System.Drawing.Size(674, 200);
-            this.chrPorSemana.TabIndex = 17;
-            this.chrPorSemana.Text = "chart1";
-            title5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            title5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            title5.ForeColor = System.Drawing.Color.White;
-            title5.IsDockedInsideChartArea = false;
-            title5.Name = "Title1";
-            title5.ShadowOffset = 2;
-            title5.Text = "Gráfica semanal";
-            this.chrPorSemana.Titles.Add(title5);
-            // 
-            // chrPorMes
-            // 
-            this.chrPorMes.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.Area3DStyle.Enable3D = true;
-            chartArea6.Area3DStyle.PointDepth = 60;
-            chartArea6.Area3DStyle.PointGapDepth = 60;
-            chartArea6.Area3DStyle.WallWidth = 0;
+            chartArea6.AxisX.Interval = 5D;
             chartArea6.AxisX.IntervalOffset = 1D;
             chartArea6.AxisX.IsLabelAutoFit = false;
             chartArea6.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
@@ -915,7 +852,8 @@
             chartArea6.AxisX.LineColor = System.Drawing.Color.DarkGray;
             chartArea6.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
             chartArea6.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
-            chartArea6.AxisX.ScaleView.Size = 11D;
+            chartArea6.AxisX.ScaleBreakStyle.LineColor = System.Drawing.Color.Maroon;
+            chartArea6.AxisX.ScaleView.Size = 52D;
             chartArea6.AxisY.IsLabelAutoFit = false;
             chartArea6.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             chartArea6.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
@@ -925,49 +863,66 @@
             chartArea6.AxisY.TitleForeColor = System.Drawing.Color.Empty;
             chartArea6.BackColor = System.Drawing.Color.Transparent;
             chartArea6.Name = "ChartArea1";
-            this.chrPorMes.ChartAreas.Add(chartArea6);
-            this.chrPorMes.Location = new System.Drawing.Point(680, 553);
-            this.chrPorMes.Name = "chrPorMes";
-            series9.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
-            series9.BackSecondaryColor = System.Drawing.Color.Transparent;
-            series9.BorderColor = System.Drawing.Color.Transparent;
-            series9.BorderWidth = 0;
+            this.chrPorSemana.ChartAreas.Add(chartArea6);
+            this.chrPorSemana.Location = new System.Drawing.Point(0, 573);
+            this.chrPorSemana.Name = "chrPorSemana";
+            series8.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
+            series8.BackSecondaryColor = System.Drawing.Color.Red;
+            series8.BorderColor = System.Drawing.Color.Silver;
+            series8.BorderWidth = 2;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Color = System.Drawing.Color.White;
+            series8.CustomProperties = "LabelStyle=Center";
+            series8.EmptyPointStyle.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            series8.EmptyPointStyle.Label = "3213";
+            series8.EmptyPointStyle.LabelForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            series8.EmptyPointStyle.LabelToolTip = "9879";
+            series8.EmptyPointStyle.ToolTip = "pp";
+            series8.Label = "o";
+            series8.LabelForeColor = System.Drawing.Color.Transparent;
+            series8.LabelToolTip = "Semana: #VALX\\nComisión: $#VAL";
+            series8.MarkerSize = 4;
+            series8.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series8.Name = "Actual";
+            series8.ShadowColor = System.Drawing.Color.Silver;
+            series8.ShadowOffset = 1;
+            series8.SmartLabelStyle.Enabled = false;
+            series9.BorderColor = System.Drawing.Color.White;
             series9.ChartArea = "ChartArea1";
-            series9.Color = System.Drawing.Color.Gray;
-            series9.CustomProperties = "PixelPointWidth=16";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Color = System.Drawing.Color.IndianRed;
+            series9.CustomProperties = "LabelStyle=Center";
+            series9.Label = "o";
+            series9.LabelForeColor = System.Drawing.Color.Transparent;
+            series9.LabelToolTip = "Semana: #VALX\\nComisión: $#VAL";
+            series9.MarkerBorderColor = System.Drawing.Color.IndianRed;
+            series9.MarkerColor = System.Drawing.Color.IndianRed;
+            series9.MarkerSize = 4;
+            series9.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             series9.Name = "Pasado";
-            series9.ShadowColor = System.Drawing.Color.White;
-            series10.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
-            series10.BackSecondaryColor = System.Drawing.Color.Transparent;
-            series10.BorderColor = System.Drawing.Color.Transparent;
-            series10.BorderWidth = 0;
-            series10.ChartArea = "ChartArea1";
-            series10.Color = System.Drawing.Color.White;
-            series10.CustomProperties = "PixelPointWidth=16";
-            series10.LabelToolTip = "#VAL{C}";
-            series10.MarkerSize = 7;
-            series10.Name = "Actual";
-            series10.ShadowColor = System.Drawing.Color.White;
-            this.chrPorMes.Series.Add(series9);
-            this.chrPorMes.Series.Add(series10);
-            this.chrPorMes.Size = new System.Drawing.Size(466, 200);
-            this.chrPorMes.TabIndex = 18;
-            this.chrPorMes.Text = "chart1";
+            series9.ShadowColor = System.Drawing.Color.Silver;
+            series9.ShadowOffset = 1;
+            series9.SmartLabelStyle.Enabled = false;
+            this.chrPorSemana.Series.Add(series8);
+            this.chrPorSemana.Series.Add(series9);
+            this.chrPorSemana.Size = new System.Drawing.Size(716, 200);
+            this.chrPorSemana.TabIndex = 17;
+            this.chrPorSemana.Text = "chart1";
             title6.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             title6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             title6.ForeColor = System.Drawing.Color.White;
             title6.IsDockedInsideChartArea = false;
             title6.Name = "Title1";
             title6.ShadowOffset = 2;
-            title6.Text = "Gráfica mensual";
-            this.chrPorMes.Titles.Add(title6);
+            title6.Text = "Gráfica semanal";
+            this.chrPorSemana.Titles.Add(title6);
             // 
-            // chrPorDiaSem
+            // chrPorMes
             // 
-            this.chrPorDiaSem.BackColor = System.Drawing.Color.Transparent;
-            this.chrPorDiaSem.BorderSkin.BorderWidth = 0;
+            this.chrPorMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chrPorMes.BackColor = System.Drawing.Color.Transparent;
             chartArea7.Area3DStyle.Enable3D = true;
-            chartArea7.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.Realistic;
             chartArea7.Area3DStyle.PointDepth = 60;
             chartArea7.Area3DStyle.PointGapDepth = 60;
             chartArea7.Area3DStyle.WallWidth = 0;
@@ -988,124 +943,189 @@
             chartArea7.AxisY.TitleForeColor = System.Drawing.Color.Empty;
             chartArea7.BackColor = System.Drawing.Color.Transparent;
             chartArea7.Name = "ChartArea1";
-            this.chrPorDiaSem.ChartAreas.Add(chartArea7);
-            this.chrPorDiaSem.Location = new System.Drawing.Point(1126, 522);
-            this.chrPorDiaSem.Name = "chrPorDiaSem";
-            this.chrPorDiaSem.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-            series11.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
+            this.chrPorMes.ChartAreas.Add(chartArea7);
+            this.chrPorMes.Location = new System.Drawing.Point(713, 573);
+            this.chrPorMes.Name = "chrPorMes";
+            series10.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
+            series10.BackSecondaryColor = System.Drawing.Color.Transparent;
+            series10.BorderColor = System.Drawing.Color.Transparent;
+            series10.BorderWidth = 0;
+            series10.ChartArea = "ChartArea1";
+            series10.Color = System.Drawing.Color.Gray;
+            series10.CustomProperties = "PixelPointWidth=16";
+            series10.Name = "Pasado";
+            series10.ShadowColor = System.Drawing.Color.White;
+            series11.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
             series11.BackSecondaryColor = System.Drawing.Color.Transparent;
-            series11.BorderColor = System.Drawing.Color.White;
+            series11.BorderColor = System.Drawing.Color.Transparent;
             series11.BorderWidth = 0;
             series11.ChartArea = "ChartArea1";
-            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
             series11.Color = System.Drawing.Color.White;
-            series11.CustomProperties = "PieLineColor=White, PieDrawingStyle=Concave, PieLabelStyle=Outside";
-            series11.EmptyPointStyle.CustomProperties = "Exploded=True";
-            series11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series11.IsValueShownAsLabel = true;
-            series11.Label = "#AXISLABEL (#PERCENT{P0})";
-            series11.LabelForeColor = System.Drawing.Color.White;
-            series11.MarkerColor = System.Drawing.Color.Green;
+            series11.CustomProperties = "PixelPointWidth=16";
+            series11.LabelToolTip = "#VAL{C}";
             series11.MarkerSize = 7;
-            series11.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Square;
             series11.Name = "Actual";
             series11.ShadowColor = System.Drawing.Color.White;
-            series11.ShadowOffset = 3;
-            series11.SmartLabelStyle.MovingDirection = ((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles)((((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Top | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.TopRight) 
-            | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.BottomLeft) 
-            | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.BottomRight)));
-            this.chrPorDiaSem.Series.Add(series11);
-            this.chrPorDiaSem.Size = new System.Drawing.Size(287, 231);
-            this.chrPorDiaSem.TabIndex = 19;
-            this.chrPorDiaSem.Text = "chart1";
+            this.chrPorMes.Series.Add(series10);
+            this.chrPorMes.Series.Add(series11);
+            this.chrPorMes.Size = new System.Drawing.Size(528, 200);
+            this.chrPorMes.TabIndex = 18;
+            this.chrPorMes.Text = "chart1";
             title7.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             title7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             title7.ForeColor = System.Drawing.Color.White;
+            title7.IsDockedInsideChartArea = false;
             title7.Name = "Title1";
             title7.ShadowOffset = 2;
-            title7.Text = "Día";
-            this.chrPorDiaSem.Titles.Add(title7);
+            title7.Text = "Gráfica mensual";
+            this.chrPorMes.Titles.Add(title7);
             // 
-            // chrPorHora
+            // chrPorDiaSem
             // 
-            this.chrPorHora.BackColor = System.Drawing.Color.Transparent;
+            this.chrPorDiaSem.BackColor = System.Drawing.Color.Transparent;
+            this.chrPorDiaSem.BorderSkin.BorderWidth = 0;
             chartArea8.Area3DStyle.Enable3D = true;
-            chartArea8.Area3DStyle.PointDepth = 20;
-            chartArea8.Area3DStyle.PointGapDepth = 50;
-            chartArea8.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea8.AxisX.LabelStyle.Enabled = false;
+            chartArea8.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.Realistic;
+            chartArea8.Area3DStyle.PointDepth = 60;
+            chartArea8.Area3DStyle.PointGapDepth = 60;
+            chartArea8.Area3DStyle.WallWidth = 0;
+            chartArea8.AxisX.IntervalOffset = 1D;
+            chartArea8.AxisX.IsLabelAutoFit = false;
             chartArea8.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             chartArea8.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea8.AxisX.LineColor = System.Drawing.Color.White;
-            chartArea8.AxisX.LineWidth = 2;
-            chartArea8.AxisX.MajorGrid.Enabled = false;
+            chartArea8.AxisX.LineColor = System.Drawing.Color.DarkGray;
             chartArea8.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
-            chartArea8.AxisX.MajorTickMark.Enabled = false;
             chartArea8.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
-            chartArea8.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea8.AxisY.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Triangle;
-            chartArea8.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea8.AxisY.Interval = 10D;
+            chartArea8.AxisX.ScaleView.Size = 11D;
             chartArea8.AxisY.IsLabelAutoFit = false;
-            chartArea8.AxisY.LabelStyle.Enabled = false;
             chartArea8.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             chartArea8.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea8.AxisY.LineColor = System.Drawing.Color.White;
-            chartArea8.AxisY.LineWidth = 2;
-            chartArea8.AxisY.MajorGrid.Enabled = false;
-            chartArea8.AxisY.MajorGrid.LineColor = System.Drawing.Color.White;
-            chartArea8.AxisY.MajorTickMark.Enabled = false;
-            chartArea8.AxisY.MajorTickMark.LineColor = System.Drawing.Color.White;
-            chartArea8.AxisY.MajorTickMark.LineWidth = 2;
-            chartArea8.AxisY.MajorTickMark.Size = 4F;
-            chartArea8.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
-            chartArea8.AxisY.MinorTickMark.LineColor = System.Drawing.Color.White;
-            chartArea8.AxisY.MinorTickMark.LineWidth = 2;
-            chartArea8.AxisY.MinorTickMark.Size = 4F;
-            chartArea8.AxisY.MinorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea8.AxisY.LineColor = System.Drawing.Color.DarkGray;
+            chartArea8.AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
+            chartArea8.AxisY.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
             chartArea8.AxisY.TitleForeColor = System.Drawing.Color.Empty;
-            chartArea8.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
             chartArea8.BackColor = System.Drawing.Color.Transparent;
-            chartArea8.BorderWidth = 0;
             chartArea8.Name = "ChartArea1";
-            this.chrPorHora.ChartAreas.Add(chartArea8);
-            this.chrPorHora.Location = new System.Drawing.Point(1472, 55);
-            this.chrPorHora.Name = "chrPorHora";
-            this.chrPorHora.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-            series12.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.VerticalCenter;
+            this.chrPorDiaSem.ChartAreas.Add(chartArea8);
+            this.chrPorDiaSem.Location = new System.Drawing.Point(775, 533);
+            this.chrPorDiaSem.Name = "chrPorDiaSem";
+            this.chrPorDiaSem.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
+            series12.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
             series12.BackSecondaryColor = System.Drawing.Color.Transparent;
-            series12.BorderColor = System.Drawing.Color.Transparent;
-            series12.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            series12.BorderColor = System.Drawing.Color.White;
             series12.BorderWidth = 0;
             series12.ChartArea = "ChartArea1";
-            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn100;
-            series12.CustomProperties = "PixelPointWidth=80";
-            series12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series12.Label = "#AXISLABEL";
-            series12.LabelBorderWidth = 0;
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series12.Color = System.Drawing.Color.White;
+            series12.CustomProperties = "PieLineColor=White, PieDrawingStyle=Concave, PieLabelStyle=Outside";
+            series12.EmptyPointStyle.CustomProperties = "Exploded=True";
+            series12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series12.IsValueShownAsLabel = true;
+            series12.Label = "#AXISLABEL (#PERCENT{P0})";
             series12.LabelForeColor = System.Drawing.Color.White;
-            series12.Name = "Referencia";
-            dataPoint2.AxisLabel = "14";
-            series12.Points.Add(dataPoint2);
-            this.chrPorHora.Series.Add(series12);
-            this.chrPorHora.Size = new System.Drawing.Size(88, 701);
-            this.chrPorHora.TabIndex = 20;
-            this.chrPorHora.Text = "chart1";
+            series12.MarkerColor = System.Drawing.Color.Green;
+            series12.MarkerSize = 7;
+            series12.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Square;
+            series12.Name = "Actual";
+            series12.ShadowColor = System.Drawing.Color.White;
+            series12.ShadowOffset = 3;
+            series12.SmartLabelStyle.MovingDirection = ((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles)((((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Top | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.TopRight) 
+            | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.BottomLeft) 
+            | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.BottomRight)));
+            this.chrPorDiaSem.Series.Add(series12);
+            this.chrPorDiaSem.Size = new System.Drawing.Size(287, 212);
+            this.chrPorDiaSem.TabIndex = 19;
+            this.chrPorDiaSem.Text = "chart1";
             title8.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             title8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             title8.ForeColor = System.Drawing.Color.White;
             title8.Name = "Title1";
             title8.ShadowOffset = 2;
-            title8.Text = "Hora";
-            this.chrPorHora.Titles.Add(title8);
+            title8.Text = "Día";
+            this.chrPorDiaSem.Titles.Add(title8);
+            // 
+            // chrPorHora
+            // 
+            this.chrPorHora.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chrPorHora.BackColor = System.Drawing.Color.Transparent;
+            chartArea9.Area3DStyle.Enable3D = true;
+            chartArea9.Area3DStyle.PointDepth = 20;
+            chartArea9.Area3DStyle.PointGapDepth = 50;
+            chartArea9.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea9.AxisX.LabelStyle.Enabled = false;
+            chartArea9.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            chartArea9.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea9.AxisX.LineColor = System.Drawing.Color.White;
+            chartArea9.AxisX.LineWidth = 2;
+            chartArea9.AxisX.MajorGrid.Enabled = false;
+            chartArea9.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
+            chartArea9.AxisX.MajorTickMark.Enabled = false;
+            chartArea9.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
+            chartArea9.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea9.AxisY.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Triangle;
+            chartArea9.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea9.AxisY.Interval = 10D;
+            chartArea9.AxisY.IsLabelAutoFit = false;
+            chartArea9.AxisY.LabelStyle.Enabled = false;
+            chartArea9.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            chartArea9.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea9.AxisY.LineColor = System.Drawing.Color.White;
+            chartArea9.AxisY.LineWidth = 2;
+            chartArea9.AxisY.MajorGrid.Enabled = false;
+            chartArea9.AxisY.MajorGrid.LineColor = System.Drawing.Color.White;
+            chartArea9.AxisY.MajorTickMark.Enabled = false;
+            chartArea9.AxisY.MajorTickMark.LineColor = System.Drawing.Color.White;
+            chartArea9.AxisY.MajorTickMark.LineWidth = 2;
+            chartArea9.AxisY.MajorTickMark.Size = 4F;
+            chartArea9.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea9.AxisY.MinorTickMark.LineColor = System.Drawing.Color.White;
+            chartArea9.AxisY.MinorTickMark.LineWidth = 2;
+            chartArea9.AxisY.MinorTickMark.Size = 4F;
+            chartArea9.AxisY.MinorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea9.AxisY.TitleForeColor = System.Drawing.Color.Empty;
+            chartArea9.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea9.BackColor = System.Drawing.Color.Transparent;
+            chartArea9.BorderWidth = 0;
+            chartArea9.Name = "ChartArea1";
+            this.chrPorHora.ChartAreas.Add(chartArea9);
+            this.chrPorHora.Location = new System.Drawing.Point(1446, 55);
+            this.chrPorHora.Name = "chrPorHora";
+            this.chrPorHora.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
+            series13.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.VerticalCenter;
+            series13.BackSecondaryColor = System.Drawing.Color.Transparent;
+            series13.BorderColor = System.Drawing.Color.Transparent;
+            series13.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
+            series13.BorderWidth = 0;
+            series13.ChartArea = "ChartArea1";
+            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn100;
+            series13.CustomProperties = "PixelPointWidth=80";
+            series13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series13.Label = "#AXISLABEL";
+            series13.LabelBorderWidth = 0;
+            series13.LabelForeColor = System.Drawing.Color.White;
+            series13.Name = "Referencia";
+            dataPoint2.AxisLabel = "14";
+            series13.Points.Add(dataPoint2);
+            this.chrPorHora.Series.Add(series13);
+            this.chrPorHora.Size = new System.Drawing.Size(132, 690);
+            this.chrPorHora.TabIndex = 20;
+            this.chrPorHora.Text = "chart1";
+            title9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            title9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            title9.ForeColor = System.Drawing.Color.White;
+            title9.Name = "Title1";
+            title9.ShadowOffset = 2;
+            title9.Text = "Hora";
+            this.chrPorHora.Titles.Add(title9);
             // 
             // chk9500
             // 
             this.chk9500.AutoSize = true;
+            this.chk9500.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chk9500.ForeColor = System.Drawing.Color.White;
             this.chk9500.Location = new System.Drawing.Point(522, 15);
             this.chk9500.Name = "chk9500";
-            this.chk9500.Size = new System.Drawing.Size(74, 17);
+            this.chk9500.Size = new System.Drawing.Size(71, 17);
             this.chk9500.TabIndex = 4;
             this.chk9500.Text = "Sólo 9500";
             this.chk9500.UseVisualStyleBackColor = true;
@@ -1113,6 +1133,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Freestyle Script", 35F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
@@ -1125,10 +1146,11 @@
             // chkOmitirDomingos
             // 
             this.chkOmitirDomingos.AutoSize = true;
+            this.chkOmitirDomingos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkOmitirDomingos.ForeColor = System.Drawing.Color.White;
             this.chkOmitirDomingos.Location = new System.Drawing.Point(602, 15);
             this.chkOmitirDomingos.Name = "chkOmitirDomingos";
-            this.chkOmitirDomingos.Size = new System.Drawing.Size(102, 17);
+            this.chkOmitirDomingos.Size = new System.Drawing.Size(99, 17);
             this.chkOmitirDomingos.TabIndex = 5;
             this.chkOmitirDomingos.Text = "Omitir Domingos";
             this.chkOmitirDomingos.UseVisualStyleBackColor = true;
@@ -1139,6 +1161,7 @@
             this.dgvPorDiaT.AllowUserToAddRows = false;
             this.dgvPorDiaT.AllowUserToDeleteRows = false;
             this.dgvPorDiaT.AllowUserToResizeRows = false;
+            this.dgvPorDiaT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPorDiaT.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPorDiaT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPorDiaT.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -1167,7 +1190,7 @@
             dataGridViewCellStyle96.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPorDiaT.DefaultCellStyle = dataGridViewCellStyle96;
             this.dgvPorDiaT.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
-            this.dgvPorDiaT.Location = new System.Drawing.Point(18, 474);
+            this.dgvPorDiaT.Location = new System.Drawing.Point(18, 517);
             this.dgvPorDiaT.Name = "dgvPorDiaT";
             this.dgvPorDiaT.ReadOnly = true;
             this.dgvPorDiaT.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
@@ -1238,6 +1261,7 @@
             this.dgvPorSemanaT.AllowUserToAddRows = false;
             this.dgvPorSemanaT.AllowUserToDeleteRows = false;
             this.dgvPorSemanaT.AllowUserToResizeRows = false;
+            this.dgvPorSemanaT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvPorSemanaT.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.dgvPorSemanaT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPorSemanaT.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -1266,7 +1290,7 @@
             dataGridViewCellStyle104.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPorSemanaT.DefaultCellStyle = dataGridViewCellStyle104;
             this.dgvPorSemanaT.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
-            this.dgvPorSemanaT.Location = new System.Drawing.Point(406, 474);
+            this.dgvPorSemanaT.Location = new System.Drawing.Point(396, 517);
             this.dgvPorSemanaT.Name = "dgvPorSemanaT";
             this.dgvPorSemanaT.ReadOnly = true;
             this.dgvPorSemanaT.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
@@ -1334,17 +1358,21 @@
             // 
             // btnMostrar
             // 
+            this.btnMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrar.ForeColor = System.Drawing.Color.White;
             this.btnMostrar.Location = new System.Drawing.Point(839, 12);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(75, 23);
             this.btnMostrar.TabIndex = 7;
             this.btnMostrar.Text = "Mostrar";
-            this.btnMostrar.UseVisualStyleBackColor = true;
+            this.btnMostrar.UseVisualStyleBackColor = false;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
             // cmbCalculo
             // 
             this.cmbCalculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCalculo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbCalculo.FormattingEnabled = true;
             this.cmbCalculo.Location = new System.Drawing.Point(63, 13);
             this.cmbCalculo.Name = "cmbCalculo";
@@ -1494,7 +1522,7 @@
             dataGridViewCellStyle113.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPorAnio.DefaultCellStyle = dataGridViewCellStyle113;
             this.dgvPorAnio.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvPorAnio.Location = new System.Drawing.Point(631, 504);
+            this.dgvPorAnio.Location = new System.Drawing.Point(1139, 543);
             this.dgvPorAnio.Name = "dgvPorAnio";
             this.dgvPorAnio.ReadOnly = true;
             this.dgvPorAnio.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
@@ -1509,7 +1537,7 @@
             this.dgvPorAnio.RowHeadersVisible = false;
             this.dgvPorAnio.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPorAnio.ShowEditingIcon = false;
-            this.dgvPorAnio.Size = new System.Drawing.Size(152, 83);
+            this.dgvPorAnio.Size = new System.Drawing.Size(152, 175);
             this.dgvPorAnio.TabIndex = 184;
             // 
             // Anio_Anio
@@ -1531,61 +1559,62 @@
             // 
             // chrPorAnio
             // 
+            this.chrPorAnio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chrPorAnio.BackColor = System.Drawing.Color.Transparent;
-            chartArea9.AxisX.IsLabelAutoFit = false;
-            chartArea9.AxisX.LabelStyle.Angle = 90;
-            chartArea9.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            chartArea9.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea9.AxisX.LineColor = System.Drawing.Color.DarkGray;
-            chartArea9.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
-            chartArea9.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
-            chartArea9.AxisX.ScaleBreakStyle.LineColor = System.Drawing.Color.Maroon;
-            chartArea9.AxisY.IsLabelAutoFit = false;
-            chartArea9.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            chartArea9.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea9.AxisY.LineColor = System.Drawing.Color.DarkGray;
-            chartArea9.AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
-            chartArea9.AxisY.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
-            chartArea9.AxisY.TitleForeColor = System.Drawing.Color.Empty;
-            chartArea9.BackColor = System.Drawing.Color.Transparent;
-            chartArea9.Name = "ChartArea1";
-            this.chrPorAnio.ChartAreas.Add(chartArea9);
-            this.chrPorAnio.Location = new System.Drawing.Point(1021, 446);
+            chartArea10.AxisX.IsLabelAutoFit = false;
+            chartArea10.AxisX.LabelStyle.Angle = 90;
+            chartArea10.AxisX.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            chartArea10.AxisX.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea10.AxisX.LineColor = System.Drawing.Color.DarkGray;
+            chartArea10.AxisX.MajorGrid.LineColor = System.Drawing.Color.Empty;
+            chartArea10.AxisX.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
+            chartArea10.AxisX.ScaleBreakStyle.LineColor = System.Drawing.Color.Maroon;
+            chartArea10.AxisY.IsLabelAutoFit = false;
+            chartArea10.AxisY.LabelStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            chartArea10.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea10.AxisY.LineColor = System.Drawing.Color.DarkGray;
+            chartArea10.AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
+            chartArea10.AxisY.MajorTickMark.LineColor = System.Drawing.Color.DarkGray;
+            chartArea10.AxisY.TitleForeColor = System.Drawing.Color.Empty;
+            chartArea10.BackColor = System.Drawing.Color.Transparent;
+            chartArea10.Name = "ChartArea1";
+            this.chrPorAnio.ChartAreas.Add(chartArea10);
+            this.chrPorAnio.Location = new System.Drawing.Point(1247, 573);
             this.chrPorAnio.Name = "chrPorAnio";
-            series13.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
-            series13.BackSecondaryColor = System.Drawing.Color.Red;
-            series13.BorderColor = System.Drawing.Color.Silver;
-            series13.BorderWidth = 2;
-            series13.ChartArea = "ChartArea1";
-            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series13.Color = System.Drawing.Color.White;
-            series13.CustomProperties = "LabelStyle=Center";
-            series13.EmptyPointStyle.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            series13.EmptyPointStyle.Label = "3213";
-            series13.EmptyPointStyle.LabelForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            series13.EmptyPointStyle.LabelToolTip = "9879";
-            series13.EmptyPointStyle.ToolTip = "pp";
-            series13.Label = "o";
-            series13.LabelForeColor = System.Drawing.Color.Transparent;
-            series13.LabelToolTip = "Semana: #VALX\\nComisión: $#VAL";
-            series13.MarkerSize = 4;
-            series13.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series13.Name = "Actual";
-            series13.ShadowColor = System.Drawing.Color.Silver;
-            series13.ShadowOffset = 1;
-            series13.SmartLabelStyle.Enabled = false;
-            this.chrPorAnio.Series.Add(series13);
-            this.chrPorAnio.Size = new System.Drawing.Size(217, 200);
+            series14.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
+            series14.BackSecondaryColor = System.Drawing.Color.Red;
+            series14.BorderColor = System.Drawing.Color.Silver;
+            series14.BorderWidth = 2;
+            series14.ChartArea = "ChartArea1";
+            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series14.Color = System.Drawing.Color.White;
+            series14.CustomProperties = "LabelStyle=Center";
+            series14.EmptyPointStyle.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            series14.EmptyPointStyle.Label = "3213";
+            series14.EmptyPointStyle.LabelForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            series14.EmptyPointStyle.LabelToolTip = "9879";
+            series14.EmptyPointStyle.ToolTip = "pp";
+            series14.Label = "o";
+            series14.LabelForeColor = System.Drawing.Color.Transparent;
+            series14.LabelToolTip = "Semana: #VALX\\nComisión: $#VAL";
+            series14.MarkerSize = 4;
+            series14.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series14.Name = "Actual";
+            series14.ShadowColor = System.Drawing.Color.Silver;
+            series14.ShadowOffset = 1;
+            series14.SmartLabelStyle.Enabled = false;
+            this.chrPorAnio.Series.Add(series14);
+            this.chrPorAnio.Size = new System.Drawing.Size(334, 200);
             this.chrPorAnio.TabIndex = 221;
             this.chrPorAnio.Text = "chart1";
-            title9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            title9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            title9.ForeColor = System.Drawing.Color.White;
-            title9.IsDockedInsideChartArea = false;
-            title9.Name = "Title1";
-            title9.ShadowOffset = 2;
-            title9.Text = "Gráfica anual";
-            this.chrPorAnio.Titles.Add(title9);
+            title10.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            title10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            title10.ForeColor = System.Drawing.Color.White;
+            title10.IsDockedInsideChartArea = false;
+            title10.Name = "Title1";
+            title10.ShadowOffset = 2;
+            title10.Text = "Gráfica anual";
+            this.chrPorAnio.Titles.Add(title10);
             // 
             // CuadroVentas
             // 

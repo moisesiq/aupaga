@@ -390,6 +390,7 @@ namespace Refaccionaria.App
                         break;
                     case Cat.FormasDePago.Cheque:
                     case Cat.FormasDePago.Tarjeta:
+                    case Cat.FormasDePago.TarjetaDeDebito:
                     case Cat.FormasDePago.Transferencia:
                         int iFormaDePagoID = this.ctlBusqueda.FormaDeDevolucion;
                         var oVentaPago = Datos.GetEntity<VentaPago>(q => q.VentaID == iVentaID && q.Estatus);

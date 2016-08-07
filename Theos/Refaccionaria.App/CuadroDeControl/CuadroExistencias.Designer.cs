@@ -33,6 +33,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UltimaVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UltimaCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FolioFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblExistenciaTotal = new System.Windows.Forms.Label();
@@ -47,18 +59,6 @@
             this.btnExcel = new System.Windows.Forms.Button();
             this.vmsExistencia = new Refaccionaria.App.VentasMesSemana();
             this.cmbAgrupar = new LibUtil.ComboEtiqueta();
-            this.ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UltimaVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UltimaCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FolioFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chkFolioFactura = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
@@ -115,8 +115,102 @@
             this.dgvDatos.TabIndex = 9;
             this.dgvDatos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellClick);
             // 
+            // ParteID
+            // 
+            this.ParteID.HeaderText = "ParteID";
+            this.ParteID.Name = "ParteID";
+            this.ParteID.ReadOnly = true;
+            this.ParteID.Visible = false;
+            // 
+            // NumeroDeParte
+            // 
+            this.NumeroDeParte.HeaderText = "No. Parte";
+            this.NumeroDeParte.Name = "NumeroDeParte";
+            this.NumeroDeParte.ReadOnly = true;
+            this.NumeroDeParte.Width = 120;
+            // 
+            // Descripcion
+            // 
+            this.Descripcion.HeaderText = "Descripción";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            this.Descripcion.Width = 320;
+            // 
+            // Proveedor
+            // 
+            this.Proveedor.HeaderText = "Proveedor";
+            this.Proveedor.Name = "Proveedor";
+            this.Proveedor.ReadOnly = true;
+            this.Proveedor.Width = 140;
+            // 
+            // Marca
+            // 
+            this.Marca.HeaderText = "Marca";
+            this.Marca.Name = "Marca";
+            this.Marca.ReadOnly = true;
+            this.Marca.Width = 140;
+            // 
+            // Linea
+            // 
+            this.Linea.HeaderText = "Línea";
+            this.Linea.Name = "Linea";
+            this.Linea.ReadOnly = true;
+            this.Linea.Width = 140;
+            // 
+            // Costo
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "C2";
+            this.Costo.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Costo.HeaderText = "Costo";
+            this.Costo.Name = "Costo";
+            this.Costo.ReadOnly = true;
+            this.Costo.Width = 80;
+            // 
+            // Existencia
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.Existencia.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Existencia.HeaderText = "Existencia";
+            this.Existencia.Name = "Existencia";
+            this.Existencia.ReadOnly = true;
+            this.Existencia.Width = 60;
+            // 
+            // CostoTotal
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "C2";
+            this.CostoTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            this.CostoTotal.HeaderText = "Costo total";
+            this.CostoTotal.Name = "CostoTotal";
+            this.CostoTotal.ReadOnly = true;
+            this.CostoTotal.Width = 80;
+            // 
+            // UltimaVenta
+            // 
+            this.UltimaVenta.HeaderText = "Ult. Venta";
+            this.UltimaVenta.Name = "UltimaVenta";
+            this.UltimaVenta.ReadOnly = true;
+            this.UltimaVenta.Width = 136;
+            // 
+            // UltimaCompra
+            // 
+            this.UltimaCompra.HeaderText = "Ult. Compra";
+            this.UltimaCompra.Name = "UltimaCompra";
+            this.UltimaCompra.ReadOnly = true;
+            this.UltimaCompra.Width = 136;
+            // 
+            // FolioFactura
+            // 
+            this.FolioFactura.HeaderText = "Folio Com.";
+            this.FolioFactura.Name = "FolioFactura";
+            this.FolioFactura.ReadOnly = true;
+            this.FolioFactura.Width = 80;
+            // 
             // btnActualizar
             // 
+            this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActualizar.ForeColor = System.Drawing.Color.White;
@@ -278,6 +372,7 @@
             // 
             // btnExcel
             // 
+            this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcel.ForeColor = System.Drawing.Color.White;
@@ -317,99 +412,6 @@
             this.cmbAgrupar.Size = new System.Drawing.Size(92, 21);
             this.cmbAgrupar.TabIndex = 4;
             this.cmbAgrupar.ValueMember = "";
-            // 
-            // ParteID
-            // 
-            this.ParteID.HeaderText = "ParteID";
-            this.ParteID.Name = "ParteID";
-            this.ParteID.ReadOnly = true;
-            this.ParteID.Visible = false;
-            // 
-            // NumeroDeParte
-            // 
-            this.NumeroDeParte.HeaderText = "No. Parte";
-            this.NumeroDeParte.Name = "NumeroDeParte";
-            this.NumeroDeParte.ReadOnly = true;
-            this.NumeroDeParte.Width = 120;
-            // 
-            // Descripcion
-            // 
-            this.Descripcion.HeaderText = "Descripción";
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
-            this.Descripcion.Width = 320;
-            // 
-            // Proveedor
-            // 
-            this.Proveedor.HeaderText = "Proveedor";
-            this.Proveedor.Name = "Proveedor";
-            this.Proveedor.ReadOnly = true;
-            this.Proveedor.Width = 140;
-            // 
-            // Marca
-            // 
-            this.Marca.HeaderText = "Marca";
-            this.Marca.Name = "Marca";
-            this.Marca.ReadOnly = true;
-            this.Marca.Width = 140;
-            // 
-            // Linea
-            // 
-            this.Linea.HeaderText = "Línea";
-            this.Linea.Name = "Linea";
-            this.Linea.ReadOnly = true;
-            this.Linea.Width = 140;
-            // 
-            // Costo
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "C2";
-            this.Costo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Costo.HeaderText = "Costo";
-            this.Costo.Name = "Costo";
-            this.Costo.ReadOnly = true;
-            this.Costo.Width = 80;
-            // 
-            // Existencia
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.Existencia.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Existencia.HeaderText = "Existencia";
-            this.Existencia.Name = "Existencia";
-            this.Existencia.ReadOnly = true;
-            this.Existencia.Width = 60;
-            // 
-            // CostoTotal
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "C2";
-            this.CostoTotal.DefaultCellStyle = dataGridViewCellStyle3;
-            this.CostoTotal.HeaderText = "Costo total";
-            this.CostoTotal.Name = "CostoTotal";
-            this.CostoTotal.ReadOnly = true;
-            this.CostoTotal.Width = 80;
-            // 
-            // UltimaVenta
-            // 
-            this.UltimaVenta.HeaderText = "Ult. Venta";
-            this.UltimaVenta.Name = "UltimaVenta";
-            this.UltimaVenta.ReadOnly = true;
-            this.UltimaVenta.Width = 136;
-            // 
-            // UltimaCompra
-            // 
-            this.UltimaCompra.HeaderText = "Ult. Compra";
-            this.UltimaCompra.Name = "UltimaCompra";
-            this.UltimaCompra.ReadOnly = true;
-            this.UltimaCompra.Width = 136;
-            // 
-            // FolioFactura
-            // 
-            this.FolioFactura.HeaderText = "Folio Com.";
-            this.FolioFactura.Name = "FolioFactura";
-            this.FolioFactura.ReadOnly = true;
-            this.FolioFactura.Width = 80;
             // 
             // chkFolioFactura
             // 
