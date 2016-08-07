@@ -210,8 +210,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dtpFechaDeCalculo = new System.Windows.Forms.DateTimePicker();
             this.cmbFiltroDeVentas = new LibUtil.ComboEtiqueta();
-            this.ctlVentasMes = new Refaccionaria.App.GridVentasMes();
             this.ctlExistencias = new Refaccionaria.App.GridExsitencias();
+            this.ctlVentasMes = new Refaccionaria.App.GridVentasMes();
             this.tabMaxMin.SuspendLayout();
             this.tbpDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -1545,16 +1545,16 @@
             this.cmbFiltroDeVentas.SelectedValue = null;
             this.cmbFiltroDeVentas.ValueMember = "";
             // 
-            // ctlVentasMes
-            // 
-            resources.ApplyResources(this.ctlVentasMes, "ctlVentasMes");
-            this.ctlVentasMes.Name = "ctlVentasMes";
-            // 
             // ctlExistencias
             // 
             resources.ApplyResources(this.ctlExistencias, "ctlExistencias");
             this.ctlExistencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.ctlExistencias.Name = "ctlExistencias";
+            // 
+            // ctlVentasMes
+            // 
+            resources.ApplyResources(this.ctlVentasMes, "ctlVentasMes");
+            this.ctlVentasMes.Name = "ctlVentasMes";
             // 
             // MaxMin
             // 

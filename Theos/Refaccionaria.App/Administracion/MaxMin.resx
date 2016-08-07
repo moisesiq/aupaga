@@ -1179,6 +1179,9 @@
   <data name="&gt;&gt;tbpSinMaxMin.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="btnImanImprimir.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnImanImprimir.Location" type="System.Drawing.Point, System.Drawing">
     <value>495, 3</value>
   </data>
@@ -2476,7 +2479,7 @@
     <value>NoControl</value>
   </data>
   <data name="label69.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1395, 382</value>
+    <value>843, 433</value>
   </data>
   <data name="label69.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -2512,7 +2515,7 @@
     <value>NoControl</value>
   </data>
   <data name="label68.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 433</value>
+    <value>3, 430</value>
   </data>
   <data name="label68.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2548,7 +2551,7 @@
     <value>NoControl</value>
   </data>
   <data name="label67.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 410</value>
+    <value>4, 407</value>
   </data>
   <data name="label67.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2617,7 +2620,7 @@
     <value>NoControl</value>
   </data>
   <data name="label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 385</value>
+    <value>4, 388</value>
   </data>
   <data name="label40.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2677,7 +2680,7 @@
     <value>NoControl</value>
   </data>
   <data name="label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 364</value>
+    <value>4, 367</value>
   </data>
   <data name="label39.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2716,7 +2719,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnExportar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>841, 427</value>
+    <value>832, 427</value>
   </data>
   <data name="btnExportar.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 23</value>
@@ -2752,7 +2755,7 @@
     <value>NoControl</value>
   </data>
   <data name="label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 343</value>
+    <value>3, 346</value>
   </data>
   <data name="label38.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -2890,7 +2893,7 @@
     <value>1409, 346</value>
   </data>
   <data name="btnGuardar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 23</value>
+    <value>85, 34</value>
   </data>
   <data name="btnGuardar.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2962,7 +2965,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVentaMayorDia.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 406</value>
+    <value>56, 405</value>
   </data>
   <data name="lblVentaMayorDia.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -2998,7 +3001,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCosto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 381</value>
+    <value>39, 384</value>
   </data>
   <data name="lblCosto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3034,7 +3037,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAbcLinea.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 360</value>
+    <value>66, 363</value>
   </data>
   <data name="lblAbcLinea.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3073,7 +3076,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVentaMenorDia.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 429</value>
+    <value>56, 426</value>
   </data>
   <data name="lblVentaMenorDia.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3109,7 +3112,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAbcProveedor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 339</value>
+    <value>66, 342</value>
   </data>
   <data name="lblAbcProveedor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3148,7 +3151,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSemanasConVenta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1451, 378</value>
+    <value>899, 429</value>
   </data>
   <data name="lblSemanasConVenta.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3310,7 +3313,7 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="txtDescripcionMaxMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1069, 346</value>
+    <value>1041, 346</value>
   </data>
   <data name="txtDescripcionMaxMin.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3408,6 +3411,30 @@
   <data name="&gt;&gt;cmbFiltroDeVentas.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="ctlExistencias.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="ctlExistencias.Location" type="System.Drawing.Point, System.Drawing">
+    <value>832, 346</value>
+  </data>
+  <data name="ctlExistencias.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 69</value>
+  </data>
+  <data name="ctlExistencias.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="&gt;&gt;ctlExistencias.Name" xml:space="preserve">
+    <value>ctlExistencias</value>
+  </data>
+  <data name="&gt;&gt;ctlExistencias.Type" xml:space="preserve">
+    <value>Refaccionaria.App.GridExsitencias, THEOS, Version=2.0.16.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ctlExistencias.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ctlExistencias.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ctlVentasMes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -3431,30 +3458,6 @@
   </data>
   <data name="&gt;&gt;ctlVentasMes.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ctlExistencias.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="ctlExistencias.Location" type="System.Drawing.Point, System.Drawing">
-    <value>841, 346</value>
-  </data>
-  <data name="ctlExistencias.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 81</value>
-  </data>
-  <data name="ctlExistencias.TabIndex" type="System.Int32, mscorlib">
-    <value>161</value>
-  </data>
-  <data name="&gt;&gt;ctlExistencias.Name" xml:space="preserve">
-    <value>ctlExistencias</value>
-  </data>
-  <data name="&gt;&gt;ctlExistencias.Type" xml:space="preserve">
-    <value>Refaccionaria.App.GridExsitencias, THEOS, Version=2.0.16.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ctlExistencias.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ctlExistencias.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

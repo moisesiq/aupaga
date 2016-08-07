@@ -214,9 +214,9 @@
             this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActualizar.ForeColor = System.Drawing.Color.White;
-            this.btnActualizar.Location = new System.Drawing.Point(1041, 5);
+            this.btnActualizar.Location = new System.Drawing.Point(1069, 5);
             this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.Size = new System.Drawing.Size(71, 23);
             this.btnActualizar.TabIndex = 7;
             this.btnActualizar.Text = "&Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = false;
@@ -333,9 +333,9 @@
             this.chkCostoConDescuento.ForeColor = System.Drawing.Color.White;
             this.chkCostoConDescuento.Location = new System.Drawing.Point(828, 9);
             this.chkCostoConDescuento.Name = "chkCostoConDescuento";
-            this.chkCostoConDescuento.Size = new System.Drawing.Size(102, 17);
+            this.chkCostoConDescuento.Size = new System.Drawing.Size(92, 17);
             this.chkCostoConDescuento.TabIndex = 5;
-            this.chkCostoConDescuento.Text = "Costo con Desc.";
+            this.chkCostoConDescuento.Text = "Costo c/Desc.";
             this.chkCostoConDescuento.UseVisualStyleBackColor = true;
             // 
             // cmbSucursal
@@ -363,7 +363,7 @@
             this.chkSoloConExistencia.AutoSize = true;
             this.chkSoloConExistencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkSoloConExistencia.ForeColor = System.Drawing.Color.White;
-            this.chkSoloConExistencia.Location = new System.Drawing.Point(939, 9);
+            this.chkSoloConExistencia.Location = new System.Drawing.Point(926, 9);
             this.chkSoloConExistencia.Name = "chkSoloConExistencia";
             this.chkSoloConExistencia.Size = new System.Drawing.Size(93, 17);
             this.chkSoloConExistencia.TabIndex = 6;
@@ -376,9 +376,9 @@
             this.btnExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcel.ForeColor = System.Drawing.Color.White;
-            this.btnExcel.Location = new System.Drawing.Point(1122, 5);
+            this.btnExcel.Location = new System.Drawing.Point(1146, 5);
             this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(75, 23);
+            this.btnExcel.Size = new System.Drawing.Size(51, 23);
             this.btnExcel.TabIndex = 8;
             this.btnExcel.Text = "&Excel";
             this.btnExcel.UseVisualStyleBackColor = false;
@@ -418,7 +418,7 @@
             this.chkFolioFactura.AutoSize = true;
             this.chkFolioFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkFolioFactura.ForeColor = System.Drawing.Color.White;
-            this.chkFolioFactura.Location = new System.Drawing.Point(1038, 9);
+            this.chkFolioFactura.Location = new System.Drawing.Point(1021, 9);
             this.chkFolioFactura.Name = "chkFolioFactura";
             this.chkFolioFactura.Size = new System.Drawing.Size(67, 17);
             this.chkFolioFactura.TabIndex = 11;
