@@ -17394,13 +17394,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="VentaPagoDetalle" EntitySet="VentaPagoDetalle" />
             <End Role="VentaPagoDetalleResguardo" EntitySet="VentaPagoDetalleResguardo" />
           </AssociationSet>
-          <FunctionImport Name="pauClienteKardex" ReturnType="Collection(TheosProc.pauClienteKardex_Result)">
-            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
-            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-            <Parameter Name="SucursalID" Mode="In" Type="Int32" />
-            <Parameter Name="VehiculoID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="pauComisiones" ReturnType="Collection(TheosProc.pauComisiones_Result)">
             <Parameter Name="ModoID" Mode="In" Type="Int32" />
             <Parameter Name="VendedorID" Mode="In" Type="Int32" />
@@ -17960,6 +17953,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="VentaPago" EntitySet="VentaPago" />
             <End Role="VentaCambio" EntitySet="VentaCambio" />
           </AssociationSet>
+          <FunctionImport Name="pauClienteKardex" ReturnType="Collection(TheosProc.pauClienteKardex_Result)">
+            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+            <Parameter Name="VehiculoID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Autorizacion">
           <Key>
@@ -28480,17 +28480,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="pauClienteKardex_Result">
-          <Property Type="Int32" Name="VentaID" Nullable="false" />
-          <Property Type="Int32" Name="ParteID" Nullable="true" />
-          <Property Type="String" Name="NumeroParte" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="512" />
-          <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Linea" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
-          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="String" Name="Busqueda" Nullable="true" MaxLength="563" />
-        </ComplexType>
         <ComplexType Name="pauComisiones_Result">
           <Property Type="Int32" Name="VentaID" Nullable="false" />
           <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
@@ -30297,6 +30286,16 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="pauClienteKardex_Result">
+          <Property Type="Int32" Name="ParteID" Nullable="true" />
+          <Property Type="String" Name="NumeroParte" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Linea" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="Busqueda" Nullable="true" MaxLength="563" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -35478,21 +35477,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pauClienteKardex" FunctionName="ControlRefaccionariaModel.Store.pauClienteKardex">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TheosProc.pauClienteKardex_Result">
-                <ScalarProperty Name="VentaID" ColumnName="VentaID" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="NumeroParte" ColumnName="NumeroParte" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pauComisiones" FunctionName="ControlRefaccionariaModel.Store.pauComisiones">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TheosProc.pauComisiones_Result">
@@ -36480,6 +36464,20 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pauClienteKardex" FunctionName="ControlRefaccionariaModel.Store.pauClienteKardex">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TheosProc.pauClienteKardex_Result">
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="NumeroParte" ColumnName="NumeroParte" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
