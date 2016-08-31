@@ -138,9 +138,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cmbImpTipo = new System.Windows.Forms.ComboBox();
             this.tbpComisiones = new System.Windows.Forms.TabPage();
-            this.tgvComisiones = new AdvancedDataGridView.TreeGridView();
             this.btnGuardarCom = new System.Windows.Forms.Button();
+            this.tgvComisiones = new AdvancedDataGridView.TreeGridView();
             this.com_ParteComisionID = new AdvancedDataGridView.TreeGridColumn();
+            this.com_Id = new AdvancedDataGridView.TreeGridColumn();
             this.com_Entidad = new AdvancedDataGridView.TreeGridColumn();
             this.com_PorcentajeNormal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.com_ComisionFija = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1052,6 +1053,20 @@
             this.tbpComisiones.TabIndex = 2;
             this.tbpComisiones.Text = "Comisiones";
             // 
+            // btnGuardarCom
+            // 
+            this.btnGuardarCom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardarCom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnGuardarCom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardarCom.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarCom.Location = new System.Drawing.Point(927, 403);
+            this.btnGuardarCom.Name = "btnGuardarCom";
+            this.btnGuardarCom.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardarCom.TabIndex = 3;
+            this.btnGuardarCom.Text = "&Guardar";
+            this.btnGuardarCom.UseVisualStyleBackColor = false;
+            this.btnGuardarCom.Click += new System.EventHandler(this.btnGuardarCom_Click);
+            // 
             // tgvComisiones
             // 
             this.tgvComisiones.AllowUserToAddRows = false;
@@ -1065,6 +1080,7 @@
             this.tgvComisiones.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.tgvComisiones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.com_ParteComisionID,
+            this.com_Id,
             this.com_Entidad,
             this.com_PorcentajeNormal,
             this.com_ComisionFija,
@@ -1083,27 +1099,16 @@
             dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.tgvComisiones.DefaultCellStyle = dataGridViewCellStyle41;
-            this.tgvComisiones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.tgvComisiones.ImageList = null;
             this.tgvComisiones.Location = new System.Drawing.Point(3, 3);
             this.tgvComisiones.MultiSelect = false;
             this.tgvComisiones.Name = "tgvComisiones";
             this.tgvComisiones.RowHeadersVisible = false;
+            this.tgvComisiones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.tgvComisiones.Size = new System.Drawing.Size(999, 394);
             this.tgvComisiones.TabIndex = 1;
-            // 
-            // btnGuardarCom
-            // 
-            this.btnGuardarCom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardarCom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnGuardarCom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardarCom.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarCom.Location = new System.Drawing.Point(927, 403);
-            this.btnGuardarCom.Name = "btnGuardarCom";
-            this.btnGuardarCom.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardarCom.TabIndex = 3;
-            this.btnGuardarCom.Text = "&Guardar";
-            this.btnGuardarCom.UseVisualStyleBackColor = false;
+            this.tgvComisiones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvComisiones_CellDoubleClick);
+            this.tgvComisiones.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvComisiones_CellValueChanged);
             // 
             // com_ParteComisionID
             // 
@@ -1111,9 +1116,18 @@
             this.com_ParteComisionID.HeaderText = "ParteComisionID";
             this.com_ParteComisionID.Name = "com_ParteComisionID";
             this.com_ParteComisionID.ReadOnly = true;
-            this.com_ParteComisionID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_ParteComisionID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.com_ParteComisionID.Visible = false;
+            // 
+            // com_Id
+            // 
+            this.com_Id.DefaultNodeImage = null;
+            this.com_Id.HeaderText = "Id";
+            this.com_Id.Name = "com_Id";
+            this.com_Id.ReadOnly = true;
+            this.com_Id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.com_Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.com_Id.Visible = false;
             // 
             // com_Entidad
             // 
@@ -1127,7 +1141,7 @@
             // com_PorcentajeNormal
             // 
             dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle32.Format = "p2";
+            dataGridViewCellStyle32.Format = "n2";
             this.com_PorcentajeNormal.DefaultCellStyle = dataGridViewCellStyle32;
             this.com_PorcentajeNormal.HeaderText = "%";
             this.com_PorcentajeNormal.Name = "com_PorcentajeNormal";
@@ -1149,7 +1163,7 @@
             // com_PorcentajeUnArticulo
             // 
             dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle34.Format = "p2";
+            dataGridViewCellStyle34.Format = "n2";
             this.com_PorcentajeUnArticulo.DefaultCellStyle = dataGridViewCellStyle34;
             this.com_PorcentajeUnArticulo.HeaderText = "Sólo 1";
             this.com_PorcentajeUnArticulo.Name = "com_PorcentajeUnArticulo";
@@ -1171,7 +1185,7 @@
             // com_PorcentajeArticulosEspecial
             // 
             dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle36.Format = "p2";
+            dataGridViewCellStyle36.Format = "n2";
             this.com_PorcentajeArticulosEspecial.DefaultCellStyle = dataGridViewCellStyle36;
             this.com_PorcentajeArticulosEspecial.HeaderText = "% # Piezas >";
             this.com_PorcentajeArticulosEspecial.Name = "com_PorcentajeArticulosEspecial";
@@ -1182,7 +1196,7 @@
             // com_PorcentajeComplementarios
             // 
             dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle37.Format = "p2";
+            dataGridViewCellStyle37.Format = "n2";
             this.com_PorcentajeComplementarios.DefaultCellStyle = dataGridViewCellStyle37;
             this.com_PorcentajeComplementarios.HeaderText = "% Comp.";
             this.com_PorcentajeComplementarios.Name = "com_PorcentajeComplementarios";
@@ -1193,7 +1207,7 @@
             // com_PorcentajeReduccionPorRepartidor
             // 
             dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle38.Format = "p2";
+            dataGridViewCellStyle38.Format = "n2";
             this.com_PorcentajeReduccionPorRepartidor.DefaultCellStyle = dataGridViewCellStyle38;
             this.com_PorcentajeReduccionPorRepartidor.HeaderText = "% Red. Rep.";
             this.com_PorcentajeReduccionPorRepartidor.Name = "com_PorcentajeReduccionPorRepartidor";
@@ -1204,7 +1218,7 @@
             // com_PorcentajeRepartidor
             // 
             dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle39.Format = "p2";
+            dataGridViewCellStyle39.Format = "n2";
             this.com_PorcentajeRepartidor.DefaultCellStyle = dataGridViewCellStyle39;
             this.com_PorcentajeRepartidor.HeaderText = "% Repartidor";
             this.com_PorcentajeRepartidor.Name = "com_PorcentajeRepartidor";
@@ -1320,6 +1334,7 @@
         private AdvancedDataGridView.TreeGridView tgvComisiones;
         private System.Windows.Forms.Button btnGuardarCom;
         private AdvancedDataGridView.TreeGridColumn com_ParteComisionID;
+        private AdvancedDataGridView.TreeGridColumn com_Id;
         private AdvancedDataGridView.TreeGridColumn com_Entidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn com_PorcentajeNormal;
         private System.Windows.Forms.DataGridViewTextBoxColumn com_ComisionFija;

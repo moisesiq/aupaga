@@ -67,6 +67,10 @@ namespace Refaccionaria.App
             oCadMeses = DateTimeFormatInfo.CurrentInfo.AbbreviatedMonthNames;
             for (int iMes = 1; iMes <= 12; iMes += 2)
                 this.oBimestres.Add(new EnteroCadena(iMes, string.Format("{0}-{1}", oCadMeses[iMes - 1], oCadMeses[iMes]).ToUpper()));
+
+            // Para la pestaña de comisiones
+            this.tgvComisiones.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
+            this.tgvComisiones.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
         }
 
         private void tabCapitalHumano_SelectedIndexChanged(object sender, EventArgs e)
@@ -1205,21 +1209,42 @@ namespace Refaccionaria.App
 
         #region [ Comisiones ]
 
+        bool bCargandoComisiones;
+
+        private void tgvComisiones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.tgvComisiones.Columns[e.ColumnIndex] == this.com_Entidad && this.tgvComisiones.CurrentNode.Level == 3)
+            {
+                this.CargarPartesLinea(this.tgvComisiones.CurrentNode);
+            }
+        }
+
+        private void tgvComisiones_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.bCargandoComisiones || this.tgvComisiones.CurrentNode == null) return;
+            this.VerMarcarCambio(this.tgvComisiones.CurrentNode.Cells[e.ColumnIndex]);
+        }
+        
+        private void btnGuardarCom_Click(object sender, EventArgs e)
+        {
+            this.GuardarDatosComisiones();
+        }
+
         private void CargarArbolDeComisiones()
         {
             Cargando.Mostrar();
-            // this.bCargandoDescuentosGanancias = true;
+            this.bCargandoComisiones = true;
 
             string sProveedor = "", sMarca = "", sLinea = "";
             TreeGridNode oNodoProveedor = null, oNodoMarca = null, oNodoLinea = null;
-            var oDatos = Datos.GetListOf<PartesComisionesView>().OrderBy(c => c.Proveedor).ThenBy(c => c.Marca).ThenBy(c => c.Linea).ThenBy(c => c.Descripcion);
+            var oDatos = Datos.GetListOf<PartesComisionesPrevioView>().OrderBy(c => c.Proveedor).ThenBy(c => c.Marca).ThenBy(c => c.Linea).ThenBy(c => c.Parte);
             this.tgvComisiones.Nodes.Clear();
             foreach (var oReg in oDatos)
             {
                 if (oReg.Proveedor != sProveedor)
                 {
                     sProveedor = oReg.Proveedor;
-                    oNodoProveedor = this.tgvComisiones.Nodes.Add(oReg.ProveedorID, sProveedor, oReg.PorcentajeNormal, oReg.ComisionFija
+                    oNodoProveedor = this.tgvComisiones.Nodes.Add(oReg.ParteComisionID, oReg.ProveedorID, sProveedor, oReg.PorcentajeNormal, oReg.ComisionFija
                         , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
                         , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
                     oNodoProveedor.Expand();
@@ -1228,7 +1253,7 @@ namespace Refaccionaria.App
                 if (oReg.Marca != sMarca)
                 {
                     sMarca = oReg.Marca;
-                    oNodoMarca = oNodoProveedor.Nodes.Add(oReg.MarcaID, sMarca, oReg.PorcentajeNormal, oReg.ComisionFija
+                    oNodoMarca = oNodoProveedor.Nodes.Add(oReg.ParteComisionID, oReg.MarcaID, sMarca, oReg.PorcentajeNormal, oReg.ComisionFija
                         , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
                         , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
                     continue;
@@ -1236,22 +1261,156 @@ namespace Refaccionaria.App
                 if (oReg.Linea != sLinea)
                 {
                     sLinea = oReg.Linea;
-                    oNodoLinea = oNodoMarca.Nodes.Add(oReg.Linea, sProveedor, oReg.PorcentajeNormal, oReg.ComisionFija
+                    oNodoLinea = oNodoMarca.Nodes.Add(oReg.ParteComisionID, oReg.LineaID, sLinea, oReg.PorcentajeNormal, oReg.ComisionFija
                         , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
                         , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
                     continue;
                 }
 
-                /* Se carga sólo hasta líneas, para que sea más rápido
-                oNodoLinea.Nodes.Add(oReg.ProveedorParteGananciaID, oReg.ParteID, oReg.Parte
-                    , oReg.DescuentoFactura1, oReg.DescuentoFactura2, oReg.DescuentoFactura3
-                    , oReg.DescuentoArticulo1, oReg.DescuentoArticulo2, oReg.DescuentoArticulo3, oReg.PorcentajeDeGanancia1, oReg.PorcentajeDeGanancia2
-                    , oReg.PorcentajeDeGanancia3, oReg.PorcentajeDeGanancia4, oReg.PorcentajeDeGanancia5);
+                // Se carga sólo hasta líneas, para que sea más rápido
+                /* oNodoLinea.Nodes.Add(oReg.ParteComisionID, oReg.ParteID, oReg.Descripcion, oReg.PorcentajeNormal, oReg.ComisionFija
+                    , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
+                    , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
                 */
             }
 
-            // this.bCargandoDescuentosGanancias = false;
+            this.bCargandoComisiones = false;
             Cargando.Cerrar();
+        }
+
+        private void CargarPartesLinea(TreeGridNode oNodo)
+        {
+            Cargando.Mostrar();
+
+            int iLineaID = Util.Entero(oNodo.Cells["com_Id"].Value);
+            // int iMarcaID = Util.Entero(oNodo.Parent.Cells["com_Id"].Value);
+            // int iProveedorID = Util.Entero(oNodo.Parent.Parent.Cells["com_Id"].Value);
+            var oDatos = Datos.GetListOf<PartesComisionesView>(c => c.LineaID == iLineaID && c.ParteID > 0).OrderBy(c => c.ParteID);
+            oNodo.Nodes.Clear();
+            foreach (var oReg in oDatos)
+            {
+                oNodo.Nodes.Add(oReg.ParteComisionID, oReg.ParteID, oReg.Parte
+                    , oReg.PorcentajeNormal, oReg.ComisionFija
+                    , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
+                    , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
+            }
+
+            oNodo.Expand();
+
+            Cargando.Cerrar();
+        }
+
+        private void VerMarcarCambio(DataGridViewCell oCelda)
+        {
+            // Se verifica si ya se marcó la fila como modificada, en base al tag
+            if (oCelda.Tag != null)
+                return;
+
+            // Se marca la fila como modificada y se manda afectar los nodos hijos
+            oCelda.Style.ForeColor = Color.Orange;
+            oCelda.Tag = true;
+            oCelda.OwningRow.Tag = true;
+            this.VerCambiosEnCascada(this.tgvComisiones.GetNodeForRow(oCelda.OwningRow), oCelda.ColumnIndex, oCelda.Value);
+        }
+
+        private void VerCambiosEnCascada(TreeGridNode oNodo, int iCol, object oValor)
+        {
+            if (oNodo.Nodes.Count > 0)
+            {
+                var oCelda = oNodo.Cells[iCol];
+                oCelda.Style.ForeColor = Color.Orange;
+                oCelda.Tag = true;
+                oCelda.OwningRow.Tag = true;
+                oCelda.Value = oValor;
+
+                foreach (var oNodoHijo in oNodo.Nodes)
+                    this.VerCambiosEnCascada(oNodoHijo, iCol, oValor);
+            }
+            else
+            {
+                var oCelda = oNodo.Cells[iCol];
+                oCelda.Style.ForeColor = Color.Orange;
+                oCelda.Tag = true;
+                oCelda.OwningRow.Tag = true;
+                oCelda.Value = oValor;
+            }
+        }
+                
+        private void GuardarDatosComisiones()
+        {
+            if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que deseas guardar los cambios realizados?") != DialogResult.Yes)
+                return;
+
+            Cargando.Mostrar();
+
+            foreach (DataGridViewRow oFila in this.tgvComisiones.Rows)
+            {
+                if (oFila.Tag == null) continue;
+
+                var oNodo = this.tgvComisiones.GetNodeForRow(oFila);
+                int? iProveedorID = null, iMarcaID = null, iLineaID = null, iParteID = null;
+                switch (oNodo.Level)
+                {
+                    case 1:
+                        iProveedorID = (int)oNodo.Cells["com_Id"].Value;
+                        break;
+                    case 2:
+                        iProveedorID = (int)oNodo.Parent.Cells["com_Id"].Value;
+                        iMarcaID = (int)oNodo.Cells["com_Id"].Value;
+                        break;
+                    case 3:
+                        iProveedorID = (int)oNodo.Parent.Parent.Cells["com_Id"].Value;
+                        iMarcaID = (int)oNodo.Parent.Cells["com_Id"].Value;
+                        iLineaID = (int)oNodo.Cells["com_Id"].Value;
+                        break;
+                    case 4:
+                        iProveedorID = (int)oNodo.Parent.Parent.Parent.Cells["com_Id"].Value;
+                        iMarcaID = (int)oNodo.Parent.Parent.Cells["com_Id"].Value;
+                        iLineaID = (int)oNodo.Parent.Cells["com_Id"].Value;
+                        iParteID = (int)oNodo.Cells["com_Id"].Value;
+                        break;
+                }
+
+                int iParteComisionID = Util.Entero(oNodo.Cells["com_ParteComisionID"].Value);
+                ParteComision oParteComision;
+                if (iParteComisionID > 0)
+                {
+                    oParteComision = Datos.GetEntity<ParteComision>(c => c.ParteComisionID == iParteComisionID);
+                }
+                else
+                {
+                    oParteComision = new ParteComision() { ProveedorID = iProveedorID.Value, MarcaParteID = iMarcaID, LineaID = iLineaID, ParteID = iParteID };
+                    oParteComision.ArticulosEspecial = 0;
+                    oParteComision.ComisionFija = oParteComision.PorcentajeNormal = oParteComision.PorcentajeUnArticulo =
+                        oParteComision.PorcentajeArticulosEspecial = oParteComision.PorcentajeComplementarios =
+                        oParteComision.PorcentajeReduccionPorRepartidor = oParteComision.PorcentajeRepartidor = oParteComision.ComisionFijaRepartidor = 0;
+                }
+
+                if (oNodo.Cells["com_ComisionFija"].Tag != null)
+                    oParteComision.ComisionFija = Util.Decimal(oNodo.Cells["com_ComisionFija"].Value);
+                if (oNodo.Cells["com_PorcentajeNormal"].Tag != null)
+                    oParteComision.PorcentajeNormal = Util.Decimal(oNodo.Cells["com_PorcentajeNormal"].Value);
+                if (oNodo.Cells["com_PorcentajeUnArticulo"].Tag != null)
+                    oParteComision.PorcentajeUnArticulo = Util.Decimal(oNodo.Cells["com_PorcentajeUnArticulo"].Value);
+                if (oNodo.Cells["com_PorcentajeArticulosEspecial"].Tag != null)
+                    oParteComision.PorcentajeArticulosEspecial = Util.Decimal(oNodo.Cells["com_PorcentajeArticulosEspecial"].Value);
+                if (oNodo.Cells["com_PorcentajeComplementarios"].Tag != null)
+                    oParteComision.PorcentajeComplementarios = Util.Decimal(oNodo.Cells["com_PorcentajeComplementarios"].Value);
+                if (oNodo.Cells["com_PorcentajeReduccionPorRepartidor"].Tag != null)
+                    oParteComision.PorcentajeReduccionPorRepartidor = Util.Decimal(oNodo.Cells["com_PorcentajeReduccionPorRepartidor"].Value);
+                if (oNodo.Cells["com_PorcentajeRepartidor"].Tag != null)
+                    oParteComision.PorcentajeRepartidor = Util.Decimal(oNodo.Cells["com_PorcentajeRepartidor"].Value);
+                if (oNodo.Cells["com_ComisionFijaRepartidor"].Tag != null)
+                    oParteComision.ComisionFijaRepartidor = Util.Decimal(oNodo.Cells["com_ComisionFijaRepartidor"].Value);
+                if (oNodo.Cells["com_ArticulosEspecial"].Tag != null)
+                    oParteComision.ArticulosEspecial = Util.Entero(oNodo.Cells["com_ArticulosEspecial"].Value);
+                                
+                Datos.Guardar<ParteComision>(oParteComision);
+            }
+
+            Cargando.Cerrar();
+
+            this.CargarArbolDeComisiones();
         }
 
         #endregion

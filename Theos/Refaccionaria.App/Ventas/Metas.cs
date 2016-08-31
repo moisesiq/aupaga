@@ -149,7 +149,12 @@ namespace Refaccionaria.App
                 (this.Parent as Comisiones).oComisiones.UsuarioAcceso = ResUsuario.Respuesta;
                 this.Preparar(ResUsuario.Respuesta.UsuarioID);
                 (this.Parent as Comisiones).CambiarUsuario();
-                this.CargarDatos();
+
+                // Se verifica si el usuario es tipo repartidor, para no mostrar gráficas
+                if (ResUsuario.Respuesta.TipoUsuarioID == Cat.TiposDeUsuario.Repartidor)
+                    this.Hide();
+                else
+                    this.CargarDatos();
             }
         }
 

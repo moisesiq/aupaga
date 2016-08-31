@@ -220,14 +220,17 @@ namespace Refaccionaria.App
             oParams.Add("VendedorID", iVendedorID);
             oParams.Add("Desde", this.dtpDe.Value.Date);
             oParams.Add("Hasta", this.dtpA.Value.Date);
-            var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
+            //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2", oParams);
 
             // Se llena el grid
             this.dgvVentas.Rows.Clear();
             foreach (var oReg in oDatos)
             {
+                // int iFila = this.dgvVentas.Rows.Add(oReg.VentaID, oReg.Caracteristica, oReg.Fecha, oReg.Cliente, oReg.Folio, oReg.Importe, oReg.Cobranza
+                //    , oReg.Utilidad, oReg.Comision, (oReg.Caracteristica.EndsWith("9500") ? "SÍ" : ""));
                 int iFila = this.dgvVentas.Rows.Add(oReg.VentaID, oReg.Caracteristica, oReg.Fecha, oReg.Cliente, oReg.Folio, oReg.Importe, oReg.Cobranza
-                    , oReg.Utilidad, oReg.Comision, (oReg.Caracteristica.EndsWith("9500") ? "SÍ" : ""));
+                    , oReg.Utilidad, oReg.Comision, oReg.ComisionFija, (oReg.Es9500.Valor() ? "SÍ" : ""));
                 // Se marcan los colores
                 switch (oReg.Caracteristica)
                 {
@@ -250,7 +253,8 @@ namespace Refaccionaria.App
                 mUtilidad += Util.Decimal(Fila.Cells["Utilidad"].Value);
                 mComision = Util.Decimal(Fila.Cells["Comision"].Value);
 
-                bool b9500 = Util.Cadena(Fila.Cells["Caracteristica"].Value).Contains("9500");
+                // bool b9500 = Util.Cadena(Fila.Cells["Caracteristica"].Value).Contains("9500");
+                bool b9500 = (Util.Cadena(Fila.Cells["Detalle_9500"]) == "SÍ");
                 if (Util.Cadena(Fila.Cells["Caracteristica"].Value).Substring(0, 1) == "V")
                 {
                     mComisionVariable += mComision;

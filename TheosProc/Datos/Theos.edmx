@@ -1503,7 +1503,10 @@
             <PropertyRef Name="ParteComisionID" />
           </Key>
           <Property Name="ParteComisionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ParteID" Type="int" Nullable="false" />
+          <Property Name="ProveedorID" Type="int" Nullable="false" />
+          <Property Name="MarcaParteID" Type="int" />
+          <Property Name="LineaID" Type="int" />
+          <Property Name="ParteID" Type="int" />
           <Property Name="ComisionFija" Type="decimal" Precision="12" Scale="2" />
           <Property Name="PorcentajeNormal" Type="decimal" Precision="5" Scale="2" />
           <Property Name="PorcentajeUnArticulo" Type="decimal" Precision="5" Scale="2" />
@@ -3895,6 +3898,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.MedidasView' does not hav
 warning 6002: The table/view 'ControlRefaccionaria.dbo.MetasComisionVendedoresView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MetasComisionVendedoresView">
           <Key>
+            
             <PropertyRef Name="Registro" />
           </Key>
           <Property Name="Registro" Type="bigint" Nullable="false" />
@@ -3908,6 +3912,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.MetasComisionVendedoresVi
 warning 6002: The table/view 'ControlRefaccionaria.dbo.MetasUtilidadSucursalesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MetasUtilidadSucursalesView">
           <Key>
+            
             <PropertyRef Name="Registro" />
           </Key>
           <Property Name="Registro" Type="bigint" Nullable="false" />
@@ -4544,25 +4549,46 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesCodigosAlternosView
           <Property Name="CodigoAlterno" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesComisionesPrevioView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PartesComisionesPrevioView">
+          <Key>
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Proveedor" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="LineaID" />
+          </Key>
+          <Property Name="ParteComisionID" Type="int" />
+          <Property Name="ProveedorID" Type="int" Nullable="false" />
+          <Property Name="MarcaID" Type="int" Nullable="false" />
+          <Property Name="LineaID" Type="int" Nullable="false" />
+          <Property Name="ParteID" Type="int" Nullable="false" />
+          <Property Name="Proveedor" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Marca" Type="nvarchar" MaxLength="200" />
+          <Property Name="Linea" Type="nvarchar" MaxLength="100" />
+          <Property Name="Parte" Type="int" />
+          <Property Name="ComisionFija" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="PorcentajeNormal" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeUnArticulo" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="ArticulosEspecial" Type="int" />
+          <Property Name="PorcentajeArticulosEspecial" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeComplementarios" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeReduccionPorRepartidor" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeRepartidor" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="ComisionFijaRepartidor" Type="decimal" Precision="12" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ControlRefaccionaria.dbo.PartesComisionesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PartesComisionesView">
           <Key>
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="ProveedorID" />
-            <PropertyRef Name="MarcaID" />
             <PropertyRef Name="LineaID" />
-            <PropertyRef Name="NumeroDeParte" />
-            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Parte" />
           </Key>
-          <Property Name="ParteID" Type="int" Nullable="false" />
-          <Property Name="ProveedorID" Type="int" Nullable="false" />
-          <Property Name="Proveedor" Type="nvarchar" MaxLength="200" />
-          <Property Name="MarcaID" Type="int" Nullable="false" />
-          <Property Name="Marca" Type="nvarchar" MaxLength="200" />
+          <Property Name="ParteComisionID" Type="int" />
           <Property Name="LineaID" Type="int" Nullable="false" />
-          <Property Name="Linea" Type="nvarchar" MaxLength="100" />
-          <Property Name="NumeroDeParte" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="ParteID" Type="int" Nullable="false" />
+          <Property Name="Parte" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="ComisionFija" Type="decimal" Precision="12" Scale="2" />
           <Property Name="PorcentajeNormal" Type="decimal" Precision="5" Scale="2" />
           <Property Name="PorcentajeUnArticulo" Type="decimal" Precision="5" Scale="2" />
@@ -8221,8 +8247,32 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ParteComi__Parte__2EC6B30F">
-          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+        <Association Name="FK__ParteComi__Linea__56D4A469">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="0..1" />
+          <End Role="ParteComision" Type="Self.ParteComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="LineaID" />
+            </Principal>
+            <Dependent Role="ParteComision">
+              <PropertyRef Name="LineaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteComi__Marca__55E08030">
+          <End Role="MarcaParte" Type="Self.MarcaParte" Multiplicity="0..1" />
+          <End Role="ParteComision" Type="Self.ParteComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarcaParte">
+              <PropertyRef Name="MarcaParteID" />
+            </Principal>
+            <Dependent Role="ParteComision">
+              <PropertyRef Name="MarcaParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteComi__Parte__57C8C8A2">
+          <End Role="Parte" Type="Self.Parte" Multiplicity="0..1" />
           <End Role="ParteComision" Type="Self.ParteComision" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Parte">
@@ -8230,6 +8280,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Principal>
             <Dependent Role="ParteComision">
               <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteComi__Prove__54EC5BF7">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="ParteComision" Type="Self.ParteComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ProveedorID" />
+            </Principal>
+            <Dependent Role="ParteComision">
+              <PropertyRef Name="ProveedorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -11210,6 +11272,12 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <Parameter Name="Desde" Type="date" Mode="In" />
           <Parameter Name="Hasta" Type="date" Mode="In" />
         </Function>
+        <Function Name="pauComisiones2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ModoID" Type="int" Mode="In" />
+          <Parameter Name="VendedorID" Type="int" Mode="In" />
+          <Parameter Name="Desde" Type="date" Mode="In" />
+          <Parameter Name="Hasta" Type="date" Mode="In" />
+        </Function>
         <Function Name="pauComisionesAgrupado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Desde" Type="date" Mode="In" />
           <Parameter Name="Hasta" Type="date" Mode="In" />
@@ -12850,17 +12918,34 @@ FROM [dbo].[PartesClasificacionAbcView] AS [PartesClasificacionAbcView]</Definin
 [PartesCodigosAlternosView].[CodigoAlterno] AS [CodigoAlterno]
 FROM [dbo].[PartesCodigosAlternosView] AS [PartesCodigosAlternosView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="PartesComisionesPrevioView" EntityType="Self.PartesComisionesPrevioView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[PartesComisionesPrevioView].[ParteComisionID] AS [ParteComisionID], 
+[PartesComisionesPrevioView].[ProveedorID] AS [ProveedorID], 
+[PartesComisionesPrevioView].[MarcaID] AS [MarcaID], 
+[PartesComisionesPrevioView].[LineaID] AS [LineaID], 
+[PartesComisionesPrevioView].[ParteID] AS [ParteID], 
+[PartesComisionesPrevioView].[Proveedor] AS [Proveedor], 
+[PartesComisionesPrevioView].[Marca] AS [Marca], 
+[PartesComisionesPrevioView].[Linea] AS [Linea], 
+[PartesComisionesPrevioView].[Parte] AS [Parte], 
+[PartesComisionesPrevioView].[ComisionFija] AS [ComisionFija], 
+[PartesComisionesPrevioView].[PorcentajeNormal] AS [PorcentajeNormal], 
+[PartesComisionesPrevioView].[PorcentajeUnArticulo] AS [PorcentajeUnArticulo], 
+[PartesComisionesPrevioView].[ArticulosEspecial] AS [ArticulosEspecial], 
+[PartesComisionesPrevioView].[PorcentajeArticulosEspecial] AS [PorcentajeArticulosEspecial], 
+[PartesComisionesPrevioView].[PorcentajeComplementarios] AS [PorcentajeComplementarios], 
+[PartesComisionesPrevioView].[PorcentajeReduccionPorRepartidor] AS [PorcentajeReduccionPorRepartidor], 
+[PartesComisionesPrevioView].[PorcentajeRepartidor] AS [PorcentajeRepartidor], 
+[PartesComisionesPrevioView].[ComisionFijaRepartidor] AS [ComisionFijaRepartidor]
+FROM [dbo].[PartesComisionesPrevioView] AS [PartesComisionesPrevioView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="PartesComisionesView" EntityType="Self.PartesComisionesView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[PartesComisionesView].[ParteID] AS [ParteID], 
-[PartesComisionesView].[ProveedorID] AS [ProveedorID], 
-[PartesComisionesView].[Proveedor] AS [Proveedor], 
-[PartesComisionesView].[MarcaID] AS [MarcaID], 
-[PartesComisionesView].[Marca] AS [Marca], 
+[PartesComisionesView].[ParteComisionID] AS [ParteComisionID], 
 [PartesComisionesView].[LineaID] AS [LineaID], 
-[PartesComisionesView].[Linea] AS [Linea], 
-[PartesComisionesView].[NumeroDeParte] AS [NumeroDeParte], 
-[PartesComisionesView].[Descripcion] AS [Descripcion], 
+[PartesComisionesView].[ParteID] AS [ParteID], 
+[PartesComisionesView].[Parte] AS [Parte], 
 [PartesComisionesView].[ComisionFija] AS [ComisionFija], 
 [PartesComisionesView].[PorcentajeNormal] AS [PorcentajeNormal], 
 [PartesComisionesView].[PorcentajeUnArticulo] AS [PorcentajeUnArticulo], 
@@ -14627,8 +14712,20 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ParteCodigoAlterno" EntitySet="ParteCodigoAlterno" />
           </AssociationSet>
-          <AssociationSet Name="FK__ParteComi__Parte__2EC6B30F" Association="Self.FK__ParteComi__Parte__2EC6B30F">
+          <AssociationSet Name="FK__ParteComi__Linea__56D4A469" Association="Self.FK__ParteComi__Linea__56D4A469">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="ParteComision" EntitySet="ParteComision" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteComi__Marca__55E08030" Association="Self.FK__ParteComi__Marca__55E08030">
+            <End Role="MarcaParte" EntitySet="MarcaParte" />
+            <End Role="ParteComision" EntitySet="ParteComision" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteComi__Parte__57C8C8A2" Association="Self.FK__ParteComi__Parte__57C8C8A2">
             <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteComision" EntitySet="ParteComision" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteComi__Prove__54EC5BF7" Association="Self.FK__ParteComi__Prove__54EC5BF7">
+            <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ParteComision" EntitySet="ParteComision" />
           </AssociationSet>
           <AssociationSet Name="FK__ParteComp__Parte__334B710A" Association="Self.FK__ParteComp__Parte__334B710A">
@@ -17910,12 +18007,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Linea" EntitySet="Linea" />
             <End Role="LineaComplementaria" EntitySet="LineaComplementaria" />
           </AssociationSet>
-          <EntitySet Name="PartesComisionesView" EntityType="TheosProc.PartesComisionesView" />
-          <EntitySet Name="ParteComision" EntityType="TheosProc.ParteComision" />
-          <AssociationSet Name="FK__ParteComi__Parte__2EC6B30F" Association="TheosProc.FK__ParteComi__Parte__2EC6B30F">
-            <End Role="Parte" EntitySet="Parte" />
-            <End Role="ParteComision" EntitySet="ParteComision" />
-          </AssociationSet>
           <EntitySet Name="VentaCambio" EntityType="TheosProc.VentaCambio" />
           <AssociationSet Name="FK__VentaCamb__Comis__172E5549" Association="TheosProc.FK__VentaCamb__Comis__172E5549">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -17953,12 +18044,37 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="VentaPago" EntitySet="VentaPago" />
             <End Role="VentaCambio" EntitySet="VentaCambio" />
           </AssociationSet>
+          <EntitySet Name="PartesComisionesPrevioView" EntityType="TheosProc.PartesComisionesPrevioView" />
+          <EntitySet Name="PartesComisionesView" EntityType="TheosProc.PartesComisionesView" />
           <FunctionImport Name="pauClienteKardex" ReturnType="Collection(TheosProc.pauClienteKardex_Result)">
             <Parameter Name="ClienteID" Mode="In" Type="Int32" />
             <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
             <Parameter Name="SucursalID" Mode="In" Type="Int32" />
             <Parameter Name="VehiculoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ParteComision" EntityType="TheosProc.ParteComision" />
+          <AssociationSet Name="FK__ParteComi__Linea__56D4A469" Association="TheosProc.FK__ParteComi__Linea__56D4A469">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="ParteComision" EntitySet="ParteComision" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteComi__Marca__55E08030" Association="TheosProc.FK__ParteComi__Marca__55E08030">
+            <End Role="MarcaParte" EntitySet="MarcaParte" />
+            <End Role="ParteComision" EntitySet="ParteComision" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteComi__Parte__57C8C8A2" Association="TheosProc.FK__ParteComi__Parte__57C8C8A2">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteComision" EntitySet="ParteComision" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteComi__Prove__54EC5BF7" Association="TheosProc.FK__ParteComi__Prove__54EC5BF7">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ParteComision" EntitySet="ParteComision" />
+          </AssociationSet>
+          <FunctionImport Name="pauComisiones2" ReturnType="Collection(TheosProc.pauComisiones2_Result)">
+            <Parameter Name="ModoID" Mode="In" Type="Int32" />
+            <Parameter Name="VendedorID" Mode="In" Type="Int32" />
+            <Parameter Name="Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Autorizacion">
@@ -18934,6 +19050,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Cotizacion9500Detalle" Relationship="TheosProc.FK__Cotizacio__Linea__0AA882D3" FromRole="Linea" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="LineaComplementaria" Relationship="TheosProc.FK__LineaComp__Linea__290DD9B9" FromRole="Linea" ToRole="LineaComplementaria" />
           <NavigationProperty Name="LineaComplementaria1" Relationship="TheosProc.FK__LineaComp__Linea__2A01FDF2" FromRole="Linea" ToRole="LineaComplementaria" />
+          <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Linea__56D4A469" FromRole="Linea" ToRole="ParteComision" />
           </EntityType>
         <EntityType Name="LineaAttachFile">
           <Key>
@@ -19011,6 +19128,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorGanancia" Relationship="TheosProc.FK_ProveedorGanancia_MarcaParte" FromRole="MarcaParte" ToRole="ProveedorGanancia" />
           <NavigationProperty Name="ProveedorMarcaParte" Relationship="TheosProc.FK_ProveedorMarcaParte_MarcaParte" FromRole="MarcaParte" ToRole="ProveedorMarcaParte" />
           <NavigationProperty Name="Cotizacion9500Detalle" Relationship="TheosProc.FK__Cotizacio__Marca__0B9CA70C" FromRole="MarcaParte" ToRole="Cotizacion9500Detalle" />
+          <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Marca__55E08030" FromRole="MarcaParte" ToRole="ParteComision" />
         </EntityType>
         <EntityType Name="Medida">
           <Key>
@@ -19624,7 +19742,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteExistenciaHistorico" Relationship="TheosProc.FK__ParteExis__Parte__0E8EEDA7" FromRole="Parte" ToRole="ParteExistenciaHistorico" />
           <NavigationProperty Name="ParteComplementaria" Relationship="TheosProc.FK__ParteComp__Parte__334B710A" FromRole="Parte" ToRole="ParteComplementaria" />
           <NavigationProperty Name="ParteComplementaria1" Relationship="TheosProc.FK__ParteComp__Parte__41999061" FromRole="Parte" ToRole="ParteComplementaria" />
-          <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Parte__2EC6B30F" FromRole="Parte" ToRole="ParteComision" />
+          <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Parte__57C8C8A2" FromRole="Parte" ToRole="ParteComision" />
         </EntityType>
         <EntityType Name="ParteAbc">
           <Key>
@@ -20222,6 +20340,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorPoliza" Relationship="TheosProc.FK_ProveedorPoliza_Proveedor" FromRole="Proveedor" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="ProveedorProntoPago" Relationship="TheosProc.FK_ProveedorProntoPago_Proveedor" FromRole="Proveedor" ToRole="ProveedorProntoPago" />
           <NavigationProperty Name="Cotizacion9500Detalle" Relationship="TheosProc.FK__Cotizacio__Prove__09B45E9A" FromRole="Proveedor" ToRole="Cotizacion9500Detalle" />
+          <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Prove__54EC5BF7" FromRole="Proveedor" ToRole="ParteComision" />
         </EntityType>
         <EntityType Name="ProveedorContacto">
           <Key>
@@ -30090,63 +30209,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="PartesComisionesView">
-          <Key>
-            <PropertyRef Name="ParteID" />
-            <PropertyRef Name="ProveedorID" />
-            <PropertyRef Name="MarcaID" />
-            <PropertyRef Name="LineaID" />
-            <PropertyRef Name="NumeroDeParte" />
-            <PropertyRef Name="Descripcion" />
-          </Key>
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MarcaID" Type="Int32" Nullable="false" />
-          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LineaID" Type="Int32" Nullable="false" />
-          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NumeroDeParte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="ComisionFija" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="PorcentajeNormal" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeUnArticulo" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="ArticulosEspecial" Type="Int32" />
-          <Property Name="PorcentajeArticulosEspecial" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeComplementarios" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeReduccionPorRepartidor" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
-        </EntityType>
-        <EntityType Name="ParteComision">
-          <Key>
-            <PropertyRef Name="ParteComisionID" />
-          </Key>
-          <Property Name="ParteComisionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParteID" Type="Int32" Nullable="false" />
-          <Property Name="ComisionFija" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="PorcentajeNormal" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeUnArticulo" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="ArticulosEspecial" Type="Int32" />
-          <Property Name="PorcentajeArticulosEspecial" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeComplementarios" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeReduccionPorRepartidor" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
-          <NavigationProperty Name="Parte" Relationship="TheosProc.FK__ParteComi__Parte__2EC6B30F" FromRole="ParteComision" ToRole="Parte" />
-        </EntityType>
-        <Association Name="FK__ParteComi__Parte__2EC6B30F">
-          <End Type="TheosProc.Parte" Role="Parte" Multiplicity="1" />
-          <End Type="TheosProc.ParteComision" Role="ParteComision" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ParteID" />
-            </Principal>
-            <Dependent Role="ParteComision">
-              <PropertyRef Name="ParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="VentaCambio">
           <Key>
             <PropertyRef Name="VentaCambioID" />
@@ -30286,6 +30348,53 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PartesComisionesPrevioView">
+          <Key>
+            <PropertyRef Name="ProveedorID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Proveedor" />
+            <PropertyRef Name="MarcaID" />
+            <PropertyRef Name="LineaID" />
+          </Key>
+          <Property Name="ParteComisionID" Type="Int32" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="MarcaID" Type="Int32" Nullable="false" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="Proveedor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Linea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Parte" Type="Int32" />
+          <Property Name="ComisionFija" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="PorcentajeNormal" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeUnArticulo" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ArticulosEspecial" Type="Int32" />
+          <Property Name="PorcentajeArticulosEspecial" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeComplementarios" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeReduccionPorRepartidor" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
+        </EntityType>
+        <EntityType Name="PartesComisionesView">
+          <Key>
+            <PropertyRef Name="LineaID" />
+            <PropertyRef Name="ParteID" />
+            <PropertyRef Name="Parte" />
+          </Key>
+          <Property Name="ParteComisionID" Type="Int32" />
+          <Property Name="LineaID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="Parte" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="ComisionFija" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="PorcentajeNormal" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeUnArticulo" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ArticulosEspecial" Type="Int32" />
+          <Property Name="PorcentajeArticulosEspecial" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeComplementarios" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeReduccionPorRepartidor" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
+        </EntityType>
         <ComplexType Name="pauClienteKardex_Result">
           <Property Type="Int32" Name="ParteID" Nullable="true" />
           <Property Type="String" Name="NumeroParte" Nullable="true" MaxLength="50" />
@@ -30295,6 +30404,91 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
           <Property Type="Decimal" Name="Cantidad" Nullable="true" Precision="38" Scale="2" />
           <Property Type="String" Name="Busqueda" Nullable="true" MaxLength="563" />
+        </ComplexType>
+        <EntityType Name="ParteComision">
+          <Key>
+            <PropertyRef Name="ParteComisionID" />
+          </Key>
+          <Property Name="ParteComisionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="MarcaParteID" Type="Int32" />
+          <Property Name="LineaID" Type="Int32" />
+          <Property Name="ParteID" Type="Int32" />
+          <Property Name="ComisionFija" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="PorcentajeNormal" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeUnArticulo" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ArticulosEspecial" Type="Int32" />
+          <Property Name="PorcentajeArticulosEspecial" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeComplementarios" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeReduccionPorRepartidor" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
+          <NavigationProperty Name="Linea" Relationship="TheosProc.FK__ParteComi__Linea__56D4A469" FromRole="ParteComision" ToRole="Linea" />
+          <NavigationProperty Name="MarcaParte" Relationship="TheosProc.FK__ParteComi__Marca__55E08030" FromRole="ParteComision" ToRole="MarcaParte" />
+          <NavigationProperty Name="Parte" Relationship="TheosProc.FK__ParteComi__Parte__57C8C8A2" FromRole="ParteComision" ToRole="Parte" />
+          <NavigationProperty Name="Proveedor" Relationship="TheosProc.FK__ParteComi__Prove__54EC5BF7" FromRole="ParteComision" ToRole="Proveedor" />
+        </EntityType>
+        <Association Name="FK__ParteComi__Linea__56D4A469">
+          <End Type="TheosProc.Linea" Role="Linea" Multiplicity="0..1" />
+          <End Type="TheosProc.ParteComision" Role="ParteComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="LineaID" />
+            </Principal>
+            <Dependent Role="ParteComision">
+              <PropertyRef Name="LineaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteComi__Marca__55E08030">
+          <End Type="TheosProc.MarcaParte" Role="MarcaParte" Multiplicity="0..1" />
+          <End Type="TheosProc.ParteComision" Role="ParteComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarcaParte">
+              <PropertyRef Name="MarcaParteID" />
+            </Principal>
+            <Dependent Role="ParteComision">
+              <PropertyRef Name="MarcaParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteComi__Parte__57C8C8A2">
+          <End Type="TheosProc.Parte" Role="Parte" Multiplicity="0..1" />
+          <End Type="TheosProc.ParteComision" Role="ParteComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteComision">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteComi__Prove__54EC5BF7">
+          <End Type="TheosProc.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="TheosProc.ParteComision" Role="ParteComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ProveedorID" />
+            </Principal>
+            <Dependent Role="ParteComision">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="pauComisiones2_Result">
+          <Property Type="Int32" Name="VentaID" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Cliente" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Folio" Nullable="true" MaxLength="16" />
+          <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Cobranza" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Utilidad" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Comision" Nullable="true" Precision="38" Scale="8" />
+          <Property Type="Decimal" Name="ComisionFija" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Boolean" Name="ACredito" Nullable="true" />
+          <Property Type="Boolean" Name="Es9500" Nullable="true" />
+          <Property Type="String" Name="Caracteristica" Nullable="false" MaxLength="1" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -35919,24 +36113,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pauParteKardex" FunctionName="ControlRefaccionariaModel.Store.pauParteKardex">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TheosProc.pauParteKardex_Result">
-                <ScalarProperty Name="ParteKardexID" ColumnName="ParteKardexID" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Operacion" ColumnName="Operacion" />
-                <ScalarProperty Name="Entidad" ColumnName="Entidad" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Origen" ColumnName="Origen" />
-                <ScalarProperty Name="Destino" ColumnName="Destino" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="ExistenciaNueva" ColumnName="ExistenciaNueva" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pauParteMaxMinDatosExtra" FunctionName="ControlRefaccionariaModel.Store.pauParteMaxMinDatosExtra">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TheosProc.pauParteMaxMinDatosExtra_Result">
@@ -36400,47 +36576,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PartesComisionesView">
-            <EntityTypeMapping TypeName="TheosProc.PartesComisionesView">
-              <MappingFragment StoreEntitySet="PartesComisionesView">
-                <ScalarProperty Name="ComisionFijaRepartidor" ColumnName="ComisionFijaRepartidor" />
-                <ScalarProperty Name="PorcentajeRepartidor" ColumnName="PorcentajeRepartidor" />
-                <ScalarProperty Name="PorcentajeReduccionPorRepartidor" ColumnName="PorcentajeReduccionPorRepartidor" />
-                <ScalarProperty Name="PorcentajeComplementarios" ColumnName="PorcentajeComplementarios" />
-                <ScalarProperty Name="PorcentajeArticulosEspecial" ColumnName="PorcentajeArticulosEspecial" />
-                <ScalarProperty Name="ArticulosEspecial" ColumnName="ArticulosEspecial" />
-                <ScalarProperty Name="PorcentajeUnArticulo" ColumnName="PorcentajeUnArticulo" />
-                <ScalarProperty Name="PorcentajeNormal" ColumnName="PorcentajeNormal" />
-                <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="NumeroDeParte" ColumnName="NumeroDeParte" />
-                <ScalarProperty Name="Linea" ColumnName="Linea" />
-                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ParteComision">
-            <EntityTypeMapping TypeName="TheosProc.ParteComision">
-              <MappingFragment StoreEntitySet="ParteComision">
-                <ScalarProperty Name="ComisionFijaRepartidor" ColumnName="ComisionFijaRepartidor" />
-                <ScalarProperty Name="PorcentajeRepartidor" ColumnName="PorcentajeRepartidor" />
-                <ScalarProperty Name="PorcentajeReduccionPorRepartidor" ColumnName="PorcentajeReduccionPorRepartidor" />
-                <ScalarProperty Name="PorcentajeComplementarios" ColumnName="PorcentajeComplementarios" />
-                <ScalarProperty Name="PorcentajeArticulosEspecial" ColumnName="PorcentajeArticulosEspecial" />
-                <ScalarProperty Name="ArticulosEspecial" ColumnName="ArticulosEspecial" />
-                <ScalarProperty Name="PorcentajeUnArticulo" ColumnName="PorcentajeUnArticulo" />
-                <ScalarProperty Name="PorcentajeNormal" ColumnName="PorcentajeNormal" />
-                <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
-                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-                <ScalarProperty Name="ParteComisionID" ColumnName="ParteComisionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VentaCambio">
             <EntityTypeMapping TypeName="TheosProc.VentaCambio">
               <MappingFragment StoreEntitySet="VentaCambio">
@@ -36464,6 +36599,49 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PartesComisionesPrevioView">
+            <EntityTypeMapping TypeName="TheosProc.PartesComisionesPrevioView">
+              <MappingFragment StoreEntitySet="PartesComisionesPrevioView">
+                <ScalarProperty Name="ComisionFijaRepartidor" ColumnName="ComisionFijaRepartidor" />
+                <ScalarProperty Name="PorcentajeRepartidor" ColumnName="PorcentajeRepartidor" />
+                <ScalarProperty Name="PorcentajeReduccionPorRepartidor" ColumnName="PorcentajeReduccionPorRepartidor" />
+                <ScalarProperty Name="PorcentajeComplementarios" ColumnName="PorcentajeComplementarios" />
+                <ScalarProperty Name="PorcentajeArticulosEspecial" ColumnName="PorcentajeArticulosEspecial" />
+                <ScalarProperty Name="ArticulosEspecial" ColumnName="ArticulosEspecial" />
+                <ScalarProperty Name="PorcentajeUnArticulo" ColumnName="PorcentajeUnArticulo" />
+                <ScalarProperty Name="PorcentajeNormal" ColumnName="PorcentajeNormal" />
+                <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
+                <ScalarProperty Name="Parte" ColumnName="Parte" />
+                <ScalarProperty Name="Linea" ColumnName="Linea" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ParteComisionID" ColumnName="ParteComisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartesComisionesView">
+            <EntityTypeMapping TypeName="TheosProc.PartesComisionesView">
+              <MappingFragment StoreEntitySet="PartesComisionesView">
+                <ScalarProperty Name="ComisionFijaRepartidor" ColumnName="ComisionFijaRepartidor" />
+                <ScalarProperty Name="PorcentajeRepartidor" ColumnName="PorcentajeRepartidor" />
+                <ScalarProperty Name="PorcentajeReduccionPorRepartidor" ColumnName="PorcentajeReduccionPorRepartidor" />
+                <ScalarProperty Name="PorcentajeComplementarios" ColumnName="PorcentajeComplementarios" />
+                <ScalarProperty Name="PorcentajeArticulosEspecial" ColumnName="PorcentajeArticulosEspecial" />
+                <ScalarProperty Name="ArticulosEspecial" ColumnName="ArticulosEspecial" />
+                <ScalarProperty Name="PorcentajeUnArticulo" ColumnName="PorcentajeUnArticulo" />
+                <ScalarProperty Name="PorcentajeNormal" ColumnName="PorcentajeNormal" />
+                <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
+                <ScalarProperty Name="Parte" ColumnName="Parte" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="ParteComisionID" ColumnName="ParteComisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pauClienteKardex" FunctionName="ControlRefaccionariaModel.Store.pauClienteKardex">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TheosProc.pauClienteKardex_Result">
@@ -36475,6 +36653,44 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ParteComision">
+            <EntityTypeMapping TypeName="TheosProc.ParteComision">
+              <MappingFragment StoreEntitySet="ParteComision">
+                <ScalarProperty Name="ComisionFijaRepartidor" ColumnName="ComisionFijaRepartidor" />
+                <ScalarProperty Name="PorcentajeRepartidor" ColumnName="PorcentajeRepartidor" />
+                <ScalarProperty Name="PorcentajeReduccionPorRepartidor" ColumnName="PorcentajeReduccionPorRepartidor" />
+                <ScalarProperty Name="PorcentajeComplementarios" ColumnName="PorcentajeComplementarios" />
+                <ScalarProperty Name="PorcentajeArticulosEspecial" ColumnName="PorcentajeArticulosEspecial" />
+                <ScalarProperty Name="ArticulosEspecial" ColumnName="ArticulosEspecial" />
+                <ScalarProperty Name="PorcentajeUnArticulo" ColumnName="PorcentajeUnArticulo" />
+                <ScalarProperty Name="PorcentajeNormal" ColumnName="PorcentajeNormal" />
+                <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+                <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ParteComisionID" ColumnName="ParteComisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pauComisiones2" FunctionName="ControlRefaccionariaModel.Store.pauComisiones2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TheosProc.pauComisiones2_Result">
+                <ScalarProperty Name="VentaID" ColumnName="VentaID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Cobranza" ColumnName="Cobranza" />
+                <ScalarProperty Name="Utilidad" ColumnName="Utilidad" />
+                <ScalarProperty Name="Comision" ColumnName="Comision" />
+                <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
+                <ScalarProperty Name="ACredito" ColumnName="ACredito" />
+                <ScalarProperty Name="Es9500" ColumnName="Es9500" />
+                <ScalarProperty Name="Caracteristica" ColumnName="Caracteristica" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -37255,9 +37471,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.LineaComplementaria" Width="1.5" PointX="12.75" PointY="354.875" />
         <AssociationConnector Association="TheosProc.FK__LineaComp__Linea__290DD9B9" />
         <AssociationConnector Association="TheosProc.FK__LineaComp__Linea__2A01FDF2" />
-        <EntityTypeShape EntityType="TheosProc.PartesComisionesView" Width="1.5" PointX="39.375" PointY="11.75" />
-        <EntityTypeShape EntityType="TheosProc.ParteComision" Width="1.5" PointX="21" PointY="341.625" />
-        <AssociationConnector Association="TheosProc.FK__ParteComi__Parte__2EC6B30F" />
         <EntityTypeShape EntityType="TheosProc.VentaCambio" Width="1.5" PointX="35.25" PointY="304.25" />
         <AssociationConnector Association="TheosProc.FK__VentaCamb__Comis__172E5549" />
         <AssociationConnector Association="TheosProc.FK__VentaCamb__Comis__18227982" />
@@ -37268,6 +37481,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK__VentaCamb__Repar__329743F3" />
         <AssociationConnector Association="TheosProc.FK__VentaCamb__Usuar__19169DBB" />
         <AssociationConnector Association="TheosProc.FK__VentaCamb__Venta__1451E89E" />
+        <EntityTypeShape EntityType="TheosProc.PartesComisionesPrevioView" Width="1.5" PointX="39.375" PointY="11.75" />
+        <EntityTypeShape EntityType="TheosProc.PartesComisionesView" Width="1.5" PointX="39.375" PointY="17.75" />
+        <EntityTypeShape EntityType="TheosProc.ParteComision" Width="1.5" PointX="24" PointY="346.75" />
+        <AssociationConnector Association="TheosProc.FK__ParteComi__Linea__56D4A469" />
+        <AssociationConnector Association="TheosProc.FK__ParteComi__Marca__55E08030" />
+        <AssociationConnector Association="TheosProc.FK__ParteComi__Parte__57C8C8A2" />
+        <AssociationConnector Association="TheosProc.FK__ParteComi__Prove__54EC5BF7" />
         </Diagram>
     </Diagrams>
   </Designer>
