@@ -1715,6 +1715,16 @@
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="ParteMaxMinFijoHistorico">
+          <Key>
+            <PropertyRef Name="ParteMaxMinFijoHistoricoID" />
+          </Key>
+          <Property Name="ParteMaxMinFijoHistoricoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParteID" Type="int" Nullable="false" />
+          <Property Name="SucursalID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Motivo" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="ParteMaxMinRegla">
           <Key>
             <PropertyRef Name="ParteMaxMinReglaID" />
@@ -8523,6 +8533,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ParteMaxM__Parte__5E75C631">
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="ParteMaxMinFijoHistorico" Type="Self.ParteMaxMinFijoHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteMaxMinFijoHistorico">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ParteMaxM__Prove__12BEA5E7">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
           <End Role="ParteMaxMinCriterioPredefinido" Type="Self.ParteMaxMinCriterioPredefinido" Multiplicity="*" />
@@ -8567,6 +8589,18 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
               <PropertyRef Name="SucursalID" />
             </Principal>
             <Dependent Role="ParteMaxMin">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteMaxM__Sucur__5F69EA6A">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
+          <End Role="ParteMaxMinFijoHistorico" Type="Self.ParteMaxMinFijoHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="ParteMaxMinFijoHistorico">
               <PropertyRef Name="SucursalID" />
             </Dependent>
           </ReferentialConstraint>
@@ -11684,6 +11718,7 @@ warning 6002: The table/view 'ControlRefaccionaria.dbo.VentasView' does not have
           <EntitySet Name="ParteKardexOperacion" EntityType="Self.ParteKardexOperacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteMaxMin" EntityType="Self.ParteMaxMin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteMaxMinCriterioPredefinido" EntityType="Self.ParteMaxMinCriterioPredefinido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParteMaxMinFijoHistorico" EntityType="Self.ParteMaxMinFijoHistorico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteMaxMinRegla" EntityType="Self.ParteMaxMinRegla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteMxMn" EntityType="Self.ParteMxMn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteMxMnCriterio" EntityType="Self.ParteMxMnCriterio" Schema="dbo" store:Type="Tables" />
@@ -14804,6 +14839,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ParteMaxMinRegla" EntitySet="ParteMaxMinRegla" />
             <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
           </AssociationSet>
+          <AssociationSet Name="FK__ParteMaxM__Parte__5E75C631" Association="Self.FK__ParteMaxM__Parte__5E75C631">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteMaxMinFijoHistorico" EntitySet="ParteMaxMinFijoHistorico" />
+          </AssociationSet>
           <AssociationSet Name="FK__ParteMaxM__Prove__12BEA5E7" Association="Self.FK__ParteMaxM__Prove__12BEA5E7">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ParteMaxMinCriterioPredefinido" EntitySet="ParteMaxMinCriterioPredefinido" />
@@ -14819,6 +14858,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__ParteMaxM__Sucur__40BA7AC1" Association="Self.FK__ParteMaxM__Sucur__40BA7AC1">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="ParteMaxMin" EntitySet="ParteMaxMin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteMaxM__Sucur__5F69EA6A" Association="Self.FK__ParteMaxM__Sucur__5F69EA6A">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="ParteMaxMinFijoHistorico" EntitySet="ParteMaxMinFijoHistorico" />
           </AssociationSet>
           <AssociationSet Name="FK__ParteMaxM__Usuar__41AE9EFA" Association="Self.FK__ParteMaxM__Usuar__41AE9EFA">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -18076,6 +18119,15 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="Desde" Mode="In" Type="DateTime" />
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="ParteMaxMinFijoHistorico" EntityType="TheosProc.ParteMaxMinFijoHistorico" />
+          <AssociationSet Name="FK__ParteMaxM__Parte__5E75C631" Association="TheosProc.FK__ParteMaxM__Parte__5E75C631">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteMaxMinFijoHistorico" EntitySet="ParteMaxMinFijoHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ParteMaxM__Sucur__5F69EA6A" Association="TheosProc.FK__ParteMaxM__Sucur__5F69EA6A">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="ParteMaxMinFijoHistorico" EntitySet="ParteMaxMinFijoHistorico" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Autorizacion">
           <Key>
@@ -19743,6 +19795,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteComplementaria" Relationship="TheosProc.FK__ParteComp__Parte__334B710A" FromRole="Parte" ToRole="ParteComplementaria" />
           <NavigationProperty Name="ParteComplementaria1" Relationship="TheosProc.FK__ParteComp__Parte__41999061" FromRole="Parte" ToRole="ParteComplementaria" />
           <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Parte__57C8C8A2" FromRole="Parte" ToRole="ParteComision" />
+          <NavigationProperty Name="ParteMaxMinFijoHistorico" Relationship="TheosProc.FK__ParteMaxM__Parte__5E75C631" FromRole="Parte" ToRole="ParteMaxMinFijoHistorico" />
         </EntityType>
         <EntityType Name="ParteAbc">
           <Key>
@@ -20714,6 +20767,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="InventarioLinea" Relationship="TheosProc.FK__Inventari__Sucur__1A35AA7D" FromRole="Sucursal" ToRole="InventarioLinea" />
           <NavigationProperty Name="Venta" Relationship="TheosProc.FK__Venta__SucursalI__0F382DC6" FromRole="Sucursal" ToRole="Venta" />
           <NavigationProperty Name="VentaCambio" Relationship="TheosProc.FK__VentaCamb__Sucur__530E3526" FromRole="Sucursal" ToRole="VentaCambio" />
+          <NavigationProperty Name="ParteMaxMinFijoHistorico" Relationship="TheosProc.FK__ParteMaxM__Sucur__5F69EA6A" FromRole="Sucursal" ToRole="ParteMaxMinFijoHistorico" />
         </EntityType>
         <EntityType Name="SucursalCriterioABC">
           <Key>
@@ -30490,6 +30544,42 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Type="Boolean" Name="Es9500" Nullable="true" />
           <Property Type="String" Name="Caracteristica" Nullable="false" MaxLength="1" />
         </ComplexType>
+        <EntityType Name="ParteMaxMinFijoHistorico">
+          <Key>
+            <PropertyRef Name="ParteMaxMinFijoHistoricoID" />
+          </Key>
+          <Property Name="ParteMaxMinFijoHistoricoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="SucursalID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Motivo" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Parte" Relationship="TheosProc.FK__ParteMaxM__Parte__5E75C631" FromRole="ParteMaxMinFijoHistorico" ToRole="Parte" />
+          <NavigationProperty Name="Sucursal" Relationship="TheosProc.FK__ParteMaxM__Sucur__5F69EA6A" FromRole="ParteMaxMinFijoHistorico" ToRole="Sucursal" />
+        </EntityType>
+        <Association Name="FK__ParteMaxM__Parte__5E75C631">
+          <End Type="TheosProc.Parte" Role="Parte" Multiplicity="1" />
+          <End Type="TheosProc.ParteMaxMinFijoHistorico" Role="ParteMaxMinFijoHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteMaxMinFijoHistorico">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteMaxM__Sucur__5F69EA6A">
+          <End Type="TheosProc.Sucursal" Role="Sucursal" Multiplicity="1" />
+          <End Type="TheosProc.ParteMaxMinFijoHistorico" Role="ParteMaxMinFijoHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="SucursalID" />
+            </Principal>
+            <Dependent Role="ParteMaxMinFijoHistorico">
+              <PropertyRef Name="SucursalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -36694,6 +36784,17 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ParteMaxMinFijoHistorico">
+            <EntityTypeMapping TypeName="TheosProc.ParteMaxMinFijoHistorico">
+              <MappingFragment StoreEntitySet="ParteMaxMinFijoHistorico">
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="ParteMaxMinFijoHistoricoID" ColumnName="ParteMaxMinFijoHistoricoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -37488,6 +37589,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK__ParteComi__Marca__55E08030" />
         <AssociationConnector Association="TheosProc.FK__ParteComi__Parte__57C8C8A2" />
         <AssociationConnector Association="TheosProc.FK__ParteComi__Prove__54EC5BF7" />
+        <EntityTypeShape EntityType="TheosProc.ParteMaxMinFijoHistorico" Width="1.5" PointX="24" PointY="352.125" />
+        <AssociationConnector Association="TheosProc.FK__ParteMaxM__Parte__5E75C631" />
+        <AssociationConnector Association="TheosProc.FK__ParteMaxM__Sucur__5F69EA6A" />
         </Diagram>
     </Diagrams>
   </Designer>

@@ -467,6 +467,7 @@ namespace Refaccionaria.App
         private void dgvExistencias_CurrentCellChanged(object sender, EventArgs e)
         {
             this.LlenarDescripcionMaxMin(this.dgvExistencias.CurrentRow);
+            this.LlenarMaxMinFijoHistorico(this.dgvExistencias.CurrentRow);
         }
 
         private void dgvExistencias_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -953,6 +954,14 @@ namespace Refaccionaria.App
             if (res == DialogResult.No)
                 return;
 
+            object oMotivoFijoCero = null;
+            if (this.VerMaxMinFijoCero())
+            {
+                oMotivoFijoCero = UtilLocal.ObtenerValor("Indica el motivo por el cuál se especificó un MaxMin de cero:", "", MensajeObtenerValor.Tipo.TextoLargo);
+                if (oMotivoFijoCero == null)
+                    return;
+            }
+
             try
             {
                 SplashScreen.Show(new Splash());
@@ -1072,6 +1081,19 @@ namespace Refaccionaria.App
                         oParteMaxMin.Maximo = Util.Entero(row.Cells["Max"].Value);
                         oParteMaxMin.Minimo = Util.Entero(row.Cells["Min"].Value);
                         Datos.Guardar<ParteMaxMin>(oParteMaxMin);
+
+                        // Se verifica si fue max min 0, para guardar histórico
+                        if (oMotivoFijoCero != null && oParteMaxMin.Maximo == 0 && oParteMaxMin.Minimo == 0)
+                        {
+                            var oFijoHist = new ParteMaxMinFijoHistorico()
+                            {
+                                ParteID = this.oParte.ParteID,
+                                SucursalID = sucursalId,
+                                Fecha = DateTime.Now,
+                                Motivo = Util.Cadena(oMotivoFijoCero)
+                            };
+                            Datos.Guardar<ParteMaxMinFijoHistorico>(oFijoHist);
+                        }
                     }
                 }
 
@@ -2236,6 +2258,27 @@ namespace Refaccionaria.App
                 return;
             this.txtDescripcionMaxMin.Text = string.Format("Condición: {0} Procesado: {1}\r\n{2}", Util.Entero(oFila.Cells["ParteMaxMinReglaID"].Value)
                 , Util.FechaHora(oFila.Cells["FechaMaxMin"].Value), Util.Cadena(oFila.Cells["DescripcionMaxMin"].Value));
+        }
+
+        private void LlenarMaxMinFijoHistorico(DataGridViewRow oFila)
+        {
+            if (oFila == null) return;
+            int iParteID = this.oParte.ParteID;
+            int iSucursalID = Util.Entero(oFila.Cells["SucursalID"].Value);
+            var oFijoHist = Datos.GetListOf<ParteMaxMinFijoHistorico>(c => c.ParteID == iParteID && c.SucursalID == iSucursalID).OrderByDescending(c => c.Fecha);
+            this.dgvMaxMinFijoHistorico.Rows.Clear();
+            foreach (var oReg in oFijoHist)
+                this.dgvMaxMinFijoHistorico.Rows.Add(oReg.Fecha, oReg.Motivo);
+        }
+
+        private bool VerMaxMinFijoCero()
+        {
+            foreach (DataGridViewRow oFila in this.dgvExistencias.Rows)
+            {
+                if (Util.Logico(oFila.Cells["MaxMinFijo"].Value) && Util.Decimal(oFila.Cells["Max"].Value) == 0 && Util.Decimal(oFila.Cells["Min"].Value) == 0)
+                    return true;
+            }
+            return false;
         }
 
         #endregion

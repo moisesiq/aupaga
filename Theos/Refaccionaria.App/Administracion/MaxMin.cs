@@ -806,6 +806,24 @@ namespace Refaccionaria.App
                 return;
             }
 
+            // Se valida que si hay fijos en cero, se ponga el motivo
+            bError = false;
+            foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
+            {
+                oFila.Cells["MotivoFijoCero"].ErrorText = "";
+                if (Util.Logico(oFila.Cells["Fijo"].Value) && Util.Decimal(oFila.Cells["Maximo"].Value) == 0 && Util.Decimal(oFila.Cells["Minimo"].Value) == 0
+                    && Util.Cadena(oFila.Cells["MotivoFijoCero"].Value) == "")
+                {
+                    oFila.Cells["MotivoFijoCero"].ErrorText = "Debes especificar un motivo";
+                    bError = true;
+                }
+            }
+            if (bError)
+            {
+                UtilLocal.MensajeAdvertencia("Por favor indica todos los motivos en donde se especificó un Max Min de cero.");
+                return;
+            }
+                        
             if (UtilLocal.MensajePregunta("¿Estás seguro que deseas guardar los Máximos y Mínimos mostrados?") != DialogResult.Yes)
                 return;
 
@@ -832,6 +850,19 @@ namespace Refaccionaria.App
 
                 // Se verifica si aplica para 9500 y se guarda el dato Es9500
                 AdmonProc.VerGuardar9500(iParteID);
+
+                // Se guardan los datos de fijos históricos, si aplican
+                if (oParteMaxMin.Fijo.Valor() && oParteMaxMin.Maximo == 0 && oParteMaxMin.Minimo == 0)
+                {
+                    var oFijoHist = new ParteMaxMinFijoHistorico()
+                    {
+                        ParteID = iParteID,
+                        SucursalID = iSucursalID,
+                        Fecha = dAhora,
+                        Motivo = Util.Cadena(Fila.Cells["MotivoFijoCero"].Value)
+                    };
+                    Datos.Guardar<ParteMaxMinFijoHistorico>(oFijoHist);
+                }
             }
 
             Cargando.Cerrar();
