@@ -219,11 +219,15 @@ namespace Refaccionaria.App
                     }
                 }
 
+                // Se obtiene el folio de la factura, para mandarlo al reporte
+                var oMov = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oID);
+
                 IEnumerable<Etiquetas> detalleE = listaEtiquetas;
                 using (FastReport.Report report = new FastReport.Report())
                 {
                     report.Load(string.Format("{0}{1}", GlobalClass.ConfiguracionGlobal.pathReportes, "ReporteEtiquetas.frx"));
                     report.RegisterData(detalleE, "etiquetas", 3);
+                    report.SetParameterValue("FolioFactura", oMov.FolioFactura);
                     report.GetDataSource("etiquetas").Enabled = true;
                     report.Show(true);
                     //report.Design(true);

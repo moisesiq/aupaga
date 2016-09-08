@@ -126,7 +126,7 @@ namespace Refaccionaria.App
                         report.Load(string.Format("{0}{1}", GlobalClass.ConfiguracionGlobal.pathReportes, "ReporteEtiquetas.frx"));
                         report.RegisterData(etiquetas, "etiquetas", 3);
                         report.GetDataSource("etiquetas").Enabled = true;
-                        report.FindObject("Text1").Delete();
+                        // report.FindObject("Text1").Delete();
                         // report.Show(true);
                         UtilLocal.EnviarReporteASalida("Reportes.Partes.Etiqueta", report);
                     }

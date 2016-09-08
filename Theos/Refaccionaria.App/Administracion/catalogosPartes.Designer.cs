@@ -31,6 +31,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(catalogosPartes));
@@ -116,9 +119,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle88 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblEncontrados = new System.Windows.Forms.Label();
             this.lblBuscar = new System.Windows.Forms.Label();
             this.progreso = new System.Windows.Forms.ProgressBar();
@@ -157,6 +157,7 @@
             this.lblMarca = new System.Windows.Forms.Label();
             this.tabExistencia = new System.Windows.Forms.TabControl();
             this.tabExistencias = new System.Windows.Forms.TabPage();
+            this.dgvMaxMinFijoHistorico = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
             this.dgvExistencias = new System.Windows.Forms.DataGridView();
@@ -368,12 +369,12 @@
             this.chkErr_MostrarTodos = new System.Windows.Forms.CheckBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.dgvMaxMinFijoHistorico = new System.Windows.Forms.DataGridView();
             this.mfh_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mfh_Motivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabExistencia.SuspendLayout();
             this.tabExistencias.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMaxMinFijoHistorico)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExistencias)).BeginInit();
             this.tabAplicaciones.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -399,7 +400,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAvProveedores)).BeginInit();
             this.tbpErrores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvErrores)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMaxMinFijoHistorico)).BeginInit();
             this.SuspendLayout();
             // 
             // lblEncontrados
@@ -867,6 +867,50 @@
             this.tabExistencias.TabIndex = 1;
             this.tabExistencias.Text = "Existencias";
             // 
+            // dgvMaxMinFijoHistorico
+            // 
+            this.dgvMaxMinFijoHistorico.AllowUserToAddRows = false;
+            this.dgvMaxMinFijoHistorico.AllowUserToDeleteRows = false;
+            this.dgvMaxMinFijoHistorico.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvMaxMinFijoHistorico.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvMaxMinFijoHistorico.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvMaxMinFijoHistorico.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
+            this.dgvMaxMinFijoHistorico.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMaxMinFijoHistorico.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMaxMinFijoHistorico.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvMaxMinFijoHistorico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMaxMinFijoHistorico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.mfh_Fecha,
+            this.mfh_Motivo});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMaxMinFijoHistorico.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvMaxMinFijoHistorico.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
+            this.dgvMaxMinFijoHistorico.Location = new System.Drawing.Point(6, 176);
+            this.dgvMaxMinFijoHistorico.Name = "dgvMaxMinFijoHistorico";
+            this.dgvMaxMinFijoHistorico.ReadOnly = true;
+            this.dgvMaxMinFijoHistorico.RowHeadersVisible = false;
+            this.dgvMaxMinFijoHistorico.RowHeadersWidth = 25;
+            this.dgvMaxMinFijoHistorico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMaxMinFijoHistorico.Size = new System.Drawing.Size(280, 31);
+            this.dgvMaxMinFijoHistorico.TabIndex = 317;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -891,7 +935,7 @@
             this.txtDescripcionMaxMin.Multiline = true;
             this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
             this.txtDescripcionMaxMin.ReadOnly = true;
-            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(133, 98);
+            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(280, 61);
             this.txtDescripcionMaxMin.TabIndex = 14;
             // 
             // dgvExistencias
@@ -3755,50 +3799,6 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // dgvMaxMinFijoHistorico
-            // 
-            this.dgvMaxMinFijoHistorico.AllowUserToAddRows = false;
-            this.dgvMaxMinFijoHistorico.AllowUserToDeleteRows = false;
-            this.dgvMaxMinFijoHistorico.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvMaxMinFijoHistorico.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvMaxMinFijoHistorico.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgvMaxMinFijoHistorico.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
-            this.dgvMaxMinFijoHistorico.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvMaxMinFijoHistorico.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMaxMinFijoHistorico.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvMaxMinFijoHistorico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMaxMinFijoHistorico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.mfh_Fecha,
-            this.mfh_Motivo});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMaxMinFijoHistorico.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvMaxMinFijoHistorico.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvMaxMinFijoHistorico.Location = new System.Drawing.Point(145, 109);
-            this.dgvMaxMinFijoHistorico.Name = "dgvMaxMinFijoHistorico";
-            this.dgvMaxMinFijoHistorico.ReadOnly = true;
-            this.dgvMaxMinFijoHistorico.RowHeadersVisible = false;
-            this.dgvMaxMinFijoHistorico.RowHeadersWidth = 25;
-            this.dgvMaxMinFijoHistorico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMaxMinFijoHistorico.Size = new System.Drawing.Size(141, 98);
-            this.dgvMaxMinFijoHistorico.TabIndex = 317;
-            // 
             // mfh_Fecha
             // 
             this.mfh_Fecha.HeaderText = "Fecha";
@@ -3811,7 +3811,7 @@
             this.mfh_Motivo.HeaderText = "Motivo";
             this.mfh_Motivo.Name = "mfh_Motivo";
             this.mfh_Motivo.ReadOnly = true;
-            this.mfh_Motivo.Width = 120;
+            this.mfh_Motivo.Width = 200;
             // 
             // catalogosPartes
             // 
@@ -3842,6 +3842,7 @@
             this.tabExistencia.ResumeLayout(false);
             this.tabExistencias.ResumeLayout(false);
             this.tabExistencias.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMaxMinFijoHistorico)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExistencias)).EndInit();
             this.tabAplicaciones.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -3876,7 +3877,6 @@
             this.tbpErrores.ResumeLayout(false);
             this.tbpErrores.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvErrores)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMaxMinFijoHistorico)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
