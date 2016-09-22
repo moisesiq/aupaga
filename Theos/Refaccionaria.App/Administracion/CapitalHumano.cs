@@ -14,6 +14,10 @@ namespace Refaccionaria.App
 {
     public partial class CapitalHumano : UserControl
     {
+        const int iNivelLinea = 3;
+        const int iNivelParte = 4;
+        const int iCol_com_Id = 1;
+
         ControlError ctlError = new ControlError();
         int iColumnasFijas = 0;
         bool bDomingo;
@@ -1213,9 +1217,9 @@ namespace Refaccionaria.App
 
         private void tgvComisiones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.tgvComisiones.Columns[e.ColumnIndex] == this.com_Entidad && this.tgvComisiones.CurrentNode.Level == 3)
+            if (this.tgvComisiones.Columns[e.ColumnIndex] == this.com_Entidad && this.tgvComisiones.CurrentNode.Level == CapitalHumano.iNivelLinea)
             {
-                this.CargarPartesLinea(this.tgvComisiones.CurrentNode);
+                this.CargarPartesLinea(this.tgvComisiones.CurrentNode, true);
             }
         }
 
@@ -1278,11 +1282,11 @@ namespace Refaccionaria.App
             Cargando.Cerrar();
         }
 
-        private void CargarPartesLinea(TreeGridNode oNodo)
+        private void CargarPartesLinea(TreeGridNode oNodo, bool bExpandir)
         {
             Cargando.Mostrar();
 
-            int iLineaID = Util.Entero(oNodo.Cells["com_Id"].Value);
+            int iLineaID = Util.Entero(oNodo.Cells[CapitalHumano.iCol_com_Id].Value);
             // int iMarcaID = Util.Entero(oNodo.Parent.Cells["com_Id"].Value);
             // int iProveedorID = Util.Entero(oNodo.Parent.Parent.Cells["com_Id"].Value);
             var oDatos = Datos.GetListOf<PartesComisionesView>(c => c.LineaID == iLineaID && c.ParteID > 0).OrderBy(c => c.ParteID);
@@ -1295,22 +1299,45 @@ namespace Refaccionaria.App
                     , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
             }
 
-            oNodo.Expand();
-
+            if (bExpandir)
+                oNodo.Expand();
+            
             Cargando.Cerrar();
         }
 
         private void VerMarcarCambio(DataGridViewCell oCelda)
         {
+            var oNodo = this.tgvComisiones.GetNodeForRow(oCelda.OwningRow);
+
             // Se verifica si ya se marcó la fila como modificada, en base al tag
-            if (oCelda.Tag != null)
+            if (oNodo.Level == CapitalHumano.iNivelParte && oCelda.Tag != null)
                 return;
 
-            // Se marca la fila como modificada y se manda afectar los nodos hijos
+            // Se mandan cargar las partes de cada línea encontrada en la selección
+            this.CargarPartesLineasEnCascada(oNodo);
+            // Se manda afectar los nodos hijos
+            this.VerCambiosEnCascada(oNodo, oCelda.ColumnIndex, oCelda.Value);
+            // Se marca la fila como modificada
             oCelda.Style.ForeColor = Color.Orange;
             oCelda.Tag = true;
             oCelda.OwningRow.Tag = true;
-            this.VerCambiosEnCascada(this.tgvComisiones.GetNodeForRow(oCelda.OwningRow), oCelda.ColumnIndex, oCelda.Value);
+        }
+
+        private void CargarPartesLineasEnCascada(TreeGridNode oNodo)
+        {
+            if (oNodo.Level == CapitalHumano.iNivelLinea)
+            {
+                if (oNodo.Nodes.Count == 0)
+                    this.CargarPartesLinea(oNodo, false);
+            }
+            else
+            {
+                if (oNodo.Nodes.Count > 0)
+                {
+                    foreach (var oNodoHijo in oNodo.Nodes)
+                        this.CargarPartesLineasEnCascada(oNodoHijo);
+                }
+            }
         }
 
         private void VerCambiosEnCascada(TreeGridNode oNodo, int iCol, object oValor)
