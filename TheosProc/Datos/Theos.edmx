@@ -15983,7 +15983,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="Cotizaciones9500DetalleView" EntityType="TheosProc.Cotizaciones9500DetalleView" />
           <EntitySet Name="Cotizaciones9500View" EntityType="TheosProc.Cotizaciones9500View" />
           <EntitySet Name="EstadosView" EntityType="TheosProc.EstadosView" />
-          <EntitySet Name="EstatusGeneralesView" EntityType="TheosProc.EstatusGeneralesView" />
           <EntitySet Name="ExistenciasView" EntityType="TheosProc.ExistenciasView" />
           <EntitySet Name="InventarioLineasAgrupadoView" EntityType="TheosProc.InventarioLineasAgrupadoView" />
           <EntitySet Name="InventarioLineasConteosView" EntityType="TheosProc.InventarioLineasConteosView" />
@@ -18128,6 +18127,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="ParteMaxMinFijoHistorico" EntitySet="ParteMaxMinFijoHistorico" />
           </AssociationSet>
+          <EntitySet Name="EstatusGeneralesView" EntityType="TheosProc.EstatusGeneralesView" />
           </EntityContainer>
         <EntityType Name="Autorizacion">
           <Key>
@@ -22181,14 +22181,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="EstadoID" Type="Int32" Nullable="false" />
           <Property Name="NombreEstado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Busqueda" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="EstatusGeneralesView">
-          <Key>
-            <PropertyRef Name="EstatusID" />
-            <PropertyRef Name="NombreEstatus" />
-          </Key>
-          <Property Name="EstatusID" Type="Int32" Nullable="false" />
-          <Property Name="NombreEstatus" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ExistenciasView">
           <Key>
@@ -30580,6 +30572,14 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EstatusGeneralesView">
+          <Key>
+            <PropertyRef Name="EstatusID" />
+            <PropertyRef Name="NombreEstatus" />
+          </Key>
+          <Property Name="EstatusID" Type="Int32" Nullable="false" />
+          <Property Name="NombreEstatus" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -33933,14 +33933,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EstatusGeneralesView">
-            <EntityTypeMapping TypeName="TheosProc.EstatusGeneralesView">
-              <MappingFragment StoreEntitySet="EstatusGeneralesView">
-                <ScalarProperty Name="NombreEstatus" ColumnName="NombreEstatus" />
-                <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ExistenciasView">
             <EntityTypeMapping TypeName="TheosProc.ExistenciasView">
               <MappingFragment StoreEntitySet="ExistenciasView">
@@ -36795,6 +36787,14 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EstatusGeneralesView">
+            <EntityTypeMapping TypeName="TheosProc.EstatusGeneralesView">
+              <MappingFragment StoreEntitySet="EstatusGeneralesView">
+                <ScalarProperty Name="NombreEstatus" ColumnName="NombreEstatus" />
+                <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -36816,7 +36816,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ControlRefaccionaria" ZoomLevel="94">
+      <Diagram Name="ControlRefaccionaria" ZoomLevel="106">
         <EntityTypeShape EntityType="TheosProc.Autorizacion" Width="1.5" PointX="13.5" PointY="301.125" />
         <EntityTypeShape EntityType="TheosProc.AutorizacionProceso" Width="1.5" PointX="5.25" PointY="280.875" />
         <EntityTypeShape EntityType="TheosProc.Banco" Width="1.5" PointX="5.25" PointY="318" />
@@ -37035,7 +37035,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.Cotizaciones9500DetalleView" Width="1.5" PointX="18.75" PointY="15.75" />
         <EntityTypeShape EntityType="TheosProc.Cotizaciones9500View" Width="1.5" PointX="16.75" PointY="19.75" />
         <EntityTypeShape EntityType="TheosProc.EstadosView" Width="1.5" PointX="18.75" PointY="19.75" />
-        <EntityTypeShape EntityType="TheosProc.EstatusGeneralesView" Width="1.5" PointX="20.75" PointY="0.75" />
         <EntityTypeShape EntityType="TheosProc.ExistenciasView" Width="1.5" PointX="20.75" PointY="3.75" />
         <EntityTypeShape EntityType="TheosProc.InventarioLineasAgrupadoView" Width="1.5" PointX="20.75" PointY="8.75" />
         <EntityTypeShape EntityType="TheosProc.InventarioLineasConteosView" Width="1.5" PointX="8.75" PointY="20.75" />
@@ -37592,6 +37591,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.ParteMaxMinFijoHistorico" Width="1.5" PointX="24" PointY="352.125" />
         <AssociationConnector Association="TheosProc.FK__ParteMaxM__Parte__5E75C631" />
         <AssociationConnector Association="TheosProc.FK__ParteMaxM__Sucur__5F69EA6A" />
+        <EntityTypeShape EntityType="TheosProc.EstatusGeneralesView" Width="1.5" PointX="9.375" PointY="17.75" />
         </Diagram>
     </Diagrams>
   </Designer>

@@ -1272,7 +1272,8 @@ namespace Refaccionaria.App
                 }
 
                 // Se carga sólo hasta líneas, para que sea más rápido
-                /* oNodoLinea.Nodes.Add(oReg.ParteComisionID, oReg.ParteID, oReg.Descripcion, oReg.PorcentajeNormal, oReg.ComisionFija
+                /*
+                oNodoLinea.Nodes.Add(oReg.ParteComisionID, oReg.ParteID, oReg.Parte, oReg.PorcentajeNormal, oReg.ComisionFija
                     , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
                     , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
                 */
@@ -1332,12 +1333,20 @@ namespace Refaccionaria.App
             }
             else
             {
+                /*
                 if (oNodo.Nodes.Count > 0)
                 {
                     foreach (var oNodoHijo in oNodo.Nodes)
                         this.CargarPartesLineasEnCascada(oNodoHijo);
                 }
+                */
             }
+        }
+
+        private void VerCargarPartesLineas(TreeGridNode oNodo)
+        {
+            if (oNodo.Level == CapitalHumano.iNivelLinea && oNodo.Nodes.Count == 0)
+                this.CargarPartesLinea(oNodo, false);
         }
 
         private void VerCambiosEnCascada(TreeGridNode oNodo, int iCol, object oValor)
@@ -1375,6 +1384,8 @@ namespace Refaccionaria.App
                 if (oFila.Tag == null) continue;
 
                 var oNodo = this.tgvComisiones.GetNodeForRow(oFila);
+                if (oNodo.Nodes.Count > 0)
+                    oNodo.Expand();
                 int? iProveedorID = null, iMarcaID = null, iLineaID = null, iParteID = null;
                 switch (oNodo.Level)
                 {
