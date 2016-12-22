@@ -54,18 +54,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExpandableGridView">
-      <HintPath>Lib\ExpandableGridView.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>lib\ExpandableGridView.dll</HintPath>
     </Reference>
-    <Reference Include="FastReport, Version=2013.3.2.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+    <Reference Include="FacturacionElectronica, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FacturacionElectronica\bin\Debug\FacturacionElectronica.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport">
       <HintPath>lib\FastReport.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="GoogleMaps.LocationServices">
       <HintPath>lib\GoogleMaps.LocationServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -2146,6 +2148,7 @@
     <EmbeddedResource Include="Ventas\vdContactos.resx">
       <DependentUpon>vdContactos.cs</DependentUpon>
     </EmbeddedResource>
+    <Fakes Include="Fakes\FacturacionElectronica.fakes" />
     <None Include="Properties\DataSources\Refaccionaria.Modelo.Configuracion.datasource" />
     <None Include="Properties\DataSources\Refaccionaria.Modelo.Etiquetas.datasource" />
     <None Include="Properties\DataSources\Refaccionaria.Modelo.MovimientoInventarioDetalleView.datasource" />
@@ -2173,10 +2176,6 @@
     <ProjectReference Include="..\..\Util\LibUtil.csproj">
       <Project>{3e90dfbe-e97e-473c-9325-cdfa1568a07f}</Project>
       <Name>LibUtil</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacturacionElectronica\FacturacionElectronica.csproj">
-      <Project>{579CEE42-5EBE-42AB-99A1-A49694128013}</Project>
-      <Name>FacturacionElectronica</Name>
     </ProjectReference>
     <ProjectReference Include="..\LibExt\LibExt.csproj">
       <Project>{97A70A0A-35CB-4C67-B0A7-E66A1244D97A}</Project>
@@ -2372,7 +2371,9 @@
       <Private>False</Private>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

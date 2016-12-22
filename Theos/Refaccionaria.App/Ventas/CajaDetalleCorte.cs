@@ -114,6 +114,7 @@ namespace Refaccionaria.App
             var oParams = new Dictionary<string, object>();
             oParams.Add("OpcionID", CajaDetalleCorte.Opciones.Ventas);
             oParams.Add("SucursalID", GlobalClass.SucursalID);
+            //oParams.Add("Dia", DateTime.Now.Date.AddDays(-38));
             oParams.Add("Dia", DateTime.Now.Date);
             oParams.Add("DevDiasAnt", false);
 

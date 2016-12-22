@@ -150,7 +150,7 @@ namespace Refaccionaria.App
 
             // Se procede a guardar los datos
             DateTime dAhora = DateTime.Now;
-
+            //DateTime dAhora = DateTime.Now.AddDays(-38);
             // Se guarda el dato de inicio
             var oEfectivo = new CajaEfectivoPorDia()
             {
@@ -1144,6 +1144,7 @@ namespace Refaccionaria.App
 
             // Se valida que no haya ventas por cobrar
             DateTime dHoy = DateTime.Today;
+            //DateTime dHoy = DateTime.Today.AddDays(-38);
             if (Datos.Exists<Venta>(c => c.VentaEstatusID == Cat.VentasEstatus.Realizada && EntityFunctions.TruncateTime(c.Fecha) == dHoy && c.Estatus))
             {
                 UtilLocal.MensajeAdvertencia("Existen una o más ventas por cobrar. No se puede continuar.");
@@ -1152,6 +1153,8 @@ namespace Refaccionaria.App
 
             // Se valida que se haya hecho el fondo de caja
             var oDia = Datos.GetEntity<CajaEfectivoPorDia>(q => q.SucursalID == GlobalClass.SucursalID && q.Dia == dHoy && q.Estatus);
+            //oDia.FechaRegistro.AddDays(-36);
+            
             if (oDia == null)
             {
                 UtilLocal.MensajeAdvertencia("No se ha realizado el Fondo de Caja, por lo tanto no se puede continuar.");
@@ -1217,9 +1220,10 @@ namespace Refaccionaria.App
             }
 
             // Se procede a guardar los datos
-            DateTime dAhora = DateTime.Now;
+            //DateTime dAhora = DateTime.Now.AddDays(-36);
+            //DateTime dAhora = DateTime.Now;
 
-            // Se manda a generar la Factura Global
+            //Se manda a generar la Factura Global
             bool bFacturaGlobal = this.FacturaGlobal(oDia);
             if (!bFacturaGlobal)
                return false;
@@ -1664,7 +1668,7 @@ namespace Refaccionaria.App
         private bool GuardarHistoricoCorte()
         {
             int iSucursalID = GlobalClass.SucursalID;
-            DateTime dHoy = DateTime.Today;
+            DateTime dHoy = DateTime.Today.AddDays(0);
             DateTime dManiana = dHoy.AddDays(1);
 
             // Se guardan las ventas

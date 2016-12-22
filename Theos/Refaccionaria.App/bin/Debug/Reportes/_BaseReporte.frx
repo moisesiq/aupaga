@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="01/07/2014 21:51:00" ReportInfo.CreatorVersion="2013.3.2.0">
+  <Dictionary/>
+  <ReportPage Name="Page1" PaperWidth="80" PaperHeight="279.4" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <PageHeaderBand Name="PageHeader1" Width="302.4" Height="69.93"/>
+    <DataBand Name="Data4" Top="73.93" Width="302.4" Height="69.48"/>
+    <PageFooterBand Name="PageFooter1" Top="147.41" Width="302.4" Height="75.6"/>
+  </ReportPage>
+</Report>

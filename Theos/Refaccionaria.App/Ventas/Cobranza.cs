@@ -70,6 +70,14 @@ namespace Refaccionaria.App
 
             // Se cargan las notas de crédito - Ya no, ahora se cargan al seleccionar esa opción en el tab page
             // this.NcAplicarFiltro();
+
+            //Se cargan la lista de nombres de clientes
+            this.dgvClientes.DataSource = Datos.GetListOf<Cliente>().Select(c => new { Value = c.ClienteID, Text = c.Nombre }).OrderBy(o => o.Text).ToList();
+            this.dgvClientes.DisplayMember = "Text";
+            this.dgvClientes.ValueMember = "Value";
+            this.dgvClientes.Text = "Selecciona un cliente";
+            this.dgvClientes.SelectedIndex = -1;
+
         }
 
         private void tabCobranza_SelectedIndexChanged(object sender, EventArgs e)
@@ -380,7 +388,18 @@ namespace Refaccionaria.App
 
         private void NcAplicarFiltro()
         {
-            int iClienteID = (this.Cliente == null ? 0 : this.Cliente.ClienteID);
+            int iClienteID; 
+            if(this.dgvClientes.SelectedValue != null)
+            {
+                iClienteID = (int)this.dgvClientes.SelectedValue;
+            }
+            else
+            {
+                iClienteID = (this.Cliente == null ? 0 : this.Cliente.ClienteID);
+            }
+
+            
+            
             DateTime dDesde = this.dtpNcDesde.Value.Date;
             DateTime dHasta = this.dtpNcHasta.Value.Date.AddDays(1);
             var oNotasDeCredito = Datos.GetListOf<NotasDeCreditoView>(q =>
@@ -711,6 +730,16 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        private void tbpVales_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.NcAplicarFiltro();
+        }
 
                                                                                                                                                         
     }

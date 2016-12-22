@@ -1,0 +1,4 @@
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\Theos\LibExt\bin\Debug\LibExt.dll
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\Theos\LibExt\bin\Debug\LibExt.pdb
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\Theos\LibExt\obj\Debug\LibExt.dll
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\Theos\LibExt\obj\Debug\LibExt.pdb

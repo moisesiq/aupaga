@@ -22,6 +22,15 @@ namespace Refaccionaria.App
         }
         //
 
+        protected override void OnLoad(EventArgs e)
+        {
+            //Your code to run on load goes here 
+
+            // Call the base class OnLoad to ensure any delegate event handlers are still callled
+            base.OnLoad(e);
+        }
+
+
         public Autorizaciones()
         {
             InitializeComponent();

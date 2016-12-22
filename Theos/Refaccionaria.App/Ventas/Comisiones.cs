@@ -221,7 +221,8 @@ namespace Refaccionaria.App
             oParams.Add("Desde", this.dtpDe.Value.Date);
             oParams.Add("Hasta", this.dtpA.Value.Date);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams);
+            
 
             // Se llena el grid
             this.dgvVentas.Rows.Clear();
@@ -278,7 +279,7 @@ namespace Refaccionaria.App
             this.dgvTotales["TotalesImporte", 0].Value = mTotalImporte;
             this.dgvTotales["TotalesCobranza", 0].Value = mTotalCobranza;
             this.dgvTotales["TotalesUtilidad", 0].Value = mUtilidad;
-            this.dgvTotales["TotalesComision", 0].Value = (mComisionVariable + mComisionNegativa);
+            this.dgvTotales["TotalesComision", 0].Value = (mComisionVariable + mComisionNegativa); //se cambio a resta, original suma
 
             // Se obtienen los totales de tienda
             this.LlenarUtilidadSuc();

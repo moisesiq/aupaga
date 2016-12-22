@@ -1091,6 +1091,8 @@ namespace Refaccionaria.App
                             sMetodo += ("," + CatFe.MetodosDePago.Transferencia);
                             break;
                     }
+
+                    sMetodo = sMetodo + " " + oReg.FormaDePago;
                 }
             }
 

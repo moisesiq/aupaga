@@ -53,7 +53,7 @@ namespace Refaccionaria.App
             this.cmbCuentaBancaria.SelectedValue = Cat.CuentasBancarias.Banamex;
 
             // Se llenan los controles de la pestaña impuestos
-            this.cmbImpTipo.CargarDatos("ContaCuentaDeMayorID", "CuentaDeMayor", Datos.GetListOf<ContaCuentaDeMayor>(c => 
+            this.cmbImpTipo.CargarDatos("ContaCuentaDeMayorID", "CuentaDeMayor", Datos.GetListOf<ContaCuentaDeMayor>(c =>
                 c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.Nomina2Por || c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.Imss
                 || c.ContaCuentaDeMayorID == Cat.ContaCuentasDeMayor.Infonavit).OrderBy(c => c.CuentaDeMayor).ToList());
             this.cmbImpPeriodo.ValueMember = "Entero";
@@ -317,7 +317,7 @@ namespace Refaccionaria.App
 
                 // Se obtienen las comisiones, sólo para vendedores y gerentes
                 var oMetaVen = oMetas.FirstOrDefault(c => c.VendedorID == iUsuarioID);
-                if (oMetaVen != null && Datos.Exists<Usuario>(c => c.UsuarioID == iUsuarioID 
+                if (oMetaVen != null && Datos.Exists<Usuario>(c => c.UsuarioID == iUsuarioID
                     && (c.TipoUsuarioID == Cat.TiposDeUsuario.Vendedor || c.TipoUsuarioID == Cat.TiposDeUsuario.Gerente) && c.Estatus))
                 {
                     int iSucursalID = Util.Entero(oFila.Cells["SucursalID"].Value);
@@ -402,24 +402,24 @@ namespace Refaccionaria.App
                 var oNominaOf = oNomUsuariosOficial.Where(c => c.IdUsuario == oReg.UsuarioID);
                 // Se llenan los datos fijos
                 this.dgvDatos.Rows.Add(
-                    oReg.UsuarioID, 
+                    oReg.UsuarioID,
                     oReg.SucursalID,
                     true,
-                    oReg.Usuario, 
+                    oReg.Usuario,
                     oReg.Sucursal,
                     oReg.TotalOficial,
-                    oReg.SueldoFijo, 
-                    oReg.SueldoVariable, 
-                    oReg.Sueldo9500, 
+                    oReg.SueldoFijo,
+                    oReg.SueldoVariable,
+                    oReg.Sueldo9500,
                     oReg.SueldoMinimo,
-                    oReg.Bono, 
-                    oReg.Adicional, 
+                    oReg.Bono,
+                    oReg.Adicional,
                     oReg.TotalSueldo,
                     oReg.Diferencia,
-                    oReg.Tickets, 
-                    oReg.Adelanto, 
-                    oReg.MinutosTarde, 
-                    oReg.Otros, 
+                    oReg.Tickets,
+                    oReg.Adelanto,
+                    oReg.MinutosTarde,
+                    oReg.Otros,
                     oReg.TotalDescuentos,
                     oReg.Liquido
                 );
@@ -513,9 +513,9 @@ namespace Refaccionaria.App
 
             if (this.bDomingo)
                 return this.GuardarDomingo();
-             
+
             Cargando.Mostrar();
-            
+
             // Se guarda la nómina
             int iBancoCuentaID = Util.Entero(this.cmbCuentaBancaria.SelectedValue);
             DateTime dAhora = DateTime.Now;
@@ -863,7 +863,7 @@ namespace Refaccionaria.App
                     }
                 }
             }
-                        
+
             // Se generan las pólizas contables correspondientes (AfeConta)
             var oNominaUsuariosV = Datos.GetListOf<NominaUsuariosView>(c => c.NominaID == oNomina.NominaID);
             foreach (var oReg in oNominaUsuariosV)
@@ -951,7 +951,7 @@ namespace Refaccionaria.App
             var oDesglose = new List<ConteoMonedasUsuario>();
             var oMonedas = new Dictionary<decimal, int>();
             var oListaMon = new List<decimal>() { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.5M, 0.2M, 0.1M };
-            
+
             foreach (DataGridViewRow oFila in this.dgvDatos.Rows)
             {
                 if (!Util.Logico(oFila.Cells["Sel"].Value))
@@ -1079,7 +1079,7 @@ namespace Refaccionaria.App
                 return;
 
             Cargando.Mostrar();
-                        
+
             // Se inserta el pago de impuesto
             var oImpuesto = new NominaImpuesto()
             {
@@ -1228,7 +1228,7 @@ namespace Refaccionaria.App
             if (this.bCargandoComisiones || this.tgvComisiones.CurrentNode == null) return;
             this.VerMarcarCambio(this.tgvComisiones.CurrentNode.Cells[e.ColumnIndex]);
         }
-        
+
         private void btnGuardarCom_Click(object sender, EventArgs e)
         {
             this.GuardarDatosComisiones();
@@ -1239,12 +1239,14 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
             this.bCargandoComisiones = true;
 
+
             string sProveedor = "", sMarca = "", sLinea = "";
-            TreeGridNode oNodoProveedor = null, oNodoMarca = null, oNodoLinea = null;
+            TreeGridNode oNodoProveedor = null, oNodoMarca = null, oNodoLinea = null, oNodoArticulo = null;
             var oDatos = Datos.GetListOf<PartesComisionesPrevioView>().OrderBy(c => c.Proveedor).ThenBy(c => c.Marca).ThenBy(c => c.Linea).ThenBy(c => c.Parte);
             this.tgvComisiones.Nodes.Clear();
             foreach (var oReg in oDatos)
             {
+
                 if (oReg.Proveedor != sProveedor)
                 {
                     sProveedor = oReg.Proveedor;
@@ -1260,16 +1262,50 @@ namespace Refaccionaria.App
                     oNodoMarca = oNodoProveedor.Nodes.Add(oReg.ParteComisionID, oReg.MarcaID, sMarca, oReg.PorcentajeNormal, oReg.ComisionFija
                         , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
                         , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
+                    //oscar 201216
+                    //oNodoMarca.Expand();
                     continue;
                 }
                 if (oReg.Linea != sLinea)
                 {
                     sLinea = oReg.Linea;
+
                     oNodoLinea = oNodoMarca.Nodes.Add(oReg.ParteComisionID, oReg.LineaID, sLinea, oReg.PorcentajeNormal, oReg.ComisionFija
                         , oReg.PorcentajeUnArticulo, oReg.ArticulosEspecial, oReg.PorcentajeArticulosEspecial, oReg.PorcentajeComplementarios
                         , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
+
+                    //oscar201216
+                    //oNodoLinea.Expand();
+
+                    //var oDatos2 = Datos.GetListOf<PartesComisionesView>(c => c.LineaID == oReg.LineaID && c.ProveedorID == oReg.ProveedorID && c.MarcaParteID == oReg.MarcaID && c.ParteID > 0).OrderBy(c => c.ParteID);
+
+                    //////oNodo2.Nodes.Clear();
+
+                    //////comentado oscar 141216
+                    //foreach (var oReg2 in oDatos2)
+                    ////--
+                    ////foreach (var oReg in hs)
+                    //{
+                    //    oNodoArticulo = oNodoLinea.Nodes.Add(oReg2.ParteComisionID, oReg2.ParteID, oReg2.Parte
+                    //        , oReg2.PorcentajeNormal, oReg2.ComisionFija
+                    //        , oReg2.PorcentajeUnArticulo, oReg2.ArticulosEspecial, oReg2.PorcentajeArticulosEspecial, oReg2.PorcentajeComplementarios
+                    //        , oReg2.PorcentajeReduccionPorRepartidor, oReg2.PorcentajeRepartidor, oReg2.ComisionFijaRepartidor);
+                    //}
+
+
                     continue;
                 }
+
+
+                //int iLineaID = Util.Entero(oNodoProveedor.Cells[CapitalHumano.iCol_com_Id].Value);
+                //int iMarcaID = Util.Entero(oNodoProveedor.Parent.Cells["com_Id"].Value);
+                //int iProveedorID = Util.Entero(oNodoProveedor.Parent.Parent.Cells["com_Id"].Value);
+
+
+
+                ////if (bExpandir)
+                ////    oNodo.Expand();
+
 
                 // Se carga sólo hasta líneas, para que sea más rápido
                 /*
@@ -1278,6 +1314,8 @@ namespace Refaccionaria.App
                     , oReg.PorcentajeReduccionPorRepartidor, oReg.PorcentajeRepartidor, oReg.ComisionFijaRepartidor);
                 */
             }
+
+            //CargarPartesLinea(oNodoProveedor, true);
 
             this.bCargandoComisiones = false;
             Cargando.Cerrar();
@@ -1288,11 +1326,31 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             int iLineaID = Util.Entero(oNodo.Cells[CapitalHumano.iCol_com_Id].Value);
-            // int iMarcaID = Util.Entero(oNodo.Parent.Cells["com_Id"].Value);
-            // int iProveedorID = Util.Entero(oNodo.Parent.Parent.Cells["com_Id"].Value);
-            var oDatos = Datos.GetListOf<PartesComisionesView>(c => c.LineaID == iLineaID && c.ParteID > 0).OrderBy(c => c.ParteID);
+
+            //editado oscar 131216
+            int iMarcaID = Util.Entero(oNodo.Parent.Cells["com_Id"].Value);
+            int iProveedorID = Util.Entero(oNodo.Parent.Parent.Cells["com_Id"].Value);
+
+            //editado oscar 121216
+            //var oDatos = Datos.GetListOf<PartesComisionesView>(c => c.LineaID == iLineaID && c.ParteID > 0).OrderBy(c => c.ParteID);
+
+            var oDatos = Datos.GetListOf<PartesComisionesView>(c => c.LineaID == iLineaID && c.ProveedorID == iProveedorID && c.MarcaParteID == iMarcaID && c.ParteID > 0).OrderBy(c => c.ParteID);
+
+            //agregado oscar141216
+            //HashSet<PartesComisionesView> hs = new HashSet<PartesComisionesView>();
+            //foreach (var i in oDatos)
+            //{
+            //    hs.Add(i);
+            //}
+            //141216
+
+
             oNodo.Nodes.Clear();
+
+            //comentado oscar 141216
             foreach (var oReg in oDatos)
+            //--
+            //foreach (var oReg in hs)
             {
                 oNodo.Nodes.Add(oReg.ParteComisionID, oReg.ParteID, oReg.Parte
                     , oReg.PorcentajeNormal, oReg.ComisionFija
@@ -1302,7 +1360,7 @@ namespace Refaccionaria.App
 
             if (bExpandir)
                 oNodo.Expand();
-            
+
             Cargando.Cerrar();
         }
 
@@ -1371,7 +1429,7 @@ namespace Refaccionaria.App
                 oCelda.Value = oValor;
             }
         }
-                
+
         private void GuardarDatosComisiones()
         {
             if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que deseas guardar los cambios realizados?") != DialogResult.Yes)
@@ -1442,7 +1500,7 @@ namespace Refaccionaria.App
                     oParteComision.ComisionFijaRepartidor = Util.Decimal(oNodo.Cells["com_ComisionFijaRepartidor"].Value);
                 if (oNodo.Cells["com_ArticulosEspecial"].Tag != null)
                     oParteComision.ArticulosEspecial = Util.Entero(oNodo.Cells["com_ArticulosEspecial"].Value);
-                                
+
                 Datos.Guardar<ParteComision>(oParteComision);
             }
 

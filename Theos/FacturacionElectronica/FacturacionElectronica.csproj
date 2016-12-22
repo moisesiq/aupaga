@@ -31,13 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto">
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4114.6375, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\BouncyCastle.Crypto.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>lib\Ionic.Zip.dll</HintPath>
-      <Private>False</Private>
+    </Reference>
+    <Reference Include="LibUtil">
+      <HintPath>bin\Release\LibUtil.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,7 +56,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="ThoughtWorks.QRCode">
       <HintPath>lib\ThoughtWorks.QRCode.dll</HintPath>
-      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Fakes Include="Fakes\BouncyCastle.Crypto.fakes" />
     <None Include="Properties\Settings.settings" />
     <None Include="Resources\cfdv32.xsd">
       <SubType>Designer</SubType>
@@ -103,12 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Util\LibUtil.csproj">
-      <Project>{3e90dfbe-e97e-473c-9325-cdfa1568a07f}</Project>
-      <Name>LibUtil</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

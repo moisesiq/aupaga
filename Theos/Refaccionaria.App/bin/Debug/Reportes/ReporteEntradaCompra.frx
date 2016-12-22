@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/07/2013 12:00:26" ReportInfo.Modified="10/22/2015 17:10:06" ReportInfo.CreatorVersion="2015.3.13.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="movimiento" ReferenceName="movimiento" DataType="null" Enabled="true">
+      <Column Name="MovimientoInventarioID" DataType="System.Int32"/>
+      <Column Name="TipoOperacionID" DataType="System.Int32"/>
+      <Column Name="NombreTipoOperacion" DataType="System.String"/>
+      <Column Name="TipoPagoID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="NombreTipoPago" DataType="System.String"/>
+      <Column Name="ProveedorID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="NombreProveedor" DataType="System.String"/>
+      <Column Name="SucursalOrigenID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="SucursalOrigen" DataType="System.String"/>
+      <Column Name="SucursalDestinoID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="SucursalDestino" DataType="System.String"/>
+      <Column Name="FechaFactura" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="FechaRecepcion" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="FolioFactura" DataType="System.String"/>
+      <Column Name="AplicaEnMovimientoInventarioID" DataType="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="FechaAplicacion" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="Subtotal" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="IVA" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="ImporteTotal" DataType="System.Decimal"/>
+      <Column Name="FueLiquidado" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="ConceptoMovimiento" DataType="System.String"/>
+      <Column Name="Observacion" DataType="System.String"/>
+      <Column Name="UsuarioID" DataType="System.Int32"/>
+      <Column Name="NombreUsuario" DataType="System.String"/>
+      <Column Name="FechaRegistro" DataType="System.DateTime"/>
+      <Column Name="FechaModificacion" DataType="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="NombreImagen" DataType="System.String"/>
+      <Column Name="Articulos" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="Unidades" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="Seguro" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+      <Column Name="ImporteTotalSinDescuento" DataType="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="detalle" ReferenceName="detalle" DataType="null" Enabled="true">
+      <Column Name="MovimientoInventarioDetalleID" DataType="System.Int32"/>
+      <Column Name="MovimientoInventarioID" DataType="System.Int32"/>
+      <Column Name="ParteID" DataType="System.Int32"/>
+      <Column Name="NumeroParte" DataType="System.String"/>
+      <Column Name="NombreParte" DataType="System.String"/>
+      <Column Name="Cantidad" DataType="System.Decimal"/>
+      <Column Name="PrecioUnitario" DataType="System.Decimal"/>
+      <Column Name="Importe" DataType="System.Decimal"/>
+      <Column Name="FueDevolucion" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="FechaRegistro" DataType="System.DateTime"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="descuentosGenerales" ReferenceName="descuentosGenerales" DataType="null" Enabled="true">
+      <Column Name="MovimientoInventarioDescuentoID" DataType="System.Int32"/>
+      <Column Name="MovimientoInventarioID" DataType="System.Int32"/>
+      <Column Name="TipoDescuentoID" DataType="System.Int32"/>
+      <Column Name="NombreTipoDescuento" DataType="System.String"/>
+      <Column Name="ParteID" DataType="System.Int32"/>
+      <Column Name="NumeroParte" DataType="System.String"/>
+      <Column Name="NombreParte" DataType="System.String"/>
+      <Column Name="DescuentoUno" DataType="System.Decimal"/>
+      <Column Name="DescuentoDos" DataType="System.Decimal"/>
+      <Column Name="DescuentoTres" DataType="System.Decimal"/>
+      <Column Name="DescuentoCuatro" DataType="System.Decimal"/>
+      <Column Name="DescuentoCinco" DataType="System.Decimal"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="70" PaperHeight="280" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <ReportTitleBand Name="ReportTitle1" Width="264.6" Height="18.9">
+      <TextObject Name="Text1" Left="-0.72" Width="245.1" Height="18.9" Text="Autopartes Garibaldi" HorzAlign="Center"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="22.1" Width="264.6" Height="110.53">
+      <TextObject Name="Text3" Left="103.95" Width="47.25" Height="15.12" Text="Folio:" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text2" Left="149.88" Width="94.5" Height="15.12" Text="[movimiento.MovimientoInventarioID]" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text4" Left="85.05" Top="14.9" Width="66.15" Height="15.12" Text="Factura:" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text5" Left="149.88" Top="14.9" Width="94.5" Height="15.12" Text="[movimiento.FolioFactura]" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text6" Left="149.88" Top="30.8" Width="94.5" Height="15.12" Text="[movimiento.NombreUsuario]" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text7" Left="-0.72" Top="31.35" Width="245.1" Height="15.12" Text="[movimiento.NombreProveedor]" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text8" Top="46.8" Width="75.6" Height="15.12" Text="Movimiento:" Font="Arial, 9pt"/>
+      <TextObject Name="Text9" Left="74.28" Top="46.8" Width="170.1" Height="15.12" Text="[movimiento.NombreTipoOperacion]" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text10" Top="62.7" Width="75.6" Height="15.12" Text="A:" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text11" Left="74.28" Top="62.7" Width="170.1" Height="15.12" Text="[movimiento.SucursalDestino]" Font="Arial, 9pt"/>
+      <TextObject Name="Text12" Top="78.6" Width="103.95" Height="15.12" Text="Forma de pago:" Font="Arial, 9pt"/>
+      <TextObject Name="Text13" Left="101.83" Top="78.6" Width="142.55" Height="15.12" Text="[movimiento.NombreTipoPago]" Font="Arial, 9pt"/>
+      <TextObject Name="Text14" Left="0.62" Top="15.09" Width="94.5" Height="15.12" Text="[movimiento.FechaRegistro]" Format="Date" Format.Format="d" Font="Arial, 9pt"/>
+      <TextObject Name="Text15" Top="96.37" Width="66.15" Height="12.58" Text="NúmParte" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text16" Left="66.15" Top="96.37" Width="75.6" Height="12.58" Text="Descripción" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text17" Left="141.75" Top="96.37" Width="37.8" Height="12.58" Text="Cant." VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text19" Left="187.25" Top="96.37" Width="57.13" Height="12.58" Text="Importe" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="135.83" Width="264.6" Height="37.29" CanGrow="true" DataSource="detalle">
+      <TextObject Name="Text20" Width="242.04" Height="36.04" Text="[detalle.NumeroParte] // [detalle.Cantidad] // [detalle.Importe] // [detalle.NombreParte]" Font="Arial, 9pt" LineHeight="11.34"/>
+    </DataBand>
+    <DataBand Name="Data2" Top="176.32" Width="264.6" Height="66.15">
+      <TextObject Name="Text26" Width="54.82" Height="15.12" Text="Unidades:" Font="Arial Narrow, 9pt"/>
+      <TextObject Name="Text27" Left="51.7" Width="28.35" Height="15.12" Text="[movimiento.Unidades]" Font="Arial Narrow, 9pt"/>
+      <TextObject Name="Text28" Left="85.05" Width="66.15" Height="15.12" Text="Subtotal:" HorzAlign="Right" Font="Arial Narrow, 9pt"/>
+      <TextObject Name="Text31" Left="147.88" Width="94.5" Height="15.12" Text="[movimiento.Subtotal]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text29" Left="85.05" Top="14.9" Width="66.15" Height="15.12" Text="Iva:" HorzAlign="Right" Font="Arial Narrow, 9pt"/>
+      <TextObject Name="Text32" Left="147.88" Top="14.9" Width="94.5" Height="15.12" Text="[movimiento.IVA]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text30" Left="85.05" Top="29.8" Width="66.15" Height="15.12" Text="Total:" HorzAlign="Right" Font="Arial Narrow, 9pt"/>
+      <TextObject Name="Text33" Left="147.88" Top="29.8" Width="94.5" Height="15.12" Text="[movimiento.ImporteTotal]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" WordWrap="false" Font="Arial, 9pt, style=Bold" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text34" Left="94.5" Top="48.15" Width="141.75" Height="15.12" Text="TOTAL SIN DESCUENTO" Font="Arial Narrow, 9pt, style=Bold, Italic"/>
+      <TextObject Name="Text35" Left="6.13" Top="48.15" Width="86.5" Height="15.12" Text="[movimiento.ImporteFactura]" Format="Currency" Format.UseLocale="true" HorzAlign="Right" Font="Arial, 9pt, style=Bold, Italic"/>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -1783,7 +1783,12 @@ namespace Refaccionaria.App
                 if (dgvExistencias.Rows.Count > 0)
                     dgvExistencias.Rows.Clear();
 
-                this.dgvExistencias.DataSource = Datos.GetListOf<ExistenciasView>(ex => ex.ParteID.Equals(parteId));
+
+                var x = Datos.GetListOf<ExistenciasView>(ex => ex.ParteID.Equals(parteId));
+                this.dgvExistencias.DataSource = x;
+                //this.dgvExistencias.DataSource = Datos.GetListOf<ExistenciasView>(ex => ex.ParteID.Equals(parteId));
+
+                //this.dgvExistencias.DataSource = Datos.GetListOf<ExistenciasView>(ex => ex.ParteID.Equals(parteId));
                 this.dgvExistencias.AutoResizeColumns();
                 
                 // Se agrega una columna para determinar si se cambió manualmente el valor de Máximo o Mínimo
@@ -2920,6 +2925,11 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        private void dgvExistencias_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
 
     }
 }

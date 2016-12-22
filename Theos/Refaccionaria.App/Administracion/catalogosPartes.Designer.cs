@@ -158,6 +158,8 @@
             this.tabExistencia = new System.Windows.Forms.TabControl();
             this.tabExistencias = new System.Windows.Forms.TabPage();
             this.dgvMaxMinFijoHistorico = new System.Windows.Forms.DataGridView();
+            this.mfh_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mfh_Motivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
             this.dgvExistencias = new System.Windows.Forms.DataGridView();
@@ -369,8 +371,6 @@
             this.chkErr_MostrarTodos = new System.Windows.Forms.CheckBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.mfh_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mfh_Motivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabExistencia.SuspendLayout();
             this.tabExistencias.SuspendLayout();
@@ -911,6 +911,20 @@
             this.dgvMaxMinFijoHistorico.Size = new System.Drawing.Size(280, 31);
             this.dgvMaxMinFijoHistorico.TabIndex = 317;
             // 
+            // mfh_Fecha
+            // 
+            this.mfh_Fecha.HeaderText = "Fecha";
+            this.mfh_Fecha.Name = "mfh_Fecha";
+            this.mfh_Fecha.ReadOnly = true;
+            this.mfh_Fecha.Width = 80;
+            // 
+            // mfh_Motivo
+            // 
+            this.mfh_Motivo.HeaderText = "Motivo";
+            this.mfh_Motivo.Name = "mfh_Motivo";
+            this.mfh_Motivo.ReadOnly = true;
+            this.mfh_Motivo.Width = 200;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -974,12 +988,14 @@
             this.dgvExistencias.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvExistencias.Location = new System.Drawing.Point(6, 6);
             this.dgvExistencias.Name = "dgvExistencias";
+            this.dgvExistencias.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvExistencias.RowHeadersVisible = false;
             this.dgvExistencias.RowHeadersWidth = 25;
             this.dgvExistencias.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvExistencias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvExistencias.Size = new System.Drawing.Size(220, 87);
             this.dgvExistencias.TabIndex = 13;
+            this.dgvExistencias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExistencias_CellContentClick);
             this.dgvExistencias.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvExistencias_CellValidating);
             this.dgvExistencias.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExistencias_CellValueChanged);
             this.dgvExistencias.CurrentCellChanged += new System.EventHandler(this.dgvExistencias_CurrentCellChanged);
@@ -3798,20 +3814,6 @@
             this.btnAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // mfh_Fecha
-            // 
-            this.mfh_Fecha.HeaderText = "Fecha";
-            this.mfh_Fecha.Name = "mfh_Fecha";
-            this.mfh_Fecha.ReadOnly = true;
-            this.mfh_Fecha.Width = 80;
-            // 
-            // mfh_Motivo
-            // 
-            this.mfh_Motivo.HeaderText = "Motivo";
-            this.mfh_Motivo.Name = "mfh_Motivo";
-            this.mfh_Motivo.ReadOnly = true;
-            this.mfh_Motivo.Width = 200;
             // 
             // catalogosPartes
             // 

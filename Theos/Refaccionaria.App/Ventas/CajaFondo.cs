@@ -60,6 +60,7 @@ namespace Refaccionaria.App
         {
             // Se llena el importe del día anterior
             DateTime dHoy = DateTime.Today;
+            //DateTime dHoy = DateTime.Today.AddDays(-38);
             CajaEfectivoPorDia oEfectivo;
             var oEfectivos = Datos.GetListOf<CajaEfectivoPorDia>(q => q.SucursalID == GlobalClass.SucursalID && q.Dia < dHoy && q.Estatus);
             if (oEfectivos.Count > 0)
@@ -94,6 +95,8 @@ namespace Refaccionaria.App
             this.LimpiarMonedas();
             // Se verifica si ya se realizó el fondo el día de hoy
             DateTime dHoy = DateTime.Today;
+            //DateTime dHoy = DateTime.Today.AddDays(-38);
+
             var oEfectivo = Datos.GetEntity<CajaEfectivoPorDia>(q => q.SucursalID == GlobalClass.SucursalID && q.Dia == dHoy && q.Estatus);
             if (oEfectivo != null)
             {

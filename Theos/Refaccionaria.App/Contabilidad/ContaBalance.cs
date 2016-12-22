@@ -52,18 +52,18 @@ namespace Refaccionaria.App
             oParams2.Add("Hasta", this.dtpHasta2.Value);
             if (this.cmbSucursal2.SelectedValue != null)
                 oParams2.Add("SucursalID", Util.Entero(this.cmbSucursal2.SelectedValue));
-            var oDatos1 = Datos.ExecuteProcedure<pauContaCuentasPolizasImportes_Result>("pauContaCuentasPolizasImportes", oParams1);
+            var oDatos = Datos.ExecuteProcedure<pauContaCuentasPolizasImportes_Result>("pauContaCuentasPolizasImportes", oParams1);
             var oDatos2 = Datos.ExecuteProcedure<pauContaCuentasPolizasImportes_Result>("pauContaCuentasPolizasImportes", oParams2);
 
             // Se sacan las cuentas de mayor que no aplican
-            oDatos1 = oDatos1.Where(c => c.ContaCuentaID == Cat.ContaCuentas.Activo || c.ContaCuentaID == Cat.ContaCuentas.Pasivo
+            oDatos = oDatos.Where(c => c.ContaCuentaID == Cat.ContaCuentas.Activo || c.ContaCuentaID == Cat.ContaCuentas.Pasivo
                 || c.ContaCuentaID == Cat.ContaCuentas.CapitalContable).ToList();
             oDatos2 = oDatos2.Where(c => c.ContaCuentaID == Cat.ContaCuentas.Activo || c.ContaCuentaID == Cat.ContaCuentas.Pasivo
                 || c.ContaCuentaID == Cat.ContaCuentas.CapitalContable).ToList();
 
-            var oPorCuenta1 = oDatos1.GroupBy(c => (c.Cuenta + " - " + c.Subcuenta)).Select(c => new { Subcuenta = c.Key, Importe = c.Sum(s => s.Importe) })
+            var oPorCuenta1 = oDatos.GroupBy(c => (c.Cuenta + " - " + c.Subcuenta)).Select(c => new { Subcuenta = c.Key, Importe = c.Sum(s => s.Importe) })
                 .ToDictionary(c => c.Subcuenta, d => d.Importe);
-            var oPorCuentaDemayor1 = oDatos1.GroupBy(c => new { Subcuenta = (c.Cuenta + " - " + c.Subcuenta), c.CuentaDeMayor }).Select(c =>
+            var oPorCuentaDemayor1 = oDatos.GroupBy(c => new { Subcuenta = (c.Cuenta + " - " + c.Subcuenta), c.CuentaDeMayor }).Select(c =>
                 new { Subcuenta = c.Key.Subcuenta, CuentaDeMayor = c.Key.CuentaDeMayor, Importe = c.Sum(s => s.Importe) }).ToList();
             var oPorCuenta2 = oDatos2.GroupBy(c => (c.Cuenta + " - " + c.Subcuenta)).Select(c => new { Subcuenta = c.Key, Importe = c.Sum(s => s.Importe) })
                 .ToDictionary(c => c.Subcuenta, d => d.Importe);

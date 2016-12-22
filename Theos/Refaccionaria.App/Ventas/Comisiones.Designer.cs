@@ -39,15 +39,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabComisiones = new System.Windows.Forms.TabControl();
             this.tbpLogros = new System.Windows.Forms.TabPage();
             this.tbpComisiones = new System.Windows.Forms.TabPage();
@@ -58,6 +58,17 @@
             this.TotalesUtilidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalesComision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvVentas = new System.Windows.Forms.DataGridView();
+            this.colVentaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cobranza = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Utilidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ComisionFija = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Detalle_9500 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.lblFijo = new System.Windows.Forms.Label();
             this.lbl9500 = new System.Windows.Forms.Label();
@@ -79,17 +90,6 @@
             this.label51 = new System.Windows.Forms.Label();
             this.cmbVendedor = new LibUtil.ComboEtiqueta();
             this.btnGraficas = new System.Windows.Forms.Button();
-            this.colVentaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Caracteristica = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cobranza = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Utilidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ComisionFija = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Detalle_9500 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabComisiones.SuspendLayout();
             this.tbpComisiones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotales)).BeginInit();
@@ -316,6 +316,101 @@
             this.dgvVentas.StandardTab = true;
             this.dgvVentas.TabIndex = 0;
             this.dgvVentas.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvVentas_RowStateChanged);
+            // 
+            // colVentaID
+            // 
+            this.colVentaID.HeaderText = "colVentaID";
+            this.colVentaID.Name = "colVentaID";
+            this.colVentaID.ReadOnly = true;
+            this.colVentaID.Visible = false;
+            // 
+            // Caracteristica
+            // 
+            this.Caracteristica.HeaderText = "Característica";
+            this.Caracteristica.Name = "Caracteristica";
+            this.Caracteristica.ReadOnly = true;
+            this.Caracteristica.Visible = false;
+            // 
+            // Fecha
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Fecha.DefaultCellStyle = dataGridViewCellStyle10;
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.Width = 136;
+            // 
+            // RazonSocial
+            // 
+            this.RazonSocial.HeaderText = "Razón Social";
+            this.RazonSocial.Name = "RazonSocial";
+            this.RazonSocial.ReadOnly = true;
+            this.RazonSocial.Width = 140;
+            // 
+            // Folio
+            // 
+            this.Folio.HeaderText = "Folio";
+            this.Folio.Name = "Folio";
+            this.Folio.ReadOnly = true;
+            this.Folio.Width = 80;
+            // 
+            // Importe
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "C2";
+            this.Importe.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Importe.HeaderText = "Importe";
+            this.Importe.Name = "Importe";
+            this.Importe.ReadOnly = true;
+            this.Importe.Width = 80;
+            // 
+            // Cobranza
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "C2";
+            this.Cobranza.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Cobranza.HeaderText = "Cobranza";
+            this.Cobranza.Name = "Cobranza";
+            this.Cobranza.ReadOnly = true;
+            this.Cobranza.Width = 80;
+            // 
+            // Utilidad
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "C2";
+            this.Utilidad.DefaultCellStyle = dataGridViewCellStyle13;
+            this.Utilidad.HeaderText = "Utilidad";
+            this.Utilidad.Name = "Utilidad";
+            this.Utilidad.ReadOnly = true;
+            this.Utilidad.Visible = false;
+            this.Utilidad.Width = 80;
+            // 
+            // Comision
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "C2";
+            this.Comision.DefaultCellStyle = dataGridViewCellStyle14;
+            this.Comision.HeaderText = "Comisión";
+            this.Comision.Name = "Comision";
+            this.Comision.ReadOnly = true;
+            this.Comision.Width = 80;
+            // 
+            // ComisionFija
+            // 
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "C2";
+            this.ComisionFija.DefaultCellStyle = dataGridViewCellStyle15;
+            this.ComisionFija.HeaderText = "Fija";
+            this.ComisionFija.Name = "ComisionFija";
+            this.ComisionFija.ReadOnly = true;
+            this.ComisionFija.Width = 80;
+            // 
+            // Detalle_9500
+            // 
+            this.Detalle_9500.HeaderText = "9500";
+            this.Detalle_9500.Name = "Detalle_9500";
+            this.Detalle_9500.ReadOnly = true;
+            this.Detalle_9500.Width = 40;
             // 
             // label2
             // 
@@ -624,101 +719,6 @@
             this.btnGraficas.Text = "&Gráficas";
             this.btnGraficas.UseVisualStyleBackColor = false;
             this.btnGraficas.Click += new System.EventHandler(this.btnGraficas_Click);
-            // 
-            // colVentaID
-            // 
-            this.colVentaID.HeaderText = "colVentaID";
-            this.colVentaID.Name = "colVentaID";
-            this.colVentaID.ReadOnly = true;
-            this.colVentaID.Visible = false;
-            // 
-            // Caracteristica
-            // 
-            this.Caracteristica.HeaderText = "Característica";
-            this.Caracteristica.Name = "Caracteristica";
-            this.Caracteristica.ReadOnly = true;
-            this.Caracteristica.Visible = false;
-            // 
-            // Fecha
-            // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Fecha.DefaultCellStyle = dataGridViewCellStyle10;
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            this.Fecha.Width = 136;
-            // 
-            // RazonSocial
-            // 
-            this.RazonSocial.HeaderText = "Razón Social";
-            this.RazonSocial.Name = "RazonSocial";
-            this.RazonSocial.ReadOnly = true;
-            this.RazonSocial.Width = 140;
-            // 
-            // Folio
-            // 
-            this.Folio.HeaderText = "Folio";
-            this.Folio.Name = "Folio";
-            this.Folio.ReadOnly = true;
-            this.Folio.Width = 80;
-            // 
-            // Importe
-            // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "C2";
-            this.Importe.DefaultCellStyle = dataGridViewCellStyle11;
-            this.Importe.HeaderText = "Importe";
-            this.Importe.Name = "Importe";
-            this.Importe.ReadOnly = true;
-            this.Importe.Width = 80;
-            // 
-            // Cobranza
-            // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "C2";
-            this.Cobranza.DefaultCellStyle = dataGridViewCellStyle12;
-            this.Cobranza.HeaderText = "Cobranza";
-            this.Cobranza.Name = "Cobranza";
-            this.Cobranza.ReadOnly = true;
-            this.Cobranza.Width = 80;
-            // 
-            // Utilidad
-            // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Format = "C2";
-            this.Utilidad.DefaultCellStyle = dataGridViewCellStyle13;
-            this.Utilidad.HeaderText = "Utilidad";
-            this.Utilidad.Name = "Utilidad";
-            this.Utilidad.ReadOnly = true;
-            this.Utilidad.Visible = false;
-            this.Utilidad.Width = 80;
-            // 
-            // Comision
-            // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.Format = "C2";
-            this.Comision.DefaultCellStyle = dataGridViewCellStyle14;
-            this.Comision.HeaderText = "Comisión";
-            this.Comision.Name = "Comision";
-            this.Comision.ReadOnly = true;
-            this.Comision.Width = 80;
-            // 
-            // ComisionFija
-            // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.Format = "C2";
-            this.ComisionFija.DefaultCellStyle = dataGridViewCellStyle15;
-            this.ComisionFija.HeaderText = "Fija";
-            this.ComisionFija.Name = "ComisionFija";
-            this.ComisionFija.ReadOnly = true;
-            this.ComisionFija.Width = 80;
-            // 
-            // Detalle_9500
-            // 
-            this.Detalle_9500.HeaderText = "9500";
-            this.Detalle_9500.Name = "Detalle_9500";
-            this.Detalle_9500.ReadOnly = true;
-            this.Detalle_9500.Width = 40;
             // 
             // Comisiones
             // 

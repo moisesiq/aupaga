@@ -1,0 +1,8 @@
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\TheosProc\bin\Debug\TheosProc.dll.config
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\TheosProc\bin\Debug\TheosProc.dll
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\TheosProc\bin\Debug\TheosProc.pdb
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\TheosProc\bin\Debug\LibUtil.dll
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\TheosProc\bin\Debug\LibUtil.pdb
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\TheosProc\obj\Debug\TheosProc.csprojResolveAssemblyReference.cache
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\TheosProc\obj\Debug\TheosProc.dll
+C:\Users\DESARROLLO\Documents\Repositorios\aupaga\TheosProc\obj\Debug\TheosProc.pdb

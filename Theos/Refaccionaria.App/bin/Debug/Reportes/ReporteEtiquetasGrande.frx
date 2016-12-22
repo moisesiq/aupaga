@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/07/2013 12:00:26" ReportInfo.Modified="09/26/2014 16:37:36" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="\\Administrativo\Label" PrintSettings.SavePrinterWithReport="true">
+  <Dictionary>
+    <BusinessObjectDataSource Name="etiquetas" ReferenceName="etiquetas" DataType="null" Enabled="true">
+      <Column Name="MovimientoInventarioEtiquetaID" DataType="System.Int32"/>
+      <Column Name="MovimientoInventarioID" DataType="System.Int32"/>
+      <Column Name="ParteID" DataType="System.Int32"/>
+      <Column Name="NumeroParte" DataType="System.String"/>
+      <Column Name="NombreParte" DataType="System.String"/>
+      <Column Name="CodigoBarra" DataType="System.String"/>
+      <Column Name="NumeroEtiquetas" DataType="System.Int32"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="50" PaperHeight="25" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0">
+    <DataBand Name="Data1" Width="189" Height="93.05" DataSource="etiquetas">
+      <TextObject Name="NumeroParte" Left="-3" Width="198.45" Height="85.05" Text="[etiquetas.NumeroParte]" HorzAlign="Center" VertAlign="Center" Font="Arial Narrow, 24pt, style=Bold" LineHeight="18.9"/>
+      <TextObject Name="Text1" Left="-1" Width="94.5" Height="18.9" HorzAlign="Center" Font="Arial, 14pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>
