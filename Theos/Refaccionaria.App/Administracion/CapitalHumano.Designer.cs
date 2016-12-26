@@ -140,6 +140,7 @@
             this.tbpComisiones = new System.Windows.Forms.TabPage();
             this.btnGuardarCom = new System.Windows.Forms.Button();
             this.tgvComisiones = new AdvancedDataGridView.TreeGridView();
+            this.label13 = new System.Windows.Forms.Label();
             this.com_ParteComisionID = new AdvancedDataGridView.TreeGridColumn();
             this.com_Id = new AdvancedDataGridView.TreeGridColumn();
             this.com_Entidad = new AdvancedDataGridView.TreeGridColumn();
@@ -174,7 +175,7 @@
             this.tabCapitalHumano.Location = new System.Drawing.Point(3, 3);
             this.tabCapitalHumano.Name = "tabCapitalHumano";
             this.tabCapitalHumano.SelectedIndex = 0;
-            this.tabCapitalHumano.Size = new System.Drawing.Size(1013, 455);
+            this.tabCapitalHumano.Size = new System.Drawing.Size(1357, 525);
             this.tabCapitalHumano.TabIndex = 0;
             this.tabCapitalHumano.SelectedIndexChanged += new System.EventHandler(this.tabCapitalHumano_SelectedIndexChanged);
             // 
@@ -201,7 +202,7 @@
             this.tbpNomina.Location = new System.Drawing.Point(4, 22);
             this.tbpNomina.Name = "tbpNomina";
             this.tbpNomina.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpNomina.Size = new System.Drawing.Size(1005, 429);
+            this.tbpNomina.Size = new System.Drawing.Size(1349, 499);
             this.tbpNomina.TabIndex = 0;
             this.tbpNomina.Text = "Nómina";
             // 
@@ -260,7 +261,7 @@
             this.btnDesgloseLiquido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnDesgloseLiquido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDesgloseLiquido.ForeColor = System.Drawing.Color.White;
-            this.btnDesgloseLiquido.Location = new System.Drawing.Point(924, 401);
+            this.btnDesgloseLiquido.Location = new System.Drawing.Point(1268, 471);
             this.btnDesgloseLiquido.Name = "btnDesgloseLiquido";
             this.btnDesgloseLiquido.Size = new System.Drawing.Size(75, 23);
             this.btnDesgloseLiquido.TabIndex = 7;
@@ -274,7 +275,7 @@
             this.lblReserva.AutoSize = true;
             this.lblReserva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReserva.ForeColor = System.Drawing.Color.White;
-            this.lblReserva.Location = new System.Drawing.Point(250, 406);
+            this.lblReserva.Location = new System.Drawing.Point(250, 476);
             this.lblReserva.Name = "lblReserva";
             this.lblReserva.Size = new System.Drawing.Size(39, 13);
             this.lblReserva.TabIndex = 11;
@@ -285,7 +286,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(194, 406);
+            this.label4.Location = new System.Drawing.Point(194, 476);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 13);
             this.label4.TabIndex = 10;
@@ -296,7 +297,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(6, 406);
+            this.label3.Location = new System.Drawing.Point(6, 476);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 9;
@@ -308,7 +309,7 @@
             this.cmbCuentaBancaria.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbCuentaBancaria.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCuentaBancaria.FormattingEnabled = true;
-            this.cmbCuentaBancaria.Location = new System.Drawing.Point(58, 403);
+            this.cmbCuentaBancaria.Location = new System.Drawing.Point(58, 473);
             this.cmbCuentaBancaria.Name = "cmbCuentaBancaria";
             this.cmbCuentaBancaria.Size = new System.Drawing.Size(121, 21);
             this.cmbCuentaBancaria.TabIndex = 5;
@@ -319,7 +320,7 @@
             this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Location = new System.Drawing.Point(843, 401);
+            this.btnGuardar.Location = new System.Drawing.Point(1187, 471);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 6;
@@ -403,7 +404,7 @@
             this.dgvDatos.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.RowHeadersWidth = 25;
-            this.dgvDatos.Size = new System.Drawing.Size(999, 363);
+            this.dgvDatos.Size = new System.Drawing.Size(1343, 433);
             this.dgvDatos.TabIndex = 4;
             this.dgvDatos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDatos_CellFormatting);
             this.dgvDatos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellValueChanged);
@@ -685,7 +686,7 @@
             this.tbpImpuestos.Controls.Add(this.cmbImpTipo);
             this.tbpImpuestos.Location = new System.Drawing.Point(4, 22);
             this.tbpImpuestos.Name = "tbpImpuestos";
-            this.tbpImpuestos.Size = new System.Drawing.Size(1005, 429);
+            this.tbpImpuestos.Size = new System.Drawing.Size(1349, 499);
             this.tbpImpuestos.TabIndex = 1;
             this.tbpImpuestos.Text = "Impuestos";
             // 
@@ -724,7 +725,7 @@
             dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvImpTotales.DefaultCellStyle = dataGridViewCellStyle24;
             this.dgvImpTotales.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvImpTotales.Location = new System.Drawing.Point(3, 377);
+            this.dgvImpTotales.Location = new System.Drawing.Point(3, 447);
             this.dgvImpTotales.Name = "dgvImpTotales";
             this.dgvImpTotales.ReadOnly = true;
             dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -737,7 +738,7 @@
             this.dgvImpTotales.RowHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvImpTotales.RowHeadersVisible = false;
             this.dgvImpTotales.RowHeadersWidth = 25;
-            this.dgvImpTotales.Size = new System.Drawing.Size(999, 20);
+            this.dgvImpTotales.Size = new System.Drawing.Size(1343, 20);
             this.dgvImpTotales.TabIndex = 24;
             // 
             // imp_TotalTitulo
@@ -780,7 +781,7 @@
             // txtImpFolioDePago
             // 
             this.txtImpFolioDePago.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtImpFolioDePago.Location = new System.Drawing.Point(473, 403);
+            this.txtImpFolioDePago.Location = new System.Drawing.Point(473, 473);
             this.txtImpFolioDePago.Name = "txtImpFolioDePago";
             this.txtImpFolioDePago.Size = new System.Drawing.Size(100, 20);
             this.txtImpFolioDePago.TabIndex = 7;
@@ -790,7 +791,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(396, 406);
+            this.label10.Location = new System.Drawing.Point(396, 476);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(71, 13);
             this.label10.TabIndex = 23;
@@ -801,7 +802,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(185, 406);
+            this.label9.Location = new System.Drawing.Point(185, 476);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(78, 13);
             this.label9.TabIndex = 22;
@@ -813,7 +814,7 @@
             this.cmbImpFormaDePago.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbImpFormaDePago.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbImpFormaDePago.FormattingEnabled = true;
-            this.cmbImpFormaDePago.Location = new System.Drawing.Point(269, 403);
+            this.cmbImpFormaDePago.Location = new System.Drawing.Point(269, 473);
             this.cmbImpFormaDePago.Name = "cmbImpFormaDePago";
             this.cmbImpFormaDePago.Size = new System.Drawing.Size(121, 21);
             this.cmbImpFormaDePago.TabIndex = 6;
@@ -861,7 +862,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(6, 406);
+            this.label5.Location = new System.Drawing.Point(6, 476);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 16;
@@ -873,7 +874,7 @@
             this.cmbImpCuenta.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbImpCuenta.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbImpCuenta.FormattingEnabled = true;
-            this.cmbImpCuenta.Location = new System.Drawing.Point(53, 403);
+            this.cmbImpCuenta.Location = new System.Drawing.Point(53, 473);
             this.cmbImpCuenta.Name = "cmbImpCuenta";
             this.cmbImpCuenta.Size = new System.Drawing.Size(121, 21);
             this.cmbImpCuenta.TabIndex = 5;
@@ -881,7 +882,7 @@
             // btnImpGuardar
             // 
             this.btnImpGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImpGuardar.Location = new System.Drawing.Point(927, 401);
+            this.btnImpGuardar.Location = new System.Drawing.Point(1271, 471);
             this.btnImpGuardar.Name = "btnImpGuardar";
             this.btnImpGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnImpGuardar.TabIndex = 8;
@@ -950,7 +951,7 @@
             this.dgvImpDatos.RowHeadersDefaultCellStyle = dataGridViewCellStyle31;
             this.dgvImpDatos.RowHeadersVisible = false;
             this.dgvImpDatos.RowHeadersWidth = 25;
-            this.dgvImpDatos.Size = new System.Drawing.Size(999, 344);
+            this.dgvImpDatos.Size = new System.Drawing.Size(1343, 414);
             this.dgvImpDatos.TabIndex = 4;
             this.dgvImpDatos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvImpDatos_CellValueChanged);
             // 
@@ -1045,11 +1046,12 @@
             // tbpComisiones
             // 
             this.tbpComisiones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.tbpComisiones.Controls.Add(this.label13);
             this.tbpComisiones.Controls.Add(this.btnGuardarCom);
             this.tbpComisiones.Controls.Add(this.tgvComisiones);
             this.tbpComisiones.Location = new System.Drawing.Point(4, 22);
             this.tbpComisiones.Name = "tbpComisiones";
-            this.tbpComisiones.Size = new System.Drawing.Size(1005, 429);
+            this.tbpComisiones.Size = new System.Drawing.Size(1349, 499);
             this.tbpComisiones.TabIndex = 2;
             this.tbpComisiones.Text = "Comisiones";
             // 
@@ -1059,7 +1061,7 @@
             this.btnGuardarCom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
             this.btnGuardarCom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarCom.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarCom.Location = new System.Drawing.Point(927, 403);
+            this.btnGuardarCom.Location = new System.Drawing.Point(1271, 473);
             this.btnGuardarCom.Name = "btnGuardarCom";
             this.btnGuardarCom.Size = new System.Drawing.Size(75, 23);
             this.btnGuardarCom.TabIndex = 3;
@@ -1099,16 +1101,27 @@
             dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.tgvComisiones.DefaultCellStyle = dataGridViewCellStyle41;
+            this.tgvComisiones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.tgvComisiones.ImageList = null;
             this.tgvComisiones.Location = new System.Drawing.Point(3, 3);
             this.tgvComisiones.MultiSelect = false;
             this.tgvComisiones.Name = "tgvComisiones";
             this.tgvComisiones.RowHeadersVisible = false;
             this.tgvComisiones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.tgvComisiones.Size = new System.Drawing.Size(999, 394);
+            this.tgvComisiones.Size = new System.Drawing.Size(1091, 493);
             this.tgvComisiones.TabIndex = 1;
             this.tgvComisiones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvComisiones_CellDoubleClick);
             this.tgvComisiones.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvComisiones_CellValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(1100, 32);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(87, 13);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Período de pago";
             // 
             // com_ParteComisionID
             // 
@@ -1143,98 +1156,97 @@
             dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle32.Format = "n2";
             this.com_PorcentajeNormal.DefaultCellStyle = dataGridViewCellStyle32;
-            this.com_PorcentajeNormal.HeaderText = "%";
+            this.com_PorcentajeNormal.HeaderText = "1) % General";
             this.com_PorcentajeNormal.Name = "com_PorcentajeNormal";
             this.com_PorcentajeNormal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_PorcentajeNormal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_PorcentajeNormal.Width = 80;
+            this.com_PorcentajeNormal.Width = 90;
             // 
             // com_ComisionFija
             // 
             dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle33.Format = "c2";
             this.com_ComisionFija.DefaultCellStyle = dataGridViewCellStyle33;
-            this.com_ComisionFija.HeaderText = "$ Fijo";
+            this.com_ComisionFija.HeaderText = "2) $ Fijo";
             this.com_ComisionFija.Name = "com_ComisionFija";
             this.com_ComisionFija.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_ComisionFija.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_ComisionFija.Width = 80;
+            this.com_ComisionFija.Width = 90;
             // 
             // com_PorcentajeUnArticulo
             // 
             dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle34.Format = "n2";
             this.com_PorcentajeUnArticulo.DefaultCellStyle = dataGridViewCellStyle34;
-            this.com_PorcentajeUnArticulo.HeaderText = "Sólo 1";
+            this.com_PorcentajeUnArticulo.HeaderText = "3) % Sólo 1";
             this.com_PorcentajeUnArticulo.Name = "com_PorcentajeUnArticulo";
             this.com_PorcentajeUnArticulo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_PorcentajeUnArticulo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_PorcentajeUnArticulo.Width = 80;
+            this.com_PorcentajeUnArticulo.Width = 90;
             // 
             // com_ArticulosEspecial
             // 
             dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle35.Format = "n0";
             this.com_ArticulosEspecial.DefaultCellStyle = dataGridViewCellStyle35;
-            this.com_ArticulosEspecial.HeaderText = "# Piezas >";
+            this.com_ArticulosEspecial.HeaderText = "4) # Piezas >";
             this.com_ArticulosEspecial.Name = "com_ArticulosEspecial";
             this.com_ArticulosEspecial.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_ArticulosEspecial.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_ArticulosEspecial.Width = 80;
+            this.com_ArticulosEspecial.Width = 90;
             // 
             // com_PorcentajeArticulosEspecial
             // 
             dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle36.Format = "n2";
             this.com_PorcentajeArticulosEspecial.DefaultCellStyle = dataGridViewCellStyle36;
-            this.com_PorcentajeArticulosEspecial.HeaderText = "% # Piezas >";
+            this.com_PorcentajeArticulosEspecial.HeaderText = "5) % # Piezas >";
             this.com_PorcentajeArticulosEspecial.Name = "com_PorcentajeArticulosEspecial";
             this.com_PorcentajeArticulosEspecial.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_PorcentajeArticulosEspecial.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_PorcentajeArticulosEspecial.Width = 80;
+            this.com_PorcentajeArticulosEspecial.Width = 90;
             // 
             // com_PorcentajeComplementarios
             // 
             dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle37.Format = "n2";
             this.com_PorcentajeComplementarios.DefaultCellStyle = dataGridViewCellStyle37;
-            this.com_PorcentajeComplementarios.HeaderText = "% Comp.";
+            this.com_PorcentajeComplementarios.HeaderText = "6) % Comple.";
             this.com_PorcentajeComplementarios.Name = "com_PorcentajeComplementarios";
             this.com_PorcentajeComplementarios.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_PorcentajeComplementarios.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_PorcentajeComplementarios.Width = 80;
+            this.com_PorcentajeComplementarios.Width = 90;
             // 
             // com_PorcentajeReduccionPorRepartidor
             // 
             dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle38.Format = "n2";
             this.com_PorcentajeReduccionPorRepartidor.DefaultCellStyle = dataGridViewCellStyle38;
-            this.com_PorcentajeReduccionPorRepartidor.HeaderText = "% Red. Rep.";
+            this.com_PorcentajeReduccionPorRepartidor.HeaderText = "7) % - Vendedor";
             this.com_PorcentajeReduccionPorRepartidor.Name = "com_PorcentajeReduccionPorRepartidor";
             this.com_PorcentajeReduccionPorRepartidor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_PorcentajeReduccionPorRepartidor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_PorcentajeReduccionPorRepartidor.Width = 80;
             // 
             // com_PorcentajeRepartidor
             // 
             dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle39.Format = "n2";
             this.com_PorcentajeRepartidor.DefaultCellStyle = dataGridViewCellStyle39;
-            this.com_PorcentajeRepartidor.HeaderText = "% Repartidor";
+            this.com_PorcentajeRepartidor.HeaderText = "8) % Reparto";
             this.com_PorcentajeRepartidor.Name = "com_PorcentajeRepartidor";
             this.com_PorcentajeRepartidor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.com_PorcentajeRepartidor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_PorcentajeRepartidor.Width = 80;
+            this.com_PorcentajeRepartidor.Width = 90;
             // 
             // com_ComisionFijaRepartidor
             // 
             dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle40.Format = "c2";
             this.com_ComisionFijaRepartidor.DefaultCellStyle = dataGridViewCellStyle40;
-            this.com_ComisionFijaRepartidor.HeaderText = "$ Fijo Rep.";
+            this.com_ComisionFijaRepartidor.HeaderText = "9) $ Fijo Reparto";
             this.com_ComisionFijaRepartidor.Name = "com_ComisionFijaRepartidor";
             this.com_ComisionFijaRepartidor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.com_ComisionFijaRepartidor.Width = 80;
+            this.com_ComisionFijaRepartidor.Width = 90;
             // 
             // CapitalHumano
             // 
@@ -1243,7 +1255,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.Controls.Add(this.tabCapitalHumano);
             this.Name = "CapitalHumano";
-            this.Size = new System.Drawing.Size(1019, 461);
+            this.Size = new System.Drawing.Size(1363, 531);
             this.Load += new System.EventHandler(this.CapitalHumano_Load);
             this.tabCapitalHumano.ResumeLayout(false);
             this.tbpNomina.ResumeLayout(false);
@@ -1255,6 +1267,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvImpTotales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImpDatos)).EndInit();
             this.tbpComisiones.ResumeLayout(false);
+            this.tbpComisiones.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tgvComisiones)).EndInit();
             this.ResumeLayout(false);
 
@@ -1333,6 +1346,7 @@
         private System.Windows.Forms.TabPage tbpComisiones;
         private AdvancedDataGridView.TreeGridView tgvComisiones;
         private System.Windows.Forms.Button btnGuardarCom;
+        private System.Windows.Forms.Label label13;
         private AdvancedDataGridView.TreeGridColumn com_ParteComisionID;
         private AdvancedDataGridView.TreeGridColumn com_Id;
         private AdvancedDataGridView.TreeGridColumn com_Entidad;

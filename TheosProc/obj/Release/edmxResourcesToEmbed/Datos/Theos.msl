@@ -6120,25 +6120,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PartesComisionesView">
-      <EntityTypeMapping TypeName="TheosProc.PartesComisionesView">
-        <MappingFragment StoreEntitySet="PartesComisionesView">
-          <ScalarProperty Name="ComisionFijaRepartidor" ColumnName="ComisionFijaRepartidor" />
-          <ScalarProperty Name="PorcentajeRepartidor" ColumnName="PorcentajeRepartidor" />
-          <ScalarProperty Name="PorcentajeReduccionPorRepartidor" ColumnName="PorcentajeReduccionPorRepartidor" />
-          <ScalarProperty Name="PorcentajeComplementarios" ColumnName="PorcentajeComplementarios" />
-          <ScalarProperty Name="PorcentajeArticulosEspecial" ColumnName="PorcentajeArticulosEspecial" />
-          <ScalarProperty Name="ArticulosEspecial" ColumnName="ArticulosEspecial" />
-          <ScalarProperty Name="PorcentajeUnArticulo" ColumnName="PorcentajeUnArticulo" />
-          <ScalarProperty Name="PorcentajeNormal" ColumnName="PorcentajeNormal" />
-          <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
-          <ScalarProperty Name="Parte" ColumnName="Parte" />
-          <ScalarProperty Name="ParteID" ColumnName="ParteID" />
-          <ScalarProperty Name="LineaID" ColumnName="LineaID" />
-          <ScalarProperty Name="ParteComisionID" ColumnName="ParteComisionID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="pauClienteKardex" FunctionName="ControlRefaccionariaModel.Store.pauClienteKardex">
       <ResultMapping>
         <ComplexTypeMapping TypeName="TheosProc.pauClienteKardex_Result">
@@ -6207,6 +6188,27 @@
         <MappingFragment StoreEntitySet="EstatusGeneralesView">
           <ScalarProperty Name="NombreEstatus" ColumnName="NombreEstatus" />
           <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartesComisionesView">
+      <EntityTypeMapping TypeName="TheosProc.PartesComisionesView">
+        <MappingFragment StoreEntitySet="PartesComisionesView">
+          <ScalarProperty Name="ComisionFijaRepartidor" ColumnName="ComisionFijaRepartidor" />
+          <ScalarProperty Name="PorcentajeRepartidor" ColumnName="PorcentajeRepartidor" />
+          <ScalarProperty Name="PorcentajeReduccionPorRepartidor" ColumnName="PorcentajeReduccionPorRepartidor" />
+          <ScalarProperty Name="PorcentajeComplementarios" ColumnName="PorcentajeComplementarios" />
+          <ScalarProperty Name="PorcentajeArticulosEspecial" ColumnName="PorcentajeArticulosEspecial" />
+          <ScalarProperty Name="ArticulosEspecial" ColumnName="ArticulosEspecial" />
+          <ScalarProperty Name="PorcentajeUnArticulo" ColumnName="PorcentajeUnArticulo" />
+          <ScalarProperty Name="PorcentajeNormal" ColumnName="PorcentajeNormal" />
+          <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
+          <ScalarProperty Name="Parte" ColumnName="Parte" />
+          <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
+          <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+          <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+          <ScalarProperty Name="LineaID" ColumnName="LineaID" />
+          <ScalarProperty Name="ParteComisionID" ColumnName="ParteComisionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

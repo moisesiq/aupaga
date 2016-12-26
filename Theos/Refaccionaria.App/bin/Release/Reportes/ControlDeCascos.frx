@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="03/31/2016 19:40:39" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="12/06/2016 20:03:36" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
   <Dictionary>
-    <BusinessObjectDataSource Name="ControlDeCasco" ReferenceName="ControlDeCasco" DataType="System.Collections.Generic.List`1[[Refaccionaria.Modelo.CascosRegistrosView, Refaccionaria.Modelo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+    <BusinessObjectDataSource Name="ControlDeCasco" ReferenceName="ControlDeCasco" DataType="System.Collections.Generic.List`1[[TheosProc.CascosRegistrosView, TheosProc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
       <Column Name="CascoRegistroID" DataType="System.Int32"/>
       <Column Name="Fecha" DataType="System.DateTime"/>
       <Column Name="VentaID" DataType="System.Int32"/>

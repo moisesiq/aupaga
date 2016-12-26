@@ -2323,7 +2323,6 @@
       <End Role="VentaCambio" EntitySet="VentaCambio" />
     </AssociationSet>
     <EntitySet Name="PartesComisionesPrevioView" EntityType="TheosProc.PartesComisionesPrevioView" />
-    <EntitySet Name="PartesComisionesView" EntityType="TheosProc.PartesComisionesView" />
     <FunctionImport Name="pauClienteKardex" ReturnType="Collection(TheosProc.pauClienteKardex_Result)">
       <Parameter Name="ClienteID" Mode="In" Type="Int32" />
       <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
@@ -2364,6 +2363,7 @@
       <End Role="ParteMaxMinFijoHistorico" EntitySet="ParteMaxMinFijoHistorico" />
     </AssociationSet>
     <EntitySet Name="EstatusGeneralesView" EntityType="TheosProc.EstatusGeneralesView" />
+    <EntitySet Name="PartesComisionesView" EntityType="TheosProc.PartesComisionesView" />
   </EntityContainer>
   <EntityType Name="Autorizacion">
     <Key>
@@ -2643,7 +2643,7 @@
     <Property Name="CaracteristicaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Caracteristica1" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Multiple" Type="Boolean" />
-    <Property Name="MultipleOpciones" Type="String" MaxLength="700" FixedLength="false" Unicode="true" />
+    <Property Name="MultipleOpciones" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="LineaCaracteristica" Relationship="TheosProc.FK__LineaCara__Carac__12A9974E" FromRole="Caracteristica" ToRole="LineaCaracteristica" />
     <NavigationProperty Name="ParteCaracteristica" Relationship="TheosProc.FK__ParteCara__Carac__186270A4" FromRole="Caracteristica" ToRole="ParteCaracteristica" />
   </EntityType>
@@ -2744,8 +2744,8 @@
     <Property Name="Rfc" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="RazonSocial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Calle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroExterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroInterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroExterior" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroInterior" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="Referencia" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
     <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CodigoPostal" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
@@ -2755,9 +2755,9 @@
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="Estatus" Type="Boolean" Nullable="false" />
     <Property Name="Actualizar" Type="Boolean" Nullable="false" />
-    <Property Name="EstadoID" Type="Int32" Nullable="false" />
-    <Property Name="MunicipioID" Type="Int32" Nullable="false" />
-    <Property Name="CiudadID" Type="Int32" Nullable="false" />
+    <Property Name="EstadoID" Type="Int32" />
+    <Property Name="MunicipioID" Type="Int32" />
+    <Property Name="CiudadID" Type="Int32" />
     <NavigationProperty Name="Usuario" Relationship="TheosProc.FK__ClienteFa__Usuar__61915EA7" FromRole="ClienteFacturacion" ToRole="Usuario" />
     <NavigationProperty Name="Cliente" Relationship="TheosProc.FK__ClienteFa__Clien__609D3A6E" FromRole="ClienteFacturacion" ToRole="Cliente" />
   </EntityType>
@@ -3530,7 +3530,7 @@
     </Key>
     <Property Name="MotorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ModeloID" Type="Int32" Nullable="false" />
-    <Property Name="NombreMotor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="NombreMotor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UsuarioID" Type="Int32" Nullable="false" />
     <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
@@ -4078,7 +4078,7 @@
     <Property Name="ParteCaracteristicaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ParteID" Type="Int32" Nullable="false" />
     <Property Name="CaracteristicaID" Type="Int32" Nullable="false" />
-    <Property Name="Valor" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Valor" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Caracteristica" Relationship="TheosProc.FK__ParteCara__Carac__186270A4" FromRole="ParteCaracteristica" ToRole="Caracteristica" />
     <NavigationProperty Name="Parte" Relationship="TheosProc.FK__ParteCara__Parte__176E4C6B" FromRole="ParteCaracteristica" ToRole="Parte" />
   </EntityType>
@@ -4230,8 +4230,8 @@
     <Property Name="ParteID" Type="Int32" Nullable="false" />
     <Property Name="NombreImagen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-    <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="0" />
+    <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="Estatus" Type="Boolean" Nullable="false" />
     <Property Name="Actualizar" Type="Boolean" Nullable="false" />
     <Property Name="Orden" Type="Int32" Nullable="false" />
@@ -4319,10 +4319,10 @@
     </Key>
     <Property Name="ParteMaxMinReglaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Orden" Type="Int32" Nullable="false" />
-    <Property Name="Regla" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-    <Property Name="Condicion" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
-    <Property Name="Maximo" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
-    <Property Name="Minimo" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Name="Regla" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Condicion" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="Maximo" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="Minimo" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
     <Property Name="UsuarioID" Type="Int32" Nullable="false" />
     <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
@@ -5040,7 +5040,7 @@
     </Key>
     <Property Name="Proceso" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
     <Property Name="Identificador" Type="Int32" Nullable="false" />
-    <Property Name="Valor" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Valor" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="TipoCilindro">
     <Key>
@@ -6147,8 +6147,8 @@
     <Property Name="Rfc" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="RazonSocial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Calle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroExterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroInterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroExterior" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroInterior" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="Referencia" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
     <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CodigoPostal" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
@@ -6170,7 +6170,7 @@
     <Property Name="ModeloID" Type="Int32" />
     <Property Name="Modelo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="MotorID" Type="Int32" />
-    <Property Name="Motor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="Motor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Anio" Type="Int32" />
     <Property Name="VehiculoTipoID" Type="Int32" />
     <Property Name="Tipo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -6322,7 +6322,7 @@
     <Property Name="SucursalID" Type="Int32" Nullable="false" />
     <Property Name="CorteCategoriaID" Type="Int32" Nullable="false" />
     <Property Name="RelacionID" Type="Int32" />
-    <Property Name="Concepto" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Concepto" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Factura" Type="Boolean" />
     <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
     <Property Name="Efectivo" Type="Decimal" Precision="12" Scale="2" />
@@ -6705,7 +6705,7 @@
     </Key>
     <Property Name="ModeloID" Type="Int32" Nullable="false" />
     <Property Name="MotorID" Type="Int32" Nullable="false" />
-    <Property Name="NombreMotor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="NombreMotor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Anio" Type="Int32" />
   </EntityType>
   <EntityType Name="MotoresExistentesView">
@@ -6730,7 +6730,7 @@
     <Property Name="NombreMarca" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="NombreModelo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="MotorID" Type="Int32" Nullable="false" />
-    <Property Name="NombreMotor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="NombreMotor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Anios" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Busqueda" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
@@ -13603,8 +13603,8 @@
     <Property Name="ModeloID" Type="Int32" Nullable="false" />
     <Property Name="NombreModelo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="MotorID" Type="Int32" />
-    <Property Name="NombreMotor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="Anio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NombreMotor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Anio" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Cotizacion9500Detalle">
     <Key>
@@ -13711,8 +13711,8 @@
     <Property Name="ClienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Calle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroExterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroInterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroExterior" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroInterior" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CodigoPostal" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
     <Property Name="Telefono" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
@@ -13726,9 +13726,9 @@
     <Property Name="Actualizar" Type="Boolean" Nullable="false" />
     <Property Name="DiasDeCredito" Type="Int32" />
     <Property Name="Alias" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Name="EstadoID" Type="Int32" Nullable="false" />
-    <Property Name="MunicipioID" Type="Int32" Nullable="false" />
-    <Property Name="CiudadID" Type="Int32" Nullable="false" />
+    <Property Name="EstadoID" Type="Int32" />
+    <Property Name="MunicipioID" Type="Int32" />
+    <Property Name="CiudadID" Type="Int32" />
     <Property Name="TipoFormaPagoID" Type="Int32" />
     <Property Name="BancoID" Type="Int32" />
     <Property Name="TipoClienteID" Type="Int32" />
@@ -13954,8 +13954,8 @@
     <Property Name="Rfc" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Calle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroInterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroExterior" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroInterior" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroExterior" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CodigoPostal" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
     <Property Name="EstadoID" Type="Int32" Nullable="false" />
@@ -14002,7 +14002,7 @@
     </Key>
     <Property Name="ClienteID" Type="Int32" Nullable="false" />
     <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Direccion" Type="String" MaxLength="220" FixedLength="false" Unicode="true" />
+    <Property Name="Direccion" Type="String" MaxLength="236" FixedLength="false" Unicode="true" />
     <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CodigoPostal" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
     <Property Name="Municipio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -14657,26 +14657,6 @@
     <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
     <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
   </EntityType>
-  <EntityType Name="PartesComisionesView">
-    <Key>
-      <PropertyRef Name="LineaID" />
-      <PropertyRef Name="ParteID" />
-      <PropertyRef Name="Parte" />
-    </Key>
-    <Property Name="ParteComisionID" Type="Int32" />
-    <Property Name="LineaID" Type="Int32" Nullable="false" />
-    <Property Name="ParteID" Type="Int32" Nullable="false" />
-    <Property Name="Parte" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="ComisionFija" Type="Decimal" Precision="12" Scale="2" />
-    <Property Name="PorcentajeNormal" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="PorcentajeUnArticulo" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="ArticulosEspecial" Type="Int32" />
-    <Property Name="PorcentajeArticulosEspecial" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="PorcentajeComplementarios" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="PorcentajeReduccionPorRepartidor" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
-  </EntityType>
   <ComplexType Name="pauClienteKardex_Result">
     <Property Type="Int32" Name="ParteID" Nullable="true" />
     <Property Type="String" Name="NumeroParte" Nullable="true" MaxLength="50" />
@@ -14815,5 +14795,29 @@
     </Key>
     <Property Name="EstatusID" Type="Int32" Nullable="false" />
     <Property Name="NombreEstatus" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PartesComisionesView">
+    <Key>
+      <PropertyRef Name="LineaID" />
+      <PropertyRef Name="ParteID" />
+      <PropertyRef Name="ProveedorID" />
+      <PropertyRef Name="MarcaParteID" />
+      <PropertyRef Name="Parte" />
+    </Key>
+    <Property Name="ParteComisionID" Type="Int32" />
+    <Property Name="LineaID" Type="Int32" Nullable="false" />
+    <Property Name="ParteID" Type="Int32" Nullable="false" />
+    <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+    <Property Name="MarcaParteID" Type="Int32" Nullable="false" />
+    <Property Name="Parte" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="ComisionFija" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="PorcentajeNormal" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PorcentajeUnArticulo" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="ArticulosEspecial" Type="Int32" />
+    <Property Name="PorcentajeArticulosEspecial" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PorcentajeComplementarios" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PorcentajeReduccionPorRepartidor" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
   </EntityType>
 </Schema>

@@ -5,11 +5,11 @@
     <Setting Name="SucursalID" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="Modo" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Pruebas</Value>
-    </Setting>
     <Setting Name="RutaImagenes" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Theos\Img\Partes\</Value>
+    </Setting>
+    <Setting Name="Modo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Pruebas</Value>
     </Setting>
   </Settings>
 </SettingsFile>
