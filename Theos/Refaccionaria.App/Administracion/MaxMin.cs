@@ -60,6 +60,7 @@ namespace Refaccionaria.App
             this.dgvDetalle.Columns["Proveedor"].ValueType = typeof(string);
             this.dgvDetalle.Columns["Linea"].ValueType = typeof(string);
             this.dgvDetalle.Columns["Marca"].ValueType = typeof(string);
+            //this.dgvDetalle.Columns["Id"].ValueType = typeof(string);
 
             this.Hasta = DateTime.Now.Date.DiaPrimero().AddDays(-1);
             this.Desde = this.Hasta.AddYears(-1).AddDays(1);
@@ -481,7 +482,8 @@ namespace Refaccionaria.App
             oParams.Add("Hasta", this.Hasta);
             // if (this.cmbProveedor.SelectedValue != null)
             //     oParams.Add("ProveedorID", Util.ConvertirEntero(this.cmbProveedor.SelectedValue));
-            if (this.ctlProveedores.ValoresSeleccionados.Count > 0) {
+            if (this.ctlProveedores.ValoresSeleccionados.Count > 0)
+            {
                 var oDtProveedores = Util.ListaEntityADataTable(this.ctlProveedores.ElementosSeleccionados);
                 oDtProveedores.Columns.Remove("Cadena");
                 oParams.Add("Proveedores/tpuTablaEnteros", oDtProveedores);
@@ -510,6 +512,7 @@ namespace Refaccionaria.App
 
             int iFila;
             this.dgvDetalle.Rows.Clear();
+            int NumFila = 0;
             foreach (var oParte in oMaxMin)
             {
                 bool bSel = (oParte.VentasTotal > 0 || oParte.Maximo > 0);
@@ -532,7 +535,7 @@ namespace Refaccionaria.App
                 // Se saltan las partes que no tengan ventas o MaxMin, si aplica
                 if (!bSel) continue;
 
-                iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, bSel, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
+                iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, bSel, NumFila++, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
                     , oParte.Existencia, oParte.UnidadEmpaque, oParte.TiempoReposicion, oParte.AbcDeNegocio, oParte.AbcDeVentas, oParte.AbcDeUtilidad
                     , oParte.VentasTotal, oParte.CantidadTotal, oParte.UtilidadTotal, oParte.Fijo, oParte.Minimo, oParte.Maximo, null, null
                     , oParte.ParteMaxMinReglaID, oParte.FechaCalculo);
@@ -605,8 +608,10 @@ namespace Refaccionaria.App
 
         private void FiltroDeCambios()
         {
+            DataGridView test = new DataGridView();
+            test = dgvDetalle;
             Cargando.Mostrar();
-
+            //this.dgvDetalle.Rows.Clear();
             if (this.cmbCambios.SelectedIndex >= 0)
             {
                 for (int iFila = 0; iFila < this.dgvDetalle.Rows.Count; iFila++)
@@ -655,7 +660,7 @@ namespace Refaccionaria.App
                 oParte.Minimo = 0;
                 // Se inicializan los datos extra
                 MaxMinFunciones.Inicializar(oParte.ParteID, iSucursalID);
-                
+
                 // Se procesan la regla correspondiente, o todas si no se tiene una asignada
                 string sReglasAp = this.ProcesarReglas(oDin, oReglas, ref oParte, oParams);
 
@@ -731,7 +736,8 @@ namespace Refaccionaria.App
             }
 
             // Se ejecutan las reglas básicas finales
-            if (oParte.Maximo == 0) {
+            if (oParte.Maximo == 0)
+            {
                 oParte.Minimo = 0;
             }
             else if (oParte.Minimo > 0)
@@ -808,22 +814,45 @@ namespace Refaccionaria.App
 
             // Se valida que si hay fijos en cero, se ponga el motivo
             bError = false;
+            int x = 0;
+            int linea = 0;
             foreach (DataGridViewRow oFila in this.dgvDetalle.Rows)
             {
-                oFila.Cells["MotivoFijoCero"].ErrorText = "";
-                if (Util.Logico(oFila.Cells["Fijo"].Value) && Util.Decimal(oFila.Cells["Maximo"].Value) == 0 && Util.Decimal(oFila.Cells["Minimo"].Value) == 0
-                    && Util.Cadena(oFila.Cells["MotivoFijoCero"].Value) == "")
+                if (oFila.Visible == true)
                 {
-                    oFila.Cells["MotivoFijoCero"].ErrorText = "Debes especificar un motivo";
-                    bError = true;
+                    if ((bool)oFila.Cells[1].Value == true)
+                    {
+                        bool fijo = Util.Logico(oFila.Cells["Fijo"].Value);
+                        decimal max = Util.Decimal(oFila.Cells["Maximo"].Value);
+                        decimal min = Util.Decimal(oFila.Cells["Minimo"].Value);
+                        bool motivo = String.IsNullOrEmpty(Util.Cadena(oFila.Cells["MotivoFijoCero"].Value));
+
+                        oFila.Cells["MotivoFijoCero"].ErrorText = "";
+                        if (Util.Logico(oFila.Cells["Fijo"].Value) && (Util.Decimal(oFila.Cells["Maximo"].Value) == 0) && (Util.Decimal(oFila.Cells["Minimo"].Value) == 0)
+                            && String.IsNullOrEmpty(Util.Cadena(oFila.Cells["MotivoFijoCero"].Value)))
+                        {
+                            oFila.Cells["MotivoFijoCero"].ErrorText = "Debes especificar un motivo";
+                            bError = true;
+                            if (bError)
+                            {
+                                linea = oFila.Index;
+                                UtilLocal.MensajeAdvertencia("Por favor indica todos los motivos en donde se especificó un Max Min de cero en la linea: " + linea + ", con Num Parte: " + oFila.Cells[3].Value + ".");
+                                return;
+                            }
+                        }
+
+                    }
                 }
+
+
             }
+
             if (bError)
             {
-                UtilLocal.MensajeAdvertencia("Por favor indica todos los motivos en donde se especificó un Max Min de cero.");
+                UtilLocal.MensajeAdvertencia("Por favor indica todos los motivos en donde se especificó un Max Min de cero en la linea .");
                 return;
             }
-                        
+
             if (UtilLocal.MensajePregunta("¿Estás seguro que deseas guardar los Máximos y Mínimos mostrados?") != DialogResult.Yes)
                 return;
 
@@ -868,7 +897,7 @@ namespace Refaccionaria.App
             Cargando.Cerrar();
             UtilLocal.MostrarNotificacion("Proceso completado correctamente.");
         }
-        
+
         private void LlenarDatosExtra(int iParteID)
         {
             this.LimpiarDatosExtra();
@@ -1426,6 +1455,7 @@ namespace Refaccionaria.App
 
             int iFilaCostoMenor = -1;
             decimal mMaximo = 0, mMinimo = 0;
+            int x = 0;
             for (int iFila = 0; iFila < this.dgvEquivalentes.Rows.Count; iFila++)
             {
                 var oFila = this.dgvEquivalentes.Rows[iFila];
@@ -1456,6 +1486,7 @@ namespace Refaccionaria.App
                     iFilaCostoMenor = -1;
                     mMaximo = mMinimo = 0;
                 }
+
             }
 
             Cargando.Cerrar();
@@ -1507,7 +1538,7 @@ namespace Refaccionaria.App
                 {
                     this.dgvEquivalentes["equ_Maximo", iFilaMasEco].Value = mMax;
                     this.dgvEquivalentes["equ_Minimo", iFilaMasEco].Value = mMin;
-                }   
+                }
             }
         }
 
@@ -1639,6 +1670,11 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        private void dgvDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
 
     }
 
