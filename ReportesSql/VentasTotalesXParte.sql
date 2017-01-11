@@ -1,7 +1,7 @@
-/* *****************************************************************************
+/* *********
 ** Script para sacar un listado de las partes vendidas.
-** Creado:  Moisés
-***************************************************************************** */
+** Creado:  Oscar
+********* */
 
 DECLARE @Desde DATE = '2016-01-01'
 DECLARE @Hasta DATE = '2017-01-12'
@@ -9,8 +9,6 @@ DECLARE @Hasta DATE = '2017-01-12'
 SET @Hasta = DATEADD(d, 1, @Hasta)
 ;WITH _TOTAL AS
 (
-SELECT VentaDetalleID,PrecioUnitario FROM VentaDetalle 
-)
 
 SELECT
 	v.Fecha
@@ -26,7 +24,7 @@ SELECT
 	, vd.Cantidad
 	, mp.NombreMarcaParte AS Marca
 	, l.NombreLinea AS Linea
-	,SUM(t.PrecioUnitario) AS Total
+	--,SUM(vd.Cantidad) AS TotalPiezasVendidas
 FROM
 	VentaDetalle vd
 	INNER JOIN Venta v ON v.VentaID = vd.VentaID AND v.Estatus = 1
@@ -38,34 +36,63 @@ FROM
 	LEFT JOIN PartePrecio pp ON pp.ParteID = vd.ParteID AND pp.Estatus = 1
 	LEFT JOIN MarcaParte mp ON mp.MarcaParteID = p.MarcaParteID AND mp.Estatus = 1
 	LEFT JOIN Linea l ON l.LineaID = p.LineaID AND l.Estatus = 1
-	LEFT JOIN _TOTAL t on t.VentaDetalleID = vd.VentaDetalleID
+	
 WHERE
 	vd.Estatus = 1
 	AND (v.Fecha >= @Desde AND v.Fecha < @Hasta)
 	AND l.LineaID = 37
-
+	--AND MP.MarcaParteID = 1
+	--AND S.SucursalID = 1
+	--AND p.NumeroParte = '06734'
 GROUP BY
-v.Fecha,
-v.Folio,
-ve.Descripcion,
-s.NombreSucursal,
-c.Nombre,
-u.NombreUsuario,
-p.NumeroParte,
-p.NombreParte,
-pp.Costo,
-pp.CostoConDescuento,
-vd.PrecioUnitario,
-vd.PrecioUnitario,
-vd.Cantidad,
-mp.NombreMarcaParte,
-l.NombreLinea,
-vd.VentaDetalleID,
-t.VentaDetalleID
-ORDER BY v.Fecha
-
-
-
-
-
---(SELECT PrecioUnitario FROM VentaDetalle WHERE  VentaDetalleID = vd.VentaDetalleID)  
+	v.Fecha,
+	v.Folio,
+	ve.Descripcion,
+	s.NombreSucursal,
+	c.Nombre,
+	u.NombreUsuario,
+	p.NumeroParte,
+	p.NombreParte,
+	pp.Costo,
+	pp.CostoConDescuento,
+	vd.PrecioUnitario,
+	vd.PrecioUnitario,
+	vd.Cantidad,
+	mp.NombreMarcaParte,
+	l.NombreLinea,
+	l.LineaID,
+	vd.Estatus
+)
+SELECT 
+	Fecha,
+	Folio,
+	Estatus,
+	Tienda,
+	Cliente,
+	Vendedor,
+	NumeroDeParte,
+	Descripcion,
+	Costo,
+	PrecioDeVenta,
+	Cantidad,
+	Marca,
+	Linea,
+	(select SUM(PrecioDeVenta) from _TOTAL) as TotalPrecioDeVenta,
+	(select SUM(Cantidad) from _TOTAL t1 where t1.NumeroDeParte = t.NumeroDeParte ) as TotalPiezasVendidas
+FROM 
+	_TOTAL t
+GROUP BY
+	Fecha,
+	Folio,
+	Estatus,
+	Tienda,
+	Cliente,
+	Vendedor,
+	NumeroDeParte,
+	Descripcion,
+	Costo,
+	PrecioDeVenta,
+	Cantidad,
+	Marca,
+	Linea
+	--TotalPiezasVendidas
