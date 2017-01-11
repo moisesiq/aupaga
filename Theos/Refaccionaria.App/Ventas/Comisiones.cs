@@ -221,7 +221,7 @@ namespace Refaccionaria.App
             oParams.Add("Desde", this.dtpDe.Value.Date);
             oParams.Add("Hasta", this.dtpA.Value.Date);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test4", oParams);
             
 
             // Se llena el grid
@@ -255,7 +255,7 @@ namespace Refaccionaria.App
                 mComision = Util.Decimal(Fila.Cells["Comision"].Value);
 
                 // bool b9500 = Util.Cadena(Fila.Cells["Caracteristica"].Value).Contains("9500");
-                bool b9500 = (Util.Cadena(Fila.Cells["Detalle_9500"]) == "SÍ");
+                bool b9500 = (Util.Cadena(Fila.Cells["Detalle_9500"].Value) == "SÍ");
                 if (Util.Cadena(Fila.Cells["Caracteristica"].Value).Substring(0, 1) == "V")
                 {
                     mComisionVariable += mComision;
