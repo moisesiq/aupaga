@@ -373,9 +373,11 @@ namespace Refaccionaria.App
                 this.chrComisionActual.Series["Meta"].Points.AddY(this.oMetaVendedor.SueldoMeta - this.oMetaVendedor.SueldoFijo - this.mComision - this.mComision9500);
                 mAdicional = (this.mComision + this.mComision9500 + this.oMetaVendedor.SueldoFijo - this.oMetaVendedor.SueldoMeta);
             }
-
+            
+            //Se quita el adicional
             if (mAdicional > 0)
-                this.chrComisionActual.Series["Adicional"].Points.AddY(mAdicional);
+                //this.chrComisionActual.Series["Adicional"].Points.AddY(mAdicional);
+                this.chrComisionActual.Series["Adicional"].Enabled = false;
             else
                 this.chrComisionActual.Series["Adicional"].Enabled = false;
 
