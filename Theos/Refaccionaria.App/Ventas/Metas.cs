@@ -509,6 +509,7 @@ namespace Refaccionaria.App
             decimal mPorGastos = (this.mGastosTotal / this.oMetaSucursal.UtilSucursalLargoPlazo);
             decimal mPorFinal = ((this.oMetaSucursal.UtilSucursal / this.oMetaSucursal.UtilSucursalLargoPlazo) - mPorGastos);
             decimal mMarcaMinimo = ((((this.oMetaSucursal.UtilSucursalMinimo / this.oMetaSucursal.UtilSucursalLargoPlazo) - mPorGastos) * Metas.RotacionMaxima) / mPorFinal);
+            //decimal mMarcaMinimo = (((this.oMetaSucursal.UtilSucursalMinimo / this.oMetaSucursal.UtilSucursalLargoPlazo) * Metas.RotacionMaxima) / mPorFinal);
             this.pcbTacometroMinimo.Image = Util.RotateImage(Properties.Resources.MetasTacometroMinimo, (float)mMarcaMinimo);
 
             // Se obtiene el ángulo para la marca
@@ -527,7 +528,7 @@ namespace Refaccionaria.App
             this.pcbTacometroMarca.Tag = mAnguloPos;
 
             this.pcbTacometroMarca.Image = Util.RotateImage(oImg, (float)mAnguloPos);
-            // this.lblUtilidadTotal.Text = this.mUtilidad.ToString(GlobalClass.FormatoEntero);
+            //this.lblUtilidadTotal.Text = this.mUtilidad.ToString(GlobalClass.FormatoEntero);
 
             this.lblUtilidadTotal.Text = ((this.mUtilidad / this.oMetaSucursal.UtilSucursalLargoPlazo) * 100).ToString(GlobalClass.FormatoDecimal);
         }
@@ -697,11 +698,19 @@ namespace Refaccionaria.App
             oParams.Add("SucursalID", (this.SucursalID > 0 ? (int?)this.SucursalID : null));
             oParams.Add("UsuarioID", (this.UsuarioID > 0 ? (int?)this.UsuarioID : null));
             var oDatos = Datos.ExecuteProcedure<pauVentasPartesPor_Result>("pauVentasPartesPor", oParams);
+
+            float totalPartesVendidas = 0;
+
+            foreach (var i in oDatos)
+            {
+                totalPartesVendidas = i.Uno + i.Dos + i.Tres + i.Mas;
+            }
+            
             this.dgvPartesPorVenta.Rows.Clear();
-            this.dgvPartesPorVenta.Rows.Add("Una", oDatos[0].Uno);
-            this.dgvPartesPorVenta.Rows.Add("Dos", oDatos[0].Dos);
-            this.dgvPartesPorVenta.Rows.Add("Tres", oDatos[0].Tres);
-            this.dgvPartesPorVenta.Rows.Add("Más", oDatos[0].Mas);
+            this.dgvPartesPorVenta.Rows.Add("Una", ((oDatos[0].Uno * 100) / totalPartesVendidas).ToString("0.##") + "%");
+            this.dgvPartesPorVenta.Rows.Add("Dos", ((oDatos[0].Dos * 100) / totalPartesVendidas).ToString("0.##") + "%");
+            this.dgvPartesPorVenta.Rows.Add("Tres", ((oDatos[0].Tres * 100) / totalPartesVendidas).ToString("0.##") + "%");
+            this.dgvPartesPorVenta.Rows.Add("Más", ((oDatos[0].Mas * 100) / totalPartesVendidas).ToString("0.##") + "%");
         }
 
         private Chart AgregarDona(string sTitulo, decimal mTotal, decimal mAvance, string sImagen)
@@ -968,7 +977,7 @@ namespace Refaccionaria.App
             var oBorde = new MetasAnimaciones.Borde(this);
 
             // Se muestran las gráficas, con valores de "cero"
-            this.pnlReferenciaGastos.Visible = true;
+            //this.pnlReferenciaGastos.Visible = true;
             this.chrComisionSem.Visible = true;
             this.chrComisionMensual.Visible = true;
             this.chrComisionActual.Visible = true;
@@ -1028,7 +1037,7 @@ namespace Refaccionaria.App
             var oBorde = new MetasAnimaciones.Borde(this);
 
             // Se muestran las gráficas, con valores de "cero"
-            this.pnlReferenciaGastos.Visible = true;
+            //this.pnlReferenciaGastos.Visible = true;
             this.pcbTacometro.Visible = true;
             this.flpDonas.Visible = true;
 
@@ -1080,7 +1089,7 @@ namespace Refaccionaria.App
             var oBorde = new MetasAnimaciones.Borde(this);
 
             // Se muestran las gráficas, con valores de "cero"
-            this.pnlReferenciaGastos.Visible = true;
+            //this.pnlReferenciaGastos.Visible = true;
             this.pcbTacometro.Visible = true;
             this.flpDonas.Visible = true;
 
@@ -1110,6 +1119,11 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        private void dgvPartesPorVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
 
     }
 
