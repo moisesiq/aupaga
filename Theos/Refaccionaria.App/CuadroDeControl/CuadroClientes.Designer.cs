@@ -36,6 +36,14 @@
             // 
             this.label6.Text = "Utilidad por Cliente";
             // 
+            // cmbCalculo
+            // 
+            this.cmbCalculo.SelectedIndexChanged += new System.EventHandler(this.cmbCalculo_SelectedIndexChanged);
+            // 
+            // lblCalculo
+            // 
+            this.lblCalculo.Click += new System.EventHandler(this.lblCalculo_Click);
+            // 
             // CuadroClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

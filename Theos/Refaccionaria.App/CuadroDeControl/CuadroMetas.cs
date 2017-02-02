@@ -17,9 +17,18 @@ namespace Refaccionaria.App
 
         private void CuadroMetas_Load(object sender, EventArgs e)
         {
+            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
             // Se llenan los controles iniciales
-            var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
-            oSucursales.Insert(0, new Sucursal() { NombreSucursal = "(TODAS)" });
+            //var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
+            var oSucursales = PermisosC.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
+
+            if (oSucursales.Count > 2)
+            {
+                //oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
+                oSucursales.Insert(0, new Sucursal() { NombreSucursal = "(TODAS)" });
+            }
+
+            //oSucursales.Insert(0, new Sucursal() { NombreSucursal = "(TODAS)" });
             this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", oSucursales);
             // this.cmbSucursal.SelectedValue = GlobalClass.SucursalID;
             var oFechas = UtilDatos.FechasDeComisiones(DateTime.Now);

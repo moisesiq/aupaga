@@ -21,6 +21,7 @@ namespace Refaccionaria.App
 
         private void CuadroVendedores_Load(object sender, EventArgs e)
         {
+            
             // Se configuran las columnas
             this.dgvPrincipal.Columns["Principal_Nombre"].HeaderText = "Vendedor";
 

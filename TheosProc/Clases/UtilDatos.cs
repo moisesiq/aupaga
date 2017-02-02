@@ -121,7 +121,7 @@ namespace TheosProc
         
         public static bool VerCierreDeDaja()
         {
-            //DateTime dHoy = DateTime.Today.AddDays(-38);
+            //DateTime dHoy = DateTime.Today.AddDays(-3);
             DateTime dHoy = DateTime.Today;
             var oDia = Datos.GetEntity<CajaEfectivoPorDia>(q => q.SucursalID == Theos.SucursalID && q.Dia == dHoy && q.Estatus);
             return (oDia != null && oDia.Cierre != null);

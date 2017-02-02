@@ -67,7 +67,7 @@
             this.tabCuadroDeControl.Location = new System.Drawing.Point(3, 3);
             this.tabCuadroDeControl.Name = "tabCuadroDeControl";
             this.tabCuadroDeControl.SelectedIndex = 0;
-            this.tabCuadroDeControl.Size = new System.Drawing.Size(765, 512);
+            this.tabCuadroDeControl.Size = new System.Drawing.Size(917, 512);
             this.tabCuadroDeControl.TabIndex = 0;
             this.tabCuadroDeControl.SelectedIndexChanged += new System.EventHandler(this.tabCuadroDeControl_SelectedIndexChanged);
             // 
@@ -76,7 +76,7 @@
             this.tbpVentas.Location = new System.Drawing.Point(4, 25);
             this.tbpVentas.Name = "tbpVentas";
             this.tbpVentas.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpVentas.Size = new System.Drawing.Size(757, 483);
+            this.tbpVentas.Size = new System.Drawing.Size(909, 483);
             this.tbpVentas.TabIndex = 0;
             this.tbpVentas.Text = "Por fecha";
             this.tbpVentas.UseVisualStyleBackColor = true;
@@ -135,7 +135,7 @@
             this.tbpCancelaciones.Location = new System.Drawing.Point(4, 25);
             this.tbpCancelaciones.Name = "tbpCancelaciones";
             this.tbpCancelaciones.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpCancelaciones.Size = new System.Drawing.Size(757, 483);
+            this.tbpCancelaciones.Size = new System.Drawing.Size(909, 483);
             this.tbpCancelaciones.TabIndex = 5;
             this.tbpCancelaciones.Text = "Cancelaciones";
             this.tbpCancelaciones.UseVisualStyleBackColor = true;
@@ -202,7 +202,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.Controls.Add(this.tabCuadroDeControl);
             this.Name = "CuadroDeControl";
-            this.Size = new System.Drawing.Size(771, 518);
+            this.Size = new System.Drawing.Size(923, 518);
             this.Load += new System.EventHandler(this.CuadroDeControl_Load);
             this.tabCuadroDeControl.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -211,7 +211,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabCuadroDeControl;
         private System.Windows.Forms.TabPage tbpVentas;
         private System.Windows.Forms.TabPage tbpClientes;
         private System.Windows.Forms.TabPage tbpProveedores;
@@ -225,5 +224,6 @@
         private System.Windows.Forms.TabPage tbpSucursales;
         private System.Windows.Forms.TabPage tbpCobranza;
         private System.Windows.Forms.TabPage tbpVip;
+        public System.Windows.Forms.TabControl tabCuadroDeControl;
     }
 }

@@ -2931,5 +2931,10 @@ namespace Refaccionaria.App
 
         }
 
+        private void flpCaracteristicas_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Drawing;
 
 using TheosProc;
 using LibUtil;
+using System.Collections;
 
 namespace Refaccionaria.App
 {
@@ -20,15 +22,94 @@ namespace Refaccionaria.App
 
         #region [ Eventos ]
 
+        //private ArrayList ValidarPermisosCalculo()
+        //{
+
+        //    List<UsuariosPermisosView> list = Datos.GetListOf<UsuariosPermisosView>(i => i.UsuarioID == Theos.UsuarioID );
+        //    ArrayList per = new ArrayList();
+
+        //    foreach (var x in list)
+        //    {
+        //        switch (x.Permiso)
+        //        {
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.Utilidad":
+        //                per.Add("Utilidad");
+        //                break;
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.UtilidadDesc":
+        //                per.Add("Utilidad Desc.");
+        //                break;
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.Precio":
+        //                per.Add("Precio");
+        //                break;
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.Costo":
+        //                per.Add("Costo");
+        //                break;
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.CostoDesc":
+        //                per.Add("Costo Desc.");
+        //                break;
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.Ventas":
+        //                per.Add("Ventas");
+        //                break;
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.Productos":
+        //                per.Add("Productos");
+        //                break;
+        //        }
+
+        //    }
+
+        //    return per;
+        //}
+
+        //private List<Sucursal> ValidarPermisosTienda()
+        //{
+        //    List<Sucursal> oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
+        //    List<UsuariosPermisosView> listaPermisos = Datos.GetListOf<UsuariosPermisosView>(i => i.UsuarioID == Theos.UsuarioID);
+        //    List<Sucursal> listaSucursales = new List<Sucursal>();
+
+        //    foreach (var x in listaPermisos)
+        //    {
+        //        switch (x.Permiso)
+        //        {
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.Sucursal1":
+        //                listaSucursales.Add(oSucursales.ElementAt(0));
+        //                break;
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.Sucursal2":
+        //                listaSucursales.Add(oSucursales.ElementAt(1));
+        //                break;
+        //            case "CuadroDeControl.Pestania.Fecha.Ver.Sucursal3":
+        //                listaSucursales.Add(oSucursales.ElementAt(2));
+        //                break;
+        //        }
+        //    }
+        //    return listaSucursales;
+        //}
+
+
         private void CuadroVentas_Load(object sender, EventArgs e)
         {
+            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
+
+
             // Se llenan los combos
-            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
-            this.cmbCalculo.SelectedIndex = 1;
-            var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
-            oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
+            // this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
+            this.cmbCalculo.Items.AddRange(PermisosC.ValidarPermisosCalculo().ToArray());
+
+            //ValidarPermisosTienda(new List<Sucursal>());
+            this.cmbCalculo.SelectedIndex = 0;
+            //var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
+            //List<Sucursal> oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
+
+            var oSucursales = PermisosC.ValidarPermisosTienda();
+
+
+            if (oSucursales.Count() > 2)
+            {
+                oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
+            }
+
             this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", oSucursales);
-            this.cmbSucursal.SelectedValue = 0;
+            this.cmbSucursal.SelectedValue = oSucursales.ElementAt(0).SucursalID;
+            //this.cmbSucursal.SelectedValue = 0;
             this.chkPagadas.Checked = true;
             // this.chkCostoConDescuento.Checked = true;
             

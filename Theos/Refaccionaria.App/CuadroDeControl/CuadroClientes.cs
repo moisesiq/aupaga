@@ -292,5 +292,15 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        private void cmbCalculo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCalculo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

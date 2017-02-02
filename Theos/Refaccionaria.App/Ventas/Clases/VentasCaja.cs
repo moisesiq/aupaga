@@ -1143,8 +1143,8 @@ namespace Refaccionaria.App
             }
 
             // Se valida que no haya ventas por cobrar
+            //DateTime dHoy = DateTime.Today.AddDays(-3);
             DateTime dHoy = DateTime.Today;
-            //DateTime dHoy = DateTime.Today.AddDays(-38);
             if (Datos.Exists<Venta>(c => c.VentaEstatusID == Cat.VentasEstatus.Realizada && EntityFunctions.TruncateTime(c.Fecha) == dHoy && c.Estatus))
             {
                 UtilLocal.MensajeAdvertencia("Existen una o más ventas por cobrar. No se puede continuar.");
@@ -1155,6 +1155,7 @@ namespace Refaccionaria.App
             var oDia = Datos.GetEntity<CajaEfectivoPorDia>(q => q.SucursalID == GlobalClass.SucursalID && q.Dia == dHoy && q.Estatus);
             //oDia.FechaRegistro.AddDays(-36);
             
+            //adasdasdasdasd
             if (oDia == null)
             {
                 UtilLocal.MensajeAdvertencia("No se ha realizado el Fondo de Caja, por lo tanto no se puede continuar.");
@@ -1188,12 +1189,13 @@ namespace Refaccionaria.App
             }
 
             // Se valida que no haya Control de Cascos pendientes por completar
-            if (Datos.Exists<CascosRegistrosView>(c => c.NumeroDeParteRecibido == null && c.FolioDeCobro == null
-                && (c.VentaEstatusID != Cat.VentasEstatus.Cancelada && c.VentaEstatusID != Cat.VentasEstatus.CanceladaSinPago)))
-            {
-                UtilLocal.MensajeAdvertencia("No se han completado todos los registros de cascos. No se puede continuar.");
-                return false;
-            }
+            //asdasdasdasdasd
+            //if (Datos.Exists<CascosRegistrosView>(c => c.NumeroDeParteRecibido == null && c.FolioDeCobro == null
+            //    && (c.VentaEstatusID != Cat.VentasEstatus.Cancelada && c.VentaEstatusID != Cat.VentasEstatus.CanceladaSinPago)))
+            //{
+            //    UtilLocal.MensajeAdvertencia("No se han completado todos los registros de cascos. No se puede continuar.");
+            //    return false;
+            //}
 
             // Se confirma la operación
             string sMensaje = string.Format("¿Estás seguro que deseas realizar el Cierre de Caja con un importe de {0}?", oCorte.Conteo.ToString(GlobalClass.FormatoMoneda));
@@ -1224,16 +1226,18 @@ namespace Refaccionaria.App
             //DateTime dAhora = DateTime.Now;
 
             //Se manda a generar la Factura Global
-            bool bFacturaGlobal = this.FacturaGlobal(oDia);
-            if (!bFacturaGlobal)
-               return false;
+            //aasdasdasdasd
+            //bool bFacturaGlobal = this.FacturaGlobal(oDia);
+            //if (!bFacturaGlobal)
+            //   return false;
 
-            // Se manda guardar el histórico del corte
+            //Se manda guardar el histórico del corte
+            //asdasdasd
             bool bSeguir = this.GuardarHistoricoCorte();
             if (!bSeguir)
                 return false;
 
-            // Se registra el cierre de caja
+            //Se registra el cierre de caja
             oDia.CierreDebeHaber = oCorte.Total;
             oDia.Cierre = oCorte.Conteo;
             oDia.CierreUsuarioID = oUsuario.UsuarioID;

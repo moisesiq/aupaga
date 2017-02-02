@@ -20,13 +20,30 @@ namespace Refaccionaria.App
         #region [ Eventos ]
         private void CuadroCobranza_Load(object sender, EventArgs e)
         {
+            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
             // Se llenan los combos
-            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
-            this.cmbCalculo.SelectedIndex = 1;
-            var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
-            oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
+            //this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
+            this.cmbCalculo.Items.AddRange(PermisosC.ValidarPermisosCalculoCuadroMultiple(CuadroControlPermisos.GetTabPage).ToArray());
+            //this.cmbCalculo.SelectedIndex = 1;
+            this.cmbCalculo.SelectedIndex = 0;
+
+
+            var oSucursales = PermisosC.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
+
+
+            if (oSucursales.Count() > 2)
+            {
+                oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
+            }
+
             this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", oSucursales);
-            this.cmbSucursal.SelectedValue = 0;
+            this.cmbSucursal.SelectedValue = oSucursales.ElementAt(0).SucursalID;
+
+            //var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
+            //oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
+            //this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", oSucursales);
+            //this.cmbSucursal.SelectedValue = 0;
+
             this.chkPagadas.Checked = true;
             this.chkCobradas.Checked = true;
 

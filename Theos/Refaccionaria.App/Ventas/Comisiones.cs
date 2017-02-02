@@ -209,6 +209,12 @@ namespace Refaccionaria.App
 
             // Se obtienen los datos del vendedor
             this.oMetaVendedor = Datos.GetEntity<MetaVendedor>(c => c.VendedorID == iVendedorID);
+            if (this.oMetaVendedor == null)
+            {
+                Cargando.Cerrar();
+                UtilLocal.MensajeInformacion("No se ha especificado una meta al vendedor.");
+                return;
+            }
             this.oMetaSucursal = Datos.GetEntity<MetaSucursal>(c => c.SucursalID == this.oMetaVendedor.SucursalID);
             this.mMetaSucursal = this.oMetaSucursal.UtilSucursal;
             this.mMetaVendedor = (this.oMetaVendedor.EsGerente ? this.oMetaSucursal.UtilGerente : this.oMetaSucursal.UtilVendedor);

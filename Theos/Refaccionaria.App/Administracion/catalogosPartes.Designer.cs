@@ -2099,6 +2099,7 @@
             this.flpCaracteristicas.Name = "flpCaracteristicas";
             this.flpCaracteristicas.Size = new System.Drawing.Size(639, 158);
             this.flpCaracteristicas.TabIndex = 198;
+            this.flpCaracteristicas.Paint += new System.Windows.Forms.PaintEventHandler(this.flpCaracteristicas_Paint);
             this.flpCaracteristicas.DoubleClick += new System.EventHandler(this.flpCaracteristicas_DoubleClick);
             // 
             // chkValCaracteristicas

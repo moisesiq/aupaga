@@ -138,9 +138,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cmbImpTipo = new System.Windows.Forms.ComboBox();
             this.tbpComisiones = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
             this.btnGuardarCom = new System.Windows.Forms.Button();
             this.tgvComisiones = new AdvancedDataGridView.TreeGridView();
-            this.label13 = new System.Windows.Forms.Label();
             this.com_ParteComisionID = new AdvancedDataGridView.TreeGridColumn();
             this.com_Id = new AdvancedDataGridView.TreeGridColumn();
             this.com_Entidad = new AdvancedDataGridView.TreeGridColumn();
@@ -1055,6 +1055,17 @@
             this.tbpComisiones.TabIndex = 2;
             this.tbpComisiones.Text = "Comisiones";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(1100, 32);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(87, 13);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Período de pago";
+            this.label13.Visible = false;
+            // 
             // btnGuardarCom
             // 
             this.btnGuardarCom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1112,16 +1123,6 @@
             this.tgvComisiones.TabIndex = 1;
             this.tgvComisiones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvComisiones_CellDoubleClick);
             this.tgvComisiones.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.tgvComisiones_CellValueChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(1100, 32);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 13);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Período de pago";
             // 
             // com_ParteComisionID
             // 

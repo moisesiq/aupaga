@@ -20,14 +20,27 @@ namespace Refaccionaria.App
 
         private void CuadroSemanas_Load(object sender, EventArgs e)
         {
+            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
             // Se llenan los tipos de cálculo
-            this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
-            this.cmbCalculo.SelectedIndex = 1;
+            //this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
+            this.cmbCalculo.Items.AddRange(PermisosC.ValidarPermisosCalculoCuadroMultiple(CuadroControlPermisos.GetTabPage).ToArray());
+            //this.cmbCalculo.SelectedIndex = 1;
+            this.cmbCalculo.SelectedIndex = 0;
             // Se llenan las Sucursales
-            var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
-            oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
+            //var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
+
+            var oSucursales = PermisosC.ValidarPermisosTienda();
+
+
+            if (oSucursales.Count() > 2)
+            {
+                oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
+            }
+
+            //oSucursales.Insert(0, new Sucursal() { SucursalID = 0, NombreSucursal = "Todas" });
             this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", oSucursales);
-            this.cmbSucursal.SelectedValue = 0;
+            //this.cmbSucursal.SelectedValue = 0;
+            this.cmbSucursal.SelectedValue = oSucursales.ElementAt(0).SucursalID; ;
             this.chkPagadas.Checked = true;
             this.chkCostoConDescuento.Checked = true;
             // Se llenan las fechas

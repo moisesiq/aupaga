@@ -88,8 +88,8 @@
             this.btnImprimir = new System.Windows.Forms.Button();
             this.dtpDe = new System.Windows.Forms.DateTimePicker();
             this.label51 = new System.Windows.Forms.Label();
-            this.cmbVendedor = new LibUtil.ComboEtiqueta();
             this.btnGraficas = new System.Windows.Forms.Button();
+            this.cmbVendedor = new LibUtil.ComboEtiqueta();
             this.tabComisiones.SuspendLayout();
             this.tbpComisiones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotales)).BeginInit();
@@ -684,6 +684,21 @@
             this.label51.TabIndex = 9;
             this.label51.Text = "_";
             // 
+            // btnGraficas
+            // 
+            this.btnGraficas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGraficas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnGraficas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGraficas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGraficas.ForeColor = System.Drawing.Color.White;
+            this.btnGraficas.Location = new System.Drawing.Point(620, 2);
+            this.btnGraficas.Name = "btnGraficas";
+            this.btnGraficas.Size = new System.Drawing.Size(80, 23);
+            this.btnGraficas.TabIndex = 3;
+            this.btnGraficas.Text = "&Gráficas";
+            this.btnGraficas.UseVisualStyleBackColor = false;
+            this.btnGraficas.Click += new System.EventHandler(this.btnGraficas_Click);
+            // 
             // cmbVendedor
             // 
             this.cmbVendedor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -704,21 +719,6 @@
             this.cmbVendedor.TabIndex = 0;
             this.cmbVendedor.ValueMember = "";
             this.cmbVendedor.SelectedIndexChanged += new System.EventHandler(this.cmbVendedor_SelectedIndexChanged);
-            // 
-            // btnGraficas
-            // 
-            this.btnGraficas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGraficas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnGraficas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGraficas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGraficas.ForeColor = System.Drawing.Color.White;
-            this.btnGraficas.Location = new System.Drawing.Point(620, 2);
-            this.btnGraficas.Name = "btnGraficas";
-            this.btnGraficas.Size = new System.Drawing.Size(80, 23);
-            this.btnGraficas.TabIndex = 3;
-            this.btnGraficas.Text = "&Gráficas";
-            this.btnGraficas.UseVisualStyleBackColor = false;
-            this.btnGraficas.Click += new System.EventHandler(this.btnGraficas_Click);
             // 
             // Comisiones
             // 
