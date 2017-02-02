@@ -11,3 +11,16 @@ C:\Users\DESARROLLO\Documents\Repositorios\aupaga\Util\obj\Debug\LibUtil.Selecci
 C:\Users\DESARROLLO\Documents\Repositorios\aupaga\Util\obj\Debug\LibUtil.csproj.GenerateResource.Cache
 C:\Users\DESARROLLO\Documents\Repositorios\aupaga\Util\obj\Debug\LibUtil.dll
 C:\Users\DESARROLLO\Documents\Repositorios\aupaga\Util\obj\Debug\LibUtil.pdb
+C:\CodigoFuente\Util\bin\Debug\LibUtil.dll
+C:\CodigoFuente\Util\bin\Debug\LibUtil.pdb
+C:\CodigoFuente\Util\obj\Debug\LibUtil.ComboEtiqueta.resources
+C:\CodigoFuente\Util\obj\Debug\LibUtil.ComboMultiSel.resources
+C:\CodigoFuente\Util\obj\Debug\LibUtil.Progreso.resources
+C:\CodigoFuente\Util\obj\Debug\LibUtil.TextoAutocompletar.resources
+C:\CodigoFuente\Util\obj\Debug\LibUtil.EdicionListado.resources
+C:\CodigoFuente\Util\obj\Debug\LibUtil.MensajeObtenerValor.resources
+C:\CodigoFuente\Util\obj\Debug\LibUtil.MensajeTexto.resources
+C:\CodigoFuente\Util\obj\Debug\LibUtil.SeleccionListado.resources
+C:\CodigoFuente\Util\obj\Debug\LibUtil.csproj.GenerateResource.Cache
+C:\CodigoFuente\Util\obj\Debug\LibUtil.dll
+C:\CodigoFuente\Util\obj\Debug\LibUtil.pdb
