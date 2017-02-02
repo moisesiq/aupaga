@@ -1,0 +1,10 @@
+C:\CodigoFuente\Theos\LibExt\bin\Release\LibExt.dll
+C:\CodigoFuente\Theos\LibExt\bin\Release\LibExt.pdb
+C:\CodigoFuente\Theos\LibExt\obj\Release\LibExt.csprojResolveAssemblyReference.cache
+C:\CodigoFuente\Theos\LibExt\obj\Release\LibExt.dll
+C:\CodigoFuente\Theos\LibExt\obj\Release\LibExt.pdb
+\\Garibaldii\c\CodigoFuente\Theos\LibExt\bin\Release\LibExt.dll
+\\Garibaldii\c\CodigoFuente\Theos\LibExt\bin\Release\LibExt.pdb
+\\Garibaldii\c\CodigoFuente\Theos\LibExt\obj\Release\LibExt.csprojResolveAssemblyReference.cache
+\\Garibaldii\c\CodigoFuente\Theos\LibExt\obj\Release\LibExt.dll
+\\Garibaldii\c\CodigoFuente\Theos\LibExt\obj\Release\LibExt.pdb
