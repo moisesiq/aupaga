@@ -515,6 +515,7 @@
     <Compile Include="CuadroDeControl\Base\CuadroMultipleSucursales.Designer.cs">
       <DependentUpon>CuadroMultipleSucursales.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuadroDeControl\Clases\CuadroControlPermisos.cs" />
     <Compile Include="CuadroDeControl\CuadroCancelaciones.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -680,6 +681,11 @@
     <Compile Include="Formas\Gen\Navegador.Designer.cs">
       <DependentUpon>Navegador.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Validaciones\Autorizaciones.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -754,11 +760,6 @@
     </Compile>
     <Compile Include="Modelos\ConteoMonedas.cs" />
     <Compile Include="Modelos\ConteoMonedasId.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="Validaciones\ValCortes.cs">
       <SubType>UserControl</SubType>
     </Compile>
