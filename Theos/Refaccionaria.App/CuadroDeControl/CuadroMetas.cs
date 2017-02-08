@@ -17,10 +17,10 @@ namespace Refaccionaria.App
 
         private void CuadroMetas_Load(object sender, EventArgs e)
         {
-            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
+            //CuadroControlPermisos PermisosC = new CuadroControlPermisos();
             // Se llenan los controles iniciales
             //var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
-            var oSucursales = PermisosC.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
+            var oSucursales = CuadroControlPermisos.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
 
             if (oSucursales.Count > 2)
             {

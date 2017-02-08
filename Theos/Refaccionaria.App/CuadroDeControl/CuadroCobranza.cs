@@ -20,15 +20,15 @@ namespace Refaccionaria.App
         #region [ Eventos ]
         private void CuadroCobranza_Load(object sender, EventArgs e)
         {
-            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
+            //CuadroControlPermisos PermisosC = new CuadroControlPermisos();
             // Se llenan los combos
             //this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
-            this.cmbCalculo.Items.AddRange(PermisosC.ValidarPermisosCalculoCuadroMultiple(CuadroControlPermisos.GetTabPage).ToArray());
+            this.cmbCalculo.Items.AddRange(CuadroControlPermisos.ValidarPermisosCalculoCuadroMultiple(CuadroControlPermisos.GetTabPage).ToArray());
             //this.cmbCalculo.SelectedIndex = 1;
             this.cmbCalculo.SelectedIndex = 0;
 
 
-            var oSucursales = PermisosC.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
+            var oSucursales = CuadroControlPermisos.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
 
 
             if (oSucursales.Count() > 2)

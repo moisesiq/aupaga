@@ -228,14 +228,15 @@ namespace Refaccionaria.App
             oParams.Add("Hasta", this.dtpA.Value.Date);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
             var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test4", oParams);
+            //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
             
 
             // Se llena el grid
             this.dgvVentas.Rows.Clear();
             foreach (var oReg in oDatos)
             {
-                // int iFila = this.dgvVentas.Rows.Add(oReg.VentaID, oReg.Caracteristica, oReg.Fecha, oReg.Cliente, oReg.Folio, oReg.Importe, oReg.Cobranza
-                //    , oReg.Utilidad, oReg.Comision, (oReg.Caracteristica.EndsWith("9500") ? "SÍ" : ""));
+                //int iFila = this.dgvVentas.Rows.Add(oReg.VentaID, oReg.Caracteristica, oReg.Fecha, oReg.Cliente, oReg.Folio, oReg.Importe, oReg.Cobranza
+                //   , oReg.Utilidad, oReg.Comision, (oReg.Caracteristica.EndsWith("9500") ? "SÍ" : ""));
                 int iFila = this.dgvVentas.Rows.Add(oReg.VentaID, oReg.Caracteristica, oReg.Fecha, oReg.Cliente, oReg.Folio, oReg.Importe, oReg.Cobranza
                     , oReg.Utilidad, oReg.Comision, oReg.ComisionFija, (oReg.Es9500.Valor() ? "SÍ" : ""));
                 // Se marcan los colores

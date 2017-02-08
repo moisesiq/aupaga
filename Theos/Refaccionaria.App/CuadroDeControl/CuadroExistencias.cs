@@ -19,10 +19,10 @@ namespace Refaccionaria.App
 
         private void CuadroExistencias_Load(object sender, EventArgs e)
         {
-            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
+            //CuadroControlPermisos PermisosC = new CuadroControlPermisos();
             // Se cargan los datos de los combos
             //this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", Datos.GetListOf<Sucursal>(c => c.Estatus));
-            this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", PermisosC.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage));
+            this.cmbSucursal.CargarDatos("SucursalID", "NombreSucursal", CuadroControlPermisos.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage));
             this.cmbProveedor.CargarDatos("ProveedorID", "NombreProveedor", Datos.GetListOf<Proveedor>(c => c.Estatus));
             this.cmbMarca.CargarDatos("MarcaParteID", "NombreMarcaParte", Datos.GetListOf<MarcaParte>(c => c.Estatus));
             this.cmbLinea.CargarDatos("LineaID", "NombreLinea", Datos.GetListOf<Linea>(c => c.Estatus));

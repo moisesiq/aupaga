@@ -7,13 +7,13 @@ using TheosProc;
 
 namespace Refaccionaria.App
 {
-    public class CuadroControlPermisos
+    public static class CuadroControlPermisos
     {
 
         public static string GetTabPage;
 
         //se validan los permisos otorgados para llenar el combo de calculo en las pestañas de cuadro de control
-        public ArrayList ValidarPermisosCalculo()
+        public static ArrayList ValidarPermisosCalculo()
         {
             List<UsuariosPermisosView> list = Datos.GetListOf<UsuariosPermisosView>(i => i.UsuarioID == Theos.UsuarioID);
             ArrayList per = new ArrayList();
@@ -50,7 +50,7 @@ namespace Refaccionaria.App
 
 
         //se validan los permisos para mostrar el combo de tienda en cuadro de control
-        public List<Sucursal> ValidarPermisosTienda()
+        public static List<Sucursal> ValidarPermisosTienda()
         {
             
             List<Sucursal> oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
@@ -76,7 +76,7 @@ namespace Refaccionaria.App
         }
 
 
-        public ArrayList ValidarPermisosCalculoCuadroMultiple(string pagina)
+        public static ArrayList ValidarPermisosCalculoCuadroMultiple(string pagina)
         {
             List<UsuariosPermisosView> list = Datos.GetListOf<UsuariosPermisosView>(i => i.UsuarioID == Theos.UsuarioID);
             ArrayList per = new ArrayList();
@@ -115,7 +115,7 @@ namespace Refaccionaria.App
             return per;
         }
 
-        public List<Sucursal> ValidarPermisosTiendaCuadroMultiple(string pagina)
+        public static List<Sucursal> ValidarPermisosTiendaCuadroMultiple(string pagina)
         {
             List<Sucursal> oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
             List<UsuariosPermisosView> listaPermisos = Datos.GetListOf<UsuariosPermisosView>(i => i.UsuarioID == Theos.UsuarioID);
@@ -138,7 +138,17 @@ namespace Refaccionaria.App
                 
             }
             return listaSucursales;
+        }
 
+
+        public static bool ValidarTodosPermisos(string pagina)
+        {
+            if (ValidarPermisosCalculoCuadroMultiple(pagina).Count <= 0 || ValidarPermisosTiendaCuadroMultiple(pagina).ToArray().Length <= 0)
+            {
+                UtilLocal.MensajeAdvertencia("No existen permisos para esta página");
+                return false;
+            }
+            return true;
         }
 
     }

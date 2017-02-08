@@ -20,16 +20,16 @@ namespace Refaccionaria.App
 
         private void CuadroSemanas_Load(object sender, EventArgs e)
         {
-            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
+            //CuadroControlPermisos PermisosC = new CuadroControlPermisos();
             // Se llenan los tipos de cálculo
             //this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
-            this.cmbCalculo.Items.AddRange(PermisosC.ValidarPermisosCalculoCuadroMultiple(CuadroControlPermisos.GetTabPage).ToArray());
+            this.cmbCalculo.Items.AddRange(CuadroControlPermisos.ValidarPermisosCalculoCuadroMultiple(CuadroControlPermisos.GetTabPage).ToArray());
             //this.cmbCalculo.SelectedIndex = 1;
             this.cmbCalculo.SelectedIndex = 0;
             // Se llenan las Sucursales
             //var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
 
-            var oSucursales = PermisosC.ValidarPermisosTienda();
+            var oSucursales = CuadroControlPermisos.ValidarPermisosTienda();
 
 
             if (oSucursales.Count() > 2)

@@ -122,24 +122,17 @@ namespace Refaccionaria.App
 
         private void CuadroMultiple_Load(object sender, EventArgs e)
         {
-
-            CuadroDeControl s = new CuadroDeControl();
-
-            CuadroControlPermisos PermisosC = new CuadroControlPermisos();
-            
             //PermisosC.ValidarPermisosCuadroMultiple();
-
-
             if (this.DesignMode) return;
-            
             // Se llenan los tipos de cálculo
             //this.cmbCalculo.Items.AddRange(new object[] { "Utilidad", "Utilidad Desc.", "Precio", "Costo", "Costo Desc.", "Ventas", "Productos" });
-            this.cmbCalculo.Items.AddRange(PermisosC.ValidarPermisosCalculoCuadroMultiple(CuadroControlPermisos.GetTabPage).ToArray());
+            this.cmbCalculo.Items.AddRange(CuadroControlPermisos.ValidarPermisosCalculoCuadroMultiple(CuadroControlPermisos.GetTabPage).ToArray());
+
             this.cmbCalculo.SelectedIndex = 0;
             //this.cmbCalculo.SelectedIndex = 1;
             // Se llenan las Sucursales
             //var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
-            var oSucursales = PermisosC.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
+            var oSucursales = CuadroControlPermisos.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
 
             if (oSucursales.Count() > 2)
             {

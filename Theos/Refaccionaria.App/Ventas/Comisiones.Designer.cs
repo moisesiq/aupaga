@@ -111,7 +111,7 @@
             this.tabComisiones.Location = new System.Drawing.Point(3, 29);
             this.tabComisiones.Name = "tabComisiones";
             this.tabComisiones.SelectedIndex = 0;
-            this.tabComisiones.Size = new System.Drawing.Size(783, 333);
+            this.tabComisiones.Size = new System.Drawing.Size(781, 333);
             this.tabComisiones.TabIndex = 5;
             this.tabComisiones.SelectedIndexChanged += new System.EventHandler(this.tabComisiones_SelectedIndexChanged);
             // 
@@ -121,7 +121,7 @@
             this.tbpLogros.Location = new System.Drawing.Point(4, 25);
             this.tbpLogros.Name = "tbpLogros";
             this.tbpLogros.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpLogros.Size = new System.Drawing.Size(775, 304);
+            this.tbpLogros.Size = new System.Drawing.Size(773, 304);
             this.tbpLogros.TabIndex = 1;
             this.tbpLogros.Text = "Logros";
             // 
@@ -143,7 +143,7 @@
             this.tbpComisiones.Location = new System.Drawing.Point(4, 25);
             this.tbpComisiones.Name = "tbpComisiones";
             this.tbpComisiones.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpComisiones.Size = new System.Drawing.Size(775, 304);
+            this.tbpComisiones.Size = new System.Drawing.Size(773, 304);
             this.tbpComisiones.TabIndex = 0;
             this.tbpComisiones.Text = "Comisiones por Venta";
             // 
@@ -198,7 +198,7 @@
             this.dgvTotales.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvTotales.RowHeadersVisible = false;
             this.dgvTotales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTotales.Size = new System.Drawing.Size(598, 20);
+            this.dgvTotales.Size = new System.Drawing.Size(596, 20);
             this.dgvTotales.StandardTab = true;
             this.dgvTotales.TabIndex = 1;
             // 
@@ -312,7 +312,7 @@
             this.dgvVentas.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvVentas.RowHeadersVisible = false;
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentas.Size = new System.Drawing.Size(598, 277);
+            this.dgvVentas.Size = new System.Drawing.Size(596, 277);
             this.dgvVentas.StandardTab = true;
             this.dgvVentas.TabIndex = 0;
             this.dgvVentas.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvVentas_RowStateChanged);
@@ -419,7 +419,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(635, 241);
+            this.label2.Location = new System.Drawing.Point(633, 241);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 6;
@@ -431,7 +431,7 @@
             this.lblFijo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(136)))), ((int)(((byte)(177)))));
             this.lblFijo.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFijo.ForeColor = System.Drawing.Color.White;
-            this.lblFijo.Location = new System.Drawing.Point(672, 194);
+            this.lblFijo.Location = new System.Drawing.Point(670, 194);
             this.lblFijo.Name = "lblFijo";
             this.lblFijo.Size = new System.Drawing.Size(100, 20);
             this.lblFijo.TabIndex = 10;
@@ -444,7 +444,7 @@
             this.lbl9500.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(136)))), ((int)(((byte)(177)))));
             this.lbl9500.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl9500.ForeColor = System.Drawing.Color.White;
-            this.lbl9500.Location = new System.Drawing.Point(672, 236);
+            this.lbl9500.Location = new System.Drawing.Point(670, 236);
             this.lbl9500.Name = "lbl9500";
             this.lbl9500.Size = new System.Drawing.Size(100, 20);
             this.lbl9500.TabIndex = 23;
@@ -457,7 +457,7 @@
             this.lblVariable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(136)))), ((int)(((byte)(177)))));
             this.lblVariable.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVariable.ForeColor = System.Drawing.Color.White;
-            this.lblVariable.Location = new System.Drawing.Point(672, 215);
+            this.lblVariable.Location = new System.Drawing.Point(670, 215);
             this.lblVariable.Name = "lblVariable";
             this.lblVariable.Size = new System.Drawing.Size(100, 20);
             this.lblVariable.TabIndex = 11;
@@ -470,7 +470,7 @@
             this.lblDevoluciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(136)))), ((int)(((byte)(177)))));
             this.lblDevoluciones.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDevoluciones.ForeColor = System.Drawing.Color.Red;
-            this.lblDevoluciones.Location = new System.Drawing.Point(672, 257);
+            this.lblDevoluciones.Location = new System.Drawing.Point(670, 257);
             this.lblDevoluciones.Name = "lblDevoluciones";
             this.lblDevoluciones.Size = new System.Drawing.Size(100, 20);
             this.lblDevoluciones.TabIndex = 13;
@@ -483,7 +483,7 @@
             this.lblTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(136)))), ((int)(((byte)(177)))));
             this.lblTotal.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblTotal.Location = new System.Drawing.Point(672, 278);
+            this.lblTotal.Location = new System.Drawing.Point(670, 278);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(100, 20);
             this.lblTotal.TabIndex = 7;
@@ -497,7 +497,7 @@
             this.label38.BackColor = System.Drawing.Color.Transparent;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(635, 283);
+            this.label38.Location = new System.Drawing.Point(633, 283);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(31, 13);
             this.label38.TabIndex = 14;
@@ -510,7 +510,7 @@
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(643, 199);
+            this.label25.Location = new System.Drawing.Point(641, 199);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(23, 13);
             this.label25.TabIndex = 8;
@@ -523,7 +523,7 @@
             this.label45.BackColor = System.Drawing.Color.Transparent;
             this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label45.ForeColor = System.Drawing.Color.White;
-            this.label45.Location = new System.Drawing.Point(609, 262);
+            this.label45.Location = new System.Drawing.Point(607, 262);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(57, 13);
             this.label45.TabIndex = 16;
@@ -536,7 +536,7 @@
             this.label27.BackColor = System.Drawing.Color.Transparent;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(621, 220);
+            this.label27.Location = new System.Drawing.Point(619, 220);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(45, 13);
             this.label27.TabIndex = 15;
@@ -655,7 +655,7 @@
             this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImprimir.ForeColor = System.Drawing.Color.White;
-            this.btnImprimir.Location = new System.Drawing.Point(706, 2);
+            this.btnImprimir.Location = new System.Drawing.Point(704, 2);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(80, 23);
             this.btnImprimir.TabIndex = 4;
@@ -691,7 +691,7 @@
             this.btnGraficas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGraficas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGraficas.ForeColor = System.Drawing.Color.White;
-            this.btnGraficas.Location = new System.Drawing.Point(620, 2);
+            this.btnGraficas.Location = new System.Drawing.Point(618, 2);
             this.btnGraficas.Name = "btnGraficas";
             this.btnGraficas.Size = new System.Drawing.Size(80, 23);
             this.btnGraficas.TabIndex = 3;
@@ -733,7 +733,7 @@
             this.Controls.Add(this.dtpDe);
             this.Controls.Add(this.label51);
             this.Name = "Comisiones";
-            this.Size = new System.Drawing.Size(789, 365);
+            this.Size = new System.Drawing.Size(787, 365);
             this.Load += new System.EventHandler(this.Comisiones_Load);
             this.tabComisiones.ResumeLayout(false);
             this.tbpComisiones.ResumeLayout(false);

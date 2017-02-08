@@ -1432,10 +1432,10 @@ namespace Refaccionaria.App
 
         private void GuardarDatosComisiones()
         {
-            if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que deseas guardar los cambios realizados?") != DialogResult.Yes)
-                return;
+            //if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que deseas guardar los cambios realizados?") != DialogResult.Yes)
+                //return;
 
-            Cargando.Mostrar();
+            //Cargando.Mostrar();
 
             foreach (DataGridViewRow oFila in this.tgvComisiones.Rows)
             {
@@ -1504,7 +1504,7 @@ namespace Refaccionaria.App
                 Datos.Guardar<ParteComision>(oParteComision);
             }
 
-            Cargando.Cerrar();
+            //Cargando.Cerrar();
 
             this.CargarArbolDeComisiones();
         }
