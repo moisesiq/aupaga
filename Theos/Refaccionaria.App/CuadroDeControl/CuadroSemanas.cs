@@ -28,8 +28,9 @@ namespace Refaccionaria.App
             this.cmbCalculo.SelectedIndex = 0;
             // Se llenan las Sucursales
             //var oSucursales = Datos.GetListOf<Sucursal>(c => c.Estatus);
+            var oSucursales = CuadroControlPermisos.ValidarPermisosTiendaCuadroMultiple(CuadroControlPermisos.GetTabPage);
 
-            var oSucursales = CuadroControlPermisos.ValidarPermisosTienda();
+            //var oSucursales = CuadroControlPermisos.ValidarPermisosTienda();
 
 
             if (oSucursales.Count() > 2)
