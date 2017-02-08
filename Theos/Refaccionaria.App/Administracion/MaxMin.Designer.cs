@@ -207,10 +207,10 @@
             this.CantidadTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Utilidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fijo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.MinimoActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaximoActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MinimoActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Maximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Minimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Condiciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaCalculo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MotivoFijoCero = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -284,10 +284,10 @@
             this.CantidadTotal,
             this.Utilidad,
             this.Fijo,
-            this.MinimoActual,
             this.MaximoActual,
-            this.Minimo,
+            this.MinimoActual,
             this.Maximo,
+            this.Minimo,
             this.Condiciones,
             this.FechaCalculo,
             this.MotivoFijoCero});
@@ -1442,6 +1442,7 @@
             // Existen
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Existen.DefaultCellStyle = dataGridViewCellStyle2;
             resources.ApplyResources(this.Existen, "Existen");
             this.Existen.Name = "Existen";
@@ -1517,41 +1518,41 @@
             this.Fijo.Name = "Fijo";
             this.Fijo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // MinimoActual
+            // MaximoActual
             // 
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle8.Format = "N0";
-            this.MinimoActual.DefaultCellStyle = dataGridViewCellStyle8;
-            resources.ApplyResources(this.MinimoActual, "MinimoActual");
-            this.MinimoActual.Name = "MinimoActual";
-            this.MinimoActual.ReadOnly = true;
-            // 
-            // MaximoActual
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N0";
-            this.MaximoActual.DefaultCellStyle = dataGridViewCellStyle9;
+            this.MaximoActual.DefaultCellStyle = dataGridViewCellStyle8;
             resources.ApplyResources(this.MaximoActual, "MaximoActual");
             this.MaximoActual.Name = "MaximoActual";
             this.MaximoActual.ReadOnly = true;
             // 
-            // Minimo
+            // MinimoActual
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N0";
-            this.Minimo.DefaultCellStyle = dataGridViewCellStyle10;
-            resources.ApplyResources(this.Minimo, "Minimo");
-            this.Minimo.Name = "Minimo";
-            this.Minimo.ReadOnly = true;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N0";
+            this.MinimoActual.DefaultCellStyle = dataGridViewCellStyle9;
+            resources.ApplyResources(this.MinimoActual, "MinimoActual");
+            this.MinimoActual.Name = "MinimoActual";
+            this.MinimoActual.ReadOnly = true;
             // 
             // Maximo
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N0";
-            this.Maximo.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
+            this.Maximo.DefaultCellStyle = dataGridViewCellStyle10;
             resources.ApplyResources(this.Maximo, "Maximo");
             this.Maximo.Name = "Maximo";
             this.Maximo.ReadOnly = true;
+            // 
+            // Minimo
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N0";
+            this.Minimo.DefaultCellStyle = dataGridViewCellStyle11;
+            resources.ApplyResources(this.Minimo, "Minimo");
+            this.Minimo.Name = "Minimo";
+            this.Minimo.ReadOnly = true;
             // 
             // Condiciones
             // 
@@ -1812,10 +1813,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CantidadTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Utilidad;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Fijo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MinimoActual;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaximoActual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Minimo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MinimoActual;
         private System.Windows.Forms.DataGridViewTextBoxColumn Maximo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Minimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Condiciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCalculo;
         private System.Windows.Forms.DataGridViewTextBoxColumn MotivoFijoCero;

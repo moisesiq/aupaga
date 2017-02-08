@@ -6,3 +6,4 @@ C:\CodigoFuente\Theos\LibExt\bin\Debug\LibExt.dll
 C:\CodigoFuente\Theos\LibExt\bin\Debug\LibExt.pdb
 C:\CodigoFuente\Theos\LibExt\obj\Debug\LibExt.dll
 C:\CodigoFuente\Theos\LibExt\obj\Debug\LibExt.pdb
+C:\CodigoFuente\Theos\LibExt\obj\Debug\LibExt.csprojResolveAssemblyReference.cache

@@ -2936,5 +2936,10 @@ namespace Refaccionaria.App
 
         }
 
+        private void txtDescripcionMaxMin_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -160,7 +160,6 @@
             this.dgvMaxMinFijoHistorico = new System.Windows.Forms.DataGridView();
             this.mfh_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mfh_Motivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label7 = new System.Windows.Forms.Label();
             this.txtDescripcionMaxMin = new System.Windows.Forms.TextBox();
             this.dgvExistencias = new System.Windows.Forms.DataGridView();
             this.tabAplicaciones = new System.Windows.Forms.TabControl();
@@ -856,7 +855,6 @@
             // 
             this.tabExistencias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.tabExistencias.Controls.Add(this.dgvMaxMinFijoHistorico);
-            this.tabExistencias.Controls.Add(this.label7);
             this.tabExistencias.Controls.Add(this.txtDescripcionMaxMin);
             this.tabExistencias.Controls.Add(this.dgvExistencias);
             this.tabExistencias.ForeColor = System.Drawing.Color.Black;
@@ -902,13 +900,13 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvMaxMinFijoHistorico.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvMaxMinFijoHistorico.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
-            this.dgvMaxMinFijoHistorico.Location = new System.Drawing.Point(6, 176);
+            this.dgvMaxMinFijoHistorico.Location = new System.Drawing.Point(6, 144);
             this.dgvMaxMinFijoHistorico.Name = "dgvMaxMinFijoHistorico";
             this.dgvMaxMinFijoHistorico.ReadOnly = true;
             this.dgvMaxMinFijoHistorico.RowHeadersVisible = false;
             this.dgvMaxMinFijoHistorico.RowHeadersWidth = 25;
             this.dgvMaxMinFijoHistorico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMaxMinFijoHistorico.Size = new System.Drawing.Size(280, 31);
+            this.dgvMaxMinFijoHistorico.Size = new System.Drawing.Size(280, 60);
             this.dgvMaxMinFijoHistorico.TabIndex = 317;
             // 
             // mfh_Fecha
@@ -925,18 +923,6 @@
             this.mfh_Motivo.ReadOnly = true;
             this.mfh_Motivo.Width = 200;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(3, 96);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(138, 13);
-            this.label7.TabIndex = 101;
-            this.label7.Text = "Selecciona una tienda:";
-            // 
             // txtDescripcionMaxMin
             // 
             this.txtDescripcionMaxMin.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -945,12 +931,13 @@
             this.txtDescripcionMaxMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
             this.txtDescripcionMaxMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDescripcionMaxMin.ForeColor = System.Drawing.Color.White;
-            this.txtDescripcionMaxMin.Location = new System.Drawing.Point(6, 109);
+            this.txtDescripcionMaxMin.Location = new System.Drawing.Point(6, 97);
             this.txtDescripcionMaxMin.Multiline = true;
             this.txtDescripcionMaxMin.Name = "txtDescripcionMaxMin";
             this.txtDescripcionMaxMin.ReadOnly = true;
-            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(280, 61);
+            this.txtDescripcionMaxMin.Size = new System.Drawing.Size(280, 43);
             this.txtDescripcionMaxMin.TabIndex = 14;
+            this.txtDescripcionMaxMin.TextChanged += new System.EventHandler(this.txtDescripcionMaxMin_TextChanged);
             // 
             // dgvExistencias
             // 
@@ -4075,7 +4062,6 @@
         private System.Windows.Forms.CheckBox chkValComplementarios;
         private System.Windows.Forms.CheckBox chkValFotos;
         private System.Windows.Forms.CheckBox chkValCaracteristicas;
-        private System.Windows.Forms.Label label7;
         private LibUtil.TextoMod txtKardexBusqueda;
         private System.Windows.Forms.TextBox txtKardexObservacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Kardex_ParteKardexID;
