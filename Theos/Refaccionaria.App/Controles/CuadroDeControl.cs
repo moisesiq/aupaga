@@ -45,6 +45,9 @@ namespace Refaccionaria.App
                     if (!UtilLocal.ValidarPermiso("CuadroDeControl.Ventas.Ver", true))
                         return;
 
+                    if (!CuadroControlPermisos.ValidarTodosPermisos(CuadroControlPermisos.GetTabPage))
+                        return;
+
                     if (this.tbpVentas.Controls.Count <= 0)
                         this.tbpVentas.Controls.Add(new CuadroVentas() { Dock = DockStyle.Fill });
                     break;
