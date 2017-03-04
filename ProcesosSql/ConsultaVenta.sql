@@ -6,8 +6,8 @@ SELECT * FROM VentasView WHERE Pagado != Total AND ACredito = 0 AND VentaEstatus
 /* Pagos mal aplicados *******************************************************/
 
 /* Consulta ******************************************************************/
-SELECT * FROM VentasView WHERE Folio = 'MAT1745'
-DECLARE @VentaID INT = 246063
+SELECT * FROM VentasView WHERE Folio = 'mat36445'
+DECLARE @VentaID INT = 473082
 SELECT * FROM Venta WHERE VentaID = @VentaID
 SELECT * FROM VentaDetalle WHERE VentaID = @VentaID
 SELECT * FROM VentaPago WHERE VentaID = @VentaID

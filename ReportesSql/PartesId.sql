@@ -22,4 +22,7 @@ FROM
 	LEFT JOIN Linea l ON l.LineaID = p.LineaID AND l.Estatus = 1
 	LEFT JOIN PartePrecio pp ON pp.ParteID = p.ParteID AND pp.Estatus = 1
 WHERE p.Estatus = 1
+and l.LineaID = 132
+
 --ORDER BY p.NumeroParte
+
