@@ -1382,6 +1382,9 @@ namespace Refaccionaria.App
                 Partes = Datos.ExecuteProcedure<pauVentasPartesBusqueda_Result>("pauVentasPartesBusqueda", Filtros);
             }
 
+            //List<ParteCaracteristica> parte = Datos.GetListOf<ParteCaracteristica>(c => c.CaracteristicaID == 1825 && c.CaracteristicaID == 505);
+            //System.Console.WriteLine(parte);
+
             // Se llena la lista con las partes que coinciden con el filtro
             this.LlenarPartesFiltro(Partes);
 
@@ -2116,6 +2119,11 @@ namespace Refaccionaria.App
                 this.VOp.oDirectorio.ctlDirectorio.MuestraTab(DirectorioVentasDetalle.eModo.Marcas, IdParteSelct);
                 this.VOp.oDirectorio.ctlDirectorio.BuscaProveedorConIdParte(IdParteSelct, true);
             }
+        }
+
+        private void cmbLinea_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

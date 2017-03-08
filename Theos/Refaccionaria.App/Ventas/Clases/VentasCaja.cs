@@ -905,6 +905,30 @@ namespace Refaccionaria.App
             foreach (var oReg in oValesCreados)
                 VentasLoc.GenerarTicketNotaDeCredito(oReg.NotaDeCreditoID);
 
+
+            //Se guarda la información de la venta en cuanto a comisiones para ese dia
+            var VentaDetalle = Datos.GetListOf<VentaDetalle>(q => q.VentaID == oVenta.VentaID && q.Estatus);
+            foreach (var i in VentaDetalle) 
+            { 
+                ParteComisionHistorico comisionActual = new ParteComisionHistorico();
+                comisionActual.VentaID = i.VentaID;
+                comisionActual.FechaRegistro = DateTime.Now;
+                comisionActual.ParteID = i.ParteID;
+                var Comisiones = Datos.GetEntity<ParteComision>(q => q.ParteID == i.ParteID);
+                var ValidarComision = Datos.GetEntity<ParteComisionHistorico>(q => q.ParteID == i.ParteID && q.PorcentajeNormal != Comisiones.PorcentajeNormal);
+                comisionActual.ComisionFija = Comisiones.ComisionFija;
+                comisionActual.PorcentajeNormal = Comisiones.PorcentajeNormal;
+                comisionActual.PorcentajeUnArticulo = Comisiones.PorcentajeUnArticulo;
+                comisionActual.ArticulosEspecial = Comisiones.ArticulosEspecial;
+                comisionActual.PorcentajeArticuloEspecial = Comisiones.PorcentajeArticulosEspecial;
+                comisionActual.PorcentajeReduccionPorRepartidor = Comisiones.PorcentajeReduccionPorRepartidor;
+                comisionActual.ComisionFijaRepartidor = Comisiones.ComisionFijaRepartidor;
+                comisionActual.PorcentajeComplementarios = Comisiones.PorcentajeComplementarios;
+                comisionActual.PorcentajeRepartidor = Comisiones.PorcentajeRepartidor;
+                Datos.Guardar<ParteComisionHistorico>(comisionActual);
+            }
+
+
             // Se cierra la ventana de "Cargando.."
             Cargando.Cerrar();
 
@@ -1162,7 +1186,7 @@ namespace Refaccionaria.App
                 return false;
             }
 
-            // Se valida que no haya autorizaciones pendientes
+            //Se valida que no haya autorizaciones pendientes
             if (Datos.Exists<Autorizacion>(c => c.SucursalID == GlobalClass.SucursalID && EntityFunctions.TruncateTime(c.FechaRegistro) == dHoy && !c.Autorizado))
             {
                 UtilLocal.MensajeAdvertencia("No se han completado todas las Autorizaciones del día. No se puede continuar.");
@@ -1190,12 +1214,12 @@ namespace Refaccionaria.App
 
             // Se valida que no haya Control de Cascos pendientes por completar
             //asdasdasdasdasd
-            //if (Datos.Exists<CascosRegistrosView>(c => c.NumeroDeParteRecibido == null && c.FolioDeCobro == null
-            //    && (c.VentaEstatusID != Cat.VentasEstatus.Cancelada && c.VentaEstatusID != Cat.VentasEstatus.CanceladaSinPago)))
-            //{
-            //    UtilLocal.MensajeAdvertencia("No se han completado todos los registros de cascos. No se puede continuar.");
-            //    return false;
-            //}
+            if (Datos.Exists<CascosRegistrosView>(c => c.NumeroDeParteRecibido == null && c.FolioDeCobro == null
+                && (c.VentaEstatusID != Cat.VentasEstatus.Cancelada && c.VentaEstatusID != Cat.VentasEstatus.CanceladaSinPago)))
+            {
+                UtilLocal.MensajeAdvertencia("No se han completado todos los registros de cascos. No se puede continuar.");
+                return false;
+            }
 
             // Se confirma la operación
             string sMensaje = string.Format("¿Estás seguro que deseas realizar el Cierre de Caja con un importe de {0}?", oCorte.Conteo.ToString(GlobalClass.FormatoMoneda));
@@ -1227,9 +1251,9 @@ namespace Refaccionaria.App
 
             //Se manda a generar la Factura Global
             //aasdasdasdasd
-            //bool bFacturaGlobal = this.FacturaGlobal(oDia);
-            //if (!bFacturaGlobal)
-            //   return false;
+            bool bFacturaGlobal = this.FacturaGlobal(oDia);
+            if (!bFacturaGlobal)
+               return false;
 
             //Se manda guardar el histórico del corte
             //asdasdasd

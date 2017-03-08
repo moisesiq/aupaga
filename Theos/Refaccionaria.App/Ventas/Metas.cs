@@ -175,7 +175,11 @@ namespace Refaccionaria.App
             var oParams = new Dictionary<string, object>();
             oParams.Add("Desde", this.Desde);
             oParams.Add("Hasta", this.Hasta);
-            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
+            oParams.Add("ModoID", 1);
+            oParams.Add("VendedorID", Theos.UsuarioID);
+            oParams.Add("SucursalID", Theos.SucursalID);
+            //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupadoTest2", oParams);
 
             this.mUtilidad = 0;
             this.mComision = 0;

@@ -226,10 +226,11 @@ namespace Refaccionaria.App
             oParams.Add("VendedorID", iVendedorID);
             oParams.Add("Desde", this.dtpDe.Value.Date);
             oParams.Add("Hasta", this.dtpA.Value.Date);
+            oParams.Add("SucursalID", Theos.SucursalID);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test4", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
-            
+
 
             // Se llena el grid
             this.dgvVentas.Rows.Clear();
@@ -382,6 +383,7 @@ namespace Refaccionaria.App
 
             this.ComisionesNpAct = true;
         }
+
 
         #endregion
 

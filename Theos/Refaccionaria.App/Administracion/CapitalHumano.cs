@@ -1037,7 +1037,19 @@ namespace Refaccionaria.App
 
             var oUsuarios = Datos.GetListOf<UsuariosNominaView>();
             int iTipo = Util.Entero(this.cmbImpTipo.SelectedValue);
-            DateTime dDesde = new DateTime(DateTime.Now.Year, Util.Entero(this.cmbImpPeriodo.SelectedValue), 1);
+
+            //si se selecciona diciembre, se muestra diciembre del año anterior y no del año actual
+            int oAño = 0;
+            if (Util.Entero(this.cmbImpPeriodo.SelectedValue) == 12)
+            {
+                oAño = DateTime.Now.AddYears(-1).Year;
+            }
+            else
+            {
+                oAño = DateTime.Now.Year;
+            }
+            //DateTime dDesde = new DateTime(DateTime.Now.Year, Util.Entero(this.cmbImpPeriodo.SelectedValue), 1);
+            DateTime dDesde = new DateTime(oAño, Util.Entero(this.cmbImpPeriodo.SelectedValue), 1);
             DateTime dHasta = (iTipo == Cat.ContaCuentasDeMayor.Imss ? dDesde.DiaUltimo() : dDesde.AddMonths(1).DiaUltimo()).AddDays(1);
             var oNominasPer = Datos.GetListOf<NominaUsuariosOficialView>(c => c.Semana >= dDesde && c.Semana <= dHasta);
             this.dgvImpDatos.Rows.Clear();
@@ -1433,7 +1445,7 @@ namespace Refaccionaria.App
         private void GuardarDatosComisiones()
         {
             //if (UtilLocal.MensajePreguntaCancelar("¿Estás seguro que deseas guardar los cambios realizados?") != DialogResult.Yes)
-                //return;
+            //    return;
 
             //Cargando.Mostrar();
 

@@ -162,6 +162,7 @@ namespace TheosProc
             } */
 
             var context = Datos.GetDataContext();
+            context.CommandTimeout = 60000;
             var oRes = context.ExecuteStoreQuery<T>(sName + sParamsNames, SqlParams.ToArray<object>()).ToList();
             Datos.ReleaseDataContext(ref context);
             return oRes;
