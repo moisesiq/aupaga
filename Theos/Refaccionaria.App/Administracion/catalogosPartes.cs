@@ -2941,5 +2941,10 @@ namespace Refaccionaria.App
 
         }
 
+        private void lblPrecio5_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
