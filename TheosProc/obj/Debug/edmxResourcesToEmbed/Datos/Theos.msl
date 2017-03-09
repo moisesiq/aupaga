@@ -6212,5 +6212,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ParteComisionHistorico">
+      <EntityTypeMapping TypeName="TheosProc.ParteComisionHistorico">
+        <MappingFragment StoreEntitySet="ParteComisionHistorico">
+          <ScalarProperty Name="ComisionFijaRepartidor" ColumnName="ComisionFijaRepartidor" />
+          <ScalarProperty Name="PorcentajeRepartidor" ColumnName="PorcentajeRepartidor" />
+          <ScalarProperty Name="PorcentajeReduccionPorRepartidor" ColumnName="PorcentajeReduccionPorRepartidor" />
+          <ScalarProperty Name="PorcentajeComplementarios" ColumnName="PorcentajeComplementarios" />
+          <ScalarProperty Name="PorcentajeArticuloEspecial" ColumnName="PorcentajeArticuloEspecial" />
+          <ScalarProperty Name="ArticulosEspecial" ColumnName="ArticulosEspecial" />
+          <ScalarProperty Name="PorcentajeUnArticulo" ColumnName="PorcentajeUnArticulo" />
+          <ScalarProperty Name="PorcentajeNormal" ColumnName="PorcentajeNormal" />
+          <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
+          <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+          <ScalarProperty Name="VentaID" ColumnName="VentaID" />
+          <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+          <ScalarProperty Name="ParteComisionHistoricoID" ColumnName="ParteComisionHistoricoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

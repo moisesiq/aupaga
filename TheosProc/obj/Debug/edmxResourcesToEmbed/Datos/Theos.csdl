@@ -2364,6 +2364,15 @@
     </AssociationSet>
     <EntitySet Name="EstatusGeneralesView" EntityType="TheosProc.EstatusGeneralesView" />
     <EntitySet Name="PartesComisionesView" EntityType="TheosProc.PartesComisionesView" />
+    <EntitySet Name="ParteComisionHistorico" EntityType="TheosProc.ParteComisionHistorico" />
+    <AssociationSet Name="FK__ParteComi__Parte__64ADC274" Association="TheosProc.FK__ParteComi__Parte__64ADC274">
+      <End Role="Parte" EntitySet="Parte" />
+      <End Role="ParteComisionHistorico" EntitySet="ParteComisionHistorico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ParteComi__Venta__65A1E6AD" Association="TheosProc.FK__ParteComi__Venta__65A1E6AD">
+      <End Role="Venta" EntitySet="Venta" />
+      <End Role="ParteComisionHistorico" EntitySet="ParteComisionHistorico" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Autorizacion">
     <Key>
@@ -4032,6 +4041,7 @@
     <NavigationProperty Name="ParteComplementaria1" Relationship="TheosProc.FK__ParteComp__Parte__41999061" FromRole="Parte" ToRole="ParteComplementaria" />
     <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Parte__57C8C8A2" FromRole="Parte" ToRole="ParteComision" />
     <NavigationProperty Name="ParteMaxMinFijoHistorico" Relationship="TheosProc.FK__ParteMaxM__Parte__5E75C631" FromRole="Parte" ToRole="ParteMaxMinFijoHistorico" />
+    <NavigationProperty Name="ParteComisionHistorico" Relationship="TheosProc.FK__ParteComi__Parte__64ADC274" FromRole="Parte" ToRole="ParteComisionHistorico" />
   </EntityType>
   <EntityType Name="ParteAbc">
     <Key>
@@ -7382,10 +7392,10 @@
     <Property Name="ParteVehiculoID" Type="Int32" Nullable="false" />
     <Property Name="ParteID" Type="Int32" Nullable="false" />
     <Property Name="NumeroParte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NombreParte" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NombreParte" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Marca" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Modelo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="Motor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="Motor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Anio" Type="Int32" Nullable="false" />
     <Property Name="TipoFuenteID" Type="Int32" Nullable="false" />
     <Property Name="Fuente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -14115,6 +14125,7 @@
     <NavigationProperty Name="VentaGarantia" Relationship="TheosProc.FK__VentaGara__Venta__1407CFDB" FromRole="Venta" ToRole="VentaGarantia" />
     <NavigationProperty Name="VentaPago" Relationship="TheosProc.FK__VentaPago__Venta__6265874F" FromRole="Venta" ToRole="VentaPago" />
     <NavigationProperty Name="VentaParteAplicacion" Relationship="TheosProc.FK__VentaPart__Venta__405B5365" FromRole="Venta" ToRole="VentaParteAplicacion" />
+    <NavigationProperty Name="ParteComisionHistorico" Relationship="TheosProc.FK__ParteComi__Venta__65A1E6AD" FromRole="Venta" ToRole="ParteComisionHistorico" />
   </EntityType>
   <Association Name="FK__CascoRegi__Cobro__04266DCD">
     <End Type="TheosProc.Venta" Role="Venta" Multiplicity="0..1" />
@@ -14820,4 +14831,48 @@
     <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
     <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
   </EntityType>
+  <EntityType Name="ParteComisionHistorico">
+    <Key>
+      <PropertyRef Name="ParteComisionHistoricoID" />
+    </Key>
+    <Property Name="ParteComisionHistoricoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="VentaID" Type="Int32" />
+    <Property Name="ParteID" Type="Int32" />
+    <Property Name="ComisionFija" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="PorcentajeNormal" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PorcentajeUnArticulo" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="ArticulosEspecial" Type="Int32" />
+    <Property Name="PorcentajeArticuloEspecial" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PorcentajeComplementarios" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PorcentajeReduccionPorRepartidor" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PorcentajeRepartidor" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="ComisionFijaRepartidor" Type="Decimal" Precision="12" Scale="2" />
+    <NavigationProperty Name="Parte" Relationship="TheosProc.FK__ParteComi__Parte__64ADC274" FromRole="ParteComisionHistorico" ToRole="Parte" />
+    <NavigationProperty Name="Venta" Relationship="TheosProc.FK__ParteComi__Venta__65A1E6AD" FromRole="ParteComisionHistorico" ToRole="Venta" />
+  </EntityType>
+  <Association Name="FK__ParteComi__Parte__64ADC274">
+    <End Type="TheosProc.Parte" Role="Parte" Multiplicity="0..1" />
+    <End Type="TheosProc.ParteComisionHistorico" Role="ParteComisionHistorico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parte">
+        <PropertyRef Name="ParteID" />
+      </Principal>
+      <Dependent Role="ParteComisionHistorico">
+        <PropertyRef Name="ParteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ParteComi__Venta__65A1E6AD">
+    <End Type="TheosProc.Venta" Role="Venta" Multiplicity="0..1" />
+    <End Type="TheosProc.ParteComisionHistorico" Role="ParteComisionHistorico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="VentaID" />
+      </Principal>
+      <Dependent Role="ParteComisionHistorico">
+        <PropertyRef Name="VentaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
