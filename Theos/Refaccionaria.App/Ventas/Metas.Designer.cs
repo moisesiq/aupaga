@@ -448,6 +448,7 @@
             this.chrComisionActual.TabIndex = 1;
             this.chrComisionActual.Text = "chart1";
             this.chrComisionActual.Visible = false;
+            this.chrComisionActual.Click += new System.EventHandler(this.chrComisionActual_Click);
             // 
             // chrComisionSem
             // 
@@ -631,7 +632,7 @@
             dataPoint6.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
             dataPoint6.BackSecondaryColor = System.Drawing.Color.Empty;
             dataPoint6.Color = System.Drawing.Color.White;
-            dataPoint6.CustomProperties = "Exploded=True, OriginalPointIndex=0";
+            dataPoint6.CustomProperties = "OriginalPointIndex=0, Exploded=True";
             dataPoint6.LabelToolTip = "";
             dataPoint6.LegendText = "#VAL{N0}";
             dataPoint6.LegendToolTip = "#VAL{N0}";

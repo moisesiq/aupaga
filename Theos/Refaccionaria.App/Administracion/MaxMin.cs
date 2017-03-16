@@ -506,7 +506,7 @@ namespace Refaccionaria.App
             }
             //
             var oMaxMin = Datos.ExecuteProcedure<pauPartesMaxMin_Res>("pauPartesMaxMin", oParams);
-            DateTime dFechaDeCalc = this.dtpFechaDeCalculo.Value.Date;
+            DateTime dFechaDeCalc = this.dtpFechaDeCalculo.Value.Date.AddDays(1);
             if (dFechaDeCalc < DateTime.Now)
                 oMaxMin = oMaxMin.Where(c => c.FechaCalculo.Valor() < dFechaDeCalc).ToList();
 

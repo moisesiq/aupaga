@@ -29,6 +29,7 @@ namespace Refaccionaria.App
         decimal mGastosTotal;
         decimal mGastosFijos;
         decimal mGastosSueldos;
+        decimal mComisionFija;
         
         public Metas()
         {
@@ -179,10 +180,13 @@ namespace Refaccionaria.App
             oParams.Add("VendedorID", Theos.UsuarioID);
             oParams.Add("SucursalID", Theos.SucursalID);
             //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupadoTest2", oParams);
+            //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupadoTest3", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupadoTest3_Result>("pauComisionesAgrupadoTest3", oParams);
 
             this.mUtilidad = 0;
             this.mComision = 0;
+            this.mComisionFija = 0;
+            
             if (oDatos.Count > 0)
             {
                 if (this.SucursalID > 0)
@@ -190,6 +194,7 @@ namespace Refaccionaria.App
                 else
                     this.mUtilidad = oDatos.Sum(c => c.Utilidad).Valor();
                 this.mComision = oDatos.Where(c => c.RealizoUsuarioID == this.UsuarioID && !c.Es9500.Valor()).Sum(c => c.Comision).Valor();
+                this.mComisionFija = oDatos.Where(c => c.RealizoUsuarioID == this.UsuarioID && !c.Es9500.Valor()).Sum(c => c.ComisionFija).Valor();
                 this.mComision9500 = oDatos.Where(c => c.RealizoUsuarioID == this.UsuarioID && c.Es9500.Valor()).Sum(c => c.Comision).Valor();
 
                 // Cálculo por si es gerente
@@ -203,7 +208,7 @@ namespace Refaccionaria.App
                         this.mComisionGerente = 0;
                 }
 
-                this.mComisionTotal = (this.mComision + this.mComision9500);
+                this.mComisionTotal = (this.mComision + this.mComision9500 + this.mComisionFija);
             }
             this.mUtilidadFinal = (this.mUtilidad - this.mGastosTotal);
         }
@@ -372,7 +377,8 @@ namespace Refaccionaria.App
             }
             else
             {
-                this.chrComisionActual.Series["Variable"].Points.AddY(this.mComision);
+                //se suma la comision y la comision fija para mostrar el variable
+                this.chrComisionActual.Series["Variable"].Points.AddY(this.mComision + this.mComisionFija);
                 this.chrComisionActual.Series["9500"].Points.AddY(this.mComision9500);
                 this.chrComisionActual.Series["Meta"].Points.AddY(this.oMetaVendedor.SueldoMeta - this.oMetaVendedor.SueldoFijo - this.mComision - this.mComision9500);
                 mAdicional = (this.mComision + this.mComision9500 + this.oMetaVendedor.SueldoFijo - this.oMetaVendedor.SueldoMeta);
@@ -413,7 +419,8 @@ namespace Refaccionaria.App
             // Se calcula la posición (Top) donde debe quedar la marca, según el caso
             decimal mAcumulado, mPasos;
             decimal mFijo = (decimal)this.chrComisionActual.Series["Fijo"].Points[0].YValues[0];
-            mAcumulado = (mFijo + this.mComision);
+            //se calcula la marca de la grafica con comision, fija y comision fija
+            mAcumulado = (mFijo + this.mComision + this.mComisionFija);
             if (this.oMetaVendedor.MetaConsiderar9500)
                 mAcumulado += this.mComision9500;
 
@@ -1125,6 +1132,11 @@ namespace Refaccionaria.App
         #endregion
 
         private void dgvPartesPorVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void chrComisionActual_Click(object sender, EventArgs e)
         {
 
         }

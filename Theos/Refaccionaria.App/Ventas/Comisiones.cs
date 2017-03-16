@@ -255,6 +255,10 @@ namespace Refaccionaria.App
             decimal mComision = 0, mUtilidad = 0;
             decimal mComisionVariable = 0, mComisionNegativa = 0;
             decimal mComision9500 = 0, mUtilidad9500 = 0, mComNeg9500 = 0, mUtilNeg9500 = 0;
+            decimal mComisionFija = 0;
+            decimal mComisionFijaDev = 0;
+            decimal mComision9500Dev = 0;
+
             foreach (DataGridViewRow Fila in this.dgvVentas.Rows)
             {
                 mTotalImporte += Util.Decimal(Fila.Cells["Importe"].Value);
@@ -264,17 +268,34 @@ namespace Refaccionaria.App
 
                 // bool b9500 = Util.Cadena(Fila.Cells["Caracteristica"].Value).Contains("9500");
                 bool b9500 = (Util.Cadena(Fila.Cells["Detalle_9500"].Value) == "SÍ");
+
+                //si es 9500 y es devolución se suman la cantidad
+                if (b9500)
+                {
+                    if (Util.Cadena(Fila.Cells["Caracteristica"].Value).Substring(0, 1) == "D")
+                    {
+                        mComision9500Dev += Util.Decimal(Fila.Cells["Comision"].Value);
+                    }
+                }
+
+
                 if (Util.Cadena(Fila.Cells["Caracteristica"].Value).Substring(0, 1) == "V")
                 {
                     mComisionVariable += mComision;
                     mComision9500 += (b9500 ? mComision : 0);
                     mUtilidad9500 += (b9500 ? mUtilidad : 0);
+                    mComisionFija += Util.Decimal(Fila.Cells["ComisionFija"].Value);
                 }
                 else
                 {
-                    mComisionNegativa += mComision;
+                    //mComisionNegativa += mComision;
+                    if (!b9500)
+                    {
+                        mComisionNegativa += Util.Decimal(Fila.Cells["Comision"].Value);
+                    }
                     mComNeg9500 += (b9500 ? mComision : 0);
                     mUtilNeg9500 += (b9500 ? mUtilidad : 0);
+                    mComisionFijaDev += Util.Decimal(Fila.Cells["ComisionFija"].Value);
                 }
 
                 // Para sumar la comisión de las ventas 9500
@@ -283,26 +304,58 @@ namespace Refaccionaria.App
                     mComision9500 += mComision;
                     mUtilidad9500 += mUtilidad;
                 } */
+
             }
+
             this.dgvTotales["TotalesImporte", 0].Value = mTotalImporte;
             this.dgvTotales["TotalesCobranza", 0].Value = mTotalCobranza;
             this.dgvTotales["TotalesUtilidad", 0].Value = mUtilidad;
             this.dgvTotales["TotalesComision", 0].Value = (mComisionVariable + mComisionNegativa); //se cambio a resta, original suma
+            this.dgvTotales["TotalFija", 0].Value = mComisionFija;
+            
 
             // Se obtienen los totales de tienda
             this.LlenarUtilidadSuc();
 
             // Se llenan los totales del vendedor
+
             decimal mFijo = this.oMetaVendedor.SueldoFijo;
             decimal mUtilidadSuc = this.mUtilidadSuc; // (this.mUtilidadSuc - this.mGastoSuc);
             if (!this.oMetaVendedor.MetaConsiderar9500)
                 mUtilidad -= mUtilidad9500;
 
+            //subtotal comisiones y fijo
             this.lblFijo.Text = mFijo.ToString(GlobalClass.FormatoMoneda);
             this.lblVariable.Text = (mComisionVariable - mComision9500).ToString(GlobalClass.FormatoMoneda);
-            this.lbl9500.Text = (mComision9500).ToString(GlobalClass.FormatoMoneda);
             this.lblDevoluciones.Text = (mComisionNegativa).ToString(GlobalClass.FormatoMoneda);
-            this.lblTotal.Text = (mFijo + mComisionVariable + (mComisionNegativa)).ToString(GlobalClass.FormatoMoneda);
+            this.lblSubVariable.Text = (mFijo + (mComisionVariable - mComision9500) + mComisionNegativa).ToString(GlobalClass.FormatoMoneda);
+
+            //Subtotal 9500
+            this.lbl9500.Text = (mComision9500).ToString(GlobalClass.FormatoMoneda);
+            this.lblDev9500.Text = (mComision9500Dev).ToString(GlobalClass.FormatoMoneda);
+            this.lblSub9500.Text = (mComision9500 - mComision9500Dev).ToString(GlobalClass.FormatoMoneda);
+
+            //subtotal comision fija
+            //this.lblTotal.Text = (mFijo + mComisionVariable + (mComisionNegativa)).ToString(GlobalClass.FormatoMoneda);
+            this.lblComisionFija.Text = (mComisionFija).ToString(GlobalClass.FormatoMoneda);
+            this.lblDevFija.Text = (mComisionFijaDev).ToString(GlobalClass.FormatoMoneda);
+            this.lblSubFija.Text = (mComisionFija + mComisionFijaDev).ToString(GlobalClass.FormatoMoneda);
+
+            //total y meta
+            decimal Total = (mFijo + (mComisionVariable - mComision9500) + mComision9500 + mComisionFija + mComisionFijaDev + mComisionNegativa + mComision9500Dev);
+            this.lblTotal.Text = (Total).ToString(GlobalClass.FormatoMoneda);
+
+            if (this.oMetaVendedor.SueldoMeta - Total < 0)
+            {
+                this.lblMetaRes.Text = (0).ToString(GlobalClass.FormatoMoneda);
+            }
+            else
+            {
+                this.lblMetaRes.Text = (this.oMetaVendedor.SueldoMeta - Total).ToString(GlobalClass.FormatoMoneda);
+            }
+            
+            
+            
 
             // Se calcula el total
             decimal mUtilMinimo = (this.oMetaVendedor.EsGerente ? this.oMetaSucursal.UtilGerente : this.oMetaSucursal.UtilVendedor);
@@ -323,9 +376,9 @@ namespace Refaccionaria.App
             }
             else
             {
-                if (this.oMetaVendedor.EsGerente)
-                    this.lblVariable.Text = 0.ToString(GlobalClass.FormatoMoneda);
-                this.lblTotal.Text = "--";
+                //if (this.oMetaVendedor.EsGerente)
+                  //  this.lblVariable.Text = 0.ToString(GlobalClass.FormatoMoneda);
+                //this.lblTotal.Text = "--";
             }
             
             // Se cierra la ventana de "Cargando.."
@@ -435,6 +488,27 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        private void dgvVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tbpComisiones_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }
