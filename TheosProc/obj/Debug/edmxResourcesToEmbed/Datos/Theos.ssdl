@@ -11358,6 +11358,13 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest3.dbo.VentasView' no
     <Parameter Name="Desde" Type="date" Mode="In" />
     <Parameter Name="Hasta" Type="date" Mode="In" />
   </Function>
+  <Function Name="pauComisionesAgrupadoTest3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ModoID" Type="int" Mode="In" />
+    <Parameter Name="VendedorID" Type="int" Mode="In" />
+    <Parameter Name="SucursalID" Type="int" Mode="In" />
+    <Parameter Name="Desde" Type="date" Mode="In" />
+    <Parameter Name="Hasta" Type="date" Mode="In" />
+  </Function>
   <Function Name="pauContaCuentaAuxiliarPolizas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CuentaAuxiliarID" Type="int" Mode="In" />
     <Parameter Name="Desde" Type="date" Mode="In" />

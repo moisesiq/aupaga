@@ -570,3 +570,4 @@ C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\RdlCompile.cache
 C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\RdlCompile.compiled
 C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\THEOS.exe
 C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\THEOS.pdb
+C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\Refaccionaria.App.csprojResolveAssemblyReference.cache
