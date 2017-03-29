@@ -200,7 +200,7 @@ namespace Refaccionaria.App
         }
 
         private void LlenarVentasProc()
-        {            
+        {
             // Se muestra la ventana de "Cargando.."
             Cargando.Mostrar();
             
@@ -234,7 +234,7 @@ namespace Refaccionaria.App
             oParams.Add("Hasta", this.dtpA.Value.Date);
             oParams.Add("SucursalID", Theos.SucursalID);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
 
             #region LLenarGrid
@@ -370,7 +370,7 @@ namespace Refaccionaria.App
             if (!this.oMetaVendedor.MetaConsiderar9500)
                 mUtilidad -= mUtilidad9500;
 
-            this.lblUtilSuc.Text = mUtilidadSuc.ToString(GlobalClass.FormatoMoneda);
+            //this.lblUtilSuc.Text = mUtilidadSuc.ToString(GlobalClass.FormatoMoneda);
 
             //subtotal comisiones y fijo
             this.lblFijo.Text = mFijo.ToString(GlobalClass.FormatoMoneda);
@@ -456,7 +456,7 @@ namespace Refaccionaria.App
             foreach (var i in VendedoresSucursal)   
             {
                 oParams["VendedorID"] = i.VendedorID;
-                var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
+                var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams);
                 //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
                 //decimal suma = (decimal)oDatos.ToList().Sum(c => c.Comision);
                 decimal suma = (decimal)oDatos.ToList().Sum(c => c.Utilidad);
@@ -524,7 +524,8 @@ namespace Refaccionaria.App
             oParams.Add("VendedorID", iVendedorID);
             oParams.Add("SucursalID", Theos.SucursalID);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisionesNormal", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
+            //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones2test", oParams);
 
             // Se llena el grid
             try

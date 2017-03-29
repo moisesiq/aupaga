@@ -177,11 +177,11 @@ namespace Refaccionaria.App
             oParams.Add("Desde", this.Desde);
             oParams.Add("Hasta", this.Hasta);
             //oParams.Add("ModoID", 1);
-            oParams.Add("VendedorID", Theos.UsuarioID);
-            oParams.Add("SucursalID", Theos.SucursalID);
-            //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
+            //oParams.Add("VendedorID", Theos.UsuarioID);
+            //oParams.Add("SucursalID", Theos.SucursalID);
+            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupadoTest3_Result>("pauComisionesAgrupado", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupadoTest3", oParams);
+            //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupadoTest3", oParams);
 
             this.mUtilidad = 0;
             this.mComision = 0;
