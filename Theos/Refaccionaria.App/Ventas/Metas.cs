@@ -176,12 +176,12 @@ namespace Refaccionaria.App
             var oParams = new Dictionary<string, object>();
             oParams.Add("Desde", this.Desde);
             oParams.Add("Hasta", this.Hasta);
-            oParams.Add("ModoID", 1);
+            //oParams.Add("ModoID", 1);
             oParams.Add("VendedorID", Theos.UsuarioID);
             oParams.Add("SucursalID", Theos.SucursalID);
             //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
-            //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupadoTest3", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupadoTest3_Result>("pauComisionesAgrupadoTest3", oParams);
+            //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupadoTest3_Result>("pauComisionesAgrupado", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupadoTest3", oParams);
 
             this.mUtilidad = 0;
             this.mComision = 0;
@@ -194,7 +194,7 @@ namespace Refaccionaria.App
                 else
                     this.mUtilidad = oDatos.Sum(c => c.Utilidad).Valor();
                 this.mComision = oDatos.Where(c => c.RealizoUsuarioID == this.UsuarioID && !c.Es9500.Valor()).Sum(c => c.Comision).Valor();
-                this.mComisionFija = oDatos.Where(c => c.RealizoUsuarioID == this.UsuarioID && !c.Es9500.Valor()).Sum(c => c.ComisionFija).Valor();
+                //this.mComisionFija = oDatos.Where(c => c.RealizoUsuarioID == this.UsuarioID && !c.Es9500.Valor()).Sum(c => c.ComisionFija).Valor();
                 this.mComision9500 = oDatos.Where(c => c.RealizoUsuarioID == this.UsuarioID && c.Es9500.Valor()).Sum(c => c.Comision).Valor();
 
                 // Cálculo por si es gerente
@@ -207,6 +207,7 @@ namespace Refaccionaria.App
                     else
                         this.mComisionGerente = 0;
                 }
+
 
                 this.mComisionTotal = (this.mComision + this.mComision9500 + this.mComisionFija);
             }

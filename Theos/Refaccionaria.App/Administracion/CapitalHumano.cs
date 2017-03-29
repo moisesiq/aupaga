@@ -1040,7 +1040,7 @@ namespace Refaccionaria.App
 
             //si se selecciona diciembre, se muestra diciembre del año anterior y no del año actual
             int oAño = 0;
-            if (Util.Entero(this.cmbImpPeriodo.SelectedValue) == 12)
+            if (Util.Entero(this.cmbImpPeriodo.SelectedValue) == 12 || (iTipo == 44 && Util.Entero(this.cmbImpPeriodo.SelectedValue) == 11) || (iTipo == 5 && Util.Entero(this.cmbImpPeriodo.SelectedValue) == 12))
             {
                 oAño = DateTime.Now.AddYears(-1).Year;
             }

@@ -8,6 +8,10 @@ using FastReport;
 
 using TheosProc;
 using LibUtil;
+using System.Net.Mail;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace Refaccionaria.App
 {
@@ -44,6 +48,9 @@ namespace Refaccionaria.App
             this.dtpA.Value = oFechas.Valor2;
             // Se agrega una fila al grid de totales
             this.dgvTotales.Rows.Add("TOTALES");
+            this.pnlUtVendedores.Visible = false;
+            //this.dgvGerentesComisiones.Visible = false;
+            
 
             // Los datos se mandan llenar desde el manejador (VentasComisiones) al Activar
         }
@@ -197,12 +204,11 @@ namespace Refaccionaria.App
             // Se muestra la ventana de "Cargando.."
             Cargando.Mostrar();
             
-            //
             int iVendedorID = Util.Entero(this.cmbVendedor.SelectedValue);
-            // this.dgvVentas.Columns.Clear();
-            // this.dgvVentas.DataSource = null;
             this.oComisiones.ctlDetalle.LimpiarDetalle();
-
+            //this.dgvGerentesComisiones.Visible = false;
+            this.pnlUtVendedores.Visible = false;
+            //this.lblUtilSuc.Visible = false;
             // Se muestra u oculta la columna de Utilidad
             this.dgvVentas.Columns["Utilidad"].Visible = this.bVerAdicional;
             this.dgvTotales.Columns["TotalesUtilidad"].Visible = this.bVerAdicional;
@@ -231,7 +237,7 @@ namespace Refaccionaria.App
             var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
 
-
+            #region LLenarGrid
             // Se llena el grid
             this.dgvVentas.Rows.Clear();
             foreach (var oReg in oDatos)
@@ -249,6 +255,8 @@ namespace Refaccionaria.App
                     case "D": this.dgvVentas.Rows[iFila].DefaultCellStyle.ForeColor = Color.Red; break;
                 }
             }
+            #endregion
+
 
             // Se llena la línea de totales, del grid
             decimal mTotalImporte = 0, mTotalCobranza = 0;
@@ -259,6 +267,7 @@ namespace Refaccionaria.App
             decimal mComisionFijaDev = 0;
             decimal mComision9500Dev = 0;
 
+            #region CalculaComisiones
             foreach (DataGridViewRow Fila in this.dgvVentas.Rows)
             {
                 mTotalImporte += Util.Decimal(Fila.Cells["Importe"].Value);
@@ -306,34 +315,87 @@ namespace Refaccionaria.App
                 } */
 
             }
+            #endregion
+
 
             this.dgvTotales["TotalesImporte", 0].Value = mTotalImporte;
             this.dgvTotales["TotalesCobranza", 0].Value = mTotalCobranza;
             this.dgvTotales["TotalesUtilidad", 0].Value = mUtilidad;
-            this.dgvTotales["TotalesComision", 0].Value = (mComisionVariable + mComisionNegativa); //se cambio a resta, original suma
+            this.dgvTotales["TotalesComision", 0].Value = (mComisionVariable + mComisionNegativa + mComNeg9500); //se cambio a resta, original suma
             this.dgvTotales["TotalFija", 0].Value = mComisionFija;
             
 
             // Se obtienen los totales de tienda
             this.LlenarUtilidadSuc();
 
+
+
+            #region LlenarEtiquetas
             // Se llenan los totales del vendedor
 
             decimal mFijo = this.oMetaVendedor.SueldoFijo;
+
             decimal mUtilidadSuc = this.mUtilidadSuc; // (this.mUtilidadSuc - this.mGastoSuc);
+
+
+            // Se calcula el total
+            decimal mUtilMinimo = (this.oMetaVendedor.EsGerente ? this.oMetaSucursal.UtilGerente : this.oMetaSucursal.UtilVendedor);
+            decimal mComisionGerente = 0;
+            if (mUtilidadSuc >= this.oMetaSucursal.UtilSucursalMinimo && mUtilidad >= mUtilMinimo)
+            {
+                if (this.oMetaVendedor.EsGerente)
+                {
+                    /*
+                    decimal mExcedente = (mUtilidadSuc - this.mMetaSucursal);
+                    int iMultiplicador = (int)(mExcedente / this.oMetaVendedor.IncrementoUtil.Valor());
+                    decimal mComisionGerente = (this.oMetaVendedor.IncrementoFijo.Valor() * iMultiplicador);
+                    */
+
+                    mComisionGerente = VentasProc.CalcularComisionGerente(this.oMetaSucursal.UtilSucursalMinimo, mUtilidadSuc, this.oMetaVendedor.IncrementoUtil.Valor()
+                        , this.oMetaVendedor.IncrementoFijo.Valor());
+                    this.lblVariable.Text = mComisionGerente.ToString(GlobalClass.FormatoMoneda);
+                    this.lblTotal.Text = (this.oMetaVendedor.SueldoFijo + mComisionGerente + mComision9500 + (mComNeg9500)).ToString(GlobalClass.FormatoMoneda);
+                }
+            }
+            else
+            {
+                //if (this.oMetaVendedor.EsGerente)
+                //    this.lblVariable.Text = 0.ToString(GlobalClass.FormatoMoneda);
+                //this.lblTotal.Text = "--";
+            }
+
+
+
+
             if (!this.oMetaVendedor.MetaConsiderar9500)
                 mUtilidad -= mUtilidad9500;
 
+            this.lblUtilSuc.Text = mUtilidadSuc.ToString(GlobalClass.FormatoMoneda);
+
             //subtotal comisiones y fijo
             this.lblFijo.Text = mFijo.ToString(GlobalClass.FormatoMoneda);
-            this.lblVariable.Text = (mComisionVariable - mComision9500).ToString(GlobalClass.FormatoMoneda);
-            this.lblDevoluciones.Text = (mComisionNegativa).ToString(GlobalClass.FormatoMoneda);
-            this.lblSubVariable.Text = (mFijo + (mComisionVariable - mComision9500) + mComisionNegativa).ToString(GlobalClass.FormatoMoneda);
+            this.lblSubFijo.Text = mFijo.ToString(GlobalClass.FormatoMoneda);
+
+
+            //subtotal variable
+            if (this.oMetaVendedor.EsGerente)
+            {
+                this.lblVariable.Text = mComisionGerente.ToString(GlobalClass.FormatoMoneda);
+                this.lblDevoluciones.Text = 0.ToString(GlobalClass.FormatoMoneda);
+                this.lblSubVariable.Text = mComisionGerente.ToString(GlobalClass.FormatoMoneda);
+            }
+            else
+            {
+                this.lblVariable.Text = (mComisionVariable - mComision9500).ToString(GlobalClass.FormatoMoneda);
+                this.lblDevoluciones.Text = (mComisionNegativa).ToString(GlobalClass.FormatoMoneda);
+                this.lblSubVariable.Text = ((mComisionVariable - mComision9500) - Math.Abs(mComisionNegativa)).ToString(GlobalClass.FormatoMoneda);
+            }
+
 
             //Subtotal 9500
             this.lbl9500.Text = (mComision9500).ToString(GlobalClass.FormatoMoneda);
             this.lblDev9500.Text = (mComision9500Dev).ToString(GlobalClass.FormatoMoneda);
-            this.lblSub9500.Text = (mComision9500 - mComision9500Dev).ToString(GlobalClass.FormatoMoneda);
+            this.lblSub9500.Text = (mComision9500 - Math.Abs(mComision9500Dev)).ToString(GlobalClass.FormatoMoneda);
 
             //subtotal comision fija
             //this.lblTotal.Text = (mFijo + mComisionVariable + (mComisionNegativa)).ToString(GlobalClass.FormatoMoneda);
@@ -353,39 +415,76 @@ namespace Refaccionaria.App
             {
                 this.lblMetaRes.Text = (this.oMetaVendedor.SueldoMeta - Total).ToString(GlobalClass.FormatoMoneda);
             }
-            
-            
-            
 
-            // Se calcula el total
-            decimal mUtilMinimo = (this.oMetaVendedor.EsGerente ? this.oMetaSucursal.UtilGerente : this.oMetaSucursal.UtilVendedor);
-            if (mUtilidadSuc >= this.oMetaSucursal.UtilSucursalMinimo && mUtilidad >= mUtilMinimo)
+
+#endregion
+
+
+
+            if (this.oMetaVendedor.EsGerente)
             {
-                if (this.oMetaVendedor.EsGerente)
-                {
-                    /*
-                    decimal mExcedente = (mUtilidadSuc - this.mMetaSucursal);
-                    int iMultiplicador = (int)(mExcedente / this.oMetaVendedor.IncrementoUtil.Valor());
-                    decimal mComisionGerente = (this.oMetaVendedor.IncrementoFijo.Valor() * iMultiplicador);
-                    */
-                    decimal mComisionGerente = VentasProc.CalcularComisionGerente(this.oMetaSucursal.UtilSucursalMinimo, mUtilidadSuc, this.oMetaVendedor.IncrementoUtil.Valor()
-                        , this.oMetaVendedor.IncrementoFijo.Valor());
-                    this.lblVariable.Text = mComisionGerente.ToString(GlobalClass.FormatoMoneda);
-                    this.lblTotal.Text = (this.oMetaVendedor.SueldoFijo + mComisionGerente + mComision9500 + (mComNeg9500)).ToString(GlobalClass.FormatoMoneda);
-                }
+                decimal meta = this.oMetaSucursal.UtilSucursalMinimo;
+                ComisionesVendedorPorSucursal(mUtilidadSuc, this.oMetaSucursal.UtilSucursalMinimo, mComisionGerente);
             }
-            else
-            {
-                //if (this.oMetaVendedor.EsGerente)
-                  //  this.lblVariable.Text = 0.ToString(GlobalClass.FormatoMoneda);
-                //this.lblTotal.Text = "--";
-            }
-            
+
             // Se cierra la ventana de "Cargando.."
             Cargando.Cerrar();
 
             this.ComisionesAct = true;
         }
+
+
+        private void ComisionesVendedorPorSucursal(decimal UtilSucursal, decimal UtilSucursalMinimo, decimal mComisionGerente)
+        {
+            this.dgvGerentesComisiones.Rows.Clear();
+            this.pnlUtVendedores.Visible = true;
+            var VendedoresSucursal = Datos.GetListOf<MetaVendedor>(c => c.SucursalID == Theos.SucursalID);
+            
+            Dictionary<string,decimal> dic = new Dictionary<string,decimal>();
+            Dictionary<string, decimal> dic2 = new Dictionary<string, decimal>();
+
+            decimal totales = UtilSucursal - UtilSucursalMinimo;
+
+            var oParams = new Dictionary<string, object>();
+            oParams.Add("ModoID", 1);
+            oParams.Add("Desde", this.dtpDe.Value.Date);
+            oParams.Add("Hasta", this.dtpA.Value.Date);
+            oParams.Add("SucursalID", Theos.SucursalID);
+            oParams.Add("VendedorID", Theos.UsuarioID);
+
+
+            foreach (var i in VendedoresSucursal)   
+            {
+                oParams["VendedorID"] = i.VendedorID;
+                var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
+                //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
+                //decimal suma = (decimal)oDatos.ToList().Sum(c => c.Comision);
+                decimal suma = (decimal)oDatos.ToList().Sum(c => c.Utilidad);
+                dic.Add(Datos.GetEntity<Usuario>( c => c.UsuarioID == i.VendedorID).NombreUsuario, suma);
+            }
+
+            foreach(var i in dic)
+            {
+                decimal mUtilidadVendedores = dic.Sum(c => c.Value);
+                dic2.Add(i.Key, ((i.Value * 100) / mUtilidadVendedores));
+            }
+
+            dic.Clear();
+
+            foreach(var i in dic2)
+            {
+                dic.Add(i.Key, ((i.Value * mComisionGerente) / 100));
+            }
+
+
+
+            foreach (var oReg in dic)
+            {
+                this.dgvGerentesComisiones.Rows.Add(oReg.Key, oReg.Value);
+            }
+
+        }
+
 
         private void LlenarUtilidadSuc()
         {
@@ -393,10 +492,15 @@ namespace Refaccionaria.App
             var oParams = new Dictionary<string, object>();
             oParams.Add("Desde", this.dtpDe.Value);
             oParams.Add("Hasta", this.dtpA.Value);
+            //oParams.Add("SucursalID", Theos.SucursalID);
+            //oParams.Add("VendedorID", Theos.UsuarioID);
+            //oParams.Add("ModoID", 1);
 
             // Se calcula la utilidad
             var oUtilidad = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
+            //var oUtilidad = Datos.ExecuteProcedure<pauComisionesAgrupadoTest3_Result>("pauComisionesAgrupadoTest3", oParams);
             this.mUtilidadSuc = oUtilidad.Where(c => c.SucursalID == iSucursal).Sum(c => c.Utilidad).Valor();
+            
             // Se calculan los gastos
             /* oParams.Add("SucursalID", iSucursal);
             var oGastos = General.ExecuteProcedure<pauContaCuentasMovimientosTotales_Result>("pauContaCuentasMovimientosTotales", oParams);
@@ -418,10 +522,19 @@ namespace Refaccionaria.App
             var oParams = new Dictionary<string, object>();
             oParams.Add("ModoID", 2);
             oParams.Add("VendedorID", iVendedorID);
+            oParams.Add("SucursalID", Theos.SucursalID);
+            //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisionesNormal", oParams);
             var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
 
             // Se llena el grid
-            this.dgvComisionesNp.DataSource = new SortableBindingList<pauComisiones_Result>(oDatos);
+            try
+            {
+                this.dgvComisionesNp.DataSource = new SortableBindingList<pauComisiones_Result>(oDatos);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             // Se configuran las columnas
             this.dgvComisionesNp.OcultarColumnas("VentaID", "Cobranza", "ACredito", "Caracteristica", "Orden", "Utilidad");
             this.dgvComisionesNp.Columns["Importe"].FormatoMoneda();
@@ -489,7 +602,7 @@ namespace Refaccionaria.App
 
         #endregion
 
-        private void dgvVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
@@ -499,7 +612,7 @@ namespace Refaccionaria.App
 
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        private void dgvGerentesComisiones_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
@@ -508,6 +621,17 @@ namespace Refaccionaria.App
         {
 
         }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
 
 
     }

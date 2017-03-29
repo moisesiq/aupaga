@@ -132,7 +132,7 @@
             // 
             this.sslRestante.BackColor = System.Drawing.SystemColors.Control;
             this.sslRestante.Name = "sslRestante";
-            this.sslRestante.Size = new System.Drawing.Size(429, 25);
+            this.sslRestante.Size = new System.Drawing.Size(460, 25);
             this.sslRestante.Spring = true;
             // 
             // lblToolTip

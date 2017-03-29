@@ -19,6 +19,8 @@ using System.Text.RegularExpressions;
 
 using TheosProc;
 using LibUtil;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace Refaccionaria.App
 {
@@ -510,6 +512,16 @@ namespace Refaccionaria.App
                 Correo.SendAsync(Mensaje, Mensaje);
             }
             catch { return false; }
+
+            ServicePointManager.ServerCertificateValidationCallback =
+                delegate
+                (
+                    object s
+                    , X509Certificate certificate
+                    , X509Chain chai
+                    , SslPolicyErrors sslPolicyErrors
+                )
+                { return true; };
 
             return true;
         }

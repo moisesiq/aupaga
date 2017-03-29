@@ -1211,6 +1211,7 @@
             this.cmbLinea.ValueMember = "";
             this.cmbLinea.SelectedIndexChanged += new System.EventHandler(this.cmbLinea_SelectedIndexChanged);
             this.cmbLinea.TextChanged += new System.EventHandler(this.cmbLinea_TextChanged);
+            this.cmbLinea.Load += new System.EventHandler(this.cmbLinea_Load);
             // 
             // chkEquivalentes
             // 

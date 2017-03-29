@@ -8,6 +8,7 @@ using System.Data.Objects.DataClasses;
 using System.Data.SqlClient;
 using System.Reflection;
 
+
 using LibUtil;
 
 namespace TheosProc
@@ -125,52 +126,59 @@ namespace TheosProc
 
         public static List<T> ExecuteProcedure<T>(string sName, Dictionary<string, object> Parameters)
         {
-            var SqlParams = new List<SqlParameter>();
-            string sParamsNames = "";
-            foreach (var Parameter in Parameters)
+            try
             {
-                if (Parameter.Value == null)
+                var SqlParams = new List<SqlParameter>();
+                string sParamsNames = "";
+                foreach (var Parameter in Parameters)
                 {
-                    sParamsNames += (" @" + Parameter.Key + " = NULL,");
-                }
-                else
-                {
-                    string sParamName, sSpecialType = "";
-                    sParamName = Parameter.Key;
-                    if (Parameter.Key.Contains("/"))
+                    if (Parameter.Value == null)
                     {
-                        sParamName = Parameter.Key.Split('/')[0];
-                        sSpecialType = Parameter.Key.Split('/')[1];
+                        sParamsNames += (" @" + Parameter.Key + " = NULL,");
                     }
+                    else
+                    {
+                        string sParamName, sSpecialType = "";
+                        sParamName = Parameter.Key;
+                        if (Parameter.Key.Contains("/"))
+                        {
+                            sParamName = Parameter.Key.Split('/')[0];
+                            sSpecialType = Parameter.Key.Split('/')[1];
+                        }
 
-                    var oSqlParam = new SqlParameter("_" + sParamName, Parameter.Value);
-                    if (sSpecialType != "")
-                        oSqlParam.TypeName = sSpecialType;
+                        var oSqlParam = new SqlParameter("_" + sParamName, Parameter.Value);
+                        if (sSpecialType != "")
+                            oSqlParam.TypeName = sSpecialType;
 
-                    SqlParams.Add(oSqlParam);
-                    sParamsNames += (" @" + sParamName + " = @_" + sParamName + ",");
-                    // SqlParams.Add(new SqlParameter("_" + Parameter.Key, Parameter.Value));
+                        SqlParams.Add(oSqlParam);
+                        sParamsNames += (" @" + sParamName + " = @_" + sParamName + ",");
+                        // SqlParams.Add(new SqlParameter("_" + Parameter.Key, Parameter.Value));
+                    }
                 }
+                sParamsNames = (sParamsNames == "" ? "" : sParamsNames.Izquierda(sParamsNames.Length - 1));
+
+                /* var Pars = new ObjectParameter[Parameters.Count]; 
+                int iCount = 0;
+                foreach (var Parameter in Parameters)
+                {
+                    Pars[iCount++] = new ObjectParameter(Parameter.Key, Parameter.Value);
+                } */
+
+                var context = Datos.GetDataContext();
+                context.CommandTimeout = 60000;
+                var oRes = context.ExecuteStoreQuery<T>(sName + sParamsNames, SqlParams.ToArray<object>()).ToList();
+                Datos.ReleaseDataContext(ref context);
+                return oRes;
+                /* using (var context = ModelHelper.CreateDataContext())
+                {
+                    return context.ExecuteStoreQuery<T>(sName + sParamsNames, SqlParams.ToArray<object>()).ToList();
+                    // return context.ExecuteFunction<T>(sName, Pars).ToList();
+                } */
             }
-            sParamsNames = (sParamsNames == "" ? "" : sParamsNames.Izquierda(sParamsNames.Length - 1));
-
-            /* var Pars = new ObjectParameter[Parameters.Count]; 
-            int iCount = 0;
-            foreach (var Parameter in Parameters)
+            catch (Exception ex)
             {
-                Pars[iCount++] = new ObjectParameter(Parameter.Key, Parameter.Value);
-            } */
-
-            var context = Datos.GetDataContext();
-            context.CommandTimeout = 60000;
-            var oRes = context.ExecuteStoreQuery<T>(sName + sParamsNames, SqlParams.ToArray<object>()).ToList();
-            Datos.ReleaseDataContext(ref context);
-            return oRes;
-            /* using (var context = ModelHelper.CreateDataContext())
-            {
-                return context.ExecuteStoreQuery<T>(sName + sParamsNames, SqlParams.ToArray<object>()).ToList();
-                // return context.ExecuteFunction<T>(sName, Pars).ToList();
-            } */
+                return null;
+            }
         }
 
         public static bool Exists<T>(Expression<Func<T, bool>> oExpression) where T : class
