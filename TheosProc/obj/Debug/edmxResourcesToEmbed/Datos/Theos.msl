@@ -6231,5 +6231,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="pauComisionesAgrupadoTest3" FunctionName="ControlRefaccionariaModel.Store.pauComisionesAgrupadoTest3">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TheosProc.pauComisionesAgrupadoTest3_Result">
+          <ScalarProperty Name="VentaID" ColumnName="VentaID" />
+          <ScalarProperty Name="SucursalID" ColumnName="SucursalID" />
+          <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="Cobranza" ColumnName="Cobranza" />
+          <ScalarProperty Name="Utilidad" ColumnName="Utilidad" />
+          <ScalarProperty Name="Comision" ColumnName="Comision" />
+          <ScalarProperty Name="ComisionFija" ColumnName="ComisionFija" />
+          <ScalarProperty Name="ACredito" ColumnName="ACredito" />
+          <ScalarProperty Name="Es9500" ColumnName="Es9500" />
+          <ScalarProperty Name="Caracteristica" ColumnName="Caracteristica" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

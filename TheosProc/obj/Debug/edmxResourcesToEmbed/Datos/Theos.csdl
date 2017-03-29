@@ -2373,6 +2373,13 @@
       <End Role="Venta" EntitySet="Venta" />
       <End Role="ParteComisionHistorico" EntitySet="ParteComisionHistorico" />
     </AssociationSet>
+    <FunctionImport Name="pauComisionesAgrupadoTest3" ReturnType="Collection(TheosProc.pauComisionesAgrupadoTest3_Result)">
+      <Parameter Name="ModoID" Mode="In" Type="Int32" />
+      <Parameter Name="VendedorID" Mode="In" Type="Int32" />
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+      <Parameter Name="Desde" Mode="In" Type="DateTime" />
+      <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Autorizacion">
     <Key>
@@ -14875,4 +14882,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="pauComisionesAgrupadoTest3_Result">
+    <Property Type="Int32" Name="VentaID" Nullable="true" />
+    <Property Type="Int32" Name="SucursalID" Nullable="true" />
+    <Property Type="Int32" Name="RealizoUsuarioID" Nullable="true" />
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Cliente" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Folio" Nullable="true" MaxLength="16" />
+    <Property Type="Decimal" Name="Importe" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="Cobranza" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="Utilidad" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="Comision" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="ComisionFija" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Boolean" Name="ACredito" Nullable="true" />
+    <Property Type="Boolean" Name="Es9500" Nullable="true" />
+    <Property Type="String" Name="Caracteristica" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" />
+  </ComplexType>
 </Schema>
