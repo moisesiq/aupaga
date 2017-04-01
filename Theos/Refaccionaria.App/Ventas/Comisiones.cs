@@ -236,6 +236,7 @@ namespace Refaccionaria.App
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
             var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
+            //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
 
             #region LLenarGrid
             // Se llena el grid
@@ -374,8 +375,6 @@ namespace Refaccionaria.App
 
             //subtotal comisiones y fijo
             this.lblFijo.Text = mFijo.ToString(GlobalClass.FormatoMoneda);
-            this.lblSubFijo.Text = mFijo.ToString(GlobalClass.FormatoMoneda);
-
 
             //subtotal variable
             if (this.oMetaVendedor.EsGerente)
@@ -403,8 +402,17 @@ namespace Refaccionaria.App
             this.lblDevFija.Text = (mComisionFijaDev).ToString(GlobalClass.FormatoMoneda);
             this.lblSubFija.Text = (mComisionFija + mComisionFijaDev).ToString(GlobalClass.FormatoMoneda);
 
+            decimal Total = 0;
             //total y meta
-            decimal Total = (mFijo + (mComisionVariable - mComision9500) + mComision9500 + mComisionFija + mComisionFijaDev + mComisionNegativa + mComision9500Dev);
+            if (this.oMetaVendedor.EsGerente)
+            {
+                Total = (mFijo + (mComisionGerente) + mComision9500 + mComisionFija + mComision9500Dev);
+            }
+            else
+            {
+                Total = (mFijo + (mComisionVariable - mComision9500) + mComision9500 + mComisionFija + mComisionFijaDev + mComisionNegativa + mComision9500Dev);
+            }
+            
             this.lblTotal.Text = (Total).ToString(GlobalClass.FormatoMoneda);
 
             if (this.oMetaVendedor.SueldoMeta - Total < 0)
@@ -424,7 +432,7 @@ namespace Refaccionaria.App
             if (this.oMetaVendedor.EsGerente)
             {
                 decimal meta = this.oMetaSucursal.UtilSucursalMinimo;
-                ComisionesVendedorPorSucursal(mUtilidadSuc, this.oMetaSucursal.UtilSucursalMinimo, mComisionGerente);
+                //ComisionesVendedorPorSucursal(mUtilidadSuc, this.oMetaSucursal.UtilSucursalMinimo, mComisionGerente);
             }
 
             // Se cierra la ventana de "Cargando.."
@@ -457,6 +465,7 @@ namespace Refaccionaria.App
             {
                 oParams["VendedorID"] = i.VendedorID;
                 var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams);
+                //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
                 //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
                 //decimal suma = (decimal)oDatos.ToList().Sum(c => c.Comision);
                 decimal suma = (decimal)oDatos.ToList().Sum(c => c.Utilidad);
@@ -526,6 +535,7 @@ namespace Refaccionaria.App
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisionesNormal", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
             var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones2test", oParams);
+            //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones3test5", oParams);
 
             // Se llena el grid
             try

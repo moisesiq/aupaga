@@ -62,8 +62,6 @@
             this.dgvGerentesComisiones = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblSubFijo = new System.Windows.Forms.Label();
             this.lblMetaRes = new System.Windows.Forms.Label();
             this.lblMetaRestante = new System.Windows.Forms.Label();
             this.lblSubVariable = new System.Windows.Forms.Label();
@@ -159,8 +157,6 @@
             // 
             this.tbpComisiones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(87)))), ((int)(((byte)(123)))));
             this.tbpComisiones.Controls.Add(this.pnlUtVendedores);
-            this.tbpComisiones.Controls.Add(this.label7);
-            this.tbpComisiones.Controls.Add(this.lblSubFijo);
             this.tbpComisiones.Controls.Add(this.lblMetaRes);
             this.tbpComisiones.Controls.Add(this.lblMetaRestante);
             this.tbpComisiones.Controls.Add(this.lblSubVariable);
@@ -202,7 +198,7 @@
             this.pnlUtVendedores.Controls.Add(this.dgvGerentesComisiones);
             this.pnlUtVendedores.Location = new System.Drawing.Point(603, 2);
             this.pnlUtVendedores.Name = "pnlUtVendedores";
-            this.pnlUtVendedores.Size = new System.Drawing.Size(170, 269);
+            this.pnlUtVendedores.Size = new System.Drawing.Size(170, 250);
             this.pnlUtVendedores.TabIndex = 45;
             // 
             // label3
@@ -265,7 +261,7 @@
             this.dgvGerentesComisiones.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvGerentesComisiones.RowHeadersVisible = false;
             this.dgvGerentesComisiones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGerentesComisiones.Size = new System.Drawing.Size(164, 233);
+            this.dgvGerentesComisiones.Size = new System.Drawing.Size(164, 210);
             this.dgvGerentesComisiones.StandardTab = true;
             this.dgvGerentesComisiones.TabIndex = 39;
             this.dgvGerentesComisiones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGerentesComisiones_CellContentClick);
@@ -289,33 +285,6 @@
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             this.dataGridViewTextBoxColumn9.Width = 80;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(622, 116);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 13);
-            this.label7.TabIndex = 41;
-            this.label7.Text = "Subtotal";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // lblSubFijo
-            // 
-            this.lblSubFijo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSubFijo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(136)))), ((int)(((byte)(177)))));
-            this.lblSubFijo.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubFijo.ForeColor = System.Drawing.Color.White;
-            this.lblSubFijo.Location = new System.Drawing.Point(670, 111);
-            this.lblSubFijo.Name = "lblSubFijo";
-            this.lblSubFijo.Size = new System.Drawing.Size(100, 18);
-            this.lblSubFijo.TabIndex = 40;
-            this.lblSubFijo.Text = "$   500.00";
-            this.lblSubFijo.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblMetaRes
             // 
@@ -794,7 +763,7 @@
             this.lblFijo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(136)))), ((int)(((byte)(177)))));
             this.lblFijo.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFijo.ForeColor = System.Drawing.Color.White;
-            this.lblFijo.Location = new System.Drawing.Point(670, 91);
+            this.lblFijo.Location = new System.Drawing.Point(670, 115);
             this.lblFijo.Name = "lblFijo";
             this.lblFijo.Size = new System.Drawing.Size(100, 18);
             this.lblFijo.TabIndex = 10;
@@ -873,7 +842,7 @@
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(645, 96);
+            this.label25.Location = new System.Drawing.Point(645, 120);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(23, 13);
             this.label25.TabIndex = 8;
@@ -1175,8 +1144,6 @@
         private System.Windows.Forms.Label lblMetaRes;
         private System.Windows.Forms.Label lblMetaRestante;
         private System.Windows.Forms.DataGridView dgvGerentesComisiones;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblSubFijo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.Panel pnlUtVendedores;

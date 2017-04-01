@@ -909,12 +909,37 @@ namespace Refaccionaria.App
             //Se guarda la información de la venta en cuanto a comisiones para ese dia
             var VentaDetalle = Datos.GetListOf<VentaDetalle>(q => q.VentaID == oVenta.VentaID && q.Estatus);
             foreach (var i in VentaDetalle) 
-            { 
+            {
+                var Comisiones = Datos.GetEntity<ParteComision>(q => q.ParteID == i.ParteID);
+                
+                if (Comisiones == null)
+                {
+                    var Parte = Datos.GetEntity<Parte>(p => p.ParteID == i.ParteID);
+                    ParteComision AgregarParteComision = new ParteComision();
+                    AgregarParteComision.ParteID = Parte.ParteID;
+                    AgregarParteComision.ProveedorID = Parte.ProveedorID;
+                    AgregarParteComision.MarcaParteID = Parte.MarcaParteID;
+                    AgregarParteComision.LineaID = Parte.LineaID;
+                    AgregarParteComision.ComisionFija = 0;
+                    AgregarParteComision.PorcentajeNormal = 11;
+                    AgregarParteComision.PorcentajeUnArticulo = 11;
+                    AgregarParteComision.ArticulosEspecial = 0;
+                    AgregarParteComision.PorcentajeArticulosEspecial = 11;
+                    AgregarParteComision.PorcentajeComplementarios = 11;
+                    AgregarParteComision.PorcentajeReduccionPorRepartidor = 0;
+                    AgregarParteComision.PorcentajeRepartidor = 0;
+                    AgregarParteComision.ComisionFijaRepartidor = 0;
+                    Datos.Guardar<ParteComision>(AgregarParteComision);
+                }
+
+                Comisiones = Datos.GetEntity<ParteComision>(q => q.ParteID == i.ParteID);
+
                 ParteComisionHistorico comisionActual = new ParteComisionHistorico();
                 comisionActual.VentaID = i.VentaID;
                 comisionActual.FechaRegistro = DateTime.Now;
                 comisionActual.ParteID = i.ParteID;
-                var Comisiones = Datos.GetEntity<ParteComision>(q => q.ParteID == i.ParteID);
+                
+                
                 var ValidarComision = Datos.GetEntity<ParteComisionHistorico>(q => q.ParteID == i.ParteID && q.PorcentajeNormal != Comisiones.PorcentajeNormal);
                 comisionActual.ComisionFija = Comisiones.ComisionFija;
                 comisionActual.PorcentajeNormal = Comisiones.PorcentajeNormal;

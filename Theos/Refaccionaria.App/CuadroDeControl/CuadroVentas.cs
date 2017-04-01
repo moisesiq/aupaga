@@ -568,5 +568,10 @@ namespace Refaccionaria.App
 
         #endregion
 
+        private void cmbCalculo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

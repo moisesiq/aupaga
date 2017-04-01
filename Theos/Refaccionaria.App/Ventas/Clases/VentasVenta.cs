@@ -97,14 +97,14 @@ namespace Refaccionaria.App
             // Se intenta completar
             if (!this.oControlVentas.ctlCobro.CompletarCobro())
                 return false;
-            decimal mImportePato = Util.Decimal(Config.Valor("Ventas.ImportePato"));
-            bool esPato = false;
-            if (this.oControlVentas.Total >= mImportePato)
-            {
-                var hunt = new Duck(UtilLocal.RutaRecursos() + "huntduck2.wmv");
-                hunt.Show(Principal.Instance);
-                esPato = true;
-            } else      // Se muestra la ventana de "Cargando.."
+            //decimal mImportePato = Util.Decimal(Config.Valor("Ventas.ImportePato"));
+            //bool esPato = false;
+            //if (this.oControlVentas.Total >= mImportePato)
+            //{
+            //    var hunt = new Duck(UtilLocal.RutaRecursos() + "huntduck2.wmv");
+            //    hunt.Show(Principal.Instance);
+            //    esPato = true;
+            //} else      // Se muestra la ventana de "Cargando.."
                 Cargando.Mostrar();
             
             // Se procede a guardar la venta
@@ -176,7 +176,7 @@ namespace Refaccionaria.App
             }
 
             // Se cierra la ventana de "Cargando.."
-            if(!esPato)
+            //if(!esPato)
                 Cargando.Cerrar();
            
             // Se muestra notificación y se limpia el formulario
