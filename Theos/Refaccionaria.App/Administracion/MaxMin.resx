@@ -309,15 +309,6 @@
   <data name="Fijo.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <metadata name="MaximoActual.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="MaximoActual.HeaderText" xml:space="preserve">
-    <value>Max. Act.</value>
-  </data>
-  <data name="MaximoActual.Width" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
   <metadata name="MinimoActual.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -327,13 +318,13 @@
   <data name="MinimoActual.Width" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <metadata name="Maximo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="MaximoActual.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="Maximo.HeaderText" xml:space="preserve">
-    <value>MAX</value>
+  <data name="MaximoActual.HeaderText" xml:space="preserve">
+    <value>Max. Act.</value>
   </data>
-  <data name="Maximo.Width" type="System.Int32, mscorlib">
+  <data name="MaximoActual.Width" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
   <metadata name="Minimo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -343,6 +334,15 @@
     <value>MIN</value>
   </data>
   <data name="Minimo.Width" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <metadata name="Maximo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Maximo.HeaderText" xml:space="preserve">
+    <value>MAX</value>
+  </data>
+  <data name="Maximo.Width" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
   <metadata name="Condiciones.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -3843,28 +3843,28 @@
   <data name="&gt;&gt;Fijo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MaximoActual.Name" xml:space="preserve">
-    <value>MaximoActual</value>
-  </data>
-  <data name="&gt;&gt;MaximoActual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;MinimoActual.Name" xml:space="preserve">
     <value>MinimoActual</value>
   </data>
   <data name="&gt;&gt;MinimoActual.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Maximo.Name" xml:space="preserve">
-    <value>Maximo</value>
+  <data name="&gt;&gt;MaximoActual.Name" xml:space="preserve">
+    <value>MaximoActual</value>
   </data>
-  <data name="&gt;&gt;Maximo.Type" xml:space="preserve">
+  <data name="&gt;&gt;MaximoActual.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Minimo.Name" xml:space="preserve">
     <value>Minimo</value>
   </data>
   <data name="&gt;&gt;Minimo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Maximo.Name" xml:space="preserve">
+    <value>Maximo</value>
+  </data>
+  <data name="&gt;&gt;Maximo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Condiciones.Name" xml:space="preserve">
