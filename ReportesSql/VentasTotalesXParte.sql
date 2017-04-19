@@ -3,14 +3,15 @@
 ** Creado:  Oscar
 ********* */
 
-DECLARE @Desde DATE = '2016-01-01'
-DECLARE @Hasta DATE = '2017-01-12'
+DECLARE @Desde DATE = '2016-12-01'
+DECLARE @Hasta DATE = '2017-04-07'
 
 SET @Hasta = DATEADD(d, 1, @Hasta)
 ;WITH _TOTAL AS
 (
 
 SELECT
+v.VentaID,
 	v.Fecha
 	, v.Folio
 	, ve.Descripcion AS Estatus
@@ -25,6 +26,7 @@ SELECT
 	, mp.NombreMarcaParte AS Marca
 	, l.NombreLinea AS Linea
 	--,SUM(vd.Cantidad) AS TotalPiezasVendidas
+	select * from Marca where NombreMarca like '%%'
 FROM
 	VentaDetalle vd
 	INNER JOIN Venta v ON v.VentaID = vd.VentaID AND v.Estatus = 1
@@ -40,11 +42,14 @@ FROM
 WHERE
 	vd.Estatus = 1
 	AND (v.Fecha >= @Desde AND v.Fecha < @Hasta)
-	AND l.LineaID = 37
-	--AND MP.MarcaParteID = 1
+	AND l.LineaID = 94
+	AND MP.MarcaParteID = 306
+	
+	--select * from MarcaParte where NombreMarcaParte = 'STEELMARK'
 	--AND S.SucursalID = 1
 	--AND p.NumeroParte = '06734'
 GROUP BY
+v.VentaID,
 	v.Fecha,
 	v.Folio,
 	ve.Descripcion,
@@ -78,10 +83,12 @@ SELECT
 	Marca,
 	Linea,
 	(select SUM(PrecioDeVenta) from _TOTAL) as TotalPrecioDeVenta,
-	(select SUM(Cantidad) from _TOTAL t1 where t1.NumeroDeParte = t.NumeroDeParte ) as TotalPiezasVendidas
+	(select sum(Cantidad) from _TOTAL t1 where t1.VentaID = t.VentaID  ) as TotalPiezasVendidas
+	--t1.NumeroDeParte = t.NumeroDeParte
 FROM 
 	_TOTAL t
 GROUP BY
+t.VentaID,
 	Fecha,
 	Folio,
 	Estatus,

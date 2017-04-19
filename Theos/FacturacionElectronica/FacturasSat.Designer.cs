@@ -146,10 +146,10 @@
             this.webSat.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webSat.Location = new System.Drawing.Point(12, 64);
+            this.webSat.Location = new System.Drawing.Point(12, 79);
             this.webSat.MinimumSize = new System.Drawing.Size(20, 20);
             this.webSat.Name = "webSat";
-            this.webSat.Size = new System.Drawing.Size(1096, 551);
+            this.webSat.Size = new System.Drawing.Size(1096, 536);
             this.webSat.TabIndex = 5;
             // 
             // btnConsultar

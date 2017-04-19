@@ -174,7 +174,7 @@ namespace Refaccionaria.App
 
                 case Mostrar.Indice:
                     // Se obtiene los datos, de ventas y de cancelaciones
-                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
                     var oVentas = oDatosVentas.GroupBy(g => new { g.ClienteID, g.Cliente })
                         .Select(c => new { c.Key.ClienteID, c.Key.Cliente, Actual = c.Sum(s => s.Actual), Anterior = c.Sum(s => s.Anterior) });
                     var oDevs = oConsulta.Select(c => new { c.Key.ClienteID, c.Key.Cliente, Actual = c.Sum(s => s.Actual), Anterior = c.Sum(s => s.Anterior) });
@@ -389,8 +389,8 @@ namespace Refaccionaria.App
 
                 case Mostrar.Indice:
                     // Se obtiene los datos, de ventas y de cancelaciones
-                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
-                    IEnumerable<pauCuadroDeControlGeneral_Result> oFiltroVen;
+                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
+                    IEnumerable<pauCuadroDeControlGeneralNuevo_Result> oFiltroVen;
                     if (this.cmbTipo.SelectedIndex == Tipo.Clientes)
                         oFiltroVen = oDatosVentas.Where(c => c.ClienteID == iId);
                     else
@@ -509,8 +509,8 @@ namespace Refaccionaria.App
 
                 case Mostrar.Indice:
                     // Se obtiene los datos, de ventas y de cancelaciones
-                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
-                    IEnumerable<pauCuadroDeControlGeneral_Result> oFiltroVen;
+                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
+                    IEnumerable<pauCuadroDeControlGeneralNuevo_Result> oFiltroVen;
                     if (this.cmbTipo.SelectedIndex == Tipo.Clientes)
                         oFiltroVen = oDatosVentas.Where(c => c.ClienteID == iId);
                     else
@@ -635,8 +635,8 @@ namespace Refaccionaria.App
 
                 case Mostrar.Indice:
                     // Se obtiene los datos, de ventas y de cancelaciones
-                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
-                    IEnumerable<pauCuadroDeControlGeneral_Result> oFiltroVen;
+                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
+                    IEnumerable<pauCuadroDeControlGeneralNuevo_Result> oFiltroVen;
                     if (this.cmbTipo.SelectedIndex == Tipo.Clientes)
                         oFiltroVen = oDatosVentas.Where(c => c.ClienteID == iId);
                     else
@@ -746,8 +746,8 @@ namespace Refaccionaria.App
 
                 case Mostrar.Indice:
                     // Se obtiene los datos, de ventas y de cancelaciones
-                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
-                    IEnumerable<pauCuadroDeControlGeneral_Result> oFiltroVen;
+                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
+                    IEnumerable<pauCuadroDeControlGeneralNuevo_Result> oFiltroVen;
                     if (this.cmbTipo.SelectedIndex == Tipo.Clientes)
                         oFiltroVen = oDatosVentas.Where(c => c.ClienteID == iId);
                     else
@@ -950,7 +950,7 @@ namespace Refaccionaria.App
 
                 case Mostrar.Indice:
                     // Se obtiene los datos, de ventas y de cancelaciones
-                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+                    var oDatosVentas = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
                     var oVentas = oDatosVentas.GroupBy(g => new { g.VendedorID, g.Vendedor })
                         .Select(c => new { c.Key.VendedorID, c.Key.Vendedor, Actual = c.Sum(s => s.Actual), Anterior = c.Sum(s => s.Anterior) });
                     var oDevs = oConsulta.Select(c => new { c.Key.VendedorID, c.Key.Vendedor, Actual = c.Sum(s => s.Actual), Anterior = c.Sum(s => s.Anterior) });

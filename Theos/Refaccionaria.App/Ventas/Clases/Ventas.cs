@@ -1538,6 +1538,8 @@ namespace Refaccionaria.App
                 var oSemana = UtilDatos.FechasDeComisiones(DateTime.Now);
                 oParams.Add("Desde", oSemana.Valor1);
                 oParams.Add("Hasta", oSemana.Valor2);
+                oParams.Add("SucursalID", Theos.SucursalID);
+                oParams.Add("VendedorID", Theos.UsuarioID);
                 var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
                 decimal mUtilidad = oDatos.Where(c => c.SucursalID == GlobalClass.SucursalID).Sum(c => c.Utilidad).Valor();
                 // Se llena la barra

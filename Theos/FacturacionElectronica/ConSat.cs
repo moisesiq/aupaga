@@ -32,6 +32,8 @@ namespace FacturacionElectronica
         bool bDescargando;
         int iXmlProc;
 
+        public FacturasSat f;
+
         public ConSat(string sRfc, string sClaveCiec)
         {
             this.Rfc = sRfc;
@@ -118,6 +120,7 @@ namespace FacturacionElectronica
         {
             if (e.Url.ToString().Contains(ConSat.PaginaDescarga))
             {
+                //MessageBox.Show("websatnavigating");
                 e.Cancel = true;
                 // Se manda descargar la factura, de forma asíncrona
                 // this.oHiloDescarga.Start();
@@ -172,17 +175,43 @@ namespace FacturacionElectronica
 
         private void webSat_NewWindow(object sender, CancelEventArgs e)
         {
+            
             switch (this.webSat.DocumentTitle)
             {
                 case "b":
+
                     this.ReportarPaso(ConSat.ConSatPaso.BusquedaCompletada);
                     break;
                 case "x":
+                    //MessageBox.Show("websat new window");
                     // Checar el document, a ver si si tiene las facturas
-                    string sXmls = this.webSat.Document.GetElementById("preXmls").InnerText;
-                    this.Xmls = sXmls.Split('\n');
-                    this.IniciarDescarga();
-                    this.ReportarPaso(ConSat.ConSatPaso.IniciandoDescarga);
+                    //string sXmls = this.webSat.Document.GetElementById("preXmls").InnerText;
+                    //this.Xmls = sXmls.Split('\n');
+
+
+                    //HtmlElementCollection elems = webSat.Document.GetElementsByTagName("IMG");
+                    //List<string> list = new List<string>();
+                    //foreach (HtmlElement elem in elems)
+                    //{
+
+                    //    if (elem.GetAttribute("name") == "BtnDescarga")
+                    //    {
+                    //        int iStartPos = elem.OuterHtml.IndexOf("onclick=\"") + ("onclick=\"").Length;
+                    //        int iEndPos = elem.OuterHtml.IndexOf("\">", iStartPos);
+                    //        String s = elem.OuterHtml.Substring(iStartPos, iEndPos - iStartPos);
+                    //        String d = s.Substring(19, s.Length - 69);
+                    //        //this.dataGridView1.Rows.Add("Nombre", elem.GetAttribute("name"), d.Trim());
+
+                    //        list.Add("https://portalcfdi.facturaelectronica.sat.gob.mx/" + d.Trim());
+                    //    }
+                    //}
+
+                    //this.Xmls = list.ToArray();
+                    //int o=0;
+                    //f.dataGridView1.Rows.Add("", Xmls[o++] );
+                    
+                    //this.IniciarDescarga();
+                    //this.ReportarPaso(ConSat.ConSatPaso.IniciandoDescarga);
                     // Se manda cerrar la sesión
                     // this.InsertarScript("window.CerrarSesion();");
                     break;
@@ -207,6 +236,7 @@ namespace FacturacionElectronica
 
         private void InsertarScript(string sScript)
         {
+            
             if (this.webSat.Document == null)
                 return;
 
@@ -218,14 +248,17 @@ namespace FacturacionElectronica
 
         private void ReportarPaso(ConSat.ConSatPaso ePaso)
         {
+            //MessageBox.Show(ePaso.ToString());
             if (this.PasoCompletado != null)
                 this.PasoCompletado.Invoke(ePaso);
         }
 
         private void IniciarDescarga()
         {
+            //MessageBox.Show("iniciar descarga");
             if (this.iXmlProc >= this.Xmls.Length)
             {
+                //MessageBox.Show("iniciar descarga false");
                 // Se espera un breve tiempo, para dejar que se terminen de bajar todas las facturas
                 Thread.Sleep(1000);
                 //
@@ -235,6 +268,7 @@ namespace FacturacionElectronica
             }
             else
             {
+                //MessageBox.Show(this.Xmls[iXmlProc++]);
                 this.bDescargando = true;
                 this.webSat.Navigate(this.Xmls[this.iXmlProc++]);
             }
@@ -247,45 +281,56 @@ namespace FacturacionElectronica
 
         private void DescargarFactura(string sUrlXml)
         {
-            // Se descarga la factura a una archivo temporal
-            string sTemp = Path.GetTempFileName();
-            this.DownloadFile(sUrlXml, sTemp);
+            //try
+            //{
+                // Se descarga la factura a una archivo temporal
+                string sTemp = Path.GetTempFileName();
+                this.DownloadFile(sUrlXml, sTemp);
 
-            // Se leen los datos principales del xml
-            var oXml = new XmlDocument();
-            oXml.Load(sTemp);
-            var oXmlNs = new XmlNamespaceManager(oXml.NameTable);
-            oXmlNs.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
-            oXmlNs.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
-            string sRfcEmisor = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Emisor", "rfc");
-            string sEmisor = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Emisor", "nombre");
-            string sRfcReceptor = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Receptor", "rfc");
-            string sReceptor = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Receptor", "nombre");
-            DateTime dFecha = Util.FechaHora(this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante", "fecha"));
-            string sSerie = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante", "serie");
-            string sFolio = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante", "folio");
-            string sUuid = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital", "UUID");
+                // Se leen los datos principales del xml
+                var oXml = new XmlDocument();
+                oXml.Load(sTemp);
+                var oXmlNs = new XmlNamespaceManager(oXml.NameTable);
+                oXmlNs.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
+                oXmlNs.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
+                string sRfcEmisor = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Emisor", "rfc");
+                string sEmisor = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Emisor", "nombre");
+                string sRfcReceptor = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Receptor", "rfc");
+                string sReceptor = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Receptor", "nombre");
+                DateTime dFecha = Util.FechaHora(this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante", "fecha"));
+                string sSerie = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante", "serie");
+                string sFolio = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante", "folio");
+                string sUuid = this.XmlValorDeAtributo(oXml, oXmlNs, "/cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital", "UUID");
 
-            // Se obtiene la ruta donde guardar
-            string sGuardar = this.RutaGuardar;
-            sGuardar = sGuardar.Replace("{_RfcEmisor}", sRfcEmisor);
-            sGuardar = sGuardar.Replace("{_Emisor}", sEmisor);
-            sGuardar = sGuardar.Replace("{_RfcReceptor}", sRfcReceptor);
-            sGuardar = sGuardar.Replace("{_Receptor}", sReceptor);
-            sGuardar = sGuardar.Replace("{_Anio}", dFecha.Year.ToString());
-            sGuardar = sGuardar.Replace("{_Mes}", dFecha.Month.ToString("00"));
-            sGuardar = sGuardar.Replace("{_Dia}", dFecha.Day.ToString("00"));
-            sGuardar = sGuardar.Replace("{_Serie}", sSerie);
-            sGuardar = sGuardar.Replace("{_Folio}", sFolio);
-            sGuardar = sGuardar.Replace("{_Uuid}", sUuid);
+                // Se obtiene la ruta donde guardar
+                string sGuardar = this.RutaGuardar;
+                sGuardar = sGuardar.Replace("{_RfcEmisor}", sRfcEmisor);
+                sGuardar = sGuardar.Replace("{_Emisor}", sEmisor);
+                sGuardar = sGuardar.Replace("{_RfcReceptor}", sRfcReceptor);
+                sGuardar = sGuardar.Replace("{_Receptor}", sReceptor);
+                sGuardar = sGuardar.Replace("{_Anio}", dFecha.Year.ToString());
+                sGuardar = sGuardar.Replace("{_Mes}", dFecha.Month.ToString("00"));
+                sGuardar = sGuardar.Replace("{_Dia}", dFecha.Day.ToString("00"));
+                sGuardar = sGuardar.Replace("{_Serie}", sSerie);
+                sGuardar = sGuardar.Replace("{_Folio}", sFolio);
+                sGuardar = sGuardar.Replace("{_Uuid}", sUuid);
 
-            // Se manda guardar el archivo (se mueve)
-            Directory.CreateDirectory(Path.GetDirectoryName(sGuardar));
-            File.Delete(sGuardar);
-            File.Move(sTemp, sGuardar);
+                if (sEmisor.Contains("MATRIZ:"))
+                {
+                    MessageBox.Show(sEmisor);
+                }
+                // Se manda guardar el archivo (se mueve)
+                Directory.CreateDirectory(Path.GetDirectoryName(sGuardar));
+                File.Delete(sGuardar);
+                File.Move(sTemp, sGuardar);
 
-            // Se manda notificar la descarga, para reportar progreso y seguir bajando lo que falte
-            this.PasoCompletado.Invoke(ConSat.ConSatPaso.XmlDescargado);
+                // Se manda notificar la descarga, para reportar progreso y seguir bajando lo que falte
+                this.PasoCompletado.Invoke(ConSat.ConSatPaso.XmlDescargado);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private string XmlValorDeAtributo(XmlDocument oXml, XmlNamespaceManager oXmlNs, string sXpath, string sAtributo)
@@ -341,8 +386,30 @@ namespace FacturacionElectronica
 
         public void IniciarObtenerXmls()
         {
-            this.InsertarScript("window.ObtenerXmls();");
+            //this.InsertarScript("window.ObtenerXmls();");
             this.ReportarPaso(ConSat.ConSatPaso.ObteniendoXmls);
+
+            HtmlElementCollection elems = webSat.Document.GetElementsByTagName("IMG");
+            List<string> list = new List<string>();
+            foreach (HtmlElement elem in elems)
+            {
+
+                if (elem.GetAttribute("name") == "BtnDescarga")
+                {
+                    int iStartPos = elem.OuterHtml.IndexOf("onclick=\"") + ("onclick=\"").Length;
+                    int iEndPos = elem.OuterHtml.IndexOf("\">", iStartPos);
+                    String s = elem.OuterHtml.Substring(iStartPos, iEndPos - iStartPos);
+                    String d = s.Substring(19, s.Length - 69);
+                    //this.dataGridView1.Rows.Add("Nombre", elem.GetAttribute("name"), d.Trim());
+
+                    list.Add("https://portalcfdi.facturaelectronica.sat.gob.mx/" + d.Trim());
+                }
+            }
+
+            this.Xmls = list.ToArray();
+
+            this.IniciarDescarga();
+            this.ReportarPaso(ConSat.ConSatPaso.IniciandoDescarga);
         }
 
         public void CerrarSesion()

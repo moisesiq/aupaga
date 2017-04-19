@@ -5,6 +5,11 @@ using System.IO;
 using System.Xml;
 
 using LibUtil;
+using System.Collections.Generic;
+using System.Net;
+using System.Xml.Linq;
+using System.Collections;
+using System.ComponentModel;
 
 namespace FacturacionElectronica
 {
@@ -82,13 +87,13 @@ namespace FacturacionElectronica
 
         private void btnDescargar_Click(object sender, EventArgs e)
         {
-            // Se configuran los datos de progreso
-            this.lblProceso.Text = "Descargando Xmls..";
+            this.lblProceso.Text = "Descargando Xmls...";
             this.lblAvance.Text = "";
             this.pgbProceso.Value = 0;
 
             this.oSat.IniciarObtenerXmls();
         }
+
 
         int iVeces = 0;
         void oSat_PasoCompletado(ConSat.ConSatPaso ePaso)
@@ -170,6 +175,8 @@ namespace FacturacionElectronica
         }
 
         #endregion
+
+
 
     }
 }

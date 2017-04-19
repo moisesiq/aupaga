@@ -206,7 +206,9 @@ namespace Refaccionaria.App
             String ClientePersonalIDCadena = iClientePersonalID.ToString("000");
             
             //Util.MensajeInformacion(String.Format("{0}{1}{2}{3}{4}{5}", GlobalClass.ConfiguracionGlobal.pathImagenes.ToString(), "Clientes\\", iClienteID, "\\PersonalFirma-", ClientePersonalIDCadena, ".jpg"), "");
-            return (String.Format("{0}{1}{2}{3}{4}{5}", GlobalClass.ConfiguracionGlobal.pathImagenes.ToString(), "Clientes\\", iClienteID, "\\PersonalFirma-", ClientePersonalIDCadena, ".jpg"));
+            //return (String.Format("{0}{1}{2}{3}{4}{5}", GlobalClass.ConfiguracionGlobal.pathImagenes.ToString(), "Clientes\\", iClienteID, "\\PersonalFirma-", ClientePersonalIDCadena, ".jpg"));
+            
+                return (String.Format("{0}{1}{2}{3}{4}{5}", "//192.168.1.1/Img/Partes/", "Clientes", iClienteID, "\\PersonalFirma-", ClientePersonalIDCadena, ".jpg"));
         }
 
         #endregion

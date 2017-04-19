@@ -647,6 +647,7 @@
             this.dgvVentas.Size = new System.Drawing.Size(596, 407);
             this.dgvVentas.StandardTab = true;
             this.dgvVentas.TabIndex = 0;
+            this.dgvVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellContentClick);
             this.dgvVentas.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvVentas_RowStateChanged);
             // 
             // colVentaID

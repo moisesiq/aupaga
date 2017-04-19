@@ -114,7 +114,7 @@ namespace Refaccionaria.App
             oParams.Add("Desde", dDesde);
             oParams.Add("Hasta", dHasta);
 
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
             var oSemanas = oDatos.Where(c => c.Fecha >= dDesde)
                 .GroupBy(c => new { Semana = UtilTheos.InicioSemanaSabAVie(c.Fecha), c.Sucursal })
                 .Select(c => new { c.Key.Semana, c.Key.Sucursal, PrecioSinIva = c.Sum(s => s.PrecioSinIvaActual), Costo = c.Sum(s => s.CostoDescActual) })
@@ -410,7 +410,7 @@ namespace Refaccionaria.App
             oParams.Add("Desde", dDesde);
             oParams.Add("Hasta", dHasta);
 
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
             oDatos = oDatos.Where(c => c.Fecha >= dDesde).ToList();
             
             List<ConsultaEdr> oConsulta = null;

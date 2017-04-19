@@ -234,7 +234,7 @@ namespace Refaccionaria.App
             oParams.Add("Hasta", this.dtpA.Value.Date);
             oParams.Add("SucursalID", Theos.SucursalID);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones_Result>("pauComisiones", oParams);
-            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams).OrderBy(c => c.Caracteristica == "D");
             //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
 
@@ -432,7 +432,7 @@ namespace Refaccionaria.App
             if (this.oMetaVendedor.EsGerente)
             {
                 decimal meta = this.oMetaSucursal.UtilSucursalMinimo;
-                //ComisionesVendedorPorSucursal(mUtilidadSuc, this.oMetaSucursal.UtilSucursalMinimo, mComisionGerente);
+                ComisionesVendedorPorSucursal(mUtilidadSuc, this.oMetaSucursal.UtilSucursalMinimo, mComisionGerente);
             }
 
             // Se cierra la ventana de "Cargando.."
@@ -444,6 +444,9 @@ namespace Refaccionaria.App
 
         private void ComisionesVendedorPorSucursal(decimal UtilSucursal, decimal UtilSucursalMinimo, decimal mComisionGerente)
         {
+            if (UtilSucursal < UtilSucursalMinimo)
+                return;
+
             this.dgvGerentesComisiones.Rows.Clear();
             this.pnlUtVendedores.Visible = true;
             var VendedoresSucursal = Datos.GetListOf<MetaVendedor>(c => c.SucursalID == Theos.SucursalID);
@@ -454,21 +457,14 @@ namespace Refaccionaria.App
             decimal totales = UtilSucursal - UtilSucursalMinimo;
 
             var oParams = new Dictionary<string, object>();
-            oParams.Add("ModoID", 1);
             oParams.Add("Desde", this.dtpDe.Value.Date);
             oParams.Add("Hasta", this.dtpA.Value.Date);
             oParams.Add("SucursalID", Theos.SucursalID);
-            oParams.Add("VendedorID", Theos.UsuarioID);
 
-
+            var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado2", oParams);
             foreach (var i in VendedoresSucursal)   
             {
-                oParams["VendedorID"] = i.VendedorID;
-                var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones2test", oParams);
-                //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones3test5", oParams);
-                //var oDatos = Datos.ExecuteProcedure<pauComisiones2_Result>("pauComisiones", oParams);
-                //decimal suma = (decimal)oDatos.ToList().Sum(c => c.Comision);
-                decimal suma = (decimal)oDatos.ToList().Sum(c => c.Utilidad);
+                decimal suma = (decimal)oDatos.ToList().Where(f => f.RealizoUsuarioID == i.VendedorID).Sum(c => c.Utilidad);
                 dic.Add(Datos.GetEntity<Usuario>( c => c.UsuarioID == i.VendedorID).NombreUsuario, suma);
             }
 
@@ -486,7 +482,7 @@ namespace Refaccionaria.App
             }
 
 
-
+            //se llenan las comisiones aportadas por cada vendedor al variable 
             foreach (var oReg in dic)
             {
                 this.dgvGerentesComisiones.Rows.Add(oReg.Key, oReg.Value);
@@ -497,16 +493,18 @@ namespace Refaccionaria.App
 
         private void LlenarUtilidadSuc()
         {
+
             int iSucursal = this.oMetaVendedor.SucursalID;
+            int iUsuario = this.oMetaVendedor.VendedorID;
             var oParams = new Dictionary<string, object>();
             oParams.Add("Desde", this.dtpDe.Value);
             oParams.Add("Hasta", this.dtpA.Value);
-            //oParams.Add("SucursalID", Theos.SucursalID);
-            //oParams.Add("VendedorID", Theos.UsuarioID);
+            oParams.Add("SucursalID", iSucursal);
+            //oParams.Add("VendedorID", iUsuario);
             //oParams.Add("ModoID", 1);
 
             // Se calcula la utilidad
-            var oUtilidad = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
+            var oUtilidad = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado2", oParams);
             //var oUtilidad = Datos.ExecuteProcedure<pauComisionesAgrupadoTest3_Result>("pauComisionesAgrupadoTest3", oParams);
             this.mUtilidadSuc = oUtilidad.Where(c => c.SucursalID == iSucursal).Sum(c => c.Utilidad).Valor();
             
@@ -516,6 +514,8 @@ namespace Refaccionaria.App
             this.mGastoSuc = oGastos.Sum(c => c.Importe).Valor();
             */
         }
+
+
 
         private void LlenarVentasNp()
         {
@@ -639,6 +639,11 @@ namespace Refaccionaria.App
         }
 
         private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

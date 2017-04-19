@@ -77,7 +77,7 @@ namespace Refaccionaria.App
                 oParams.Add("OmitirDomingo", false);
                 oParams.Add("Desde", DateTime.Now.AddMonths(-6));
                 oParams.Add("Hasta", DateTime.Now);
-                var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+                var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
                 // Marcas
                 var oMarcas = oDatos.GroupBy(c => new { c.MarcaID, c.Marca })
                     .Select(c => new { MarcaID = c.Key.MarcaID, Marca = c.Key.Marca, UtilDesc = c.Sum(s => s.UtilDescActual) })
@@ -574,7 +574,7 @@ namespace Refaccionaria.App
             oParams.Add("OmitirDomingo", false);
             oParams.Add("Desde", oFechasAnt.Valor1);
             oParams.Add("Hasta", oFechasAnt.Valor2);
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
             decimal mVendido = oDatos.Sum(c => c.CostoActual).Valor();
 
             var oPedidos = Datos.GetListOf<Pedido>(c => c.FechaRegistro >= oFechas.Valor1 && c.FechaRegistro <= oFechas.Valor2 && c.Estatus);

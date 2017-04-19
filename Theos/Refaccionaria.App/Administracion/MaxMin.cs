@@ -506,9 +506,13 @@ namespace Refaccionaria.App
             }
             //
             var oMaxMin = Datos.ExecuteProcedure<pauPartesMaxMin_Res>("pauPartesMaxMin", oParams);
-            DateTime dFechaDeCalc = this.dtpFechaDeCalculo.Value.Date.AddDays(1);
-            if (dFechaDeCalc < DateTime.Now)
-                oMaxMin = oMaxMin.Where(c => c.FechaCalculo.Valor() < dFechaDeCalc).ToList();
+            DateTime dFechaDeCalc = this.dtpFechaDeCalculo.Value.Date;//.AddDays(1);
+            string c2 = dFechaDeCalc.Date.ToString();
+            string f = DateTime.Now.Date.ToString();
+
+            
+            //if (dFechaDeCalc < DateTime.Now.Date) //se comentó esta linea para evitar filtrar registros que coincidad con fecha de calculo al dia actual
+                oMaxMin = oMaxMin.Where(c => c.FechaCalculo.Valor().Date < dFechaDeCalc.Date).ToList();
 
             int iFila;
             this.dgvDetalle.Rows.Clear();
@@ -535,10 +539,14 @@ namespace Refaccionaria.App
                 // Se saltan las partes que no tengan ventas o MaxMin, si aplica
                 if (!bSel) continue;
 
-                iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, bSel, NumFila++, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
+                iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, bSel, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
                     , oParte.Existencia, oParte.UnidadEmpaque, oParte.TiempoReposicion, oParte.AbcDeNegocio, oParte.AbcDeVentas, oParte.AbcDeUtilidad
                     , oParte.VentasTotal, oParte.CantidadTotal, oParte.UtilidadTotal, oParte.Fijo, oParte.Minimo, oParte.Maximo, null, null
                     , oParte.ParteMaxMinReglaID, oParte.FechaCalculo);
+                //iFila = this.dgvDetalle.Rows.Add(oParte.ParteID, bSel, oParte.NumeroDeParte, oParte.Descripcion, oParte.Proveedor, oParte.Linea, oParte.Marca
+                //    , oParte.Existencia, oParte.UnidadEmpaque, oParte.TiempoReposicion, oParte.AbcDeNegocio, oParte.AbcDeVentas, oParte.AbcDeUtilidad
+                //    , oParte.VentasTotal, oParte.CantidadTotal, oParte.UtilidadTotal, oParte.Fijo, oParte.Minimo, oParte.Maximo, null, null
+                //    , oParte.ParteMaxMinReglaID, oParte.FechaCalculo);
                 this.dgvDetalle.Rows[iFila].Tag = oParte;
             }
             // this.dgvDetalle.AutoResizeColumns();

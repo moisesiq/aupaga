@@ -305,6 +305,8 @@ namespace Refaccionaria.App
             var oParams = new Dictionary<string, object>();
             oParams.Add("Desde", dInicio);
             oParams.Add("Hasta", dInicio.AddDays(6));
+            oParams.Add("SucursalID", 0);
+            oParams.Add("VendedorID", 0);
             var oComisiones = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
             var oMetasSucursal = Datos.GetListOf<MetaSucursal>();
             decimal mComisionVen = (Util.Decimal(Config.Valor("Comisiones.Vendedor.Porcentaje")) / 100);

@@ -171,7 +171,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
             var oTotales = this.ObtenerTotales(oDatos);
 
             // Se llena el grid de por semana
@@ -248,7 +248,7 @@ namespace Refaccionaria.App
                 return;
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid de Vendedor
             var oConsulta = oDatos.Where(c => UtilTheos.SemanaSabAVie(c.Fecha) == iSemana).GroupBy(g => new { g.VendedorID, g.Vendedor }).Select(
@@ -275,10 +275,10 @@ namespace Refaccionaria.App
                 return;
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena la gráfica
-            IEnumerable<pauCuadroDeControlGeneral_Result> oFiltro = oDatos;
+            IEnumerable<pauCuadroDeControlGeneralNuevo_Result> oFiltro = oDatos;
             if (iVendedorID.HasValue)
                 oFiltro = oDatos.Where(c => c.VendedorID == iVendedorID);
             // 
@@ -297,7 +297,7 @@ namespace Refaccionaria.App
             public decimal Actual { get; set; }
             public decimal Anterior { get; set; }
         }
-        private IEnumerable<AgrupadoPorFecha> AgruparPorDia(List<pauCuadroDeControlGeneral_Result> oDatos)
+        private IEnumerable<AgrupadoPorFecha> AgruparPorDia(List<pauCuadroDeControlGeneralNuevo_Result> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             DateTime dDiaCero = new DateTime(DateTime.Now.Year, 1, 1).AddDays(-1);
@@ -364,7 +364,7 @@ namespace Refaccionaria.App
             public decimal Actual { get; set; }
             public decimal Anterior { get; set; }
         }
-        private IEnumerable<AgrupadoPorEntero> AgruparPorEntero(IEnumerable<IGrouping<int, pauCuadroDeControlGeneral_Result>> oDatos)
+        private IEnumerable<AgrupadoPorEntero> AgruparPorEntero(IEnumerable<IGrouping<int, pauCuadroDeControlGeneralNuevo_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)
@@ -447,7 +447,7 @@ namespace Refaccionaria.App
             }
         }
         private IEnumerable<AgrupadoPorEnteroCadenaEntero> AgruparPorEnteroCadenaEntero(
-            IEnumerable<IGrouping<AgrupadoPorEnteroCadenaEntero, pauCuadroDeControlGeneral_Result>> oDatos)
+            IEnumerable<IGrouping<AgrupadoPorEnteroCadenaEntero, pauCuadroDeControlGeneralNuevo_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)
@@ -525,7 +525,7 @@ namespace Refaccionaria.App
             public decimal Actual { get; set; }
             public decimal Anterior { get; set; }
         }
-        private Totales ObtenerTotales(List<pauCuadroDeControlGeneral_Result> oDatos)
+        private Totales ObtenerTotales(List<pauCuadroDeControlGeneralNuevo_Result> oDatos)
         {
             if (oDatos.Count <= 0)
                 return new Totales();

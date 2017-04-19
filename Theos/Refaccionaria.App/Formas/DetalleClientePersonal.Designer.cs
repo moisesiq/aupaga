@@ -59,6 +59,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Location = new System.Drawing.Point(302, 383);
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
             // 
             // txtNombre
             // 
@@ -132,6 +133,7 @@
             this.picBoxImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBoxImagen.TabIndex = 4;
             this.picBoxImagen.TabStop = false;
+            this.picBoxImagen.Click += new System.EventHandler(this.picBoxImagen_Click);
             // 
             // btnSeleccionar
             // 

@@ -10,6 +10,8 @@ using System.Data.Objects;
 
 using TheosProc;
 using LibUtil;
+using System.Net.Mail;
+using System.Net;
 
 namespace Refaccionaria.App
 {
@@ -173,21 +175,22 @@ namespace Refaccionaria.App
                 
         private void CalcularUtilidadComision()
         {
+            Cargando.Mostrar();
             var oParams = new Dictionary<string, object>();
             oParams.Add("Desde", this.Desde);
             oParams.Add("Hasta", this.Hasta);
             //oParams.Add("ModoID", 1);
-            //oParams.Add("VendedorID", Theos.UsuarioID);
-            //oParams.Add("SucursalID", Theos.SucursalID);
+            oParams.Add("VendedorID", this.UsuarioID);
+            oParams.Add("SucursalID", this.SucursalID);
             var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupado", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupadoTest3_Result>("pauComisionesAgrupado", oParams);
             //var oDatos = Datos.ExecuteProcedure<pauComisionesAgrupado_Result>("pauComisionesAgrupadoTest3", oParams);
-
+            Cargando.Cerrar();
             this.mUtilidad = 0;
             this.mComision = 0;
             this.mComisionFija = 0;
             
-            if (oDatos.Count > 0)
+            if (oDatos.Count > 0 || oDatos != null)
             {
                 if (this.SucursalID > 0)
                     this.mUtilidad = oDatos.Where(c => c.SucursalID == this.SucursalID).Sum(c => c.Utilidad).Valor();
@@ -719,10 +722,21 @@ namespace Refaccionaria.App
             }
             
             this.dgvPartesPorVenta.Rows.Clear();
-            this.dgvPartesPorVenta.Rows.Add("Una", ((oDatos[0].Uno * 100) / totalPartesVendidas).ToString("0.##") + "%");
-            this.dgvPartesPorVenta.Rows.Add("Dos", ((oDatos[0].Dos * 100) / totalPartesVendidas).ToString("0.##") + "%");
-            this.dgvPartesPorVenta.Rows.Add("Tres", ((oDatos[0].Tres * 100) / totalPartesVendidas).ToString("0.##") + "%");
-            this.dgvPartesPorVenta.Rows.Add("Más", ((oDatos[0].Mas * 100) / totalPartesVendidas).ToString("0.##") + "%");
+
+            if (totalPartesVendidas <= 0)
+            {
+                this.dgvPartesPorVenta.Rows.Add("Una", "0%");
+                this.dgvPartesPorVenta.Rows.Add("Dos", "0%");
+                this.dgvPartesPorVenta.Rows.Add("Tres", "0%");
+                this.dgvPartesPorVenta.Rows.Add("Más", "0%");
+            }
+            else
+            {
+                this.dgvPartesPorVenta.Rows.Add("Una", ((oDatos[0].Uno * 100) / totalPartesVendidas).ToString("0.#") + "%");
+                this.dgvPartesPorVenta.Rows.Add("Dos", ((oDatos[0].Dos * 100) / totalPartesVendidas).ToString("0.#") + "%");
+                this.dgvPartesPorVenta.Rows.Add("Tres", ((oDatos[0].Tres * 100) / totalPartesVendidas).ToString("0.#") + "%");
+                this.dgvPartesPorVenta.Rows.Add("Más", ((oDatos[0].Mas * 100) / totalPartesVendidas).ToString("0.#") + "%");
+            }
         }
 
         private Chart AgregarDona(string sTitulo, decimal mTotal, decimal mAvance, string sImagen)

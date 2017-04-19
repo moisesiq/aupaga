@@ -122,7 +122,7 @@ namespace Refaccionaria.App
             oParams.Add("OmitirDomingo", false);
             oParams.Add("Desde", dDesdeSemUno);
             oParams.Add("Hasta", dHasta);
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
             var oSemanas = oDatos.Where(c => c.Fecha >= dDesdeSemUno)
                 .GroupBy(c => new { Semana = UtilTheos.InicioSemanaSabAVie(c.Fecha) })
                 .Select(c => new { c.Key.Semana, PrecioSinIva = c.Sum(s => s.PrecioSinIvaActual) })

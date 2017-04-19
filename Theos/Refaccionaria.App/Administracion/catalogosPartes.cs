@@ -2526,23 +2526,30 @@ namespace Refaccionaria.App
 
             // Se empiezan a llenar los datos
             this.lblAvFotos.Text =
-                (oDatos.Count(c => c.Fotos.HasValue && c.Fotos.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
-                + " / " + (oDatos.Count(c => c.FotosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+                (oDatos.Count(c => c.Fotos.HasValue && c.Fotos.Value > 0) + "/" + oDatos.Count(c => c.FotosVal == true).ToString());
+                //(oDatos.Count(c => c.Fotos.HasValue && c.Fotos.Value > 0 ).ToString());
+                /// (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                //+ " / " + (oDatos.Count(c => c.FotosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
             this.lblAvEquivalentes.Text =
-                (oDatos.Count(c => c.Equivalentes.HasValue && c.Equivalentes.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
-                + " / " + (oDatos.Count(c => c.EquivalentesVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+                (oDatos.Count(c => c.Equivalentes.HasValue && c.Equivalentes.Value > 0) + "/" + oDatos.Count(c => c.EquivalentesVal == true)).ToString();
+                //(oDatos.Count(c => c.Equivalentes.HasValue && c.Equivalentes.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                //+ " / " + (oDatos.Count(c => c.EquivalentesVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
             this.lblAvAplicaciones.Text =
-                (oDatos.Count(c => c.Aplicaciones.HasValue && c.Aplicaciones.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
-                + " / " + (oDatos.Count(c => c.AplicacionesVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje); ;
+                (oDatos.Count(c => c.Aplicaciones.HasValue && c.Aplicaciones.Value > 0) + "/" + oDatos.Count(c => c.AplicacionesVal == true)).ToString();
+                //(oDatos.Count(c => c.Aplicaciones.HasValue && c.Aplicaciones.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                //+ " / " + (oDatos.Count(c => c.AplicacionesVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje); ;
             this.lblAvAlternos.Text =
-                (oDatos.Count(c => c.Alternos.HasValue && c.Alternos.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
-                + " / " + (oDatos.Count(c => c.AlternosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+                (oDatos.Count(c => c.Alternos.HasValue && c.Alternos.Value > 0) + "/" + oDatos.Count(c => c.AlternosVal == true)).ToString();
+                //(oDatos.Count(c => c.Alternos.HasValue && c.Alternos.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                //+ " / " + (oDatos.Count(c => c.AlternosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
             this.lblAvComplementarios.Text =
-                (oDatos.Count(c => c.Complementarios.HasValue && c.Complementarios.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
-                + " / " + (oDatos.Count(c => c.ComplementariosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+                (oDatos.Count(c => c.Complementarios.HasValue && c.Complementarios.Value > 0) + "/" + oDatos.Count(c => c.ComplementariosVal == true)).ToString();
+                //(oDatos.Count(c => c.Complementarios.HasValue && c.Complementarios.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                //+ " / " + (oDatos.Count(c => c.ComplementariosVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
             this.lblAvCaracteristicas.Text =
-                (oDatos.Count(c => c.Caracteristicas.HasValue && c.Caracteristicas.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
-                + " / " + (oDatos.Count(c => c.CaracteristicasVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
+                (oDatos.Count(c => c.Caracteristicas.HasValue && c.Caracteristicas.Value > 0) + "/" +oDatos.Count(c => c.CaracteristicasVal == true)).ToString();
+                //(oDatos.Count(c => c.Caracteristicas.HasValue && c.Caracteristicas.Value > 0) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje)
+                //+ " / " + (oDatos.Count(c => c.CaracteristicasVal == true) / (decimal)oDatos.Count).ToString(GlobalClass.FormatoPorcentaje);
             this.lblAvValidadosNum.Text = oDatos.Count(c => c.Validado == true).ToString(GlobalClass.FormatoEntero);
 
             // Por Proveedor

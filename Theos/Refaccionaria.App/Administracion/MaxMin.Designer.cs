@@ -191,7 +191,6 @@
             this.ctlVentasMes = new Refaccionaria.App.GridVentasMes();
             this.ParteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProcesar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -268,7 +267,6 @@
             this.dgvDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ParteID,
             this.colProcesar,
-            this.Id,
             this.NumeroDeParte,
             this.Descripcion,
             this.Proveedor,
@@ -1401,12 +1399,6 @@
             this.colProcesar.Name = "colProcesar";
             this.colProcesar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // Id
-            // 
-            resources.ApplyResources(this.Id, "Id");
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
             // NumeroDeParte
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
@@ -1797,7 +1789,6 @@
         private GridExsitencias ctlExistencias;
         private System.Windows.Forms.DataGridViewTextBoxColumn ParteID;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colProcesar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroDeParte;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;

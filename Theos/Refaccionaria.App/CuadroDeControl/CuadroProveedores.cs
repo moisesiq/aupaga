@@ -68,7 +68,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid de proveedores
             var oProveedores = this.AgruparPorEnteroCadena(oDatos.GroupBy(g => new EnteroCadenaComp() { Entero = g.ProveedorID.Valor(), Cadena = g.Proveedor }))
@@ -106,7 +106,7 @@ namespace Refaccionaria.App
             }
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid de clientes
             var oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.ProveedorID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.LineaID.Valor(), Cadena = g.Linea }))
@@ -135,7 +135,7 @@ namespace Refaccionaria.App
             }
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid y la gráfica de Semanas
             var oConsulta = this.AgruparPorEntero(oDatos.Where(c => c.ProveedorID == iId).GroupBy(g => UtilTheos.SemanaSabAVie(g.Fecha)));
@@ -166,7 +166,7 @@ namespace Refaccionaria.App
             }
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid y la gráfica de Meses
             var oConsulta = this.AgruparPorEntero(oDatos.Where(c => c.ProveedorID == iId).GroupBy(g => g.Fecha.Month));
@@ -194,7 +194,7 @@ namespace Refaccionaria.App
             }
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid de Vendedor
             var oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.ProveedorID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.VendedorID, Cadena = g.Vendedor }))
@@ -220,7 +220,7 @@ namespace Refaccionaria.App
             }
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se llena el grid de Sucursales
             var oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.ProveedorID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.SucursalID, Cadena = g.Sucursal }));
@@ -246,7 +246,7 @@ namespace Refaccionaria.App
             }
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             var oConsulta = oDatos.Where(c => c.ProveedorID == iIdPrincipal && c.Fecha >= this.dtpDesde.Value.Date);
             switch (iGridFuente)

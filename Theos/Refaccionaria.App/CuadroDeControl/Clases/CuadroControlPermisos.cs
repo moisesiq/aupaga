@@ -89,7 +89,7 @@ namespace Refaccionaria.App
                 }
                 else if ("CuadroDeControl." + pagina + ".Ver.UtilidadDesc" == x.Permiso)
                 {
-                    per.Add("Utilidad Desc");
+                    per.Add("Utilidad Desc.");
                 }
                 else if ("CuadroDeControl." + pagina + ".Ver.Precio" == x.Permiso)
                 {

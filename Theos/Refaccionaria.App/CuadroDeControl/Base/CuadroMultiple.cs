@@ -371,7 +371,7 @@ namespace Refaccionaria.App
             return oParams;
         }
 
-        protected virtual void LlenarDetalle(IEnumerable<pauCuadroDeControlGeneral_Result> oDatos, int? iLineaID)
+        protected virtual void LlenarDetalle(IEnumerable<pauCuadroDeControlGeneralNuevo_Result> oDatos, int? iLineaID)
         {
             List<int> oVentasProc = new List<int>();
 
@@ -410,7 +410,7 @@ namespace Refaccionaria.App
 
         protected virtual void LlenarPartes(int iGridFuente, int iIdPrincipal, int iId) { }
 
-        protected virtual IEnumerable<TotalesPorEntero> AgruparPorEntero(IEnumerable<IGrouping<int, pauCuadroDeControlGeneral_Result>> oDatos)
+        protected virtual IEnumerable<TotalesPorEntero> AgruparPorEntero(IEnumerable<IGrouping<int, pauCuadroDeControlGeneralNuevo_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)
@@ -469,7 +469,7 @@ namespace Refaccionaria.App
             return null;
         }
 
-        protected virtual IEnumerable<TotalesPorEnteroCadena> AgruparPorEnteroCadena(IEnumerable<IGrouping<EnteroCadenaComp, pauCuadroDeControlGeneral_Result>> oDatos)
+        protected virtual IEnumerable<TotalesPorEnteroCadena> AgruparPorEnteroCadena(IEnumerable<IGrouping<EnteroCadenaComp, pauCuadroDeControlGeneralNuevo_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)
@@ -527,7 +527,8 @@ namespace Refaccionaria.App
                     {
                         Llave = c.Key.Entero,
                         Cadena = c.Key.Cadena,
-                        Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        //Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        Actual = c.Sum(s => s.TotalPiezasVendidas).Valor(),
                         Anterior = c.Sum(s => s.ProductosAnterior).Valor()
                     }).OrderBy(o => o.Llave);
             }
@@ -536,7 +537,7 @@ namespace Refaccionaria.App
         }
 
         protected virtual IEnumerable<AgrupadoPorEnteroCadenaEntero> AgruparPorEnteroCadenaEntero(
-            IEnumerable<IGrouping<AgrupadoPorEnteroCadenaEntero, pauCuadroDeControlGeneral_Result>> oDatos)
+            IEnumerable<IGrouping<AgrupadoPorEnteroCadenaEntero, pauCuadroDeControlGeneralNuevo_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)

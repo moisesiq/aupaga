@@ -14,7 +14,7 @@ namespace Refaccionaria.App
 {
     public partial class CuadroVip : UserControl
     {
-        List<pauCuadroDeControlGeneral_Result> oDatos;
+        List<pauCuadroDeControlGeneralNuevo_Result> oDatos;
         List<pauCuadroDeControlPorAnio_Result> oDatosPorAnio;
         List<pauCuadroDeControlPartes_Result> oDatosPartes;
 
@@ -131,7 +131,7 @@ namespace Refaccionaria.App
 
             // Se cargan los datos base
             var oParams = this.ObtenerParametros();
-            this.oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            this.oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
             // Se obtienen los datos para partes
             this.oDatosPartes = Datos.ExecuteProcedure<pauCuadroDeControlPartes_Result>("pauCuadroDeControlPartes", oParams);
             // Se obtienen los datos por año
@@ -387,7 +387,7 @@ namespace Refaccionaria.App
             public decimal Anterior { get; set; }
         }
 
-        protected virtual IEnumerable<TotalesPorEntero> AgruparPorEntero(IEnumerable<IGrouping<int, pauCuadroDeControlGeneral_Result>> oDatos)
+        protected virtual IEnumerable<TotalesPorEntero> AgruparPorEntero(IEnumerable<IGrouping<int, pauCuadroDeControlGeneralNuevo_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)
@@ -478,7 +478,7 @@ namespace Refaccionaria.App
                 return (hashEntero ^ hashCadena);
             }
         }
-        protected virtual IEnumerable<TotalesPorEnteroCadena> AgruparPorEnteroCadena(IEnumerable<IGrouping<EnteroCadenaAgrupar, pauCuadroDeControlGeneral_Result>> oDatos)
+        protected virtual IEnumerable<TotalesPorEnteroCadena> AgruparPorEnteroCadena(IEnumerable<IGrouping<EnteroCadenaAgrupar, pauCuadroDeControlGeneralNuevo_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)
@@ -550,7 +550,7 @@ namespace Refaccionaria.App
             public int Semana { get; set; }
             public decimal Actual { get; set; }
         }
-        private IEnumerable<TotalesClientesSemanas> ObtenerClientesSemanas(List<pauCuadroDeControlGeneral_Result> oDatos)
+        private IEnumerable<TotalesClientesSemanas> ObtenerClientesSemanas(List<pauCuadroDeControlGeneralNuevo_Result> oDatos)
         {
             var oGrupo = oDatos.GroupBy(c => new { c.ClienteID, Semana = UtilTheos.SemanaSabAVie(c.Fecha) });
 

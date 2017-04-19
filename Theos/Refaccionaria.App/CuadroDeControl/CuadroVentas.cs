@@ -215,7 +215,7 @@ namespace Refaccionaria.App
             oParams.Add("Desde", this.dtpDesde.Value);
             oParams.Add("Hasta", this.dtpHasta.Value);
 
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
             var oTotales = this.ObtenerTotales(oDatos);
 
             // Se llena el grid de por día
@@ -260,7 +260,7 @@ namespace Refaccionaria.App
             // Se llena el grid de días
             oParams["Desde"] = this.dtpDesde.Value;
             oParams["Hasta"] = this.dtpHasta.Value;
-            oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
             var oPorDiaSem = oDatos.GroupBy(g => g.Fecha.DayOfWeek).Select(c => new { Dia = c.Key, Actual = c.Sum(s => s.Actual), Anterior = c.Sum(s => s.Anterior) })
                 .OrderBy(o => (int)o.Dia);
             decimal mTotalDiaSem = (oDatos.Count > 0 ? oDatos.Sum(c => c.Actual).Valor() : 0);
@@ -364,7 +364,7 @@ namespace Refaccionaria.App
             public decimal Actual { get; set; }
             public decimal Anterior { get; set; }
         }
-        private IEnumerable<TotalesPorFecha> AgruparPorDia(List<pauCuadroDeControlGeneral_Result> oDatos)
+        private IEnumerable<TotalesPorFecha> AgruparPorDia(List<pauCuadroDeControlGeneralNuevo_Result> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             DateTime dDiaCero = new DateTime(DateTime.Now.Year, 1, 1).AddDays(-1);
@@ -429,7 +429,7 @@ namespace Refaccionaria.App
             public decimal Actual { get; set; }
             public decimal Anterior { get; set; }
         }
-        private IEnumerable<TotalesPorEntero> AgruparPorEntero(IEnumerable<IGrouping<int, pauCuadroDeControlGeneral_Result>> oDatos)
+        private IEnumerable<TotalesPorEntero> AgruparPorEntero(IEnumerable<IGrouping<int, pauCuadroDeControlGeneralNuevo_Result>> oDatos)
         {
             string sCalculo = this.cmbCalculo.Text;
             switch (sCalculo)
@@ -492,7 +492,7 @@ namespace Refaccionaria.App
             public decimal Actual { get; set; }
             public decimal Anterior { get; set; }
         }
-        private Totales ObtenerTotales(List<pauCuadroDeControlGeneral_Result> oDatos)
+        private Totales ObtenerTotales(List<pauCuadroDeControlGeneralNuevo_Result> oDatos)
         {
             if (oDatos.Count <= 0)
                 return new Totales();

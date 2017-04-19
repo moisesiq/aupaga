@@ -37,7 +37,7 @@ namespace Refaccionaria.App
             Cargando.Mostrar();
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se filtran según el combo de líneas
             if (this.ctlLineas.ValoresSeleccionados.Count > 0)
@@ -73,7 +73,7 @@ namespace Refaccionaria.App
                 return;
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se filtran según el combo de líneas
             if (this.ctlLineas.ValoresSeleccionados.Count > 0)
@@ -100,7 +100,7 @@ namespace Refaccionaria.App
                 return;
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se filtran según el combo de líneas
             if (this.ctlLineas.ValoresSeleccionados.Count > 0)
@@ -134,7 +134,7 @@ namespace Refaccionaria.App
                 return;
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se filtran según el combo de líneas
             if (this.ctlLineas.ValoresSeleccionados.Count > 0)
@@ -166,7 +166,7 @@ namespace Refaccionaria.App
                 return;
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se filtran según el combo de líneas
             if (this.ctlLineas.ValoresSeleccionados.Count > 0)
@@ -195,7 +195,7 @@ namespace Refaccionaria.App
                 return;
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se filtran según el combo de líneas
             if (this.ctlLineas.ValoresSeleccionados.Count > 0)
@@ -223,7 +223,7 @@ namespace Refaccionaria.App
                 return;
 
             var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneral_Result>("pauCuadroDeControlGeneral", oParams);
+            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
 
             // Se filtran según el combo de líneas
             if (this.ctlLineas.ValoresSeleccionados.Count > 0)
