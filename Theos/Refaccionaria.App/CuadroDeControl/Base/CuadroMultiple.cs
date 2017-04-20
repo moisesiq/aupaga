@@ -461,7 +461,8 @@ namespace Refaccionaria.App
                     return oDatos.Select(c => new TotalesPorEntero()
                     {
                         Llave = c.Key,
-                        Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        //Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        Actual = c.Sum(s => s.TotalPiezasVendidas).Valor(),
                         Anterior = c.Sum(s => s.ProductosAnterior).Valor()
                     }).OrderBy(o => o.Llave);
             }
@@ -602,7 +603,8 @@ namespace Refaccionaria.App
                         Llave = c.Key.Llave,
                         Cadena = c.Key.Cadena,
                         Entero = c.Key.Entero,
-                        Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        //Actual = c.Sum(s => s.ProductosActual).Valor(),
+                        Actual = c.Sum(s => s.TotalPiezasVendidas).Valor(),
                         Anterior = c.Sum(s => s.ProductosAnterior).Valor()
                     }).OrderBy(o => o.Llave);
             }
