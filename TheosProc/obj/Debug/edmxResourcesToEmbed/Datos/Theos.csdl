@@ -1776,6 +1776,8 @@
       <Parameter Name="Hasta" Mode="In" Type="DateTime" />
     </FunctionImport>
     <FunctionImport Name="pauComisionesAgrupado" ReturnType="Collection(TheosProc.pauComisionesAgrupado_Result)">
+      <Parameter Name="VendedorID" Mode="In" Type="Int32" />
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
       <Parameter Name="Desde" Mode="In" Type="DateTime" />
       <Parameter Name="Hasta" Mode="In" Type="DateTime" />
     </FunctionImport>
@@ -2376,6 +2378,45 @@
     <FunctionImport Name="pauComisionesAgrupadoTest3" ReturnType="Collection(TheosProc.pauComisionesAgrupadoTest3_Result)">
       <Parameter Name="ModoID" Mode="In" Type="Int32" />
       <Parameter Name="VendedorID" Mode="In" Type="Int32" />
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+      <Parameter Name="Desde" Mode="In" Type="DateTime" />
+      <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="pauPartesMaxMin">
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+      <Parameter Name="Desde" Mode="In" Type="DateTime" />
+      <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="pauCuadroDeControlGeneralNuevo" ReturnType="Collection(TheosProc.pauCuadroDeControlGeneralNuevo_Result)">
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+      <Parameter Name="Pagadas" Mode="In" Type="Boolean" />
+      <Parameter Name="Cobradas" Mode="In" Type="Boolean" />
+      <Parameter Name="Solo9500" Mode="In" Type="Boolean" />
+      <Parameter Name="OmitirDomingo" Mode="In" Type="Boolean" />
+      <Parameter Name="Desde" Mode="In" Type="DateTime" />
+      <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="pauPartesMaxMinNuevo">
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+      <Parameter Name="Desde" Mode="In" Type="DateTime" />
+      <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="pauPartesMaxMinNuevo1">
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+      <Parameter Name="Desde" Mode="In" Type="DateTime" />
+      <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="pauPartesMaxMinMotivo">
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+      <Parameter Name="Desde" Mode="In" Type="DateTime" />
+      <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="pauPartesMaxMinMotivo1">
+      <Parameter Name="SucursalID" Mode="In" Type="Int32" />
+      <Parameter Name="Desde" Mode="In" Type="DateTime" />
+      <Parameter Name="Hasta" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="papPartesTest">
       <Parameter Name="SucursalID" Mode="In" Type="Int32" />
       <Parameter Name="Desde" Mode="In" Type="DateTime" />
       <Parameter Name="Hasta" Mode="In" Type="DateTime" />
@@ -5745,7 +5786,7 @@
     <Property Name="BancoCuentaID" Type="Int32" Nullable="false" />
     <Property Name="VentaPagoDetalleID" Type="Int32" Nullable="false" />
     <Property Name="MesesSinIntereses" Type="Int32" Nullable="false" />
-    <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Telefono" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="BancoCuenta" Relationship="TheosProc.FK__VentaPago__Banco__0D65BF44" FromRole="VentaPagoConTarjeta" ToRole="BancoCuenta" />
     <NavigationProperty Name="VentaPagoDetalle" Relationship="TheosProc.FK__VentaPago__Venta__0E59E37D" FromRole="VentaPagoConTarjeta" ToRole="VentaPagoDetalle" />
   </EntityType>
@@ -7399,10 +7440,10 @@
     <Property Name="ParteVehiculoID" Type="Int32" Nullable="false" />
     <Property Name="ParteID" Type="Int32" Nullable="false" />
     <Property Name="NumeroParte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NombreParte" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="NombreParte" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Marca" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Modelo" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="Motor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Motor" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
     <Property Name="Anio" Type="Int32" Nullable="false" />
     <Property Name="TipoFuenteID" Type="Int32" Nullable="false" />
     <Property Name="Fuente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -14898,5 +14939,37 @@
     <Property Type="Boolean" Name="Es9500" Nullable="true" />
     <Property Type="String" Name="Caracteristica" Nullable="true" MaxLength="2" />
     <Property Type="String" Name="Tipo" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="pauCuadroDeControlGeneralNuevo_Result">
+    <Property Type="Int32" Name="VentaID" Nullable="false" />
+    <Property Type="String" Name="Folio" Nullable="true" MaxLength="16" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="SucursalID" Nullable="false" />
+    <Property Type="String" Name="Sucursal" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="ClienteID" Nullable="false" />
+    <Property Type="String" Name="Cliente" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="VendedorID" Nullable="false" />
+    <Property Type="String" Name="Vendedor" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="LineaID" Nullable="true" />
+    <Property Type="String" Name="Linea" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="MarcaID" Nullable="true" />
+    <Property Type="String" Name="Marca" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="ProveedorID" Nullable="true" />
+    <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="Actual" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="Anterior" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="UtilDescActual" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="UtilDescAnterior" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="PrecioSinIvaActual" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="PrecioActual" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="PrecioAnterior" Nullable="true" Precision="38" Scale="6" />
+    <Property Type="Decimal" Name="CostoActual" Nullable="true" Precision="38" Scale="4" />
+    <Property Type="Decimal" Name="CostoAnterior" Nullable="true" Precision="38" Scale="4" />
+    <Property Type="Decimal" Name="CostoDescActual" Nullable="true" Precision="38" Scale="4" />
+    <Property Type="Decimal" Name="CostoDescAnterior" Nullable="true" Precision="38" Scale="4" />
+    <Property Type="Int32" Name="ProductosActual" Nullable="true" />
+    <Property Type="Int32" Name="ProductosAnterior" Nullable="true" />
+    <Property Type="Boolean" Name="EsActual" Nullable="true" />
+    <Property Type="Decimal" Name="TotalPiezasVendidas" Nullable="true" Precision="9" Scale="2" />
   </ComplexType>
 </Schema>

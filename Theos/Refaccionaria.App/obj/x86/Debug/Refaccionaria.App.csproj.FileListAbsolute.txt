@@ -570,3 +570,4 @@ C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\Fakes\fe\o\FacturacionElec
 C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\Fakes\fe\o\FacturacionElectronica.Fakes.pdb
 C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\THEOS.exe
 C:\CodigoFuente\Theos\Refaccionaria.App\obj\x86\Debug\THEOS.pdb
+C:\CodigoFuente\Theos\Refaccionaria.App\bin\Debug\FacturacionElectronica.Fakes.fakesconfig
