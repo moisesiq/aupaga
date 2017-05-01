@@ -34,36 +34,43 @@ namespace Refaccionaria.App
 
         protected override void CargarDatos()
         {
-            Cargando.Mostrar();
-
-            var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
-
-            // Se filtran según el combo de líneas
-            if (this.ctlLineas.ValoresSeleccionados.Count > 0)
-                oDatos = oDatos.Where(c => this.ctlLineas.ValoresSeleccionados.Contains(c.LineaID.Valor())).ToList();
-            
-            // Se llena el grid principal
-            var oMarcas = this.AgruparPorEnteroCadena(oDatos.GroupBy(g => new EnteroCadenaComp() { Entero = g.MarcaID.Valor(), Cadena = g.Marca }))
-                .OrderByDescending(c => c.Actual);
-            
-            decimal mTotal = (oMarcas.Count() > 0 ? oMarcas.Sum(c => c.Actual) : 0);
-            this.dgvPrincipal.Rows.Clear();
-            foreach (var oReg in oMarcas)
+            try
             {
-                this.dgvPrincipal.Rows.Add(oReg.Llave, oReg.Llave, oReg.Cadena, oReg.Actual, oReg.Anterior
-                    , Util.DividirONull(oReg.Actual, oReg.Anterior), (Util.DividirONull(oReg.Actual, mTotal) * 100));
+                Cargando.Mostrar();
+
+                var oParams = this.ObtenerParametros();
+                var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
+
+                // Se filtran según el combo de líneas
+                if (this.ctlLineas.ValoresSeleccionados.Count > 0)
+                    oDatos = oDatos.Where(c => this.ctlLineas.ValoresSeleccionados.Contains(c.LineaID.Valor())).ToList();
+
+                // Se llena el grid principal
+                var oMarcas = this.AgruparPorEnteroCadena(oDatos.GroupBy(g => new EnteroCadenaComp() { Entero = g.MarcaID.Valor(), Cadena = g.Marca }))
+                    .OrderByDescending(c => c.Actual);
+
+                decimal mTotal = (oMarcas.Count() > 0 ? oMarcas.Sum(c => c.Actual) : 0);
+                this.dgvPrincipal.Rows.Clear();
+                foreach (var oReg in oMarcas)
+                {
+                    this.dgvPrincipal.Rows.Add(oReg.Llave, oReg.Llave, oReg.Cadena, oReg.Actual, oReg.Anterior
+                        , Util.DividirONull(oReg.Actual, oReg.Anterior), (Util.DividirONull(oReg.Actual, mTotal) * 100));
+                }
+                // Se llenan los totales
+                decimal mTotalAnt = (oMarcas.Count() > 0 ? oMarcas.Sum(c => c.Anterior) : 0);
+                this.dgvPrincipalTotales["PrincipalT_Actual", 0].Value = mTotal;
+                this.dgvPrincipalTotales["PrincipalT_Anterior", 0].Value = mTotalAnt;
+                this.dgvPrincipalTotales["PrincipalT_Resultado", 0].Value = Util.DividirONull(mTotal, mTotalAnt);
+
+                // Para configurar las columnas de los grids
+                base.CargarDatos();
+
+                Cargando.Cerrar();
             }
-            // Se llenan los totales
-            decimal mTotalAnt = (oMarcas.Count() > 0 ? oMarcas.Sum(c => c.Anterior) : 0);
-            this.dgvPrincipalTotales["PrincipalT_Actual", 0].Value = mTotal;
-            this.dgvPrincipalTotales["PrincipalT_Anterior", 0].Value = mTotalAnt;
-            this.dgvPrincipalTotales["PrincipalT_Resultado", 0].Value = Util.DividirONull(mTotal, mTotalAnt);
-
-            // Para configurar las columnas de los grids
-            base.CargarDatos();
-
-            Cargando.Cerrar();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         protected override void LlenarGrupos(int iId)
@@ -161,30 +168,37 @@ namespace Refaccionaria.App
 
         protected override void LLenarVendedores(int iId)
         {
-            this.dgvVendedor.Rows.Clear();
-            if (iId <= 0)
-                return;
-
-            var oParams = this.ObtenerParametros();
-            var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
-
-            // Se filtran según el combo de líneas
-            if (this.ctlLineas.ValoresSeleccionados.Count > 0)
-                oDatos = oDatos.Where(c => this.ctlLineas.ValoresSeleccionados.Contains(c.LineaID.Valor())).ToList();
-
-            // Se llena el grid de Vendedor
-            IEnumerable<TotalesPorEnteroCadena> oConsulta;
-            if (this.ActiveControl == this.dgvPrincipal)
-                oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.MarcaID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.VendedorID, Cadena = g.Vendedor }));
-            else
-                oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.LineaID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.VendedorID, Cadena = g.Vendedor }));
-            oConsulta = oConsulta.OrderByDescending(c => c.Actual);
-            
-            decimal mTotal = (oConsulta.Count() > 0 ? oConsulta.Sum(c => c.Actual) : 0);
-            foreach (var oReg in oConsulta)
+            try
             {
-                this.dgvVendedor.Rows.Add(oReg.Llave, oReg.Cadena, oReg.Actual, oReg.Anterior
-                    , Util.DividirONull(oReg.Actual, oReg.Anterior), (Util.DividirONull(oReg.Actual, mTotal) * 100));
+                this.dgvVendedor.Rows.Clear();
+                if (iId <= 0)
+                    return;
+
+                var oParams = this.ObtenerParametros();
+                var oDatos = Datos.ExecuteProcedure<pauCuadroDeControlGeneralNuevo_Result>("pauCuadroDeControlGeneral", oParams);
+
+                // Se filtran según el combo de líneas
+                if (this.ctlLineas.ValoresSeleccionados.Count > 0)
+                    oDatos = oDatos.Where(c => this.ctlLineas.ValoresSeleccionados.Contains(c.LineaID.Valor())).ToList();
+
+                // Se llena el grid de Vendedor
+                IEnumerable<TotalesPorEnteroCadena> oConsulta;
+                if (this.ActiveControl == this.dgvPrincipal)
+                    oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.MarcaID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.VendedorID, Cadena = g.Vendedor }));
+                else
+                    oConsulta = this.AgruparPorEnteroCadena(oDatos.Where(c => c.LineaID == iId).GroupBy(g => new EnteroCadenaComp() { Entero = g.VendedorID, Cadena = g.Vendedor }));
+                oConsulta = oConsulta.OrderByDescending(c => c.Actual);
+
+                decimal mTotal = (oConsulta.Count() > 0 ? oConsulta.Sum(c => c.Actual) : 0);
+                foreach (var oReg in oConsulta)
+                {
+                    this.dgvVendedor.Rows.Add(oReg.Llave, oReg.Cadena, oReg.Actual, oReg.Anterior
+                        , Util.DividirONull(oReg.Actual, oReg.Anterior), (Util.DividirONull(oReg.Actual, mTotal) * 100));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

@@ -1234,6 +1234,8 @@ namespace Refaccionaria.App
                         UtilLocal.MensajeAdvertencia("El Precio especificado no puede ser mayor que el Precio 1.");
                     else if (mPrecio < oParteVenta.Precios[this.Cliente.ListaDePrecios - 1])
                         UtilLocal.MensajeAdvertencia("El Precio especificado no puede ser menor que el precio asignado al Cliente.");
+                    else if (mPrecio != oParteVenta.Precios[0] || mPrecio != oParteVenta.Precios[1] || mPrecio != oParteVenta.Precios[2] || mPrecio != oParteVenta.Precios[3] || mPrecio != oParteVenta.Precios[4])
+                        UtilLocal.MensajeAdvertencia("El precio especificado no puede ser diferente al precio asignado al Cliente.");
                     else
                         this.AplicarPrecioProducto(oParteVenta, mPrecio);
                 }

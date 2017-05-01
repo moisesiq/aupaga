@@ -435,6 +435,7 @@ namespace Refaccionaria.App
                 Concepto = "REFUERZO",
                 RealizoUsuarioID = oUsuario.UsuarioID
             };
+
             Datos.Guardar<CajaIngreso>(oIngreso);
 
             // Se crea la Poliza correspondiente (AfeConta)
@@ -597,6 +598,7 @@ namespace Refaccionaria.App
                         iAFClienteID = Util.Entero(frmValor.Valor);
                     frmValor.Dispose();
                 }
+
                 if (iAFClienteID == 0)
                     return false;
 
@@ -1344,6 +1346,27 @@ namespace Refaccionaria.App
 
         #region [ Uso interno ]
 
+
+        public decimal GenerarFacturaEspecial(List<VentasPagosDetalleAvanzadoView> oLista)
+        {
+            List<int> oVentas = new List<int>();
+            decimal ImporteFactura = 0;
+            int clienteId = Util.Entero(Config.Valor("FacturaExtractoClienteID"));
+            if (clienteId <= 0)
+            {
+                return ImporteFactura;
+            }
+            
+            foreach (var i in oLista)
+            {
+                oVentas.Add((int)i.VentaID);
+            }
+
+            ImporteFactura = VentasLoc.GenerarFacturaElectronicaDeGlobal(oVentas, clienteId, String.Empty);
+
+            return ImporteFactura;
+        }
+
         private bool FacturaGlobal(CajaEfectivoPorDia oDia)
         {
             // Se obtiene el importe a restar, excepto si es domingo
@@ -1352,9 +1375,18 @@ namespace Refaccionaria.App
                 mRestar = Util.Decimal(Config.Valor("Ventas.FacturaGlobal.Restar"));
 
             // Se obtienen el total de los tickets del día
-            DateTime dHoy = DateTime.Today;
+            DateTime dHoy = DateTime.Today.AddDays(0);
             var oPagosDet = Datos.GetListOf<VentasPagosDetalleAvanzadoView>(c => c.SucursalID == GlobalClass.SucursalID && EntityFunctions.TruncateTime(c.Fecha) == dHoy
                 && !c.Facturada);
+
+            //List<VentasPagosDetalleAvanzadoView> oListaVentas = oPagosDet;
+            //decimal importeClienteFactura = 0;
+            //if (oListaVentas.Sum(c => c.ImportePago) > 5000 && DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
+            //{
+            //    importeClienteFactura = GenerarFacturaEspecial(oListaVentas);
+            //}
+
+
             var oDevsV = Datos.GetListOf<VentasDevolucionesView>(c => c.SucursalID == GlobalClass.SucursalID && EntityFunctions.TruncateTime(c.Fecha) == dHoy);
             decimal mTickets = 0, mNegativos = 0, mCancelaciones = 0, mDevoluciones = 0;
             decimal mDevolucionesDia = 0, mDevolucionesDiasAnt = 0, mGarantiasDia = 0, mGarantiasDiasAnt = 0, mCobranza = 0;
@@ -1583,8 +1615,29 @@ namespace Refaccionaria.App
             // Se hace el cálculo final
             decimal mCostoMinimo = (UtilTheos.ObtenerImporteMasIva(mCostoTotal) * 1.1M);
             // decimal mOficial = (mTickets - mNegativos - mDevoluciones - mCancelaciones - mFacturadoDiasAnt);
-            decimal mOficial = (mTickets - mNegativos - mDevolucionesDia - mDevolucionesDiasAnt - mGarantiasDia - mGarantiasDiasAnt - mFacturadoDiasAnt);
-            decimal mFacturar = (mOficial - mRestar);
+
+
+
+
+            decimal mOficial = (mTickets - mNegativos - mDevolucionesDia - mDevolucionesDiasAnt - mGarantiasDia - mGarantiasDiasAnt - mFacturadoDiasAnt  );
+
+            //Se genera un extracto de factura si existe un cliente en la configuración
+            List<VentasPagosDetalleAvanzadoView> oListaVentas = oPagosDet;
+            decimal importeClienteFactura = 0;
+
+
+            //Solo si existe una cantidad mayor a 5000 y si no es domingo se desglosa la factura
+            if (oListaVentas.Sum(c => c.ImportePago) > 5000 && DateTime.Now.DayOfWeek != DayOfWeek.Sunday && mOficial > 5000)
+            {
+                importeClienteFactura = GenerarFacturaEspecial(oListaVentas);
+            }
+    
+
+
+
+            decimal mFacturar = (mOficial - mRestar - importeClienteFactura);
+
+            //decimal mFacturar = (mOficial - mRestar);
             decimal mRestante = 0;
             var oFacturaGlobalAnt = Datos.GetListOf<CajaFacturaGlobal>(c => c.SucursalID == GlobalClass.SucursalID).OrderBy(c => c.Dia).LastOrDefault();
             if (mFacturar > mCostoMinimo)

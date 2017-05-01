@@ -706,7 +706,7 @@ namespace Refaccionaria.App
             oFacturaE.Adicionales.Add("LeyendaDePago", VentasLoc.GenerarCadenaMetodoDePagoFactura(oFormasDePago));
             
             oFacturaE.Fecha = dAhora;
-            oFacturaE.FormaDePago = "UNA SOLA EXHIBICIÓN";
+            oFacturaE.FormaDePago = "EFECTIVO";
             oFacturaE.LugarDeExpedicion = string.Format("{0}, {1}", oConfig["Facturacion.Municipio"], oConfig["Facturacion.Estado"]);
             oFacturaE.TipoDeComprobante = Enumerados.TiposDeComprobante.Ingreso;
             oFacturaE.TasaDeImpuesto = GlobalClass.ConfiguracionGlobal.IVA.ToString();
@@ -826,6 +826,11 @@ namespace Refaccionaria.App
         {
             return VentasLoc.GenerarFacturaElectronica(VentasIDs, iClienteID, null, null, sObservacion, null);
         }
+        public static decimal GenerarFacturaElectronicaDeGlobal(List<int> VentasIDs, int iClienteID, string sObservacion)
+        {
+            //return VentasLoc.GenerarFacturaElectronica(VentasIDs, iClienteID, null, null, sObservacion, null);
+            return VentasLoc.ExampleFacturas(VentasIDs, iClienteID, null, null, sObservacion, null);
+        }
 
         public static ResAcc<int> GenerarFacturaGlobal(string sConceptoVentas, decimal mCostoTotal, decimal mTotalVentas
             , string sConceptoCancelaciones, decimal mTotalCancelaciones, string sConceptoDevoluciones, decimal mTotalDevoluciones
@@ -933,8 +938,17 @@ namespace Refaccionaria.App
             return new ResAcc<int>(true, oVentaFactura.VentaFacturaID);
         }
 
+
+        public static ResAcc<int> GenerarFacturaRestaGlobal(int VentasID, int ClienteID, string sObseracion)
+        {
+
+            return null;
+        }
+
+
         public static ResAcc<bool> ValidarDatosParaFactura(List<int> VentasIDs, int iClienteID)
         {
+
             // Se crea la instancia de la clase de Facturación Electrónica
             var oFacturaE = new FacturaElectronica();
             var oConfig = TheosProc.Config.ValoresVarios("Facturacion.");
@@ -1488,6 +1502,284 @@ namespace Refaccionaria.App
                 oRes.Mensaje = ResXml.Mensaje;
             return oRes;
         }
+
+        public static decimal ExampleFacturas(List<int> VentasIDs, int iClienteID
+    , List<ProductoVenta> oListaVenta, List<VentasPagosDetalleView> oFormasDePago, string sObservacion, Dictionary<string, object> oAdicionales)
+        {
+            var xVentas = new List<VentasView>();
+            decimal SumaImporte = 0;
+            decimal SumaIVA = 0;
+            string xVendedores = "";
+
+            foreach (int iVentaID in VentasIDs)
+            {
+                var oVentaV = Datos.GetEntity<VentasView>(q => q.VentaID == iVentaID);
+                xVentas.Add(oVentaV);
+                xVendedores += (", " + oVentaV.Vendedor);
+            }
+
+            decimal sumatodo = 0;
+            if (oListaVenta == null)
+            {
+                List<VentasDetalleView> oVentaDetalle;
+                //Dictionary<int, decimal> dicVentas = new Dictionary<int, decimal>(); 
+                List<decimal> dicVentas = new List<decimal>();
+                
+                foreach (var oVentaCon in xVentas)
+                {
+                    oVentaDetalle = Datos.GetListOf<VentasDetalleView>(q => q.VentaID == oVentaCon.VentaID);
+                    foreach (var oConcepto in oVentaDetalle)
+                    {
+                        decimal sumadic = dicVentas.Sum();
+                        //if (dicVentas.Sum() < 2000)
+                        if (sumadic < 2000)
+                        {
+                            
+                            //if ((dicVentas.Sum()+ oConcepto.PrecioUnitario + SumaIVA) < 2000)
+                            sumatodo =sumadic + oConcepto.PrecioUnitario + oConcepto.Iva;
+                            if ((sumatodo) < 2000)
+                            {
+                                dicVentas.Add(oConcepto.PrecioUnitario + oConcepto.Iva);
+                                SumaImporte += oConcepto.PrecioUnitario;
+                                SumaIVA += oConcepto.Iva;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+            var registro = Datos.GetListOf<FacturaExtracto>(c => c.ClienteID == iClienteID).Sum(c=> c.ImporteFactura);
+            decimal MontoMaximo = Util.Decimal(TheosProc.Config.Valor("FacturaExtractoMontoMaximo"));
+            var oExtracto = new FacturaExtracto();
+            if (registro + (SumaImporte + SumaIVA) > MontoMaximo)
+            {
+                decimal redondeo = (decimal)(registro + SumaImporte + SumaIVA) - MontoMaximo;
+                decimal desglose = ((SumaImporte + SumaIVA ) - redondeo)  / (decimal)1.16;
+                decimal totiva = ((SumaImporte + SumaIVA ) - redondeo) - desglose;
+
+                oExtracto.ClienteID = iClienteID;
+                oExtracto.Fecha = DateTime.Now;
+                oExtracto.ImporteFactura = totiva + desglose;
+
+                Datos.Guardar<FacturaExtracto>(oExtracto);
+
+                SumaImporte = desglose;
+                SumaIVA = totiva;
+            }
+            else
+            {
+                
+                oExtracto.ClienteID = iClienteID;
+                oExtracto.Fecha = DateTime.Now;
+                oExtracto.ImporteFactura = SumaImporte + SumaIVA;
+
+                Datos.Guardar<FacturaExtracto>(oExtracto);
+
+            }
+
+            if (SumaImporte <= 0)
+            {
+                return 0;
+            }
+
+
+            // Se crea la instancia de la clase de Facturación Electrónica
+            var oFacturaE = new FacturaElectronica();
+            var oConfig = TheosProc.Config.ValoresVarios("Facturacion.");
+            // Se llenan los valores de configuración y los datos del emisor
+            VentasLoc.FeLlenarDatosComunes(ref oFacturaE, oConfig);
+
+            // Se llenan los datos generales de la factura
+            DateTime dAhora = DateTime.Now;
+
+            // Se obtienen las ventas a facturar, y los vendedores
+            var oVentas = new List<VentasView>();
+            string sVendedores = "";
+            foreach (int iVentaID in VentasIDs)
+            {
+                var oVentaV = Datos.GetEntity<VentasView>(q => q.VentaID == iVentaID);
+                oVentas.Add(oVentaV);
+                sVendedores += (", " + oVentaV.Vendedor);
+            }
+            sVendedores = (sVendedores == "" ? "" : sVendedores.Substring(2));
+            oFacturaE.Adicionales = new Dictionary<string, string>();
+            oFacturaE.Adicionales.Add("Vendedor", sVendedores);
+            if (oVentas.Count > 0)
+            {
+                oFacturaE.Adicionales.Add("ACredito", oVentas[0].ACredito.ToString());
+                // Se llena el dato de la fecha de vencimiento, sólo de la primer venta
+                int iClienteVenID = oVentas[0].ClienteID;
+                var oCliente = Datos.GetEntity<Cliente>(q => q.ClienteID == iClienteVenID && q.Estatus);
+                oFacturaE.Adicionales.Add("Vencimiento", oVentas[0].Fecha.AddDays(oCliente.DiasDeCredito.Valor()).ToShortDateString());
+                // Leyenda de la venta
+                oFacturaE.Adicionales.Add("LeyendaDeVenta", VentasProc.ObtenerQuitarLeyenda(oVentas[0].VentaID));
+                // Si no hay leyenda, se verifica si hay observación (por tickets convertidos a factura), y si hay, se manda como leyenda
+                if (string.IsNullOrEmpty(oFacturaE.Adicionales["LeyendaDeVenta"]) && sObservacion != "")
+                    oFacturaE.Adicionales["LeyendaDeVenta"] = sObservacion;
+                // Leyenda de vehículo, si aplica
+                if (oVentas[0].ClienteVehiculoID.HasValue)
+                    oFacturaE.Adicionales.Add("LeyendaDeVehiculo", UtilDatos.LeyendaDeVehiculo(oVentas[0].ClienteVehiculoID.Value));
+                // Se agregan los adicionales, si hubiera
+                if (oAdicionales != null)
+                {
+                    if (oAdicionales.ContainsKey("EfectivoRecibido"))
+                        oFacturaE.Adicionales.Add("EfectivoRecibido", Util.Cadena(oAdicionales["EfectivoRecibido"]));
+                    if (oAdicionales.ContainsKey("Cambio"))
+                        oFacturaE.Adicionales.Add("Cambio", Util.Cadena(oAdicionales["Cambio"]));
+                }
+            }
+
+            // Se procesa la forma de pago con nueva modalidad del sat
+            string sFormaDePago = VentasLoc.GenerarMetodoDePagoFactura(oFormasDePago);
+            oFacturaE.MetodoDePago = "01 EFECTIVO";
+            oFacturaE.CuentaPago = VentasLoc.ObtenerCuentaDePago(oFormasDePago);
+            // Se agraga la cadena del método de pago, como adicional
+            oFacturaE.Adicionales.Add("LeyendaDePago", VentasLoc.GenerarCadenaMetodoDePagoFactura(oFormasDePago));
+
+            oFacturaE.Fecha = dAhora;
+            oFacturaE.FormaDePago = "EFECTIVO";
+            oFacturaE.LugarDeExpedicion = string.Format("{0}, {1}", oConfig["Facturacion.Municipio"], oConfig["Facturacion.Estado"]);
+            oFacturaE.TipoDeComprobante = Enumerados.TiposDeComprobante.Ingreso;
+            oFacturaE.TasaDeImpuesto = GlobalClass.ConfiguracionGlobal.IVA.ToString();
+
+            // Se llenan los datos del receptor
+            var ResRec = VentasLoc.FeLlenarDatosReceptor(ref oFacturaE, iClienteID);
+            if (ResRec.Error)
+                //return new ResAcc<int>(false, ResRec.Mensaje);
+                return 0;
+
+            // Se llenan los conceptos de la factura
+            decimal mUnitarioTotal = 0, mIvaTotal = 0;
+            oFacturaE.Conceptos = new List<Concepto>();
+
+            oFacturaE.Conceptos.Add(new Concepto()
+            {
+                Identificador = "ARTVAR",
+                Cantidad = 1,
+                Unidad = "Piezas",
+                Descripcion = "ARTICULOS VARIOS",
+                ValorUnitario = SumaImporte,
+                Iva = SumaIVA
+            });
+
+
+            // Se asigna el folio y la serie de la factura
+            var oFolioFactura = VentasLoc.GenerarFolioDeFactura();
+            oFacturaE.Serie = oFolioFactura["Serie"];
+            oFacturaE.Folio = oFolioFactura["Folio"];
+
+            // Se comienza a procesar la facturación electrónica
+
+            // Se envía la factura y se obtiene el Xml generado
+            var ResXml = VentasLoc.FeEnviarFactura(ref oFacturaE);
+            if (ResXml.Error)
+            {
+                // Se trata de regresar el folio de facturación apartado
+                VentasLoc.RegresarFolioDeFacrtura(oFacturaE.Folio);
+                //return new ResAcc<int>(false, ResXml.Mensaje);
+                return 0;
+            }
+            string sCfdiTimbrado = ResXml.Respuesta;
+
+            // Se guarda la información
+            var oVentaFactura = new VentaFactura()
+            {
+                Fecha = dAhora,
+                FolioFiscal = oFacturaE.Timbre.FolioFiscal,
+                Serie = oFacturaE.Serie,
+                Folio = oFacturaE.Folio,
+                ClienteID = iClienteID,
+                Observacion = sObservacion,
+                Subtotal = mUnitarioTotal,
+                Iva = mIvaTotal
+            };
+            var oVentaFacturaD = new List<VentaFacturaDetalle>();
+            foreach (var oVentaFac in oVentas)
+            {
+                var oFacturaDet = new VentaFacturaDetalle() { VentaID = oVentaFac.VentaID };
+
+                // Se revisa si es la primera factura para esta venta
+                if (!Datos.Exists<VentaFacturaDetalle>(c => c.VentaID == oVentaFac.VentaID && c.Estatus))
+                    oFacturaDet.Primera = true;
+
+                oVentaFacturaD.Add(oFacturaDet);
+            }
+            Guardar.Factura(oVentaFactura, oVentaFacturaD);
+
+            // Se escribe el folio de factura en cada venta
+            string sSerieFolio = (oFacturaE.Serie + oFacturaE.Folio);
+            foreach (int iVentaID in VentasIDs)
+            {
+                var oVenta = Datos.GetEntity<Venta>(q => q.VentaID == iVentaID && q.Estatus);
+                oVenta.Facturada = true;
+                oVenta.Folio = sSerieFolio;
+                Datos.Guardar<Venta>(oVenta);
+            }
+
+            // Se manda guardar la factura, en pdf y xml. También se manda a salida
+            var oRep = VentasLoc.FeGuardarArchivosFactura(ref oFacturaE, sCfdiTimbrado, sSerieFolio);
+
+            // Se manda la factura por correo
+            VentasLoc.EnviarFacturaPorCorreo(oVentaFactura.VentaFacturaID);
+
+            //return new ResAcc<int>(true, oVentaFactura.VentaFacturaID);
+            return SumaImporte + SumaIVA;
+        }
+
+        public static decimal ObtenerTotalFacturaCliente(List<int> VentasIDs)
+        {
+            var xVentas = new List<VentasView>();
+            decimal SumaImporte = 0;
+            decimal SumaIVA = 0;
+            string xVendedores = "";
+
+            foreach (int iVentaID in VentasIDs)
+            {
+                var oVentaV = Datos.GetEntity<VentasView>(q => q.VentaID == iVentaID);
+                xVentas.Add(oVentaV);
+                xVendedores += (", " + oVentaV.Vendedor);
+            }
+
+            //if (oListaVenta == null)
+            //{
+                List<VentasDetalleView> oVentaDetalle;
+                //Dictionary<int, decimal> dicVentas = new Dictionary<int, decimal>(); 
+                List<decimal> dicVentas = new List<decimal>();
+                foreach (var oVentaCon in xVentas)
+                {
+                    oVentaDetalle = Datos.GetListOf<VentasDetalleView>(q => q.VentaID == oVentaCon.VentaID);
+                    foreach (var oConcepto in oVentaDetalle)
+                    {
+                        if (dicVentas.Sum() < 2000)
+                        {
+                            dicVentas.Add(oConcepto.PrecioUnitario);
+                            if ((dicVentas.Sum() + SumaIVA) > 2000)
+                            {
+                                break;
+                            }
+                            SumaImporte += oConcepto.PrecioUnitario;
+                            SumaIVA += oConcepto.Iva;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            //}
+
+                return SumaImporte + SumaIVA;
+        }
+
 
         #endregion
 
