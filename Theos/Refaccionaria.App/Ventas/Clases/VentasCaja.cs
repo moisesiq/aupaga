@@ -46,7 +46,7 @@ namespace Refaccionaria.App
 
         public override bool Ejecutar()
         {
-            // Se verifica si ya se hizo el cierre de caja
+            //// Se verifica si ya se hizo el cierre de caja
             if (UtilDatos.VerCierreDeDaja())
             {
                 UtilLocal.MensajeAdvertencia("Ya se hizo el Corte de Caja. No se puede continuar.");
@@ -1196,6 +1196,7 @@ namespace Refaccionaria.App
             // Se valida que no haya ventas por cobrar
             //DateTime dHoy = DateTime.Today.AddDays(-3);
             DateTime dHoy = DateTime.Today;
+
             if (Datos.Exists<Venta>(c => c.VentaEstatusID == Cat.VentasEstatus.Realizada && EntityFunctions.TruncateTime(c.Fecha) == dHoy && c.Estatus))
             {
                 UtilLocal.MensajeAdvertencia("Existen una o más ventas por cobrar. No se puede continuar.");
@@ -1206,7 +1207,6 @@ namespace Refaccionaria.App
             var oDia = Datos.GetEntity<CajaEfectivoPorDia>(q => q.SucursalID == GlobalClass.SucursalID && q.Dia == dHoy && q.Estatus);
             //oDia.FechaRegistro.AddDays(-36);
             
-            //adasdasdasdasd
             if (oDia == null)
             {
                 UtilLocal.MensajeAdvertencia("No se ha realizado el Fondo de Caja, por lo tanto no se puede continuar.");
@@ -1227,7 +1227,7 @@ namespace Refaccionaria.App
                 UtilLocal.MensajeAdvertencia("No se han registrado todos los traspasos que ya se marcaron como entregados.");
                 return false;
             }
-            
+
             // Se valida que no haya conteos de inventario pendientes
             if (Util.Logico(Config.Valor("Inventario.Conteo.RevisarEnCorte")))
             {
@@ -1240,7 +1240,6 @@ namespace Refaccionaria.App
             }
 
             // Se valida que no haya Control de Cascos pendientes por completar
-            //asdasdasdasdasd
             if (Datos.Exists<CascosRegistrosView>(c => c.NumeroDeParteRecibido == null && c.FolioDeCobro == null
                 && (c.VentaEstatusID != Cat.VentasEstatus.Cancelada && c.VentaEstatusID != Cat.VentasEstatus.CanceladaSinPago)))
             {
@@ -1277,13 +1276,11 @@ namespace Refaccionaria.App
             //DateTime dAhora = DateTime.Now;
 
             //Se manda a generar la Factura Global
-            //aasdasdasdasd
             bool bFacturaGlobal = this.FacturaGlobal(oDia);
             if (!bFacturaGlobal)
                return false;
 
             //Se manda guardar el histórico del corte
-            //asdasdasd
             bool bSeguir = this.GuardarHistoricoCorte();
             if (!bSeguir)
                 return false;
@@ -1347,7 +1344,7 @@ namespace Refaccionaria.App
         #region [ Uso interno ]
 
 
-        public decimal GenerarFacturaEspecial(List<VentasPagosDetalleAvanzadoView> oLista)
+        public decimal GenerarFacturaEspecial(List<VentasPagosDetalleAvanzadoView> oLista, decimal totalFactura)
         {
             List<int> oVentas = new List<int>();
             decimal ImporteFactura = 0;
@@ -1362,7 +1359,7 @@ namespace Refaccionaria.App
                 oVentas.Add((int)i.VentaID);
             }
 
-            ImporteFactura = VentasLoc.GenerarFacturaElectronicaDeGlobal(oVentas, clienteId, String.Empty);
+            ImporteFactura = VentasLoc.GenerarFacturaElectronicaDeGlobal(oVentas, clienteId, String.Empty, totalFactura);
 
             return ImporteFactura;
         }
@@ -1378,14 +1375,6 @@ namespace Refaccionaria.App
             DateTime dHoy = DateTime.Today.AddDays(0);
             var oPagosDet = Datos.GetListOf<VentasPagosDetalleAvanzadoView>(c => c.SucursalID == GlobalClass.SucursalID && EntityFunctions.TruncateTime(c.Fecha) == dHoy
                 && !c.Facturada);
-
-            //List<VentasPagosDetalleAvanzadoView> oListaVentas = oPagosDet;
-            //decimal importeClienteFactura = 0;
-            //if (oListaVentas.Sum(c => c.ImportePago) > 5000 && DateTime.Now.DayOfWeek != DayOfWeek.Sunday)
-            //{
-            //    importeClienteFactura = GenerarFacturaEspecial(oListaVentas);
-            //}
-
 
             var oDevsV = Datos.GetListOf<VentasDevolucionesView>(c => c.SucursalID == GlobalClass.SucursalID && EntityFunctions.TruncateTime(c.Fecha) == dHoy);
             decimal mTickets = 0, mNegativos = 0, mCancelaciones = 0, mDevoluciones = 0;
@@ -1616,9 +1605,6 @@ namespace Refaccionaria.App
             decimal mCostoMinimo = (UtilTheos.ObtenerImporteMasIva(mCostoTotal) * 1.1M);
             // decimal mOficial = (mTickets - mNegativos - mDevoluciones - mCancelaciones - mFacturadoDiasAnt);
 
-
-
-
             decimal mOficial = (mTickets - mNegativos - mDevolucionesDia - mDevolucionesDiasAnt - mGarantiasDia - mGarantiasDiasAnt - mFacturadoDiasAnt  );
 
             //Se genera un extracto de factura si existe un cliente en la configuración
@@ -1627,15 +1613,22 @@ namespace Refaccionaria.App
 
 
             //Solo si existe una cantidad mayor a 5000 y si no es domingo se desglosa la factura
-            if (oListaVentas.Sum(c => c.ImportePago) > 5000 && DateTime.Now.DayOfWeek != DayOfWeek.Sunday && mOficial > 5000)
+            if (oListaVentas.Sum(c => c.ImportePago) > 5000 && DateTime.Now.DayOfWeek != DayOfWeek.Sunday && mOficial > 5000 && GlobalClass.SucursalID == 1)
+            //if (oListaVentas.Sum(c => c.ImportePago) >= 0 && DateTime.Now.DayOfWeek != DayOfWeek.Sunday && mOficial >= 0)
             {
-                importeClienteFactura = GenerarFacturaEspecial(oListaVentas);
+                importeClienteFactura = GenerarFacturaEspecial(oListaVentas,2000);
             }
-    
+            else if (oListaVentas.Sum(c => c.ImportePago) > 2500 && DateTime.Now.DayOfWeek != DayOfWeek.Sunday && mOficial > 2500 && GlobalClass.SucursalID == 2)
+            {
+                importeClienteFactura = GenerarFacturaEspecial(oListaVentas, 1500);
+            }
+            else if (oListaVentas.Sum(c => c.ImportePago) > 1750 && DateTime.Now.DayOfWeek != DayOfWeek.Sunday && mOficial > 1750 && GlobalClass.SucursalID == 3)
+            {
+                importeClienteFactura = GenerarFacturaEspecial(oListaVentas, 1000);
+            }
 
-
-
-            decimal mFacturar = (mOficial - mRestar - importeClienteFactura);
+            //decimal mFacturar = (mOficial - mRestar - importeClienteFactura);
+            decimal mFacturar = (mOficial - mRestar);
 
             //decimal mFacturar = (mOficial - mRestar);
             decimal mRestante = 0;
@@ -1645,16 +1638,17 @@ namespace Refaccionaria.App
                 // Se verifica si hay saldo restante, para abonar la diferencia
                 if (oFacturaGlobalAnt.SaldoRestante > 0)
                 {
-                    mRestante = (mFacturar - mCostoMinimo);
+                    mRestante = (mFacturar - (mCostoMinimo));
                     mRestante = (mRestante > oFacturaGlobalAnt.SaldoRestante ? oFacturaGlobalAnt.SaldoRestante : mRestante);
                     mFacturar -= mRestante;
+                    mFacturar -= importeClienteFactura;
                     mRestante *= -1;
                 }
             }
             else
             {
                 mRestante = (mCostoMinimo - mFacturar);
-                mFacturar = mCostoMinimo;
+                mFacturar = mCostoMinimo - importeClienteFactura;
             }
 
             // Se genera cuadro informativo de los cálculos realizados

@@ -2127,14 +2127,28 @@ namespace TheosProc
 
         private static void AfectarConFacturaGlobalNoValesDeFactura(ref ContaPolizaDetalle oDetalle, int iId)
         {
-            var oFacturaGlobal = Datos.GetEntity<CajaFacturaGlobal>(c => c.VentaFacturaID == iId);
-            oDetalle.Cargo = (oFacturaGlobal.Facturado - oFacturaGlobal.FacturadoVales).Valor();
+            try
+            {
+                var oFacturaGlobal = Datos.GetEntity<CajaFacturaGlobal>(c => c.VentaFacturaID == iId);
+                oDetalle.Cargo = (oFacturaGlobal.Facturado - oFacturaGlobal.FacturadoVales).Valor();
+            }
+            catch
+            {
+                var oFacturaGlobal = Datos.GetEntity<VentaFactura>(c => c.VentaFacturaID == iId);
+                oDetalle.Cargo = oFacturaGlobal.Iva + oFacturaGlobal.Subtotal;
+            }
         }
 
         private static void AfectarConFacturaGlobalValesDeFactura(ref ContaPolizaDetalle oDetalle, int iId)
         {
-            var oFacturaGlobal = Datos.GetEntity<CajaFacturaGlobal>(c => c.VentaFacturaID == iId);
-            oDetalle.Cargo = oFacturaGlobal.FacturadoVales.Valor();
+            try
+            {
+                var oFacturaGlobal = Datos.GetEntity<CajaFacturaGlobal>(c => c.VentaFacturaID == iId);
+                oDetalle.Cargo = oFacturaGlobal.FacturadoVales.Valor();
+            }
+             catch
+            {
+            }
         }
 
         private static void AfectarConPago(ref ContaPolizaDetalle oDetalle, int iId)

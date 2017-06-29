@@ -675,7 +675,9 @@ namespace Refaccionaria.App
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
             if (this.txtCodigo.Focused)
+            {
                 this.BusquedaAvanzada();
+            }
         }
                 
         private void txtDescripcion_TextChanged(object sender, EventArgs e)
@@ -1297,7 +1299,10 @@ namespace Refaccionaria.App
             {
                 Filtros.Add("Codigo", this.txtCodigo.Text);
                 Partes = Datos.ExecuteProcedure<pauVentasPartesBusqueda_Result>("pauVentasPartesBusqueda", Filtros);
-                if (Partes.Count != 1)
+
+                //if (Partes.Count != 1)
+                //    return;
+                if (Partes.Count > 2)
                     return;
             }
             else

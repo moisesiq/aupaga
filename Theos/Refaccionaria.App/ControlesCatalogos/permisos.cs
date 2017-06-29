@@ -76,5 +76,15 @@ namespace Refaccionaria.App
 
         #endregion
 
+        private void btnAgregar_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnModificar_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

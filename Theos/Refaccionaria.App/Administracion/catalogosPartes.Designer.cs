@@ -225,6 +225,7 @@
             this.btnImportar = new System.Windows.Forms.Button();
             this.tabPartes = new System.Windows.Forms.TabControl();
             this.tbpParte = new System.Windows.Forms.TabPage();
+            this.btnImprimirTicketLinea = new System.Windows.Forms.Button();
             this.chkValFotos = new System.Windows.Forms.CheckBox();
             this.ctlVentasPorMes = new Refaccionaria.App.GridVentasMes();
             this.btnActualizadorDeImagenes = new System.Windows.Forms.Button();
@@ -938,7 +939,6 @@
             this.txtDescripcionMaxMin.ReadOnly = true;
             this.txtDescripcionMaxMin.Size = new System.Drawing.Size(280, 43);
             this.txtDescripcionMaxMin.TabIndex = 14;
-            this.txtDescripcionMaxMin.TextChanged += new System.EventHandler(this.txtDescripcionMaxMin_TextChanged);
             // 
             // dgvExistencias
             // 
@@ -983,7 +983,6 @@
             this.dgvExistencias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvExistencias.Size = new System.Drawing.Size(220, 87);
             this.dgvExistencias.TabIndex = 13;
-            this.dgvExistencias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExistencias_CellContentClick);
             this.dgvExistencias.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvExistencias_CellValidating);
             this.dgvExistencias.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExistencias_CellValueChanged);
             this.dgvExistencias.CurrentCellChanged += new System.EventHandler(this.dgvExistencias_CurrentCellChanged);
@@ -1606,7 +1605,6 @@
             this.lblPrecio5.Size = new System.Drawing.Size(46, 13);
             this.lblPrecio5.TabIndex = 108;
             this.lblPrecio5.Text = "Precio 5";
-            this.lblPrecio5.Click += new System.EventHandler(this.lblPrecio5_Click);
             // 
             // lblMedida
             // 
@@ -1895,6 +1893,7 @@
             // tbpParte
             // 
             this.tbpParte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(79)))), ((int)(((byte)(109)))));
+            this.tbpParte.Controls.Add(this.btnImprimirTicketLinea);
             this.tbpParte.Controls.Add(this.chkValFotos);
             this.tbpParte.Controls.Add(this.ctlVentasPorMes);
             this.tbpParte.Controls.Add(this.btnActualizadorDeImagenes);
@@ -1973,6 +1972,21 @@
             this.tbpParte.Size = new System.Drawing.Size(1381, 561);
             this.tbpParte.TabIndex = 0;
             this.tbpParte.Text = "Parte";
+            // 
+            // btnImprimirTicketLinea
+            // 
+            this.btnImprimirTicketLinea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnImprimirTicketLinea.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimirTicketLinea.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImprimirTicketLinea.ForeColor = System.Drawing.Color.White;
+            this.btnImprimirTicketLinea.Location = new System.Drawing.Point(1172, 180);
+            this.btnImprimirTicketLinea.Name = "btnImprimirTicketLinea";
+            this.btnImprimirTicketLinea.Size = new System.Drawing.Size(168, 23);
+            this.btnImprimirTicketLinea.TabIndex = 319;
+            this.btnImprimirTicketLinea.Text = "&Imprimir Etiquetas por Linea";
+            this.btnImprimirTicketLinea.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnImprimirTicketLinea.UseVisualStyleBackColor = false;
+            this.btnImprimirTicketLinea.Click += new System.EventHandler(this.btnImprimirTicketLinea_Click);
             // 
             // chkValFotos
             // 
@@ -2088,7 +2102,6 @@
             this.flpCaracteristicas.Name = "flpCaracteristicas";
             this.flpCaracteristicas.Size = new System.Drawing.Size(639, 158);
             this.flpCaracteristicas.TabIndex = 198;
-            this.flpCaracteristicas.Paint += new System.Windows.Forms.PaintEventHandler(this.flpCaracteristicas_Paint);
             this.flpCaracteristicas.DoubleClick += new System.EventHandler(this.flpCaracteristicas_DoubleClick);
             // 
             // chkValCaracteristicas
@@ -2114,7 +2127,7 @@
             this.lblNoPedidos.BackColor = System.Drawing.Color.Transparent;
             this.lblNoPedidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoPedidos.ForeColor = System.Drawing.Color.Yellow;
-            this.lblNoPedidos.Location = new System.Drawing.Point(1171, 176);
+            this.lblNoPedidos.Location = new System.Drawing.Point(1169, 208);
             this.lblNoPedidos.Name = "lblNoPedidos";
             this.lblNoPedidos.Size = new System.Drawing.Size(145, 13);
             this.lblNoPedidos.TabIndex = 172;
@@ -4128,6 +4141,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Kardex_Importe;
         private System.Windows.Forms.DataGridViewTextBoxColumn Kardex_Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Kardex_ExistenciaNueva;
+        public System.Windows.Forms.Button btnImprimirTicketLinea;
 
     }
 }

@@ -12,5 +12,6 @@ namespace Refaccionaria.App
         public string NombreParte { get; set; }
         public string CodigoBarra { get; set; }
         public int NumeroEtiquetas { get; set; }
+        public string sParteID { get; set; }
     }
 }

@@ -1244,6 +1244,11 @@ namespace Refaccionaria.App
                 this.dgvDetallePedido.DataSource = null;
                 var pedidoId = Util.Entero(this.dgvPedidos.Rows[e.RowIndex].Cells["PedidoID"].Value);
                 this.dgvDetallePedido.DataSource = Datos.GetListOf<PedidosDetalleView>(p => p.PedidoID == pedidoId).ToList();
+                this.dgvDetallePedido.Columns["ParteID"].DisplayIndex = 0;
+                this.dgvDetallePedido.Columns["NumeroParte"].DisplayIndex = 1;
+                this.dgvDetallePedido.Columns["NombreParte"].DisplayIndex = 2;
+                this.dgvDetallePedido.Columns["Costo"].DisplayIndex = 3;
+                this.dgvDetallePedido.Columns["CantidadPedido"].DisplayIndex = 4;
                 Util.OcultarColumnas(this.dgvDetallePedido, new string[] { "PedidoDetalleID", "PedidoID", "ParteID", "PedidoEstatusID", "NombrePedidoEstatus", "Abreviacion", "CostosUnitario", "FechaRegistro", "Fecha" });
                 UtilLocal.ColumnasToHeaderText(this.dgvDetallePedido);
                 this.dgvDetallePedido.Columns["NombreParte"].Width = 400;
@@ -1294,6 +1299,11 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        private void dgvDetallePedido_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
             
         #endregion
                 

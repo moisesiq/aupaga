@@ -736,6 +736,7 @@
             this.dgvDetallePedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetallePedido.Size = new System.Drawing.Size(720, 516);
             this.dgvDetallePedido.TabIndex = 164;
+            this.dgvDetallePedido.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetallePedido_CellContentClick);
             // 
             // dgvPedidos
             // 

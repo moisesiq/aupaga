@@ -1409,6 +1409,7 @@ namespace Refaccionaria.App
             // Se agregan los eventos
             foreach (var oReg in this.oEventosCalendario)
             {
+
                 if (this.calendar1.ViewIntersects(oReg))
                     this.calendar1.Items.Add(oReg);
             }
@@ -1419,7 +1420,7 @@ namespace Refaccionaria.App
                 DateTime dFecha = oReg.Fecha.AddHours(8.5);
                 if (this.calendar1.ViewIntersects(dFecha, dFecha.AddHours(0.5)))
                 {
-                    this.calendar1.Items.Add(new CalendarItem(this.calendar1, dFecha, dFecha.AddHours(0.5), "TOTAL: " + oReg.Adeudo.ToString(GlobalClass.FormatoMoneda)));
+                    //this.calendar1.Items.Add(new CalendarItem(this.calendar1, dFecha, dFecha.AddHours(0.5), "TOTAL: " + oReg.Adeudo.ToString(GlobalClass.FormatoMoneda)));
                 }
             }
 
@@ -1507,6 +1508,8 @@ namespace Refaccionaria.App
                 ClearFolder(diSubFolder); // Call recursively for all subfolders
             }
         }
+
+
 
     }
 }

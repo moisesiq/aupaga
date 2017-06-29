@@ -130,10 +130,8 @@
             this.lblrptSucursal = new System.Windows.Forms.Label();
             this.cboSucursalRpt = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dgvExd_Excedentes = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbExd_Sucursal = new System.Windows.Forms.ComboBox();
             this.btnExd_Imprimir = new System.Windows.Forms.Button();
+            this.dgvExd_Excedentes = new System.Windows.Forms.DataGridView();
             this.exd_NumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exd_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exd_Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -141,6 +139,8 @@
             this.exd_Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exd_Existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exd_Es9500 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbExd_Sucursal = new System.Windows.Forms.ComboBox();
             this.tabTraspasos.SuspendLayout();
             this.tabTraspasoNuevo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTraspasos)).BeginInit();
@@ -744,13 +744,14 @@
             // 
             // splitContainerRecibir.Panel1
             // 
+            this.splitContainerRecibir.Panel1.AutoScroll = true;
             this.splitContainerRecibir.Panel1.Controls.Add(this.dgvRecibir);
             // 
             // splitContainerRecibir.Panel2
             // 
             this.splitContainerRecibir.Panel2.Controls.Add(this.dgvRecibirDetalle);
             this.splitContainerRecibir.Size = new System.Drawing.Size(959, 573);
-            this.splitContainerRecibir.SplitterDistance = 483;
+            this.splitContainerRecibir.SplitterDistance = 400;
             this.splitContainerRecibir.SplitterIncrement = 3;
             this.splitContainerRecibir.SplitterWidth = 5;
             this.splitContainerRecibir.TabIndex = 170;
@@ -784,8 +785,8 @@
             this.dgvRecibir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRecibir.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             this.dgvRecibir.Location = new System.Drawing.Point(0, 0);
+            this.dgvRecibir.MultiSelect = false;
             this.dgvRecibir.Name = "dgvRecibir";
-            this.dgvRecibir.ReadOnly = true;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -797,9 +798,9 @@
             this.dgvRecibir.RowHeadersVisible = false;
             this.dgvRecibir.RowHeadersWidth = 25;
             this.dgvRecibir.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRecibir.Size = new System.Drawing.Size(483, 573);
+            this.dgvRecibir.Size = new System.Drawing.Size(400, 573);
             this.dgvRecibir.TabIndex = 161;
-            this.dgvRecibir.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecibir_CellClick);
+            this.dgvRecibir.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvRecibir_CurrentCellDirtyStateChanged);
             this.dgvRecibir.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvRecibir_KeyUp);
             // 
             // dgvRecibirDetalle
@@ -844,7 +845,7 @@
             this.dgvRecibirDetalle.RowHeadersVisible = false;
             this.dgvRecibirDetalle.RowHeadersWidth = 25;
             this.dgvRecibirDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvRecibirDetalle.Size = new System.Drawing.Size(471, 573);
+            this.dgvRecibirDetalle.Size = new System.Drawing.Size(554, 573);
             this.dgvRecibirDetalle.TabIndex = 162;
             this.dgvRecibirDetalle.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvRecibirDetalle_CellValidating);
             this.dgvRecibirDetalle.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecibirDetalle_CellValueChanged);
@@ -972,7 +973,7 @@
             // 
             this.splitContainerHis.Panel2.Controls.Add(this.dgvHistoricoDetalle);
             this.splitContainerHis.Size = new System.Drawing.Size(959, 542);
-            this.splitContainerHis.SplitterDistance = 483;
+            this.splitContainerHis.SplitterDistance = 354;
             this.splitContainerHis.SplitterIncrement = 3;
             this.splitContainerHis.SplitterWidth = 5;
             this.splitContainerHis.TabIndex = 177;
@@ -1019,7 +1020,7 @@
             this.dgvHistorico.RowHeadersVisible = false;
             this.dgvHistorico.RowHeadersWidth = 25;
             this.dgvHistorico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHistorico.Size = new System.Drawing.Size(483, 542);
+            this.dgvHistorico.Size = new System.Drawing.Size(354, 542);
             this.dgvHistorico.TabIndex = 161;
             this.dgvHistorico.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHistorico_CellClick);
             // 
@@ -1065,7 +1066,7 @@
             this.dgvHistoricoDetalle.RowHeadersVisible = false;
             this.dgvHistoricoDetalle.RowHeadersWidth = 25;
             this.dgvHistoricoDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHistoricoDetalle.Size = new System.Drawing.Size(471, 542);
+            this.dgvHistoricoDetalle.Size = new System.Drawing.Size(600, 542);
             this.dgvHistoricoDetalle.TabIndex = 162;
             this.dgvHistoricoDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHistoricoDetalle_CellClick);
             this.dgvHistoricoDetalle.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvHistoricoDetalle_KeyUp);
@@ -1394,6 +1395,20 @@
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "Excedente";
             // 
+            // btnExd_Imprimir
+            // 
+            this.btnExd_Imprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
+            this.btnExd_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExd_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExd_Imprimir.ForeColor = System.Drawing.Color.White;
+            this.btnExd_Imprimir.Location = new System.Drawing.Point(178, 6);
+            this.btnExd_Imprimir.Name = "btnExd_Imprimir";
+            this.btnExd_Imprimir.Size = new System.Drawing.Size(80, 21);
+            this.btnExd_Imprimir.TabIndex = 183;
+            this.btnExd_Imprimir.Text = "&Imprimir";
+            this.btnExd_Imprimir.UseVisualStyleBackColor = false;
+            this.btnExd_Imprimir.Click += new System.EventHandler(this.btnExd_Imprimir_Click);
+            // 
             // dgvExd_Excedentes
             // 
             this.dgvExd_Excedentes.AllowUserToAddRows = false;
@@ -1449,41 +1464,6 @@
             this.dgvExd_Excedentes.Size = new System.Drawing.Size(986, 605);
             this.dgvExd_Excedentes.TabIndex = 182;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(3, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Sucursal";
-            // 
-            // cmbExd_Sucursal
-            // 
-            this.cmbExd_Sucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbExd_Sucursal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbExd_Sucursal.FormattingEnabled = true;
-            this.cmbExd_Sucursal.Location = new System.Drawing.Point(57, 6);
-            this.cmbExd_Sucursal.Name = "cmbExd_Sucursal";
-            this.cmbExd_Sucursal.Size = new System.Drawing.Size(100, 21);
-            this.cmbExd_Sucursal.TabIndex = 13;
-            this.cmbExd_Sucursal.SelectedIndexChanged += new System.EventHandler(this.cmbExd_Sucursal_SelectedIndexChanged);
-            // 
-            // btnExd_Imprimir
-            // 
-            this.btnExd_Imprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(63)))), ((int)(((byte)(87)))));
-            this.btnExd_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExd_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExd_Imprimir.ForeColor = System.Drawing.Color.White;
-            this.btnExd_Imprimir.Location = new System.Drawing.Point(178, 6);
-            this.btnExd_Imprimir.Name = "btnExd_Imprimir";
-            this.btnExd_Imprimir.Size = new System.Drawing.Size(80, 21);
-            this.btnExd_Imprimir.TabIndex = 183;
-            this.btnExd_Imprimir.Text = "&Imprimir";
-            this.btnExd_Imprimir.UseVisualStyleBackColor = false;
-            this.btnExd_Imprimir.Click += new System.EventHandler(this.btnExd_Imprimir_Click);
-            // 
             // exd_NumeroDeParte
             // 
             this.exd_NumeroDeParte.HeaderText = "No. Parte";
@@ -1533,6 +1513,27 @@
             this.exd_Es9500.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.exd_Es9500.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.exd_Es9500.Width = 60;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Sucursal";
+            // 
+            // cmbExd_Sucursal
+            // 
+            this.cmbExd_Sucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbExd_Sucursal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbExd_Sucursal.FormattingEnabled = true;
+            this.cmbExd_Sucursal.Location = new System.Drawing.Point(57, 6);
+            this.cmbExd_Sucursal.Name = "cmbExd_Sucursal";
+            this.cmbExd_Sucursal.Size = new System.Drawing.Size(100, 21);
+            this.cmbExd_Sucursal.TabIndex = 13;
+            this.cmbExd_Sucursal.SelectedIndexChanged += new System.EventHandler(this.cmbExd_Sucursal_SelectedIndexChanged);
             // 
             // catalogosTraspasos
             // 

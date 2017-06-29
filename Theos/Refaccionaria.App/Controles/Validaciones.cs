@@ -21,6 +21,7 @@ namespace Refaccionaria.App
         public Validaciones()
         {
             InitializeComponent();
+            this.tbpAutorizaciones.Controls.Add(new Autorizaciones() { Dock = DockStyle.Fill });
         }
 
         private void tabValidaciones_SelectedIndexChanged(object sender, EventArgs e)
@@ -37,5 +38,7 @@ namespace Refaccionaria.App
                     break;
             }
         }
+
+
     }
 }

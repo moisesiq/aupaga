@@ -161,6 +161,11 @@ namespace Refaccionaria.App
                 ((ListBox)clbAbc).DataSource = criterios;
                 ((ListBox)clbAbc).DisplayMember = "Clasificacion";
                 ((ListBox)clbAbc).ValueMember = "CriterioAbcID";
+
+
+
+
+
                 
             }
             catch (Exception ex)
@@ -224,6 +229,17 @@ namespace Refaccionaria.App
 
             this.txtMotivo.Clear();
         }
+
+
+        private void LimpiarRecibirDetalle()
+        {
+            this.dgvRecibirDetalle.DataSource = null;
+            if (this.dgvRecibirDetalle.Rows.Count > 0)
+                this.dgvRecibirDetalle.Rows.Clear();
+            if (this.dgvRecibirDetalle.Columns.Count > 0)
+                this.dgvRecibirDetalle.Columns.Clear();
+        }
+
 
         private void LimpiarTabHistorico()
         {
@@ -688,6 +704,7 @@ namespace Refaccionaria.App
             this.txtCodigo.SelectAll();
         }
 
+
         private void dgvDatos_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (null == this.dgvDatos.CurrentRow)
@@ -732,7 +749,7 @@ namespace Refaccionaria.App
                                 LineaID = 0,
                                 Busqueda = sugerencia.ToString()
                             };
-                            
+
                             // Se verifica si ya hay un traspaso para la parte indicada
                             int iSucDestID = Util.Entero(this.cboUbicacionDestino.SelectedValue);
                             if (Datos.Exists<MovimientoInventarioDetalleView>(c => c.TipoOperacionID == Cat.TiposDeOperacionMovimientos.Traspaso && c.SucursalDestinoID == iSucDestID
@@ -925,6 +942,7 @@ namespace Refaccionaria.App
         {
             try
             {
+
                 int iAutorizoID = 0;
                 var ResU = UtilLocal.ValidarObtenerUsuario(null, "Autorización");
                 if (ResU.Exito)
@@ -1298,7 +1316,7 @@ namespace Refaccionaria.App
 
                 this.dgvExistencias.DataSource = Datos.GetListOf<ExistenciasView>(ex => ex.ParteID.Equals(parteId));
                 this.dgvExistencias.AutoResizeColumns();
-                Util.OcultarColumnas(this.dgvExistencias, new string[] { "ParteExistenciaID", "ParteID", "NumeroParte", "SucursalID" });
+                Util.OcultarColumnas(this.dgvExistencias, new string[] { "ParteExistenciaID", "ParteID", "NumeroParte", "SucursalID", "ParteMaxMinReglaID", "FechaMaxMin", "DescripcionMaxMin" });
                 UtilLocal.ColumnasToHeaderText(this.dgvExistencias);
             }
             catch (Exception ex)
@@ -1503,7 +1521,34 @@ namespace Refaccionaria.App
             // var log = new Log();
             try
             {
+
+                List<bool> oSeleccionados = new List<bool>();
+                foreach (DataGridViewRow Row in dgvRecibir.Rows)
+                {
+                    try
+                    {
+                        if ((bool)Row.Cells["Check"].Value == true)
+                        {
+                            oSeleccionados.Add((bool)Row.Cells["Check"].Value);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+                if (oSeleccionados.Count < 1)
+                {
+                    Util.MensajeAdvertencia("No hay traspaso seleccionado", GlobalClass.NombreApp);
+                    LimpiarRecibirDetalle();
+                    return;
+                }
+
+
+
                 var movimientoId = Util.Entero(this.dgvRecibir.Rows[this.dgvRecibir.SelectedRows[0].Index].Cells["MovimientoInventarioID"].Value);
+                //return;
                 if (movimientoId <= 0)
                 {
                     Util.MensajeError("Ocurrio un error al intentar recibir el traspaso.", GlobalClass.NombreApp);
@@ -1611,6 +1656,7 @@ namespace Refaccionaria.App
                             Actualizar = true
                         };
                         // log.AppendTextBox("Almacenando Contingencia...");
+                        //aquie es donde oscar modifico
                         Datos.SaveOrUpdate<MovimientoInventarioTraspasoContingencia>(contingencia);
                     }
 
@@ -1629,6 +1675,7 @@ namespace Refaccionaria.App
                         ExistenciaFinal = Util.Decimal(oExistencia.Existencia),
                         SucursalID = GlobalClass.SucursalID
                     };
+                    //aquie es donde oscar modifico
                     Datos.Guardar<MovimientoInventarioHistorial>(historial);
 
                     //Aumentar la existencia actual de la sucursal destino
@@ -1766,7 +1813,7 @@ namespace Refaccionaria.App
                 UtilLocal.ColumnasToHeaderText(this.dgvRecibirDetalle);
                 this.dgvRecibirDetalle.Columns["NombreParte"].HeaderText = "Descripcion";
                 Util.OcultarColumnas(this.dgvRecibirDetalle, new string[] { "MovimientoInventarioDetalleID", "MovimientoInventarioID", "ParteID", 
-                    "FueDevolucion", "FechaRegistro", "PrecioUnitario", "Importe", "Cantidad", "CantidadRecibida", "TipoOperacionID", "FechaRecepcion" });
+                    "FueDevolucion", "FechaRegistro", "PrecioUnitario","PrecioUnitarioConDescuento", "Importe", "Cantidad", "CantidadRecibida", "TipoOperacionID", "FechaRecepcion","LineaID" });
 
                 if (!this.dgvRecibirDetalle.Columns.Contains("Recibido"))
                 {
@@ -1841,8 +1888,31 @@ namespace Refaccionaria.App
                     this.dgvRecibir.DataSource = traspasos;
                     this.lblEncontradosRecibir.Text = string.Format("Encontrados: {0}", traspasos.Count);
                     Util.OcultarColumnas(this.dgvRecibir, new string[] { "TipoOperacionID", "SucursalOrigenID", "SucursalDestinoID"
-                        , "FechaRecepcion", "Recibio", "TraspasoEntregado" });
+                        , "FechaRecepcion", "Recibio", "TraspasoEntregado","Observacion" });
                     UtilLocal.ColumnasToHeaderText(this.dgvRecibir);
+
+                    if (!this.dgvRecibir.Columns.Contains("Check"))
+                    {
+                        DataGridViewCheckBoxColumn check = new DataGridViewCheckBoxColumn();
+                        check.Name = "Check";
+                        check.HeaderText = "";
+                        check.Width = 50;
+                        check.ReadOnly = false;
+                        check.FillWeight = 10;
+                        this.dgvRecibir.Columns.Add(check);
+                        this.dgvRecibir.Columns["Check"].DisplayIndex = 0;
+                    }
+
+                    foreach (DataGridViewColumn column in this.dgvRecibir.Columns)
+                    {
+                        if (!column.Name.Equals("Check"))
+                        {
+                            column.ReadOnly = true;
+                            //dgvDatos.AutoResizeColumn(column.Index, DataGridViewAutoSizeColumnMode.AllCells);
+                        }
+                    } 
+
+
                     //this.dgvDatos.Columns["NombreParte"].HeaderText = "Descripcion";                    
                     this.dgvRecibir.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }
@@ -1852,6 +1922,21 @@ namespace Refaccionaria.App
                 }
 
                 this.ColorearMarcadosParaEntrega();
+
+
+                foreach (DataGridViewRow Row in dgvRecibir.Rows)
+                {
+                    try
+                    {
+                        if (dgvRecibir.CurrentRow.Cells["Check"] != Row.Cells["Check"])
+                        {
+                            Row.Cells["Check"].Value = false;
+                        }
+                    }
+                    catch
+                    { }
+                }
+
             }
             catch (Exception ex)
             {
@@ -2204,6 +2289,55 @@ namespace Refaccionaria.App
         }
 
         #endregion
+
+        //private void dgvRecibir_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e == null)
+        //        return;
+        //    if (e.RowIndex == -1)
+        //        return;
+        //    if (this.dgvRecibir.CurrentRow == null)
+        //        return;
+        //    var movimientoId = Util.Entero(this.dgvRecibir.CurrentRow.Cells["MovimientoInventarioID"].Value);
+        //    if (movimientoId > 0)
+        //    {
+        //        this.CargarDetalleTraspaso(movimientoId);
+        //    }
+        //}
+
+        private void dgvRecibir_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (this.dgvRecibir.CurrentRow == null)
+                return;
+
+            foreach (DataGridViewRow Row in dgvRecibir.Rows)
+            {
+                try
+                {
+                    if (dgvRecibir.CurrentRow.Cells["Check"] != Row.Cells["Check"])
+                    {
+                        Row.Cells["Check"].Value = false;
+                        Row.Cells["Check"].ReadOnly = false;
+                    }
+                    else
+                    {
+                        dgvRecibir.CurrentRow.Cells["Check"].ReadOnly = true;
+                    }
+                }
+                catch
+                { }
+            }
+
+            var movimientoId = Util.Entero(this.dgvRecibir.CurrentRow.Cells["MovimientoInventarioID"].Value);
+            if (movimientoId > 0)
+            {
+                this.CargarDetalleTraspaso(movimientoId);
+            }
+        }
+
+
+
+      
 
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="03/10/2016 19:20:35" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="BIXOLON SRP-F310" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/22/2013 21:35:49" ReportInfo.Modified="03/10/2016 19:20:35" ReportInfo.CreatorVersion="2013.3.2.0" PrintSettings.Printer="\\ADMIN\Tickets Admindddd" PrintSettings.SavePrinterWithReport="true" PrintSettings.Copies="2">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;

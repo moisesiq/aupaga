@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using TheosProc;
 using LibUtil;
 using System.IO;
+using Refaccionaria.App.Administracion.Formas;
 
 namespace Refaccionaria.App
 {
@@ -113,6 +114,7 @@ namespace Refaccionaria.App
                         {
                             ParteID = oParte.ParteID,
                             NumeroParte = oParte.NumeroParte,
+                            sParteID = oParte.ParteID.ToString("D8"),
                             NombreParte = oParte.NombreParte,
                             CodigoBarra = oParte.CodigoBarra,
                             NumeroEtiquetas = copias
@@ -121,17 +123,33 @@ namespace Refaccionaria.App
                     }
 
                     IEnumerable<Etiquetas> listaEtiquetas = etiquetas;
+                    //using (FastReport.Report report = new FastReport.Report())
+                    //{
+                    //    report.Load(string.Format("{0}{1}", GlobalClass.ConfiguracionGlobal.pathReportes, "ReporteEtiquetas.frx"));
+                    //    report.RegisterData(etiquetas, "etiquetas", 3);
+                    //    report.GetDataSource("etiquetas").Enabled = true;
+                    //    // report.FindObject("Text1").Delete();
+                    //    // report.Show(true);
+                    //    UtilLocal.EnviarReporteASalida("Reportes.Partes.Etiqueta", report);
+                    //}
                     using (FastReport.Report report = new FastReport.Report())
                     {
                         report.Load(string.Format("{0}{1}", GlobalClass.ConfiguracionGlobal.pathReportes, "ReporteEtiquetas.frx"));
-                        report.RegisterData(etiquetas, "etiquetas", 3);
+                        report.RegisterData(listaEtiquetas, "etiquetas", 3);
+                        report.SetParameterValue("FolioFactura", 0);
                         report.GetDataSource("etiquetas").Enabled = true;
-                        // report.FindObject("Text1").Delete();
-                        // report.Show(true);
-                        UtilLocal.EnviarReporteASalida("Reportes.Partes.Etiqueta", report);
+                        report.Show(true);
+                        //report.Design(true);
                     }
                 }
             }
+        }
+
+        private void btnImprimirTicketLinea_Click(object sender, EventArgs e)
+        {
+            ImprimirEtiquetas frm = new ImprimirEtiquetas();
+            frm.Focus();
+            frm.ShowDialog();
         }
 
         private void dgvDatos_Enter(object sender, EventArgs e)
@@ -1193,6 +1211,7 @@ namespace Refaccionaria.App
 
         private void btnImportar_Click(object sender, EventArgs e)
         {
+            
             var frmImportar = new PartesImportar();
             frmImportar.ShowDialog(Principal.Instance);
             frmImportar.Dispose();
@@ -2172,7 +2191,36 @@ namespace Refaccionaria.App
         private void CargarCaracteristicas()
         {
             var oLineaCarV = Datos.GetListOf<LineasCaracteristicasView>(c => c.LineaID == this.oParte.LineaID);
-            var oParteCars = Datos.GetListOf<ParteCaracteristica>(c => c.ParteID == this.oParte.ParteID);
+            ///var oParteCars = Datos.GetListOf<ParteCaracteristica>(c => c.ParteID == this.oParte.ParteID);
+            var oParteCarDet = Datos.GetListOf<ParteCaracteristicaDetalle>(c => c.ParteID == this.oParte.ParteID);
+
+            Dictionary<int, string> todos = new Dictionary<int, string>();
+            foreach (var i in oParteCarDet)
+            {
+                try
+                {
+                    todos.Add(i.C1.Value, i.V1);
+                    todos.Add(i.C2.Value, i.V2);
+                    todos.Add(i.C3.Value, i.V3);
+                    todos.Add(i.C4.Value, i.V4);
+                    todos.Add(i.C5.Value, i.V5);
+                    todos.Add(i.C6.Value, i.V6);
+                    todos.Add(i.C7.Value, i.V7);
+                    todos.Add(i.C8.Value, i.V8);
+                    todos.Add(i.C9.Value, i.V9);
+                    todos.Add(i.C10.Value, i.V10);
+                    todos.Add(i.C11.Value, i.V11);
+                    todos.Add(i.C12.Value, i.V12);
+                    todos.Add(i.C13.Value, i.V13);
+                    todos.Add(i.C14.Value, i.V14);
+                    todos.Add(i.C15.Value, i.V15);
+                }
+                catch
+                {
+
+                }
+            }
+
             this.LimpiarCaracteristicas();
             foreach (var oReg in oLineaCarV)
             {
@@ -2193,30 +2241,160 @@ namespace Refaccionaria.App
                 {
                     oPanel.Controls.Add(new TextBox() { Left = 61, Width = 140 });
                 }
+
                 // Se llena el control
-                var oParteCar = oParteCars.FirstOrDefault(c => c.CaracteristicaID == oReg.CaracteristicaID);
-                oPanel.Controls[1].Text = (oParteCar == null ? "" : oParteCar.Valor);
+                //var oParteCar = oParteCars.FirstOrDefault(c => c.CaracteristicaID == oReg.CaracteristicaID);
+
+                foreach (var x in todos)
+                {
+                    if (x.Key == oReg.CaracteristicaID)
+                    {
+                        oPanel.Controls[1].Text = x.Value;
+                        
+                    }
+                }
+
                 oPanel.Controls[1].Tag = oReg.CaracteristicaID;
+
+                int xl = 0;
+                xl = xl + 1;
+                //oPanel.Controls[1].Text = (oParteCar == null ? "" : oParteCar.Valor);
+                //oPanel.Controls[1].Tag = oReg.CaracteristicaID;
             }
             
         }
 
         private void GuardarCaracteristicas()
         {
+            Dictionary<int, string> newVals = new Dictionary<int, string>();
             foreach (Control oCaract in this.flpCaracteristicas.Controls)
             {
+                var chekedItems = oCaract.Controls[1];
                 var oControl = oCaract.Controls[1];
-                if (oControl.Tag == null) continue;
+                //if (oControl.Tag == null) continue;
                 int iCaracteristicaID = Util.Entero(oControl.Tag);
-                var oParteCar = Datos.GetEntity<ParteCaracteristica>(c => c.ParteID == this.oParte.ParteID && c.CaracteristicaID == iCaracteristicaID);
+                //var oParteCar = Datos.GetEntity<ParteCaracteristica>(c => c.ParteID == this.oParte.ParteID && c.CaracteristicaID == iCaracteristicaID);
+                var oParteCar = Datos.GetEntity<ParteCaracteristicaDetalle>(c => c.ParteID == this.oParte.ParteID );
+
                 if (oParteCar == null)
-                    oParteCar = new ParteCaracteristica() { ParteID = this.oParte.ParteID, CaracteristicaID = iCaracteristicaID };
+                {
+                    oParteCar = new ParteCaracteristicaDetalle() { ParteID = this.oParte.ParteID, ParteCaracteristicaID = iCaracteristicaID };
+                    Datos.SaveOrUpdate(oParteCar);
+                }
                 if (oControl is ComboMultiSel)
-                    oParteCar.Valor = string.Join(",", (oControl as ComboMultiSel).CheckedItems);
+                {
+                    newVals.Add(iCaracteristicaID, string.Join(",", (oControl as ComboMultiSel).CheckedItems));
+                    //oParteCar.V1 = string.Join(",", (oControl as ComboMultiSel).CheckedItems);
+                }
                 else
-                    oParteCar.Valor = oControl.Text;
-                Datos.Guardar<ParteCaracteristica>(oParteCar);
+                {
+                    oParteCar.V1 = oControl.Text;
+                }
+                
+                //Datos.Guardar<ParteCaracteristicaDetalle>(oParteCar);
             }
+
+            var oParteCar2 = Datos.GetListOf<ParteCaracteristicaDetalle>(c => c.ParteID == this.oParte.ParteID);
+            
+            foreach(var c in oParteCar2)
+            {
+                foreach (var x in newVals)
+                {
+                    if (c.C1 == x.Key || c.C1 == null)
+                    {
+                        c.C1 = x.Key;
+                        c.V1 = x.Value;
+                    }
+                    else if (c.C2 == x.Key || c.C2 == null)
+                    {
+                        c.C2 = x.Key;
+                        c.V2 = x.Value;
+                    }
+                    else if (c.C3 == x.Key || c.C3 == null)
+                    {
+                        c.C3 = x.Key;
+                        c.V3 = x.Value;
+                    }
+                    else if (c.C4 == x.Key || c.C4 == null)
+                    {
+                        c.C4 = x.Key;
+                        c.V4 = x.Value;
+                    }
+                    else if (c.C5 == x.Key || c.C5 == null)
+                    {
+                        c.C5 = x.Key;
+                        c.V5 = x.Value;
+                    }
+                    else if (c.C6 == x.Key || c.C6 == null)
+                    {
+                        c.C6 = x.Key;
+                        c.V6 = x.Value;
+                    }
+                    else if (c.C7 == x.Key || c.C7 == null)
+                    {
+                        c.C7 = x.Key;
+                        c.V7 = x.Value;
+                    }
+                    else if (c.C8 == x.Key || c.C8 == null)
+                    {
+                        c.C8 = x.Key;
+                        c.V8 = x.Value;
+                    }
+                    else if (c.C9 == x.Key || c.C9 == null)
+                    {
+                        c.C9 = x.Key;
+                        c.V9 = x.Value;
+                    }
+                    else if (c.C10 == x.Key || c.C10 == null)
+                    {
+                        c.C10 = x.Key;
+                        c.V10 = x.Value;
+                    }
+                    else if (c.C11 == x.Key || c.C11 == null)
+                    {
+                        c.C11 = x.Key;
+                        c.V11 = x.Value;
+                    }
+                    else if (c.C12 == x.Key || c.C12 == null)
+                    {
+                        c.C12 = x.Key;
+                        c.V12 = x.Value;
+                    }
+                    else if (c.C13 == x.Key || c.C13 == null)
+                    {
+                        c.C13 = x.Key;
+                        c.V13 = x.Value;
+                    }
+                    else if (c.C14 == x.Key || c.C14 == null)
+                    {
+                        c.C14 = x.Key;
+                        c.V14 = x.Value;
+                    }
+                    else if (c.C15 == x.Key || c.C15 == null)
+                    {
+                        c.C15 = x.Key;
+                        c.V15 = x.Value;
+                    }
+                }
+                Datos.SaveOrUpdate(c);
+            }
+
+            
+            
+            //foreach (Control oCaract in this.flpCaracteristicas.Controls)
+            //{
+            //    var oControl = oCaract.Controls[1];
+            //    if (oControl.Tag == null) continue;
+            //    int iCaracteristicaID = Util.Entero(oControl.Tag);
+            //    var oParteCar = Datos.GetEntity<ParteCaracteristica>(c => c.ParteID == this.oParte.ParteID && c.CaracteristicaID == iCaracteristicaID);
+            //    if (oParteCar == null)
+            //        oParteCar = new ParteCaracteristica() { ParteID = this.oParte.ParteID, CaracteristicaID = iCaracteristicaID };
+            //    if (oControl is ComboMultiSel)
+            //        oParteCar.Valor = string.Join(",", (oControl as ComboMultiSel).CheckedItems);
+            //    else
+            //        oParteCar.Valor = oControl.Text;
+            //    Datos.Guardar<ParteCaracteristica>(oParteCar);
+            //}
         }
 
         private void BusquedaVerRetraso()
@@ -2933,25 +3111,9 @@ namespace Refaccionaria.App
 
         #endregion
 
-        private void dgvExistencias_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
 
-        private void flpCaracteristicas_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
-
-        private void txtDescripcionMaxMin_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPrecio5_Click(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }

@@ -1483,6 +1483,43 @@
           <Property Name="CaracteristicaID" Type="int" Nullable="false" />
           <Property Name="Valor" Type="nvarchar" MaxLength="120" />
         </EntityType>
+        <EntityType Name="ParteCaracteristicaDetalle">
+          <Key>
+            <PropertyRef Name="ParteCaracteristicaID" />
+          </Key>
+          <Property Name="ParteCaracteristicaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParteID" Type="int" Nullable="false" />
+          <Property Name="C1" Type="int" />
+          <Property Name="V1" Type="nvarchar" MaxLength="512" />
+          <Property Name="C2" Type="int" />
+          <Property Name="V2" Type="nvarchar" MaxLength="512" />
+          <Property Name="C3" Type="int" />
+          <Property Name="V3" Type="nvarchar" MaxLength="512" />
+          <Property Name="C4" Type="int" />
+          <Property Name="V4" Type="nvarchar" MaxLength="512" />
+          <Property Name="C5" Type="int" />
+          <Property Name="V5" Type="nvarchar" MaxLength="512" />
+          <Property Name="C6" Type="int" />
+          <Property Name="V6" Type="nvarchar" MaxLength="512" />
+          <Property Name="C7" Type="int" />
+          <Property Name="V7" Type="nvarchar" MaxLength="512" />
+          <Property Name="C8" Type="int" />
+          <Property Name="V8" Type="nvarchar" MaxLength="512" />
+          <Property Name="C9" Type="int" />
+          <Property Name="V9" Type="nvarchar" MaxLength="512" />
+          <Property Name="C10" Type="int" />
+          <Property Name="V10" Type="nvarchar" MaxLength="512" />
+          <Property Name="C11" Type="int" />
+          <Property Name="V11" Type="nvarchar" MaxLength="512" />
+          <Property Name="C12" Type="int" />
+          <Property Name="V12" Type="nvarchar" MaxLength="512" />
+          <Property Name="C13" Type="int" />
+          <Property Name="V13" Type="nvarchar" MaxLength="512" />
+          <Property Name="C14" Type="int" />
+          <Property Name="V14" Type="nvarchar" MaxLength="512" />
+          <Property Name="C15" Type="int" />
+          <Property Name="V15" Type="nvarchar" MaxLength="512" />
+        </EntityType>
         <EntityType Name="ParteCaracteristicaTemporal">
           <Key>
             <PropertyRef Name="ParteCaracteristicaTemporalID" />
@@ -2877,7 +2914,7 @@
           <Property Name="LineaID" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.AutorizacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.AutorizacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="AutorizacionesView">
           <Key>
             <PropertyRef Name="AutorizacionID" />
@@ -2901,7 +2938,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Autorizaciones
           <Property Name="Autorizo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.BancosCuentasMovimientosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.BancosCuentasMovimientosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="BancosCuentasMovimientosView">
           <Key>
             <PropertyRef Name="BancoCuentaMovimientoID" />
@@ -2939,7 +2976,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.BancosCuentasM
           <Property Name="FueManual" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaEfectivoPorDiaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.CajaEfectivoPorDiaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CajaEfectivoPorDiaView">
           <Key>
             <PropertyRef Name="CajaEfectivoPorDiaID" />
@@ -2958,7 +2995,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaEfectivoPo
           <Property Name="UsuarioCierre" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaEgresosProveedoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.CajaEgresosProveedoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CajaEgresosProveedoresView">
           <Key>
             <PropertyRef Name="CajaEgresoID" />
@@ -2979,7 +3016,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaEgresosPro
           <Property Name="AfectadoEnProveedores" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaEgresosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.CajaEgresosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CajaEgresosView">
           <Key>
             <PropertyRef Name="CajaEgresoID" />
@@ -3008,7 +3045,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaEgresosVie
           <Property Name="CuentaAuxiliar" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaFacturasGlobalesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.CajaFacturasGlobalesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CajaFacturasGlobalesView">
           <Key>
             <PropertyRef Name="CajaFacturaGlobalID" />
@@ -3051,7 +3088,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaFacturasGl
           <Property Name="Facturado" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaIngresosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.CajaIngresosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CajaIngresosView">
           <Key>
             <PropertyRef Name="CajaIngresoID" />
@@ -3073,7 +3110,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CajaIngresosVi
           <Property Name="AutorizoUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CascosRegistrosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.CascosRegistrosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CascosRegistrosView">
           <Key>
             <PropertyRef Name="CascoRegistroID" />
@@ -3102,7 +3139,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CascosRegistro
           <Property Name="CascoImporte" Type="nvarchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CiudadesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.CiudadesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CiudadesView">
           <Key>
             <PropertyRef Name="CiudadID" />
@@ -3122,7 +3159,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CiudadesView' 
           <Property Name="Busqueda" Type="nvarchar" MaxLength="765" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClienteCreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClienteCreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClienteCreditoView">
           <Key>
             <PropertyRef Name="ClienteCreditoID" />
@@ -3141,7 +3178,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClienteCredito
           <Property Name="Comentario" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClienteKardexDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClienteKardexDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClienteKardexDetalleView">
           <Key>
             <PropertyRef Name="VentaID" />
@@ -3174,7 +3211,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClienteKardexD
           <Property Name="Kilometraje" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientePersonalView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClientePersonalView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClientePersonalView">
           <Key>
             <PropertyRef Name="ClientePersonalID" />
@@ -3189,7 +3226,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientePersona
           <Property Name="Usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesAdeudosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClientesAdeudosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClientesAdeudosView">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -3206,7 +3243,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesAdeudo
           <Property Name="Restante" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesCreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClientesCreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClientesCreditoView">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -3232,7 +3269,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesCredit
           <Property Name="PromedioDePago3Meses" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesDatosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClientesDatosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClientesDatosView">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -3263,7 +3300,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesDatosV
           <Property Name="MenorQue2000Efectivo" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesEventosCalendarioView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClientesEventosCalendarioView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClientesEventosCalendarioView">
           <Key>
             <PropertyRef Name="ClienteEventoCalendarioID" />
@@ -3278,7 +3315,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesEvento
           <Property Name="Revisado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesFacturacionView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClientesFacturacionView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClientesFacturacionView">
           <Key>
             <PropertyRef Name="ClienteFacturacionID" />
@@ -3303,7 +3340,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesFactur
           <Property Name="Localidad" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesFlotillasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClientesFlotillasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClientesFlotillasView">
           <Key>
             <PropertyRef Name="ClienteFlotillaID" />
@@ -3328,7 +3365,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesFlotil
           <Property Name="Etiqueta" Type="nvarchar" MaxLength="54" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ClientesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClientesView">
           <Key>
             <PropertyRef Name="ClienteID" />
@@ -3393,7 +3430,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ClientesView' 
           <Property Name="MenorQue2000Efectivo" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaCuentasAuxiliaresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ContaCuentasAuxiliaresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ContaCuentasAuxiliaresView">
           <Key>
             <PropertyRef Name="ContaCuentaAuxiliarID" />
@@ -3411,7 +3448,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaCuentasAu
           <Property Name="Cuenta" Type="nvarchar" MaxLength="32" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaEgresosDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ContaEgresosDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ContaEgresosDetalleView">
           <Key>
             <PropertyRef Name="ContaEgresoDetalleID" />
@@ -3430,7 +3467,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaEgresosDe
           <Property Name="CantidadDevEspecial" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaEgresosDevengadoEspecialCuentasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ContaEgresosDevengadoEspecialCuentasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ContaEgresosDevengadoEspecialCuentasView">
           <Key>
             <PropertyRef Name="ContaEgresoDevengadoEspecialID" />
@@ -3459,7 +3496,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaEgresosDe
           <Property Name="ImporteDev" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaEgresosDevengadosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ContaEgresosDevengadosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ContaEgresosDevengadosView">
           <Key>
             <PropertyRef Name="Id" />
@@ -3479,7 +3516,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaEgresosDe
           <Property Name="EsEspecial" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaEgresosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ContaEgresosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ContaEgresosView">
           <Key>
             <PropertyRef Name="ContaEgresoID" />
@@ -3500,7 +3537,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaEgresosVi
           <Property Name="ImporteDevEsp" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaPolizasDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ContaPolizasDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ContaPolizasDetalleAvanzadoView">
           <Key>
             <PropertyRef Name="ContaPolizaDetalleID" />
@@ -3533,7 +3570,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ContaPolizasDe
           <Property Name="Referencia" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CorteValidacionView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.CorteValidacionView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CorteValidacionView">
           <Key>
             <PropertyRef Name="CorteDetalleHistoricoID" />
@@ -3565,7 +3602,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.CorteValidacio
           <Property Name="ExistenciaCantidad" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Cotizaciones9500DetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.Cotizaciones9500DetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Cotizaciones9500DetalleAvanzadoView">
           <Key>
             <PropertyRef Name="Cotizacion9500DetalleID" />
@@ -3591,7 +3628,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Cotizaciones95
           <Property Name="PrecioAlCliente" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Cotizaciones9500DetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.Cotizaciones9500DetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Cotizaciones9500DetalleView">
           <Key>
             <PropertyRef Name="Cotizacion9500DetalleID" />
@@ -3617,7 +3654,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Cotizaciones95
           <Property Name="PrecioAlCliente" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Cotizaciones9500View' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.Cotizaciones9500View' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Cotizaciones9500View">
           <Key>
             <PropertyRef Name="Cotizacion9500ID" />
@@ -3641,7 +3678,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Cotizaciones95
           <Property Name="AnticipoVentaFolio" Type="nvarchar" MaxLength="16" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.EstadosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.EstadosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="EstadosView">
           <Key>
             <PropertyRef Name="EstadoID" />
@@ -3653,7 +3690,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.EstadosView' n
           <Property Name="Busqueda" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.EstatusGeneralesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.EstatusGeneralesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="EstatusGeneralesView">
           <Key>
             <PropertyRef Name="EstatusID" />
@@ -3663,7 +3700,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.EstatusGeneral
           <Property Name="NombreEstatus" Type="varchar" MaxLength="8" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ExistenciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ExistenciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ExistenciasView">
           <Key>
             <PropertyRef Name="ParteExistenciaID" />
@@ -3687,7 +3724,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ExistenciasVie
           <Property Name="DescripcionMaxMin" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioConteosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.InventarioConteosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="InventarioConteosView">
           <Key>
             <PropertyRef Name="InventarioConteoID" />
@@ -3709,7 +3746,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioCont
           <Property Name="RealizoUsuarioID" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioLineasAgrupadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.InventarioLineasAgrupadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="InventarioLineasAgrupadoView">
           <Key>
             <PropertyRef Name="Id" />
@@ -3726,7 +3763,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioLine
           <Property Name="FechaCompletado" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioLineasConteosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.InventarioLineasConteosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="InventarioLineasConteosView">
           <Key>
             <PropertyRef Name="InventarioLineaID" />
@@ -3740,7 +3777,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioLine
           <Property Name="Conteo" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioLineasPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.InventarioLineasPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="InventarioLineasPartesView">
           <Key>
             <PropertyRef Name="Id" />
@@ -3752,7 +3789,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioLine
           <Property Name="Partes" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioResultadosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.InventarioResultadosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="InventarioResultadosView">
           <Key>
             <PropertyRef Name="Id" />
@@ -3773,7 +3810,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioResu
           <Property Name="DiferenciaTotal" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioUsuariosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.InventarioUsuariosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="InventarioUsuariosView">
           <Key>
             <PropertyRef Name="InventarioUsuarioID" />
@@ -3789,7 +3826,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.InventarioUsua
           <Property Name="ArticulosDiarios" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.LineaMarcaPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.LineaMarcaPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="LineaMarcaPartesView">
           <Key>
             <PropertyRef Name="LineaMarcaParteID" />
@@ -3807,7 +3844,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.LineaMarcaPart
           <Property Name="LineaMarca" Type="nvarchar" MaxLength="303" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.LineasCaracteristicasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.LineasCaracteristicasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="LineasCaracteristicasView">
           <Key>
             <PropertyRef Name="LineaCaracteristicaID" />
@@ -3822,7 +3859,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.LineasCaracter
           <Property Name="MultipleOpciones" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.LineasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.LineasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="LineasView">
           <Key>
             <PropertyRef Name="LineaID" />
@@ -3867,7 +3904,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.LineasView' no
           <Property Name="Busqueda" Type="nvarchar" MaxLength="230" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Lista9500View' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.Lista9500View' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Lista9500View">
           <Key>
             <PropertyRef Name="Cotizacion9500ID" />
@@ -3898,7 +3935,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.Lista9500View'
           <Property Name="BajaUsuario" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MarcaPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MarcaPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MarcaPartesView">
           <Key>
             <PropertyRef Name="MarcaParteID" />
@@ -3911,7 +3948,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MarcaPartesVie
           <Property Name="Busqueda" Type="nvarchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MarcasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MarcasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MarcasView">
           <Key>
             <PropertyRef Name="MarcaID" />
@@ -3921,7 +3958,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MarcasView' no
           <Property Name="Busqueda" Type="nvarchar" MaxLength="62" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MedidasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MedidasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MedidasView">
           <Key>
             <PropertyRef Name="MedidaID" />
@@ -3932,7 +3969,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MedidasView' n
           <Property Name="Busqueda" Type="nvarchar" MaxLength="130" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MetasComisionVendedoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MetasComisionVendedoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MetasComisionVendedoresView">
           <Key>
             
@@ -3946,7 +3983,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MetasComisionV
           <Property Name="Comision" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MetasUtilidadSucursalesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MetasUtilidadSucursalesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MetasUtilidadSucursalesView">
           <Key>
             
@@ -3960,7 +3997,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MetasUtilidadS
           <Property Name="Utilidad" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MetasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MetasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MetasView">
           <Key>
             <PropertyRef Name="MetaID" />
@@ -3979,7 +4016,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MetasView' no 
           <Property Name="RutaImagen" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ModelosAniosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ModelosAniosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ModelosAniosView">
           <Key>
             <PropertyRef Name="ModeloID" />
@@ -3989,7 +4026,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ModelosAniosVi
           <Property Name="Anio" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ModelosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ModelosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ModelosView">
           <Key>
             <PropertyRef Name="ModeloID" />
@@ -4003,7 +4040,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ModelosView' n
           <Property Name="Busqueda" Type="nvarchar" MaxLength="157" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MotoresAniosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MotoresAniosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MotoresAniosView">
           <Key>
             <PropertyRef Name="ModeloID" />
@@ -4015,7 +4052,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MotoresAniosVi
           <Property Name="Anio" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MotoresExistentesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MotoresExistentesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MotoresExistentesView">
           <Key>
             <PropertyRef Name="MotorExistenteID" />
@@ -4026,7 +4063,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MotoresExisten
           <Property Name="Busqueda" Type="nvarchar" MaxLength="80" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MotoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MotoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MotoresView">
           <Key>
             <PropertyRef Name="GenericoID" />
@@ -4045,7 +4082,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MotoresView' n
           <Property Name="Busqueda" Type="nvarchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInventarioContingenciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientoInventarioContingenciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientoInventarioContingenciasView">
           <Key>
             <PropertyRef Name="MovimientoInventarioTraspasoContingenciaID" />
@@ -4092,7 +4129,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInve
           <Property Name="ObservacionSolucion" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInventarioDescuentoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientoInventarioDescuentoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientoInventarioDescuentoView">
           <Key>
             <PropertyRef Name="MovimientoInventarioDescuentoID" />
@@ -4122,7 +4159,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInve
           <Property Name="DescuentoCinco" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInventarioDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientoInventarioDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientoInventarioDetalleView">
           <Key>
             <PropertyRef Name="MovimientoInventarioDetalleID" />
@@ -4154,7 +4191,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInve
           <Property Name="LineaID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInventarioEtiquetasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientoInventarioEtiquetasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientoInventarioEtiquetasView">
           <Key>
             <PropertyRef Name="MovimientoInventarioEtiquetaID" />
@@ -4173,7 +4210,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInve
           <Property Name="NumeroEtiquetas" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInventarioTraspasosHisView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientoInventarioTraspasosHisView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientoInventarioTraspasosHisView">
           <Key>
             <PropertyRef Name="MovimientoInventarioDetalleID" />
@@ -4195,7 +4232,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInve
           <Property Name="Diferencia" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInventarioTraspasosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientoInventarioTraspasosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientoInventarioTraspasosView">
           <Key>
             <PropertyRef Name="MovimientoInventarioID" />
@@ -4219,7 +4256,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInve
           <Property Name="TraspasoEntregado" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInventarioView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientoInventarioView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientoInventarioView">
           <Key>
             <PropertyRef Name="MovimientoInventarioID" />
@@ -4266,7 +4303,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientoInve
           <Property Name="ImporteTotalSinDescuento" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientosInventarioContadorDevolucionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientosInventarioContadorDevolucionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientosInventarioContadorDevolucionesView">
           <Key>
             <PropertyRef Name="MovimientoInventarioID" />
@@ -4278,7 +4315,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientosInv
           <Property Name="Cantidad" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientosInventarioDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MovimientosInventarioDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MovimientosInventarioDetalleAvanzadoView">
           <Key>
             <PropertyRef Name="MovimientoInventarioDetalleID" />
@@ -4306,7 +4343,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MovimientosInv
           <Property Name="Linea" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MunicipiosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MunicipiosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MunicipiosView">
           <Key>
             <PropertyRef Name="MunicipioID" />
@@ -4322,7 +4359,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MunicipiosView
           <Property Name="Busqueda" Type="nvarchar" MaxLength="510" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MxMnCriterioView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.MxMnCriterioView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="MxMnCriterioView">
           <Key>
             <PropertyRef Name="MxMnCriterioID" />
@@ -4333,7 +4370,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.MxMnCriterioVi
           <Property Name="Expresion" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NominaOficialCuentasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.NominaOficialCuentasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="NominaOficialCuentasView">
           <Key>
             <PropertyRef Name="NominaOficialCuentaID" />
@@ -4347,7 +4384,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NominaOficialC
           <Property Name="GeneraGasto" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NominaUsuariosOficialView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.NominaUsuariosOficialView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="NominaUsuariosOficialView">
           <Key>
             <PropertyRef Name="NominaUsuarioOficialID" />
@@ -4367,7 +4404,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NominaUsuarios
           <Property Name="Suma" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NominaUsuariosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.NominaUsuariosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="NominaUsuariosView">
           <Key>
             <PropertyRef Name="NominaUsuarioID" />
@@ -4411,7 +4448,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NominaUsuarios
           <Property Name="Liquido" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NotasDeCreditoFiscalesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.NotasDeCreditoFiscalesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="NotasDeCreditoFiscalesView">
           <Key>
             <PropertyRef Name="NotaDeCreditoFiscalID" />
@@ -4438,7 +4475,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NotasDeCredito
           <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NotasDeCreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.NotasDeCreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="NotasDeCreditoView">
           <Key>
             <PropertyRef Name="NotaDeCreditoID" />
@@ -4463,7 +4500,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.NotasDeCredito
           <Property Name="RelacionID" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesAvancesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesAvancesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesAvancesView">
           <Key>
             <PropertyRef Name="ParteID" />
@@ -4499,7 +4536,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesAvancesV
           <Property Name="Validado" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesBusquedaEnMovimientosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesBusquedaEnMovimientosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesBusquedaEnMovimientosView">
           <Key>
             <PropertyRef Name="ParteID" />
@@ -4538,7 +4575,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesBusqueda
           <Property Name="Busqueda" Type="nvarchar" MaxLength="862" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesCaracteristicasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesCaracteristicasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesCaracteristicasView">
           <Key>
             <PropertyRef Name="ParteCaracteristicaID" />
@@ -4553,7 +4590,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesCaracter
           <Property Name="Valor" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesClasificacionAbcView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesClasificacionAbcView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesClasificacionAbcView">
           <Key>
             <PropertyRef Name="ParteID" />
@@ -4569,7 +4606,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesClasific
           <Property Name="NuevaAbc" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesCodigosAlternosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesCodigosAlternosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesCodigosAlternosView">
           <Key>
             <PropertyRef Name="ParteCodigoAlternoID" />
@@ -4586,7 +4623,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesCodigosA
           <Property Name="CodigoAlterno" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesComisionesPrevioView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesComisionesPrevioView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesComisionesPrevioView">
           <Key>
             <PropertyRef Name="ProveedorID" />
@@ -4615,7 +4652,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesComision
           <Property Name="ComisionFijaRepartidor" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesComisionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesComisionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesComisionesView">
           <Key>
             <PropertyRef Name="LineaID" />
@@ -4641,7 +4678,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesComision
           <Property Name="ComisionFijaRepartidor" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesComplementariasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesComplementariasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesComplementariasView">
           <Key>
             <PropertyRef Name="ParteComplementariaID" />
@@ -4655,7 +4692,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesCompleme
           <Property Name="Descripcion" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesDiferenciasEnExistenciaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesDiferenciasEnExistenciaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesDiferenciasEnExistenciaView">
           <Key>
             <PropertyRef Name="ParteID" />
@@ -4672,7 +4709,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesDiferenc
           <Property Name="Diferencia" Type="decimal" Precision="19" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesEquivalentesMaxMinView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesEquivalentesMaxMinView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesEquivalentesMaxMinView">
           <Key>
             <PropertyRef Name="ParteEquivalenteID" />
@@ -4688,7 +4725,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesEquivale
           <Property Name="Minimo" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesEquivalentesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesEquivalentesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesEquivalentesView">
           <Key>
             <PropertyRef Name="ParteEquivalenteID" />
@@ -4706,7 +4743,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesEquivale
           <Property Name="CostoConDescuento" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesErroresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesErroresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesErroresView">
           <Key>
             <PropertyRef Name="ParteErrorID" />
@@ -4743,7 +4780,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesErroresV
           <Property Name="UsuarioSolucion" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesExistenciasMaxMinView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesExistenciasMaxMinView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesExistenciasMaxMinView">
           <Key>
             <PropertyRef Name="ParteExistenciaID" />
@@ -4759,7 +4796,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesExistenc
           <Property Name="Minimo" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesExistenciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesExistenciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesExistenciasView">
           <Key>
             <PropertyRef Name="Registro" />
@@ -4790,7 +4827,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesExistenc
           <Property Name="FolioFactura" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesMaxMinView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesMaxMinView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesMaxMinView">
           <Key>
             <PropertyRef Name="ParteID" />
@@ -4815,7 +4852,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesMaxMinVi
           <Property Name="Linea" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesSistemaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesSistemaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesSistemaView">
           <Key>
             <PropertyRef Name="ParteSistemaID" />
@@ -4826,7 +4863,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesSistemaV
           <Property Name="Busqueda" Type="nvarchar" MaxLength="80" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesUbicacionView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesUbicacionView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesUbicacionView">
           <Key>
             <PropertyRef Name="ParteUbicacionID" />
@@ -4837,7 +4874,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesUbicacio
           <Property Name="Busqueda" Type="nvarchar" MaxLength="80" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesVehiculosBasicoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesVehiculosBasicoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesVehiculosBasicoView">
           <Key>
             <PropertyRef Name="ParteVehiculoID" />
@@ -4857,7 +4894,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesVehiculo
           <Property Name="Fuente" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesVehiculosMotoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesVehiculosMotoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesVehiculosMotoresView">
           <Key>
             <PropertyRef Name="MotorID" />
@@ -4870,7 +4907,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesVehiculo
           <Property Name="NombreMotor" Type="nvarchar" MaxLength="8" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesVehiculosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesVehiculosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesVehiculosView">
           <Key>
             <PropertyRef Name="GenericoID" />
@@ -4886,7 +4923,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesVehiculo
           <Property Name="Anio" Type="nvarchar" MaxLength="4" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesVentasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesVentasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesVentasView">
           <Key>
             <PropertyRef Name="ParteID" />
@@ -4915,7 +4952,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesVentasVi
           <Property Name="CostoConDescuento" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PartesView">
           <Key>
             <PropertyRef Name="ParteID" />
@@ -4941,7 +4978,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PartesView' no
           <Property Name="Busqueda" Type="nvarchar" MaxLength="862" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PedidosDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PedidosDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PedidosDetalleView">
           <Key>
             <PropertyRef Name="PedidoDetalleID" />
@@ -4959,18 +4996,19 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PedidosDetalle
           <Property Name="PedidoID" Type="int" Nullable="false" />
           <Property Name="ParteID" Type="int" Nullable="false" />
           <Property Name="NumeroParte" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NombreParte" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="NombreParte" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="PedidoEstatusID" Type="int" Nullable="false" />
           <Property Name="NombrePedidoEstatus" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Abreviacion" Type="nvarchar" MaxLength="50" />
           <Property Name="CantidadPedido" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CantidadSurtida" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CostosUnitario" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="Fecha" Type="date" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PedidosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PedidosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PedidosView">
           <Key>
             <PropertyRef Name="PedidoID" />
@@ -4993,7 +5031,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PedidosView' n
           <Property Name="Abreviacion" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PerfilesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PerfilesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PerfilesView">
           <Key>
             <PropertyRef Name="PerfilID" />
@@ -5004,7 +5042,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PerfilesView' 
           <Property Name="Busqueda" Type="nvarchar" MaxLength="80" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PerfilPermisosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PerfilPermisosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PerfilPermisosView">
           <Key>
             <PropertyRef Name="PerfilID" />
@@ -5018,7 +5056,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PerfilPermisos
           <Property Name="MensajeDeError" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PermisosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PermisosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PermisosView">
           <Key>
             <PropertyRef Name="PermisoID" />
@@ -5029,7 +5067,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.PermisosView' 
           <Property Name="Busqueda" Type="nvarchar" MaxLength="130" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorContactoPrincipalView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorContactoPrincipalView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorContactoPrincipalView">
           <Key>
             <PropertyRef Name="ProveedorID" />
@@ -5053,7 +5091,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorConta
           <Property Name="CP" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorContactosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorContactosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorContactosView">
           <Key>
             <PropertyRef Name="ProveedorContactoID" />
@@ -5073,7 +5111,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorConta
           <Property Name="Busqueda" Type="nvarchar" MaxLength="360" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorDetalleDocumentosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorDetalleDocumentosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorDetalleDocumentosView">
           <Key>
             <PropertyRef Name="MovimientoInventarioDetalleID" />
@@ -5090,7 +5128,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorDetal
           <Property Name="UNS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorEquivalContactoPpalView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorEquivalContactoPpalView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorEquivalContactoPpalView">
           <Key>
             <PropertyRef Name="ProveedorID" />
@@ -5118,7 +5156,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorEquiv
           <Property Name="ParteIDEquivalente" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresComprasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresComprasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresComprasView">
           <Key>
             <PropertyRef Name="MovimientoInventarioID" />
@@ -5147,7 +5185,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresCom
           <Property Name="DiasPlazo" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresMarcasLineasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresMarcasLineasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresMarcasLineasView">
           <Key>
             <PropertyRef Name="ProveedorMarcaParteID" />
@@ -5167,7 +5205,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresMar
           <Property Name="LineaMarca" Type="nvarchar" MaxLength="301" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresNotasDeCreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresNotasDeCreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresNotasDeCreditoView">
           <Key>
             <PropertyRef Name="ProveedorNotaDeCreditoID" />
@@ -5196,7 +5234,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresNot
           <Property Name="Facturas" Type="nvarchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPagosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresPagosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresPagosView">
           <Key>
             <PropertyRef Name="ProveedorPolizaID" />
@@ -5220,7 +5258,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPag
           <Property Name="Descuento" Type="numeric" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPartesGananciasLineasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresPartesGananciasLineasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresPartesGananciasLineasView">
           <Key>
             <PropertyRef Name="ProveedorID" />
@@ -5252,7 +5290,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPar
           <Property Name="Observacion" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPartesGananciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresPartesGananciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresPartesGananciasView">
           <Key>
             <PropertyRef Name="ProveedorID" />
@@ -5284,7 +5322,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPar
           <Property Name="Observacion" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPolizasDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresPolizasDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresPolizasDetalleAvanzadoView">
           <Key>
             <PropertyRef Name="ProveedorPolizaDetalleID" />
@@ -5316,7 +5354,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPol
           <Property Name="NotaDeCreditoOrigen" Type="nvarchar" MaxLength="32" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPolizasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresPolizasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresPolizasView">
           <Key>
             <PropertyRef Name="ProveedorPolizaID" />
@@ -5338,7 +5376,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresPol
           <Property Name="Folio" Type="nvarchar" MaxLength="16" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedoresView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedoresView">
           <Key>
             <PropertyRef Name="ProveedorID" />
@@ -5363,7 +5401,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedoresVie
           <Property Name="Busqueda" Type="nvarchar" MaxLength="230" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorGananciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorGananciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorGananciasView">
           <Key>
             <PropertyRef Name="ProveedorGananciaID" />
@@ -5388,7 +5426,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorGanan
           <Property Name="LineaMarca" Type="nvarchar" MaxLength="303" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorKardexDetalleOperacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorKardexDetalleOperacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorKardexDetalleOperacionesView">
           <Key>
             <PropertyRef Name="MovimientoInventarioDetalleID" />
@@ -5406,7 +5444,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorKarde
           <Property Name="Importe" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorLineaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorLineaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorLineaView">
           <Key>
             <PropertyRef Name="LineaID" />
@@ -5418,7 +5456,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorLinea
           <Property Name="ProveedorID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorMarcaPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorMarcaPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorMarcaPartesView">
           <Key>
             <PropertyRef Name="ProveedorMarcaParteID" />
@@ -5436,7 +5474,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorMarca
           <Property Name="Impacta" Type="varchar" MaxLength="1" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorMarcaParteView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorMarcaParteView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorMarcaParteView">
           <Key>
             <PropertyRef Name="MarcaParteID" />
@@ -5448,7 +5486,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorMarca
           <Property Name="ProveedorID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorObservacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorObservacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorObservacionesView">
           <Key>
             <PropertyRef Name="ProveedorObservacionID" />
@@ -5465,7 +5503,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorObser
           <Property Name="Busqueda" Type="nvarchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorPaqueteriasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorPaqueteriasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorPaqueteriasView">
           <Key>
             <PropertyRef Name="ProveedorPaqueteriaID" />
@@ -5484,7 +5522,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorPaque
           <Property Name="Busqueda" Type="nvarchar" MaxLength="602" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorProductosCompradosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorProductosCompradosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorProductosCompradosView">
           <Key>
             <PropertyRef Name="MovimientoInventarioDetalleID" />
@@ -5514,7 +5552,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorProdu
           <Property Name="FechaRecepcion" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorProntoPagosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.ProveedorProntoPagosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ProveedorProntoPagosView">
           <Key>
             <PropertyRef Name="ProveedorProntoPagoID" />
@@ -5529,7 +5567,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.ProveedorPront
           <Property Name="Comentario" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.SistemasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.SistemasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="SistemasView">
           <Key>
             <PropertyRef Name="SistemaID" />
@@ -5540,7 +5578,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.SistemasView' 
           <Property Name="Busqueda" Type="nvarchar" MaxLength="80" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.SubsistemasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.SubsistemasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="SubsistemasView">
           <Key>
             <PropertyRef Name="SubsistemaID" />
@@ -5553,7 +5591,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.SubsistemasVie
           <Property Name="Busqueda" Type="nvarchar" MaxLength="130" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.SucursalesCriterioAbcView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.SucursalesCriterioAbcView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="SucursalesCriterioAbcView">
           <Key>
             <PropertyRef Name="SucursalID" />
@@ -5565,7 +5603,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.SucursalesCrit
           <Property Name="Nivel" Type="nvarchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.SucursalesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.SucursalesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="SucursalesView">
           <Key>
             <PropertyRef Name="SucursalID" />
@@ -5577,7 +5615,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.SucursalesView
           <Property Name="Busqueda" Type="nvarchar" MaxLength="180" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.TipoMovimientosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.TipoMovimientosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="TipoMovimientosView">
           <Key>
             <PropertyRef Name="TipoMovimientoID" />
@@ -5588,7 +5626,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.TipoMovimiento
           <Property Name="Busqueda" Type="nvarchar" MaxLength="130" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.TipoOperacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.TipoOperacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="TipoOperacionesView">
           <Key>
             <PropertyRef Name="TipoOperacionID" />
@@ -5601,7 +5639,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.TipoOperacione
           <Property Name="Busqueda" Type="nvarchar" MaxLength="130" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.TipoPagosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.TipoPagosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="TipoPagosView">
           <Key>
             <PropertyRef Name="TipoPagoID" />
@@ -5612,7 +5650,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.TipoPagosView'
           <Property Name="Busqueda" Type="nvarchar" MaxLength="130" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuarioPerfilesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.UsuarioPerfilesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="UsuarioPerfilesView">
           <Key>
             <PropertyRef Name="UsuarioPerfilID" />
@@ -5632,7 +5670,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuarioPerfile
           <Property Name="NombrePersona" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuariosAsistenciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.UsuariosAsistenciasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="UsuariosAsistenciasView">
           <Key>
             <PropertyRef Name="AccesoUsuarioID" />
@@ -5649,7 +5687,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuariosAsiste
           <Property Name="NombreSucursal" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuariosNominaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.UsuariosNominaView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="UsuariosNominaView">
           <Key>
             <PropertyRef Name="UsuarioNominaID" />
@@ -5666,7 +5704,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuariosNomina
           <Property Name="SueldoFijo" Type="decimal" Precision="12" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuariosPermisosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.UsuariosPermisosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="UsuariosPermisosView">
           <Key>
             <PropertyRef Name="UsuarioID" />
@@ -5681,7 +5719,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuariosPermis
           <Property Name="Permiso" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuariosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.UsuariosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="UsuariosView">
           <Key>
             <PropertyRef Name="UsuarioID" />
@@ -5699,7 +5737,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.UsuariosView' 
           <Property Name="Busqueda" Type="nvarchar" MaxLength="138" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasACreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasACreditoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasACreditoView">
           <Key>
             <PropertyRef Name="VentaID" />
@@ -5722,7 +5760,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasACredito
           <Property Name="Restante" Type="decimal" Precision="13" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasCambiosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasCambiosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasCambiosView">
           <Key>
             <PropertyRef Name="VentaCambioID" />
@@ -5749,7 +5787,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasCambiosV
           <Property Name="ComisionistaDespues" Type="nvarchar" MaxLength="16" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasCotizacionesDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasCotizacionesDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasCotizacionesDetalleAvanzadoView">
           <Key>
             <PropertyRef Name="VentaCotizacionDetalleID" />
@@ -5780,7 +5818,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasCotizaci
           <Property Name="Linea" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasDetalleAvanzadoView">
           <Key>
             <PropertyRef Name="VentaDetalleID" />
@@ -5807,7 +5845,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasDetalleA
           <Property Name="Iva" Type="decimal" Precision="14" Scale="4" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasDetalleView">
           <Key>
             <PropertyRef Name="VentaDetalleID" />
@@ -5833,7 +5871,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasDetalleV
           <Property Name="LineaID" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasDevolucionesDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasDevolucionesDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasDevolucionesDetalleView">
           <Key>
             <PropertyRef Name="VentaDevolucionDetalleID" />
@@ -5859,7 +5897,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasDevoluci
           <Property Name="LineaID" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasDevolucionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasDevolucionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasDevolucionesView">
           <Key>
             <PropertyRef Name="VentaDevolucionID" />
@@ -5903,7 +5941,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasDevoluci
           <Property Name="Total" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasFacturasCancelacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasFacturasCancelacionesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasFacturasCancelacionesView">
           <Key>
             <PropertyRef Name="VentaFacturaDevolucionID" />
@@ -5919,7 +5957,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasFacturas
           <Property Name="FechaSolicitudCancelacion" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasFacturasDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasFacturasDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasFacturasDetalleAvanzadoView">
           <Key>
             <PropertyRef Name="VentaFacturaDetalleID" />
@@ -5940,7 +5978,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasFacturas
           <Property Name="VentaEstatusID" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasFacturasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasFacturasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasFacturasView">
           <Key>
             <PropertyRef Name="VentaFacturaID" />
@@ -5954,7 +5992,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasFacturas
           <Property Name="Ventas" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasGarantiasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasGarantiasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasGarantiasView">
           <Key>
             <PropertyRef Name="VentaGarantiaID" />
@@ -6016,7 +6054,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasGarantia
           <Property Name="ProveedorNotaDeCreditoID" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPagosDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasPagosDetalleAvanzadoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasPagosDetalleAvanzadoView">
           <Key>
             <PropertyRef Name="VentaPagoDetalleID" />
@@ -6050,7 +6088,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPagosDet
           <Property Name="Vendedor" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPagosDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasPagosDetalleView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasPagosDetalleView">
           <Key>
             <PropertyRef Name="VentaPagoDetalleID" />
@@ -6074,7 +6112,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPagosDet
           <Property Name="Resguardado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPagosFormasDePagoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasPagosFormasDePagoView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasPagosFormasDePagoView">
           <Key>
             <PropertyRef Name="VentaPagoID" />
@@ -6099,7 +6137,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPagosFor
           <Property Name="Importe" Type="decimal" Precision="38" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPagosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasPagosView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasPagosView">
           <Key>
             <PropertyRef Name="VentaPagoID" />
@@ -6125,7 +6163,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPagosVie
           <Property Name="VendedorUsuario" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasPartesView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasPartesView">
           <Key>
             <PropertyRef Name="VentaDetalleID" />
@@ -6149,7 +6187,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasPartesVi
           <Property Name="MarcaID" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VentasView">
           <Key>
             <PropertyRef Name="VentaID" />
@@ -8260,6 +8298,18 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasView' no
               <PropertyRef Name="ParteID" />
             </Principal>
             <Dependent Role="ParteCaracteristica">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ParteCara__Parte__76CC72AF">
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="ParteCaracteristicaDetalle" Type="Self.ParteCaracteristicaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteCaracteristicaDetalle">
               <PropertyRef Name="ParteID" />
             </Dependent>
           </ReferentialConstraint>
@@ -11722,6 +11772,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest6.dbo.VentasView' no
           <EntitySet Name="ParteAbcRango" EntityType="Self.ParteAbcRango" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteCambio" EntityType="Self.ParteCambio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteCaracteristica" EntityType="Self.ParteCaracteristica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParteCaracteristicaDetalle" EntityType="Self.ParteCaracteristicaDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteCaracteristicaTemporal" EntityType="Self.ParteCaracteristicaTemporal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteCodigoAlterno" EntityType="Self.ParteCodigoAlterno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParteComision" EntityType="Self.ParteComision" Schema="dbo" store:Type="Tables" />
@@ -13236,6 +13287,7 @@ FROM [dbo].[PartesView] AS [PartesView]</DefiningQuery>
 [PedidosDetalleView].[CantidadPedido] AS [CantidadPedido], 
 [PedidosDetalleView].[CantidadSurtida] AS [CantidadSurtida], 
 [PedidosDetalleView].[CostosUnitario] AS [CostosUnitario], 
+[PedidosDetalleView].[Costo] AS [Costo], 
 [PedidosDetalleView].[FechaRegistro] AS [FechaRegistro], 
 [PedidosDetalleView].[Fecha] AS [Fecha]
 FROM [dbo].[PedidosDetalleView] AS [PedidosDetalleView]</DefiningQuery>
@@ -14763,6 +14815,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Parte" EntitySet="Parte" />
             <End Role="ParteCaracteristica" EntitySet="ParteCaracteristica" />
           </AssociationSet>
+          <AssociationSet Name="FK__ParteCara__Parte__76CC72AF" Association="Self.FK__ParteCara__Parte__76CC72AF">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteCaracteristicaDetalle" EntitySet="ParteCaracteristicaDetalle" />
+          </AssociationSet>
           <AssociationSet Name="FK__ParteCara__Usuar__47F18835" Association="Self.FK__ParteCara__Usuar__47F18835">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ParteCaracteristicaTemporal" EntitySet="ParteCaracteristicaTemporal" />
@@ -16039,7 +16095,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="NominaUsuariosOficialView" EntityType="TheosProc.NominaUsuariosOficialView" />
           <EntitySet Name="NominaUsuariosView" EntityType="TheosProc.NominaUsuariosView" />
           <EntitySet Name="NotasDeCreditoFiscalesView" EntityType="TheosProc.NotasDeCreditoFiscalesView" />
-          <EntitySet Name="NotasDeCreditoView" EntityType="TheosProc.NotasDeCreditoView" />
           <EntitySet Name="PartesAvancesView" EntityType="TheosProc.PartesAvancesView" />
           <EntitySet Name="PartesCaracteristicasView" EntityType="TheosProc.PartesCaracteristicasView" />
           <EntitySet Name="PartesClasificacionAbcView" EntityType="TheosProc.PartesClasificacionAbcView" />
@@ -18206,6 +18261,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <Parameter Name="Hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="FacturaExtracto" EntityType="TheosProc.FacturaExtracto" />
+          <EntitySet Name="ParteCaracteristicaDetalle" EntityType="TheosProc.ParteCaracteristicaDetalle" />
+          <AssociationSet Name="FK__ParteCara__Parte__6D430875" Association="TheosProc.FK__ParteCara__Parte__6D430875">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteCaracteristicaDetalle" EntitySet="ParteCaracteristicaDetalle" />
+          </AssociationSet>
+          <EntitySet Name="NotasDeCreditoView" EntityType="TheosProc.NotasDeCreditoView" />
           </EntityContainer>
         <EntityType Name="Autorizacion">
           <Key>
@@ -19875,6 +19936,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Parte__57C8C8A2" FromRole="Parte" ToRole="ParteComision" />
           <NavigationProperty Name="ParteMaxMinFijoHistorico" Relationship="TheosProc.FK__ParteMaxM__Parte__5E75C631" FromRole="Parte" ToRole="ParteMaxMinFijoHistorico" />
           <NavigationProperty Name="ParteComisionHistorico" Relationship="TheosProc.FK__ParteComi__Parte__64ADC274" FromRole="Parte" ToRole="ParteComisionHistorico" />
+          <NavigationProperty Name="ParteCaracteristicaDetalle" Relationship="TheosProc.FK__ParteCara__Parte__6D430875" FromRole="Parte" ToRole="ParteCaracteristicaDetalle" />
         </EntityType>
         <EntityType Name="ParteAbc">
           <Key>
@@ -22939,29 +23001,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Total" Type="Decimal" Nullable="false" Precision="13" Scale="2" />
           <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
           <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="NotasDeCreditoView">
-          <Key>
-            <PropertyRef Name="NotaDeCreditoID" />
-            <PropertyRef Name="FechaDeEmision" />
-            <PropertyRef Name="Importe" />
-            <PropertyRef Name="ClienteID" />
-            <PropertyRef Name="Valida" />
-          </Key>
-          <Property Name="NotaDeCreditoID" Type="Int32" Nullable="false" />
-          <Property Name="FechaDeEmision" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="ClienteID" Type="Int32" Nullable="false" />
-          <Property Name="Cliente" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Valida" Type="Boolean" Nullable="false" />
-          <Property Name="FechaDeUso" Type="DateTime" Precision="3" />
-          <Property Name="Observacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Autorizo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OrigenVentaFolio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="UsoVentaFolio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="OrigenID" Type="Int32" />
-          <Property Name="Origen" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="RelacionID" Type="Int32" />
         </EntityType>
         <EntityType Name="PartesAvancesView">
           <Key>
@@ -29874,7 +29913,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="PedidoID" Type="Int32" Nullable="false" />
           <Property Name="ParteID" Type="Int32" Nullable="false" />
           <Property Name="NumeroParte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NombreParte" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NombreParte" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="PedidoEstatusID" Type="Int32" Nullable="false" />
           <Property Name="NombrePedidoEstatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Abreviacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -29883,6 +29922,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="CostosUnitario" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ParteExistenciaHistorico">
           <Key>
@@ -30765,6 +30805,79 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="ClienteID" Type="Int32" />
           <Property Name="ImporteFactura" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ParteCaracteristicaDetalle">
+          <Key>
+            <PropertyRef Name="ParteCaracteristicaID" />
+          </Key>
+          <Property Name="ParteCaracteristicaID" Type="Int32" Nullable="false" />
+          <Property Name="ParteID" Type="Int32" Nullable="false" />
+          <Property Name="C1" Type="Int32" />
+          <Property Name="V1" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C2" Type="Int32" />
+          <Property Name="V2" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C3" Type="Int32" />
+          <Property Name="V3" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C4" Type="Int32" />
+          <Property Name="V4" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C5" Type="Int32" />
+          <Property Name="V5" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C6" Type="Int32" />
+          <Property Name="V6" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C7" Type="Int32" />
+          <Property Name="V7" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C8" Type="Int32" />
+          <Property Name="V8" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C9" Type="Int32" />
+          <Property Name="V9" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C10" Type="Int32" />
+          <Property Name="V10" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C11" Type="Int32" />
+          <Property Name="V11" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C12" Type="Int32" />
+          <Property Name="V12" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C13" Type="Int32" />
+          <Property Name="V13" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C14" Type="Int32" />
+          <Property Name="V14" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="C15" Type="Int32" />
+          <Property Name="V15" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Parte" Relationship="TheosProc.FK__ParteCara__Parte__6D430875" FromRole="ParteCaracteristicaDetalle" ToRole="Parte" />
+        </EntityType>
+        <Association Name="FK__ParteCara__Parte__6D430875">
+          <End Type="TheosProc.Parte" Role="Parte" Multiplicity="1" />
+          <End Type="TheosProc.ParteCaracteristicaDetalle" Role="ParteCaracteristicaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteCaracteristicaDetalle">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NotasDeCreditoView">
+          <Key>
+            <PropertyRef Name="NotaDeCreditoID" />
+            <PropertyRef Name="FechaDeEmision" />
+            <PropertyRef Name="Importe" />
+            <PropertyRef Name="ClienteID" />
+            <PropertyRef Name="Valida" />
+          </Key>
+          <Property Name="NotaDeCreditoID" Type="Int32" Nullable="false" />
+          <Property Name="FechaDeEmision" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="Cliente" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Valida" Type="Boolean" Nullable="false" />
+          <Property Name="FechaDeUso" Type="DateTime" Precision="3" />
+          <Property Name="Observacion" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Autorizo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrigenVentaFolio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="UsoVentaFolio" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="OrigenID" Type="Int32" />
+          <Property Name="Origen" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="RelacionID" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -34689,26 +34802,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NotasDeCreditoView">
-            <EntityTypeMapping TypeName="TheosProc.NotasDeCreditoView">
-              <MappingFragment StoreEntitySet="NotasDeCreditoView">
-                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
-                <ScalarProperty Name="Origen" ColumnName="Origen" />
-                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
-                <ScalarProperty Name="UsoVentaFolio" ColumnName="UsoVentaFolio" />
-                <ScalarProperty Name="OrigenVentaFolio" ColumnName="OrigenVentaFolio" />
-                <ScalarProperty Name="Autorizo" ColumnName="Autorizo" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="FechaDeUso" ColumnName="FechaDeUso" />
-                <ScalarProperty Name="Valida" ColumnName="Valida" />
-                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
-                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="FechaDeEmision" ColumnName="FechaDeEmision" />
-                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PartesAvancesView">
             <EntityTypeMapping TypeName="TheosProc.PartesAvancesView">
               <MappingFragment StoreEntitySet="PartesAvancesView">
@@ -36764,6 +36857,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySetMapping Name="PedidosDetalleView">
             <EntityTypeMapping TypeName="TheosProc.PedidosDetalleView">
               <MappingFragment StoreEntitySet="PedidosDetalleView">
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="CostosUnitario" ColumnName="CostosUnitario" />
@@ -36992,6 +37086,64 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="ImporteFactura" ColumnName="ImporteFactura" />
                 <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
                 <ScalarProperty Name="FacturaExtractoID" ColumnName="FacturaExtractoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParteCaracteristicaDetalle">
+            <EntityTypeMapping TypeName="TheosProc.ParteCaracteristicaDetalle">
+              <MappingFragment StoreEntitySet="ParteCaracteristicaDetalle">
+                <ScalarProperty Name="V15" ColumnName="V15" />
+                <ScalarProperty Name="C15" ColumnName="C15" />
+                <ScalarProperty Name="V14" ColumnName="V14" />
+                <ScalarProperty Name="C14" ColumnName="C14" />
+                <ScalarProperty Name="V13" ColumnName="V13" />
+                <ScalarProperty Name="C13" ColumnName="C13" />
+                <ScalarProperty Name="V12" ColumnName="V12" />
+                <ScalarProperty Name="C12" ColumnName="C12" />
+                <ScalarProperty Name="V11" ColumnName="V11" />
+                <ScalarProperty Name="C11" ColumnName="C11" />
+                <ScalarProperty Name="V10" ColumnName="V10" />
+                <ScalarProperty Name="C10" ColumnName="C10" />
+                <ScalarProperty Name="V9" ColumnName="V9" />
+                <ScalarProperty Name="C9" ColumnName="C9" />
+                <ScalarProperty Name="V8" ColumnName="V8" />
+                <ScalarProperty Name="C8" ColumnName="C8" />
+                <ScalarProperty Name="V7" ColumnName="V7" />
+                <ScalarProperty Name="C7" ColumnName="C7" />
+                <ScalarProperty Name="V6" ColumnName="V6" />
+                <ScalarProperty Name="C6" ColumnName="C6" />
+                <ScalarProperty Name="V5" ColumnName="V5" />
+                <ScalarProperty Name="C5" ColumnName="C5" />
+                <ScalarProperty Name="V4" ColumnName="V4" />
+                <ScalarProperty Name="C4" ColumnName="C4" />
+                <ScalarProperty Name="V3" ColumnName="V3" />
+                <ScalarProperty Name="C3" ColumnName="C3" />
+                <ScalarProperty Name="V2" ColumnName="V2" />
+                <ScalarProperty Name="C2" ColumnName="C2" />
+                <ScalarProperty Name="V1" ColumnName="V1" />
+                <ScalarProperty Name="C1" ColumnName="C1" />
+                <ScalarProperty Name="ParteID" ColumnName="ParteID" />
+                <ScalarProperty Name="ParteCaracteristicaID" ColumnName="ParteCaracteristicaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotasDeCreditoView">
+            <EntityTypeMapping TypeName="TheosProc.NotasDeCreditoView">
+              <MappingFragment StoreEntitySet="NotasDeCreditoView">
+                <ScalarProperty Name="RelacionID" ColumnName="RelacionID" />
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="UsoVentaFolio" ColumnName="UsoVentaFolio" />
+                <ScalarProperty Name="OrigenVentaFolio" ColumnName="OrigenVentaFolio" />
+                <ScalarProperty Name="Autorizo" ColumnName="Autorizo" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FechaDeUso" ColumnName="FechaDeUso" />
+                <ScalarProperty Name="Valida" ColumnName="Valida" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="FechaDeEmision" ColumnName="FechaDeEmision" />
+                <ScalarProperty Name="NotaDeCreditoID" ColumnName="NotaDeCreditoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -37270,8 +37422,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.NominaOficialCuentasView" Width="1.5" PointX="8.75" PointY="26.75" />
         <EntityTypeShape EntityType="TheosProc.NominaUsuariosOficialView" Width="1.5" PointX="26.75" PointY="9.75" />
         <EntityTypeShape EntityType="TheosProc.NominaUsuariosView" Width="1.5" PointX="26.75" PointY="13.75" />
-        <EntityTypeShape EntityType="TheosProc.NotasDeCreditoFiscalesView" Width="1.5" PointX="16.75" PointY="26.75" />
-        <EntityTypeShape EntityType="TheosProc.NotasDeCreditoView" Width="1.5" PointX="26.75" PointY="20.75" />
+        <EntityTypeShape EntityType="TheosProc.NotasDeCreditoFiscalesView" Width="2" PointX="16.75" PointY="26.75" />
         <EntityTypeShape EntityType="TheosProc.PartesAvancesView" Width="1.5" PointX="26.75" PointY="25.75" />
         <EntityTypeShape EntityType="TheosProc.PartesCaracteristicasView" Width="1.5" PointX="28.75" PointY="0.75" />
         <EntityTypeShape EntityType="TheosProc.PartesClasificacionAbcView" Width="1.5" PointX="28.75" PointY="3.75" />
@@ -37285,7 +37436,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.PartesExistenciasView" Width="1.5" PointX="20.75" PointY="28.75" />
         <EntityTypeShape EntityType="TheosProc.PartesMaxMinView" Width="1.5" PointX="28.75" PointY="24.75" />
         <EntityTypeShape EntityType="TheosProc.PartesSistemaView" Width="1.5" PointX="4.75" PointY="29.75" />
-        <EntityTypeShape EntityType="TheosProc.PartesUbicacionView" Width="1.5" PointX="6.75" PointY="29.75" />
+        <EntityTypeShape EntityType="TheosProc.PartesUbicacionView" Width="2.125" PointX="6.75" PointY="29.75" />
         <EntityTypeShape EntityType="TheosProc.PartesVehiculosBasicoView" Width="1.5" PointX="28.75" PointY="29.75" />
         <EntityTypeShape EntityType="TheosProc.PartesVehiculosMotoresView" Width="1.5" PointX="30.75" PointY="0.75" />
         <EntityTypeShape EntityType="TheosProc.PartesVentasView" Width="1.5" PointX="30.75" PointY="7.75" />
@@ -37796,6 +37947,9 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK__ParteComi__Parte__64ADC274" />
         <AssociationConnector Association="TheosProc.FK__ParteComi__Venta__65A1E6AD" />
         <EntityTypeShape EntityType="TheosProc.FacturaExtracto" Width="1.5" PointX="39.375" PointY="22.75" />
+        <EntityTypeShape EntityType="TheosProc.ParteCaracteristicaDetalle" Width="1.5" PointX="21" PointY="366.875" />
+        <AssociationConnector Association="TheosProc.FK__ParteCara__Parte__6D430875" />
+        <EntityTypeShape EntityType="TheosProc.NotasDeCreditoView" Width="1.5" PointX="39.375" PointY="25.75" />
         </Diagram>
     </Diagrams>
   </Designer>

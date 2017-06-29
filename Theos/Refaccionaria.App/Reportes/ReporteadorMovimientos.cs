@@ -205,15 +205,18 @@ namespace Refaccionaria.App
                     for (var x = 0; x < etiqueta.NumeroEtiquetas; x++)
                     {
                         cont += 1;
+                        
                         var e = new Etiquetas()
                         {
                             MovimientoInventarioEtiquetaID = cont,
                             MovimientoInventarioID = oID,
                             ParteID = etiqueta.ParteID,
+                            sParteID = etiqueta.ParteID.ToString("D8"),
                             NumeroParte = etiqueta.NumeroParte,
                             CodigoBarra = etiqueta.CodigoBarra,
                             NumeroEtiquetas = 1,
                             NombreParte = etiqueta.NombreParte
+                            //NombreParte = etiqueta.ParteID.ToString("D8")
                         };
                         listaEtiquetas.Add(e);
                     }

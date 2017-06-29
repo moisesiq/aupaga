@@ -2045,6 +2045,7 @@
             this.dgvMovimientosNoPagados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMovimientosNoPagados.Size = new System.Drawing.Size(574, 398);
             this.dgvMovimientosNoPagados.TabIndex = 8;
+            this.dgvMovimientosNoPagados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovimientosNoPagados_CellContentClick);
             this.dgvMovimientosNoPagados.CurrentCellChanged += new System.EventHandler(this.dgvMovimientosNoPagados_CurrentCellChanged);
             this.dgvMovimientosNoPagados.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvMovimientosNoPagados_KeyDown);
             // 

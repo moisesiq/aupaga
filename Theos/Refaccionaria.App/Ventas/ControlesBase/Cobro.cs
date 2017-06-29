@@ -155,7 +155,7 @@ namespace Refaccionaria.App
 
             // Se llenan los Combos
             this.cmbBanco.CargarDatos("BancoID", "NombreBanco", Datos.GetListOf<Banco>(q => q.Estatus).OrderBy(q => q.NombreBanco).ToList());
-            this.cmbVendedor.CargarDatos("UsuarioID", "NombreUsuario", Datos.GetListOf<Usuario>(q => q.Activo && q.Estatus).OrderBy(q => q.NombreUsuario).ToList());
+            this.cmbVendedor.CargarDatos("UsuarioID", "NombreUsuario", Datos.GetListOf<Usuario>(q => q.Activo && q.Estatus && (q.TipoUsuarioID == 1 || q.TipoUsuarioID ==2)).OrderBy(q => q.NombreUsuario).ToList());
             this.cmbRepartidor.CargarDatos("UsuarioID", "NombreUsuario", Datos.GetListOf<Usuario>(c => c.TipoUsuarioID == Cat.TiposDeUsuario.Repartidor
                 && c.Activo && c.Estatus));
             this.cmbClienteComisionista.CargarDatos("ClienteID", "Nombre", 

@@ -412,8 +412,10 @@ namespace Refaccionaria.App
 
             this.dgvNotasDeCredito.Rows.Clear();
             foreach (var oNota in oNotasDeCredito)
+                //this.dgvNotasDeCredito.Rows.Add(oNota.NotaDeCreditoID, oNota.FechaDeEmision, oNota.Origen, 
+                //    oNota.RelacionID, oNota.Importe, oNota.UsoVentaFolio, oNota.FechaDeUso, oNota.Observacion);
                 this.dgvNotasDeCredito.Rows.Add(oNota.NotaDeCreditoID, oNota.FechaDeEmision, oNota.Origen, 
-                    oNota.RelacionID, oNota.Importe, oNota.UsoVentaFolio, oNota.FechaDeUso, oNota.Observacion);
+                    oNota.RelacionID, oNota.Importe, oNota.UsoVentaFolio, oNota.FechaDeUso, oNota.Observacion, oNota.OrigenVentaFolio);
         }
 
         private void FilaMarcaCambiada(DataGridViewRow Fila)

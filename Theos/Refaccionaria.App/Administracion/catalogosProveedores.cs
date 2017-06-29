@@ -2745,5 +2745,10 @@ namespace Refaccionaria.App
 
         #endregion
 
+        private void dgvMovimientosNoPagados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
     }
 }
