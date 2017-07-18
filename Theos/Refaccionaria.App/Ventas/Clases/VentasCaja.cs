@@ -307,7 +307,7 @@ namespace Refaccionaria.App
 
                 // Se verifica si es un gasto de casco, para afectar la existencia
                 if (iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoChico || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoMediano
-                    || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoGrande || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoExtragrande)
+                    || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoGrande || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoExtragrande || iCuentaAuxiliarID == Cat.ContaCuentasAuxiliares.CascoIntermedio)
                 {
                     int iCascoParteID = 0;
                     switch (iCuentaAuxiliarID)
@@ -316,6 +316,7 @@ namespace Refaccionaria.App
                         case Cat.ContaCuentasAuxiliares.CascoMediano: iCascoParteID = Cat.Partes.DepositoCascoMediano; break;
                         case Cat.ContaCuentasAuxiliares.CascoGrande: iCascoParteID = Cat.Partes.DepositoCascoGrande; break;
                         case Cat.ContaCuentasAuxiliares.CascoExtragrande: iCascoParteID = Cat.Partes.DepositoCascoExtragrande; break;
+                        case Cat.ContaCuentasAuxiliares.CascoIntermedio: iCascoParteID = Cat.Partes.DepositoCascoIntermedio; break;
                     }
                     var oSucursal = Datos.GetEntity<Sucursal>(c => c.SucursalID == GlobalClass.SucursalID && c.Estatus);
                     AdmonProc.AfectarExistenciaYKardex(iCascoParteID, GlobalClass.SucursalID, Cat.OperacionesKardex.EntradaInventario, oEgreso.CajaEgresoID.ToString()

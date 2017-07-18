@@ -268,6 +268,7 @@
             public const int CascoMediano = 29;
             public const int CascoGrande = 30;
             public const int CascoExtragrande = 64;
+            public const int CascoIntermedio = 4592;
 
             public const int Inventario = 353;
             public const int CostoVenta = 421;
@@ -365,6 +366,8 @@
             public const int DepositoCascoGrande = 3403;
             public const int DepositoCascoExtragrande = 3400;
             public const int DiferenciaDeCascos = 3434;
+            public const int DepositoCascoIntermedio = 135819;
+            
         }
 
         public class VentaDevolucionMotivos

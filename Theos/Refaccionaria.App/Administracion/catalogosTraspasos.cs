@@ -1655,6 +1655,15 @@ namespace Refaccionaria.App
                             Estatus = true,
                             Actualizar = true
                         };
+
+                        // Se valida que no se haya procesado ya el traspaso en cuestión
+                        if (Datos.Exists<MovimientoInventarioTraspasoContingencia>(c => c.MovimientoInventarioID == movimientoId))
+                        {
+                            UtilLocal.MensajeAdvertencia("El traspaso seleccionado ya fue procesado. Actualiza el listado para ver sólo los traspasos pendientes.");
+                            Cargando.Cerrar();
+                            return;
+                        }
+
                         // log.AppendTextBox("Almacenando Contingencia...");
                         //aquie es donde oscar modifico
                         Datos.SaveOrUpdate<MovimientoInventarioTraspasoContingencia>(contingencia);
@@ -1757,6 +1766,15 @@ namespace Refaccionaria.App
                     movimiento.FechaRecepcion = DateTime.Now;
                     movimiento.FechaModificacion = DateTime.Now;
                     // log.AppendTextBox("Finalizando...");
+
+                    if (Datos.Exists<MovimientoInventario>(c => c.MovimientoInventarioID == movimientoId && c.FechaRecepcion.HasValue))
+                    {
+                        UtilLocal.MensajeAdvertencia("El traspaso seleccionado ya fue procesado. Actualiza el listado para ver sólo los traspasos pendientes.");
+                        Cargando.Cerrar();
+                        return;
+                    }
+
+
                     Datos.SaveOrUpdate<MovimientoInventario>(movimiento);
                 }
 

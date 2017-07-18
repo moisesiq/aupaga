@@ -2157,6 +2157,8 @@
           <Property Name="OrigenID" Type="int" Nullable="false" />
           <Property Name="RealizoUsuarioID" Type="int" Nullable="false" />
           <Property Name="Observacion" Type="nvarchar" MaxLength="128" />
+          <Property Name="MovimientoInventarioID" Type="int" />
+          <Property Name="VentaGarantiaID" Type="int" />
         </EntityType>
         <EntityType Name="ProveedorNotaDeCreditoDetalle">
           <Key>
@@ -2165,6 +2167,15 @@
           <Property Name="ProveedorNotaDeCreditoDetalleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProveedorNotaDeCreditoID" Type="int" Nullable="false" />
           <Property Name="MovimientoInventarioID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProveedorNotaDeCreditoDetalleUso">
+          <Key>
+            <PropertyRef Name="ProveedorNotaDeCreditoDetalleID" />
+          </Key>
+          <Property Name="ProveedorNotaDeCreditoDetalleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProveedorNotaDeCreditoID" Type="int" Nullable="false" />
+          <Property Name="FolioFactura" Type="nvarchar" MaxLength="128" />
+          <Property Name="Cantidad" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="ProveedorNotaDeCreditoOrigen">
           <Key>
@@ -5001,9 +5012,9 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.PedidosDetalle
           <Property Name="NombrePedidoEstatus" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Abreviacion" Type="nvarchar" MaxLength="50" />
           <Property Name="CantidadPedido" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CantidadSurtida" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CostosUnitario" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Costo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="Fecha" Type="date" />
         </EntityType>
@@ -8290,6 +8301,18 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasView' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ParteCara__Parte__71139959">
+          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
+          <End Role="ParteCaracteristicaDetalle" Type="Self.ParteCaracteristicaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parte">
+              <PropertyRef Name="ParteID" />
+            </Principal>
+            <Dependent Role="ParteCaracteristicaDetalle">
+              <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ParteCara__Parte__72DBE63A">
           <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
           <End Role="ParteCaracteristica" Type="Self.ParteCaracteristica" Multiplicity="*" />
@@ -8298,18 +8321,6 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasView' no
               <PropertyRef Name="ParteID" />
             </Principal>
             <Dependent Role="ParteCaracteristica">
-              <PropertyRef Name="ParteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ParteCara__Parte__76CC72AF">
-          <End Role="Parte" Type="Self.Parte" Multiplicity="1" />
-          <End Role="ParteCaracteristicaDetalle" Type="Self.ParteCaracteristicaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Parte">
-              <PropertyRef Name="ParteID" />
-            </Principal>
-            <Dependent Role="ParteCaracteristicaDetalle">
               <PropertyRef Name="ParteID" />
             </Dependent>
           </ReferentialConstraint>
@@ -8806,6 +8817,18 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasView' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Proveedor__Movim__76CC72AF">
+          <End Role="MovimientoInventario" Type="Self.MovimientoInventario" Multiplicity="0..1" />
+          <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Proveedor__NotaD__271AA44F">
           <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="0..1" />
           <End Role="ProveedorPolizaDetalle" Type="Self.ProveedorPolizaDetalle" Multiplicity="*" />
@@ -8851,6 +8874,18 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasView' no
             </Principal>
             <Dependent Role="ProveedorParteGanancia">
               <PropertyRef Name="ParteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Prove__04266DCD">
+          <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="1" />
+          <End Role="ProveedorNotaDeCreditoDetalleUso" Type="Self.ProveedorNotaDeCreditoDetalleUso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalleUso">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8902,6 +8937,18 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasView' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Proveedor__Prove__75D84E76">
+          <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="1" />
+          <End Role="ProveedorNotaDeCreditoDetalle" Type="Self.ProveedorNotaDeCreditoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalle">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Proveedor__Reali__1F798287">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="*" />
@@ -8923,6 +8970,18 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasView' no
             </Principal>
             <Dependent Role="ProveedorPolizaDetalle">
               <PropertyRef Name="TipoFormaPagoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Venta__051A9206">
+          <End Role="VentaGarantia" Type="Self.VentaGarantia" Multiplicity="0..1" />
+          <End Role="ProveedorNotaDeCredito" Type="Self.ProveedorNotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaGarantia">
+              <PropertyRef Name="VentaGarantiaID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="VentaGarantiaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -11815,6 +11874,7 @@ advertencia 6002: La tabla o vista 'ControlRefaccionariaTest7.dbo.VentasView' no
           <EntitySet Name="ProveedorMarcaParte" EntityType="Self.ProveedorMarcaParte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorNotaDeCredito" EntityType="Self.ProveedorNotaDeCredito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorNotaDeCreditoDetalle" EntityType="Self.ProveedorNotaDeCreditoDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProveedorNotaDeCreditoDetalleUso" EntityType="Self.ProveedorNotaDeCreditoDetalleUso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorNotaDeCreditoOrigen" EntityType="Self.ProveedorNotaDeCreditoOrigen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorObservacion" EntityType="Self.ProveedorObservacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedorPaqueteria" EntityType="Self.ProveedorPaqueteria" Schema="dbo" store:Type="Tables" />
@@ -13285,9 +13345,9 @@ FROM [dbo].[PartesView] AS [PartesView]</DefiningQuery>
 [PedidosDetalleView].[NombrePedidoEstatus] AS [NombrePedidoEstatus], 
 [PedidosDetalleView].[Abreviacion] AS [Abreviacion], 
 [PedidosDetalleView].[CantidadPedido] AS [CantidadPedido], 
+[PedidosDetalleView].[Costo] AS [Costo], 
 [PedidosDetalleView].[CantidadSurtida] AS [CantidadSurtida], 
 [PedidosDetalleView].[CostosUnitario] AS [CostosUnitario], 
-[PedidosDetalleView].[Costo] AS [Costo], 
 [PedidosDetalleView].[FechaRegistro] AS [FechaRegistro], 
 [PedidosDetalleView].[Fecha] AS [Fecha]
 FROM [dbo].[PedidosDetalleView] AS [PedidosDetalleView]</DefiningQuery>
@@ -14811,13 +14871,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Parte" EntitySet="Parte" />
             <End Role="ParteCaracteristicaTemporal" EntitySet="ParteCaracteristicaTemporal" />
           </AssociationSet>
+          <AssociationSet Name="FK__ParteCara__Parte__71139959" Association="Self.FK__ParteCara__Parte__71139959">
+            <End Role="Parte" EntitySet="Parte" />
+            <End Role="ParteCaracteristicaDetalle" EntitySet="ParteCaracteristicaDetalle" />
+          </AssociationSet>
           <AssociationSet Name="FK__ParteCara__Parte__72DBE63A" Association="Self.FK__ParteCara__Parte__72DBE63A">
             <End Role="Parte" EntitySet="Parte" />
             <End Role="ParteCaracteristica" EntitySet="ParteCaracteristica" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ParteCara__Parte__76CC72AF" Association="Self.FK__ParteCara__Parte__76CC72AF">
-            <End Role="Parte" EntitySet="Parte" />
-            <End Role="ParteCaracteristicaDetalle" EntitySet="ParteCaracteristicaDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK__ParteCara__Usuar__47F18835" Association="Self.FK__ParteCara__Usuar__47F18835">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -14983,6 +15043,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
             <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
           </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Movim__76CC72AF" Association="Self.FK__Proveedor__Movim__76CC72AF">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+          </AssociationSet>
           <AssociationSet Name="FK__Proveedor__NotaD__271AA44F" Association="Self.FK__Proveedor__NotaD__271AA44F">
             <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
             <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
@@ -14998,6 +15062,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__Proveedor__Parte__4381D8D3" Association="Self.FK__Proveedor__Parte__4381D8D3">
             <End Role="Parte" EntitySet="Parte" />
             <End Role="ProveedorParteGanancia" EntitySet="ProveedorParteGanancia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Prove__04266DCD" Association="Self.FK__Proveedor__Prove__04266DCD">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorNotaDeCreditoDetalleUso" EntitySet="ProveedorNotaDeCreditoDetalleUso" />
           </AssociationSet>
           <AssociationSet Name="FK__Proveedor__Prove__0737E4A2" Association="Self.FK__Proveedor__Prove__0737E4A2">
             <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
@@ -15015,6 +15083,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ProveedorEventoCalendario" EntitySet="ProveedorEventoCalendario" />
           </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Prove__75D84E76" Association="Self.FK__Proveedor__Prove__75D84E76">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
+          </AssociationSet>
           <AssociationSet Name="FK__Proveedor__Reali__1F798287" Association="Self.FK__Proveedor__Reali__1F798287">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
@@ -15022,6 +15094,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK__Proveedor__TipoF__2F45D5FC" Association="Self.FK__Proveedor__TipoF__2F45D5FC">
             <End Role="TipoFormaPago" EntitySet="TipoFormaPago" />
             <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Venta__051A9206" Association="Self.FK__Proveedor__Venta__051A9206">
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
           </AssociationSet>
           <AssociationSet Name="FK__ReporteDe__Parte__69D19EED" Association="Self.FK__ReporteDe__Parte__69D19EED">
             <End Role="Parte" EntitySet="Parte" />
@@ -15975,7 +16051,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <EntitySet Name="ProveedorEventoCalendario" EntityType="TheosProc.ProveedorEventoCalendario" />
           <EntitySet Name="ProveedorGanancia" EntityType="TheosProc.ProveedorGanancia" />
           <EntitySet Name="ProveedorMarcaParte" EntityType="TheosProc.ProveedorMarcaParte" />
-          <EntitySet Name="ProveedorNotaDeCredito" EntityType="TheosProc.ProveedorNotaDeCredito" />
           <EntitySet Name="ProveedorNotaDeCreditoDetalle" EntityType="TheosProc.ProveedorNotaDeCreditoDetalle" />
           <EntitySet Name="ProveedorNotaDeCreditoOrigen" EntityType="TheosProc.ProveedorNotaDeCreditoOrigen" />
           <EntitySet Name="ProveedorObservacion" EntityType="TheosProc.ProveedorObservacion" />
@@ -17244,10 +17319,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ProveedorParteGanancia" EntitySet="ProveedorParteGanancia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__Prove__69FC8776" Association="TheosProc.FK__Proveedor__Prove__69FC8776">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
-          </AssociationSet>
           <AssociationSet Name="FK__Proveedor__Prove__760D58A0" Association="TheosProc.FK__Proveedor__Prove__760D58A0">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ProveedorEventoCalendario" EntitySet="ProveedorEventoCalendario" />
@@ -17295,22 +17366,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <AssociationSet Name="FK_ProveedorMarcaParte_Usuario" Association="TheosProc.FK_ProveedorMarcaParte_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ProveedorMarcaParte" EntitySet="ProveedorMarcaParte" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__NotaD__70A98505" Association="TheosProc.FK__Proveedor__NotaD__70A98505">
-            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
-            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__Orige__6BE4CFE8" Association="TheosProc.FK__Proveedor__Orige__6BE4CFE8">
-            <End Role="ProveedorNotaDeCreditoOrigen" EntitySet="ProveedorNotaDeCreditoOrigen" />
-            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__Prove__46D346CA" Association="TheosProc.FK__Proveedor__Prove__46D346CA">
-            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
-            <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Proveedor__Reali__6CD8F421" Association="TheosProc.FK__Proveedor__Reali__6CD8F421">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
           </AssociationSet>
           <AssociationSet Name="FK_ProveedorObservacion_Usuario" Association="TheosProc.FK_ProveedorObservacion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -18267,6 +18322,44 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             <End Role="ParteCaracteristicaDetalle" EntitySet="ParteCaracteristicaDetalle" />
           </AssociationSet>
           <EntitySet Name="NotasDeCreditoView" EntityType="TheosProc.NotasDeCreditoView" />
+          <EntitySet Name="ProveedorNotaDeCredito" EntityType="TheosProc.ProveedorNotaDeCredito" />
+          <AssociationSet Name="FK__Proveedor__Movim__76CC72AF" Association="TheosProc.FK__Proveedor__Movim__76CC72AF">
+            <End Role="MovimientoInventario" EntitySet="MovimientoInventario" />
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Prove__1D913A15" Association="TheosProc.FK__Proveedor__Prove__1D913A15">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__NotaD__271AA44F" Association="TheosProc.FK__Proveedor__NotaD__271AA44F">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorPolizaDetalle" EntitySet="ProveedorPolizaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Orige__1E855E4E" Association="TheosProc.FK__Proveedor__Orige__1E855E4E">
+            <End Role="ProveedorNotaDeCreditoOrigen" EntitySet="ProveedorNotaDeCreditoOrigen" />
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Prove__0737E4A2" Association="TheosProc.FK__Proveedor__Prove__0737E4A2">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Prove__75D84E76" Association="TheosProc.FK__Proveedor__Prove__75D84E76">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorNotaDeCreditoDetalle" EntitySet="ProveedorNotaDeCreditoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Reali__1F798287" Association="TheosProc.FK__Proveedor__Reali__1F798287">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+          </AssociationSet>
+          <EntitySet Name="ProveedorNotaDeCreditoDetalleUso" EntityType="TheosProc.ProveedorNotaDeCreditoDetalleUso" />
+          <AssociationSet Name="FK__Proveedor__Prove__04266DCD" Association="TheosProc.FK__Proveedor__Prove__04266DCD">
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+            <End Role="ProveedorNotaDeCreditoDetalleUso" EntitySet="ProveedorNotaDeCreditoDetalleUso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proveedor__Venta__051A9206" Association="TheosProc.FK__Proveedor__Venta__051A9206">
+            <End Role="VentaGarantia" EntitySet="VentaGarantia" />
+            <End Role="ProveedorNotaDeCredito" EntitySet="ProveedorNotaDeCredito" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Autorizacion">
           <Key>
@@ -19524,6 +19617,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="MovimientoInventarioTraspasoContingencia" Relationship="TheosProc.FK_MovimientoInventarioTraspasoContingencia_MovimientoInventario" FromRole="MovimientoInventario" ToRole="MovimientoInventarioTraspasoContingencia" />
           <NavigationProperty Name="PartePrecioHistorico" Relationship="TheosProc.FK_PartePrecioHistorico_MovimientoInventario" FromRole="MovimientoInventario" ToRole="PartePrecioHistorico" />
           <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="TheosProc.FK_ProveedorPolizaDetalle_MovimientoInventario" FromRole="MovimientoInventario" ToRole="ProveedorPolizaDetalle" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Movim__76CC72AF" FromRole="MovimientoInventario" ToRole="ProveedorNotaDeCredito" />
         </EntityType>
         <EntityType Name="MovimientoInventarioDescuento">
           <Key>
@@ -20523,7 +20617,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ParteMaxMinCriterioPredefinido" Relationship="TheosProc.FK__ParteMaxM__Prove__12BEA5E7" FromRole="Proveedor" ToRole="ParteMaxMinCriterioPredefinido" />
           <NavigationProperty Name="Pedido" Relationship="TheosProc.FK_Pedido_Proveedor" FromRole="Proveedor" ToRole="Pedido" />
           <NavigationProperty Name="ProveedorParteGanancia" Relationship="TheosProc.FK__Proveedor__Prove__4EA972BC" FromRole="Proveedor" ToRole="ProveedorParteGanancia" />
-          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Prove__69FC8776" FromRole="Proveedor" ToRole="ProveedorNotaDeCredito" />
           <NavigationProperty Name="ProveedorEventoCalendario" Relationship="TheosProc.FK__Proveedor__Prove__760D58A0" FromRole="Proveedor" ToRole="ProveedorEventoCalendario" />
           <NavigationProperty Name="ProveedorEstatus" Relationship="TheosProc.FK_Proveedor_ProveedorEstatus" FromRole="Proveedor" ToRole="ProveedorEstatus" />
           <NavigationProperty Name="Usuario" Relationship="TheosProc.FK_Proveedor_Usuario" FromRole="Proveedor" ToRole="Usuario" />
@@ -20535,6 +20628,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorProntoPago" Relationship="TheosProc.FK_ProveedorProntoPago_Proveedor" FromRole="Proveedor" ToRole="ProveedorProntoPago" />
           <NavigationProperty Name="Cotizacion9500Detalle" Relationship="TheosProc.FK__Cotizacio__Prove__09B45E9A" FromRole="Proveedor" ToRole="Cotizacion9500Detalle" />
           <NavigationProperty Name="ParteComision" Relationship="TheosProc.FK__ParteComi__Prove__54EC5BF7" FromRole="Proveedor" ToRole="ParteComision" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Prove__1D913A15" FromRole="Proveedor" ToRole="ProveedorNotaDeCredito" />
         </EntityType>
         <EntityType Name="ProveedorContacto">
           <Key>
@@ -20628,26 +20722,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="Proveedor" Relationship="TheosProc.FK_ProveedorMarcaParte_Proveedor" FromRole="ProveedorMarcaParte" ToRole="Proveedor" />
           <NavigationProperty Name="Usuario" Relationship="TheosProc.FK_ProveedorMarcaParte_Usuario" FromRole="ProveedorMarcaParte" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="ProveedorNotaDeCredito">
-          <Key>
-            <PropertyRef Name="ProveedorNotaDeCreditoID" />
-          </Key>
-          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
-          <Property Name="Folio" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
-          <Property Name="OrigenID" Type="Int32" Nullable="false" />
-          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Disponible" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Proveedor" Relationship="TheosProc.FK__Proveedor__Prove__69FC8776" FromRole="ProveedorNotaDeCredito" ToRole="Proveedor" />
-          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="TheosProc.FK__Proveedor__NotaD__70A98505" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorPolizaDetalle" />
-          <NavigationProperty Name="ProveedorNotaDeCreditoOrigen" Relationship="TheosProc.FK__Proveedor__Orige__6BE4CFE8" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoOrigen" />
-          <NavigationProperty Name="ProveedorNotaDeCreditoDetalle" Relationship="TheosProc.FK__Proveedor__Prove__46D346CA" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoDetalle" />
-          <NavigationProperty Name="Usuario" Relationship="TheosProc.FK__Proveedor__Reali__6CD8F421" FromRole="ProveedorNotaDeCredito" ToRole="Usuario" />
-        </EntityType>
         <EntityType Name="ProveedorNotaDeCreditoDetalle">
           <Key>
             <PropertyRef Name="ProveedorNotaDeCreditoDetalleID" />
@@ -20656,7 +20730,8 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="ProveedorNotaDeCreditoID" Type="Int32" Nullable="false" />
           <Property Name="MovimientoInventarioID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MovimientoInventario" Relationship="TheosProc.FK__Proveedor__Movim__47C76B03" FromRole="ProveedorNotaDeCreditoDetalle" ToRole="MovimientoInventario" />
-          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Prove__46D346CA" FromRole="ProveedorNotaDeCreditoDetalle" ToRole="ProveedorNotaDeCredito" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Prove__0737E4A2" FromRole="ProveedorNotaDeCreditoDetalle" ToRole="ProveedorNotaDeCredito" />
+          <NavigationProperty Name="ProveedorNotaDeCredito1" Relationship="TheosProc.FK__Proveedor__Prove__75D84E76" FromRole="ProveedorNotaDeCreditoDetalle" ToRole="ProveedorNotaDeCredito" />
         </EntityType>
         <EntityType Name="ProveedorNotaDeCreditoOrigen">
           <Key>
@@ -20664,7 +20739,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           </Key>
           <Property Name="ProveedorNotaDeCreditoOrigenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Origen" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Orige__6BE4CFE8" FromRole="ProveedorNotaDeCreditoOrigen" ToRole="ProveedorNotaDeCredito" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Orige__1E855E4E" FromRole="ProveedorNotaDeCreditoOrigen" ToRole="ProveedorNotaDeCredito" />
         </EntityType>
         <EntityType Name="ProveedorObservacion">
           <Key>
@@ -20767,10 +20842,10 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="BancoCuenta" Relationship="TheosProc.FK__Proveedor__Banco__122A7461" FromRole="ProveedorPolizaDetalle" ToRole="BancoCuenta" />
           <NavigationProperty Name="CajaEgreso" Relationship="TheosProc.FK__Proveedor__CajaE__2977EE0D" FromRole="ProveedorPolizaDetalle" ToRole="CajaEgreso" />
           <NavigationProperty Name="MovimientoInventario" Relationship="TheosProc.FK_ProveedorPolizaDetalle_MovimientoInventario" FromRole="ProveedorPolizaDetalle" ToRole="MovimientoInventario" />
-          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__NotaD__70A98505" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorNotaDeCredito" />
           <NavigationProperty Name="ProveedorPoliza" Relationship="TheosProc.FK_ProveedorPolizaDetalle_ProveedorPoliza" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorPoliza" />
           <NavigationProperty Name="ProveedorPolizaDetalleOrigen" Relationship="TheosProc.FK__Proveedor__Orige__7EF7A45C" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorPolizaDetalleOrigen" />
           <NavigationProperty Name="TipoFormaPago" Relationship="TheosProc.FK__Proveedor__TipoF__11365028" FromRole="ProveedorPolizaDetalle" ToRole="TipoFormaPago" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__NotaD__271AA44F" FromRole="ProveedorPolizaDetalle" ToRole="ProveedorNotaDeCredito" />
         </EntityType>
         <EntityType Name="ProveedorPolizaDetalleOrigen">
           <Key>
@@ -21222,7 +21297,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="ProveedorContacto" Relationship="TheosProc.FK_ProveedorContacto_Usuario" FromRole="Usuario" ToRole="ProveedorContacto" />
           <NavigationProperty Name="ProveedorEstatus" Relationship="TheosProc.FK_ProveedorEstatus_Usuario" FromRole="Usuario" ToRole="ProveedorEstatus" />
           <NavigationProperty Name="ProveedorMarcaParte" Relationship="TheosProc.FK_ProveedorMarcaParte_Usuario" FromRole="Usuario" ToRole="ProveedorMarcaParte" />
-          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Reali__6CD8F421" FromRole="Usuario" ToRole="ProveedorNotaDeCredito" />
           <NavigationProperty Name="ProveedorObservacion" Relationship="TheosProc.FK_ProveedorObservacion_Usuario" FromRole="Usuario" ToRole="ProveedorObservacion" />
           <NavigationProperty Name="ProveedorPaqueteria" Relationship="TheosProc.FK_ProveedorPaqueteria_Usuario" FromRole="Usuario" ToRole="ProveedorPaqueteria" />
           <NavigationProperty Name="ProveedorPoliza" Relationship="TheosProc.FK_ProveedorPoliza_Usuario" FromRole="Usuario" ToRole="ProveedorPoliza" />
@@ -21274,6 +21348,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaCambio2" Relationship="TheosProc.FK__VentaCamb__Repar__31A31FBA" FromRole="Usuario" ToRole="VentaCambio" />
           <NavigationProperty Name="VentaCambio3" Relationship="TheosProc.FK__VentaCamb__Repar__329743F3" FromRole="Usuario" ToRole="VentaCambio" />
           <NavigationProperty Name="VentaCambio4" Relationship="TheosProc.FK__VentaCamb__Usuar__19169DBB" FromRole="Usuario" ToRole="VentaCambio" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Reali__1F798287" FromRole="Usuario" ToRole="ProveedorNotaDeCredito" />
         </EntityType>
         <EntityType Name="UsuarioAsistencia">
           <Key>
@@ -21579,6 +21654,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <NavigationProperty Name="VentaGarantiaRespuesta" Relationship="TheosProc.FK__VentaGara__Respu__2E1CA799" FromRole="VentaGarantia" ToRole="VentaGarantiaRespuesta" />
           <NavigationProperty Name="VentaPagoDetalle" Relationship="TheosProc.FK__VentaGara__Venta__2429290B" FromRole="VentaGarantia" ToRole="VentaPagoDetalle" />
           <NavigationProperty Name="Venta" Relationship="TheosProc.FK__VentaGara__Venta__1407CFDB" FromRole="VentaGarantia" ToRole="Venta" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Venta__051A9206" FromRole="VentaGarantia" ToRole="ProveedorNotaDeCredito" />
         </EntityType>
         <EntityType Name="VentaGarantiaAccion">
           <Key>
@@ -27671,18 +27747,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Proveedor__Prove__69FC8776">
-          <End Type="TheosProc.Proveedor" Role="Proveedor" Multiplicity="1" />
-          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ProveedorID" />
-            </Principal>
-            <Dependent Role="ProveedorNotaDeCredito">
-              <PropertyRef Name="ProveedorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Proveedor__Prove__760D58A0">
           <End Type="TheosProc.Proveedor" Role="Proveedor" Multiplicity="1" />
           <End Type="TheosProc.ProveedorEventoCalendario" Role="ProveedorEventoCalendario" Multiplicity="*" />
@@ -27824,54 +27888,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
             </Principal>
             <Dependent Role="ProveedorMarcaParte">
               <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__NotaD__70A98505">
-          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="0..1" />
-          <End Type="TheosProc.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProveedorNotaDeCredito">
-              <PropertyRef Name="ProveedorNotaDeCreditoID" />
-            </Principal>
-            <Dependent Role="ProveedorPolizaDetalle">
-              <PropertyRef Name="NotaDeCreditoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__Orige__6BE4CFE8">
-          <End Type="TheosProc.ProveedorNotaDeCreditoOrigen" Role="ProveedorNotaDeCreditoOrigen" Multiplicity="1" />
-          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProveedorNotaDeCreditoOrigen">
-              <PropertyRef Name="ProveedorNotaDeCreditoOrigenID" />
-            </Principal>
-            <Dependent Role="ProveedorNotaDeCredito">
-              <PropertyRef Name="OrigenID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__Prove__46D346CA">
-          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="1" />
-          <End Type="TheosProc.ProveedorNotaDeCreditoDetalle" Role="ProveedorNotaDeCreditoDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProveedorNotaDeCredito">
-              <PropertyRef Name="ProveedorNotaDeCreditoID" />
-            </Principal>
-            <Dependent Role="ProveedorNotaDeCreditoDetalle">
-              <PropertyRef Name="ProveedorNotaDeCreditoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Proveedor__Reali__6CD8F421">
-          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioID" />
-            </Principal>
-            <Dependent Role="ProveedorNotaDeCredito">
-              <PropertyRef Name="RealizoUsuarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -30879,6 +30895,150 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
           <Property Name="Origen" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="RelacionID" Type="Int32" />
         </EntityType>
+        <EntityType Name="ProveedorNotaDeCredito">
+          <Key>
+            <PropertyRef Name="ProveedorNotaDeCreditoID" />
+          </Key>
+          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="Folio" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Disponible" Type="Boolean" Nullable="false" />
+          <Property Name="OrigenID" Type="Int32" Nullable="false" />
+          <Property Name="RealizoUsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MovimientoInventarioID" Type="Int32" />
+          <NavigationProperty Name="MovimientoInventario" Relationship="TheosProc.FK__Proveedor__Movim__76CC72AF" FromRole="ProveedorNotaDeCredito" ToRole="MovimientoInventario" />
+          <NavigationProperty Name="Proveedor" Relationship="TheosProc.FK__Proveedor__Prove__1D913A15" FromRole="ProveedorNotaDeCredito" ToRole="Proveedor" />
+          <NavigationProperty Name="ProveedorPolizaDetalle" Relationship="TheosProc.FK__Proveedor__NotaD__271AA44F" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorPolizaDetalle" />
+          <NavigationProperty Name="ProveedorNotaDeCreditoOrigen" Relationship="TheosProc.FK__Proveedor__Orige__1E855E4E" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoOrigen" />
+          <NavigationProperty Name="ProveedorNotaDeCreditoDetalle" Relationship="TheosProc.FK__Proveedor__Prove__0737E4A2" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoDetalle" />
+          <NavigationProperty Name="ProveedorNotaDeCreditoDetalle1" Relationship="TheosProc.FK__Proveedor__Prove__75D84E76" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoDetalle" />
+          <NavigationProperty Name="Usuario" Relationship="TheosProc.FK__Proveedor__Reali__1F798287" FromRole="ProveedorNotaDeCredito" ToRole="Usuario" />
+          <NavigationProperty Name="ProveedorNotaDeCreditoDetalleUso" Relationship="TheosProc.FK__Proveedor__Prove__04266DCD" FromRole="ProveedorNotaDeCredito" ToRole="ProveedorNotaDeCreditoDetalleUso" />
+          <Property Name="VentaGarantiaID" Type="Int32" />
+          <NavigationProperty Name="VentaGarantia" Relationship="TheosProc.FK__Proveedor__Venta__051A9206" FromRole="ProveedorNotaDeCredito" ToRole="VentaGarantia" />
+          </EntityType>
+        <Association Name="FK__Proveedor__Movim__76CC72AF">
+          <End Type="TheosProc.MovimientoInventario" Role="MovimientoInventario" Multiplicity="0..1" />
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovimientoInventario">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="MovimientoInventarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Prove__1D913A15">
+          <End Type="TheosProc.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ProveedorID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__NotaD__271AA44F">
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="0..1" />
+          <End Type="TheosProc.ProveedorPolizaDetalle" Role="ProveedorPolizaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorPolizaDetalle">
+              <PropertyRef Name="NotaDeCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Orige__1E855E4E">
+          <End Type="TheosProc.ProveedorNotaDeCreditoOrigen" Role="ProveedorNotaDeCreditoOrigen" Multiplicity="1" />
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCreditoOrigen">
+              <PropertyRef Name="ProveedorNotaDeCreditoOrigenID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="OrigenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Prove__0737E4A2">
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="1" />
+          <End Type="TheosProc.ProveedorNotaDeCreditoDetalle" Role="ProveedorNotaDeCreditoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalle">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Prove__75D84E76">
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="1" />
+          <End Type="TheosProc.ProveedorNotaDeCreditoDetalle" Role="ProveedorNotaDeCreditoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalle">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Reali__1F798287">
+          <End Type="TheosProc.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="RealizoUsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProveedorNotaDeCreditoDetalleUso">
+          <Key>
+            <PropertyRef Name="ProveedorNotaDeCreditoDetalleID" />
+          </Key>
+          <Property Name="ProveedorNotaDeCreditoDetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProveedorNotaDeCreditoID" Type="Int32" Nullable="false" />
+          <Property Name="FolioFactura" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ProveedorNotaDeCredito" Relationship="TheosProc.FK__Proveedor__Prove__04266DCD" FromRole="ProveedorNotaDeCreditoDetalleUso" ToRole="ProveedorNotaDeCredito" />
+        </EntityType>
+        <Association Name="FK__Proveedor__Prove__04266DCD">
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="1" />
+          <End Type="TheosProc.ProveedorNotaDeCreditoDetalleUso" Role="ProveedorNotaDeCreditoDetalleUso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCreditoDetalleUso">
+              <PropertyRef Name="ProveedorNotaDeCreditoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proveedor__Venta__051A9206">
+          <End Type="TheosProc.VentaGarantia" Role="VentaGarantia" Multiplicity="0..1" />
+          <End Type="TheosProc.ProveedorNotaDeCredito" Role="ProveedorNotaDeCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VentaGarantia">
+              <PropertyRef Name="VentaGarantiaID" />
+            </Principal>
+            <Dependent Role="ProveedorNotaDeCredito">
+              <PropertyRef Name="VentaGarantiaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -32938,22 +33098,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
                 <ScalarProperty Name="MarcaParteID" ColumnName="MarcaParteID" />
                 <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
                 <ScalarProperty Name="ProveedorMarcaParteID" ColumnName="ProveedorMarcaParteID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProveedorNotaDeCredito">
-            <EntityTypeMapping TypeName="TheosProc.ProveedorNotaDeCredito">
-              <MappingFragment StoreEntitySet="ProveedorNotaDeCredito">
-                <ScalarProperty Name="Disponible" ColumnName="Disponible" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
-                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Folio" ColumnName="Folio" />
-                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
-                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -37147,6 +37291,34 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProveedorNotaDeCredito">
+            <EntityTypeMapping TypeName="TheosProc.ProveedorNotaDeCredito">
+              <MappingFragment StoreEntitySet="ProveedorNotaDeCredito">
+                <ScalarProperty Name="VentaGarantiaID" ColumnName="VentaGarantiaID" />
+                <ScalarProperty Name="MovimientoInventarioID" ColumnName="MovimientoInventarioID" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="RealizoUsuarioID" ColumnName="RealizoUsuarioID" />
+                <ScalarProperty Name="OrigenID" ColumnName="OrigenID" />
+                <ScalarProperty Name="Disponible" ColumnName="Disponible" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="ProveedorID" ColumnName="ProveedorID" />
+                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedorNotaDeCreditoDetalleUso">
+            <EntityTypeMapping TypeName="TheosProc.ProveedorNotaDeCreditoDetalleUso">
+              <MappingFragment StoreEntitySet="ProveedorNotaDeCreditoDetalleUso">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
+                <ScalarProperty Name="ProveedorNotaDeCreditoID" ColumnName="ProveedorNotaDeCreditoID" />
+                <ScalarProperty Name="ProveedorNotaDeCreditoDetalleID" ColumnName="ProveedorNotaDeCreditoDetalleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -37168,7 +37340,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ControlRefaccionaria" ZoomLevel="106">
+      <Diagram Name="ControlRefaccionaria" ZoomLevel="60">
         <EntityTypeShape EntityType="TheosProc.Autorizacion" Width="1.5" PointX="13.5" PointY="301.125" />
         <EntityTypeShape EntityType="TheosProc.AutorizacionProceso" Width="1.5" PointX="5.25" PointY="280.875" />
         <EntityTypeShape EntityType="TheosProc.Banco" Width="1.5" PointX="5.25" PointY="318" />
@@ -37244,13 +37416,13 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.Motor" Width="1.5" PointX="21.75" PointY="297" />
         <EntityTypeShape EntityType="TheosProc.MotorAnio" Width="1.5" PointX="24" PointY="278.25" />
         <EntityTypeShape EntityType="TheosProc.MotorExistente" Width="1.5" PointX="5.25" PointY="222.5" />
-        <EntityTypeShape EntityType="TheosProc.MovimientoInventario" Width="1.5" PointX="7.5" PointY="211.875" />
+        <EntityTypeShape EntityType="TheosProc.MovimientoInventario" Width="3.375" PointX="7.5" PointY="211.875" />
         <EntityTypeShape EntityType="TheosProc.MovimientoInventarioDescuento" Width="1.5" PointX="9.75" PointY="253.25" />
         <EntityTypeShape EntityType="TheosProc.MovimientoInventarioDetalle" Width="1.5" PointX="27" PointY="277.875" />
         <EntityTypeShape EntityType="TheosProc.MovimientoInventarioEstatusContingencia" Width="1.5" PointX="5.25" PointY="243.75" />
         <EntityTypeShape EntityType="TheosProc.MovimientoInventarioEtiqueta" Width="1.5" PointX="12.75" PointY="250.75" />
         <EntityTypeShape EntityType="TheosProc.MovimientoInventarioHistorial" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="TheosProc.MovimientoInventarioTraspasoContingencia" Width="1.5" PointX="24" PointY="282.25" />
+        <EntityTypeShape EntityType="TheosProc.MovimientoInventarioTraspasoContingencia" Width="2.75" PointX="24" PointY="282.25" />
         <EntityTypeShape EntityType="TheosProc.Municipio" Width="1.5" PointX="7.5" PointY="327.25" />
         <EntityTypeShape EntityType="TheosProc.MxMnCriterio" Width="1.5" PointX="5.25" PointY="435.5" />
         <EntityTypeShape EntityType="TheosProc.Nomina" Width="1.5" PointX="9.75" PointY="318.125" />
@@ -37298,13 +37470,12 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.PerfilPermiso" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="TheosProc.Permiso" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="TheosProc.Proveedor" Width="1.5" PointX="7.5" PointY="331.25" />
-        <EntityTypeShape EntityType="TheosProc.ProveedorContacto" Width="1.5" PointX="21.75" PointY="301.5" />
+        <EntityTypeShape EntityType="TheosProc.ProveedorContacto" Width="2.5" PointX="21.75" PointY="301.5" />
         <EntityTypeShape EntityType="TheosProc.ProveedorEstatus" Width="1.5" PointX="5.25" PointY="404.375" />
-        <EntityTypeShape EntityType="TheosProc.ProveedorEventoCalendario" Width="1.5" PointX="9.75" PointY="340.875" />
-        <EntityTypeShape EntityType="TheosProc.ProveedorGanancia" Width="1.5" PointX="15.75" PointY="344.75" />
-        <EntityTypeShape EntityType="TheosProc.ProveedorMarcaParte" Width="1.5" PointX="18.75" PointY="323.375" />
-        <EntityTypeShape EntityType="TheosProc.ProveedorNotaDeCredito" Width="1.5" PointX="15.75" PointY="298.75" />
-        <EntityTypeShape EntityType="TheosProc.ProveedorNotaDeCreditoDetalle" Width="1.5" PointX="18" PointY="256.25" />
+        <EntityTypeShape EntityType="TheosProc.ProveedorEventoCalendario" Width="2" PointX="9.75" PointY="340.875" />
+        <EntityTypeShape EntityType="TheosProc.ProveedorGanancia" Width="1.75" PointX="15.75" PointY="344.75" />
+        <EntityTypeShape EntityType="TheosProc.ProveedorMarcaParte" Width="2.75" PointX="18.75" PointY="323.375" />
+        <EntityTypeShape EntityType="TheosProc.ProveedorNotaDeCreditoDetalle" Width="3.375" PointX="18" PointY="256.25" />
         <EntityTypeShape EntityType="TheosProc.ProveedorNotaDeCreditoOrigen" Width="1.5" PointX="13.5" PointY="274.875" />
         <EntityTypeShape EntityType="TheosProc.ProveedorObservacion" Width="1.5" PointX="15.75" PointY="294.25" />
         <EntityTypeShape EntityType="TheosProc.ProveedorPaqueteria" Width="1.5" PointX="5.25" PointY="450.625" />
@@ -37312,7 +37483,7 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <EntityTypeShape EntityType="TheosProc.ProveedorPoliza" Width="1.5" PointX="18.75" PointY="295.125" />
         <EntityTypeShape EntityType="TheosProc.ProveedorPolizaDetalle" Width="1.5" PointX="21" PointY="274.125" />
         <EntityTypeShape EntityType="TheosProc.ProveedorPolizaDetalleOrigen" Width="1.5" PointX="18.75" PointY="274.875" />
-        <EntityTypeShape EntityType="TheosProc.ProveedorProntoPago" Width="1.5" PointX="12.75" PointY="297" />
+        <EntityTypeShape EntityType="TheosProc.ProveedorProntoPago" Width="1.75" PointX="12.75" PointY="297" />
         <EntityTypeShape EntityType="TheosProc.ReporteDeFaltante" Width="1.5" PointX="27" PointY="303.25" />
         <EntityTypeShape EntityType="TheosProc.Sistema" Width="1.5" PointX="5.25" PointY="395.625" />
         <EntityTypeShape EntityType="TheosProc.Subsistema" Width="1.5" PointX="10.5" PointY="327.125" />
@@ -37765,7 +37936,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK_PedidoDetalle_Usuario" />
         <AssociationConnector Association="TheosProc.FK_PedidoEstatus_Usuario" />
         <AssociationConnector Association="TheosProc.FK__Proveedor__Prove__4EA972BC" />
-        <AssociationConnector Association="TheosProc.FK__Proveedor__Prove__69FC8776" />
         <AssociationConnector Association="TheosProc.FK__Proveedor__Prove__760D58A0" />
         <AssociationConnector Association="TheosProc.FK_Proveedor_ProveedorEstatus" />
         <AssociationConnector Association="TheosProc.FK_Proveedor_Usuario" />
@@ -37778,10 +37948,6 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK_ProveedorContacto_Usuario" />
         <AssociationConnector Association="TheosProc.FK_ProveedorEstatus_Usuario" />
         <AssociationConnector Association="TheosProc.FK_ProveedorMarcaParte_Usuario" />
-        <AssociationConnector Association="TheosProc.FK__Proveedor__NotaD__70A98505" />
-        <AssociationConnector Association="TheosProc.FK__Proveedor__Orige__6BE4CFE8" />
-        <AssociationConnector Association="TheosProc.FK__Proveedor__Prove__46D346CA" />
-        <AssociationConnector Association="TheosProc.FK__Proveedor__Reali__6CD8F421" />
         <AssociationConnector Association="TheosProc.FK_ProveedorObservacion_Usuario" />
         <AssociationConnector Association="TheosProc.FK_ProveedorPaqueteria_Usuario" />
         <AssociationConnector Association="TheosProc.FK_ProveedorPoliza_Usuario" />
@@ -37943,13 +38109,24 @@ FROM [dbo].[VentasView] AS [VentasView]</DefiningQuery>
         <AssociationConnector Association="TheosProc.FK__ParteMaxM__Sucur__5F69EA6A" />
         <EntityTypeShape EntityType="TheosProc.EstatusGeneralesView" Width="1.5" PointX="9.375" PointY="17.75" />
         <EntityTypeShape EntityType="TheosProc.PartesComisionesView" Width="2.375" PointX="39.375" PointY="17.75" />
-        <EntityTypeShape EntityType="TheosProc.ParteComisionHistorico" Width="1.5" PointX="26" PointY="331.875" />
+        <EntityTypeShape EntityType="TheosProc.ParteComisionHistorico" Width="2.25" PointX="26" PointY="331.875" />
         <AssociationConnector Association="TheosProc.FK__ParteComi__Parte__64ADC274" />
         <AssociationConnector Association="TheosProc.FK__ParteComi__Venta__65A1E6AD" />
         <EntityTypeShape EntityType="TheosProc.FacturaExtracto" Width="1.5" PointX="39.375" PointY="22.75" />
         <EntityTypeShape EntityType="TheosProc.ParteCaracteristicaDetalle" Width="1.5" PointX="21" PointY="366.875" />
         <AssociationConnector Association="TheosProc.FK__ParteCara__Parte__6D430875" />
         <EntityTypeShape EntityType="TheosProc.NotasDeCreditoView" Width="1.5" PointX="39.375" PointY="25.75" />
+        <EntityTypeShape EntityType="TheosProc.ProveedorNotaDeCredito" Width="4.125" PointX="15.75" PointY="275.125" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__Movim__76CC72AF" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__Prove__1D913A15" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__NotaD__271AA44F" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__Orige__1E855E4E" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__Prove__0737E4A2" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__Prove__75D84E76" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__Reali__1F798287" />
+        <EntityTypeShape EntityType="TheosProc.ProveedorNotaDeCreditoDetalleUso" Width="1.5" PointX="20.625" PointY="270.5" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__Prove__04266DCD" />
+        <AssociationConnector Association="TheosProc.FK__Proveedor__Venta__051A9206" />
         </Diagram>
     </Diagrams>
   </Designer>

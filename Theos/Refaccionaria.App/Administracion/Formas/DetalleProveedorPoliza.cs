@@ -865,11 +865,30 @@ namespace Refaccionaria.App
                         int iNotaDeCreditoID = oReg.NotaDeCreditoID.Valor();
                         var oNota = Datos.GetEntity<ProveedorNotaDeCredito>(c => c.ProveedorNotaDeCreditoID == iNotaDeCreditoID);
                         if (oNota.OrigenID == Cat.OrigenesNotasDeCreditoProveedor.Garantia)
+                        {
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoCompraCreditoNotaDeCreditoGarantia, oReg.ProveedorPolizaDetalleID
                                 , oNota.Folio, ("GARANTÍA / " + oMovInv.FolioFactura), poliza.FechaPago);
+                        }
                         else if (oNota.OrigenID == Cat.OrigenesNotasDeCreditoProveedor.Devolucion)
+                        {
                             ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoCompraCreditoNotaDeCreditoDevolucion, oReg.ProveedorPolizaDetalleID
                                 , oNota.Folio, ("DEVOLUCIÓN / " + oMovInv.FolioFactura), poliza.FechaPago);
+                        }
+
+                        var nc = new ProveedorNotaDeCreditoDetalleUso()
+                        {
+                            ProveedorNotaDeCreditoID = iNotaDeCreditoID,
+                            FolioFactura = oMovInv.FolioFactura
+                        };
+                        Datos.Guardar(nc);
+
+                        var MovKarDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oNota.MovimientoInventarioID && c.Estatus);
+
+                        if (String.IsNullOrEmpty(MovKarDev.Observacion))
+                            MovKarDev.Observacion = MovKarDev.Observacion + "NC " + iNotaDeCreditoID + " SE USO EN FACTURA " + oMovInv.FolioFactura;
+                        else
+                            MovKarDev.Observacion = MovKarDev.Observacion + "//NC " + iNotaDeCreditoID + " SE USO EN FACTURA " + oMovInv.FolioFactura;
+                        Datos.SaveOrUpdate(MovKarDev);
                         break;
                     case Cat.OrigenesPagosAProveedores.DescuentoFactura:
                         ContaProc.CrearPolizaAfectacion(Cat.ContaAfectaciones.PagoCompraCreditoDescuentoFactura, oReg.ProveedorPolizaDetalleID
@@ -972,6 +991,11 @@ namespace Refaccionaria.App
         }
         
         #endregion
+
+        private void btnGuardar_Click_1(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }

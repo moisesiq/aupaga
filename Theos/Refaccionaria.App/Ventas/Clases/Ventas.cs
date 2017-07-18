@@ -654,6 +654,7 @@ namespace Refaccionaria.App
         {
             // Se crea la instancia de la clase de Facturación Electrónica
             var oFacturaE = new FacturaElectronica();
+            var TestFAct = new FacturaElectronica();
             var oConfig = TheosProc.Config.ValoresVarios("Facturacion.");
             // Se llenan los valores de configuración y los datos del emisor
             VentasLoc.FeLlenarDatosComunes(ref oFacturaE, oConfig);
