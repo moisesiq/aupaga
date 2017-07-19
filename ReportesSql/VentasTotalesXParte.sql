@@ -25,8 +25,6 @@ v.VentaID,
 	, vd.Cantidad
 	, mp.NombreMarcaParte AS Marca
 	, l.NombreLinea AS Linea
-	--,SUM(vd.Cantidad) AS TotalPiezasVendidas
-	select * from Marca where NombreMarca like '%%'
 FROM
 	VentaDetalle vd
 	INNER JOIN Venta v ON v.VentaID = vd.VentaID AND v.Estatus = 1
@@ -42,8 +40,10 @@ FROM
 WHERE
 	vd.Estatus = 1
 	AND (v.Fecha >= @Desde AND v.Fecha < @Hasta)
-	AND l.LineaID = 94
-	AND MP.MarcaParteID = 306
+	AND l.LineaID = 147
+	--and p.NumeroParte = '1231H'
+	--and v.VentaID = 477457
+	--AND MP.MarcaParteID = 306
 	
 	--select * from MarcaParte where NombreMarcaParte = 'STEELMARK'
 	--AND S.SucursalID = 1
@@ -68,6 +68,9 @@ v.VentaID,
 	l.LineaID,
 	vd.Estatus
 )
+
+--select * from _TOTAL
+
 SELECT 
 	Fecha,
 	Folio,
@@ -83,7 +86,7 @@ SELECT
 	Marca,
 	Linea,
 	(select SUM(PrecioDeVenta) from _TOTAL) as TotalPrecioDeVenta,
-	(select sum(Cantidad) from _TOTAL t1 where t1.VentaID = t.VentaID  ) as TotalPiezasVendidas
+	(select sum(Cantidad) from _TOTAL t1 where  t1.NumeroDeParte = t.NumeroDeParte  ) as TotalPiezasVendidas
 	--t1.NumeroDeParte = t.NumeroDeParte
 FROM 
 	_TOTAL t
@@ -103,3 +106,5 @@ t.VentaID,
 	Marca,
 	Linea
 	--TotalPiezasVendidas
+	
+	--select * from Linea where NombreLinea like '%soporte%'

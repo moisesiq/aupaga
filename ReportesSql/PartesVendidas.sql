@@ -42,7 +42,7 @@ FROM
 WHERE
 	vd.Estatus = 1
 	AND (v.Fecha >= @Desde AND v.Fecha < @Hasta)
-	AND l.LineaID = 37
+	AND l.LineaID = 147
 
 GROUP BY
 v.Fecha,
