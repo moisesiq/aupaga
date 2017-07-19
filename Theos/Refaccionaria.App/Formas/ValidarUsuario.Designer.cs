@@ -84,6 +84,7 @@
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(160, 21);
             this.cmbSucursal.TabIndex = 0;
+            //this.cmbSucursal.SelectedIndexChanged += new System.EventHandler(this.cmbSucursal_SelectedIndexChanged);
             // 
             // txtContrasenia
             // 
