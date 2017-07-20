@@ -89,7 +89,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -111,6 +110,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpInicial = new System.Windows.Forms.DateTimePicker();
             this.cboFiltro = new System.Windows.Forms.ComboBox();
@@ -124,7 +124,6 @@
             this.dtpHoraMaxima = new System.Windows.Forms.DateTimePicker();
             this.lblHoraMaxima = new System.Windows.Forms.Label();
             this.lblMontoPaqueteria = new System.Windows.Forms.Label();
-            this.txtMontoPaqueteria = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkUsarDescuentosItemFactura = new System.Windows.Forms.CheckBox();
             this.chkAceptaDevolucion = new System.Windows.Forms.CheckBox();
             this.txtBeneficiario = new System.Windows.Forms.TextBox();
@@ -142,7 +141,6 @@
             this.chkLunes = new System.Windows.Forms.CheckBox();
             this.nudCalendarioPedido = new System.Windows.Forms.NumericUpDown();
             this.lblSeguro = new System.Windows.Forms.Label();
-            this.txtSeguro = new Refaccionaria.App.textBoxOnlyDouble();
             this.chkCobraSeguro = new System.Windows.Forms.CheckBox();
             this.dtpHoraTope = new System.Windows.Forms.DateTimePicker();
             this.cboEstatusProveedor = new System.Windows.Forms.ComboBox();
@@ -166,17 +164,7 @@
             this.cboPaqueteria = new System.Windows.Forms.ComboBox();
             this.lblPaqueteria = new System.Windows.Forms.Label();
             this.gpoDescuentosFacturas = new System.Windows.Forms.GroupBox();
-            this.txtDescuentoFacturaCinco = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaCuatro = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaTres = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaDos = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoFacturaUno = new Refaccionaria.App.textBoxOnlyDouble();
             this.gpoDescuentosItems = new System.Windows.Forms.GroupBox();
-            this.txtDescuentoItemCinco = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemCuatro = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemTres = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemDos = new Refaccionaria.App.textBoxOnlyDouble();
-            this.txtDescuentoItemUno = new Refaccionaria.App.textBoxOnlyDouble();
             this.lblPlazo = new System.Windows.Forms.Label();
             this.npdDiasPlazo = new System.Windows.Forms.NumericUpDown();
             this.txtPaginaWeb = new System.Windows.Forms.TextBox();
@@ -306,16 +294,6 @@
             this.gadAutorizo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chkGarMostrarTodas = new System.Windows.Forms.CheckBox();
             this.dgvGarantias = new System.Windows.Forms.DataGridView();
-            this.garVentaGarantiaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garEstatusGenericoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garSel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.garNumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garEstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garFacturaDeCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpDevoluciones = new System.Windows.Forms.TabPage();
             this.dgvDevolucionesDetalle = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -358,6 +336,31 @@
             this.btnFactuas = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.ncID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtMontoPaqueteria = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtSeguro = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaCinco = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaCuatro = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaTres = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaDos = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoFacturaUno = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemCinco = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemCuatro = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemTres = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemDos = new Refaccionaria.App.textBoxOnlyDouble();
+            this.txtDescuentoItemUno = new Refaccionaria.App.textBoxOnlyDouble();
+            this.garVentaGarantiaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garEstatusGenericoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garSel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.garNumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garEstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garFacturaDeCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabDatosProveedores.SuspendLayout();
             this.tabDatosGenerales.SuspendLayout();
@@ -644,15 +647,6 @@
             this.lblMontoPaqueteria.TabIndex = 67;
             this.lblMontoPaqueteria.Text = "Monto Paqueteria";
             // 
-            // txtMontoPaqueteria
-            // 
-            this.txtMontoPaqueteria.Enabled = false;
-            this.txtMontoPaqueteria.Location = new System.Drawing.Point(348, 165);
-            this.txtMontoPaqueteria.Name = "txtMontoPaqueteria";
-            this.txtMontoPaqueteria.Size = new System.Drawing.Size(71, 20);
-            this.txtMontoPaqueteria.TabIndex = 66;
-            this.txtMontoPaqueteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // chkUsarDescuentosItemFactura
             // 
             this.chkUsarDescuentosItemFactura.AutoSize = true;
@@ -835,15 +829,6 @@
             this.lblSeguro.Size = new System.Drawing.Size(41, 13);
             this.lblSeguro.TabIndex = 54;
             this.lblSeguro.Text = "Seguro";
-            // 
-            // txtSeguro
-            // 
-            this.txtSeguro.Enabled = false;
-            this.txtSeguro.Location = new System.Drawing.Point(175, 348);
-            this.txtSeguro.Name = "txtSeguro";
-            this.txtSeguro.Size = new System.Drawing.Size(70, 20);
-            this.txtSeguro.TabIndex = 53;
-            this.txtSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // chkCobraSeguro
             // 
@@ -1170,46 +1155,6 @@
             this.gpoDescuentosFacturas.TabStop = false;
             this.gpoDescuentosFacturas.Text = "Descuentos a Facturas";
             // 
-            // txtDescuentoFacturaCinco
-            // 
-            this.txtDescuentoFacturaCinco.Location = new System.Drawing.Point(194, 18);
-            this.txtDescuentoFacturaCinco.Name = "txtDescuentoFacturaCinco";
-            this.txtDescuentoFacturaCinco.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaCinco.TabIndex = 4;
-            this.txtDescuentoFacturaCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaCuatro
-            // 
-            this.txtDescuentoFacturaCuatro.Location = new System.Drawing.Point(147, 18);
-            this.txtDescuentoFacturaCuatro.Name = "txtDescuentoFacturaCuatro";
-            this.txtDescuentoFacturaCuatro.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaCuatro.TabIndex = 3;
-            this.txtDescuentoFacturaCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaTres
-            // 
-            this.txtDescuentoFacturaTres.Location = new System.Drawing.Point(100, 18);
-            this.txtDescuentoFacturaTres.Name = "txtDescuentoFacturaTres";
-            this.txtDescuentoFacturaTres.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaTres.TabIndex = 2;
-            this.txtDescuentoFacturaTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaDos
-            // 
-            this.txtDescuentoFacturaDos.Location = new System.Drawing.Point(53, 18);
-            this.txtDescuentoFacturaDos.Name = "txtDescuentoFacturaDos";
-            this.txtDescuentoFacturaDos.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaDos.TabIndex = 1;
-            this.txtDescuentoFacturaDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoFacturaUno
-            // 
-            this.txtDescuentoFacturaUno.Location = new System.Drawing.Point(6, 18);
-            this.txtDescuentoFacturaUno.Name = "txtDescuentoFacturaUno";
-            this.txtDescuentoFacturaUno.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoFacturaUno.TabIndex = 0;
-            this.txtDescuentoFacturaUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // gpoDescuentosItems
             // 
             this.gpoDescuentosItems.Controls.Add(this.txtDescuentoItemCinco);
@@ -1223,46 +1168,6 @@
             this.gpoDescuentosItems.TabIndex = 18;
             this.gpoDescuentosItems.TabStop = false;
             this.gpoDescuentosItems.Text = "Descuentos a items";
-            // 
-            // txtDescuentoItemCinco
-            // 
-            this.txtDescuentoItemCinco.Location = new System.Drawing.Point(194, 18);
-            this.txtDescuentoItemCinco.Name = "txtDescuentoItemCinco";
-            this.txtDescuentoItemCinco.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemCinco.TabIndex = 4;
-            this.txtDescuentoItemCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemCuatro
-            // 
-            this.txtDescuentoItemCuatro.Location = new System.Drawing.Point(147, 18);
-            this.txtDescuentoItemCuatro.Name = "txtDescuentoItemCuatro";
-            this.txtDescuentoItemCuatro.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemCuatro.TabIndex = 3;
-            this.txtDescuentoItemCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemTres
-            // 
-            this.txtDescuentoItemTres.Location = new System.Drawing.Point(100, 18);
-            this.txtDescuentoItemTres.Name = "txtDescuentoItemTres";
-            this.txtDescuentoItemTres.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemTres.TabIndex = 2;
-            this.txtDescuentoItemTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemDos
-            // 
-            this.txtDescuentoItemDos.Location = new System.Drawing.Point(53, 18);
-            this.txtDescuentoItemDos.Name = "txtDescuentoItemDos";
-            this.txtDescuentoItemDos.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemDos.TabIndex = 1;
-            this.txtDescuentoItemDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtDescuentoItemUno
-            // 
-            this.txtDescuentoItemUno.Location = new System.Drawing.Point(6, 18);
-            this.txtDescuentoItemUno.Name = "txtDescuentoItemUno";
-            this.txtDescuentoItemUno.Size = new System.Drawing.Size(41, 20);
-            this.txtDescuentoItemUno.TabIndex = 0;
-            this.txtDescuentoItemUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblPlazo
             // 
@@ -2965,7 +2870,8 @@
             this.garMarca,
             this.garCosto,
             this.garEstatus,
-            this.garFacturaDeCompra});
+            this.garFacturaDeCompra,
+            this.Column1});
             dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             dataGridViewCellStyle59.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2991,75 +2897,6 @@
             this.dgvGarantias.Size = new System.Drawing.Size(1082, 522);
             this.dgvGarantias.TabIndex = 4;
             this.dgvGarantias.CurrentCellChanged += new System.EventHandler(this.dgvGarantias_CurrentCellChanged);
-            // 
-            // garVentaGarantiaID
-            // 
-            this.garVentaGarantiaID.HeaderText = "GarantiaID";
-            this.garVentaGarantiaID.Name = "garVentaGarantiaID";
-            this.garVentaGarantiaID.ReadOnly = true;
-            this.garVentaGarantiaID.Visible = false;
-            // 
-            // garEstatusGenericoID
-            // 
-            this.garEstatusGenericoID.HeaderText = "EstatusGenericoID";
-            this.garEstatusGenericoID.Name = "garEstatusGenericoID";
-            this.garEstatusGenericoID.ReadOnly = true;
-            this.garEstatusGenericoID.Visible = false;
-            // 
-            // garSel
-            // 
-            this.garSel.HeaderText = "Sel";
-            this.garSel.Name = "garSel";
-            this.garSel.Width = 40;
-            // 
-            // garNumeroDeParte
-            // 
-            this.garNumeroDeParte.HeaderText = "No. de Parte";
-            this.garNumeroDeParte.Name = "garNumeroDeParte";
-            this.garNumeroDeParte.ReadOnly = true;
-            // 
-            // garDescripcion
-            // 
-            this.garDescripcion.HeaderText = "Descripción";
-            this.garDescripcion.Name = "garDescripcion";
-            this.garDescripcion.ReadOnly = true;
-            this.garDescripcion.Width = 300;
-            // 
-            // garLinea
-            // 
-            this.garLinea.HeaderText = "Línea";
-            this.garLinea.Name = "garLinea";
-            this.garLinea.ReadOnly = true;
-            this.garLinea.Width = 120;
-            // 
-            // garMarca
-            // 
-            this.garMarca.HeaderText = "Marca";
-            this.garMarca.Name = "garMarca";
-            this.garMarca.ReadOnly = true;
-            this.garMarca.Width = 120;
-            // 
-            // garCosto
-            // 
-            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle58.Format = "C2";
-            this.garCosto.DefaultCellStyle = dataGridViewCellStyle58;
-            this.garCosto.HeaderText = "Costo";
-            this.garCosto.Name = "garCosto";
-            this.garCosto.ReadOnly = true;
-            this.garCosto.Width = 80;
-            // 
-            // garEstatus
-            // 
-            this.garEstatus.HeaderText = "Estatus";
-            this.garEstatus.Name = "garEstatus";
-            this.garEstatus.ReadOnly = true;
-            // 
-            // garFacturaDeCompra
-            // 
-            this.garFacturaDeCompra.HeaderText = "Factura c.";
-            this.garFacturaDeCompra.Name = "garFacturaDeCompra";
-            this.garFacturaDeCompra.ReadOnly = true;
             // 
             // tbpDevoluciones
             // 
@@ -3205,7 +3042,9 @@
             this.des_Factura,
             this.des_Fecha,
             this.des_Importe,
-            this.des_Observacion});
+            this.des_Observacion,
+            this.ncID,
+            this.Column2});
             dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle68.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             dataGridViewCellStyle68.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3589,6 +3428,188 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // ncID
+            // 
+            this.ncID.HeaderText = "Nota de Crédito";
+            this.ncID.Name = "ncID";
+            // 
+            // txtMontoPaqueteria
+            // 
+            this.txtMontoPaqueteria.Enabled = false;
+            this.txtMontoPaqueteria.Location = new System.Drawing.Point(348, 165);
+            this.txtMontoPaqueteria.Name = "txtMontoPaqueteria";
+            this.txtMontoPaqueteria.Size = new System.Drawing.Size(71, 20);
+            this.txtMontoPaqueteria.TabIndex = 66;
+            this.txtMontoPaqueteria.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtSeguro
+            // 
+            this.txtSeguro.Enabled = false;
+            this.txtSeguro.Location = new System.Drawing.Point(175, 348);
+            this.txtSeguro.Name = "txtSeguro";
+            this.txtSeguro.Size = new System.Drawing.Size(70, 20);
+            this.txtSeguro.TabIndex = 53;
+            this.txtSeguro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaCinco
+            // 
+            this.txtDescuentoFacturaCinco.Location = new System.Drawing.Point(194, 18);
+            this.txtDescuentoFacturaCinco.Name = "txtDescuentoFacturaCinco";
+            this.txtDescuentoFacturaCinco.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaCinco.TabIndex = 4;
+            this.txtDescuentoFacturaCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaCuatro
+            // 
+            this.txtDescuentoFacturaCuatro.Location = new System.Drawing.Point(147, 18);
+            this.txtDescuentoFacturaCuatro.Name = "txtDescuentoFacturaCuatro";
+            this.txtDescuentoFacturaCuatro.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaCuatro.TabIndex = 3;
+            this.txtDescuentoFacturaCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaTres
+            // 
+            this.txtDescuentoFacturaTres.Location = new System.Drawing.Point(100, 18);
+            this.txtDescuentoFacturaTres.Name = "txtDescuentoFacturaTres";
+            this.txtDescuentoFacturaTres.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaTres.TabIndex = 2;
+            this.txtDescuentoFacturaTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaDos
+            // 
+            this.txtDescuentoFacturaDos.Location = new System.Drawing.Point(53, 18);
+            this.txtDescuentoFacturaDos.Name = "txtDescuentoFacturaDos";
+            this.txtDescuentoFacturaDos.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaDos.TabIndex = 1;
+            this.txtDescuentoFacturaDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoFacturaUno
+            // 
+            this.txtDescuentoFacturaUno.Location = new System.Drawing.Point(6, 18);
+            this.txtDescuentoFacturaUno.Name = "txtDescuentoFacturaUno";
+            this.txtDescuentoFacturaUno.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoFacturaUno.TabIndex = 0;
+            this.txtDescuentoFacturaUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemCinco
+            // 
+            this.txtDescuentoItemCinco.Location = new System.Drawing.Point(194, 18);
+            this.txtDescuentoItemCinco.Name = "txtDescuentoItemCinco";
+            this.txtDescuentoItemCinco.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemCinco.TabIndex = 4;
+            this.txtDescuentoItemCinco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemCuatro
+            // 
+            this.txtDescuentoItemCuatro.Location = new System.Drawing.Point(147, 18);
+            this.txtDescuentoItemCuatro.Name = "txtDescuentoItemCuatro";
+            this.txtDescuentoItemCuatro.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemCuatro.TabIndex = 3;
+            this.txtDescuentoItemCuatro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemTres
+            // 
+            this.txtDescuentoItemTres.Location = new System.Drawing.Point(100, 18);
+            this.txtDescuentoItemTres.Name = "txtDescuentoItemTres";
+            this.txtDescuentoItemTres.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemTres.TabIndex = 2;
+            this.txtDescuentoItemTres.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemDos
+            // 
+            this.txtDescuentoItemDos.Location = new System.Drawing.Point(53, 18);
+            this.txtDescuentoItemDos.Name = "txtDescuentoItemDos";
+            this.txtDescuentoItemDos.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemDos.TabIndex = 1;
+            this.txtDescuentoItemDos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtDescuentoItemUno
+            // 
+            this.txtDescuentoItemUno.Location = new System.Drawing.Point(6, 18);
+            this.txtDescuentoItemUno.Name = "txtDescuentoItemUno";
+            this.txtDescuentoItemUno.Size = new System.Drawing.Size(41, 20);
+            this.txtDescuentoItemUno.TabIndex = 0;
+            this.txtDescuentoItemUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // garVentaGarantiaID
+            // 
+            this.garVentaGarantiaID.HeaderText = "GarantiaID";
+            this.garVentaGarantiaID.Name = "garVentaGarantiaID";
+            this.garVentaGarantiaID.ReadOnly = true;
+            this.garVentaGarantiaID.Visible = false;
+            // 
+            // garEstatusGenericoID
+            // 
+            this.garEstatusGenericoID.HeaderText = "EstatusGenericoID";
+            this.garEstatusGenericoID.Name = "garEstatusGenericoID";
+            this.garEstatusGenericoID.ReadOnly = true;
+            this.garEstatusGenericoID.Visible = false;
+            // 
+            // garSel
+            // 
+            this.garSel.HeaderText = "Sel";
+            this.garSel.Name = "garSel";
+            this.garSel.Width = 40;
+            // 
+            // garNumeroDeParte
+            // 
+            this.garNumeroDeParte.HeaderText = "No. de Parte";
+            this.garNumeroDeParte.Name = "garNumeroDeParte";
+            this.garNumeroDeParte.ReadOnly = true;
+            // 
+            // garDescripcion
+            // 
+            this.garDescripcion.HeaderText = "Descripción";
+            this.garDescripcion.Name = "garDescripcion";
+            this.garDescripcion.ReadOnly = true;
+            this.garDescripcion.Width = 300;
+            // 
+            // garLinea
+            // 
+            this.garLinea.HeaderText = "Línea";
+            this.garLinea.Name = "garLinea";
+            this.garLinea.ReadOnly = true;
+            this.garLinea.Width = 120;
+            // 
+            // garMarca
+            // 
+            this.garMarca.HeaderText = "Marca";
+            this.garMarca.Name = "garMarca";
+            this.garMarca.ReadOnly = true;
+            this.garMarca.Width = 120;
+            // 
+            // garCosto
+            // 
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle58.Format = "C2";
+            this.garCosto.DefaultCellStyle = dataGridViewCellStyle58;
+            this.garCosto.HeaderText = "Costo";
+            this.garCosto.Name = "garCosto";
+            this.garCosto.ReadOnly = true;
+            this.garCosto.Width = 80;
+            // 
+            // garEstatus
+            // 
+            this.garEstatus.HeaderText = "Estatus";
+            this.garEstatus.Name = "garEstatus";
+            this.garEstatus.ReadOnly = true;
+            // 
+            // garFacturaDeCompra
+            // 
+            this.garFacturaDeCompra.HeaderText = "Factura c.";
+            this.garFacturaDeCompra.Name = "garFacturaDeCompra";
+            this.garFacturaDeCompra.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Nota de Credito";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Factura Uso";
+            this.Column2.Name = "Column2";
+            // 
             // catalogosProveedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3855,16 +3876,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridView dgvDevolucionesDetalle;
         private System.Windows.Forms.CheckBox chkDevMostrarTodas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garVentaGarantiaID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garEstatusGenericoID;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn garSel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garNumeroDeParte;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garDescripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garLinea;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garMarca;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garCosto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garEstatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn garFacturaDeCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
@@ -3928,5 +3939,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pen_Usuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn pen_EsAgrupador;
         private System.Windows.Forms.Button btnFactuas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ncID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garVentaGarantiaID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garEstatusGenericoID;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn garSel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garNumeroDeParte;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garDescripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garLinea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garMarca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garCosto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garEstatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn garFacturaDeCompra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }
