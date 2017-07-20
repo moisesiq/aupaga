@@ -51,12 +51,12 @@
     <Compile Include="Datos\Cat.cs" />
     <Compile Include="Datos\Consultas.cs" />
     <Compile Include="Datos\Guardar.cs" />
-    <Compile Include="Modelos\Modelos.cs" />
     <Compile Include="Datos\Theos.Designer.cs">
-      <DependentUpon>Theos.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Theos.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\Modelos.cs" />
     <Compile Include="Datos\Datos.cs" />
     <Compile Include="Modelos\PreciosParte.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

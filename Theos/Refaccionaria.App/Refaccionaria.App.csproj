@@ -23,11 +23,13 @@
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <MinimumRequiredVersion>2.2.3.0</MinimumRequiredVersion>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>2.2.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -52,7 +54,24 @@
   <PropertyGroup>
     <ApplicationIcon>AG.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>783B756F1FF8BDE4A8EEB11276B913695593C81D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Refaccionaria.App_ClaveTemporal.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="ExpandableGridView">
       <HintPath>lib\ExpandableGridView.dll</HintPath>
     </Reference>
@@ -71,9 +90,11 @@
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Design" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
@@ -98,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administracion\Clases\Admon.cs" />
+    <Compile Include="Administracion\Formas\ImprimirEtiquetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administracion\Formas\ImprimirEtiquetas.Designer.cs">
+      <DependentUpon>ImprimirEtiquetas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Administracion\Formas\MovimientosAgrupar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -760,10 +787,10 @@
     </Compile>
     <Compile Include="Modelos\ConteoMonedas.cs" />
     <Compile Include="Modelos\ConteoMonedasId.cs" />
-    <Compile Include="Validaciones\ValCortes.cs">
+    <Compile Include="Ventas\ValCortes.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Validaciones\ValCortes.Designer.cs">
+    <Compile Include="Ventas\ValCortes.Designer.cs">
       <DependentUpon>ValCortes.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventas\Clases\Ventas.cs" />
@@ -857,10 +884,10 @@
     <Compile Include="Modelos\ProductoVenta.cs" />
     <Compile Include="Modelos\Vehiculo.cs" />
     <Compile Include="Reportes\ReporteadorMovimientos.cs" />
-    <Compile Include="Ventas\BusquedaDevolucion.cs">
+    <Compile Include="Ventas\Formas\BusquedaDevolucion.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Ventas\BusquedaDevolucion.Designer.cs">
+    <Compile Include="Ventas\Formas\BusquedaDevolucion.Designer.cs">
       <DependentUpon>BusquedaDevolucion.cs</DependentUpon>
     </Compile>
     <Compile Include="Ventas\BusquedaGarantia.cs">
@@ -1482,6 +1509,9 @@
     <Compile Include="Ventas\vdContactos.Designer.cs">
       <DependentUpon>vdContactos.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Administracion\Formas\ImprimirEtiquetas.resx">
+      <DependentUpon>ImprimirEtiquetas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Administracion\Formas\MovimientosAgrupar.resx">
       <DependentUpon>MovimientosAgrupar.cs</DependentUpon>
     </EmbeddedResource>
@@ -1874,7 +1904,7 @@
     <EmbeddedResource Include="Formas\Gen\EdicionListadoTheos.resx">
       <DependentUpon>EdicionListadoTheos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Validaciones\ValCortes.resx">
+    <EmbeddedResource Include="Ventas\ValCortes.resx">
       <DependentUpon>ValCortes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\CajaRefuerzo.resx">
@@ -1925,7 +1955,7 @@
     <EmbeddedResource Include="Formas\VerImagenesParte.resx">
       <DependentUpon>VerImagenesParte.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ventas\BusquedaDevolucion.resx">
+    <EmbeddedResource Include="Ventas\Formas\BusquedaDevolucion.resx">
       <DependentUpon>BusquedaDevolucion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\BusquedaGarantia.resx">
@@ -2162,6 +2192,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Refaccionaria.App_ClaveTemporal.pfx" />
     <None Include="Reportes\ReportePoliza.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -2332,7 +2363,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4 %28x86 y x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -2374,6 +2405,48 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="AxInterop.WMPLib">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="GoogleMaps.LocationServices">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Interop.WMPLib">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="System.Windows.Forms.Calendar">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
