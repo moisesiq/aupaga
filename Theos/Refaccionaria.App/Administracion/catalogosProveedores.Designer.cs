@@ -97,7 +97,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -110,6 +109,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpInicial = new System.Windows.Forms.DateTimePicker();
@@ -304,13 +304,6 @@
             this.chkDevMostrarTodas = new System.Windows.Forms.CheckBox();
             this.btnDevNotaDeCredito = new System.Windows.Forms.Button();
             this.dgvDevoluciones = new System.Windows.Forms.DataGridView();
-            this.des_MovimientoInventarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.des_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.des_Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.des_Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.des_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.des_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.des_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpDescGan = new System.Windows.Forms.TabPage();
             this.txtDescGanObservacion = new System.Windows.Forms.TextBox();
             this.btnDescGanGuardar = new System.Windows.Forms.Button();
@@ -336,7 +329,26 @@
             this.btnFactuas = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.des_MovimientoInventarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.des_Sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.des_Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.des_Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.des_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.des_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.des_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ncID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FacturaUso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garVentaGarantiaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garEstatusGenericoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garSel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.garNumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garEstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.garFacturaDeCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NotaDeCreditoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtMontoPaqueteria = new Refaccionaria.App.textBoxOnlyDouble();
             this.txtSeguro = new Refaccionaria.App.textBoxOnlyDouble();
             this.txtDescuentoFacturaCinco = new Refaccionaria.App.textBoxOnlyDouble();
@@ -349,18 +361,7 @@
             this.txtDescuentoItemTres = new Refaccionaria.App.textBoxOnlyDouble();
             this.txtDescuentoItemDos = new Refaccionaria.App.textBoxOnlyDouble();
             this.txtDescuentoItemUno = new Refaccionaria.App.textBoxOnlyDouble();
-            this.garVentaGarantiaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garEstatusGenericoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garSel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.garNumeroDeParte = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garEstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.garFacturaDeCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FacturaUsoGar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.tabDatosProveedores.SuspendLayout();
             this.tabDatosGenerales.SuspendLayout();
@@ -2871,7 +2872,8 @@
             this.garCosto,
             this.garEstatus,
             this.garFacturaDeCompra,
-            this.Column1});
+            this.NotaDeCreditoID,
+            this.FacturaUsoGar});
             dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             dataGridViewCellStyle59.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3044,7 +3046,7 @@
             this.des_Importe,
             this.des_Observacion,
             this.ncID,
-            this.Column2});
+            this.FacturaUso});
             dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle68.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(199)))), ((int)(((byte)(216)))));
             dataGridViewCellStyle68.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3069,57 +3071,8 @@
             this.dgvDevoluciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDevoluciones.Size = new System.Drawing.Size(1087, 428);
             this.dgvDevoluciones.TabIndex = 9;
+            this.dgvDevoluciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDevoluciones_CellContentClick);
             this.dgvDevoluciones.CurrentCellChanged += new System.EventHandler(this.dgvDevoluciones_CurrentCellChanged);
-            // 
-            // des_MovimientoInventarioID
-            // 
-            this.des_MovimientoInventarioID.HeaderText = "MovimientoInventarioID";
-            this.des_MovimientoInventarioID.Name = "des_MovimientoInventarioID";
-            this.des_MovimientoInventarioID.ReadOnly = true;
-            this.des_MovimientoInventarioID.Visible = false;
-            // 
-            // des_Sel
-            // 
-            this.des_Sel.HeaderText = "Sel";
-            this.des_Sel.Name = "des_Sel";
-            this.des_Sel.Width = 40;
-            // 
-            // des_Folio
-            // 
-            this.des_Folio.HeaderText = "Folio";
-            this.des_Folio.Name = "des_Folio";
-            this.des_Folio.ReadOnly = true;
-            this.des_Folio.Width = 60;
-            // 
-            // des_Factura
-            // 
-            this.des_Factura.HeaderText = "Factura";
-            this.des_Factura.Name = "des_Factura";
-            this.des_Factura.ReadOnly = true;
-            this.des_Factura.Width = 80;
-            // 
-            // des_Fecha
-            // 
-            this.des_Fecha.HeaderText = "Fecha";
-            this.des_Fecha.Name = "des_Fecha";
-            this.des_Fecha.ReadOnly = true;
-            this.des_Fecha.Width = 136;
-            // 
-            // des_Importe
-            // 
-            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle67.Format = "C2";
-            this.des_Importe.DefaultCellStyle = dataGridViewCellStyle67;
-            this.des_Importe.HeaderText = "Importe";
-            this.des_Importe.Name = "des_Importe";
-            this.des_Importe.ReadOnly = true;
-            // 
-            // des_Observacion
-            // 
-            this.des_Observacion.HeaderText = "Observación";
-            this.des_Observacion.Name = "des_Observacion";
-            this.des_Observacion.ReadOnly = true;
-            this.des_Observacion.Width = 200;
             // 
             // tbpDescGan
             // 
@@ -3428,10 +3381,142 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // des_MovimientoInventarioID
+            // 
+            this.des_MovimientoInventarioID.HeaderText = "MovimientoInventarioID";
+            this.des_MovimientoInventarioID.Name = "des_MovimientoInventarioID";
+            this.des_MovimientoInventarioID.ReadOnly = true;
+            this.des_MovimientoInventarioID.Visible = false;
+            // 
+            // des_Sel
+            // 
+            this.des_Sel.HeaderText = "Sel";
+            this.des_Sel.Name = "des_Sel";
+            this.des_Sel.Width = 40;
+            // 
+            // des_Folio
+            // 
+            this.des_Folio.HeaderText = "Folio";
+            this.des_Folio.Name = "des_Folio";
+            this.des_Folio.ReadOnly = true;
+            this.des_Folio.Width = 60;
+            // 
+            // des_Factura
+            // 
+            this.des_Factura.HeaderText = "Factura";
+            this.des_Factura.Name = "des_Factura";
+            this.des_Factura.ReadOnly = true;
+            this.des_Factura.Width = 80;
+            // 
+            // des_Fecha
+            // 
+            this.des_Fecha.HeaderText = "Fecha";
+            this.des_Fecha.Name = "des_Fecha";
+            this.des_Fecha.ReadOnly = true;
+            this.des_Fecha.Width = 136;
+            // 
+            // des_Importe
+            // 
+            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle67.Format = "C2";
+            this.des_Importe.DefaultCellStyle = dataGridViewCellStyle67;
+            this.des_Importe.HeaderText = "Importe";
+            this.des_Importe.Name = "des_Importe";
+            this.des_Importe.ReadOnly = true;
+            // 
+            // des_Observacion
+            // 
+            this.des_Observacion.HeaderText = "Observación";
+            this.des_Observacion.Name = "des_Observacion";
+            this.des_Observacion.ReadOnly = true;
+            this.des_Observacion.Width = 200;
+            // 
             // ncID
             // 
             this.ncID.HeaderText = "Nota de Crédito";
             this.ncID.Name = "ncID";
+            this.ncID.ReadOnly = true;
+            // 
+            // FacturaUso
+            // 
+            this.FacturaUso.HeaderText = "Factura Uso";
+            this.FacturaUso.Name = "FacturaUso";
+            this.FacturaUso.ReadOnly = true;
+            // 
+            // garVentaGarantiaID
+            // 
+            this.garVentaGarantiaID.HeaderText = "GarantiaID";
+            this.garVentaGarantiaID.Name = "garVentaGarantiaID";
+            this.garVentaGarantiaID.ReadOnly = true;
+            this.garVentaGarantiaID.Visible = false;
+            // 
+            // garEstatusGenericoID
+            // 
+            this.garEstatusGenericoID.HeaderText = "EstatusGenericoID";
+            this.garEstatusGenericoID.Name = "garEstatusGenericoID";
+            this.garEstatusGenericoID.ReadOnly = true;
+            this.garEstatusGenericoID.Visible = false;
+            // 
+            // garSel
+            // 
+            this.garSel.HeaderText = "Sel";
+            this.garSel.Name = "garSel";
+            this.garSel.Width = 40;
+            // 
+            // garNumeroDeParte
+            // 
+            this.garNumeroDeParte.HeaderText = "No. de Parte";
+            this.garNumeroDeParte.Name = "garNumeroDeParte";
+            this.garNumeroDeParte.ReadOnly = true;
+            // 
+            // garDescripcion
+            // 
+            this.garDescripcion.HeaderText = "Descripción";
+            this.garDescripcion.Name = "garDescripcion";
+            this.garDescripcion.ReadOnly = true;
+            this.garDescripcion.Width = 300;
+            // 
+            // garLinea
+            // 
+            this.garLinea.HeaderText = "Línea";
+            this.garLinea.Name = "garLinea";
+            this.garLinea.ReadOnly = true;
+            this.garLinea.Width = 120;
+            // 
+            // garMarca
+            // 
+            this.garMarca.HeaderText = "Marca";
+            this.garMarca.Name = "garMarca";
+            this.garMarca.ReadOnly = true;
+            this.garMarca.Width = 120;
+            // 
+            // garCosto
+            // 
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle58.Format = "C2";
+            this.garCosto.DefaultCellStyle = dataGridViewCellStyle58;
+            this.garCosto.HeaderText = "Costo";
+            this.garCosto.Name = "garCosto";
+            this.garCosto.ReadOnly = true;
+            this.garCosto.Width = 80;
+            // 
+            // garEstatus
+            // 
+            this.garEstatus.HeaderText = "Estatus";
+            this.garEstatus.Name = "garEstatus";
+            this.garEstatus.ReadOnly = true;
+            // 
+            // garFacturaDeCompra
+            // 
+            this.garFacturaDeCompra.HeaderText = "Factura c.";
+            this.garFacturaDeCompra.Name = "garFacturaDeCompra";
+            this.garFacturaDeCompra.ReadOnly = true;
+            // 
+            // NotaDeCreditoID
+            // 
+            this.NotaDeCreditoID.HeaderText = "Nota de Credito";
+            this.NotaDeCreditoID.Name = "NotaDeCreditoID";
+            this.NotaDeCreditoID.ReadOnly = true;
             // 
             // txtMontoPaqueteria
             // 
@@ -3531,84 +3616,11 @@
             this.txtDescuentoItemUno.TabIndex = 0;
             this.txtDescuentoItemUno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // garVentaGarantiaID
+            // FacturaUsoGar
             // 
-            this.garVentaGarantiaID.HeaderText = "GarantiaID";
-            this.garVentaGarantiaID.Name = "garVentaGarantiaID";
-            this.garVentaGarantiaID.ReadOnly = true;
-            this.garVentaGarantiaID.Visible = false;
-            // 
-            // garEstatusGenericoID
-            // 
-            this.garEstatusGenericoID.HeaderText = "EstatusGenericoID";
-            this.garEstatusGenericoID.Name = "garEstatusGenericoID";
-            this.garEstatusGenericoID.ReadOnly = true;
-            this.garEstatusGenericoID.Visible = false;
-            // 
-            // garSel
-            // 
-            this.garSel.HeaderText = "Sel";
-            this.garSel.Name = "garSel";
-            this.garSel.Width = 40;
-            // 
-            // garNumeroDeParte
-            // 
-            this.garNumeroDeParte.HeaderText = "No. de Parte";
-            this.garNumeroDeParte.Name = "garNumeroDeParte";
-            this.garNumeroDeParte.ReadOnly = true;
-            // 
-            // garDescripcion
-            // 
-            this.garDescripcion.HeaderText = "Descripción";
-            this.garDescripcion.Name = "garDescripcion";
-            this.garDescripcion.ReadOnly = true;
-            this.garDescripcion.Width = 300;
-            // 
-            // garLinea
-            // 
-            this.garLinea.HeaderText = "Línea";
-            this.garLinea.Name = "garLinea";
-            this.garLinea.ReadOnly = true;
-            this.garLinea.Width = 120;
-            // 
-            // garMarca
-            // 
-            this.garMarca.HeaderText = "Marca";
-            this.garMarca.Name = "garMarca";
-            this.garMarca.ReadOnly = true;
-            this.garMarca.Width = 120;
-            // 
-            // garCosto
-            // 
-            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle58.Format = "C2";
-            this.garCosto.DefaultCellStyle = dataGridViewCellStyle58;
-            this.garCosto.HeaderText = "Costo";
-            this.garCosto.Name = "garCosto";
-            this.garCosto.ReadOnly = true;
-            this.garCosto.Width = 80;
-            // 
-            // garEstatus
-            // 
-            this.garEstatus.HeaderText = "Estatus";
-            this.garEstatus.Name = "garEstatus";
-            this.garEstatus.ReadOnly = true;
-            // 
-            // garFacturaDeCompra
-            // 
-            this.garFacturaDeCompra.HeaderText = "Factura c.";
-            this.garFacturaDeCompra.Name = "garFacturaDeCompra";
-            this.garFacturaDeCompra.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Nota de Credito";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Factura Uso";
-            this.Column2.Name = "Column2";
+            this.FacturaUsoGar.HeaderText = "Factura Uso";
+            this.FacturaUsoGar.Name = "FacturaUsoGar";
+            this.FacturaUsoGar.ReadOnly = true;
             // 
             // catalogosProveedores
             // 
@@ -3834,13 +3846,6 @@
         private System.Windows.Forms.TabPage tbpDevoluciones;
         private System.Windows.Forms.Button btnDevNotaDeCredito;
         private System.Windows.Forms.DataGridView dgvDevoluciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn des_MovimientoInventarioID;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn des_Sel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn des_Folio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn des_Factura;
-        private System.Windows.Forms.DataGridViewTextBoxColumn des_Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn des_Importe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn des_Observacion;
         private System.Windows.Forms.DataGridView dgvNotasDeCredito;
         private System.Windows.Forms.TextBox txtNdcObservacion;
         private System.Windows.Forms.DataGridView dgvAbonos;
@@ -3939,7 +3944,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pen_Usuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn pen_EsAgrupador;
         private System.Windows.Forms.Button btnFactuas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn des_MovimientoInventarioID;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn des_Sel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn des_Folio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn des_Factura;
+        private System.Windows.Forms.DataGridViewTextBoxColumn des_Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn des_Importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn des_Observacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn ncID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FacturaUso;
         private System.Windows.Forms.DataGridViewTextBoxColumn garVentaGarantiaID;
         private System.Windows.Forms.DataGridViewTextBoxColumn garEstatusGenericoID;
         private System.Windows.Forms.DataGridViewCheckBoxColumn garSel;
@@ -3950,7 +3963,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn garCosto;
         private System.Windows.Forms.DataGridViewTextBoxColumn garEstatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn garFacturaDeCompra;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NotaDeCreditoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FacturaUsoGar;
     }
 }

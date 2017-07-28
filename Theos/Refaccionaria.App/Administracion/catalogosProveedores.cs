@@ -2256,17 +2256,38 @@ namespace Refaccionaria.App
 
             foreach (var oReg in oGarantias)
             {
-                var iNotID = (from c in todas where c.VentaGarantiaID == oReg.VentaGarantiaID select c.ProveedorNotaDeCreditoID).FirstOrDefault();
-                if (iNotID == 0)
+                //var iNotID = (from c in todas where c.VentaGarantiaID == oReg.VentaGarantiaID select c.ProveedorNotaDeCreditoID).FirstOrDefault();
+                var iNotID = (from c in todas where c.VentaGarantiaID == oReg.VentaGarantiaID select c).FirstOrDefault();
+
+                if (iNotID == null)
+                {
+                    ProveedorNotaDeCredito nc = new ProveedorNotaDeCredito();
+                    nc.ProveedorNotaDeCreditoID = 0;
+                    nc.Folio = String.Empty;
+                    iNotID = nc;
+                }
+
+
+                string facturas = String.Empty;
+
+                if (iNotID.ProveedorNotaDeCreditoID == 0)
                 {
                     int iFila = this.dgvGarantias.Rows.Add(oReg.VentaGarantiaID, oReg.EstatusGenericoID, false, oReg.NumeroDeParte, oReg.NombreDeParte
-                        , oReg.Linea, oReg.Marca, oReg.Costo, oReg.Estatus, oReg.FacturaDeCompra, String.Empty);
+                        , oReg.Linea, oReg.Marca, oReg.Costo, oReg.Estatus, oReg.FacturaDeCompra, String.Empty,facturas);
                     this.dgvGarantias.Rows[iFila].Tag = oReg;
                 }
                 else
                 {
+                    var todasUso = Datos.GetListOf<ProveedorNotaDeCreditoDetalleUso>(c => c.ProveedorNotaDeCreditoID == iNotID.ProveedorNotaDeCreditoID);
+
+                    foreach (var item in todasUso)
+                    {
+                        facturas = facturas + "" + item.FolioFactura;
+                    }
+
+
                     int iFila = this.dgvGarantias.Rows.Add(oReg.VentaGarantiaID, oReg.EstatusGenericoID, false, oReg.NumeroDeParte, oReg.NombreDeParte
-                        , oReg.Linea, oReg.Marca, oReg.Costo, oReg.Estatus, oReg.FacturaDeCompra, iNotID);
+                        , oReg.Linea, oReg.Marca, oReg.Costo, oReg.Estatus, oReg.FacturaDeCompra, iNotID.Folio,facturas);
                     this.dgvGarantias.Rows[iFila].Tag = oReg;
                 }   
             }
@@ -2426,11 +2447,21 @@ namespace Refaccionaria.App
 
             foreach (var oReg in devs)
             {
-                var iNotID = (from c in todas where c.MovimientoInventarioID == oReg.MovimientoInventarioID select c.ProveedorNotaDeCreditoID).FirstOrDefault();
+                var iNotIwD = (from c in todas where c.MovimientoInventarioID == oReg.MovimientoInventarioID select c.ProveedorNotaDeCreditoID).FirstOrDefault();
+                var iNotID = (from c in todas where c.MovimientoInventarioID == oReg.MovimientoInventarioID select c).FirstOrDefault();
+
+                if(iNotID == null)
+                {
+                    ProveedorNotaDeCredito notc = new ProveedorNotaDeCredito();
+                    notc.MovimientoInventarioID = 0;
+                    notc.Folio = String.Empty;
+
+                    iNotID = notc;
+                }
 
                 string facturas = String.Empty;
 
-                if (iNotID == 0)
+                if (iNotID.ProveedorNotaDeCreditoID == 0)
                 {
                     this.dgvDevoluciones.Rows.Add(oReg.MovimientoInventarioID, false, oReg.MovimientoInventarioID, oReg.FolioFactura, oReg.FechaRegistro
                         , oReg.ImporteTotal, oReg.Observacion, String.Empty,facturas);
@@ -2438,7 +2469,7 @@ namespace Refaccionaria.App
                 else
                 {
 
-                    var todasUso = Datos.GetListOf<ProveedorNotaDeCreditoDetalleUso>(c => c.ProveedorNotaDeCreditoID == iNotID);
+                    var todasUso = Datos.GetListOf<ProveedorNotaDeCreditoDetalleUso>(c => c.ProveedorNotaDeCreditoID == iNotID.ProveedorNotaDeCreditoID);
                     
                     foreach (var item in todasUso)
                     {
@@ -2446,7 +2477,7 @@ namespace Refaccionaria.App
                     }
 
                     this.dgvDevoluciones.Rows.Add(oReg.MovimientoInventarioID, false, oReg.MovimientoInventarioID, oReg.FolioFactura, oReg.FechaRegistro
-                        , oReg.ImporteTotal, oReg.Observacion, iNotID, facturas);
+                        , oReg.ImporteTotal, oReg.Observacion, iNotID.Folio, facturas);
                 }
             }
             // this.dgvDevoluciones.DefaultCellStyle.ForeColor = Color.Black;
@@ -2516,8 +2547,11 @@ namespace Refaccionaria.App
                     {
                         var oMovDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iMovID && c.Estatus);
                         oMovDev.FueLiquidado = true;
-                        int x = (int)Datos.GetEntity<ProveedorNotaDeCredito>(c => c.MovimientoInventarioID == MovInID).ProveedorNotaDeCreditoID;
-                        oMovDev.Observacion = oMovDev.Observacion + "/ NOTA DE CREDITO " + x + " " + DateTime.Today.Date;
+                        //int x = (int)Datos.GetEntity<ProveedorNotaDeCredito>(c => c.MovimientoInventarioID == MovInID).ProveedorNotaDeCreditoID;
+                        //se agrega la observacion
+                        string  x = Datos.GetEntity<ProveedorNotaDeCredito>(c => c.MovimientoInventarioID == MovInID).Folio;
+                        string s = 
+                        oMovDev.Observacion = oMovDev.Observacion + "/ NOTA DE CREDITO " + x + " " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
                         Datos.Guardar<MovimientoInventario>(oMovDev);
 
                         // Se guarda el detalle de la Nota de crédito
@@ -2811,6 +2845,11 @@ namespace Refaccionaria.App
         #endregion
 
         private void dgvMovimientosNoPagados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvDevoluciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

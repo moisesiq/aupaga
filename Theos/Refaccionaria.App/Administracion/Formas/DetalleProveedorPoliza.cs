@@ -862,6 +862,7 @@ namespace Refaccionaria.App
                 switch (oReg.OrigenID)
                 {
                     case Cat.OrigenesPagosAProveedores.NotaDeCredito:
+                        string iNotaDeCreditoFolio = oReg.Folio.Valor();
                         int iNotaDeCreditoID = oReg.NotaDeCreditoID.Valor();
                         var oNota = Datos.GetEntity<ProveedorNotaDeCredito>(c => c.ProveedorNotaDeCreditoID == iNotaDeCreditoID);
                         if (oNota.OrigenID == Cat.OrigenesNotasDeCreditoProveedor.Garantia)
@@ -882,12 +883,15 @@ namespace Refaccionaria.App
                         };
                         Datos.Guardar(nc);
 
-                        var MovKarDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oNota.MovimientoInventarioID && c.Estatus);
+                        //var MovKarDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oNota.MovimientoInventarioID && c.Estatus);
+                        var MovKarDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iNotaDeCreditoID && c.Estatus);
 
                         if (String.IsNullOrEmpty(MovKarDev.Observacion))
-                            MovKarDev.Observacion = MovKarDev.Observacion + "NC " + iNotaDeCreditoID + " SE USO EN FACTURA " + oMovInv.FolioFactura;
+                            //MovKarDev.Observacion = MovKarDev.Observacion + "NC " + iNotaDeCreditoID + " SE APLICÓ A FACTURA " + oMovInv.FolioFactura;
+                            MovKarDev.Observacion = MovKarDev.Observacion + "NC " + iNotaDeCreditoFolio + " SE APLICÓ A FACTURA " + oMovInv.FolioFactura + " " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
                         else
-                            MovKarDev.Observacion = MovKarDev.Observacion + "//NC " + iNotaDeCreditoID + " SE USO EN FACTURA " + oMovInv.FolioFactura;
+                            //MovKarDev.Observacion = MovKarDev.Observacion + "//NC " + iNotaDeCreditoID + " SE APLICÓ A FACTURA " + oMovInv.FolioFactura;
+                            MovKarDev.Observacion = MovKarDev.Observacion + "//NC " + iNotaDeCreditoFolio + " SE APLICÓ A FACTURA " + oMovInv.FolioFactura + " " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
                         Datos.SaveOrUpdate(MovKarDev);
                         break;
                     case Cat.OrigenesPagosAProveedores.DescuentoFactura:
