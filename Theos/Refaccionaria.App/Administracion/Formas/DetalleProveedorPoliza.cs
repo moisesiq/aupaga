@@ -883,8 +883,8 @@ namespace Refaccionaria.App
                         };
                         Datos.Guardar(nc);
 
-                        //var MovKarDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oNota.MovimientoInventarioID && c.Estatus);
-                        var MovKarDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iNotaDeCreditoID && c.Estatus);
+                        var MovKarDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == oNota.MovimientoInventarioID && c.Estatus);
+                        //var MovKarDev = Datos.GetEntity<MovimientoInventario>(c => c.MovimientoInventarioID == iNotaDeCreditoID && c.Estatus);
 
                         if (String.IsNullOrEmpty(MovKarDev.Observacion))
                             //MovKarDev.Observacion = MovKarDev.Observacion + "NC " + iNotaDeCreditoID + " SE APLICÓ A FACTURA " + oMovInv.FolioFactura;
